@@ -1,0 +1,26 @@
+import express from "express";
+import * as dashboardController from "../controllers/dashboardController.js";
+import { authenticate, authorize } from "../middleware/auth.js";
+import { ROLES } from "../config/constants.js";
+
+const router = express.Router();
+
+router.use(authenticate);
+
+router.get(
+  "/admin",
+  authorize(ROLES.SUPER_ADMIN),
+  dashboardController.getAdminDashboard,
+);
+router.get(
+  "/doctor",
+  authorize(ROLES.DOCTOR),
+  dashboardController.getDoctorDashboard,
+);
+router.get(
+  "/clerk",
+  authorize(ROLES.DATA_CLERK),
+  dashboardController.getClerkDashboard,
+);
+
+export default router;

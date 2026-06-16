@@ -1,0 +1,240 @@
+import { Visit, Patient, User } from "../models/index.js";
+import { Op } from "sequelize";
+import { getPagination, calculateBMI } from "../utils/helpers.js";
+import { ERROR_MESSAGES, VISIT_STATUS } from "../config/constants.js";
+
+/**
+ * Create new visit
+ */
+export const createVisit = async (data, createdBy) => {
+  const { patientId } = data;
+
+  // Verify patient exists
+  const patient = await Patient.findByPk(patientId);
+  if (!patient) {
+    throw new Error("Patient not found");
+  }
+
+  // Parse symptoms if it's an array
+  if (Array.isArray(data.symptoms)) {
+    data.symptoms = JSON.stringify(data.symptoms);
+  }
+
+  const visit = await Visit.create({
+    ...data,
+    createdBy,
+  });
+
+  return visit;
+};
+
+/**
+ * Get all visits with pagination and filters
+ */
+export const getAllVisits = async (query) => {
+  const {
+    page = 1,
+    pageSize = 10,
+    status,
+    patientId,
+    doctorId,
+    visitDate,
+    sortBy = "createdAt",
+    sortOrder = "DESC",
+  } = query;
+
+  const { limit, offset } = getPagination(page, pageSize);
+
+  const where = {};
+
+  if (status) where.status = status;
+  if (patientId) where.patientId = patientId;
+  if (doctorId) where.doctorId = doctorId;
+  if (visitDate) where.visitDate = visitDate;
+
+  const { count, rows } = await Visit.findAndCountAll({
+    where,
+    limit,
+    offset,
+    order: [[sortBy, sortOrder]],
+    include: [
+      {
+        model: Patient,
+        as: "patient",
+        attributes: ["id", "patientId", "firstName", "lastName", "phone"],
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["id", "firstName", "lastName", "specialization"],
+      },
+    ],
+  });
+
+  return {
+    visits: rows,
+    pagination: {
+      page: parseInt(page),
+      pageSize: limit,
+      totalItems: count,
+    },
+  };
+};
+
+/**
+ * Get visit by ID
+ */
+export const getVisitById = async (id) => {
+  const visit = await Visit.findByPk(id, {
+    include: [
+      {
+        model: Patient,
+        as: "patient",
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["id", "firstName", "lastName", "specialization"],
+      },
+    ],
+  });
+
+  if (!visit) {
+    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+  }
+
+  return visit;
+};
+
+/**
+ * Update visit
+ */
+export const updateVisit = async (id, data, updatedBy) => {
+  const visit = await Visit.findByPk(id);
+
+  if (!visit) {
+    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+  }
+
+  // Calculate BMI if weight and height provided
+  if ((data.weight && visit.height) || (data.height && visit.weight)) {
+    const weight = data.weight || visit.weight;
+    const height = data.height || visit.height;
+    data.bmi = calculateBMI(weight, height);
+  }
+
+  // Parse symptoms if it's an array
+  if (Array.isArray(data.symptoms)) {
+    data.symptoms = JSON.stringify(data.symptoms);
+  }
+
+  await visit.update({
+    ...data,
+    updatedBy,
+  });
+
+  return visit;
+};
+
+/**
+ * Update visit status
+ */
+export const updateVisitStatus = async (id, status, updatedBy) => {
+  const visit = await Visit.findByPk(id);
+
+  if (!visit) {
+    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+  }
+
+  const updates = { status, updatedBy };
+
+  // Set consultation times based on status
+  if (status === VISIT_STATUS.IN_CONSULTATION && !visit.consultationStartTime) {
+    const now = new Date();
+    updates.consultationStartTime = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`;
+  }
+
+  if (status === VISIT_STATUS.COMPLETED && !visit.consultationEndTime) {
+    const now = new Date();
+    updates.consultationEndTime = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`;
+  }
+
+  await visit.update(updates);
+
+  return visit;
+};
+
+/**
+ * Get doctor queue (waiting patients)
+ */
+export const getDoctorQueue = async (doctorId) => {
+  const waiting = await Visit.findAll({
+    where: {
+      [Op.or]: [
+        { doctorId, status: VISIT_STATUS.WAITING },
+        { doctorId: null, status: VISIT_STATUS.WAITING },
+      ],
+      visitDate: new Date().toISOString().split("T")[0],
+    },
+    include: [
+      {
+        model: Patient,
+        as: "patient",
+        attributes: [
+          "id",
+          "patientId",
+          "firstName",
+          "lastName",
+          "phone",
+          "age",
+          "gender",
+        ],
+      },
+    ],
+    order: [["arrivalTime", "ASC"]],
+  });
+
+  return waiting;
+};
+
+/**
+ * Assign doctor to visit
+ */
+export const assignDoctor = async (visitId, doctorId, updatedBy) => {
+  const visit = await Visit.findByPk(visitId);
+
+  if (!visit) {
+    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+  }
+
+  await visit.update({
+    doctorId,
+    status: VISIT_STATUS.IN_CONSULTATION,
+    updatedBy,
+  });
+
+  return visit;
+};
+
+/**
+ * Record vital signs
+ */
+export const recordVitalSigns = async (id, vitalData, updatedBy) => {
+  const visit = await Visit.findByPk(id);
+
+  if (!visit) {
+    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+  }
+
+  // Calculate BMI if weight and height provided
+  if (vitalData.weight && vitalData.height) {
+    vitalData.bmi = calculateBMI(vitalData.weight, vitalData.height);
+  }
+
+  await visit.update({
+    ...vitalData,
+    updatedBy,
+  });
+
+  return visit;
+};

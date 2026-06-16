@@ -1,0 +1,145 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous"
+  },
+
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+
+  "header": {
+    "title": "Neshiha Herbal Clinic",
+    "tagline": "Natural Healing Solutions",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Natural Healing for a",
+    "subtitle": "Healthier Life",
+    "description": "At Nesiha Herbal Clinic, we blend traditional remedies with modern practices to provide personalized care that nurtures your body's natural healing abilities.",
+    "cta": "Book Appointment",
+    "learnMore": "Learn More",
+    "traditionalRemedies": "Traditional Remedies",
+    "modernPractices": "Modern Practices",
+    "personalizedCare": "Personalized Care"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive herbal treatments for your wellness",
+    "consultation": "Herbal Consultation",
+    "consultationDesc": "Personalized herbal medicine consultation",
+    "treatment": "Herbal Treatment",
+    "treatmentDesc": "Custom herbal remedies and treatments",
+    "wellness": "Wellness Programs",
+    "wellnessDesc": "Holistic wellness and prevention programs",
+    "desc": "Personalized herbal consultations with our certified herbalists to address your specific health concerns and create tailored treatment plans."
+  },
+  "about": {
+    "title": "About Neshiha",
+    "subtitle": "Your trusted partner in natural health",
+    "description": "We combine traditional herbal wisdom with modern understanding to provide effective, natural healing solutions.",
+    "extendedDescription": "Our clinic combines centuries-old herbal wisdom with modern scientific research to create personalized treatment plans. We believe in treating the whole person, not just symptoms, ensuring long-term wellness and vitality.",
+    "experience": "Years of Experience",
+    "patients": "Happy Patients",
+    "treatments": "Successful Treatments",
+    "herbalWisdom": "Traditional Herbal Wisdom",
+    "herbalWisdomDesc": "Passed down through generations",
+    "certifiedPractitioners": "Certified Practitioners",
+    "certifiedPractitionersDesc": "Our team consists of certified herbal medicine practitioners with extensive training and experience.",
+    "naturalIngredients": "Natural Ingredients",
+    "naturalIngredientsDesc": "We use only the highest quality, ethically sourced natural ingredients in all our treatments.",
+    "holisticApproach": "Holistic Approach",
+    "holisticApproachDesc": "We treat the whole person, addressing root causes rather than just symptoms for lasting wellness.",
+    "metaTitle": "About Us - Nesiha Herbal Clinic",
+    "metaDescription": "Learn about Nesiha Herbal Clinic, where traditional herbal wisdom meets modern science. Discover our certified practitioners, natural ingredients, and holistic approach.",
+    "metaKeywords": "herbal clinic, Nesiha herbal, mana qorichaa aadaa, natural remedies, holistic healing, alternative medicine, Oromia herbal clinic, Ethiopia herbal treatment"
+  },
+  "testimonials": {
+    "title": "What Our Patients Say",
+    "featured": "Featured Video Testimonials",
+    "more": "More Client Stories",
+    "videoAvailable": "Video testimonial available",
+    "subtitle": "Real stories from real people",
+    "list": [
+      {
+        "name": "Emma S.",
+        "role": "Wellness Enthusiast",
+        "text": "Nesiha Herbal Clinic transformed my health completely. The personalized approach and natural remedies made such a difference in my energy levels and overall well-being. I feel like a new person!",
+        "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuD0Y94D31VsPg2A71_5WcUyOZ-kroXMKmMXwpVrpjFNypclskhPxui_ZEsIC2DEZpZvImxvJXITSH684Sc81iw5Xf_YYycatLv-WDPbrEwMthHT6j01aGZEZe7OnV7B2FRnU_Uugxh7srAFHtJtD3Bcf_-tQnij5nYPdos4Li5Y20pZyxf8c-kgdwJTWIXUEzxdj6qo2ERPTNXKNGvqVDysoBxhiMoHfo8-F1bVLMDbahQa3kBzoZDaSV2WYs3HZHLivRIqDIsPKo",
+        "rating": 5,
+        "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "hasVideo": true
+      },
+      {
+        "name": "Liam L.",
+        "role": "Health Coach",
+        "text": "I was thoroughly impressed by the knowledge and care at Nesiha. The comprehensive wellness program helped me achieve my health goals naturally. The herbal treatments are incredibly effective!",
+        "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuA1wZsT7S5UZg8rTlFjTc2KVDgPuG8I8dqRnb12k97fNEx9K8jjVZsVIEGkSa80zpBy_5UnWOA7rU6gvqVKiBV3Y3Uz46uUMagrbOu3Dm4y8gpRud5Tnf_lixLF6vK_WekYR3a8CTLOl-bLpQVdvDUr0nqWd9UOL6HRX1bNYi3bOj1F_WSxJZXWfcRkXiSjxSrqR6QP0K5edHXIPZKomMzYlHoB89HRTabDzJY4087gqid7BMQeDGmB5fb_f1sGwUPsDoJTxlM5b_Q",
+        "rating": 5,
+        "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "hasVideo": true
+      }
+    ]
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Ready to start your healing journey?",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "message": "Your Message",
+    "sendMessage": "Send Message",
+    "address": "Address",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "hours": "Business Hours",
+    "contactInformation": "Contact Information",
+    "emailAddress": "info@nesihaherbalclinic.com",
+    "phoneNumber": "+251912166549",
+    "mainOffice": "Main Office",
+    "whatsapp": "WhatsApp",
+    "whatsappNumber": "+251912166549",
+    "quickResponse": "Quick Response",
+    "streetAddress": "Bero, AshewaMeda",
+    "cityState": "",
+    "businessHours": "Business Hours",
+    "mondayFriday": "Saturday - Thursday",
+    "weekdayHours": "2:00 AM - 10:00 AM",
+    "saturday": "Saturday",
+    "saturdayHours": "2:00 AM - 10:00 AM",
+    "sunday": "Friday",
+    "closed": "Closed",
+    "ourLocation": "Our Location",
+    "easyToFind": "Easy to find!",
+    "locationDescription": "We're located in the heart of Healthville, just off the main Wellness Avenue. Free parking available.",
+    "needImmediateAssistance": "Need Immediate Assistance?",
+    "expertsReady": "Our herbal medicine experts are ready to help you today",
+    "scheduleConsultation": "Schedule Consultation"
+  },
+  "footer": {
+    "copyright": "© 2024 Neshiha Herbal Clinic. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "blog": {
+    "title": "Health & Wellness Blog",
+    "subtitle": "Insights and tips for natural living",
+    "readMore": "Read More",
+    "publishedOn": "Published on"
+  }
+}
