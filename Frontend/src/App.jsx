@@ -1,15 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 // Pages
 import Home from "./pages/Home";
-import Admin from "./pages/Admin";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import SigninPage from "./pages/SigninPage";
+import LoginPage from "./pages/LoginPage";
+import PortalLayout from "./components/portal/PortalLayout";
+import DashboardPage from "./pages/portal/DashboardPage";
+import PatientsPage from "./pages/portal/PatientsPage";
+import VisitsPage from "./pages/portal/VisitsPage";
+import DoctorQueuePage from "./pages/portal/DoctorQueuePage";
+
+// Store
+import useAuthStore from "./store/authStore";
+import {
+  initializeSocket,
+  connectSocket,
+  disconnectSocket,
+} from "./lib/socket";
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useAuthStore();
+  return isAuthenticated ? children : <Navigate to="/signin" replace />;
+};
 
 export default function App() {
   const [theme, setTheme] = useState("light");
+  const { isAuthenticated, accessToken } = useAuthStore();
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -19,37 +42,87 @@ export default function App() {
     document.body.className = theme;
   }, [theme]);
 
+  // Initialize Socket.io when authenticated
+  useEffect(() => {
+    if (isAuthenticated && accessToken) {
+      initializeSocket(accessToken);
+      connectSocket();
+    } else {
+      disconnectSocket();
+    }
+
+    return () => {
+      disconnectSocket();
+    };
+  }, [isAuthenticated, accessToken]);
+
   return (
     <Router>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#fff",
+            color: "#363636",
+          },
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: "#10b981",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            duration: 4000,
+            iconTheme: {
+              primary: "#ef4444",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
+
       <Routes>
-        {/* Main site with header/footer */}
+        {/* Public Routes */}
         <Route
           path="/"
           element={
             <div
-              className={`min-h-screen flex flex-col font-['Lexend','Noto Sans',sans-serif] ${
-                theme === "light" ? "bg-white" : "bg-gray-900"
-              }`}
+              className={`min-h-screen flex flex-col ${theme === "light" ? "bg-white" : "bg-gray-900"}`}
             >
-              <Header theme={theme} toggleTheme={toggleTheme} />
-              <main className="flex-1 px-6 md:px-20">
-                <Home />
-              </main>
-              <Footer />
+              <Home />
             </div>
           }
         />
+        <Route path="/signin" element={<LoginPage />} />
 
-        {/* Admin sign in page */}
-
-        {/* Admin page (protected) */}
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/signin" element={<SigninPage />} />
+        {/* Protected Portal Routes */}
+        <Route
+          path="/portal"
+          element={
+            <ProtectedRoute>
+              <PortalLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<DashboardPage />} />
+          <Route path="patients" element={<PatientsPage />} />
+          <Route path="visits" element={<VisitsPage />} />
+          <Route path="queue" element={<DoctorQueuePage />} />
+        </Route>
 
         {/* 404 fallback */}
         <Route
           path="*"
-          element={<div className="text-center font-bold">404 Not Found</div>}
+          element={
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="text-center">
+                <h1 className="text-6xl font-bold text-gray-800">404</h1>
+                <p className="text-xl text-gray-600 mt-4">Page Not Found</p>
+              </div>
+            </div>
+          }
         />
       </Routes>
     </Router>
