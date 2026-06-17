@@ -27,7 +27,6 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
     quantity: "",
     instructions: "",
     reason: "",
-    dispenseNow: true,
   });
 
   useEffect(() => {
@@ -121,37 +120,9 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
       };
 
       // Create prescription
-      const prescriptionResponse = await axiosInstance.post(
-        "/prescriptions",
-        prescriptionData,
-      );
+      await axiosInstance.post("/prescriptions", prescriptionData);
 
-      // If dispense now is checked, dispense immediately
-      if (formData.dispenseNow) {
-        const dispenseData = {
-          prescriptionId: prescriptionResponse.data.id,
-          patientId,
-          medicineId: formData.medicineId,
-          visitId,
-          dispensedBy: user.id,
-          quantity: parseInt(formData.quantity),
-          dosage,
-          frequency,
-          route: formData.route,
-          duration,
-          instructions: formData.instructions,
-          reason: formData.reason,
-          dispensedDate: new Date().toISOString(),
-          dispensedTime: new Date().toLocaleTimeString("en-GB", {
-            hour12: false,
-          }),
-        };
-
-        await axiosInstance.post("/medicines/dispense", dispenseData);
-        toast.success("Medicine prescribed and dispensed successfully");
-      } else {
-        toast.success("Medicine prescribed successfully");
-      }
+      toast.success("Medicine prescribed successfully");
 
       // Reset form
       setFormData({
@@ -238,9 +209,9 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
               <option value="">-- Select Medicine --</option>
               {medicines.map((medicine) => (
                 <option key={medicine.id} value={medicine.id}>
-                  {medicine.name} - {medicine.strength} (Available:{" "}
-                  {medicine.availableQuantity}
-                  {medicine.dosageForm})
+                  {medicine.name} - {medicine.strength} (Price:{" "}
+                  {medicine.sellingPrice} ETB | Available:{" "}
+                  {medicine.availableQuantity} {medicine.dosageForm})
                 </option>
               ))}
             </select>
@@ -432,25 +403,6 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
             />
           </div>
 
-          {/* Dispense Now Checkbox */}
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="dispenseNow"
-              checked={formData.dispenseNow}
-              onChange={(e) =>
-                setFormData({ ...formData, dispenseNow: e.target.checked })
-              }
-              className="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
-            />
-            <label
-              htmlFor="dispenseNow"
-              className="text-sm font-medium text-gray-700"
-            >
-              Dispense medicine immediately (today)
-            </label>
-          </div>
-
           {/* Action Buttons */}
           <div className="flex justify-end space-x-3 pt-4 border-t">
             <button
@@ -464,11 +416,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
               className="flex items-center space-x-2 px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
             >
               <FiSave />
-              <span>
-                {formData.dispenseNow
-                  ? "Prescribe & Dispense"
-                  : "Save Prescription"}
-              </span>
+              <span>Save Prescription</span>
             </button>
           </div>
         </div>

@@ -21,6 +21,7 @@ const DashboardPage = () => {
         staff_manager: "/dashboard/admin",
         doctor: "/dashboard/doctor",
         data_clerk: "/dashboard/clerk",
+        cashier: "/dashboard/cashier",
       }[user?.role];
 
       const response = await axiosInstance.get(endpoint);
@@ -272,6 +273,82 @@ const DashboardPage = () => {
             <p className="text-gray-500 text-center py-8">
               No recent registrations
             </p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Cashier Dashboard
+  if (user?.role === "cashier") {
+    return (
+      <div>
+        <h1 className="text-3xl font-bold text-gray-800 mb-6">
+          Cashier Dashboard
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <StatCard
+            title="Pending Payments"
+            value={stats?.pendingPayments || 0}
+            icon={FiUsers}
+            color="orange"
+          />
+          <StatCard
+            title="Payments Processed Today"
+            value={stats?.todayPaymentsCount || 0}
+            icon={FiActivity}
+            color="emerald"
+          />
+          <StatCard
+            title="Today's Revenue (ETB)"
+            value={stats?.todayTotalRevenue?.toFixed(2) || "0.00"}
+            icon={FiTrendingUp}
+            color="blue"
+          />
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            Recent Payments
+          </h3>
+          {stats?.recentPayments?.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="text-gray-500 text-sm border-b">
+                    <th className="pb-3 font-medium">Payment #</th>
+                    <th className="pb-3 font-medium">Patient</th>
+                    <th className="pb-3 font-medium">Amount</th>
+                    <th className="pb-3 font-medium">Method</th>
+                    <th className="pb-3 font-medium">Date</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {stats.recentPayments.map((payment) => (
+                    <tr key={payment.id} className="text-sm">
+                      <td className="py-3 font-medium text-gray-800">
+                        {payment.paymentNumber}
+                      </td>
+                      <td className="py-3 text-gray-600">
+                        {payment.patient?.firstName} {payment.patient?.lastName}
+                      </td>
+                      <td className="py-3 font-bold text-emerald-700">
+                        {parseFloat(payment.amount).toFixed(2)} ETB
+                      </td>
+                      <td className="py-3 capitalize text-gray-600">
+                        {payment.paymentMethod?.replace("_", " ")}
+                      </td>
+                      <td className="py-3 text-gray-500">
+                        {new Date(payment.paidAt).toLocaleTimeString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="text-gray-500 text-center py-8">No recent payments</p>
           )}
         </div>
       </div>

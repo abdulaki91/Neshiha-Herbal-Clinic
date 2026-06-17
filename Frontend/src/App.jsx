@@ -15,6 +15,10 @@ import DashboardPage from "./pages/portal/DashboardPage";
 import PatientsPage from "./pages/portal/PatientsPage";
 import VisitsPage from "./pages/portal/VisitsPage";
 import DoctorQueuePage from "./pages/portal/DoctorQueuePage";
+import MedicinesPage from "./pages/portal/MedicinesPage";
+import LaboratoryPage from "./pages/portal/LaboratoryPage";
+import PharmacyPage from "./pages/portal/PharmacyPage";
+import CashierPage from "./pages/portal/CashierPage";
 
 // Store
 import useAuthStore from "./store/authStore";
@@ -110,6 +114,9 @@ export default function App() {
           <Route path="patients" element={<PatientsPage />} />
           <Route path="visits" element={<VisitsPage />} />
           <Route path="queue" element={<DoctorQueuePage />} />
+          <Route path="laboratory" element={<LaboratoryPage />} />
+          <Route path="pharmacy" element={<PharmacyPage />} />
+          <Route path="cashier" element={<CashierPage />} />
         </Route>
 
         {/* 404 fallback */}

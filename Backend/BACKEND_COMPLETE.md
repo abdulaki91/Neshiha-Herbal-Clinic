@@ -246,6 +246,7 @@ Super Admin: admin@neshihaclinic.com / Admin@123
 Staff Manager: manager@neshihaclinic.com / Manager@123
 Doctor: doctor@neshihaclinic.com / Doctor@123
 Data Clerk: clerk@neshihaclinic.com / Clerk@123
+Cashier: cashier@neshihaclinic.com / Cashier@123
 ```
 
 ## 🚀 Ready to Use

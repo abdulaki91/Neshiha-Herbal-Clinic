@@ -236,13 +236,13 @@ export const updateVisitStatus = async (id, status, updatedBy) => {
 };
 
 /**
- * Get doctor queue (waiting patients)
+ * Get doctor queue (waiting and in-consultation patients)
  */
 export const getDoctorQueue = async (doctorId) => {
-  const waiting = await Visit.findAll({
+  const queue = await Visit.findAll({
     where: {
       [Op.or]: [
-        { doctorId, status: VISIT_STATUS.WAITING },
+        { doctorId, status: [VISIT_STATUS.WAITING, VISIT_STATUS.IN_CONSULTATION] },
         { doctorId: null, status: VISIT_STATUS.WAITING },
       ],
       visitDate: new Date().toISOString().split("T")[0],
@@ -268,7 +268,7 @@ export const getDoctorQueue = async (doctorId) => {
   });
 
   // Parse JSON fields in patient data
-  const visitsWithParsedData = waiting.map((visit) => {
+  const visitsWithParsedData = queue.map((visit) => {
     const visitData = visit.toJSON();
     if (visitData.patient) {
       if (visitData.patient.knownAllergies) {

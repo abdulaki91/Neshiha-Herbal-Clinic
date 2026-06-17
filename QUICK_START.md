@@ -57,11 +57,13 @@ npm run dev
 
 1. Open browser: **http://localhost:5173/signin**
 
-2. Login with:
+2. Login with any of these demo accounts:
 
    ```
-   Email: admin@neshihaclinic.com
-   Password: Admin@123
+   Admin:   admin@neshihaclinic.com   / Admin@123
+   Doctor:  doctor@neshihaclinic.com  / Doctor@123
+   Clerk:   clerk@neshihaclinic.com   / Clerk@123
+   Cashier: cashier@neshihaclinic.com / Cashier@123
    ```
 
 3. You're in! 🎉

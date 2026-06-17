@@ -5,6 +5,7 @@ import {
   Medicine,
   Prescription,
   MedicineDispense,
+  Payment,
 } from "../models/index.js";
 import { Op } from "sequelize";
 import { VISIT_STATUS, MEDICINE_STATUS, ROLES } from "../config/constants.js";
@@ -165,5 +166,47 @@ export const getClerkDashboard = async () => {
     todayVisits,
     waitingPatients,
     recentPatients,
+  };
+};
+
+export const getCashierDashboard = async () => {
+  const today = new Date().toISOString().split("T")[0];
+
+  const pendingPayments = await Visit.count({
+    where: {
+      status: VISIT_STATUS.PENDING_PAYMENT,
+    },
+  });
+
+  const todayPaymentsCount = await Payment.count({
+    where: {
+      paidAt: { [Op.gte]: new Date(today) },
+    },
+  });
+
+  const todayTotalRevenue = await Payment.sum("amount", {
+    where: {
+      paidAt: { [Op.gte]: new Date(today) },
+      status: "paid",
+    },
+  });
+
+  const recentPayments = await Payment.findAll({
+    order: [["paidAt", "DESC"]],
+    limit: 10,
+    include: [
+      {
+        model: Patient,
+        as: "patient",
+        attributes: ["id", "patientId", "firstName", "lastName"],
+      },
+    ],
+  });
+
+  return {
+    pendingPayments,
+    todayPaymentsCount,
+    todayTotalRevenue: todayTotalRevenue || 0,
+    recentPayments,
   };
 };

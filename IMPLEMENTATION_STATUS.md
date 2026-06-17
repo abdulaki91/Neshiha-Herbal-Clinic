@@ -125,6 +125,10 @@ Password: Doctor@123
 Data Clerk:
 Email: clerk@neshihaclinic.com
 Password: Clerk@123
+
+Cashier:
+Email: cashier@neshihaclinic.com
+Password: Cashier@123
 ```
 
 ---

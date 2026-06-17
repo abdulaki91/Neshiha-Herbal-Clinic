@@ -11,7 +11,7 @@ const Medicine = sequelize.define(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    medicineId: {
+    code: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
@@ -112,8 +112,8 @@ const Medicine = sequelize.define(
     timestamps: true,
     hooks: {
       beforeValidate: async (medicine) => {
-        if (!medicine.medicineId) {
-          medicine.medicineId = generateMedicineId();
+        if (!medicine.code) {
+          medicine.code = generateMedicineId();
         }
       },
       beforeUpdate: async (medicine) => {

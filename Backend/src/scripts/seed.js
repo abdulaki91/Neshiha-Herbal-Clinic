@@ -98,6 +98,26 @@ const runSeeder = async () => {
       logger.info("Data Clerk already exists");
     }
 
+    // Create Cashier
+    const cashierExists = await User.findOne({
+      where: { email: "cashier@neshihaclinic.com" },
+    });
+
+    if (!cashierExists) {
+      const cashier = await User.create({
+        email: "cashier@neshihaclinic.com",
+        password: "Cashier@123",
+        role: ROLES.CASHIER,
+        firstName: "Cashier",
+        lastName: "User",
+        phone: "+251911000004",
+        status: "active",
+      });
+      logger.info(`✅ Cashier created: ${cashier.email}`);
+    } else {
+      logger.info("Cashier already exists");
+    }
+
     // Create Sample Medicines
     const medicineCount = await Medicine.count();
 
@@ -185,7 +205,10 @@ const runSeeder = async () => {
       "Doctor - Email: doctor@neshihaclinic.com, Password: Doctor@123",
     );
     logger.info(
-      "Data Clerk - Email: clerk@neshihaclinic.com, Password: Clerk@123\n",
+      "Data Clerk - Email: clerk@neshihaclinic.com, Password: Clerk@123",
+    );
+    logger.info(
+      "Cashier - Email: cashier@neshihaclinic.com, Password: Cashier@123\n",
     );
 
     process.exit(0);

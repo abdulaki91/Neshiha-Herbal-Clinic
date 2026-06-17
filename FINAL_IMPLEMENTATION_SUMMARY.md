@@ -205,7 +205,18 @@ Neshiha-Herbal-Clinic/
 
 ---
 
-### 4. STAFF MANAGER (manager@neshihaclinic.com)
+### 4. CASHIER (cashier@neshihaclinic.com)
+
+- ✅ View pending payments (prescriptions awaiting payment)
+- ✅ Process payments (Cash, Transfer, Mobile Money)
+- ✅ Record transaction IDs & notes
+- ✅ Real-time dashboard with revenue stats
+- ✅ View payment history
+- ✅ Search patients with pending bills
+
+---
+
+### 5. STAFF MANAGER (manager@neshihaclinic.com)
 
 - ✅ View staff dashboard
 - ⏳ Create doctor accounts (backend ready)

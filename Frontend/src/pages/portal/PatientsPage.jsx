@@ -4,8 +4,10 @@ import axiosInstance from "../../lib/axios";
 import PatientForm from "../../components/patients/PatientForm";
 import PatientCard from "../../components/patients/PatientCard";
 import toast from "react-hot-toast";
+import useAuthStore from "../../store/authStore";
 
 const PatientsPage = () => {
+  const { user } = useAuthStore();
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -39,6 +41,8 @@ const PatientsPage = () => {
     toast.success("Patient registered successfully!");
   };
 
+  const canRegister = user?.role === "super_admin" || user?.role === "data_clerk";
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -46,13 +50,15 @@ const PatientsPage = () => {
           <h1 className="text-3xl font-bold text-gray-800">Patients</h1>
           <p className="text-gray-500 mt-1">Manage patient records</p>
         </div>
-        <button
-          onClick={() => setShowForm(true)}
-          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
-        >
-          <FiPlus />
-          <span>Register Patient</span>
-        </button>
+        {canRegister && (
+          <button
+            onClick={() => setShowForm(true)}
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
+          >
+            <FiPlus />
+            <span>Register Patient</span>
+          </button>
+        )}
       </div>
 
       {/* Search Bar */}

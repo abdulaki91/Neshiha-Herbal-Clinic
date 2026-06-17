@@ -22,5 +22,10 @@ router.get(
   authorize(ROLES.DATA_CLERK),
   dashboardController.getClerkDashboard,
 );
+router.get(
+  "/cashier",
+  authorize(ROLES.CASHIER),
+  dashboardController.getCashierDashboard,
+);
 
 export default router;

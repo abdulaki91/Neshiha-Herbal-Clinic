@@ -130,6 +130,12 @@ After seeding, you can login with these accounts:
 - Password: `Clerk@123`
 - Access: Patient registration, visit creation
 
+### Cashier
+
+- Email: `cashier@neshihaclinic.com`
+- Password: `Cashier@123`
+- Access: Billing, pending payments, payment history
+
 ## Testing the API
 
 ### Health Check

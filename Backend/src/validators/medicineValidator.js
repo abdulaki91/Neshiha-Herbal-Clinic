@@ -2,6 +2,7 @@ import { body, query } from "express-validator";
 
 export const createMedicineValidator = [
   body("name").trim().notEmpty().withMessage("Medicine name is required"),
+  body("code").trim().notEmpty().withMessage("Medicine code is required"),
   body("strength").optional().trim(),
   body("dosageForm").optional().trim(),
   body("category").optional().trim(),

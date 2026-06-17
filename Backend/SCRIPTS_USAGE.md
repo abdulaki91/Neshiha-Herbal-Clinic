@@ -111,6 +111,7 @@ npm run migrate undo
 | Staff Manager | manager@neshihaclinic.com | Manager@123 |
 | Doctor | doctor@neshihaclinic.com | Doctor@123 |
 | Data Clerk | clerk@neshihaclinic.com | Clerk@123 |
+| Cashier | cashier@neshihaclinic.com | Cashier@123 |
 
 **When to use:**
 

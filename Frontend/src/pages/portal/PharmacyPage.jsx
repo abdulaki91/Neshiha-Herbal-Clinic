@@ -19,7 +19,7 @@ const PharmacyPage = () => {
   const [filteredPrescriptions, setFilteredPrescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState("pending");
+  const [statusFilter, setStatusFilter] = useState("paid");
   const [selectedPrescription, setSelectedPrescription] = useState(null);
   const [dispensingData, setDispensingData] = useState({
     quantityDispensed: "",
@@ -197,7 +197,7 @@ const PharmacyPage = () => {
 
           {/* Status Filter */}
           <div className="flex space-x-2">
-            {["pending", "dispensed", "completed"].map((status) => (
+            {["paid", "dispensed", "completed", "pending"].map((status) => (
               <button
                 key={status}
                 onClick={() => setStatusFilter(status)}
@@ -334,7 +334,7 @@ const PharmacyPage = () => {
                 </div>
 
                 {/* Action Button */}
-                {prescription.status === "pending" && (
+                {(prescription.status === "paid" || prescription.status === "pending") && (
                   <button
                     onClick={() => handleDispenseClick(prescription)}
                     className="ml-6 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium flex items-center space-x-2"

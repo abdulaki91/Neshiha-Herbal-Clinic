@@ -40,6 +40,12 @@ Both Backend and Frontend are running. Test data has been created.
 - **Password:** `Clerk@123`
 - **Can:** Register patients, create visits, send patients to doctor
 
+### 5. Cashier
+
+- **Email:** `cashier@neshihaclinic.com`
+- **Password:** `Cashier@123`
+- **Can:** View pending payments, process payments, view payment history
+
 ---
 
 ## 📋 Test Data Available

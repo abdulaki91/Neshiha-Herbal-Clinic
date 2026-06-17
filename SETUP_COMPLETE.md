@@ -28,6 +28,7 @@ You can now login with these credentials:
 | Staff Manager | manager@neshihaclinic.com | Manager@123 |
 | Doctor        | doctor@neshihaclinic.com  | Doctor@123  |
 | Data Clerk    | clerk@neshihaclinic.com   | Clerk@123   |
+| Cashier       | cashier@neshihaclinic.com | Cashier@123 |
 
 ### Backend API Modules
 

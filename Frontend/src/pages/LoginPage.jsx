@@ -121,6 +121,7 @@ export default function LoginPage() {
               <p>📧 admin@neshihaclinic.com | 🔑 Admin@123</p>
               <p>📧 doctor@neshihaclinic.com | 🔑 Doctor@123</p>
               <p>📧 clerk@neshihaclinic.com | 🔑 Clerk@123</p>
+              <p>📧 cashier@neshihaclinic.com | 🔑 Cashier@123</p>
             </div>
           </div>
         </form>

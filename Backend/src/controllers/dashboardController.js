@@ -28,3 +28,12 @@ export const getClerkDashboard = asyncHandler(async (req, res) => {
     "Data clerk dashboard retrieved successfully",
   );
 });
+
+export const getCashierDashboard = asyncHandler(async (req, res) => {
+  const dashboard = await dashboardService.getCashierDashboard();
+  return ApiResponse.success(
+    res,
+    dashboard,
+    "Cashier dashboard retrieved successfully",
+  );
+});

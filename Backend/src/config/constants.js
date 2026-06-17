@@ -4,6 +4,7 @@ export const ROLES = {
   STAFF_MANAGER: "staff_manager",
   DATA_CLERK: "data_clerk",
   DOCTOR: "doctor",
+  CASHIER: "cashier",
 };
 
 // User Status
@@ -17,6 +18,7 @@ export const USER_STATUS = {
 export const VISIT_STATUS = {
   WAITING: "waiting",
   IN_CONSULTATION: "in_consultation",
+  PENDING_PAYMENT: "pending_payment",
   COMPLETED: "completed",
   CANCELLED: "cancelled",
 };
@@ -59,6 +61,7 @@ export const MEDICINE_STATUS = {
 // Prescription Status
 export const PRESCRIPTION_STATUS = {
   PENDING: "pending",
+  PAID: "paid",
   DISPENSED: "dispensed",
   COMPLETED: "completed",
   STOPPED: "stopped",
@@ -134,6 +137,7 @@ export const PERMISSIONS = {
   [ROLES.STAFF_MANAGER]: [
     "create_doctor",
     "create_data_clerk",
+    "create_cashier",
     "edit_staff",
     "deactivate_staff",
     "reset_password",
@@ -167,6 +171,12 @@ export const PERMISSIONS = {
     "view_previous_medicines",
     "view_allergies",
     "view_chronic_diseases",
+  ],
+  [ROLES.CASHIER]: [
+    "view_pending_payments",
+    "process_payment",
+    "view_payment_history",
+    "print_receipt",
   ],
 };
 

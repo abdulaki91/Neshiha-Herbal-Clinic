@@ -23,6 +23,7 @@ A complete, production-ready clinic management system specifically designed for 
 | ----------------- | ------------------------- | ----------- |
 | **Doctor**        | doctor@neshihaclinic.com  | Doctor@123  |
 | **Data Clerk**    | clerk@neshihaclinic.com   | Clerk@123   |
+| **Cashier**       | cashier@neshihaclinic.com | Cashier@123 |
 | **Admin**         | admin@neshihaclinic.com   | Admin@123   |
 | **Staff Manager** | manager@neshihaclinic.com | Manager@123 |
 

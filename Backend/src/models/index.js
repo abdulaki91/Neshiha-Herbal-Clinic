@@ -9,6 +9,7 @@ import Investigation from "./Investigation.js";
 import AuditLog from "./AuditLog.js";
 import Notification from "./Notification.js";
 import Setting from "./Setting.js";
+import Payment from "./Payment.js";
 
 // Define Associations
 
@@ -26,6 +27,7 @@ User.hasMany(MedicineDispense, {
   as: "dispensedMedicines",
 });
 User.hasMany(Notification, { foreignKey: "userId", as: "notifications" });
+User.hasMany(Payment, { foreignKey: "cashierId", as: "processedPayments" });
 
 // Patient associations
 Patient.belongsTo(User, { foreignKey: "registeredBy", as: "registeredByUser" });
@@ -39,6 +41,7 @@ Patient.hasMany(MedicineDispense, {
   foreignKey: "patientId",
   as: "medicineDispenses",
 });
+Patient.hasMany(Payment, { foreignKey: "patientId", as: "payments" });
 
 // Visit associations
 Visit.belongsTo(Patient, { foreignKey: "patientId", as: "patient" });
@@ -50,6 +53,7 @@ Visit.hasMany(MedicineDispense, {
   foreignKey: "visitId",
   as: "medicineDispenses",
 });
+Visit.hasMany(Payment, { foreignKey: "visitId", as: "payments" });
 
 // Medicine associations
 Medicine.hasMany(Prescription, {
@@ -103,6 +107,11 @@ Investigation.belongsTo(User, {
   as: "reviewedByUser",
 });
 
+// Payment associations
+Payment.belongsTo(Visit, { foreignKey: "visitId", as: "visit" });
+Payment.belongsTo(Patient, { foreignKey: "patientId", as: "patient" });
+Payment.belongsTo(User, { foreignKey: "cashierId", as: "cashier" });
+
 // Notification associations
 Notification.belongsTo(User, { foreignKey: "userId", as: "user" });
 
@@ -122,6 +131,7 @@ export {
   AuditLog,
   Notification,
   Setting,
+  Payment,
 };
 
 // Sync database (development only)

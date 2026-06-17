@@ -105,6 +105,11 @@ Data Clerk:
 📧 Email: clerk@neshihaclinic.com
 🔑 Password: Clerk@123
 ✅ Access: Patient registration, visit creation
+
+Cashier:
+📧 Email: cashier@neshihaclinic.com
+🔑 Password: Cashier@123
+✅ Access: Billing, pending payments, payment history
 ```
 
 ---

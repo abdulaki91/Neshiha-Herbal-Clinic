@@ -21,6 +21,8 @@ import InvestigationForm from "../../components/doctor/InvestigationForm";
 import FollowUpIndicator from "../../components/doctor/FollowUpIndicator";
 import ActivePrescriptions from "../../components/doctor/ActivePrescriptions";
 import PendingInvestigations from "../../components/doctor/PendingInvestigations";
+import ConsultationTab from "../../components/doctor/ConsultationTab";
+import PatientHistoryTab from "../../components/doctor/PatientHistoryTab";
 
 const DoctorQueuePage = () => {
   const { user } = useAuthStore();
@@ -62,40 +64,12 @@ const DoctorQueuePage = () => {
 
   const fetchQueue = async () => {
     try {
-      console.log("🔍 Fetching queue with params:", {
-        status: "waiting",
-        sortBy: "arrivalTime",
-        sortOrder: "ASC",
-      });
-
-      const response = await axiosInstance.get("/visits", {
-        params: {
-          status: "waiting",
-          sortBy: "arrivalTime",
-          sortOrder: "ASC",
-        },
-      });
-
-      console.log("📦 Raw API response:", response);
-      console.log("📋 Response data structure:", {
-        hasData: !!response.data,
-        hasVisits: !!response.data?.visits,
-        visitCount: response.data?.visits?.length || 0,
-        visits: response.data?.visits || response.data || [],
-      });
-
-      // Handle both response.data.visits and response.data directly
-      const visits = response.data?.visits || response.data || [];
-      console.log("✅ Setting queue with visits:", visits);
+      // Fetch both waiting and in_consultation
+      const response = await axiosInstance.get("/visits/doctor/queue");
+      const visits = response.data.data || response.data || [];
       setQueue(visits);
     } catch (error) {
-      console.error("❌ Queue fetch error:", error);
-      console.error("Error response:", error.response?.data);
-      console.error("Error status:", error.response?.status);
-      toast.error(
-        "Failed to fetch queue: " +
-          (error.response?.data?.message || error.message),
-      );
+      toast.error("Failed to fetch queue");
       setQueue([]);
     } finally {
       setLoading(false);
@@ -103,6 +77,11 @@ const DoctorQueuePage = () => {
   };
 
   const handleStartConsultation = async (visit) => {
+    if (visit.status === "in_consultation") {
+      setSelectedVisit(visit);
+      return;
+    }
+
     try {
       // Update visit status to in_consultation
       await axiosInstance.put(`/visits/${visit.id}`, {
@@ -146,15 +125,32 @@ const DoctorQueuePage = () => {
     }
 
     try {
+      // Check if there are any prescriptions for this visit
+      const prescriptionsResponse = await axiosInstance.get("/prescriptions", {
+        params: { visitId: selectedVisit.id, status: "pending" },
+      });
+
+      const hasPendingPrescriptions =
+        prescriptionsResponse.data.prescriptions?.length > 0;
+
+      const nextStatus = hasPendingPrescriptions
+        ? "pending_payment"
+        : "completed";
+
       await axiosInstance.put(`/visits/${selectedVisit.id}`, {
         ...consultationData,
-        status: "completed",
+        status: nextStatus,
         consultationEndTime: new Date().toLocaleTimeString("en-GB", {
           hour12: false,
         }),
       });
 
-      toast.success("Consultation completed successfully");
+      if (hasPendingPrescriptions) {
+        toast.success("Consultation sent to Cashier for payment");
+      } else {
+        toast.success("Consultation completed successfully");
+      }
+
       setSelectedVisit(null);
       setConsultationData({
         chiefComplaint: "",
@@ -460,315 +456,27 @@ const DoctorQueuePage = () => {
                   </div>
                 </div>
 
+                {/* Status Badge */}
+                {visit.status === "in_consultation" && (
+                  <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full mr-4">
+                    In Consultation
+                  </span>
+                )}
+
                 {/* Action Button */}
                 <button
                   onClick={() => handleStartConsultation(visit)}
                   className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium"
                 >
-                  Start Consultation
+                  {visit.status === "in_consultation"
+                    ? "Continue Consultation"
+                    : "Start Consultation"}
                 </button>
               </div>
             </div>
           ))}
         </div>
       )}
-    </div>
-  );
-};
-
-// Consultation Tab Component
-const ConsultationTab = ({ data, onChange, onComplete }) => {
-  const [newSymptom, setNewSymptom] = useState("");
-  const [newDiagnosis, setNewDiagnosis] = useState("");
-
-  const handleAddSymptom = () => {
-    if (newSymptom.trim()) {
-      onChange({
-        ...data,
-        symptoms: [...data.symptoms, newSymptom.trim()],
-      });
-      setNewSymptom("");
-    }
-  };
-
-  const handleRemoveSymptom = (index) => {
-    onChange({
-      ...data,
-      symptoms: data.symptoms.filter((_, i) => i !== index),
-    });
-  };
-
-  const handleAddDiagnosis = () => {
-    if (newDiagnosis.trim()) {
-      onChange({
-        ...data,
-        diagnosis: [...data.diagnosis, newDiagnosis.trim()],
-      });
-      setNewDiagnosis("");
-    }
-  };
-
-  const handleRemoveDiagnosis = (index) => {
-    onChange({
-      ...data,
-      diagnosis: data.diagnosis.filter((_, i) => i !== index),
-    });
-  };
-
-  return (
-    <div className="space-y-6">
-      {/* Chief Complaint */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Chief Complaint *
-        </label>
-        <textarea
-          value={data.chiefComplaint}
-          onChange={(e) =>
-            onChange({ ...data, chiefComplaint: e.target.value })
-          }
-          rows={2}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Main reason for visit..."
-        />
-      </div>
-
-      {/* Symptoms */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Symptoms
-        </label>
-        <div className="flex space-x-2 mb-2">
-          <input
-            type="text"
-            value={newSymptom}
-            onChange={(e) => setNewSymptom(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && handleAddSymptom()}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="Add symptom..."
-          />
-          <button
-            onClick={handleAddSymptom}
-            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
-          >
-            <FiPlus />
-          </button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {data.symptoms.map((symptom, index) => (
-            <span
-              key={index}
-              className="inline-flex items-center space-x-2 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-            >
-              <span>{symptom}</span>
-              <button
-                onClick={() => handleRemoveSymptom(index)}
-                className="hover:text-blue-600"
-              >
-                <FiX className="w-4 h-4" />
-              </button>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* History of Present Illness */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          History of Present Illness
-        </label>
-        <textarea
-          value={data.historyOfPresentIllness}
-          onChange={(e) =>
-            onChange({ ...data, historyOfPresentIllness: e.target.value })
-          }
-          rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Detailed history of the current condition..."
-        />
-      </div>
-
-      {/* Physical Examination */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Physical Examination
-        </label>
-        <textarea
-          value={data.physicalExamination}
-          onChange={(e) =>
-            onChange({ ...data, physicalExamination: e.target.value })
-          }
-          rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Physical examination findings..."
-        />
-      </div>
-
-      {/* Diagnosis */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Diagnosis *
-        </label>
-        <div className="flex space-x-2 mb-2">
-          <input
-            type="text"
-            value={newDiagnosis}
-            onChange={(e) => setNewDiagnosis(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && handleAddDiagnosis()}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="Add diagnosis..."
-          />
-          <button
-            onClick={handleAddDiagnosis}
-            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
-          >
-            <FiPlus />
-          </button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {data.diagnosis.map((diag, index) => (
-            <span
-              key={index}
-              className="inline-flex items-center space-x-2 px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm"
-            >
-              <span>{diag}</span>
-              <button
-                onClick={() => handleRemoveDiagnosis(index)}
-                className="hover:text-red-600"
-              >
-                <FiX className="w-4 h-4" />
-              </button>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Treatment Plan */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Treatment Plan
-        </label>
-        <textarea
-          value={data.treatmentPlan}
-          onChange={(e) => onChange({ ...data, treatmentPlan: e.target.value })}
-          rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Treatment plan and recommendations..."
-        />
-      </div>
-
-      {/* Doctor Notes */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Doctor's Notes
-        </label>
-        <textarea
-          value={data.doctorNotes}
-          onChange={(e) => onChange({ ...data, doctorNotes: e.target.value })}
-          rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Additional notes..."
-        />
-      </div>
-
-      {/* Follow-up Date */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Follow-up Date
-        </label>
-        <input
-          type="date"
-          value={data.followUpDate}
-          onChange={(e) => onChange({ ...data, followUpDate: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-        />
-      </div>
-
-      {/* Complete Button */}
-      <div className="flex justify-end space-x-3 pt-4 border-t">
-        <button
-          onClick={onComplete}
-          className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium"
-        >
-          Complete Consultation
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// Patient History Tab
-const PatientHistoryTab = ({ patientId }) => {
-  const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchHistory();
-  }, [patientId]);
-
-  const fetchHistory = async () => {
-    try {
-      const response = await axiosInstance.get(`/visits`, {
-        params: {
-          patientId,
-          status: "completed",
-          sortBy: "visitDate",
-          sortOrder: "DESC",
-        },
-      });
-      setHistory(response.data.visits || []);
-    } catch (error) {
-      toast.error("Failed to fetch patient history");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return <div className="text-center py-8">Loading history...</div>;
-  }
-
-  if (history.length === 0) {
-    return (
-      <div className="text-center py-8 text-gray-500">
-        No previous visits found
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-4">
-      {history.map((visit) => (
-        <div key={visit.id} className="border border-gray-200 rounded-lg p-4">
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <p className="font-semibold text-gray-800">
-                Visit #{visit.visitNumber}
-              </p>
-              <p className="text-sm text-gray-500">
-                {new Date(visit.visitDate).toLocaleDateString()} •{" "}
-                {visit.doctor?.firstName} {visit.doctor?.lastName}
-              </p>
-            </div>
-          </div>
-          {visit.diagnosis && (
-            <div className="mb-2">
-              <p className="text-sm font-medium text-gray-700">Diagnosis:</p>
-              <p className="text-sm text-gray-600">
-                {Array.isArray(visit.diagnosis)
-                  ? visit.diagnosis.join(", ")
-                  : visit.diagnosis}
-              </p>
-            </div>
-          )}
-          {visit.treatmentPlan && (
-            <div>
-              <p className="text-sm font-medium text-gray-700">Treatment:</p>
-              <p className="text-sm text-gray-600">{visit.treatmentPlan}</p>
-            </div>
-          )}
-        </div>
-      ))}
     </div>
   );
 };
