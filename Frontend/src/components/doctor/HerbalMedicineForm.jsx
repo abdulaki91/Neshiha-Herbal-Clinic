@@ -8,31 +8,20 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
   const { user } = useAuthStore();
   const [medicines, setMedicines] = useState([]);
   const [prescriptions, setPrescriptions] = useState([]);
-  const [dispensedMedicines, setDispensedMedicines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
 
-  // Form state for new prescription
   const [formData, setFormData] = useState({
     medicineId: "",
     medicineName: "",
-    dosage: "",
-    dosageAmount: "",
-    dosageUnit: "gram",
-    frequency: "twice-daily",
-    frequencyDetail: "",
-    route: "oral",
-    duration: "",
-    durationUnit: "days",
+    unitPrice: "",
     quantity: "",
     instructions: "",
-    reason: "",
   });
 
   useEffect(() => {
     fetchMedicines();
     fetchPrescriptions();
-    fetchDispensedMedicines();
   }, [visitId]);
 
   const fetchMedicines = async () => {
@@ -40,8 +29,8 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
       const response = await axiosInstance.get("/medicines", {
         params: { status: "available", limit: 1000 },
       });
-      setMedicines(response.data.medicines || []);
-    } catch (error) {
+      setMedicines(response.data.data || []);
+    } catch {
       toast.error("Failed to fetch medicines");
     } finally {
       setLoading(false);
@@ -50,23 +39,12 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
 
   const fetchPrescriptions = async () => {
     try {
-      const response = await axiosInstance.get(`/prescriptions`, {
+      const response = await axiosInstance.get("/prescriptions", {
         params: { visitId },
       });
-      setPrescriptions(response.data.prescriptions || []);
-    } catch (error) {
-      console.error("Failed to fetch prescriptions:", error);
-    }
-  };
-
-  const fetchDispensedMedicines = async () => {
-    try {
-      const response = await axiosInstance.get(`/medicines/dispenses`, {
-        params: { visitId },
-      });
-      setDispensedMedicines(response.data.dispenses || []);
-    } catch (error) {
-      console.error("Failed to fetch dispensed medicines:", error);
+      setPrescriptions(response.data.data || []);
+    } catch {
+      // silent
     }
   };
 
@@ -77,90 +55,70 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
         ...formData,
         medicineId: selected.id,
         medicineName: selected.name,
+        unitPrice: selected.sellingPrice || "",
       });
     }
   };
 
+  const totalAmount =
+    formData.unitPrice && formData.quantity
+      ? (parseFloat(formData.unitPrice) * parseInt(formData.quantity)).toFixed(2)
+      : "0.00";
+
   const handleAddPrescription = async () => {
-    // Validation
     if (!formData.medicineId) {
       toast.error("Please select a herbal medicine");
       return;
     }
-    if (!formData.dosageAmount) {
-      toast.error("Please enter dosage amount");
-      return;
-    }
-    if (!formData.quantity) {
-      toast.error("Please enter quantity");
+    if (!formData.quantity || parseInt(formData.quantity) <= 0) {
+      toast.error("Please enter a valid quantity");
       return;
     }
 
     try {
-      const dosage = `${formData.dosageAmount}${formData.dosageUnit}`;
-      const frequency =
-        formData.frequency === "custom"
-          ? formData.frequencyDetail
-          : formData.frequency.replace("-", " ");
-      const duration = `${formData.duration} ${formData.durationUnit}`;
-
-      const prescriptionData = {
+      await axiosInstance.post("/prescriptions", {
         visitId,
         patientId,
         medicineId: formData.medicineId,
         doctorId: user.id,
-        dosage,
-        frequency,
-        route: formData.route,
-        duration,
         quantity: parseInt(formData.quantity),
+        unitPrice: parseFloat(formData.unitPrice) || 0,
+        totalAmount: parseFloat(totalAmount),
+        dosage: "As prescribed",
+        frequency: "As directed",
+        route: "oral",
         instructions: formData.instructions,
-        reason: formData.reason,
         prescribedDate: new Date().toISOString(),
-      };
-
-      // Create prescription
-      await axiosInstance.post("/prescriptions", prescriptionData);
+      });
 
       toast.success("Medicine prescribed successfully");
 
-      // Reset form
       setFormData({
         medicineId: "",
         medicineName: "",
-        dosage: "",
-        dosageAmount: "",
-        dosageUnit: "gram",
-        frequency: "twice-daily",
-        frequencyDetail: "",
-        route: "oral",
-        duration: "",
-        durationUnit: "days",
+        unitPrice: "",
         quantity: "",
         instructions: "",
-        reason: "",
-        dispenseNow: true,
       });
-
       setShowAddForm(false);
       fetchPrescriptions();
-      fetchDispensedMedicines();
       onSave && onSave();
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to add medicine");
     }
   };
 
-  const handleDeletePrescription = async (prescriptionId) => {
-    if (!confirm("Are you sure you want to delete this prescription?")) return;
+  const handleCancelPrescription = async (prescriptionId) => {
+    if (!confirm("Cancel this prescription?")) return;
 
     try {
-      await axiosInstance.delete(`/prescriptions/${prescriptionId}`);
-      toast.success("Prescription deleted");
+      await axiosInstance.patch(`/prescriptions/${prescriptionId}/stop`, {
+        reason: "cancelled",
+      });
+      toast.success("Prescription cancelled");
       fetchPrescriptions();
-      fetchDispensedMedicines();
-    } catch (error) {
-      toast.error("Failed to delete prescription");
+    } catch {
+      toast.error("Failed to cancel prescription");
     }
   };
 
@@ -170,7 +128,6 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
 
   return (
     <div className="space-y-6">
-      {/* Add Medicine Button */}
       {!showAddForm && (
         <button
           onClick={() => setShowAddForm(true)}
@@ -181,7 +138,6 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
         </button>
       )}
 
-      {/* Add Medicine Form */}
       {showAddForm && (
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-4">
           <div className="flex items-center justify-between mb-4">
@@ -204,206 +160,84 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
             <select
               value={formData.medicineId}
               onChange={(e) => handleMedicineSelect(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
             >
               <option value="">-- Select Medicine --</option>
               {medicines.map((medicine) => (
                 <option key={medicine.id} value={medicine.id}>
-                  {medicine.name} - {medicine.strength} (Price:{" "}
-                  {medicine.sellingPrice} ETB | Available:{" "}
-                  {medicine.availableQuantity} {medicine.dosageForm})
+                  {medicine.name}
+                  {medicine.strength ? ` - ${medicine.strength}` : ""}
+                  {medicine.sellingPrice ? ` (${medicine.sellingPrice} ETB)` : ""}
+                  {medicine.availableQuantity != null
+                    ? ` | Stock: ${medicine.availableQuantity}`
+                    : ""}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Dosage */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Dosage Amount *
-              </label>
-              <input
-                type="number"
-                value={formData.dosageAmount}
-                onChange={(e) =>
-                  setFormData({ ...formData, dosageAmount: e.target.value })
-                }
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                placeholder="e.g., 10, 50, 100"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Unit *
-              </label>
-              <select
-                value={formData.dosageUnit}
-                onChange={(e) =>
-                  setFormData({ ...formData, dosageUnit: e.target.value })
-                }
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              >
-                <option value="gram">Gram (g)</option>
-                <option value="mg">Milligram (mg)</option>
-                <option value="ml">Milliliter (ml)</option>
-                <option value="tsp">Teaspoon</option>
-                <option value="tbsp">Tablespoon</option>
-                <option value="cup">Cup</option>
-                <option value="piece">Piece(s)</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Frequency */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Frequency *
-            </label>
-            <select
-              value={formData.frequency}
-              onChange={(e) =>
-                setFormData({ ...formData, frequency: e.target.value })
-              }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            >
-              <option value="once-daily">Once daily</option>
-              <option value="twice-daily">Twice daily</option>
-              <option value="three-times-daily">Three times daily</option>
-              <option value="four-times-daily">Four times daily</option>
-              <option value="every-4-hours">Every 4 hours</option>
-              <option value="every-6-hours">Every 6 hours</option>
-              <option value="every-8-hours">Every 8 hours</option>
-              <option value="every-12-hours">Every 12 hours</option>
-              <option value="before-meals">Before meals</option>
-              <option value="after-meals">After meals</option>
-              <option value="at-bedtime">At bedtime</option>
-              <option value="as-needed">As needed</option>
-              <option value="custom">Custom</option>
-            </select>
-          </div>
-
-          {formData.frequency === "custom" && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Custom Frequency
-              </label>
-              <input
-                type="text"
-                value={formData.frequencyDetail}
-                onChange={(e) =>
-                  setFormData({ ...formData, frequencyDetail: e.target.value })
-                }
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                placeholder="Describe the frequency..."
-              />
-            </div>
-          )}
-
-          {/* Route */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Route of Administration *
-            </label>
-            <select
-              value={formData.route}
-              onChange={(e) =>
-                setFormData({ ...formData, route: e.target.value })
-              }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            >
-              <option value="oral">Oral (by mouth)</option>
-              <option value="topical">Topical (apply to skin)</option>
-              <option value="inhalation">Inhalation (breathe in)</option>
-              <option value="sublingual">Sublingual (under tongue)</option>
-              <option value="rectal">Rectal</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          {/* Duration */}
+          {/* Price and Quantity */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Duration *
+                Unit Price (ETB) *
               </label>
               <input
                 type="number"
-                value={formData.duration}
+                step="0.01"
+                value={formData.unitPrice}
                 onChange={(e) =>
-                  setFormData({ ...formData, duration: e.target.value })
+                  setFormData({ ...formData, unitPrice: e.target.value })
                 }
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                placeholder="e.g., 7, 14, 30"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                placeholder="Price per unit"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Duration Unit
+                Quantity *
               </label>
-              <select
-                value={formData.durationUnit}
+              <input
+                type="number"
+                value={formData.quantity}
                 onChange={(e) =>
-                  setFormData({ ...formData, durationUnit: e.target.value })
+                  setFormData({ ...formData, quantity: e.target.value })
                 }
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              >
-                <option value="days">Days</option>
-                <option value="weeks">Weeks</option>
-                <option value="months">Months</option>
-              </select>
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                placeholder="Number of units"
+              />
             </div>
           </div>
 
-          {/* Quantity */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Total Quantity to Dispense *
-            </label>
-            <input
-              type="number"
-              value={formData.quantity}
-              onChange={(e) =>
-                setFormData({ ...formData, quantity: e.target.value })
-              }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              placeholder="Total quantity"
-            />
-          </div>
-
-          {/* Reason for Prescription */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Reason for Prescription
-            </label>
-            <input
-              type="text"
-              value={formData.reason}
-              onChange={(e) =>
-                setFormData({ ...formData, reason: e.target.value })
-              }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              placeholder="e.g., Pain relief, Blood pressure, etc."
-            />
+          {/* Total */}
+          <div className="bg-emerald-50 p-4 rounded-lg">
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-emerald-700">
+                Total Amount
+              </span>
+              <span className="text-2xl font-bold text-emerald-900">
+                {totalAmount} ETB
+              </span>
+            </div>
           </div>
 
           {/* Instructions */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Special Instructions
+              Instructions (Optional)
             </label>
             <textarea
               value={formData.instructions}
               onChange={(e) =>
                 setFormData({ ...formData, instructions: e.target.value })
               }
-              rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              placeholder="Special instructions for the patient (e.g., take with food, avoid alcohol, etc.)"
+              rows={2}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+              placeholder="e.g., Take with food, avoid alcohol..."
             />
           </div>
 
-          {/* Action Buttons */}
+          {/* Actions */}
           <div className="flex justify-end space-x-3 pt-4 border-t">
             <button
               onClick={() => setShowAddForm(false)}
@@ -422,135 +256,75 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
         </div>
       )}
 
-      {/* Dispensed Medicines List */}
-      {dispensedMedicines.length > 0 && (
-        <div>
-          <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center space-x-2">
+      {/* Prescriptions List */}
+      {prescriptions.length > 0 ? (
+        <div className="space-y-3">
+          <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2">
             <FiPackage className="text-emerald-600" />
-            <span>Dispensed Medicines</span>
+            <span>Prescribed Medicines</span>
           </h4>
-          <div className="space-y-3">
-            {dispensedMedicines.map((dispense) => (
-              <div
-                key={dispense.id}
-                className="bg-green-50 border border-green-200 rounded-lg p-4"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h5 className="font-semibold text-gray-800 mb-1">
-                      {dispense.medicine?.name}
-                    </h5>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-gray-600">
-                      <div>
-                        <span className="font-medium">Dosage:</span>{" "}
-                        {dispense.dosage}
-                      </div>
-                      <div>
-                        <span className="font-medium">Frequency:</span>{" "}
-                        {dispense.frequency}
-                      </div>
-                      <div>
-                        <span className="font-medium">Route:</span>{" "}
-                        {dispense.route}
-                      </div>
-                      <div>
-                        <span className="font-medium">Duration:</span>{" "}
-                        {dispense.duration}
-                      </div>
-                      <div>
-                        <span className="font-medium">Quantity:</span>{" "}
-                        {dispense.quantity}
-                      </div>
-                      <div className="md:col-span-3">
-                        <span className="font-medium">Dispensed:</span>{" "}
-                        {new Date(dispense.dispensedDate).toLocaleDateString()}{" "}
-                        at {dispense.dispensedTime}
-                      </div>
-                    </div>
-                    {dispense.instructions && (
-                      <p className="mt-2 text-sm text-gray-700">
-                        <span className="font-medium">Instructions:</span>{" "}
-                        {dispense.instructions}
-                      </p>
-                    )}
-                    {dispense.reason && (
-                      <p className="mt-1 text-sm text-gray-700">
-                        <span className="font-medium">Reason:</span>{" "}
-                        {dispense.reason}
-                      </p>
-                    )}
+          {prescriptions.map((prescription) => (
+            <div
+              key={prescription.id}
+              className={`border rounded-lg p-4 ${
+                prescription.status === "pending"
+                  ? "bg-yellow-50 border-yellow-200"
+                  : prescription.status === "paid"
+                    ? "bg-green-50 border-green-200"
+                    : "bg-gray-50 border-gray-200"
+              }`}
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h5 className="font-semibold text-gray-800">
+                    {prescription.medicine?.name}
+                  </h5>
+                  <div className="flex items-center space-x-4 text-sm text-gray-600 mt-1">
+                    <span>
+                      {prescription.quantity} x{" "}
+                      {parseFloat(prescription.unitPrice || 0).toFixed(2)} ETB
+                    </span>
+                    <span className="font-bold text-emerald-700">
+                      Total:{" "}
+                      {parseFloat(prescription.totalAmount || 0).toFixed(2)} ETB
+                    </span>
                   </div>
-                  <span className="px-3 py-1 bg-green-600 text-white text-xs rounded-full">
-                    Dispensed
+                  {prescription.instructions && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      {prescription.instructions}
+                    </p>
+                  )}
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span
+                    className={`px-2 py-1 text-xs rounded-full font-medium ${
+                      prescription.status === "pending"
+                        ? "bg-yellow-200 text-yellow-800"
+                        : prescription.status === "paid"
+                          ? "bg-green-200 text-green-800"
+                          : "bg-gray-200 text-gray-700"
+                    }`}
+                  >
+                    {prescription.status}
                   </span>
+                  {prescription.status === "pending" && (
+                    <button
+                      onClick={() =>
+                        handleCancelPrescription(prescription.id)
+                      }
+                      className="text-red-600 hover:text-red-700"
+                    >
+                      <FiTrash2 />
+                    </button>
+                  )}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      )}
-
-      {/* Prescribed but Not Dispensed */}
-      {prescriptions.filter((p) => p.status === "pending").length > 0 && (
-        <div>
-          <h4 className="text-lg font-semibold text-gray-800 mb-4">
-            Pending Prescriptions
-          </h4>
-          <div className="space-y-3">
-            {prescriptions
-              .filter((p) => p.status === "pending")
-              .map((prescription) => (
-                <div
-                  key={prescription.id}
-                  className="bg-yellow-50 border border-yellow-200 rounded-lg p-4"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <h5 className="font-semibold text-gray-800 mb-1">
-                        {prescription.medicine?.name}
-                      </h5>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-gray-600">
-                        <div>
-                          <span className="font-medium">Dosage:</span>{" "}
-                          {prescription.dosage}
-                        </div>
-                        <div>
-                          <span className="font-medium">Frequency:</span>{" "}
-                          {prescription.frequency}
-                        </div>
-                        <div>
-                          <span className="font-medium">Route:</span>{" "}
-                          {prescription.route}
-                        </div>
-                        <div>
-                          <span className="font-medium">Duration:</span>{" "}
-                          {prescription.duration}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="px-3 py-1 bg-yellow-600 text-white text-xs rounded-full">
-                        Pending
-                      </span>
-                      <button
-                        onClick={() =>
-                          handleDeletePrescription(prescription.id)
-                        }
-                        className="text-red-600 hover:text-red-700"
-                      >
-                        <FiTrash2 />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
-
-      {prescriptions.length === 0 && dispensedMedicines.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
-          <FiPackage className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+      ) : (
+        <div className="text-center py-8 text-gray-500">
+          <FiPackage className="w-12 h-12 mx-auto mb-3 text-gray-300" />
           <p>No medicines prescribed yet</p>
         </div>
       )}

@@ -70,6 +70,16 @@ const Prescription = sequelize.define(
       allowNull: false,
       comment: "Total quantity prescribed",
     },
+    unitPrice: {
+      type: DataTypes.DECIMAL(10, 2),
+      defaultValue: 0,
+      comment: "Price per unit",
+    },
+    totalAmount: {
+      type: DataTypes.DECIMAL(10, 2),
+      defaultValue: 0,
+      comment: "unitPrice * quantity",
+    },
     instructions: {
       type: DataTypes.TEXT,
       comment: "Special instructions for patient",

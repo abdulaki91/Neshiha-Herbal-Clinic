@@ -32,7 +32,7 @@ const PendingInvestigations = ({ patientId }) => {
       });
 
       const allInvestigations =
-        response.data?.investigations || response.data || [];
+        response.data?.data || response.data || [];
 
       // Filter for investigations from last 90 days
       const ninetyDaysAgo = new Date();

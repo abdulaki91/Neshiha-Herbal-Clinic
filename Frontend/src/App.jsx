@@ -16,6 +16,7 @@ import PatientsPage from "./pages/portal/PatientsPage";
 import VisitsPage from "./pages/portal/VisitsPage";
 import DoctorQueuePage from "./pages/portal/DoctorQueuePage";
 import MedicinesPage from "./pages/portal/MedicinesPage";
+import PatientDetailPage from "./pages/portal/PatientDetailPage";
 import LaboratoryPage from "./pages/portal/LaboratoryPage";
 import PharmacyPage from "./pages/portal/PharmacyPage";
 import CashierPage from "./pages/portal/CashierPage";
@@ -112,8 +113,11 @@ export default function App() {
         >
           <Route index element={<DashboardPage />} />
           <Route path="patients" element={<PatientsPage />} />
+          <Route path="patients/:id" element={<PatientDetailPage />} />
           <Route path="visits" element={<VisitsPage />} />
+          <Route path="visits/new" element={<VisitsPage />} />
           <Route path="queue" element={<DoctorQueuePage />} />
+          <Route path="medicines" element={<MedicinesPage />} />
           <Route path="laboratory" element={<LaboratoryPage />} />
           <Route path="pharmacy" element={<PharmacyPage />} />
           <Route path="cashier" element={<CashierPage />} />

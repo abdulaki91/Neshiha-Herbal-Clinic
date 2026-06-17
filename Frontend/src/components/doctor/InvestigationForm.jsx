@@ -27,7 +27,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
       const response = await axiosInstance.get("/investigations", {
         params: { visitId },
       });
-      setInvestigations(response.data.investigations || []);
+      setInvestigations(response.data.data || []);
     } catch (error) {
       console.error("Failed to fetch investigations:", error);
     } finally {
@@ -72,14 +72,16 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
   };
 
   const handleDeleteInvestigation = async (id) => {
-    if (!confirm("Are you sure you want to delete this investigation?")) return;
+    if (!confirm("Are you sure you want to cancel this investigation?")) return;
 
     try {
-      await axiosInstance.delete(`/investigations/${id}`);
-      toast.success("Investigation deleted");
+      await axiosInstance.put(`/investigations/${id}`, {
+        status: "cancelled",
+      });
+      toast.success("Investigation cancelled");
       fetchInvestigations();
     } catch (error) {
-      toast.error("Failed to delete investigation");
+      toast.error("Failed to cancel investigation");
     }
   };
 

@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { FiUser, FiPhone, FiCalendar, FiMapPin } from "react-icons/fi";
 
 const PatientCard = ({ patient, onUpdate }) => {
+  const navigate = useNavigate();
+
   const getInitials = () => {
     return `${patient.firstName?.[0] || ""}${patient.lastName?.[0] || ""}`;
   };
@@ -45,10 +48,16 @@ const PatientCard = ({ patient, onUpdate }) => {
       </div>
 
       <div className="mt-4 pt-4 border-t border-gray-100 flex items-center space-x-2">
-        <button className="flex-1 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition text-sm font-medium">
+        <button
+          onClick={() => navigate(`/portal/patients/${patient.id}`)}
+          className="flex-1 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition text-sm font-medium"
+        >
           View Details
         </button>
-        <button className="flex-1 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition text-sm font-medium">
+        <button
+          onClick={() => navigate(`/portal/visits/new?patientId=${patient.id}`)}
+          className="flex-1 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition text-sm font-medium"
+        >
           New Visit
         </button>
       </div>

@@ -199,6 +199,11 @@ export const updateVisit = async (id, data, updatedBy) => {
     data.symptoms = JSON.stringify(data.symptoms);
   }
 
+  // Parse diagnosis if it's an array
+  if (Array.isArray(data.diagnosis)) {
+    data.diagnosis = JSON.stringify(data.diagnosis);
+  }
+
   await visit.update({
     ...data,
     updatedBy,

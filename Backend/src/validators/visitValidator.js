@@ -8,8 +8,17 @@ export const createVisitValidator = [
 
 export const updateVisitValidator = [
   body("chiefComplaint").optional().trim(),
-  body("diagnosis").optional().trim(),
-  body("treatment Plan").optional().trim(),
+  body("symptoms").optional(),
+  body("historyOfPresentIllness").optional().trim(),
+  body("pastHistory").optional().trim(),
+  body("physicalExamination").optional().trim(),
+  body("diagnosis").optional(),
+  body("treatmentPlan").optional().trim(),
+  body("doctorNotes").optional().trim(),
+  body("followUpDate").optional(),
+  body("status").optional().trim(),
+  body("consultationStartTime").optional().trim(),
+  body("consultationEndTime").optional().trim(),
 ];
 
 export const visitStatusValidator = [

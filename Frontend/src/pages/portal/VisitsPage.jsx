@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { FiPlus, FiClock, FiCheckCircle } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 import VisitForm from "../../components/visits/VisitForm";
 import toast from "react-hot-toast";
 
 const VisitsPage = () => {
+  const [searchParams] = useSearchParams();
+  const patientIdParam = searchParams.get("patientId");
+
   const [visits, setVisits] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(!!patientIdParam);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
@@ -21,7 +25,7 @@ const VisitsPage = () => {
       if (filter !== "all") params.status = filter;
 
       const response = await axiosInstance.get("/visits", { params });
-      setVisits(response.data.visits || response.data || []);
+      setVisits(response.data.data || response.data || []);
     } catch (error) {
       toast.error("Failed to load visits");
       setVisits([]);
@@ -132,6 +136,7 @@ const VisitsPage = () => {
       {/* Visit Form Modal */}
       {showForm && (
         <VisitForm
+          defaultPatientId={patientIdParam}
           onClose={() => setShowForm(false)}
           onSuccess={() => {
             setShowForm(false);

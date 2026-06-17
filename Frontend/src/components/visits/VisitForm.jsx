@@ -4,26 +4,42 @@ import { FiX } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 import toast from "react-hot-toast";
 
-const VisitForm = ({ onClose, onSuccess }) => {
+const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
   const [patients, setPatients] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      patientId: defaultPatientId || "",
+      visitDate: new Date().toISOString().split("T")[0],
+      arrivalTime: new Date().toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    },
+  });
 
   useEffect(() => {
     fetchPatients();
   }, [searchTerm]);
+
+  useEffect(() => {
+    if (defaultPatientId) {
+      setValue("patientId", defaultPatientId);
+    }
+  }, [defaultPatientId, setValue]);
 
   const fetchPatients = async () => {
     try {
       const response = await axiosInstance.get("/patients", {
         params: { pageSize: 50, search: searchTerm },
       });
-      setPatients(response.data.patients || response.data || []);
+      setPatients(response.data.data || response.data || []);
     } catch (error) {
       console.error("Failed to fetch patients");
       setPatients([]);

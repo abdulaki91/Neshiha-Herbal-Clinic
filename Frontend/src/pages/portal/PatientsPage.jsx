@@ -25,7 +25,7 @@ const PatientsPage = () => {
       const response = await axiosInstance.get("/patients", {
         params: { page, pageSize: 10, search },
       });
-      setPatients(response.data.patients || response.data || []);
+      setPatients(response.data.data || response.data || []);
       setPagination(response.data.pagination || null);
     } catch (error) {
       toast.error("Failed to load patients");

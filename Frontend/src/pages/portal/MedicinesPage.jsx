@@ -23,7 +23,7 @@ const MedicinesPage = () => {
       const response = await axiosInstance.get("/medicines", {
         params: { search },
       });
-      setMedicines(response.data.medicines || response.data || []);
+      setMedicines(response.data.data || response.data || []);
     } catch (error) {
       toast.error("Failed to load medicines");
     } finally {

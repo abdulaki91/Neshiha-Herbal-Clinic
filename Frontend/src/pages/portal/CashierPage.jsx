@@ -37,7 +37,7 @@ const CashierPage = () => {
       const response = await axiosInstance.get("/payments/pending", {
         params: { search: searchTerm },
       });
-      setPendingPayments(response.data.visits || []);
+      setPendingPayments(response.data.data?.visits || []);
     } catch (error) {
       toast.error("Failed to fetch pending payments");
     } finally {
@@ -47,9 +47,8 @@ const CashierPage = () => {
 
   const handleProcessPaymentClick = (visit) => {
     setSelectedVisit(visit);
-    // Calculate total amount from prescriptions
     const total = visit.prescriptions.reduce((sum, p) => {
-      return sum + parseFloat(p.medicine?.sellingPrice || 0) * p.quantity;
+      return sum + parseFloat(p.totalAmount || p.unitPrice * p.quantity || 0);
     }, 0);
 
     setPaymentData({
@@ -142,12 +141,10 @@ const CashierPage = () => {
                       >
                         <span>
                           {p.medicine?.name} ({p.quantity} x{" "}
-                          {p.medicine?.sellingPrice} ETB)
+                          {parseFloat(p.unitPrice || 0).toFixed(2)} ETB)
                         </span>
                         <span className="font-semibold">
-                          {(
-                            p.quantity * (p.medicine?.sellingPrice || 0)
-                          ).toFixed(2)}{" "}
+                          {parseFloat(p.totalAmount || p.unitPrice * p.quantity || 0).toFixed(2)}{" "}
                           ETB
                         </span>
                       </div>
@@ -157,7 +154,7 @@ const CashierPage = () => {
                       {visit.prescriptions
                         .reduce(
                           (sum, p) =>
-                            sum + p.quantity * (p.medicine?.sellingPrice || 0),
+                            sum + parseFloat(p.totalAmount || p.unitPrice * p.quantity || 0),
                           0,
                         )
                         .toFixed(2)}{" "}

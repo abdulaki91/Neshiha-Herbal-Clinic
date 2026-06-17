@@ -62,7 +62,7 @@ export const getAllPrescriptions = async (query) => {
       {
         model: Medicine,
         as: "medicine",
-        attributes: ["id", "medicineId", "name", "strength"],
+        attributes: ["id", "code", "name", "strength"],
       },
       {
         model: User,

@@ -31,7 +31,7 @@ const ActivePrescriptions = ({ patientId }) => {
       });
 
       const allPrescriptions =
-        response.data?.prescriptions || response.data || [];
+        response.data?.data || response.data || [];
 
       // Filter for prescriptions from last 90 days
       const ninetyDaysAgo = new Date();

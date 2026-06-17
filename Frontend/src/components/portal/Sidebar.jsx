@@ -10,37 +10,46 @@ import {
   FiActivity,
   FiPackage,
   FiClock,
+  FiSearch,
+  FiExternalLink,
 } from "react-icons/fi";
 import useAuthStore from "../../store/authStore";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuthStore();
   const [recentPatients, setRecentPatients] = useState([]);
+  const [patientFilter, setPatientFilter] = useState("");
 
   useEffect(() => {
-    // Load recent patients from localStorage
-    const saved = localStorage.getItem("recentPatients");
-    if (saved) {
-      try {
-        setRecentPatients(JSON.parse(saved).slice(0, 5));
-      } catch (e) {
-        setRecentPatients([]);
-      }
-    }
-
-    // Listen for updates to recent patients
-    const handleStorageChange = () => {
-      const updated = localStorage.getItem("recentPatients");
-      if (updated) {
-        setRecentPatients(JSON.parse(updated).slice(0, 5));
+    const loadPatients = () => {
+      const saved = localStorage.getItem("recentPatients");
+      if (saved) {
+        try {
+          setRecentPatients(JSON.parse(saved));
+        } catch {
+          setRecentPatients([]);
+        }
       }
     };
 
+    loadPatients();
+
+    const handleStorageChange = () => loadPatients();
     window.addEventListener("recentPatientsUpdated", handleStorageChange);
     return () =>
       window.removeEventListener("recentPatientsUpdated", handleStorageChange);
   }, []);
+
+  const filteredPatients = useMemo(() => {
+    if (!patientFilter.trim()) return recentPatients;
+    const q = patientFilter.toLowerCase();
+    return recentPatients.filter(
+      (p) =>
+        `${p.firstName} ${p.lastName}`.toLowerCase().includes(q) ||
+        (p.patientId || "").toLowerCase().includes(q),
+    );
+  }, [recentPatients, patientFilter]);
 
   const navigation = {
     super_admin: [
@@ -79,11 +88,18 @@ const Sidebar = ({ isOpen, onClose }) => {
   };
 
   const links = navigation[user?.role] || [];
+  const showPatients =
+    user?.role === "data_clerk" ||
+    user?.role === "super_admin";
 
   const handleLogout = () => {
     logout();
     localStorage.clear();
     window.location.href = "/signin";
+  };
+
+  const closeIfMobile = () => {
+    if (window.innerWidth < 1024) onClose();
   };
 
   return (
@@ -98,12 +114,12 @@ const Sidebar = ({ isOpen, onClose }) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-full bg-white shadow-xl z-30 w-64 transform transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed left-0 top-0 h-full bg-white shadow-xl z-30 w-64 transform transition-transform duration-300 lg:translate-x-0 flex flex-col ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Logo */}
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-gray-200 flex-shrink-0">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center">
               <svg
@@ -129,9 +145,10 @@ const Sidebar = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Navigation */}
+        {/* Scrollable middle section */}
         <div className="flex-1 overflow-y-auto">
-          <nav className="p-4 space-y-2">
+          {/* Navigation */}
+          <nav className="p-4 space-y-1">
             {links.map((link) => {
               const Icon = link.icon;
               return (
@@ -140,56 +157,95 @@ const Sidebar = ({ isOpen, onClose }) => {
                   to={link.to}
                   end={link.end}
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 px-4 py-3 rounded-lg transition ${
+                    `flex items-center space-x-3 px-4 py-2.5 rounded-lg transition ${
                       isActive
                         ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white"
                         : "text-gray-700 hover:bg-gray-100"
                     }`
                   }
-                  onClick={() => {
-                    if (window.innerWidth < 1024) onClose();
-                  }}
+                  onClick={closeIfMobile}
                 >
                   <Icon className="w-5 h-5" />
-                  <span className="font-medium">{link.name}</span>
+                  <span className="font-medium text-sm">{link.name}</span>
                 </NavLink>
               );
             })}
           </nav>
 
-          {/* Recent Patients Section */}
-          {(user?.role === "doctor" ||
-            user?.role === "data_clerk" ||
-            user?.role === "super_admin") &&
-            recentPatients.length > 0 && (
-              <div className="px-4 py-6 border-t border-gray-100">
-                <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center">
+          {/* Previous Patients Section */}
+          {showPatients && (
+            <div className="px-4 py-4 border-t border-gray-100">
+              <div className="flex items-center justify-between px-1 mb-3">
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center">
                   <FiClock className="mr-2" />
-                  Recent Patients
+                  Previous Patients
                 </p>
-                <div className="space-y-1">
-                  {recentPatients.map((patient) => (
+                <span className="text-xs text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">
+                  {recentPatients.length}
+                </span>
+              </div>
+
+              {/* Search filter */}
+              {recentPatients.length > 0 && (
+                <div className="relative mb-2">
+                  <FiSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Filter patients..."
+                    value={patientFilter}
+                    onChange={(e) => setPatientFilter(e.target.value)}
+                    className="w-full pl-8 pr-3 py-1.5 text-xs border border-gray-200 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none bg-gray-50"
+                  />
+                </div>
+              )}
+
+              {/* Patient list with scroll */}
+              {filteredPatients.length > 0 ? (
+                <div className="max-h-48 overflow-y-auto space-y-0.5">
+                  {filteredPatients.map((patient) => (
                     <NavLink
                       key={patient.id}
                       to={`/portal/patients/${patient.id}`}
-                      className="flex items-center px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition"
-                      onClick={() => {
-                        if (window.innerWidth < 1024) onClose();
-                      }}
+                      className="flex items-center px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition"
+                      onClick={closeIfMobile}
                     >
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 mr-3" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2.5 flex-shrink-0" />
                       <span className="truncate">
                         {patient.firstName} {patient.lastName}
                       </span>
+                      {patient.patientId && (
+                        <span className="ml-auto text-xs text-gray-400 flex-shrink-0 pl-1">
+                          #{patient.patientId}
+                        </span>
+                      )}
                     </NavLink>
                   ))}
                 </div>
-              </div>
-            )}
+              ) : recentPatients.length > 0 && patientFilter ? (
+                <p className="text-xs text-gray-400 text-center py-2">
+                  No patients match "{patientFilter}"
+                </p>
+              ) : recentPatients.length === 0 ? (
+                <p className="text-xs text-gray-400 text-center py-2">
+                  No previous patients yet
+                </p>
+              ) : null}
+
+              {/* View All link */}
+              <NavLink
+                to="/portal/patients"
+                className="flex items-center justify-center space-x-1 mt-2 px-3 py-1.5 text-xs text-emerald-600 hover:bg-emerald-50 rounded-lg transition font-medium"
+                onClick={closeIfMobile}
+              >
+                <FiExternalLink className="w-3 h-3" />
+                <span>View All Patients</span>
+              </NavLink>
+            </div>
+          )}
         </div>
 
         {/* User Info & Logout */}
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200 flex-shrink-0">
           <div className="flex items-center space-x-3 mb-3">
             <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
               <span className="text-emerald-600 font-bold">

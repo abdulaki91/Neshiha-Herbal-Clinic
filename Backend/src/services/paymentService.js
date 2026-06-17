@@ -47,6 +47,7 @@ export const getPendingPayments = async (query) => {
       {
         model: Prescription,
         as: "prescriptions",
+        attributes: ["id", "quantity", "unitPrice", "totalAmount", "status", "dosage", "frequency"],
         include: [
           {
             model: Medicine,

@@ -77,6 +77,7 @@ export const getAllDispenses = async (query) => {
     pageSize = 10,
     patientId,
     medicineId,
+    visitId,
     dispensedBy,
     startDate,
     endDate,
@@ -90,6 +91,7 @@ export const getAllDispenses = async (query) => {
 
   if (patientId) where.patientId = patientId;
   if (medicineId) where.medicineId = medicineId;
+  if (visitId) where.visitId = visitId;
   if (dispensedBy) where.dispensedBy = dispensedBy;
 
   if (startDate && endDate) {
@@ -120,7 +122,7 @@ export const getAllDispenses = async (query) => {
       {
         model: Medicine,
         as: "medicine",
-        attributes: ["id", "name", "category", "unit"],
+        attributes: ["id", "code", "name", "strength", "dosageForm"],
       },
       {
         model: Prescription,
@@ -190,7 +192,7 @@ export const getDispensesByPatient = async (patientId, query = {}) => {
       {
         model: Medicine,
         as: "medicine",
-        attributes: ["id", "name", "category", "unit"],
+        attributes: ["id", "code", "name", "strength", "dosageForm"],
       },
       {
         model: Prescription,
@@ -221,7 +223,7 @@ export const getDispensesByPrescription = async (prescriptionId) => {
       {
         model: Medicine,
         as: "medicine",
-        attributes: ["id", "name", "category", "unit"],
+        attributes: ["id", "code", "name", "strength", "dosageForm"],
       },
     ],
   });
