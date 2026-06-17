@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FiUsers, FiCalendar, FiActivity, FiTrendingUp } from "react-icons/fi";
 import useAuthStore from "../../store/authStore";
 import axiosInstance from "../../lib/axios";
 
 const DashboardPage = () => {
   const { user } = useAuthStore();
+  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -191,7 +193,12 @@ const DashboardPage = () => {
                       </p>
                     </div>
                   </div>
-                  <button className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition">
+                  <button
+                    onClick={() =>
+                      navigate(`/portal/queue?visitId=${visit.id}`)
+                    }
+                    className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+                  >
                     Start Consultation
                   </button>
                 </div>

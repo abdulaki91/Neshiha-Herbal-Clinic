@@ -99,8 +99,33 @@ export const getAllPatients = async (query) => {
     ],
   });
 
+  // Parse JSON fields in patient data
+  const patientsWithParsedData = rows.map((patient) => {
+    const patientData = patient.toJSON();
+    if (patientData.knownAllergies) {
+      try {
+        patientData.knownAllergies = JSON.parse(patientData.knownAllergies);
+      } catch (e) {
+        patientData.knownAllergies = [];
+      }
+    } else {
+      patientData.knownAllergies = [];
+    }
+
+    if (patientData.chronicDiseases) {
+      try {
+        patientData.chronicDiseases = JSON.parse(patientData.chronicDiseases);
+      } catch (e) {
+        patientData.chronicDiseases = [];
+      }
+    } else {
+      patientData.chronicDiseases = [];
+    }
+    return patientData;
+  });
+
   return {
-    patients: rows,
+    patients: patientsWithParsedData,
     pagination: {
       page: parseInt(page),
       pageSize: limit,
@@ -127,7 +152,29 @@ export const getPatientById = async (id) => {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
-  return patient;
+  // Parse JSON fields
+  const patientData = patient.toJSON();
+  if (patientData.knownAllergies) {
+    try {
+      patientData.knownAllergies = JSON.parse(patientData.knownAllergies);
+    } catch (e) {
+      patientData.knownAllergies = [];
+    }
+  } else {
+    patientData.knownAllergies = [];
+  }
+
+  if (patientData.chronicDiseases) {
+    try {
+      patientData.chronicDiseases = JSON.parse(patientData.chronicDiseases);
+    } catch (e) {
+      patientData.chronicDiseases = [];
+    }
+  } else {
+    patientData.chronicDiseases = [];
+  }
+
+  return patientData;
 };
 
 /**
@@ -239,7 +286,29 @@ export const getPatientHistory = async (id) => {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
-  return patient;
+  // Parse JSON fields
+  const patientData = patient.toJSON();
+  if (patientData.knownAllergies) {
+    try {
+      patientData.knownAllergies = JSON.parse(patientData.knownAllergies);
+    } catch (e) {
+      patientData.knownAllergies = [];
+    }
+  } else {
+    patientData.knownAllergies = [];
+  }
+
+  if (patientData.chronicDiseases) {
+    try {
+      patientData.chronicDiseases = JSON.parse(patientData.chronicDiseases);
+    } catch (e) {
+      patientData.chronicDiseases = [];
+    }
+  } else {
+    patientData.chronicDiseases = [];
+  }
+
+  return patientData;
 };
 
 /**

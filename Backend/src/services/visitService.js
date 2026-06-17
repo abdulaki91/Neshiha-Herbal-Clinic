@@ -61,7 +61,19 @@ export const getAllVisits = async (query) => {
       {
         model: Patient,
         as: "patient",
-        attributes: ["id", "patientId", "firstName", "lastName", "phone"],
+        attributes: [
+          "id",
+          "patientId",
+          "firstName",
+          "middleName",
+          "lastName",
+          "age",
+          "gender",
+          "phone",
+          "bloodGroup",
+          "knownAllergies",
+          "chronicDiseases",
+        ],
       },
       {
         model: User,
@@ -71,8 +83,39 @@ export const getAllVisits = async (query) => {
     ],
   });
 
+  // Parse JSON fields in patient data
+  const visitsWithParsedData = rows.map((visit) => {
+    const visitData = visit.toJSON();
+    if (visitData.patient) {
+      if (visitData.patient.knownAllergies) {
+        try {
+          visitData.patient.knownAllergies = JSON.parse(
+            visitData.patient.knownAllergies,
+          );
+        } catch (e) {
+          visitData.patient.knownAllergies = [];
+        }
+      } else {
+        visitData.patient.knownAllergies = [];
+      }
+
+      if (visitData.patient.chronicDiseases) {
+        try {
+          visitData.patient.chronicDiseases = JSON.parse(
+            visitData.patient.chronicDiseases,
+          );
+        } catch (e) {
+          visitData.patient.chronicDiseases = [];
+        }
+      } else {
+        visitData.patient.chronicDiseases = [];
+      }
+    }
+    return visitData;
+  });
+
   return {
-    visits: rows,
+    visits: visitsWithParsedData,
     pagination: {
       page: parseInt(page),
       pageSize: limit,
@@ -103,7 +146,35 @@ export const getVisitById = async (id) => {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
-  return visit;
+  // Parse JSON fields in patient data
+  const visitData = visit.toJSON();
+  if (visitData.patient) {
+    if (visitData.patient.knownAllergies) {
+      try {
+        visitData.patient.knownAllergies = JSON.parse(
+          visitData.patient.knownAllergies,
+        );
+      } catch (e) {
+        visitData.patient.knownAllergies = [];
+      }
+    } else {
+      visitData.patient.knownAllergies = [];
+    }
+
+    if (visitData.patient.chronicDiseases) {
+      try {
+        visitData.patient.chronicDiseases = JSON.parse(
+          visitData.patient.chronicDiseases,
+        );
+      } catch (e) {
+        visitData.patient.chronicDiseases = [];
+      }
+    } else {
+      visitData.patient.chronicDiseases = [];
+    }
+  }
+
+  return visitData;
 };
 
 /**
@@ -188,13 +259,46 @@ export const getDoctorQueue = async (doctorId) => {
           "phone",
           "age",
           "gender",
+          "knownAllergies",
+          "chronicDiseases",
         ],
       },
     ],
     order: [["arrivalTime", "ASC"]],
   });
 
-  return waiting;
+  // Parse JSON fields in patient data
+  const visitsWithParsedData = waiting.map((visit) => {
+    const visitData = visit.toJSON();
+    if (visitData.patient) {
+      if (visitData.patient.knownAllergies) {
+        try {
+          visitData.patient.knownAllergies = JSON.parse(
+            visitData.patient.knownAllergies,
+          );
+        } catch (e) {
+          visitData.patient.knownAllergies = [];
+        }
+      } else {
+        visitData.patient.knownAllergies = [];
+      }
+
+      if (visitData.patient.chronicDiseases) {
+        try {
+          visitData.patient.chronicDiseases = JSON.parse(
+            visitData.patient.chronicDiseases,
+          );
+        } catch (e) {
+          visitData.patient.chronicDiseases = [];
+        }
+      } else {
+        visitData.patient.chronicDiseases = [];
+      }
+    }
+    return visitData;
+  });
+
+  return visitsWithParsedData;
 };
 
 /**

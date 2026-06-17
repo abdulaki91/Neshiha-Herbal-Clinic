@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   FiUser,
   FiClock,
@@ -18,10 +18,14 @@ import useAuthStore from "../../store/authStore";
 import HerbalMedicineForm from "../../components/doctor/HerbalMedicineForm";
 import VitalSignsForm from "../../components/doctor/VitalSignsForm";
 import InvestigationForm from "../../components/doctor/InvestigationForm";
+import FollowUpIndicator from "../../components/doctor/FollowUpIndicator";
+import ActivePrescriptions from "../../components/doctor/ActivePrescriptions";
+import PendingInvestigations from "../../components/doctor/PendingInvestigations";
 
 const DoctorQueuePage = () => {
   const { user } = useAuthStore();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [queue, setQueue] = useState([]);
   const [selectedVisit, setSelectedVisit] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,19 +49,54 @@ const DoctorQueuePage = () => {
     fetchQueue();
   }, []);
 
+  // Auto-start consultation if visitId is in URL
+  useEffect(() => {
+    const visitId = searchParams.get("visitId");
+    if (visitId && queue.length > 0) {
+      const visit = queue.find((v) => v.id === visitId);
+      if (visit) {
+        handleStartConsultation(visit);
+      }
+    }
+  }, [queue, searchParams]);
+
   const fetchQueue = async () => {
     try {
+      console.log("🔍 Fetching queue with params:", {
+        status: "waiting",
+        sortBy: "arrivalTime",
+        sortOrder: "ASC",
+      });
+
       const response = await axiosInstance.get("/visits", {
         params: {
           status: "waiting",
-          doctorId: user.id,
           sortBy: "arrivalTime",
           sortOrder: "ASC",
         },
       });
-      setQueue(response.data.visits || []);
+
+      console.log("📦 Raw API response:", response);
+      console.log("📋 Response data structure:", {
+        hasData: !!response.data,
+        hasVisits: !!response.data?.visits,
+        visitCount: response.data?.visits?.length || 0,
+        visits: response.data?.visits || response.data || [],
+      });
+
+      // Handle both response.data.visits and response.data directly
+      const visits = response.data?.visits || response.data || [];
+      console.log("✅ Setting queue with visits:", visits);
+      setQueue(visits);
     } catch (error) {
-      toast.error("Failed to fetch queue");
+      console.error("❌ Queue fetch error:", error);
+      console.error("Error response:", error.response?.data);
+      console.error("Error status:", error.response?.status);
+      toast.error(
+        "Failed to fetch queue: " +
+          (error.response?.data?.message || error.message),
+      );
+      setQueue([]);
     } finally {
       setLoading(false);
     }
@@ -250,6 +289,20 @@ const DoctorQueuePage = () => {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Follow-up Indicator */}
+        <div className="mb-6">
+          <FollowUpIndicator
+            patientId={selectedVisit.patient?.id}
+            currentVisitDate={selectedVisit.visitDate}
+          />
+        </div>
+
+        {/* Active Prescriptions & Pending Investigations */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <ActivePrescriptions patientId={selectedVisit.patient?.id} />
+          <PendingInvestigations patientId={selectedVisit.patient?.id} />
         </div>
 
         {/* Tabs */}

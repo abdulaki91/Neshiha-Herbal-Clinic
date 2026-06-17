@@ -58,8 +58,8 @@ const createTestData = async () => {
         height: 175,
         maritalStatus: "married",
         occupation: "Teacher",
-        knownAllergies: ["Penicillin", "Peanuts"],
-        chronicDiseases: ["Hypertension"],
+        knownAllergies: JSON.stringify(["Penicillin", "Peanuts"]),
+        chronicDiseases: JSON.stringify(["Hypertension"]),
         registeredBy: clerk.id,
       },
       {
@@ -81,8 +81,8 @@ const createTestData = async () => {
         height: 165,
         maritalStatus: "single",
         occupation: "Nurse",
-        knownAllergies: [],
-        chronicDiseases: [],
+        knownAllergies: JSON.stringify([]),
+        chronicDiseases: JSON.stringify([]),
         registeredBy: clerk.id,
       },
       {
@@ -104,8 +104,11 @@ const createTestData = async () => {
         height: 178,
         maritalStatus: "married",
         occupation: "Business Owner",
-        knownAllergies: [],
-        chronicDiseases: ["Diabetes Type 2", "High Cholesterol"],
+        knownAllergies: JSON.stringify([]),
+        chronicDiseases: JSON.stringify([
+          "Diabetes Type 2",
+          "High Cholesterol",
+        ]),
         registeredBy: clerk.id,
       },
       {
@@ -127,8 +130,8 @@ const createTestData = async () => {
         height: 162,
         maritalStatus: "single",
         occupation: "Student",
-        knownAllergies: ["Dust", "Pollen"],
-        chronicDiseases: [],
+        knownAllergies: JSON.stringify(["Dust", "Pollen"]),
+        chronicDiseases: JSON.stringify([]),
         registeredBy: clerk.id,
       },
       {
@@ -150,8 +153,8 @@ const createTestData = async () => {
         height: 172,
         maritalStatus: "married",
         occupation: "Engineer",
-        knownAllergies: [],
-        chronicDiseases: [],
+        knownAllergies: JSON.stringify([]),
+        chronicDiseases: JSON.stringify([]),
         registeredBy: clerk.id,
       },
     ];

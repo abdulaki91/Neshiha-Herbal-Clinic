@@ -9,6 +9,7 @@
     "dev": "nodemon src/server.js",
     "migrate": "node src/scripts/migrate.js",
     "seed": "node src/scripts/seed.js",
+    "test-data": "node src/scripts/createTestData.js",
     "migrate:undo": "node src/scripts/migrate.js undo",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
