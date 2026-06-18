@@ -1,6 +1,7 @@
 import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import * as visitService from "../services/visitService.js";
+import { emitVisitCreated, emitVisitStatusChanged } from "../config/socket.js";
 
 export const getAllVisits = asyncHandler(async (req, res) => {
   const result = await visitService.getAllVisits(req.query);
@@ -19,6 +20,7 @@ export const getVisitById = asyncHandler(async (req, res) => {
 
 export const createVisit = asyncHandler(async (req, res) => {
   const visit = await visitService.createVisit(req.body, req.user.id);
+  emitVisitCreated(visit);
   return ApiResponse.created(res, visit, "Visit created successfully");
 });
 
@@ -28,6 +30,7 @@ export const updateVisit = asyncHandler(async (req, res) => {
     req.body,
     req.user.id,
   );
+  emitVisitStatusChanged(visit);
   return ApiResponse.success(res, visit, "Visit updated successfully");
 });
 
@@ -38,6 +41,7 @@ export const updateVisitStatus = asyncHandler(async (req, res) => {
     status,
     req.user.id,
   );
+  emitVisitStatusChanged(visit);
   return ApiResponse.success(res, visit, "Visit status updated successfully");
 });
 

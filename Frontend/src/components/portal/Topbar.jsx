@@ -1,8 +1,29 @@
 import { FiBell, FiMenu } from "react-icons/fi";
+import { useEffect, useState } from "react";
 import useAuthStore from "../../store/authStore";
+import { getSocket } from "../../lib/socket";
 
 const Topbar = ({ onMenuClick }) => {
   const { user } = useAuthStore();
+  const [notifCount, setNotifCount] = useState(0);
+
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+
+    const handleNew = () => setNotifCount((c) => c + 1);
+    const handleClear = () => setNotifCount(0);
+
+    socket.on("notification:new", handleNew);
+    socket.on("visit:status-changed", handleNew);
+    socket.on("patient:registered", handleNew);
+
+    return () => {
+      socket.off("notification:new", handleNew);
+      socket.off("visit:status-changed", handleNew);
+      socket.off("patient:registered", handleNew);
+    };
+  }, []);
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
@@ -30,9 +51,16 @@ const Topbar = ({ onMenuClick }) => {
         </div>
 
         <div className="flex items-center space-x-4">
-          <button className="relative p-2 rounded-lg hover:bg-gray-100 transition">
+          <button
+            onClick={() => setNotifCount(0)}
+            className="relative p-2 rounded-lg hover:bg-gray-100 transition"
+          >
             <FiBell className="w-6 h-6 text-gray-600" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            {notifCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-[20px] h-5 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full px-1">
+                {notifCount > 99 ? "99+" : notifCount}
+              </span>
+            )}
           </button>
         </div>
       </div>

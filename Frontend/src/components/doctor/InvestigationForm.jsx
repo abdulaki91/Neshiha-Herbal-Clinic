@@ -27,7 +27,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
       const response = await axiosInstance.get("/investigations", {
         params: { visitId },
       });
-      setInvestigations(response.data.data || []);
+      setInvestigations(response.data?.data || response.data || []);
     } catch (error) {
       console.error("Failed to fetch investigations:", error);
     } finally {

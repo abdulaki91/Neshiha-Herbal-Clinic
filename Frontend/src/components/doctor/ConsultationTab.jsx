@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiPlus, FiX } from "react-icons/fi";
 
-const ConsultationTab = ({ data, onChange, onComplete }) => {
+const ConsultationTab = ({ data, onChange }) => {
   const [newSymptom, setNewSymptom] = useState("");
   const [newDiagnosis, setNewDiagnosis] = useState("");
 
@@ -131,7 +131,7 @@ const ConsultationTab = ({ data, onChange, onComplete }) => {
       {/* Diagnosis */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Diagnosis *
+          Diagnosis
         </label>
         <div className="flex space-x-2 mb-2">
           <input
@@ -206,16 +206,6 @@ const ConsultationTab = ({ data, onChange, onComplete }) => {
           onChange={(e) => onChange({ ...data, followUpDate: e.target.value })}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
         />
-      </div>
-
-      {/* Complete Button */}
-      <div className="flex justify-end space-x-3 pt-4 border-t">
-        <button
-          onClick={onComplete}
-          className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium"
-        >
-          Complete Consultation
-        </button>
       </div>
     </div>
   );

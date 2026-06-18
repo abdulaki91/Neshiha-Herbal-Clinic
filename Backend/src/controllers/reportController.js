@@ -58,3 +58,13 @@ export const getYearlyReport = asyncHandler(async (req, res) => {
     "Yearly report generated successfully",
   );
 });
+
+export const getRevenueReport = asyncHandler(async (req, res) => {
+  const { period, date } = req.query;
+  const report = await reportService.getRevenueReport(period, date);
+  return ApiResponse.success(
+    res,
+    report,
+    "Revenue report generated successfully",
+  );
+});

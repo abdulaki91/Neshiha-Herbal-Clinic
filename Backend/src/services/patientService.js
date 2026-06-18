@@ -1,4 +1,4 @@
-import { Patient, User } from "../models/index.js";
+import { Patient, User, Visit } from "../models/index.js";
 import { Op } from "sequelize";
 import { getPagination, calculateAge } from "../utils/helpers.js";
 import { ERROR_MESSAGES } from "../config/constants.js";
@@ -56,6 +56,7 @@ export const getAllPatients = async (query) => {
     isActive = true,
     sortBy = "createdAt",
     sortOrder = "DESC",
+    consultedBy,
   } = query;
 
   const { limit, offset } = getPagination(page, pageSize);
@@ -85,18 +86,35 @@ export const getAllPatients = async (query) => {
     ];
   }
 
+  const include = [
+    {
+      model: User,
+      as: "registeredByUser",
+      attributes: ["id", "firstName", "lastName", "email"],
+    },
+  ];
+
+  if (consultedBy) {
+    const visitedPatientIds = await Visit.findAll({
+      attributes: ["patientId"],
+      where: { doctorId: consultedBy },
+    });
+    if (visitedPatientIds.length === 0) {
+      return {
+        patients: [],
+        pagination: { page: parseInt(page), pageSize: limit, totalItems: 0 },
+      };
+    }
+    where.id = visitedPatientIds.map((v) => v.patientId);
+  }
+
   const { count, rows } = await Patient.findAndCountAll({
     where,
+    distinct: true,
     limit,
     offset,
     order: [[sortBy, sortOrder]],
-    include: [
-      {
-        model: User,
-        as: "registeredByUser",
-        attributes: ["id", "firstName", "lastName", "email"],
-      },
-    ],
+    include,
   });
 
   // Parse JSON fields in patient data

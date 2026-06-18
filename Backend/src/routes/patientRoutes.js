@@ -32,7 +32,7 @@ router.get("/:id/history", patientController.getPatientHistory);
 // Create new patient
 router.post(
   "/",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN),
+  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
   patientValidator.createPatientValidator,
   validate,
   auditLogger("CREATE", "Patient"),
@@ -42,17 +42,17 @@ router.post(
 // Update patient
 router.put(
   "/:id",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN),
+  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
   patientValidator.updatePatientValidator,
   validate,
   auditUpdate("Patient"),
   patientController.updatePatient,
 );
 
-// Delete patient (super admin only)
+// Delete patient (super admin and doctor)
 router.delete(
   "/:id",
-  authorize(ROLES.SUPER_ADMIN),
+  authorize(ROLES.SUPER_ADMIN, ROLES.DOCTOR),
   auditLogger("DELETE", "Patient"),
   patientController.deletePatient,
 );
@@ -60,7 +60,7 @@ router.delete(
 // Upload patient photo
 router.post(
   "/:id/photo",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN),
+  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
   uploadSingle("photo"),
   auditLogger("UPDATE", "Patient"),
   patientController.uploadPhoto,

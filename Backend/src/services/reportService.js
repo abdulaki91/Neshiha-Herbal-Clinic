@@ -4,6 +4,7 @@ import {
   Medicine,
   Prescription,
   MedicineDispense,
+  Payment,
   User,
 } from "../models/index.js";
 import { Op } from "sequelize";
@@ -146,4 +147,101 @@ export const getYearlyReport = async (year) => {
   });
 
   return { year, visitCount, patientCount };
+};
+
+/**
+ * Get revenue report for paid/dispensed prescriptions
+ * @param {string} period - "daily", "weekly", or "monthly"
+ * @param {string} date - reference date (ISO format), defaults to today
+ */
+export const getRevenueReport = async (period = "daily", date) => {
+  const refDate = date ? new Date(date) : new Date();
+  let startDate, endDate;
+
+  if (period === "daily") {
+    startDate = new Date(refDate);
+    startDate.setHours(0, 0, 0, 0);
+    endDate = new Date(refDate);
+    endDate.setHours(23, 59, 59, 999);
+  } else if (period === "weekly") {
+    const day = refDate.getDay();
+    startDate = new Date(refDate);
+    startDate.setDate(refDate.getDate() - day);
+    startDate.setHours(0, 0, 0, 0);
+    endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 6);
+    endDate.setHours(23, 59, 59, 999);
+  } else if (period === "monthly") {
+    startDate = new Date(refDate.getFullYear(), refDate.getMonth(), 1);
+    endDate = new Date(refDate.getFullYear(), refDate.getMonth() + 1, 0);
+    endDate.setHours(23, 59, 59, 999);
+  }
+
+  const payments = await Payment.findAll({
+    where: {
+      paidAt: { [Op.between]: [startDate, endDate] },
+      status: "paid",
+    },
+    include: [
+      {
+        model: Patient,
+        as: "patient",
+        attributes: ["id", "patientId", "firstName", "lastName", "phone"],
+      },
+      {
+        model: Visit,
+        as: "visit",
+        attributes: ["id", "visitNumber", "visitDate"],
+      },
+      {
+        model: User,
+        as: "cashier",
+        attributes: ["id", "firstName", "lastName"],
+      },
+    ],
+    order: [["paidAt", "DESC"]],
+  });
+
+  const totalRevenue = payments.reduce((sum, p) => sum + parseFloat(p.amount || 0), 0);
+  const totalPrescriptions = payments.length;
+
+  // Group by day for chart data
+  const revenueByDay = {};
+  for (const p of payments) {
+    const day = new Date(p.paidAt).toISOString().split("T")[0];
+    revenueByDay[day] = (revenueByDay[day] || 0) + parseFloat(p.amount || 0);
+  }
+
+  // Payment method breakdown
+  const byMethod = {};
+  for (const p of payments) {
+    const method = p.paymentMethod || "other";
+    byMethod[method] = (byMethod[method] || 0) + parseFloat(p.amount || 0);
+  }
+
+  return {
+    period,
+    startDate: startDate.toISOString().split("T")[0],
+    endDate: endDate.toISOString().split("T")[0],
+    summary: {
+      totalRevenue: Math.round(totalRevenue * 100) / 100,
+      totalPrescriptions,
+      byPaymentMethod: byMethod,
+    },
+    revenueByDay: Object.entries(revenueByDay).map(([day, amount]) => ({
+      day,
+      amount: Math.round(amount * 100) / 100,
+    })),
+    payments: payments.map((p) => ({
+      id: p.id,
+      paymentNumber: p.paymentNumber,
+      amount: parseFloat(p.amount || 0),
+      paymentMethod: p.paymentMethod,
+      paidAt: p.paidAt,
+      transactionId: p.transactionId,
+      patient: p.patient,
+      visit: p.visit,
+      cashier: p.cashier,
+    })),
+  };
 };

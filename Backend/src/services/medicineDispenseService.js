@@ -58,13 +58,6 @@ export const createDispense = async (data, dispensedBy) => {
     dispensedDate: new Date(),
   });
 
-  // Update medicine stock
-  if (medicine.quantityInStock !== null) {
-    await medicine.update({
-      quantityInStock: medicine.quantityInStock - quantityDispensed,
-    });
-  }
-
   return dispense;
 };
 

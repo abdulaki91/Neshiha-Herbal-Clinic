@@ -1,6 +1,7 @@
 import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import * as patientService from "../services/patientService.js";
+import { emitPatientRegistered } from "../config/socket.js";
 
 /**
  * @route   GET /api/v1/patients
@@ -8,7 +9,9 @@ import * as patientService from "../services/patientService.js";
  * @access  Private
  */
 export const getAllPatients = asyncHandler(async (req, res) => {
+  console.log("[patientController] getAllPatients query:", req.query);
   const result = await patientService.getAllPatients(req.query);
+  console.log("[patientController] Result count:", result.patients?.length);
 
   return ApiResponse.paginated(
     res,
@@ -36,7 +39,7 @@ export const getPatientById = asyncHandler(async (req, res) => {
  */
 export const createPatient = asyncHandler(async (req, res) => {
   const patient = await patientService.createPatient(req.body, req.user.id);
-
+  emitPatientRegistered(patient);
   return ApiResponse.created(res, patient, "Patient registered successfully");
 });
 

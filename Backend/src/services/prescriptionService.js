@@ -12,15 +12,6 @@ import { ERROR_MESSAGES, PRESCRIPTION_STATUS } from "../config/constants.js";
 import sequelize from "../config/database.js";
 
 export const createPrescription = async (data, doctorId) => {
-  const { visitId, patientId, medicineId, quantity } = data;
-
-  // Verify medicine has sufficient stock
-  const medicine = await Medicine.findByPk(medicineId);
-  if (!medicine) throw new Error("Medicine not found");
-  if (medicine.availableQuantity < quantity) {
-    throw new Error("Insufficient medicine stock");
-  }
-
   const prescription = await Prescription.create({
     ...data,
     doctorId,
@@ -36,6 +27,7 @@ export const getAllPrescriptions = async (query) => {
     pageSize = 10,
     patientId,
     doctorId,
+    visitId,
     status,
     sortBy = "prescribedDate",
     sortOrder = "DESC",
@@ -46,6 +38,7 @@ export const getAllPrescriptions = async (query) => {
 
   if (patientId) where.patientId = patientId;
   if (doctorId) where.doctorId = doctorId;
+  if (visitId) where.visitId = visitId;
   if (status) where.status = status;
 
   const { count, rows } = await Prescription.findAndCountAll({
@@ -109,19 +102,13 @@ export const dispenseMedicine = async (
     });
     if (!prescription) throw new Error("Prescription not found");
 
+    // Default to full prescribed quantity if not specified
+    const dispenseQuantity = quantity || prescription.quantity;
+
     const medicine = await Medicine.findByPk(prescription.medicineId, {
       transaction,
     });
     if (!medicine) throw new Error("Medicine not found");
-    if (medicine.availableQuantity < quantity) {
-      throw new Error("Insufficient medicine stock");
-    }
-
-    // Update medicine stock
-    await medicine.update(
-      { availableQuantity: medicine.availableQuantity - quantity },
-      { transaction },
-    );
 
     // Create dispense record
     const dispense = await MedicineDispense.create(
@@ -131,7 +118,7 @@ export const dispenseMedicine = async (
         medicineId: prescription.medicineId,
         visitId: prescription.visitId,
         dispensedBy,
-        quantity,
+        quantity: dispenseQuantity,
         dosage: prescription.dosage,
         frequency: prescription.frequency,
         route: prescription.route,

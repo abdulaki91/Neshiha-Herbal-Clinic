@@ -6,7 +6,8 @@ import useAuthStore from "../../store/authStore";
 
 const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
   const { user } = useAuthStore();
-  const [medicines, setMedicines] = useState([]);
+  const [medicines, setMedicines] = useState();
+  console.log(medicines);
   const [prescriptions, setPrescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -29,7 +30,9 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
       const response = await axiosInstance.get("/medicines", {
         params: { status: "available", limit: 1000 },
       });
-      setMedicines(response.data.data || []);
+      console.log(response.data);
+
+      setMedicines(response.data?.data || response.data || []);
     } catch {
       toast.error("Failed to fetch medicines");
     } finally {
@@ -42,7 +45,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
       const response = await axiosInstance.get("/prescriptions", {
         params: { visitId },
       });
-      setPrescriptions(response.data.data || []);
+      setPrescriptions(response.data?.data || response.data || []);
     } catch {
       // silent
     }
@@ -162,15 +165,12 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
               onChange={(e) => handleMedicineSelect(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
             >
-              <option value="">-- Select Medicine --</option>
+                <option value="">-- Select Medicine --</option>
               {medicines.map((medicine) => (
                 <option key={medicine.id} value={medicine.id}>
                   {medicine.name}
                   {medicine.strength ? ` - ${medicine.strength}` : ""}
                   {medicine.sellingPrice ? ` (${medicine.sellingPrice} ETB)` : ""}
-                  {medicine.availableQuantity != null
-                    ? ` | Stock: ${medicine.availableQuantity}`
-                    : ""}
                 </option>
               ))}
             </select>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FiPlus, FiSearch, FiUser } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
+import { getSocket } from "../../lib/socket";
 import PatientForm from "../../components/patients/PatientForm";
 import PatientCard from "../../components/patients/PatientCard";
 import toast from "react-hot-toast";
@@ -18,6 +19,18 @@ const PatientsPage = () => {
   useEffect(() => {
     fetchPatients();
   }, [page, search]);
+
+  // Real-time socket listener for new patients
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+
+    socket.on("patient:registered", fetchPatients);
+
+    return () => {
+      socket.off("patient:registered", fetchPatients);
+    };
+  }, []);
 
   const fetchPatients = async () => {
     try {
@@ -41,7 +54,7 @@ const PatientsPage = () => {
     toast.success("Patient registered successfully!");
   };
 
-  const canRegister = user?.role === "super_admin" || user?.role === "data_clerk";
+  const canRegister = ["super_admin", "data_clerk", "doctor"].includes(user?.role);
 
   return (
     <div>

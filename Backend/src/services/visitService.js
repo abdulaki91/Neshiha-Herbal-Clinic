@@ -194,6 +194,16 @@ export const updateVisit = async (id, data, updatedBy) => {
     data.bmi = calculateBMI(weight, height);
   }
 
+  // Convert empty followUpDate to null
+  if (data.followUpDate === "") {
+    data.followUpDate = null;
+  }
+
+  // Auto-assign doctor when visit has no doctor and status is being changed
+  if (!visit.doctorId && data.status) {
+    data.doctorId = updatedBy;
+  }
+
   // Parse symptoms if it's an array
   if (Array.isArray(data.symptoms)) {
     data.symptoms = JSON.stringify(data.symptoms);
@@ -223,6 +233,11 @@ export const updateVisitStatus = async (id, status, updatedBy) => {
   }
 
   const updates = { status, updatedBy };
+
+  // Auto-assign doctor when visit has no doctor and status is being changed
+  if (!visit.doctorId) {
+    updates.doctorId = updatedBy;
+  }
 
   // Set consultation times based on status
   if (status === VISIT_STATUS.IN_CONSULTATION && !visit.consultationStartTime) {

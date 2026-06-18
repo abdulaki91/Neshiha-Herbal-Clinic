@@ -2,6 +2,7 @@ import * as paymentService from "../services/paymentService.js";
 import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import { SUCCESS_MESSAGES } from "../config/constants.js";
+import { emitPaymentCompleted } from "../config/socket.js";
 
 /**
  * Get all pending payments
@@ -28,6 +29,7 @@ export const processPayment = asyncHandler(async (req, res) => {
     req.body,
     req.user.id,
   );
+  emitPaymentCompleted(payment);
   return ApiResponse.created(res, payment, "Payment processed successfully");
 });
 

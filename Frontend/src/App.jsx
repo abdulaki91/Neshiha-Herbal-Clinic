@@ -20,6 +20,7 @@ import PatientDetailPage from "./pages/portal/PatientDetailPage";
 import LaboratoryPage from "./pages/portal/LaboratoryPage";
 import PharmacyPage from "./pages/portal/PharmacyPage";
 import CashierPage from "./pages/portal/CashierPage";
+import CashierReportsPage from "./pages/portal/CashierReportsPage";
 
 // Store
 import useAuthStore from "./store/authStore";
@@ -121,6 +122,7 @@ export default function App() {
           <Route path="laboratory" element={<LaboratoryPage />} />
           <Route path="pharmacy" element={<PharmacyPage />} />
           <Route path="cashier" element={<CashierPage />} />
+          <Route path="reports" element={<CashierReportsPage />} />
         </Route>
 
         {/* 404 fallback */}

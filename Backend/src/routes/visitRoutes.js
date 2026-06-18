@@ -15,7 +15,7 @@ router.get("/", visitController.getAllVisits);
 router.get("/:id", visitController.getVisitById);
 router.post(
   "/",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN),
+  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
   visitValidator.createVisitValidator,
   validate,
   auditLogger("CREATE", "Visit"),
@@ -38,7 +38,7 @@ router.patch(
 );
 router.patch(
   "/:id/assign-doctor",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN),
+  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
   auditLogger("UPDATE", "Visit"),
   visitController.assignDoctor,
 );

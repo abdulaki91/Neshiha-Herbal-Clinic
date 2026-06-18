@@ -19,5 +19,8 @@ export const createPrescriptionValidator = [
 ];
 
 export const dispenseMedicineValidator = [
-  body("quantity").isInt({ min: 1 }).withMessage("Quantity must be at least 1"),
+  body("quantity")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Quantity must be at least 1"),
 ];

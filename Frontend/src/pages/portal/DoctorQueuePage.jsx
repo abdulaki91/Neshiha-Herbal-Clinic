@@ -17,6 +17,7 @@ import {
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
+import { getSocket } from "../../lib/socket";
 import HerbalMedicineForm from "../../components/doctor/HerbalMedicineForm";
 import VitalSignsForm from "../../components/doctor/VitalSignsForm";
 import InvestigationForm from "../../components/doctor/InvestigationForm";
@@ -84,6 +85,20 @@ const DoctorQueuePage = () => {
     fetchQueue();
   }, [fetchQueue]);
 
+  // Real-time socket listener for queue updates
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+
+    socket.on("queue:updated", fetchQueue);
+    socket.on("visit:status-changed", fetchQueue);
+
+    return () => {
+      socket.off("queue:updated", fetchQueue);
+      socket.off("visit:status-changed", fetchQueue);
+    };
+  }, [fetchQueue]);
+
   // Auto-start consultation if visitId is in URL
   useEffect(() => {
     const visitId = searchParams.get("visitId");
@@ -145,18 +160,13 @@ const DoctorQueuePage = () => {
   const handleCompleteConsultation = async () => {
     if (!selectedVisit) return;
 
-    if (!consultationData.diagnosis.length) {
-      toast.error("Please add at least one diagnosis");
-      return;
-    }
-
     try {
       const prescriptionsResponse = await axiosInstance.get("/prescriptions", {
         params: { visitId: selectedVisit.id, status: "pending" },
       });
 
-      const hasPendingPrescriptions =
-        prescriptionsResponse.data.prescriptions?.length > 0;
+      const pendingPrescriptions = prescriptionsResponse.data || [];
+      const hasPendingPrescriptions = pendingPrescriptions.length > 0;
 
       const nextStatus = hasPendingPrescriptions
         ? "pending_payment"
@@ -575,7 +585,6 @@ const ConsultationPanel = ({
             <ConsultationTab
               data={consultationData}
               onChange={setConsultationData}
-              onComplete={onComplete}
             />
           )}
           {activeTab === "vitals" && (
@@ -601,6 +610,40 @@ const ConsultationPanel = ({
           {activeTab === "history" && (
             <PatientHistoryTab patientId={selectedVisit.patient?.id} />
           )}
+        </div>
+      </div>
+
+      {/* Diagnosis summary + Complete button */}
+      <div className="bg-white rounded-xl shadow-sm p-4 border-t-2 border-emerald-100">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          {/* Diagnosis summary */}
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+              Diagnosis
+            </p>
+            {consultationData.diagnosis.length > 0 ? (
+              <div className="flex flex-wrap gap-1.5">
+                {consultationData.diagnosis.map((d, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center px-2.5 py-1 bg-red-50 text-red-700 rounded-full text-sm font-medium"
+                  >
+                    {d}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-gray-400 italic">No diagnosis added yet</p>
+            )}
+          </div>
+
+          {/* Complete button */}
+          <button
+            onClick={onComplete}
+            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium shadow-md text-center"
+          >
+            Complete Consultation
+          </button>
         </div>
       </div>
     </div>

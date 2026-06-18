@@ -15,6 +15,7 @@ const createTestData = async () => {
   try {
     // Test database connection
     const connected = await testConnection();
+    2;
     if (!connected) {
       logger.error("Failed to connect to database");
       process.exit(1);
@@ -226,8 +227,9 @@ const createTestData = async () => {
           `✅ Visit created for ${visitData.patient.firstName} ${visitData.patient.lastName} - ${visit.visitNumber}`,
         );
       } else {
+        await existingVisit.update({ doctorId: doctor.id });
         logger.info(
-          `ℹ️ Visit already exists for ${visitData.patient.firstName} ${visitData.patient.lastName}`,
+          `ℹ️ Visit already exists for ${visitData.patient.firstName} ${visitData.patient.lastName} - updated doctorId`,
         );
       }
     }

@@ -3,20 +3,47 @@ import { FiX } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 import toast from "react-hot-toast";
 
-const PatientForm = ({ onClose, onSuccess }) => {
+const PatientForm = ({ onClose, onSuccess, patient }) => {
+  const isEditing = !!patient;
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    defaultValues: patient
+      ? {
+          firstName: patient.firstName || "",
+          middleName: patient.middleName || "",
+          lastName: patient.lastName || "",
+          gender: patient.gender || "",
+          dateOfBirth: patient.dateOfBirth
+            ? patient.dateOfBirth.split("T")[0]
+            : "",
+          phone: patient.phone || "",
+          city: patient.city || "",
+          subCity: patient.subCity || "",
+          woreda: patient.woreda || "",
+          bloodGroup: patient.bloodGroup || "",
+          emergencyContactName: patient.emergencyContactName || "",
+          emergencyContactPhone: patient.emergencyContactPhone || "",
+        }
+      : {},
+  });
 
   const onSubmit = async (data) => {
     try {
-      await axiosInstance.post("/patients", data);
+      if (isEditing) {
+        await axiosInstance.put(`/patients/${patient.id}`, data);
+        toast.success("Patient updated successfully");
+      } else {
+        await axiosInstance.post("/patients", data);
+        toast.success("Patient registered successfully");
+      }
       onSuccess();
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Failed to register patient",
+        error.response?.data?.message || "Failed to save patient",
       );
     }
   };
@@ -26,7 +53,9 @@ const PatientForm = ({ onClose, onSuccess }) => {
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-white flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Register New Patient</h2>
+          <h2 className="text-2xl font-bold">
+            {isEditing ? "Edit Patient" : "Register New Patient"}
+          </h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-white/20 rounded-lg transition"
@@ -251,7 +280,11 @@ const PatientForm = ({ onClose, onSuccess }) => {
               disabled={isSubmitting}
               className="px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? "Registering..." : "Register Patient"}
+              {isSubmitting
+                ? "Saving..."
+                : isEditing
+                  ? "Update Patient"
+                  : "Register Patient"}
             </button>
           </div>
         </form>

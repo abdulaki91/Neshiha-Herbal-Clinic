@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 import {
   FiHome,
   FiUsers,
@@ -9,47 +10,66 @@ import {
   FiDollarSign,
   FiActivity,
   FiPackage,
-  FiClock,
-  FiSearch,
   FiExternalLink,
 } from "react-icons/fi";
 import useAuthStore from "../../store/authStore";
-import { useEffect, useState, useMemo } from "react";
+import { getSocket } from "../../lib/socket";
+import axiosInstance from "../../lib/axios";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuthStore();
-  const [recentPatients, setRecentPatients] = useState([]);
-  const [patientFilter, setPatientFilter] = useState("");
+  const [counts, setCounts] = useState({});
 
+  // Fetch initial counts and listen for updates
   useEffect(() => {
-    const loadPatients = () => {
-      const saved = localStorage.getItem("recentPatients");
-      if (saved) {
-        try {
-          setRecentPatients(JSON.parse(saved));
-        } catch {
-          setRecentPatients([]);
+    const fetchCounts = async () => {
+      try {
+        if (user?.role === "doctor") {
+          const res = await axiosInstance.get("/visits/queue");
+          const queue = res.data?.data || res.data || [];
+          setCounts((c) => ({ ...c, "/portal/queue": queue.length }));
+        }
+        if (user?.role === "cashier") {
+          const res = await axiosInstance.get("/payments/pending", { params: { pageSize: 1 } });
+          const total = res.data?.pagination?.totalItems || res.data?.data?.visits?.length || 0;
+          setCounts((c) => ({ ...c, "/portal/cashier": total }));
+        }
+      } catch {
+        // silent
+      }
+    };
+
+    fetchCounts();
+
+    const socket = getSocket();
+    if (!socket) return;
+
+    const handleQueueUpdated = (visit) => {
+      setCounts((c) => ({ ...c, "/portal/queue": (c["/portal/queue"] || 0) + 1 }));
+    };
+
+    const handleStatusChanged = (visit) => {
+      if (user?.role === "cashier") {
+        if (visit.status === "pending_payment") {
+          setCounts((c) => ({ ...c, "/portal/cashier": (c["/portal/cashier"] || 0) + 1 }));
+        } else if (visit.status === "completed" || visit.status === "cancelled") {
+          setCounts((c) => ({ ...c, "/portal/cashier": Math.max(0, (c["/portal/cashier"] || 1) - 1) }));
         }
       }
     };
 
-    loadPatients();
+    socket.on("queue:updated", handleQueueUpdated);
+    socket.on("visit:status-changed", handleStatusChanged);
+    socket.on("payment:completed", () => {
+      setCounts((c) => ({ ...c, "/portal/cashier": Math.max(0, (c["/portal/cashier"] || 1) - 1) }));
+    });
 
-    const handleStorageChange = () => loadPatients();
-    window.addEventListener("recentPatientsUpdated", handleStorageChange);
-    return () =>
-      window.removeEventListener("recentPatientsUpdated", handleStorageChange);
-  }, []);
-
-  const filteredPatients = useMemo(() => {
-    if (!patientFilter.trim()) return recentPatients;
-    const q = patientFilter.toLowerCase();
-    return recentPatients.filter(
-      (p) =>
-        `${p.firstName} ${p.lastName}`.toLowerCase().includes(q) ||
-        (p.patientId || "").toLowerCase().includes(q),
-    );
-  }, [recentPatients, patientFilter]);
+    return () => {
+      socket.off("queue:updated", handleQueueUpdated);
+      socket.off("visit:status-changed", handleStatusChanged);
+      socket.off("payment:completed");
+    };
+  }, [user?.role]);
 
   const navigation = {
     super_admin: [
@@ -75,22 +95,20 @@ const Sidebar = ({ isOpen, onClose }) => {
     ],
     doctor: [
       { name: "Dashboard", to: "/portal", icon: FiHome, end: true },
-      { name: "Queue", to: "/portal/queue", icon: FiCalendar },
-      { name: "Patients", to: "/portal/patients", icon: FiUsers },
+      { name: "Queue", to: "/portal/queue", icon: FiCalendar, showBadge: true },
+      { name: "Patients", to: "/portal/patients", icon: FiExternalLink },
       { name: "Visits", to: "/portal/visits", icon: FiCalendar },
       { name: "Medicines", to: "/portal/medicines", icon: FiPackage },
     ],
     cashier: [
       { name: "Dashboard", to: "/portal", icon: FiHome, end: true },
-      { name: "Cashier", to: "/portal/cashier", icon: FiDollarSign },
+      { name: "Cashier", to: "/portal/cashier", icon: FiDollarSign, showBadge: true },
+      { name: "Reports", to: "/portal/reports", icon: FiFileText },
       { name: "Patients", to: "/portal/patients", icon: FiUsers },
     ],
   };
 
   const links = navigation[user?.role] || [];
-  const showPatients =
-    user?.role === "data_clerk" ||
-    user?.role === "super_admin";
 
   const handleLogout = () => {
     logout();
@@ -104,7 +122,6 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Overlay for mobile */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
@@ -112,52 +129,37 @@ const Sidebar = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed left-0 top-0 h-full bg-white shadow-xl z-30 w-64 transform transition-transform duration-300 lg:translate-x-0 flex flex-col ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Logo */}
         <div className="p-6 border-b border-gray-200 flex-shrink-0">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
             <div>
               <h1 className="font-bold text-gray-800">Neshiha Clinic</h1>
-              <p className="text-xs text-gray-500">
-                {user?.role?.replace("_", " ")}
-              </p>
+              <p className="text-xs text-gray-500">{user?.role?.replace("_", " ")}</p>
             </div>
           </div>
         </div>
 
-        {/* Scrollable middle section */}
         <div className="flex-1 overflow-y-auto">
-          {/* Navigation */}
           <nav className="p-4 space-y-1">
             {links.map((link) => {
               const Icon = link.icon;
+              const badge = link.showBadge ? counts[link.to] : 0;
               return (
                 <NavLink
                   key={link.to}
                   to={link.to}
                   end={link.end}
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 px-4 py-2.5 rounded-lg transition ${
+                    `flex items-center space-x-3 px-4 py-2.5 rounded-lg transition relative ${
                       isActive
                         ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white"
                         : "text-gray-700 hover:bg-gray-100"
@@ -167,84 +169,17 @@ const Sidebar = ({ isOpen, onClose }) => {
                 >
                   <Icon className="w-5 h-5" />
                   <span className="font-medium text-sm">{link.name}</span>
+                  {badge > 0 && (
+                    <span className="ml-auto min-w-[22px] h-5 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full px-1.5">
+                      {badge > 99 ? "99+" : badge}
+                    </span>
+                  )}
                 </NavLink>
               );
             })}
           </nav>
-
-          {/* Previous Patients Section */}
-          {showPatients && (
-            <div className="px-4 py-4 border-t border-gray-100">
-              <div className="flex items-center justify-between px-1 mb-3">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center">
-                  <FiClock className="mr-2" />
-                  Previous Patients
-                </p>
-                <span className="text-xs text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">
-                  {recentPatients.length}
-                </span>
-              </div>
-
-              {/* Search filter */}
-              {recentPatients.length > 0 && (
-                <div className="relative mb-2">
-                  <FiSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Filter patients..."
-                    value={patientFilter}
-                    onChange={(e) => setPatientFilter(e.target.value)}
-                    className="w-full pl-8 pr-3 py-1.5 text-xs border border-gray-200 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none bg-gray-50"
-                  />
-                </div>
-              )}
-
-              {/* Patient list with scroll */}
-              {filteredPatients.length > 0 ? (
-                <div className="max-h-48 overflow-y-auto space-y-0.5">
-                  {filteredPatients.map((patient) => (
-                    <NavLink
-                      key={patient.id}
-                      to={`/portal/patients/${patient.id}`}
-                      className="flex items-center px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition"
-                      onClick={closeIfMobile}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2.5 flex-shrink-0" />
-                      <span className="truncate">
-                        {patient.firstName} {patient.lastName}
-                      </span>
-                      {patient.patientId && (
-                        <span className="ml-auto text-xs text-gray-400 flex-shrink-0 pl-1">
-                          #{patient.patientId}
-                        </span>
-                      )}
-                    </NavLink>
-                  ))}
-                </div>
-              ) : recentPatients.length > 0 && patientFilter ? (
-                <p className="text-xs text-gray-400 text-center py-2">
-                  No patients match "{patientFilter}"
-                </p>
-              ) : recentPatients.length === 0 ? (
-                <p className="text-xs text-gray-400 text-center py-2">
-                  No previous patients yet
-                </p>
-              ) : null}
-
-              {/* View All link */}
-              <NavLink
-                to="/portal/patients"
-                className="flex items-center justify-center space-x-1 mt-2 px-3 py-1.5 text-xs text-emerald-600 hover:bg-emerald-50 rounded-lg transition font-medium"
-                onClick={closeIfMobile}
-              >
-                <FiExternalLink className="w-3 h-3" />
-                <span>View All Patients</span>
-              </NavLink>
-            </div>
-          )}
         </div>
 
-        {/* User Info & Logout */}
         <div className="p-4 border-t border-gray-200 flex-shrink-0">
           <div className="flex items-center space-x-3 mb-3">
             <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">

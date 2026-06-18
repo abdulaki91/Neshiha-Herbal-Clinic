@@ -2,6 +2,7 @@ import {
   Payment,
   Visit,
   Prescription,
+  MedicineDispense,
   Patient,
   Medicine,
   User,
@@ -47,7 +48,7 @@ export const getPendingPayments = async (query) => {
       {
         model: Prescription,
         as: "prescriptions",
-        attributes: ["id", "quantity", "unitPrice", "totalAmount", "status", "dosage", "frequency"],
+        attributes: ["id", "quantity", "unitPrice", "totalAmount", "status", "dosage", "frequency", "route", "duration", "instructions"],
         include: [
           {
             model: Medicine,
@@ -55,6 +56,11 @@ export const getPendingPayments = async (query) => {
             attributes: ["id", "name", "sellingPrice", "strength"],
           },
         ],
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["id", "firstName", "lastName"],
       },
     ],
   });
@@ -138,11 +144,34 @@ export const processPayment = async (visitId, paymentData, cashierId) => {
     // but here we'll use COMPLETED or just update prescription status.
     await visit.update({ status: VISIT_STATUS.COMPLETED }, { transaction });
 
-    // Update prescriptions status to PAID
+    // Update prescriptions to DISPENSED and create dispense records
     for (const prescription of visit.prescriptions) {
       if (prescription.status === PRESCRIPTION_STATUS.PENDING) {
+        const medicine = await Medicine.findByPk(prescription.medicineId, { transaction });
+        await MedicineDispense.create(
+          {
+            prescriptionId: prescription.id,
+            patientId: prescription.patientId,
+            medicineId: prescription.medicineId,
+            visitId: prescription.visitId,
+            dispensedBy: cashierId,
+            quantity: prescription.quantity,
+            dosage: prescription.dosage,
+            frequency: prescription.frequency,
+            route: prescription.route,
+            duration: prescription.duration,
+            instructions: prescription.instructions,
+            batchNumber: medicine?.batchNumber,
+            expiryDate: medicine?.expiryDate,
+          },
+          { transaction },
+        );
         await prescription.update(
-          { status: PRESCRIPTION_STATUS.PAID },
+          {
+            status: PRESCRIPTION_STATUS.DISPENSED,
+            dispensedDate: new Date(),
+            dispensedBy: cashierId,
+          },
           { transaction },
         );
       }
@@ -163,15 +192,47 @@ export const getPaymentHistory = async (query) => {
   const { page = 1, pageSize = 10, search } = query;
   const { limit, offset } = getPagination(page, pageSize);
 
+  const where = {};
+  if (search) {
+    where[Op.or] = [
+      { paymentNumber: { [Op.iLike]: `%${search}%` } },
+    ];
+  }
+
   const { count, rows } = await Payment.findAndCountAll({
+    where,
     limit,
     offset,
-    order: [["createdAt", "DESC"]],
+    order: [["paidAt", "DESC"]],
     include: [
       {
         model: Patient,
         as: "patient",
-        attributes: ["id", "patientId", "firstName", "lastName"],
+        attributes: ["id", "patientId", "firstName", "lastName", "phone"],
+      },
+      {
+        model: Visit,
+        as: "visit",
+        attributes: ["id", "visitNumber", "visitDate", "doctorId"],
+        include: [
+          {
+            model: Prescription,
+            as: "prescriptions",
+            attributes: ["id", "quantity", "unitPrice", "totalAmount", "dosage", "frequency", "route", "duration", "instructions"],
+            include: [
+              {
+                model: Medicine,
+                as: "medicine",
+                attributes: ["id", "name", "strength"],
+              },
+            ],
+          },
+          {
+            model: User,
+            as: "doctor",
+            attributes: ["id", "firstName", "lastName"],
+          },
+        ],
       },
       {
         model: User,

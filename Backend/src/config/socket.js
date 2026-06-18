@@ -265,6 +265,15 @@ export const emitInvestigationResultAdded = (investigation) => {
   emitToRole("super_admin", "investigation:result-added", investigation);
 };
 
+/**
+ * Emit payment completed
+ */
+export const emitPaymentCompleted = (payment) => {
+  emitToRole("cashier", "payment:completed", payment);
+  emitToRole("doctor", "payment:completed", payment);
+  emitToRole("super_admin", "payment:completed", payment);
+};
+
 export default {
   initializeSocket,
   getIO,
@@ -282,4 +291,5 @@ export default {
   emitNotificationCreated,
   emitStaffCreated,
   emitInvestigationResultAdded,
+  emitPaymentCompleted,
 };

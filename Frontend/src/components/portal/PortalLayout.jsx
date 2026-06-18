@@ -55,6 +55,33 @@ const PortalLayout = () => {
           icon: notification.priority === "urgent" ? "🚨" : "📬",
         });
       });
+
+      socket.on("prescription:created", (prescription) => {
+        if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+          toast.success(`New prescription added for patient`, {
+            icon: "💊",
+          });
+        }
+      });
+
+      socket.on("medicine:dispensed", (result) => {
+        if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+          toast.success("Medicine dispensed to patient", {
+            icon: "✅",
+          });
+        }
+      });
+
+      socket.on("payment:completed", (payment) => {
+        if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+          toast.success(
+            `Payment received: ${payment.amount?.toLocaleString?.() || payment.amount} ETB`,
+            {
+              icon: "💰",
+            },
+          );
+        }
+      });
     }
 
     return () => {
@@ -64,6 +91,9 @@ const PortalLayout = () => {
         socket.off("visit:created");
         socket.off("visit:status-changed");
         socket.off("notification:new");
+        socket.off("prescription:created");
+        socket.off("medicine:dispensed");
+        socket.off("payment:completed");
       }
     };
   }, [user]);

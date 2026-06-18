@@ -22,7 +22,7 @@ router.post(
 );
 router.post(
   "/:id/dispense",
-  authorize(ROLES.DOCTOR),
+  authorize(ROLES.DOCTOR, ROLES.CASHIER),
   prescriptionValidator.dispenseMedicineValidator,
   validate,
   auditLogger("UPDATE", "Prescription"),
