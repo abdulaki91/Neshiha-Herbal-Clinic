@@ -19,13 +19,14 @@ export const useVisit = (id) =>
     enabled: !!id,
   });
 
-export const useQueue = () =>
+export const useQueue = (opts = {}) =>
   useQuery({
     queryKey: ["queue"],
     queryFn: () => axiosInstance.get("/visits/queue"),
     select: (res) => res.data || [],
     refetchInterval: 15_000,
     staleTime: 5_000,
+    ...opts,
   });
 
 export const useCreateVisit = () => {

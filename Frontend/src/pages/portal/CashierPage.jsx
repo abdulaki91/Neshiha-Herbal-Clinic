@@ -26,7 +26,8 @@ const CashierPage = () => {
     activeTab === "pending" ? searchTerm : "",
   );
   const { data: recentPayments = [], isLoading: recentLoading } = usePaymentHistory(
-    activeTab === "recent" ? { pageSize: 50 } : { pageSize: 0 },
+    { pageSize: 50 },
+    activeTab === "recent",
   );
   const processPayment = useProcessPayment();
 

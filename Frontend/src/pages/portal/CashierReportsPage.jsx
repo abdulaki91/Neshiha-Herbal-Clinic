@@ -1,44 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
-  FiDollarSign,
-  FiCalendar,
-  FiTrendingUp,
-  FiPackage,
-  FiUser,
-  FiClock,
+  FiDollarSign, FiCalendar, FiTrendingUp, FiPackage, FiUser, FiClock,
 } from "react-icons/fi";
-import toast from "react-hot-toast";
-import axiosInstance from "../../lib/axios";
+import { useReportsRevenue } from "../../hooks/useDashboard";
 
-const PERIODS = {
-  DAILY: "daily",
-  WEEKLY: "weekly",
-  MONTHLY: "monthly",
-};
+const PERIODS = { DAILY: "daily", WEEKLY: "weekly", MONTHLY: "monthly" };
 
 const CashierReportsPage = () => {
   const [period, setPeriod] = useState(PERIODS.DAILY);
-  const [report, setReport] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
-  const fetchReport = async () => {
-    try {
-      setLoading(true);
-      const response = await axiosInstance.get("/reports/revenue", {
-        params: { period, date },
-      });
-      setReport(response.data || response);
-    } catch (error) {
-      toast.error("Failed to load report");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchReport();
-  }, [period, date]);
+  const { data: report, isLoading } = useReportsRevenue(period, date);
 
   const periodLabel =
     period === PERIODS.DAILY ? "Today" : period === PERIODS.WEEKLY ? "This Week" : "This Month";
@@ -99,14 +71,14 @@ const CashierReportsPage = () => {
       )}
 
       {/* Loading */}
-      {loading && (
+      {isLoading && (
         <div className="flex items-center justify-center h-40">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-600"></div>
         </div>
       )}
 
       {/* Report Content */}
-      {!loading && report && (
+      {!isLoading && report && (
         <>
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -244,7 +216,7 @@ const CashierReportsPage = () => {
       )}
 
       {/* Empty state (no report + not loading) */}
-      {!loading && !report && (
+      {!isLoading && !report && (
         <div className="bg-white rounded-xl shadow-sm p-12 text-center">
           <FiDollarSign className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <p className="text-gray-500 text-lg">No report data available</p>

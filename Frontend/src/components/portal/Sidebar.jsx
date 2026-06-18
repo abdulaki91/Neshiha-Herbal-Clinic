@@ -1,75 +1,54 @@
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
-  FiHome,
-  FiUsers,
-  FiCalendar,
-  FiFileText,
-  FiSettings,
-  FiLogOut,
-  FiDollarSign,
-  FiActivity,
-  FiPackage,
-  FiExternalLink,
+  FiHome, FiUsers, FiCalendar, FiFileText, FiSettings,
+  FiLogOut, FiDollarSign, FiActivity, FiPackage, FiExternalLink,
 } from "react-icons/fi";
 import useAuthStore from "../../store/authStore";
 import { getSocket } from "../../lib/socket";
-import axiosInstance from "../../lib/axios";
+import { useQueue } from "../../hooks/useVisits";
+import { usePendingPayments } from "../../hooks/usePayments";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuthStore();
-  const [counts, setCounts] = useState({});
+  const qc = useQueryClient();
+  const role = user?.role;
 
-  // Fetch initial counts and listen for updates
+  // Use hooks for counts — they auto-fetch and stay fresh
+  const { data: queue = [] } = useQueue({ enabled: role === "doctor" });
+  const { data: pendingPayments = [] } = usePendingPayments(
+    role === "cashier" ? "" : "",
+    { enabled: role === "cashier" },
+  );
+
+  const counts = {
+    "/portal/queue": role === "doctor" ? queue.length : 0,
+    "/portal/cashier": role === "cashier" ? pendingPayments.length : 0,
+  };
+
+  // Real-time: invalidate on socket events
   useEffect(() => {
-    const fetchCounts = async () => {
-      try {
-        if (user?.role === "doctor") {
-          const res = await axiosInstance.get("/visits/queue");
-          const queue = res.data?.data || res.data || [];
-          setCounts((c) => ({ ...c, "/portal/queue": queue.length }));
-        }
-        if (user?.role === "cashier") {
-          const res = await axiosInstance.get("/payments/pending", { params: { pageSize: 1 } });
-          const total = res.data?.pagination?.totalItems || res.data?.data?.visits?.length || 0;
-          setCounts((c) => ({ ...c, "/portal/cashier": total }));
-        }
-      } catch {
-        // silent
-      }
-    };
-
-    fetchCounts();
-
     const socket = getSocket();
     if (!socket) return;
-
-    const handleQueueUpdated = (visit) => {
-      setCounts((c) => ({ ...c, "/portal/queue": (c["/portal/queue"] || 0) + 1 }));
+    const invalidate = () => {
+      qc.invalidateQueries({ queryKey: ["queue"] });
+      qc.invalidateQueries({ queryKey: ["payments"] });
     };
-
-    const handleStatusChanged = (visit) => {
-      if (user?.role === "cashier") {
-        if (visit.status === "pending_payment") {
-          setCounts((c) => ({ ...c, "/portal/cashier": (c["/portal/cashier"] || 0) + 1 }));
-        } else if (visit.status === "completed" || visit.status === "cancelled") {
-          setCounts((c) => ({ ...c, "/portal/cashier": Math.max(0, (c["/portal/cashier"] || 1) - 1) }));
-        }
-      }
+    const attach = () => {
+      socket.on("queue:updated", invalidate);
+      socket.on("visit:status-changed", invalidate);
+      socket.on("payment:completed", invalidate);
     };
-
-    socket.on("queue:updated", handleQueueUpdated);
-    socket.on("visit:status-changed", handleStatusChanged);
-    socket.on("payment:completed", () => {
-      setCounts((c) => ({ ...c, "/portal/cashier": Math.max(0, (c["/portal/cashier"] || 1) - 1) }));
-    });
-
-    return () => {
-      socket.off("queue:updated", handleQueueUpdated);
-      socket.off("visit:status-changed", handleStatusChanged);
-      socket.off("payment:completed");
+    const detach = () => {
+      socket.off("queue:updated", invalidate);
+      socket.off("visit:status-changed", invalidate);
+      socket.off("payment:completed", invalidate);
     };
-  }, [user?.role]);
+    if (socket.connected) attach();
+    socket.on("connect", attach);
+    return () => { detach(); socket.off("connect", attach); };
+  }, [qc]);
 
   const navigation = {
     super_admin: [

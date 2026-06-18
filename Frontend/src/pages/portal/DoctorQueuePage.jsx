@@ -63,12 +63,13 @@ const DoctorQueuePage = () => {
   const { data: queue = [], isLoading } = useQueue();
   const updateVisit = useUpdateVisit();
   const { data: prescriptionsData } = usePrescriptions();
+  const refreshQueue = () => qc.invalidateQueries({ queryKey: ["queue"] });
 
   // Real-time: invalidate queue on socket events
   useEffect(() => {
     const socket = getSocket();
     if (!socket) return;
-    const invalidate = () => qc.invalidateQueries({ queryKey: ["queue"] });
+    const invalidate = refreshQueue;
     socket.on("queue:updated", invalidate);
     socket.on("visit:status-changed", invalidate);
     return () => {
@@ -111,7 +112,7 @@ const DoctorQueuePage = () => {
       setSelectedVisit(visit);
       setShowMobileConsultation(true);
       toast.success("Consultation started — patient stays in queue until saved");
-      fetchQueue();
+      refreshQueue();
     } catch {
       toast.error("Failed to start consultation");
     }
@@ -129,7 +130,7 @@ const DoctorQueuePage = () => {
       });
 
       toast.success("Consultation details saved");
-      fetchQueue();
+      refreshQueue();
     } catch {
       toast.error("Failed to save consultation");
     }
@@ -177,7 +178,7 @@ const DoctorQueuePage = () => {
         doctorNotes: "",
         followUpDate: "",
       });
-      fetchQueue();
+      refreshQueue();
     } catch {
       toast.error("Failed to complete consultation");
     }
@@ -199,7 +200,7 @@ const DoctorQueuePage = () => {
     });
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
@@ -231,7 +232,7 @@ const DoctorQueuePage = () => {
           onSave={handleSaveConsultation}
           onComplete={handleCompleteConsultation}
           onBack={handleDeselectVisit}
-          fetchQueue={fetchQueue}
+          refreshQueue={refreshQueue}
         />
       </div>
     );
@@ -259,7 +260,7 @@ const DoctorQueuePage = () => {
             </p>
           </div>
           <button
-            onClick={fetchQueue}
+            onClick={refreshQueue}
             className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm"
           >
             Refresh Queue
@@ -392,7 +393,7 @@ const DoctorQueuePage = () => {
             onSave={handleSaveConsultation}
             onComplete={handleCompleteConsultation}
             onBack={handleDeselectVisit}
-            fetchQueue={fetchQueue}
+            refreshQueue={refreshQueue}
           />
         </div>
       )}
@@ -423,7 +424,7 @@ const ConsultationPanel = ({
   onSave,
   onComplete,
   onBack,
-  fetchQueue,
+  refreshQueue,
 }) => {
   return (
     <div>
@@ -568,21 +569,21 @@ const ConsultationPanel = ({
           {activeTab === "vitals" && (
             <VitalSignsForm
               visitId={selectedVisit.id}
-              onSave={fetchQueue}
+              onSave={refreshQueue}
             />
           )}
           {activeTab === "investigation" && (
             <InvestigationForm
               visitId={selectedVisit.id}
               patientId={selectedVisit.patient?.id}
-              onSave={fetchQueue}
+              onSave={refreshQueue}
             />
           )}
           {activeTab === "medicine" && (
             <HerbalMedicineForm
               visitId={selectedVisit.id}
               patientId={selectedVisit.patient?.id}
-              onSave={fetchQueue}
+              onSave={refreshQueue}
             />
           )}
           {activeTab === "history" && (

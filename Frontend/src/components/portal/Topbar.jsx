@@ -31,126 +31,67 @@ const Topbar = ({ onMenuClick }) => {
   }, [notifications, localNotifs]);
 
   // Real-time: invalidate + add local notification on socket
-
-  const fetchNotifications = useCallback(async () => {
-    try {
-      const res = await axiosInstance.get("/notifications", { params: { pageSize: 20 } });
-      const list = res.data?.data || res.data || [];
-      setNotifications(list);
-      setUnreadCount(list.filter((n) => !n.isRead).length);
-    } catch {
-      // silent
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchNotifications();
-  }, [fetchNotifications]);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClick = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setShowDropdown(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
-
-  // Socket listeners for real-time notifications
   useEffect(() => {
     const socket = getSocket();
     if (!socket) return;
 
-    const addNotification = (data) => {
-      const notif = {
-        id: data.id || Date.now().toString(),
-        title: data.title || data.message || "New update",
-        message: data.message || data.description || "",
-        type: data.type || data.priority || "info",
-        isRead: false,
-        createdAt: data.createdAt || new Date().toISOString(),
-      };
-      setNotifications((prev) => [notif, ...prev].slice(0, 50));
-      setUnreadCount((c) => c + 1);
+    const addLocal = (title, message, type = "info") => {
+      setLocalNotifs((prev) =>
+        [{ id: Date.now().toString(), title, message, type, isRead: false, createdAt: new Date().toISOString() }, ...prev].slice(0, 50),
+      );
     };
 
-    const handleNotification = (data) => addNotification(data);
+    const handleNotification = (data) =>
+      addLocal(data.title || data.message, data.message || "", data.type);
 
-    const handleVisitStatus = (visit) => {
-      addNotification({
-        title: "Visit Updated",
-        message: `Visit #${visit.visitNumber || ""} status: ${visit.status?.replace("_", " ") || "updated"}`,
-        type: "info",
-      });
-    };
-
-    const handlePatientRegistered = (patient) => {
-      addNotification({
-        title: "New Patient",
-        message: `${patient.firstName} ${patient.lastName} was registered`,
-        type: "success",
-      });
-    };
-
-    const handlePaymentCompleted = (payment) => {
-      const amt = parseFloat(payment.amount || 0).toFixed(2);
-      addNotification({
-        title: "Payment Received",
-        message: `${amt} ETB paid`,
-        type: "success",
-      });
-    };
-
-    const handlePrescriptionCreated = () => {
-      addNotification({
-        title: "Prescription Added",
-        message: "A new prescription was created",
-        type: "info",
-      });
-    };
-
-    const attachListeners = () => {
+    const attach = () => {
       socket.on("notification:new", handleNotification);
-      socket.on("visit:status-changed", handleVisitStatus);
-      socket.on("patient:registered", handlePatientRegistered);
-      socket.on("payment:completed", handlePaymentCompleted);
-      socket.on("prescription:created", handlePrescriptionCreated);
+      socket.on("visit:status-changed", (v) =>
+        addLocal("Visit Updated", `Status: ${v.status?.replace("_", " ")}`, "info"),
+      );
+      socket.on("patient:registered", (p) =>
+        addLocal("New Patient", `${p.firstName} ${p.lastName} registered`, "success"),
+      );
+      socket.on("payment:completed", (p) =>
+        addLocal("Payment Received", `${parseFloat(p.amount || 0).toFixed(2)} ETB paid`, "success"),
+      );
+      socket.on("prescription:created", () =>
+        addLocal("Prescription Added", "New prescription created", "info"),
+      );
     };
 
-    const detachListeners = () => {
+    const detach = () => {
       socket.off("notification:new", handleNotification);
-      socket.off("visit:status-changed", handleVisitStatus);
-      socket.off("patient:registered", handlePatientRegistered);
-      socket.off("payment:completed", handlePaymentCompleted);
-      socket.off("prescription:created", handlePrescriptionCreated);
+      socket.off("visit:status-changed");
+      socket.off("patient:registered");
+      socket.off("payment:completed");
+      socket.off("prescription:created");
     };
 
-    // Attach immediately if already connected
-    if (socket.connected) {
-      attachListeners();
-    }
+    if (socket.connected) attach();
+    socket.on("connect", attach);
 
-    // Re-attach on (re)connect
-    socket.on("connect", attachListeners);
+    // Also invalidate the API query periodically
+    const invalidate = () => qc.invalidateQueries({ queryKey: ["notifications"] });
+    socket.on("notification:new", invalidate);
 
     return () => {
-      detachListeners();
-      socket.off("connect", attachListeners);
+      detach();
+      socket.off("connect", attach);
+      socket.off("notification:new", invalidate);
     };
-  }, []);
+  }, [qc]);
+
+  // Close dropdown on outside click
 
   const handleMarkAllRead = async () => {
     try {
       await axiosInstance.delete("/notifications");
-      setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
-      setUnreadCount(0);
     } catch {
-      // If API fails, still mark locally
-      setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
-      setUnreadCount(0);
+      // silent
     }
+    setLocalNotifs((prev) => prev.map((n) => ({ ...n, isRead: true })));
+    qc.invalidateQueries({ queryKey: ["notifications"] });
   };
 
   const getTypeColor = (type) => {
@@ -233,12 +174,14 @@ const Topbar = ({ onMenuClick }) => {
                 </div>
 
                 <div className="overflow-y-auto flex-1">
-                  {notifications.length === 0 ? (
+                  {(() => {
+                    const list = allNotifications();
+                    return list.length === 0 ? (
                     <div className="p-6 text-center text-sm text-gray-400">
                       No notifications yet
                     </div>
                   ) : (
-                    notifications.slice(0, 20).map((n) => (
+                    list.slice(0, 20).map((n) => (
                       <div
                         key={n.id}
                         className={`px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition cursor-pointer ${
@@ -268,7 +211,7 @@ const Topbar = ({ onMenuClick }) => {
                         </div>
                       </div>
                     ))
-                  )}
+                  )})()}
                 </div>
               </div>
             )}

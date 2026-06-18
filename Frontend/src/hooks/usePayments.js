@@ -1,18 +1,20 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../lib/axios";
 
-export const usePendingPayments = (search = "") =>
+export const usePendingPayments = (search = "", opts = {}) =>
   useQuery({
     queryKey: ["payments", "pending", search],
     queryFn: () => axiosInstance.get("/payments/pending", { params: { search } }),
     select: (res) => res.data?.data?.visits || res.data?.visits || [],
+    ...opts,
   });
 
-export const usePaymentHistory = (params = {}) =>
+export const usePaymentHistory = (params = {}, enabled = true) =>
   useQuery({
     queryKey: ["payments", "history", params],
     queryFn: () => axiosInstance.get("/payments/history", { params }),
     select: (res) => res.data?.data?.payments || res.data?.payments || [],
+    enabled,
   });
 
 export const useProcessPayment = () => {
