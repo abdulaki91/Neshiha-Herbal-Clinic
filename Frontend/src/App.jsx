@@ -6,6 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 // Pages
 import Home from "./pages/Home";
@@ -34,6 +35,19 @@ import {
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuthStore();
   return isAuthenticated ? children : <Navigate to="/signin" replace />;
+};
+
+// 404 Page Component
+const NotFoundPage = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-gray-800">{t("error.404.code")}</h1>
+        <p className="text-xl text-gray-600 mt-4">{t("error.404.message")}</p>
+      </div>
+    </div>
+  );
 };
 
 export default function App() {
@@ -126,17 +140,7 @@ export default function App() {
         </Route>
 
         {/* 404 fallback */}
-        <Route
-          path="*"
-          element={
-            <div className="min-h-screen flex items-center justify-center">
-              <div className="text-center">
-                <h1 className="text-6xl font-bold text-gray-800">404</h1>
-                <p className="text-xl text-gray-600 mt-4">Page Not Found</p>
-              </div>
-            </div>
-          }
-        />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

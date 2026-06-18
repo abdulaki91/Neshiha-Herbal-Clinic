@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { FiX } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 import toast from "react-hot-toast";
 
 const PatientForm = ({ onClose, onSuccess, patient }) => {
+  const { t } = useTranslation();
   const isEditing = !!patient;
 
   const {
@@ -35,15 +37,15 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
     try {
       if (isEditing) {
         await axiosInstance.put(`/patients/${patient.id}`, data);
-        toast.success("Patient updated successfully");
+        toast.success(t("patientForm.updateSuccess"));
       } else {
         await axiosInstance.post("/patients", data);
-        toast.success("Patient registered successfully");
+        toast.success(t("patientForm.registerSuccess"));
       }
       onSuccess();
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Failed to save patient",
+        error.response?.data?.message || t("patientForm.saveError"),
       );
     }
   };
@@ -54,7 +56,7 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
         {/* Header */}
         <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-white flex items-center justify-between">
           <h2 className="text-2xl font-bold">
-            {isEditing ? "Edit Patient" : "Register New Patient"}
+            {isEditing ? t("patientForm.editTitle") : t("patientForm.registerTitle")}
           </h2>
           <button
             onClick={onClose}
@@ -73,20 +75,20 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
             {/* Personal Information */}
             <div className="col-span-2">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Personal Information
+                {t("patientForm.personalInfoTitle")}
               </h3>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                First Name *
+                {t("patientForm.firstNameLabel")}
               </label>
               <input
                 {...register("firstName", {
-                  required: "First name is required",
+                  required: t("patientForm.firstNameRequired"),
                 })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="First name"
+                placeholder={t("patientForm.firstNamePlaceholder")}
               />
               {errors.firstName && (
                 <p className="mt-1 text-sm text-red-600">
@@ -97,23 +99,23 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Middle Name
+                {t("patientForm.middleNameLabel")}
               </label>
               <input
                 {...register("middleName")}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="Middle name"
+                placeholder={t("patientForm.middleNamePlaceholder")}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Last Name *
+                {t("patientForm.lastNameLabel")}
               </label>
               <input
-                {...register("lastName", { required: "Last name is required" })}
+                {...register("lastName", { required: t("patientForm.lastNameRequired") })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="Last name"
+                placeholder={t("patientForm.lastNamePlaceholder")}
               />
               {errors.lastName && (
                 <p className="mt-1 text-sm text-red-600">
@@ -124,16 +126,16 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Gender *
+                {t("patientForm.genderLabel")}
               </label>
               <select
-                {...register("gender", { required: "Gender is required" })}
+                {...register("gender", { required: t("patientForm.genderRequired") })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
               >
-                <option value="">Select gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="">{t("patientForm.genderPlaceholder")}</option>
+                <option value="male">{t("patientForm.genderMale")}</option>
+                <option value="female">{t("patientForm.genderFemale")}</option>
+                <option value="other">{t("patientForm.genderOther")}</option>
               </select>
               {errors.gender && (
                 <p className="mt-1 text-sm text-red-600">
@@ -144,12 +146,12 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Date of Birth *
+                {t("patientForm.dobLabel")}
               </label>
               <input
                 type="date"
                 {...register("dateOfBirth", {
-                  required: "Date of birth is required",
+                  required: t("patientForm.dobRequired"),
                 })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
               />
@@ -162,12 +164,12 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Phone Number *
+                {t("patientForm.phoneLabel")}
               </label>
               <input
-                {...register("phone", { required: "Phone number is required" })}
+                {...register("phone", { required: t("patientForm.phoneRequired") })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="+251911234567"
+                placeholder={t("patientForm.phonePlaceholder")}
               />
               {errors.phone && (
                 <p className="mt-1 text-sm text-red-600">
@@ -179,52 +181,52 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
             {/* Address Information */}
             <div className="col-span-2 mt-4">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Address
+                {t("patientForm.addressTitle")}
               </h3>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                City
+                {t("patientForm.cityLabel")}
               </label>
               <input
                 {...register("city")}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="City"
+                placeholder={t("patientForm.cityPlaceholder")}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Sub City
+                {t("patientForm.subCityLabel")}
               </label>
               <input
                 {...register("subCity")}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="Sub city"
+                placeholder={t("patientForm.subCityPlaceholder")}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Woreda
+                {t("patientForm.woredaLabel")}
               </label>
               <input
                 {...register("woreda")}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="Woreda"
+                placeholder={t("patientForm.woredaPlaceholder")}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Blood Group
+                {t("patientForm.bloodGroupLabel")}
               </label>
               <select
                 {...register("bloodGroup")}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
               >
-                <option value="">Select blood group</option>
+                <option value="">{t("patientForm.bloodGroupPlaceholder")}</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
                 <option value="B+">B+</option>
@@ -239,29 +241,29 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
             {/* Emergency Contact */}
             <div className="col-span-2 mt-4">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Emergency Contact
+                {t("patientForm.emergencyContactTitle")}
               </h3>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Emergency Contact Name
+                {t("patientForm.emergencyContactNameLabel")}
               </label>
               <input
                 {...register("emergencyContactName")}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="Full name"
+                placeholder={t("patientForm.emergencyContactNamePlaceholder")}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Emergency Contact Phone
+                {t("patientForm.emergencyContactPhoneLabel")}
               </label>
               <input
                 {...register("emergencyContactPhone")}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="+251911234567"
+                placeholder={t("patientForm.emergencyContactPhonePlaceholder")}
               />
             </div>
           </div>
@@ -273,7 +275,7 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
               onClick={onClose}
               className="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition font-medium"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
@@ -281,10 +283,10 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
               className="px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting
-                ? "Saving..."
+                ? t("patientForm.saving")
                 : isEditing
-                  ? "Update Patient"
-                  : "Register Patient"}
+                  ? t("patientForm.updateButton")
+                  : t("patientForm.registerButton")}
             </button>
           </div>
         </form>

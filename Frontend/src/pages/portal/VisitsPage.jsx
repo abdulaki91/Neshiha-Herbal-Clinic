@@ -4,8 +4,10 @@ import { FiPlus, FiClock, FiCheckCircle } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 import VisitForm from "../../components/visits/VisitForm";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const VisitsPage = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const patientIdParam = searchParams.get("patientId");
 
@@ -27,7 +29,7 @@ const VisitsPage = () => {
       const response = await axiosInstance.get("/visits", { params });
       setVisits(response.data.data || response.data || []);
     } catch (error) {
-      toast.error("Failed to load visits");
+      toast.error(t("visits.toast.loadError"));
       setVisits([]);
     } finally {
       setLoading(false);
@@ -44,19 +46,29 @@ const VisitsPage = () => {
     return colors[status] || "bg-gray-100 text-gray-800";
   };
 
+  const getStatusLabel = (status) => {
+    const labels = {
+      waiting: t("visits.status.waiting"),
+      in_consultation: t("visits.status.inConsultation"),
+      completed: t("visits.status.completed"),
+      cancelled: t("visits.status.cancelled"),
+    };
+    return labels[status] || status.replace("_", " ");
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">Visits</h1>
-          <p className="text-gray-500 mt-1">Manage patient visits</p>
+          <h1 className="text-3xl font-bold text-gray-800">{t("visits.title")}</h1>
+          <p className="text-gray-500 mt-1">{t("visits.subtitle")}</p>
         </div>
         <button
           onClick={() => setShowForm(true)}
           className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
         >
           <FiPlus />
-          <span>New Visit</span>
+          <span>{t("visits.newVisitButton")}</span>
         </button>
       </div>
 
@@ -72,7 +84,7 @@ const VisitsPage = () => {
                 : "bg-white text-gray-600 hover:bg-gray-50"
             }`}
           >
-            {status === "all" ? "All" : status.replace("_", " ")}
+            {status === "all" ? t("common.all") : getStatusLabel(status)}
           </button>
         ))}
       </div>
@@ -102,7 +114,7 @@ const VisitsPage = () => {
                       {visit.patient?.firstName} {visit.patient?.lastName}
                     </h3>
                     <p className="text-sm text-gray-500">
-                      Visit #{visit.visitNumber}
+                      {t("common.visitNumber")}{visit.visitNumber}
                     </p>
                     {visit.chiefComplaint && (
                       <p className="text-sm text-gray-600 mt-2">
@@ -115,7 +127,7 @@ const VisitsPage = () => {
                   <span
                     className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(visit.status)}`}
                   >
-                    {visit.status.replace("_", " ")}
+                    {getStatusLabel(visit.status)}
                   </span>
                   <p className="text-sm text-gray-500 mt-2">
                     {new Date(visit.visitDate).toLocaleDateString()}
@@ -129,7 +141,7 @@ const VisitsPage = () => {
       ) : (
         <div className="text-center py-16">
           <FiClock className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-500 text-lg">No visits found</p>
+          <p className="text-gray-500 text-lg">{t("visits.empty")}</p>
         </div>
       )}
 
@@ -141,7 +153,7 @@ const VisitsPage = () => {
           onSuccess={() => {
             setShowForm(false);
             fetchVisits();
-            toast.success("Visit created successfully!");
+            toast.success(t("visits.toast.createSuccess"));
           }}
         />
       )}

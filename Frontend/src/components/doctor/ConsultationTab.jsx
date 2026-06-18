@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { FiPlus, FiX } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 const ConsultationTab = ({ data, onChange }) => {
+  const { t } = useTranslation();
   const [newSymptom, setNewSymptom] = useState("");
   const [newDiagnosis, setNewDiagnosis] = useState("");
 
@@ -44,7 +46,7 @@ const ConsultationTab = ({ data, onChange }) => {
       {/* Chief Complaint */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Chief Complaint *
+          {t("consultation.chiefComplaintLabel")}
         </label>
         <textarea
           value={data.chiefComplaint}
@@ -53,14 +55,14 @@ const ConsultationTab = ({ data, onChange }) => {
           }
           rows={2}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Main reason for visit..."
+          placeholder={t("consultation.chiefComplaintPlaceholder")}
         />
       </div>
 
       {/* Symptoms */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Symptoms
+          {t("consultation.symptomsLabel")}
         </label>
         <div className="flex space-x-2 mb-2">
           <input
@@ -69,7 +71,7 @@ const ConsultationTab = ({ data, onChange }) => {
             onChange={(e) => setNewSymptom(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleAddSymptom()}
             className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="Add symptom..."
+            placeholder={t("consultation.addSymptomPlaceholder")}
           />
           <button
             onClick={handleAddSymptom}
@@ -99,7 +101,7 @@ const ConsultationTab = ({ data, onChange }) => {
       {/* History of Present Illness */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          History of Present Illness
+          {t("consultation.historyOfPresentIllnessLabel")}
         </label>
         <textarea
           value={data.historyOfPresentIllness}
@@ -108,14 +110,14 @@ const ConsultationTab = ({ data, onChange }) => {
           }
           rows={3}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Detailed history of the current condition..."
+          placeholder={t("consultation.historyOfPresentIllnessPlaceholder")}
         />
       </div>
 
       {/* Physical Examination */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Physical Examination
+          {t("consultation.physicalExaminationLabel")}
         </label>
         <textarea
           value={data.physicalExamination}
@@ -124,14 +126,14 @@ const ConsultationTab = ({ data, onChange }) => {
           }
           rows={3}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Physical examination findings..."
+          placeholder={t("consultation.physicalExaminationPlaceholder")}
         />
       </div>
 
       {/* Diagnosis */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Diagnosis
+          {t("consultation.diagnosisLabel")}
         </label>
         <div className="flex space-x-2 mb-2">
           <input
@@ -140,7 +142,7 @@ const ConsultationTab = ({ data, onChange }) => {
             onChange={(e) => setNewDiagnosis(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleAddDiagnosis()}
             className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="Add diagnosis..."
+            placeholder={t("consultation.addDiagnosisPlaceholder")}
           />
           <button
             onClick={handleAddDiagnosis}
@@ -170,35 +172,35 @@ const ConsultationTab = ({ data, onChange }) => {
       {/* Treatment Plan */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Treatment Plan
+          {t("consultation.treatmentPlanLabel")}
         </label>
         <textarea
           value={data.treatmentPlan}
           onChange={(e) => onChange({ ...data, treatmentPlan: e.target.value })}
           rows={3}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Treatment plan and recommendations..."
+          placeholder={t("consultation.treatmentPlanPlaceholder")}
         />
       </div>
 
       {/* Doctor Notes */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Doctor's Notes
+          {t("consultation.doctorNotesLabel")}
         </label>
         <textarea
           value={data.doctorNotes}
           onChange={(e) => onChange({ ...data, doctorNotes: e.target.value })}
           rows={3}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          placeholder="Additional notes..."
+          placeholder={t("consultation.doctorNotesPlaceholder")}
         />
       </div>
 
       {/* Follow-up Date */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Follow-up Date
+          {t("consultation.followUpDateLabel")}
         </label>
         <input
           type="date"

@@ -4,11 +4,13 @@ import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import { getSocket, subscribeToQueue } from "../../lib/socket";
 import useAuthStore from "../../store/authStore";
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 
 const PortalLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useAuthStore();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const socket = getSocket();
@@ -19,7 +21,7 @@ const PortalLayout = () => {
         subscribeToQueue();
 
         socket.on("queue:updated", (visit) => {
-          toast.success("New patient in queue", {
+          toast.success(t("toast.newPatientInQueue"), {
             icon: "🔔",
           });
         });
@@ -28,7 +30,7 @@ const PortalLayout = () => {
       socket.on("patient:registered", (patient) => {
         if (["super_admin", "data_clerk", "doctor"].includes(user?.role)) {
           toast.success(
-            `New patient registered: ${patient.firstName} ${patient.lastName}`,
+            t("toast.patientRegistered", { firstName: patient.firstName, lastName: patient.lastName }),
             {
               icon: "👤",
             },
@@ -38,14 +40,14 @@ const PortalLayout = () => {
 
       socket.on("visit:created", (visit) => {
         if (["super_admin", "doctor"].includes(user?.role)) {
-          toast.success("New visit created", {
+          toast.success(t("toast.newVisitCreated"), {
             icon: "📋",
           });
         }
       });
 
       socket.on("visit:status-changed", (visit) => {
-        toast.info(`Visit status: ${visit.status}`, {
+        toast.info(t("toast.visitStatus", { status: visit.status }), {
           icon: "🔄",
         });
       });
@@ -58,7 +60,7 @@ const PortalLayout = () => {
 
       socket.on("prescription:created", (prescription) => {
         if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
-          toast.success(`New prescription added for patient`, {
+          toast.success(t("toast.prescriptionAdded"), {
             icon: "💊",
           });
         }
@@ -66,7 +68,7 @@ const PortalLayout = () => {
 
       socket.on("medicine:dispensed", (result) => {
         if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
-          toast.success("Medicine dispensed to patient", {
+          toast.success(t("toast.medicineDispensed"), {
             icon: "✅",
           });
         }
@@ -75,7 +77,7 @@ const PortalLayout = () => {
       socket.on("payment:completed", (payment) => {
         if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
           toast.success(
-            `Payment received: ${payment.amount?.toLocaleString?.() || payment.amount} ETB`,
+            t("toast.paymentReceived", { amount: payment.amount?.toLocaleString?.() || payment.amount }),
             {
               icon: "💰",
             },

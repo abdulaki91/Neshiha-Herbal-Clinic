@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import axiosInstance from "../lib/axios";
 import useAuthStore from "../store/authStore";
@@ -10,6 +11,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { setAuth } = useAuthStore();
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const {
     register,
@@ -32,10 +34,10 @@ export default function LoginPage() {
       initializeSocket(accessToken);
       connectSocket();
 
-      toast.success(`Welcome back, ${user.firstName}!`);
+      toast.success(t("login.toast.welcome", { firstName: user.firstName }));
       navigate("/portal");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed");
+      toast.error(error.response?.data?.message || t("login.toast.failed"));
     } finally {
       setLoading(false);
     }
@@ -61,24 +63,24 @@ export default function LoginPage() {
               />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold">Neshiha Herbal Clinic</h1>
-          <p className="text-emerald-100 mt-2">Clinic Management System</p>
+          <h1 className="text-2xl font-bold">{t("login.brandName")}</h1>
+          <p className="text-emerald-100 mt-2">{t("login.brandSubtitle")}</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Sign In</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">{t("login.heading")}</h2>
 
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
+                {t("login.label.email")}
               </label>
               <input
                 type="email"
-                {...register("email", { required: "Email is required" })}
+                {...register("email", { required: t("login.validation.emailRequired") })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="your.email@clinic.com"
+                placeholder={t("login.placeholder.email")}
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-600">
@@ -89,13 +91,13 @@ export default function LoginPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Password
+                {t("login.label.password")}
               </label>
               <input
                 type="password"
-                {...register("password", { required: "Password is required" })}
+                {...register("password", { required: t("login.validation.passwordRequired") })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="••••••••"
+                placeholder={t("login.placeholder.password")}
               />
               {errors.password && (
                 <p className="mt-1 text-sm text-red-600">
@@ -110,18 +112,18 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full mt-6 bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-700 hover:to-teal-700 focus:ring-4 focus:ring-emerald-300 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? t("login.button.loading") : t("login.button.submit")}
           </button>
 
           <div className="mt-6 p-4 bg-blue-50 rounded-lg">
             <p className="text-sm text-blue-800 font-medium mb-2">
-              Demo Accounts:
+              {t("login.demo.heading")}
             </p>
             <div className="text-xs text-blue-700 space-y-1">
-              <p>📧 admin@neshihaclinic.com | 🔑 Admin@123</p>
-              <p>📧 doctor@neshihaclinic.com | 🔑 Doctor@123</p>
-              <p>📧 clerk@neshihaclinic.com | 🔑 Clerk@123</p>
-              <p>📧 cashier@neshihaclinic.com | 🔑 Cashier@123</p>
+              <p>{t("login.demo.admin")}</p>
+              <p>{t("login.demo.doctor")}</p>
+              <p>{t("login.demo.clerk")}</p>
+              <p>{t("login.demo.cashier")}</p>
             </div>
           </div>
         </form>

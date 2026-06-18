@@ -3,8 +3,10 @@ import { FiPlus, FiTrash2, FiSave, FiPackage } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 import useAuthStore from "../../store/authStore";
+import { useTranslation } from "react-i18next";
 
 const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const [medicines, setMedicines] = useState();
   console.log(medicines);
@@ -34,7 +36,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
 
       setMedicines(response.data?.data || response.data || []);
     } catch {
-      toast.error("Failed to fetch medicines");
+      toast.error(t("herbalMedicine.fetchError"));
     } finally {
       setLoading(false);
     }
@@ -70,11 +72,11 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
 
   const handleAddPrescription = async () => {
     if (!formData.medicineId) {
-      toast.error("Please select a herbal medicine");
+      toast.error(t("herbalMedicine.selectError"));
       return;
     }
     if (!formData.quantity || parseInt(formData.quantity) <= 0) {
-      toast.error("Please enter a valid quantity");
+      toast.error(t("herbalMedicine.quantityError"));
       return;
     }
 
@@ -94,7 +96,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
         prescribedDate: new Date().toISOString(),
       });
 
-      toast.success("Medicine prescribed successfully");
+      toast.success(t("herbalMedicine.prescribeSuccess"));
 
       setFormData({
         medicineId: "",
@@ -107,26 +109,26 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
       fetchPrescriptions();
       onSave && onSave();
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to add medicine");
+      toast.error(error.response?.data?.message || t("herbalMedicine.addError"));
     }
   };
 
   const handleCancelPrescription = async (prescriptionId) => {
-    if (!confirm("Cancel this prescription?")) return;
+    if (!confirm(t("herbalMedicine.cancelConfirm"))) return;
 
     try {
       await axiosInstance.patch(`/prescriptions/${prescriptionId}/stop`, {
         reason: "cancelled",
       });
-      toast.success("Prescription cancelled");
+      toast.success(t("herbalMedicine.cancelSuccess"));
       fetchPrescriptions();
     } catch {
-      toast.error("Failed to cancel prescription");
+      toast.error(t("herbalMedicine.cancelError"));
     }
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading medicines...</div>;
+    return <div className="text-center py-8">{t("herbalMedicine.loading")}</div>;
   }
 
   return (
@@ -137,7 +139,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
           className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
         >
           <FiPlus />
-          <span>Add Herbal Medicine</span>
+          <span>{t("herbalMedicine.addButton")}</span>
         </button>
       )}
 
@@ -145,32 +147,32 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-4">
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-lg font-semibold text-gray-800">
-              Prescribe Herbal Medicine
+              {t("herbalMedicine.prescribeTitle")}
             </h4>
             <button
               onClick={() => setShowAddForm(false)}
               className="text-gray-500 hover:text-gray-700"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
           </div>
 
           {/* Medicine Selection */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Select Herbal Medicine *
+              {t("herbalMedicine.selectLabel")}
             </label>
             <select
               value={formData.medicineId}
               onChange={(e) => handleMedicineSelect(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
             >
-                <option value="">-- Select Medicine --</option>
+              <option value="">{t("herbalMedicine.selectPlaceholder")}</option>
               {medicines.map((medicine) => (
                 <option key={medicine.id} value={medicine.id}>
                   {medicine.name}
                   {medicine.strength ? ` - ${medicine.strength}` : ""}
-                  {medicine.sellingPrice ? ` (${medicine.sellingPrice} ETB)` : ""}
+                  {medicine.sellingPrice ? ` (${medicine.sellingPrice} ${t("common.currency.etb")})` : ""}
                 </option>
               ))}
             </select>
@@ -180,7 +182,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Unit Price (ETB) *
+                {t("herbalMedicine.unitPriceLabel")}
               </label>
               <input
                 type="number"
@@ -190,12 +192,12 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
                   setFormData({ ...formData, unitPrice: e.target.value })
                 }
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
-                placeholder="Price per unit"
+                placeholder={t("herbalMedicine.unitPricePlaceholder")}
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Quantity *
+                {t("herbalMedicine.quantityLabel")}
               </label>
               <input
                 type="number"
@@ -204,7 +206,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
                   setFormData({ ...formData, quantity: e.target.value })
                 }
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
-                placeholder="Number of units"
+                placeholder={t("herbalMedicine.quantityPlaceholder")}
               />
             </div>
           </div>
@@ -213,10 +215,10 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
           <div className="bg-emerald-50 p-4 rounded-lg">
             <div className="flex justify-between items-center">
               <span className="text-sm font-medium text-emerald-700">
-                Total Amount
+                {t("herbalMedicine.totalLabel")}
               </span>
               <span className="text-2xl font-bold text-emerald-900">
-                {totalAmount} ETB
+                {totalAmount} {t("common.currency.etb")}
               </span>
             </div>
           </div>
@@ -224,7 +226,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
           {/* Instructions */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Instructions (Optional)
+              {t("herbalMedicine.instructionsLabel")}
             </label>
             <textarea
               value={formData.instructions}
@@ -233,7 +235,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
               }
               rows={2}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
-              placeholder="e.g., Take with food, avoid alcohol..."
+              placeholder={t("herbalMedicine.instructionsPlaceholder")}
             />
           </div>
 
@@ -243,14 +245,14 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
               onClick={() => setShowAddForm(false)}
               className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               onClick={handleAddPrescription}
               className="flex items-center space-x-2 px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
             >
               <FiSave />
-              <span>Save Prescription</span>
+              <span>{t("herbalMedicine.saveButton")}</span>
             </button>
           </div>
         </div>
@@ -261,7 +263,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
         <div className="space-y-3">
           <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2">
             <FiPackage className="text-emerald-600" />
-            <span>Prescribed Medicines</span>
+            <span>{t("herbalMedicine.listTitle")}</span>
           </h4>
           {prescriptions.map((prescription) => (
             <div
@@ -282,11 +284,11 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
                   <div className="flex items-center space-x-4 text-sm text-gray-600 mt-1">
                     <span>
                       {prescription.quantity} x{" "}
-                      {parseFloat(prescription.unitPrice || 0).toFixed(2)} ETB
+                      {parseFloat(prescription.unitPrice || 0).toFixed(2)} {t("common.currency.etb")}
                     </span>
                     <span className="font-bold text-emerald-700">
-                      Total:{" "}
-                      {parseFloat(prescription.totalAmount || 0).toFixed(2)} ETB
+                      {t("herbalMedicine.totalPrefix")}
+                      {parseFloat(prescription.totalAmount || 0).toFixed(2)} {t("common.currency.etb")}
                     </span>
                   </div>
                   {prescription.instructions && (
@@ -305,7 +307,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
                           : "bg-gray-200 text-gray-700"
                     }`}
                   >
-                    {prescription.status}
+                    {t(`prescription.status.${prescription.status}`)}
                   </span>
                   {prescription.status === "pending" && (
                     <button
@@ -325,7 +327,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
       ) : (
         <div className="text-center py-8 text-gray-500">
           <FiPackage className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-          <p>No medicines prescribed yet</p>
+          <p>{t("herbalMedicine.emptyList")}</p>
         </div>
       )}
     </div>

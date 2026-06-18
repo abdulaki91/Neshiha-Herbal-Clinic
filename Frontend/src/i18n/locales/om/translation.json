@@ -10,163 +10,1135 @@
     "search": "Barbaadi",
     "close": "Cufi",
     "back": "Deebi'i",
-    "next": "Kan itti aanuu",
-    "previous": "Kan darbe"
+    "next": "Kan itti aanu",
+    "previous": "Kan darbe",
+    "view": "Ilaali",
+    "print": "Maxxansi",
+    "all": "Hunda",
+    "total": "Ida'ama",
+    "patient": "Maamila",
+    "patientId": "LakkID",
+    "doctor": "Doktara",
+    "doctorPrefix": "Dr.",
+    "amount": "Gatii",
+    "method": "Mala",
+    "date": "Guyyaa",
+    "dateAndTime": "Guyyaa fi Sa'aatii",
+    "cashier": "Kaashiyara",
+    "visitNumber": "Daawwata Lakk#",
+    "paymentNumber": "Kaffaltii Lakk#",
+    "phone": "Bilbilaa",
+    "age": "Umurii",
+    "notAvailable": "Hin argamu",
+    "instructions": "Qajeelfama",
+    "quantityAbbr": "Baay.",
+    "by": "kan",
+    "saving": "Kuusaa jira...",
+    "creating": "Uumaa jira...",
+    "currency": { "etb": "ETB" },
+    "pagination": { "page": "Fuula", "of": "keessaa" },
+    "ageUnit": { "years": "waggaa" }
   },
+
   "navigation": {
     "home": "Fuula Duraa",
     "about": "Waa'ee Keenya",
     "services": "Tajaajiloota",
     "testimonials": "Yaada Maamila",
-    "contact": "Nu qunnami",
+    "contact": "Nu Qunnami",
     "blog": "Blogii"
   },
+
   "header": {
-    "title": "Nesiha Kliinika Fayyummaa Biqilaa",
+    "title": "Nesiha Kliinika Biqilaa",
     "tagline": "Furmaatota Fayyaa Uumamaa",
     "language": "Afaan"
   },
+
   "hero": {
-    "title": "Fayyaa fi Jireenya Gaarii",
-    "subtitle": "Fayyaa Uumamaa",
-    "description": "Kliinikii Nesiha keessatti, yaala aadaa waliin mala ammayyaa walitti maknee, fayyaa keessan akka of irraa fayyinu gochuuf tajaajila dhuunfaa ni kennina.",
-    "cta": "Yeroo qabi",
-    "learnMore": "Dabalata baradhu",
+    "title": "Fayyaa Uumamaa",
+    "subtitle": "Jireenya Fayyaa Qabeessaaf",
+    "description": "Kliinika Nesiha keessatti, yaala aadaa fi mala ammayyaa walitti maknee, humna fayyummaa uumamaa qaama keessanii gabbisuuf tajaajila dhuunfaa ni kennina.",
+    "cta": "Yeroo Qabadhu",
+    "learnMore": "Dabalata Baradhu",
     "traditionalRemedies": "Yaala Aadaa",
     "modernPractices": "Mala Ammayyaa",
     "personalizedCare": "Tajaajila Dhuunfaa"
   },
+
   "services": {
+    "title": "Tajaajiloota Keenya",
+    "subtitle": "Yaala biqilaa guutuu fayyaa keessaniif",
+    "consultation": "Gorsa Biqilaa",
+    "consultationDesc": "Gorsa dhuunfaa yaala biqilaa",
+    "treatment": "Yaala Biqilaa",
+    "treatmentDesc": "Yaala biqilaa fi mala uumamaa dhuunfaa",
+    "wellness": "Sagantaa Fayyummaa",
+    "wellnessDesc": "Sagantaa fayyummaa fi ittisa dhukkubaa guutuu",
+    "desc": "Ogeeyyii biqilaa raggaasifamaniin gorsa biqilaa dhuunfaa rakkoo fayyaa keessan furamuuf fi karoora yaalaa dhuunfaa qopheessuuf.",
     "initialAssessment": "Qo'annoo Jalqabaa",
     "customFormulations": "Qindaa'ina Dhuunfaa",
     "followUpCare": "Tajaajila Itti Fufaa",
-    "lifestyleGuidance": "Qajeelfama Jiraachuu",
-
+    "lifestyleGuidance": "Qajeelfama Jireenyaa",
     "immuneSupport": "Deeggarsa Ittisa Dhukkubaa",
-    "detoxPrograms": "Sagantaa Fayyummaa Qaamaa",
-    "energyEnhancement": "Jabeessa Humna",
-    "stressManagement": "To'annoo Dhiphina",
-
-    "treatment": "Yaala Biqilaa",
-    "herbalMedicine": "Dawo Biqilaa",
-    "acupuncture": "Acupuncture",
-    "cuppingTherapy": "Cupping",
-    "moxibustion": "Moxibustion",
-    "consultationDesc": "Gorsa dhuunfaa fayyaa keessan gargaaruuf yaala biqilaa sirrii filachuuf.",
-    "wellnessDesc": "Sagantaa ittisa dhukkubaa, humna dabaluu fi tasgabbi sammuu fi qaamaaf.",
-    "treatmentDesc": "Yaala bu’a qabeessa biqilaa fi mala uumamaa fayyadamuun.",
-    "consultation": "Gorsa Biqilaa",
-    "wellness": "Sagantaa Fayyaa",
-    "title": "Tajaajiloota Keenya",
-    "subtitle": "Yaala Biqilaa Guutuu Fayyaa Keessaniif",
-    "desc": "Gorsa dhuunfaa biqilaa ogganaa keenya waliin rakkoo fayyaa keessan furuuf fi karoorri yaalaa dhuunfaa qopheessuuf.",
-
-    "therapeuticMassage": "Massaji Fayyaa",
-    "therapeuticMassageDesc": "Koorsoota massaji aadaa fi yaala zayita biqilaa qaama fi sammuu tasgabbeessuuf.",
-    "swedishMassage": "Massaji Swedish",
-    "deepTissue": "Massaji Qaama Gadi",
+    "detoxPrograms": "Sagantaa Summii Baasuu",
+    "energyEnhancement": "Humna Dabalataa",
+    "stressManagement": "To'annoo Dhiphinaa",
+    "herbalMedicine": "Qoricha Biqilaa",
+    "acupuncture": "Akupunktarii",
+    "cuppingTherapy": "Cupping Tirapii",
+    "moxibustion": "Moksibaashinii",
+    "therapeuticMassage": "Masajii Fayyaa",
+    "therapeuticMassageDesc": "Koorsewwan masajii aadaa fi yaala zayita biqilaa qaama fi sammuu tasgabbeessuuf.",
+    "swedishMassage": "Masajii Siweedishii",
+    "deepTissue": "Masajii Qaama Gadi",
     "herbalOilTherapy": "Yaala Zayita Biqilaa",
-    "stressRelief": "Dhiphina Hir'isu",
-
-    "personalizedHealthPlans": "Karoorri Fayyaa Dhuunfaa",
-    "personalizedHealthPlansDesc": "Karoora dhuunfaa nyaataa, sochii qaamaa, biqilaa gargaarsaa fi hordoffii of keessaa qabu.",
+    "stressRelief": "Dhiphina Hir'isuu",
+    "personalizedHealthPlans": "Karoora Fayyaa Dhuunfaa",
+    "personalizedHealthPlansDesc": "Karoora dhuunfaa nyaataa, sochii qaamaa, biqilaa dabalaa fi hordoffii of keessaa qabu.",
     "nutritionGuidance": "Qajeelfama Nyaataa",
     "exercisePlans": "Karoora Sochii Qaamaa",
-    "herbalSupplements": "Dabalata Biqilaa",
-    "progressTracking": "Hordoffii Milkaa'ina",
-
+    "herbalSupplements": "Biqilaa Dabalataa",
+    "progressTracking": "Hordoffii Guddinaa",
     "herbalEducation": "Barnoota Biqilaa",
-    "herbalEducationDesc": "Leenjii fi gorsa mala yaala uumamaa jireenya guyyaa guyyaa keessatti itti fayyadamuuf.",
+    "herbalEducationDesc": "Leenjiiwwan fi gorsa itti fayyadama yaala uumamaa jireenya guyyaa guyyaa keessatti.",
     "workshops": "Leenjiiwwan",
-    "herbIdentification": "Beeksisa Biqilaa",
+    "herbIdentification": "Adda Baasuu Biqilaa",
     "homeRemedies": "Yaala Manaa",
     "safetyGuidelines": "Qajeelfama Nageenyaa",
-
     "whatsIncluded": "Kan Keessa Jiru",
-    "ctaTitle": "Jireenya Fayyaa Keessan Eegalu",
-    "ctaDesc": "Ogganaa biqilaa keenya waliin qunnamuuf, fayyaa uumamaa akkamitti isin gargaaru argachuuf."
+    "ctaTitle": "Jireenya Fayyaa Keessan Eegalaa",
+    "ctaDesc": "Ogeeyyii biqilaa keenya waliin qunnamaa, yaala uumamaa akkamitti isin gargaaruu akka danda'u hubadhaa."
   },
+
   "about": {
-    "title": "Waa'ee Keenya",
-    "subtitle": "Hiriyaa Amanamaa Fayyaa Uumamaa Keessan",
-    "description": "Ogummaa biqilaa aadaa fi hubannoo ammayyaa walitti maknee furmaatota fayyaa uumamaa fi bu’a qabeessa dhiheessina.",
-    "extendedDescription": "Kliinikii keenya ogummaa biqilaa durii fi qorannoo ammayyaa walitti makuun karoorri yaalaa dhuunfaa uuma. Namni guutuu akka ilaalamu amanna, mallattoolee qofaa miti, fayyaa fi onnee guutuu eeguuf.",
+    "title": "Waa'ee Nesihaa",
+    "subtitle": "Hiriyaa amanamaa fayyaa uumamaa keessan",
+    "description": "Ogummaa biqilaa aadaa fi hubannoo ammayyaa walitti maknee furmaatota fayyaa uumamaa bu'a qabeessa dhiheessina.",
+    "extendedDescription": "Kliinikii keenya ogummaa biqilaa durii fi qorannoo ammayyaa walitti makuun karoora yaalaa dhuunfaa uuma. Mallattoolee qofa utuu hin taane nama guutuu yaaluu amanna, fayyaa fi humna dheeraaf eeguuf.",
     "experience": "Waggaa Muuxannoo",
-    "patients": "Barsiisota Gammadan",
+    "patients": "Mamiloota Gammadan",
     "treatments": "Yaala Milkaa'aa",
     "herbalWisdom": "Ogummaa Biqilaa Aadaa",
-    "herbalWisdomDesc": "Bara dhaloota dhalootatti dabarfamee",
-    "certifiedPractitioners": "Ogganaan Raggaasifame",
-    "certifiedPractitionersDesc": "Hojjettoonni keenya ogganaan biqilaa raggaasifame kan leenjii fi muuxannoo bal'aa qabu.",
+    "herbalWisdomDesc": "Dhaloota irraa dhalootaatti darbaa dhufe",
+    "certifiedPractitioners": "Ogeeyyii Raggaasifaman",
+    "certifiedPractitionersDesc": "Hojjettoonni keenya ogeeyyii yaala biqilaa raggaasifaman kan leenjii fi muuxannoo bal'aa qaban.",
     "naturalIngredients": "Qabeenya Uumamaa",
-    "naturalIngredientsDesc": "Yaala keenya hundaaf qabeenya uumamaa qulqullina ol'aanaa fi madaallii qabu qofa fayyadamna.",
-    "holisticApproach": "Tartiiba Guutuu",
-    "holisticApproachDesc": "Namni guutuu akka ilaalamu goona, sababoota bu'uuraa irratti xiyyeeffanne, mallattoolee qofa osoo hin taane, fayyaa yeroo dheeraaf eeguuf."
+    "naturalIngredientsDesc": "Yaala keenya hundaaf qabeenya uumamaa qulqullina olaanaa fi haala gaariin argame qofa fayyadamna.",
+    "holisticApproach": "Mala Guutuu",
+    "holisticApproachDesc": "Mallattoolee qofa osoo hin taane, sababoota bu'uuraa irratti xiyyeeffannaa, fayyaa dhaabbataaf nama guutuu yaalla.",
+    "metaTitle": "Waa'ee Keenya - Kliinika Biqilaa Nesihaa",
+    "metaDescription": "Waa'ee Kliinika Biqilaa Nesihaa baradhaa, bakka ogummaan biqilaa aadaa fi saayinsii ammayyaa walitti dhufan. Ogeeyyii raggaasifaman, qabeenya uumamaa fi mala guutuu keenya hubadhaa.",
+    "metaKeywords": "kliinika biqilaa, Nesiha biqilaa, mana qorichaa aadaa, yaala uumamaa, fayyummaa guutuu, yaala filannoo, Kliinika biqilaa Oromiyaa, yaala biqilaa Itoophiyaa"
   },
-  "testimonials": {
-    "title": "Maamila keenya maal jedhu",
-    "subtitle": "Fayyaa uumamaa jireenya maamiloota keenya akkamitti jijjiire hubadhaa. Seenaa dhugaa, bu'aa ifaa fi gammachuu dhugaa.",
-    "featured": "Dhugaa Video Filatamaa",
-    "more": "Seenaa Maamila Dabalataa",
-    "videoAvailable": "Video Argamuu danda'a",
 
+  "testimonials": {
+    "title": "Maamila Keenya Maal Jedhu",
+    "subtitle": "Seenaa dhugaa namoota dhugaa irraa",
+    "featured": "Ragaa Video Filatamaa",
+    "more": "Seenaa Maamila Dabalataa",
+    "videoAvailable": "Ragaa video argamuu danda'a",
     "list": [
       {
         "name": "Emma S.",
-        "role": "Fayyummaa Qabdu",
-        "text": "Kliinikii Nesiha fayyaa koo guutummaatti jijjiire. Tartiiba dhuunfaa fi yaala uumamaa humna koo fi tasgabbii koo irratti jijjiirama guddaa fidani. Nama haaraa fakkaata!"
+        "role": "Fayyummaa Jaalattu",
+        "text": "Kliinika Biqilaa Nesihaa fayyaa koo guutummaatti jijjiire. Mala dhuunfaa fi yaala uumamaa humna koo fi fayyummaa koo irratti jijjiirama guddaa fidani. Nama haaraa fakkaadha!"
       },
       {
         "name": "Liam L.",
         "role": "Leenjisaa Fayyaa",
-        "text": "Beekumsa fi tajaajila Nesiha keessatti argame hedduu nan dinqisiifadhe. Sagantaa fayyaa guutuu gorsa uumamaa waliin milkaa'ina fayyaa koo argamsiise. Yaala biqilaa dinqisiisaa fi bu'a qabeessa!"
+        "text": "Beekumsa fi tajaajila Nesihaa keessatti argame hedduu nan dinqisiifadhe. Sagantaan fayyummaa guutuu fi gorsi uumamaa galma fayyaa koo akkan argadhu na gargaare. Yaalonni biqilaa baay'ee bu'a qabeessa!"
       }
     ]
   },
+
   "contact": {
-    "title": "Nu qunnami",
-    "subtitle": "Jireenya fayyaa eegaluu barbaaddaa?",
+    "title": "Nu Qunnamaa",
+    "subtitle": "Jireenya fayyaa keessan eegaluuf qophii dha?",
     "name": "Maqaa Guutuu",
     "email": "Imeeli",
     "phone": "Lakkoofsa Bilbilaa",
-    "message": "Ergaa Kee",
-    "sendMessage": "Ergaa Ergi",
+    "message": "Ergaa Keessan",
+    "sendMessage": "Ergaa Ergaa",
     "address": "Teessoo",
     "phoneLabel": "Bilbilaa",
     "emailLabel": "Imeeli",
-    "hours": "Sa’aatii Hojii",
+    "hours": "Sa'aatii Hojii",
     "contactInformation": "Odeeffannoo Qunnamtii",
     "emailAddress": "info@nesihaherbalclinic.com",
-    "phoneNumber": "(555) 123-4567",
+    "phoneNumber": "+251912166549",
     "mainOffice": "Waajjira Guddaa",
     "whatsapp": "WhatsApp",
-    "whatsappNumber": "(555) 987-6543",
+    "whatsappNumber": "+251912166549",
     "quickResponse": "Deebii Ariifataa",
-    "streetAddress": "123 Daandii Fayyaa",
-    "cityState": "Magaalaa Fayyaa, California 90210",
-    "businessHours": "Sa’aatii Hojii",
-    "mondayFriday": "Wiixata - Jimaata",
-    "weekdayHours": "Sa’aatii 9:00 - 18:00",
+    "streetAddress": "Beroo, Ashewaa Meedaa",
+    "cityState": "",
+    "businessHours": "Sa'aatii Hojii",
+    "mondayFriday": "Sanbata - Kamisa",
+    "weekdayHours": "2:00 AM - 10:00 AM",
     "saturday": "Sanbata",
-    "saturdayHours": "Sa’aatii 10:00 - 16:00",
-    "sunday": "Dilbata",
+    "saturdayHours": "2:00 AM - 10:00 AM",
+    "sunday": "Jimaata",
     "closed": "Cufame",
     "ourLocation": "Bakka Keenya",
     "easyToFind": "Argachuuf salphaa!",
-    "locationDescription": "Magaalaa Fayyaa keessaa, daandii Fayyaa giddugaleessa irraa fagaatee miti. Bakki paarkii konkolaataa bilisaa ni jira.",
-    "needImmediateAssistance": "Deeggarsa hatattamaa barbaaddaa?",
-    "expertsReady": "Ogganaan biqilaa keenya har’a si gargaaruuf qophii dha.",
-    "scheduleConsultation": "Yeroo Gorsa Qabaadhu"
+    "locationDescription": "Bakka fayyaa giddugaleessaa keessatti argamna, daandii Fayyaa guddaa bira. Bakki paarkii konkolaataa bilisaa ni jira.",
+    "needImmediateAssistance": "Deeggarsa Hatattamaa Barbaaddaa?",
+    "expertsReady": "Ogeeyyiin yaala biqilaa keenya har'a isin gargaaruuf qophii dha",
+    "scheduleConsultation": "Yeroo Gorsa Qabadhu"
   },
+
   "footer": {
-    "copyright": "© 2024 Kliinika Nesiha. Mirga hunda eeyyamame.",
-    "privacy": "Seera Iddoo Dhunfaa",
-    "terms": "Shira Tajaajilaa"
+    "copyright": "© 2024 Kliinika Biqilaa Nesihaa. Mirga hundi eegame.",
+    "privacy": "Imaammata Mana Dhuunfaa",
+    "terms": "Haalota Tajaajilaa",
+    "quickLinks": "Geessituu Ariifataa"
   },
+
   "blog": {
-    "title": "Blogii Fayyaa fi Fayyaa Uumamaa",
-    "subtitle": "Hubannoo fi Gorsa Jireenya Uumamaa",
-    "readMore": "Dabalata dubbisi",
-    "publishedOn": "Bara maxxanfame"
+    "title": "Blogii Fayyaa fi Fayyummaa",
+    "subtitle": "Hubannoo fi gorsa jireenya uumamaa",
+    "readMore": "Dabalata Dubbisi",
+    "publishedOn": "Maxxanfame",
+    "badge": "Blogii Keenya",
+    "heading": "Hubannoo Fayyummaa",
+    "desc": "Hubannoo ogeeyyii, gorsa fayyaa uumamaa fi qorannoo haaraa yaala biqilaa keessatti argadhaa, jireenya fayyaa gaarii argachuuf isin gargaaru.",
+    "featuredBadge": "Filatame",
+    "readFullArticle": "Barreeffama Guutuu Dubbisi",
+    "filter": { "all": "Hunda" },
+    "post": [
+      {
+        "title": "Gorsa Ijoo 5 Jireenya Fayyaa Qabeessa Ta'uuf",
+        "desc": "Mala guyyaa guyyaa salphaa garuu humna qabu fayyaa fi fayyummaa keessan uumamaan jijjiiruu danda'u argadhaa. Hojii ganamaa irraa hanga hojii galgalaatti, jijjiirama xiqqaan bu'aa dhaabbataa akkamitti akka fidu baradhaa.",
+        "category": "Gorsa Fayyummaa",
+        "readTime": "Daqiiqaa 5 dubbisuuf",
+        "date": "Bitootessa 15, 2024",
+        "author": "Dr. Sarah Johnson"
+      },
+      {
+        "title": "Humna Fayyisaa Qoricha Biqilaa",
+        "desc": "Ogummaa durii yaala biqilaa keessa seenaa, yaalonni uumamaa fayyaa keessan akkamitti akka gabbisan hubadhaa. Saayinsii mala yaala aadaa fi itti fayyadama ammayyaa duubaa baradhaa.",
+        "category": "Qoricha Biqilaa",
+        "readTime": "Daqiiqaa 7 dubbisuuf",
+        "date": "Bitootessa 12, 2024",
+        "author": "Dr. Ahmed Hassan"
+      },
+      {
+        "title": "Summii Uumamaan Baasuu: Qaama Keessan Uumamaan Qulqulleessaa",
+        "desc": "Mala summii uumamaan baasuu hojii qulqulleessituu uumamaa qaama keessanii deeggaru baradhaa. Biqiltoota, nyaata fi mala fayyaa fi humna guddisan argadhaa.",
+        "category": "Summii Baasuu fi Qulqulleessuu",
+        "readTime": "Daqiiqaa 6 dubbisuuf",
+        "date": "Bitootessa 10, 2024",
+        "author": "Dr. Maria Rodriguez"
+      },
+      {
+        "title": "To'annoo Dhiphinaa Yaala Aadaatiin",
+        "desc": "Mala to'annoo dhiphinaa durii fi addunyaa saffisaa har'aa keessatti madaallii akkamitti akka argattan qorachaa. Meeditaashinii irraa hanga yaala biqilaatti, dhiphina hir'isuu uumamaa argadhaa.",
+        "category": "Fayyaa Sammuu",
+        "readTime": "Daqiiqaa 8 dubbisuuf",
+        "date": "Bitootessa 8, 2024",
+        "author": "Dr. James Chen"
+      },
+      {
+        "title": "Fayyummaa Waabee: Qajeelfama Fayyaa Birraa",
+        "desc": "Humna birraa qajeelfama fayyummaa waabee keenyaan simadhaa. Hojiiwwan fayyaa keessan seera uumamaa waliin akkamitti akka walsimsiiftan fayyummaa olaanaa argachuuf baradhaa.",
+        "category": "Fayyaa Waabee",
+        "readTime": "Daqiiqaa 4 dubbisuuf",
+        "date": "Bitootessa 5, 2024",
+        "author": "Dr. Elena Petrov"
+      },
+      {
+        "title": "Saayinsii Duubaa Ittisa Uumamaa",
+        "desc": "Yaalonni uumamaa fi filannoon jireenyaa sirni ittisa qaama keessanii akkamitti akka cimsan hubadhaa. Mala ragaadhaan deeggarame fayyaa cimaa uumamaan ijaaruuf argadhaa.",
+        "category": "Ittisa Dhukkubaa",
+        "readTime": "Daqiiqaa 9 dubbisuuf",
+        "date": "Bitootessa 3, 2024",
+        "author": "Dr. Lisa Thompson"
+      }
+    ],
+    "newsletter": {
+      "heading": "Odeeffannoo Argadhaa",
+      "subtitle": "Gorsa fayyummaa haaraa, hubannoo yaala biqilaa fi odeeffannoo fayyaa imeeli keessanitti argadhaa.",
+      "placeholder": "Imeeli keessan galchaa",
+      "subscribe": "Rekistarii"
+    }
+  },
+
+  "sidebar": {
+    "brandName": "Kliinika Nesihaa",
+    "dashboard": "Dashboordii",
+    "staff": "Hojjettoota",
+    "patients": "Mamiloota",
+    "visits": "Daawwattoota",
+    "medicines": "Qoricha",
+    "cashier": "Kaashiyara",
+    "laboratory": "Laaboratorii",
+    "reports": "Gabaasa",
+    "settings": "Sajoo",
+    "queue": "Tarree Eeggataa",
+    "logout": "Ba'i",
+    "adminPanel": "Paaneel Bulchiinsa",
+    "badgeOverflow": "99+"
+  },
+
+  "topbar": {
+    "greeting": "Baga nagaa dhufte, {{firstName}}!",
+    "notifications": "Beeffannoo",
+    "markAllRead": "Hunda akka dubbifame mallattoo godhi",
+    "noNotifications": "Ammas beeffannoo hin jiru",
+    "badgeOverflow": "99+",
+    "lang": {
+      "english": "English",
+      "oromo": "Oromo",
+      "amharic": "Amharic",
+      "arabic": "Arabic",
+      "nativeEnglish": "English",
+      "nativeOromo": "Afaan Oromoo",
+      "nativeAmharic": "አማርኛ",
+      "nativeArabic": "العربية"
+    },
+    "notification": {
+      "visitUpdated": "Daawwata Fooyya'e",
+      "visitStatus": "Haala: {{status}}",
+      "newPatient": "Maamila Haaraa",
+      "patientRegistered": "{{firstName}} {{lastName}} galmeessame",
+      "paymentReceived": "Kaffaltii Fudhatame",
+      "paymentAmount": "{{amount}} ETB kaffalame",
+      "prescriptionAdded": "Ajandaa Dabale",
+      "newPrescription": "Ajandaan haaraan uumame"
+    },
+    "time": {
+      "justNow": "amma",
+      "minutesAgo": "{{m}} dq dura",
+      "hoursAgo": "{{h}} sa dura"
+    }
+  },
+
+  "toast": {
+    "newPatientInQueue": "Maamila haaraa tarree keessatti",
+    "patientRegistered": "Maamila haaraa galmeessame: {{firstName}} {{lastName}}",
+    "newVisitCreated": "Daawwata haaraa uumame",
+    "visitStatus": "Haala daawwataa: {{status}}",
+    "prescriptionAdded": "Ajandaan haaraa maamilaaf dabale",
+    "medicineDispensed": "Qorichi maamilaaf kennam",
+    "paymentReceived": "Kaffaltii fudhatame: {{amount}} ETB"
+  },
+
+  "login": {
+    "brandName": "Kliinika Biqilaa Nesihaa",
+    "brandSubtitle": "Sirna Bulchiinsa Kliinika",
+    "heading": "Seeni",
+    "label": {
+      "email": "Imeeli",
+      "password": "Jecha Darbaa"
+    },
+    "placeholder": {
+      "email": "imeeli.keessan@kliinika.com",
+      "password": "••••••••"
+    },
+    "validation": {
+      "emailRequired": "Imeeli barbaachisa",
+      "passwordRequired": "Jecha darbaa barbaachisa"
+    },
+    "button": {
+      "submit": "Seeni",
+      "loading": "Seenaa jira..."
+    },
+    "demo": {
+      "heading": "Akkaawuntii Demoo:",
+      "admin": "admin@neshihaclinic.com | Admin@123",
+      "doctor": "doctor@neshihaclinic.com | Doctor@123",
+      "clerk": "clerk@neshihaclinic.com | Clerk@123",
+      "cashier": "cashier@neshihaclinic.com | Cashier@123"
+    },
+    "toast": {
+      "welcome": "Baga nagaa dhufte, {{firstName}}!",
+      "failed": "Seenaan milkaa'uu baate"
+    }
+  },
+
+  "signin": {
+    "heading": "Bulchiisaan Seeni",
+    "error": { "fillAllFields": "Maaloo dirree hunda guutaa." },
+    "label": { "email": "Imeeli", "password": "Jecha Darbaa" },
+    "placeholder": { "email": "you@example.com", "password": "Jecha darbaa keessan galchaa" },
+    "button": { "submit": "Seeni" },
+    "forgotPassword": "Jecha darbaa irraanfatte?",
+    "resetLink": "Deebisi"
+  },
+
+  "error": {
+    "404": { "code": "404", "message": "Fuula Hin Argamne" }
+  },
+
+  "home": {
+    "title": "Nesihah Herbal Clinic | Mana Qorichaa Aadaa Nasiiha",
+    "metaDescription": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha): Maddi amanamaa yaala biqilaa aadaa, yaala uumamaa fi fayyummaa guutuu Itoophiyaa keessatti.",
+    "metaKeywords": "Nesihah Herbal Clinic, Mana Qorichaa Aadaa Nasiiha, yaala biqilaa, yaala uumamaa, fayyummaa aadaa, Itoophiyaa",
+    "ogTitle": "Nesihah Herbal Clinic",
+    "ogDescription": "Furmaata fayyaa biqilaa amanamaa fi fayyummaa aadaa Itoophiyaa keessatti.",
+    "twitterTitle": "Nesihah Herbal Clinic",
+    "twitterDescription": "Furmaata fayyaa biqilaa amanamaa fi fayyummaa aadaa Itoophiyaa keessatti.",
+    "schema": {
+      "name": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha)",
+      "streetAddress": "AshewaMeda",
+      "addressLocality": "Shegar",
+      "addressRegion": "Oromia",
+      "postalCode": "0000",
+      "addressCountry": "Ethiopia",
+      "telephone": "+251912166549",
+      "url": "https://www.nesihaherbalclinic.com/"
+    }
+  },
+
+  "receipt": {
+    "clinicName": "Kliinika Biqilaa Nesihaa",
+    "clinicSubtitle": "Sirna Bulchiinsa Kliinika",
+    "label": {
+      "patient": "Maamila:",
+      "id": "LakkID:",
+      "visit": "Daawwata:",
+      "doctor": "Doktara:"
+    },
+    "doctorNameFormat": "Dr. {{firstName}} {{lastName}}",
+    "sectionPrescribedMedicines": "Qoricha Ajajame:",
+    "medicine": { "qty": "Baay.: {{quantity}}" },
+    "placeholder": "—",
+    "totalLabel": "IDA'AMA:",
+    "currencyFormat": "{{amount}} ETB",
+    "footer": {
+      "thankYou": "Filatteef galatoomaa",
+      "clinicName": "Kliinika Biqilaa Nesihaa",
+      "disclaimer": "Kun reesitii komputaraatiin uumame"
+    }
+  },
+
+  "dashboard": {
+    "title": "Dashboordii",
+    "fallback": { "title": "Dashboordii" },
+    "stats": {
+      "totalPatients": "Mamiloota Waliigalaa",
+      "todayPatients": "Mamiloota Har'aa",
+      "todayVisits": "Daawwattoota Har'aa",
+      "waitingNow": "Amma Eeggataa Jiran",
+      "totalDoctors": "Doktaroota Waliigalaa",
+      "totalStaff": "Hojjettoota Waliigalaa",
+      "completedToday": "Har'a Xumurame",
+      "lowStockItems": "Qabeenya Gadi Aanaa",
+      "expiredMedicines": "Qoricha Darbee"
+    },
+    "quickStats": { "title": "Islaayidii Ariifataa" },
+    "systemStatus": {
+      "title": "Haala Sirnichaa",
+      "database": "Daataa Kuusaa",
+      "online": "Toora irraa",
+      "realtimeUpdates": "Fooyya'insa Yeroo Dhugaatiin",
+      "connected": "Walqabate",
+      "lastBackup": "Baakappii Dhumaa"
+    },
+    "doctor": {
+      "title": "Dashboordii Doktaraa",
+      "stats": {
+        "inQueue": "Tarree Keessatti",
+        "completedToday": "Har'a Xumurame",
+        "prescriptions": "Ajandoota",
+        "dispensed": "Kennaman"
+      },
+      "waitingPatients": "Mamiloota Eeggataa Jiran",
+      "startConsultation": "Gorsa Eegali",
+      "empty": { "noPatients": "Mamila eeggataa hin jiru" }
+    },
+    "dataClerk": {
+      "title": "Dashboordii Kalarkii Daataa",
+      "stats": {
+        "registeredToday": "Har'a Galmeessaman",
+        "todayVisits": "Daawwattoota Har'aa",
+        "waitingPatients": "Mamiloota Eeggataa Jiran"
+      },
+      "recentRegistrations": "Galmeessa Dhiyoo",
+      "empty": { "noRegistrations": "Galmeessa dhiyoo hin jiru" }
+    },
+    "cashier": {
+      "title": "Dashboordii Kaashiyara",
+      "stats": {
+        "pendingPayments": "Kaffaltii Eeggataa Jiran",
+        "paymentsProcessedToday": "Kaffaltii Har'aa Hojjetame",
+        "todayRevenue": "Galii Har'aa (ETB)"
+      },
+      "recentPayments": "Kaffaltii Dhiyoo",
+      "empty": { "noPayments": "Kaffaltii dhiyoo hin jiru" }
+    }
+  },
+
+  "cashier": {
+    "title": "Dashboordii Kaashiyara",
+    "subtitle": "Kaffaltii fudhi, qoricha kenni fi reesitii maxxansi",
+    "tabs": { "pending": "Eeggataa Jiran", "recent": "Kaffaltii Dhiyoo" },
+    "search": { "placeholder": "Maqaa ykn LakkID maamilaatiin barbaadi..." },
+    "pending": {
+      "actionButton": "Fudhi fi Kenni",
+      "empty": "Kaffaltii eeggataa hin jiru"
+    },
+    "recent": { "empty": "Kaffaltii dhiyoo hin jiru" },
+    "modal": {
+      "payment": {
+        "title": "Kaffaltii Fudhi",
+        "confirm": "Kaffaltii fi Kenniinsi Mirkaneessi",
+        "totalDue": "Gatii Waliigalaa Kaffalamu",
+        "medicinesToDispense": "Qorichi kennamuu qabu:",
+        "paymentMethodLabel": "Mala Kaffaltii",
+        "transactionIdLabel": "LakkID Dalagaa / Wabiilee (Barbaachisaa miti)",
+        "transactionIdPlaceholder": "fkn., TXN123456",
+        "notesLabel": "Yaadannoo"
+      },
+      "detail": {
+        "title": "Ibsa Kaffaltii",
+        "printReceipt": "Reesitii Maxxansi",
+        "prescribedMedicines": "Qoricha Ajajame",
+        "transactionId": "LakkID Dalagaa"
+      }
+    },
+    "paymentMethods": {
+      "cash": "Qarshii",
+      "bankTransfer": "Baankii Keessaa Jijjiiruu",
+      "mobileMoney": "Qarshii Mobayilaa (Telebirr/CBE Birr)",
+      "other": "Kan Biroo"
+    },
+    "toast": {
+      "paymentSuccess": "Kaffaltii fudhatame — qorichi maamilaaf kenname",
+      "paymentError": "Kaffaltii hojjechuun milkaa'uu baate"
+    }
+  },
+
+  "cashierReports": {
+    "title": "Gabaasa Kaashiyara",
+    "subtitle": "Galii ajandaa kaffalame",
+    "periods": { "daily": "Guyyaa Guyyaan", "weekly": "Torban Torbaniin", "monthly": "Ji'a Ji'aan" },
+    "periodLabels": { "today": "Har'a", "thisWeek": "Torbana Kana", "thisMonth": "Ji'a Kana" },
+    "cards": {
+      "totalRevenue": "Galii Waliigalaa",
+      "prescriptionsPaid": "Ajandoota Kaffalaman",
+      "period": "Yeroo"
+    },
+    "byPaymentMethod": "Mala Kaffaltii Malaan",
+    "paymentTransactions": "Dalagaa Kaffaltii",
+    "empty": {
+      "payments": "Yeroo kanaaf kaffaltii hin argamne",
+      "report": "Deetaan gabaasaa hin argamu"
+    }
+  },
+
+  "patients": {
+    "title": "Mamiloota",
+    "subtitle": "Galmee maamilaa bulchi",
+    "registerButton": "Maamila Galmeessi",
+    "search": { "placeholder": "Maqaa, LakkID, bilbilaatiin maamiloota barbaadi..." },
+    "empty": { "title": "Mamila hin argamne", "subtitle": "Mamila jalqabaa keessan galmeessaa jalqabuuf" },
+    "toast": { "registerSuccess": "Maamila milkaa'inaan galmeessame!" }
+  },
+
+  "visits": {
+    "title": "Daawwattoota",
+    "subtitle": "Daawwattoota maamilaa bulchi",
+    "newVisitButton": "Daawwata Haaraa",
+    "status": {
+      "waiting": "Eeggataa Jira",
+      "inConsultation": "Gorsa Keessatti",
+      "completed": "Xumurame",
+      "cancelled": "Haqufame"
+    },
+    "empty": "Daawwata hin argamne",
+    "toast": {
+      "loadError": "Daawwattoota fe'uun milkaa'uu baate",
+      "createSuccess": "Daawwata milkaa'inaan uumame!"
+    }
+  },
+
+  "doctorQueue": {
+    "title": "Tarree Eeggataa Maamilaa",
+    "backToQueue": "Gara Tarree Eeggataatti Deebi'i",
+    "refreshQueue": "Tarree Eeggataa Haaromsi",
+    "actions": {
+      "start": "Jalqabi",
+      "continue": "Itti Fufi",
+      "consulting": "Gorsa Irra Jira"
+    },
+    "status": {
+      "withAnotherDoctor": "Doktara biraa waliin",
+      "active": "Hojiirra",
+      "inProgress": "Adeemsa Keessatti"
+    },
+    "empty": {
+      "title": "Mamila eeggataa hin jiru",
+      "subtitle": "Mamiloonni haaraan asitti mul'atu"
+    },
+    "rightPanel": {
+      "selectPatient": "Maamila Tokko Fili",
+      "selectPatientHint": "Gorsa eegaluuf maamila tarree keessaa tokko irratti \"Jalqabi\" cuqaasi"
+    },
+    "tabs": {
+      "consultation": "Gorsa",
+      "vitalSigns": "Mallattoolee Jireenyaa",
+      "investigation": "Qo'annoo",
+      "herbalMedicine": "Qoricha Biqilaa",
+      "history": "Seenaa"
+    },
+    "consultation": {
+      "title": "Gorsa",
+      "patientInfo": "Odeeffannoo Maamilaa",
+      "diagnosisTitle": "Dhukkuba Adda Baasuu",
+      "noDiagnosis": "Ammas dhukkuba adda baasuun hin jiru",
+      "ageGender": "Umurii / Saala",
+      "bloodGroup": "Garee Dhigaa",
+      "allergies": "Alarjii:",
+      "chronic": "Dhukkuba Dhaabbataa:",
+      "saveProgress": "Guddina Kuusi",
+      "completeConsultation": "Gorsa Xumuri"
+    },
+    "queue": { "chiefComplaintPrefix": "KK:" },
+    "queueStats": {
+      "patients": "mamiloota",
+      "inConsultation": "gorsa keessatti"
+    },
+    "toast": {
+      "consultationStarted": "Gorsa jalqabe — hamma kuusamutti mamila tarree keessatti hafa",
+      "startError": "Gorsa jalqabuun milkaa'uu baate",
+      "saveSuccess": "Ibsi gorsaa kuusame",
+      "saveError": "Gorsa kuusuun milkaa'uu baate",
+      "sentToCashier": "Gorsi Kaashiyaraaf kaffaltiidhaaf ergame",
+      "completeSuccess": "Gorsa milkaa'inaan xumurame",
+      "completeError": "Gorsa xumuruun milkaa'uu baate"
+    }
+  },
+
+  "medicines": {
+    "title": "Qoricha",
+    "subtitle": "Qabeenya qoricha biqilaa bulchi",
+    "addButton": "Qoricha Dabali",
+    "search": { "placeholder": "Maqaa ykn koodiitiin barbaadi..." },
+    "card": {
+      "code": "Koodii:",
+      "category": "Gosa:",
+      "inStock": "Kuusaa Keessaa:",
+      "strength": "Humna:"
+    },
+    "empty": "Qorichi barbaacha keessan waliin walsimu hin argamne.",
+    "toast": {
+      "loadError": "Qoricha fe'uun milkaa'uu baate",
+      "deleteConfirmation": "Dhuguma qoricha kana haquu barbaaddaa?",
+      "deleteSuccess": "Qorichi milkaa'inaan haqufame",
+      "deleteError": "Qoricha haquun milkaa'uu baate"
+    }
+  },
+
+  "pharmacy": {
+    "title": "Faarmaasii",
+    "subtitle": "Ajandaa fi kenninsa qorichaa bulchi",
+    "actions": { "dispense": "Kenni" },
+    "filters": {
+      "paid": "Kaffalame",
+      "dispensed": "Kenname",
+      "completed": "Xumurame",
+      "pending": "Eeggataa Jira"
+    },
+    "search": { "placeholder": "Maqaa maamilaa, LakkID ykn qorichaatiin barbaadi..." },
+    "empty": {
+      "search": "Ajandaa barbaacha keessan waliin walsimu hin argamne",
+      "status": "Ajandaan {{status}} hin jiru"
+    },
+    "prescription": {
+      "medicineFallback": "Qoricha",
+      "dosage": "Doosii",
+      "frequency": "Irra Deddeebi'uu",
+      "duration": "Yeroo",
+      "quantity": "Baay'ina",
+      "instructions": "Qajeelfama:",
+      "prescribed": "Ajajame:"
+    },
+    "status": { "dispensed": "Kenname" },
+    "dispenseModal": {
+      "title": "Qoricha Kenni",
+      "confirm": "Kenniinsa Mirkaneessi",
+      "prescriptionDetails": "Ibsa Ajandaa",
+      "prescribedQuantity": "Baay'ina Ajajame",
+      "quantityToDispense": "Baay'ina Kennamu *",
+      "batchNumber": "Lakk Baacii *",
+      "batchNumberPlaceholder": "fkn., BATCH-2026-001",
+      "expiryDate": "Guyyaa Darbuu *",
+      "notes": "Yaadannoo (Barbaachisaa Miti)",
+      "notesPlaceholder": "Yaadannoo dabalataa kamiyyuu..."
+    },
+    "toast": {
+      "loadError": "Ajandoota fe'uun milkaa'uu baate",
+      "invalidQuantity": "Maaloo baay'ina sirrii galchi",
+      "missingBatch": "Maaloo lakk baacii galchi",
+      "missingExpiry": "Maaloo guyyaa darbuu galchi",
+      "dispenseSuccess": "Qorichi milkaa'inaan kenname",
+      "dispenseError": "Qoricha kennuun milkaa'uu baate"
+    }
+  },
+
+  "laboratory": {
+    "title": "Laaboratorii",
+    "subtitle": "Gaaffii fi bu'aa qo'annoo bulchi",
+    "actions": {
+      "startProcessing": "Hojii Jalqabi",
+      "enterResults": "Bu'aa Galchi"
+    },
+    "status": {
+      "requested": "Gaafatame",
+      "inProgress": "Adeemsa Keessatti",
+      "completed": "Xumurame",
+      "cancelled": "Haqufame"
+    },
+    "urgency": {
+      "routine": "Idilee",
+      "urgent": "Ariifataa",
+      "stat": "STAT"
+    },
+    "search": { "placeholder": "Maqaa maamilaa, LakkID ykn qo'annootiin barbaadi..." },
+    "empty": {
+      "search": "Qo'annoo barbaacha keessan waliin walsimu hin argamne",
+      "status": "Qo'annoon {{status}} hin jiru"
+    },
+    "detail": {
+      "instructions": "Qajeelfama:",
+      "results": "Bu'aa:",
+      "interpretation": "Hiika:"
+    },
+    "info": {
+      "requested": "Gaafatame:",
+      "scheduled": "Beellame:",
+      "completed": "Xumurame:",
+      "performedBy": "Hojjate:"
+    },
+    "modal": {
+      "title": "Bu'aa Qo'annoo Galchi",
+      "submitResults": "Bu'aa Ergi",
+      "investigationDetails": "Ibsa Qo'annoo",
+      "type": "Gosa",
+      "testName": "Maqaa Qo'annoo",
+      "urgency": "Ariifannaa",
+      "requestedDate": "Guyyaa Gaafatame",
+      "instructions": "Qajeelfama:",
+      "results": "Bu'aa Qo'annoo *",
+      "resultsPlaceholder": "Bu'aa qo'annoo, safartuu, hubannoo bal'aa galchi...",
+      "interpretation": "Hiika Kiliinikaa",
+      "interpretationPlaceholder": "Hiika doktaraa bu'aa irratti (barbaachisaa miti)...",
+      "performedBy": "Hojjate *",
+      "performedByPlaceholder": "Maqaa teekniishaanii laaboratorii ykn raadiyooloojistii",
+      "additionalNotes": "Yaadannoo Dabalataa",
+      "additionalNotesPlaceholder": "Yaadannoo ykn yaada dabalataa kamiyyuu..."
+    },
+    "toast": {
+      "loadError": "Qo'annoo fe'uun milkaa'uu baate",
+      "statusUpdated": "Qo'annoon akka {{status}} mallattoo godhame",
+      "statusUpdateError": "Haala fooyyeessuun milkaa'uu baate",
+      "missingResults": "Maaloo bu'aa qo'annoo galchi",
+      "missingPerformedBy": "Maaloo eenyu akka qo'annicha hojjate galchi",
+      "submitSuccess": "Bu'aan qo'annoo milkaa'inaan ergame",
+      "submitError": "Bu'aa erguun milkaa'uu baate"
+    }
+  },
+
+  "patientDetail": {
+    "backToPatients": "Gara Mamilootaatti Deebi'i",
+    "newVisit": "Daawwata Haaraa",
+    "notFound": "Mamila hin argamne",
+    "detail": {
+      "email": "Imeeli",
+      "address": "Teessoo",
+      "occupation": "Hojii",
+      "maritalStatus": "Haala Heerumaa"
+    },
+    "registered": "Galmaa'e:",
+    "alerts": {
+      "allergies": "Alarjii:",
+      "chronic": "Dhukkuba Dhaabbataa:"
+    },
+    "visitHistory": {
+      "title": "Seenaa Daawwataa",
+      "complaint": "Komii:",
+      "treatment": "Yaala:",
+      "empty": "Daawwata duraa hin jiru"
+    },
+    "toast": { "loadError": "Ibsa maamilaa fe'uun milkaa'uu baate" }
+  },
+
+  "patientForm": {
+    "updateSuccess": "Maamila milkaa'inaan fooyya'e",
+    "registerSuccess": "Maamila milkaa'inaan galmeessame",
+    "saveError": "Maamila kuusuun milkaa'uu baate",
+    "editTitle": "Maamila Gulaali",
+    "registerTitle": "Maamila Haaraa Galmeessi",
+    "personalInfoTitle": "Odeeffannoo Dhuunfaa",
+    "firstNameLabel": "Maqaa Duraa *",
+    "firstNameRequired": "Maqaan duraa barbaachisa",
+    "firstNamePlaceholder": "Maqaa duraa",
+    "middleNameLabel": "Maqaa Gidduu",
+    "middleNamePlaceholder": "Maqaa gidduu",
+    "lastNameLabel": "Maqaa Abbaa *",
+    "lastNameRequired": "Maqaan abbaa barbaachisa",
+    "lastNamePlaceholder": "Maqaa abbaa",
+    "genderLabel": "Saala *",
+    "genderRequired": "Saala barbaachisa",
+    "genderPlaceholder": "Saala fili",
+    "genderMale": "Dhiira",
+    "genderFemale": "Dubara",
+    "genderOther": "Kan Biroo",
+    "dobLabel": "Guyyaa Dhalootaa *",
+    "dobRequired": "Guyyaan dhalootaa barbaachisa",
+    "phoneLabel": "Lakkoofsa Bilbilaa *",
+    "phoneRequired": "Lakkoofsi bilbilaa barbaachisa",
+    "phonePlaceholder": "+251911234567",
+    "addressTitle": "Teessoo",
+    "cityLabel": "Magaalaa",
+    "cityPlaceholder": "Magaalaa",
+    "subCityLabel": "Aanaa Magaalaa",
+    "subCityPlaceholder": "Aanaa magaalaa",
+    "woredaLabel": "Aanaa",
+    "woredaPlaceholder": "Aanaa",
+    "bloodGroupLabel": "Garee Dhigaa",
+    "bloodGroupPlaceholder": "Garee dhigaa fili",
+    "emergencyContactTitle": "Qunnamtii Hatattamaa",
+    "emergencyContactNameLabel": "Maqaa Qunnamtii Hatattamaa",
+    "emergencyContactNamePlaceholder": "Maqaa guutuu",
+    "emergencyContactPhoneLabel": "Bilbilaa Qunnamtii Hatattamaa",
+    "emergencyContactPhonePlaceholder": "+251911234567",
+    "saving": "Kuusaa jira...",
+    "updateButton": "Maamila Fooyyeessi",
+    "registerButton": "Maamila Galmeessi"
+  },
+
+  "patientCard": {
+    "idPrefix": "LakkID: ",
+    "ageGenderSeparator": " waggaa • ",
+    "registeredPrefix": "Galmaa'e: ",
+    "viewDetails": "Ibsa Ilaali",
+    "newVisit": "Daawwata Haaraa"
+  },
+
+  "vitalSigns": {
+    "title": "Mallattoolee Jireenyaa",
+    "loading": "Mallattoolee jireenyaa fe'aa jira...",
+    "saveButton": "Mallattoolee Kuusi",
+    "saveSuccess": "Mallattooleen jireenyaa milkaa'inaan kuusaman",
+    "saveError": "Mallattoolee jireenyaa kuusuun milkaa'uu baate",
+    "temperatureLabel": "Ho'a Qaamaa (°C)",
+    "temperaturePlaceholder": "fkn., 37.5",
+    "temperatureNormal": "Idilee: 36.5 - 37.5°C",
+    "bloodPressureLabel": "Dhiibbaa Dhigaa (mmHg)",
+    "systolicPlaceholder": "Sistolii (120)",
+    "diastolicPlaceholder": "Daayistolii (80)",
+    "bloodPressureNormal": "Idilee: 120/80 mmHg",
+    "heartRateLabel": "Dha'icha Onnee (bpm)",
+    "heartRatePlaceholder": "fkn., 72",
+    "heartRateNormal": "Idilee: 60 - 100 bpm",
+    "respiratoryRateLabel": "Dha'icha Hafuuraa (daqiiqaatti)",
+    "respiratoryRatePlaceholder": "fkn., 16",
+    "respiratoryRateNormal": "Idilee: 12 - 20 daqiiqaatti",
+    "oxygenSaturationLabel": "Oksiijinii Dhiigaa (%)",
+    "oxygenSaturationPlaceholder": "fkn., 98",
+    "oxygenSaturationNormal": "Idilee: 95 - 100%",
+    "weightLabel": "Ulfaatina (kg)",
+    "weightPlaceholder": "fkn., 70.5",
+    "heightLabel": "Dheerina (cm)",
+    "heightPlaceholder": "fkn., 175",
+    "bmiLabel": "Indeeksii Ulfaatina Qaamaa (BMI)",
+    "categoryPrefix": "Gosa: ",
+    "reference": {
+      "title": "Mallattoolee Jireenyaa Idilee Wabiilee",
+      "temperature": "• Ho'a Qaamaa: 36.5 - 37.5°C",
+      "bloodPressure": "• Dhiibbaa Dhigaa: 120/80 mmHg",
+      "heartRate": "• Dha'icha Onnee: 60 - 100 bpm",
+      "respiratoryRate": "• Dha'icha Hafuuraa: 12 - 20/daqiiqaatti",
+      "oxygenSaturation": "• Oksiijinii Dhiigaa: 95 - 100%",
+      "bmi": "• BMI: 18.5 - 24.9 (Idilee)"
+    }
+  },
+
+  "bmi": {
+    "category": {
+      "underweight": "Ulfaatina Gadi",
+      "normal": "Idilee",
+      "overweight": "Ulfaatina Ol",
+      "obese": "Furdaa"
+    }
+  },
+
+  "consultation": {
+    "chiefComplaintLabel": "Komii Guddaa *",
+    "chiefComplaintPlaceholder": "Sababa daawwataa guddaa...",
+    "symptomsLabel": "Mallattoolee",
+    "addSymptomPlaceholder": "Mallattoo dabali...",
+    "historyOfPresentIllnessLabel": "Seenaa Dhukkuba Ammaa",
+    "historyOfPresentIllnessPlaceholder": "Seenaa bal'aa haala ammaa...",
+    "physicalExaminationLabel": "Qo'annoo Qaamaa",
+    "physicalExaminationPlaceholder": "Bu'aa qo'annoo qaamaa...",
+    "diagnosisLabel": "Dhukkuba Adda Baasuu",
+    "addDiagnosisPlaceholder": "Dhukkuba adda baasuu dabali...",
+    "treatmentPlanLabel": "Karoora Yaalaa",
+    "treatmentPlanPlaceholder": "Karoora yaalaa fi yaada gorsaa...",
+    "doctorNotesLabel": "Yaadannoo Doktaraa",
+    "doctorNotesPlaceholder": "Yaadannoo dabalataa...",
+    "followUpDateLabel": "Guyyaa Hordoffii"
+  },
+
+  "herbalMedicine": {
+    "loading": "Qoricha fe'aa jira...",
+    "addButton": "Qoricha Biqilaa Dabali",
+    "prescribeTitle": "Qoricha Biqilaa Ajaji",
+    "selectLabel": "Qoricha Biqilaa Fili *",
+    "selectPlaceholder": "-- Qoricha Fili --",
+    "unitPriceLabel": "Gatii Tokkoo (ETB) *",
+    "unitPricePlaceholder": "Gatii tokko tokkoon",
+    "quantityLabel": "Baay'ina *",
+    "quantityPlaceholder": "Lakkoofsa uniiwwanii",
+    "totalLabel": "Gatii Waliigalaa",
+    "totalPrefix": "Waliigala: ",
+    "instructionsLabel": "Qajeelfama (Barbaachisaa Miti)",
+    "instructionsPlaceholder": "fkn., Nyaata waliin fudhadhu, alkoolii irraa fagaadhu...",
+    "saveButton": "Ajandaa Kuusi",
+    "listTitle": "Qoricha Ajajame",
+    "emptyList": "Ammas qorichi ajajame hin jiru",
+    "fetchError": "Qoricha fe'uun milkaa'uu baate",
+    "selectError": "Maaloo qoricha biqilaa fili",
+    "quantityError": "Maaloo baay'ina sirrii galchi",
+    "prescribeSuccess": "Qorichi milkaa'inaan ajajame",
+    "addError": "Qoricha dabaluun milkaa'uu baate",
+    "cancelConfirm": "Ajandaa kana haquu barbaaddaa?",
+    "cancelSuccess": "Ajandaa haqufame",
+    "cancelError": "Ajandaa haquun milkaa'uu baate"
+  },
+
+  "prescription": {
+    "status": {
+      "pending": "eeggataa jira",
+      "paid": "kaffalame",
+      "dispensed": "kenname",
+      "completed": "xumurame",
+      "stopped": "dhaabate",
+      "expired": "darbee"
+    },
+    "dosage": { "asPrescribed": "Akkuma ajajame" },
+    "frequency": { "asDirected": "Akkuma qajeelfame" },
+    "route": { "oral": "afaan" },
+    "medicineFallback": "Qoricha"
+  },
+
+  "investigation": {
+    "loading": "Qo'annoo fe'aa jira...",
+    "requestButton": "Qo'annoo Gaafadhu",
+    "fillError": "Maaloo gosa qo'annoo fi maqaa qo'annoo guuti",
+    "requestSuccess": "Qo'annoo milkaa'inaan gaafatame",
+    "requestError": "Qo'annoo gaafachuun milkaa'uu baate",
+    "cancelConfirm": "Dhuguma qo'annoo kana haquu barbaaddaa?",
+    "cancelSuccess": "Qo'annoo haqufame",
+    "cancelError": "Qo'annoo haquun milkaa'uu baate",
+    "typeLabel": "Gosa Qo'annoo *",
+    "typePlaceholder": "-- Gosa Fili --",
+    "testNameLabel": "Maqaa Qo'annoo *",
+    "testNamePlaceholder": "fkn., Lakkaawaa Dhigaa Guutuu, Qo'annoo Dalagaa Tiriinsuu",
+    "urgencyLabel": "Ariifannaa",
+    "scheduledDateLabel": "Guyyaa Beellame",
+    "instructionsLabel": "Qajeelfama Addaa",
+    "instructionsPlaceholder": "Qajeelfama addaa ykn yaadannoo qophii...",
+    "typePrefix": "Gosa: ",
+    "instructionsPrefix": "Qajeelfama: ",
+    "requestedPrefix": "Gaafatame: ",
+    "scheduledPrefix": "Beellame: ",
+    "resultsLabel": "Bu'aa:",
+    "interpretationLabel": "Hiika:",
+    "completedPrefix": "Xumurame: ",
+    "emptyList": "Ammas qo'annoo gaafatame hin jiru",
+    "status": {
+      "requested": "Gaafatame",
+      "inProgress": "Adeemsa Keessatti",
+      "completed": "Xumurame",
+      "cancelled": "Haqufame"
+    },
+    "urgency": {
+      "routine": "Idilee",
+      "urgent": "Ariifataa",
+      "stat": "STAT (Hatattamaa)"
+    },
+    "type": {
+      "bloodTest": "Qo'annoo Dhigaa",
+      "urineTest": "Qo'annoo Finjaanii",
+      "stoolTest": "Qo'annoo Bobbaatii",
+      "xray": "Raajii",
+      "ultrasound": "Altraasaawundii",
+      "ctScan": "CT Scan",
+      "mri": "MRI",
+      "ecg": "ECG (Elektirookaardiyoogiraamii)",
+      "biopsy": "Baayopsii",
+      "cultureTest": "Qo'annoo Gochuu",
+      "other": "Kan Biroo"
+    }
+  },
+
+  "patientHistory": {
+    "loading": "Seenaa fe'aa jira...",
+    "fetchError": "Seenaa maamilaa fe'uun milkaa'uu baate",
+    "empty": "Daawwata duraa hin argamne",
+    "visitNumberPrefix": "Daawwata Lakk#",
+    "diagnosisLabel": "Dhukkuba Adda Baasuu:",
+    "treatmentLabel": "Yaala:"
+  },
+
+  "activePrescriptions": {
+    "title": "Ajandoota Dhiyoo (Guyyoota 90 Darban)",
+    "empty": "Ajandaa hojiirra hin jiru",
+    "prescribedPrefix": "Ajajame: ",
+    "daysLeft": "guyyoota hafe",
+    "endsToday": "Har'a dhuma",
+    "expired": "Darbee",
+    "durationLabel": "Yeroo:",
+    "instructionsLabel": "Qajeelfama:",
+    "reasonLabel": "Sababa:",
+    "endingSoonAlert": "Qorichi dhiyootti ni dhuma - yoo barbaachise deebifachuu yaadi",
+    "endedAlert": "Yeroon qorichaa dhumee"
+  },
+
+  "pendingInvestigations": {
+    "pendingTitle": "Qo'annoo Eeggataa Jiran",
+    "completedTitle": "Bu'aa Dhiyoo Argamuu Danda'a",
+    "empty": "Qo'annoo dhiyoo hin jiru",
+    "requestedPrefix": "Gaafatame: ",
+    "scheduledPrefix": "Beellame: ",
+    "instructionsLabel": "Qajeelfama:",
+    "statAlert": "STAT - Xiyyeeffannaa hatattamaa barbaachisa",
+    "resultsReady": "Bu'aa Qophaa'e",
+    "completedPrefix": "Xumurame: ",
+    "resultsLabel": "Bu'aa:",
+    "interpretationLabel": "Hiika:",
+    "viewResultFile": "Faayilii Bu'aa Ilaali",
+    "performedByPrefix": "Hojjate: "
+  },
+
+  "followUp": {
+    "firstVisit": "Daawwata Jalqabaa - Seenaa fayyaa duraa hin jiru",
+    "scheduledTitle": "✓ Daawwata Hordoffii Beellame",
+    "returnTitle": "Daawwata Deebii",
+    "daysSince": "guyyoota daawwata dhumaa booda",
+    "lastVisitLabel": "Daawwata Dhumaa:",
+    "scheduledForLabel": "Hordoffiin beellame ture:",
+    "previousDiagnosisLabel": "Dhukkuba Duraa Adda Baasuu:",
+    "previousTreatmentLabel": "Yaala Duraa:",
+    "previousNotesLabel": "Yaadannoo Duraa:",
+    "viewHistory": "Seenaa Guutuu Ilaali"
+  },
+
+  "medicineForm": {
+    "updateSuccess": "Qorichi milkaa'inaan fooyya'e",
+    "addSuccess": "Qorichi milkaa'inaan dabale",
+    "saveError": "Qoricha kuusuun milkaa'uu baate",
+    "editTitle": "Qoricha Biqilaa Gulaali",
+    "addTitle": "Qoricha Biqilaa Dabali",
+    "herbalModeHint": "Maqaan qorichaa qofa barbaachisa",
+    "standardModeHint": "Mala idilee dirree hunda waliin",
+    "modeToggleLabel": "Mala Qoricha Biqilaa",
+    "nameLabel": "Maqaa Qorichaa *",
+    "nameRequired": "Maqaan qorichaa barbaachisa",
+    "namePlaceholder": "fkn. Qorqorooba Eessaa, Zayita Habbashaa Gurraacha...",
+    "autoCodeHint": "Yeroo kuusamu koodiin qorichaa uumamaan uumama",
+    "codeLabel": "Koodii Qorichaa",
+    "codePlaceholder": "Duwwaa dhiisi uumamaan uumamuuf",
+    "codeAutoHint": "Yoo duwwaa ta'e uumamaan uumama",
+    "genericNameLabel": "Maqaa Waliigalaa",
+    "genericNamePlaceholder": "fkn. Allium sativum",
+    "categoryLabel": "Gosa",
+    "categoryPlaceholder": "fkn. Biqilaa Dabalataa",
+    "strengthLabel": "Humna",
+    "strengthPlaceholder": "fkn. 500mg",
+    "dosageFormLabel": "Unka Doosii",
+    "dosageFormPlaceholder": "Unka Fili",
+    "manufacturerLabel": "Oomishtuu",
+    "supplierLabel": "Dhiyeessituu",
+    "batchNumberLabel": "Lakk Baacii",
+    "storageLocationLabel": "Bakka Kuusaa",
+    "availableQuantityLabel": "Baay'ina Jiru",
+    "minimumStockLabel": "Kuusaa Xiqqaa",
+    "purchasePriceLabel": "Gatii Bitaa",
+    "sellingPriceLabel": "Gatii Gurgurtaa",
+    "expiryDateLabel": "Guyyaa Darbuu",
+    "requiresPrescriptionLabel": "Ajandaa Barbaachisa",
+    "optionalDetails": "Ibsa Dabalataa",
+    "optionalDetailsHint": "(gosa, humna, kuusaa, gatii, yaadannoo...)",
+    "instructionsLabel": "Qajeelfama",
+    "instructionsPlaceholder": "Qoricha biqilaa kana akkamitti qopheessuu ykn itti fayyadamuu...",
+    "notesLabel": "Yaadannoo",
+    "notesPlaceholder": "Yaadannoo dabalataa...",
+    "instructionsPlaceholderAlt": "Qoricha kana akkamitti qopheessuu ykn itti fayyadamuu...",
+    "sideEffectsLabel": "Miidhaa Cinaa",
+    "contraindicationsLabel": "Waan Itti Hin Fayyadamne",
+    "saving": "Kuusaa jira...",
+    "updateButton": "Qoricha Fooyyeessi",
+    "addButton": "Qoricha Dabali",
+    "dosageForm": {
+      "tablet": "Taableetii",
+      "capsule": "Kaapsilii",
+      "syrup": "Siraappii",
+      "powder": "Daakuu",
+      "extract": "Iksitiraaktii",
+      "tea": "Shaayii",
+      "oil": "Zayita",
+      "cream": "Kirimii",
+      "tincture": "Tiinkicharii"
+    }
+  },
+
+  "visitForm": {
+    "fetchError": "Mamiloota fe'uun milkaa'uu baate",
+    "createError": "Daawwata uumuun milkaa'uu baate",
+    "title": "Daawwata Haaraa Uumi",
+    "patientLabel": "Maamila *",
+    "patientRequired": "Maamila barbaachisa",
+    "patientPlaceholder": "Maamila fili",
+    "chiefComplaintLabel": "Komii Guddaa",
+    "chiefComplaintPlaceholder": "Komii guddaa maamichaa ibsi...",
+    "visitDateLabel": "Guyyaa Daawwataa",
+    "arrivalTimeLabel": "Yeroo Ga'umsaa *",
+    "arrivalTimeRequired": "Yeroon ga'umsaa barbaachisa",
+    "creating": "Uumaa jira...",
+    "createButton": "Daawwata Uumi"
+  },
+
+  "clinicManagement": {
+    "title": "Bulchiinsa Kliinika",
+    "doctors": "Doktaroota",
+    "doctorsDesc": "Doktaroota as bulchi...",
+    "patients": "Mamiloota",
+    "patientsDesc": "Mamiloota as bulchi...",
+    "appointments": "Beellamoota",
+    "appointmentsDesc": "Beellamoota bulchi..."
+  },
+
+  "blogForm": {
+    "editTitle": "Barreeffama Gulaali",
+    "addTitle": "Barreeffama Haaraa Dabali",
+    "titlePlaceholder": "Mata Duree",
+    "mediaTypeLabel": "Gosa Miidiyaa:",
+    "mediaTypeImage": "Suuraa",
+    "mediaTypeVideo": "Video",
+    "previewAlt": "Dursee Argii",
+    "authorPlaceholder": "Barreessaa",
+    "descPlaceholder": "Ibsa",
+    "saveButton": "Jijjiirama Kuusi",
+    "addButton": "Barreeffama Dabali"
+  },
+
+  "blogCard": {
+    "edit": "Gulaali",
+    "delete": "Haqu"
+  },
+
+  "roles": {
+    "super_admin": "Bulchiisaa Olaanaa",
+    "admin": "Bulchiisaa",
+    "doctor": "Doktara",
+    "data_clerk": "Kalarkii Daataa",
+    "cashier": "Kaashiyara",
+    "staff_manager": "Bulchiisaa Hojjettootaa"
   }
 }

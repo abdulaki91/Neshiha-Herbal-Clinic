@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function SigninPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Temporary validation
     if (!email || !password) {
-      setError("Please fill in all fields.");
+      setError(t("signin.error.fillAllFields"));
       return;
     }
     setError("");
@@ -24,7 +27,7 @@ export default function SigninPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
       <div className="max-w-md w-full bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 text-center mb-6">
-          Admin Sign In
+          {t("signin.heading")}
         </h2>
 
         {error && (
@@ -39,14 +42,14 @@ export default function SigninPage() {
               htmlFor="email"
               className="block text-gray-700 dark:text-gray-200 font-medium mb-1"
             >
-              Email
+              {t("signin.label.email")}
             </label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder={t("signin.placeholder.email")}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
             />
           </div>
@@ -56,14 +59,14 @@ export default function SigninPage() {
               htmlFor="password"
               className="block text-gray-700 dark:text-gray-200 font-medium mb-1"
             >
-              Password
+              {t("signin.label.password")}
             </label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder={t("signin.placeholder.password")}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
             />
           </div>
@@ -72,14 +75,14 @@ export default function SigninPage() {
             type="submit"
             className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-300"
           >
-            Sign In
+            {t("signin.button.submit")}
           </button>
         </form>
 
         <p className="mt-4 text-center text-gray-500 dark:text-gray-400 text-sm">
-          Forgot your password?{" "}
+          {t("signin.forgotPassword")}{" "}
           <a href="#" className="text-blue-600 hover:underline">
-            Reset it
+            {t("signin.resetLink")}
           </a>
         </p>
       </div>

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(D:\\Web App\\Neshiha-Herbal-Clinic\\Frontend\\src\\i18n\\locales\\en/**)",
+      "Read(D:\\Web App\\Neshiha-Herbal-Clinic\\Frontend\\src\\i18n\\locales\\ar/**)",
+      "Read(D:\\Web App\\Neshiha-Herbal-Clinic\\Frontend\\src\\i18n\\locales\\om/**)"
+    ]
+  },
+  "$version": 4
+}

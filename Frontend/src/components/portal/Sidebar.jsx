@@ -5,6 +5,7 @@ import {
   FiHome, FiUsers, FiCalendar, FiFileText, FiSettings,
   FiLogOut, FiDollarSign, FiActivity, FiPackage, FiExternalLink,
 } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 import useAuthStore from "../../store/authStore";
 import { getSocket } from "../../lib/socket";
 import { useQueue } from "../../hooks/useVisits";
@@ -12,6 +13,7 @@ import { usePendingPayments } from "../../hooks/usePayments";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuthStore();
+  const { t } = useTranslation();
   const qc = useQueryClient();
   const role = user?.role;
 
@@ -52,38 +54,38 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   const navigation = {
     super_admin: [
-      { name: "Dashboard", to: "/portal", icon: FiHome, end: true },
-      { name: "Staff", to: "/portal/staff", icon: FiUsers },
-      { name: "Patients", to: "/portal/patients", icon: FiUsers },
-      { name: "Visits", to: "/portal/visits", icon: FiCalendar },
-      { name: "Medicines", to: "/portal/medicines", icon: FiPackage },
-      { name: "Cashier", to: "/portal/cashier", icon: FiDollarSign },
-      { name: "Laboratory", to: "/portal/laboratory", icon: FiActivity },
-      { name: "Reports", to: "/portal/reports", icon: FiFileText },
-      { name: "Settings", to: "/portal/settings", icon: FiSettings },
+      { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
+      { name: t("sidebar.staff"), to: "/portal/staff", icon: FiUsers },
+      { name: t("sidebar.patients"), to: "/portal/patients", icon: FiUsers },
+      { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
+      { name: t("sidebar.medicines"), to: "/portal/medicines", icon: FiPackage },
+      { name: t("sidebar.cashier"), to: "/portal/cashier", icon: FiDollarSign },
+      { name: t("sidebar.laboratory"), to: "/portal/laboratory", icon: FiActivity },
+      { name: t("sidebar.reports"), to: "/portal/reports", icon: FiFileText },
+      { name: t("sidebar.settings"), to: "/portal/settings", icon: FiSettings },
     ],
     staff_manager: [
-      { name: "Dashboard", to: "/portal", icon: FiHome, end: true },
-      { name: "Staff", to: "/portal/staff", icon: FiUsers },
+      { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
+      { name: t("sidebar.staff"), to: "/portal/staff", icon: FiUsers },
     ],
     data_clerk: [
-      { name: "Dashboard", to: "/portal", icon: FiHome, end: true },
-      { name: "Patients", to: "/portal/patients", icon: FiUsers },
-      { name: "Visits", to: "/portal/visits", icon: FiCalendar },
-      { name: "Medicines", to: "/portal/medicines", icon: FiPackage },
+      { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
+      { name: t("sidebar.patients"), to: "/portal/patients", icon: FiUsers },
+      { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
+      { name: t("sidebar.medicines"), to: "/portal/medicines", icon: FiPackage },
     ],
     doctor: [
-      { name: "Dashboard", to: "/portal", icon: FiHome, end: true },
-      { name: "Queue", to: "/portal/queue", icon: FiCalendar, showBadge: true },
-      { name: "Patients", to: "/portal/patients", icon: FiExternalLink },
-      { name: "Visits", to: "/portal/visits", icon: FiCalendar },
-      { name: "Medicines", to: "/portal/medicines", icon: FiPackage },
+      { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
+      { name: t("sidebar.queue"), to: "/portal/queue", icon: FiCalendar, showBadge: true },
+      { name: t("sidebar.patients"), to: "/portal/patients", icon: FiExternalLink },
+      { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
+      { name: t("sidebar.medicines"), to: "/portal/medicines", icon: FiPackage },
     ],
     cashier: [
-      { name: "Dashboard", to: "/portal", icon: FiHome, end: true },
-      { name: "Cashier", to: "/portal/cashier", icon: FiDollarSign, showBadge: true },
-      { name: "Reports", to: "/portal/reports", icon: FiFileText },
-      { name: "Patients", to: "/portal/patients", icon: FiUsers },
+      { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
+      { name: t("sidebar.cashier"), to: "/portal/cashier", icon: FiDollarSign, showBadge: true },
+      { name: t("sidebar.reports"), to: "/portal/reports", icon: FiFileText },
+      { name: t("sidebar.patients"), to: "/portal/patients", icon: FiUsers },
     ],
   };
 
@@ -121,8 +123,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               </svg>
             </div>
             <div>
-              <h1 className="font-bold text-gray-800">Neshiha Clinic</h1>
-              <p className="text-xs text-gray-500">{user?.role?.replace("_", " ")}</p>
+              <h1 className="font-bold text-gray-800">{t("sidebar.brandName")}</h1>
+              <p className="text-xs text-gray-500">{t(`roles.${user?.role}`)}</p>
             </div>
           </div>
         </div>
@@ -150,7 +152,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                   <span className="font-medium text-sm">{link.name}</span>
                   {badge > 0 && (
                     <span className="ml-auto min-w-[22px] h-5 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full px-1.5">
-                      {badge > 99 ? "99+" : badge}
+                      {badge > 99 ? t("sidebar.badgeOverflow") : badge}
                     </span>
                   )}
                 </NavLink>
@@ -179,7 +181,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             className="flex items-center space-x-2 w-full px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition font-medium"
           >
             <FiLogOut />
-            <span>Logout</span>
+            <span>{t("sidebar.logout")}</span>
           </button>
         </div>
       </aside>

@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FiX, FiSave, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 
 const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [herbalMode, setHerbalMode] = useState(true);
   const [showOptional, setShowOptional] = useState(false);
@@ -51,14 +53,14 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
       if (isEdit) {
         await axiosInstance.put(`/medicines/${medicine.id}`, cleaned);
-        toast.success("Medicine updated successfully");
+        toast.success(t("medicineForm.updateSuccess"));
       } else {
         await axiosInstance.post("/medicines", cleaned);
-        toast.success("Medicine added successfully");
+        toast.success(t("medicineForm.addSuccess"));
       }
       onSuccess();
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to save medicine");
+      toast.error(error.response?.data?.message || t("medicineForm.saveError"));
     } finally {
       setLoading(false);
     }
@@ -75,12 +77,12 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
             </div>
             <div>
               <h2 className="text-xl font-bold text-gray-800">
-                {isEdit ? "Edit Herbal Drug" : "Add Herbal Drug"}
+                {isEdit ? t("medicineForm.editTitle") : t("medicineForm.addTitle")}
               </h2>
               <p className="text-xs text-gray-500">
                 {herbalMode
-                  ? "Only drug name is required"
-                  : "Standard mode with all fields"}
+                  ? t("medicineForm.herbalModeHint")
+                  : t("medicineForm.standardModeHint")}
               </p>
             </div>
           </div>
@@ -98,7 +100,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
             <div className="flex items-center space-x-2">
               <span className="text-lg">🌿</span>
               <span className="text-sm font-medium text-gray-700">
-                Herbal Drug Mode
+                {t("medicineForm.modeToggleLabel")}
               </span>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -115,15 +117,15 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
           {/* Herbal Mode — Name only */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Drug Name *
+              {t("medicineForm.nameLabel")}
             </label>
             <input
               type="text"
-              {...register("name", { required: "Drug name is required" })}
+              {...register("name", { required: t("medicineForm.nameRequired") })}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-lg ${
                 errors.name ? "border-red-500" : "border-gray-300"
               }`}
-              placeholder="e.g. Garlic Extract, Black Seed Oil..."
+              placeholder={t("medicineForm.namePlaceholder")}
             />
             {errors.name && (
               <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
@@ -131,7 +133,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
             {herbalMode && (
               <p className="mt-1 text-xs text-gray-400 flex items-center">
                 <span className="mr-1">🌿</span>
-                A medicine code will be auto-generated when saved
+                {t("medicineForm.autoCodeHint")}
               </p>
             )}
           </div>
@@ -140,16 +142,16 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
           {!herbalMode && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Medicine Code
+                {t("medicineForm.codeLabel")}
               </label>
               <input
                 type="text"
                 {...register("code")}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
-                placeholder="Leave empty to auto-generate"
+                placeholder={t("medicineForm.codePlaceholder")}
               />
               <p className="mt-1 text-xs text-gray-400">
-                Auto-generated if left empty
+                {t("medicineForm.codeAutoHint")}
               </p>
             </div>
           )}
@@ -159,64 +161,64 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Generic Name
+                  {t("medicineForm.genericNameLabel")}
                 </label>
                 <input
                   type="text"
                   {...register("genericName")}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
-                  placeholder="e.g. Allium sativum"
+                  placeholder={t("medicineForm.genericNamePlaceholder")}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Category
+                  {t("medicineForm.categoryLabel")}
                 </label>
                 <input
                   type="text"
                   {...register("category")}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
-                  placeholder="e.g. Herbal Supplement"
+                  placeholder={t("medicineForm.categoryPlaceholder")}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Strength
+                  {t("medicineForm.strengthLabel")}
                 </label>
                 <input
                   type="text"
                   {...register("strength")}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
-                  placeholder="e.g. 500mg"
+                  placeholder={t("medicineForm.strengthPlaceholder")}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Dosage Form
+                  {t("medicineForm.dosageFormLabel")}
                 </label>
                 <select
                   {...register("dosageForm")}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
                 >
-                  <option value="">Select Form</option>
-                  <option value="Tablet">Tablet</option>
-                  <option value="Capsule">Capsule</option>
-                  <option value="Syrup">Syrup</option>
-                  <option value="Powder">Powder</option>
-                  <option value="Extract">Extract</option>
-                  <option value="Tea">Tea</option>
-                  <option value="Oil">Oil</option>
-                  <option value="Cream">Cream</option>
-                  <option value="Tincture">Tincture</option>
+                  <option value="">{t("medicineForm.dosageFormPlaceholder")}</option>
+                  <option value="Tablet">{t("medicineForm.dosageForm.tablet")}</option>
+                  <option value="Capsule">{t("medicineForm.dosageForm.capsule")}</option>
+                  <option value="Syrup">{t("medicineForm.dosageForm.syrup")}</option>
+                  <option value="Powder">{t("medicineForm.dosageForm.powder")}</option>
+                  <option value="Extract">{t("medicineForm.dosageForm.extract")}</option>
+                  <option value="Tea">{t("medicineForm.dosageForm.tea")}</option>
+                  <option value="Oil">{t("medicineForm.dosageForm.oil")}</option>
+                  <option value="Cream">{t("medicineForm.dosageForm.cream")}</option>
+                  <option value="Tincture">{t("medicineForm.dosageForm.tincture")}</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Manufacturer
+                  {t("medicineForm.manufacturerLabel")}
                 </label>
                 <input
                   type="text"
@@ -227,7 +229,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Supplier
+                  {t("medicineForm.supplierLabel")}
                 </label>
                 <input
                   type="text"
@@ -238,7 +240,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Batch Number
+                  {t("medicineForm.batchNumberLabel")}
                 </label>
                 <input
                   type="text"
@@ -249,7 +251,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Storage Location
+                  {t("medicineForm.storageLocationLabel")}
                 </label>
                 <input
                   type="text"
@@ -260,7 +262,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Available Quantity
+                  {t("medicineForm.availableQuantityLabel")}
                 </label>
                 <input
                   type="number"
@@ -271,7 +273,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Minimum Stock
+                  {t("medicineForm.minimumStockLabel")}
                 </label>
                 <input
                   type="number"
@@ -282,7 +284,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Purchase Price
+                  {t("medicineForm.purchasePriceLabel")}
                 </label>
                 <input
                   type="number"
@@ -294,7 +296,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Selling Price
+                  {t("medicineForm.sellingPriceLabel")}
                 </label>
                 <input
                   type="number"
@@ -306,7 +308,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Expiry Date
+                  {t("medicineForm.expiryDateLabel")}
                 </label>
                 <input
                   type="date"
@@ -326,7 +328,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                   htmlFor="requiresPrescription"
                   className="text-sm font-medium text-gray-700"
                 >
-                  Requires Prescription
+                  {t("medicineForm.requiresPrescriptionLabel")}
                 </label>
               </div>
             </div>
@@ -345,9 +347,9 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 ) : (
                   <FiChevronDown className="w-4 h-4" />
                 )}
-                <span>Optional Details</span>
+                <span>{t("medicineForm.optionalDetails")}</span>
                 <span className="text-xs text-gray-400">
-                  (category, strength, stock, price, notes...)
+                  {t("medicineForm.optionalDetailsHint")}
                 </span>
               </button>
 
@@ -355,7 +357,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Generic Name
+                      {t("medicineForm.genericNameLabel")}
                     </label>
                     <input
                       type="text"
@@ -366,7 +368,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Category
+                      {t("medicineForm.categoryLabel")}
                     </label>
                     <input
                       type="text"
@@ -377,7 +379,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Strength
+                      {t("medicineForm.strengthLabel")}
                     </label>
                     <input
                       type="text"
@@ -388,28 +390,28 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Dosage Form
+                      {t("medicineForm.dosageFormLabel")}
                     </label>
                     <select
                       {...register("dosageForm")}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
                     >
-                      <option value="">Select Form</option>
-                      <option value="Tablet">Tablet</option>
-                      <option value="Capsule">Capsule</option>
-                      <option value="Syrup">Syrup</option>
-                      <option value="Powder">Powder</option>
-                      <option value="Extract">Extract</option>
-                      <option value="Tea">Tea</option>
-                      <option value="Oil">Oil</option>
-                      <option value="Cream">Cream</option>
-                      <option value="Tincture">Tincture</option>
+                      <option value="">{t("medicineForm.dosageFormPlaceholder")}</option>
+                      <option value="Tablet">{t("medicineForm.dosageForm.tablet")}</option>
+                      <option value="Capsule">{t("medicineForm.dosageForm.capsule")}</option>
+                      <option value="Syrup">{t("medicineForm.dosageForm.syrup")}</option>
+                      <option value="Powder">{t("medicineForm.dosageForm.powder")}</option>
+                      <option value="Extract">{t("medicineForm.dosageForm.extract")}</option>
+                      <option value="Tea">{t("medicineForm.dosageForm.tea")}</option>
+                      <option value="Oil">{t("medicineForm.dosageForm.oil")}</option>
+                      <option value="Cream">{t("medicineForm.dosageForm.cream")}</option>
+                      <option value="Tincture">{t("medicineForm.dosageForm.tincture")}</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Available Quantity
+                      {t("medicineForm.availableQuantityLabel")}
                     </label>
                     <input
                       type="number"
@@ -420,7 +422,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Selling Price
+                      {t("medicineForm.sellingPriceLabel")}
                     </label>
                     <input
                       type="number"
@@ -432,25 +434,25 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Instructions
+                      {t("medicineForm.instructionsLabel")}
                     </label>
                     <textarea
                       {...register("instructions")}
                       rows={2}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm resize-none"
-                      placeholder="How to prepare or use this herbal medicine..."
+                      placeholder={t("medicineForm.instructionsPlaceholder")}
                     ></textarea>
                   </div>
 
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Notes
+                      {t("medicineForm.notesLabel")}
                     </label>
                     <textarea
                       {...register("notes")}
                       rows={2}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm resize-none"
-                      placeholder="Additional notes..."
+                      placeholder={t("medicineForm.notesPlaceholder")}
                     ></textarea>
                   </div>
                 </div>
@@ -463,20 +465,20 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
             <>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Instructions
+                  {t("medicineForm.instructionsLabel")}
                 </label>
                 <textarea
                   {...register("instructions")}
                   rows={3}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
-                  placeholder="How to prepare or use this medicine..."
+                  placeholder={t("medicineForm.instructionsPlaceholderAlt")}
                 ></textarea>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Side Effects
+                    {t("medicineForm.sideEffectsLabel")}
                   </label>
                   <textarea
                     {...register("sideEffects")}
@@ -486,7 +488,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Contraindications
+                    {t("medicineForm.contraindicationsLabel")}
                   </label>
                   <textarea
                     {...register("contraindications")}
@@ -498,7 +500,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Notes
+                  {t("medicineForm.notesLabel")}
                 </label>
                 <textarea
                   {...register("notes")}
@@ -516,7 +518,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
               onClick={onClose}
               className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
@@ -524,7 +526,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
               className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition disabled:opacity-50 shadow-md"
             >
               <FiSave />
-              <span>{loading ? "Saving..." : isEdit ? "Update Drug" : "Add Drug"}</span>
+              <span>{loading ? t("medicineForm.saving") : isEdit ? t("medicineForm.updateButton") : t("medicineForm.addButton")}</span>
             </button>
           </div>
         </form>

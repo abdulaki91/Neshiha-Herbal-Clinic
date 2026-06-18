@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BlogForm({ formData, setFormData, onSubmit, editing }) {
+  const { t } = useTranslation();
   const [mediaType, setMediaType] = useState("image");
   const [preview, setPreview] = useState("");
 
@@ -36,20 +38,20 @@ export default function BlogForm({ formData, setFormData, onSubmit, editing }) {
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-8">
       <h1 className="text-3xl font-bold mb-6">
-        {editing ? "Edit Post" : "Add New Post"}
+        {editing ? t("blogForm.editTitle") : t("blogForm.addTitle")}
       </h1>
 
       <input
         name="title"
         value={formData.title}
         onChange={handleChange}
-        placeholder="Title"
+        placeholder={t("blogForm.titlePlaceholder")}
         className="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
       />
 
       <div className="mb-2">
         <label className="mr-4 font-medium text-gray-700 dark:text-gray-200">
-          Media Type:
+          {t("blogForm.mediaTypeLabel")}
         </label>
         <label className="mr-2">
           <input
@@ -59,7 +61,7 @@ export default function BlogForm({ formData, setFormData, onSubmit, editing }) {
             onChange={handleMediaTypeChange}
             className="mr-1"
           />
-          Image
+          {t("blogForm.mediaTypeImage")}
         </label>
         <label>
           <input
@@ -69,7 +71,7 @@ export default function BlogForm({ formData, setFormData, onSubmit, editing }) {
             onChange={handleMediaTypeChange}
             className="mr-1"
           />
-          Video
+          {t("blogForm.mediaTypeVideo")}
         </label>
       </div>
 
@@ -82,7 +84,7 @@ export default function BlogForm({ formData, setFormData, onSubmit, editing }) {
       />
 
       {preview && mediaType === "image" && (
-        <img src={preview} alt="preview" className="mb-2 max-h-48 rounded" />
+        <img src={preview} alt={t("blogForm.previewAlt")} className="mb-2 max-h-48 rounded" />
       )}
 
       {preview && mediaType === "video" && (
@@ -95,7 +97,7 @@ export default function BlogForm({ formData, setFormData, onSubmit, editing }) {
         name="author"
         value={formData.author}
         onChange={handleChange}
-        placeholder="Author"
+        placeholder={t("blogForm.authorPlaceholder")}
         className="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
       />
 
@@ -103,7 +105,7 @@ export default function BlogForm({ formData, setFormData, onSubmit, editing }) {
         name="desc"
         value={formData.desc}
         onChange={handleChange}
-        placeholder="Description"
+        placeholder={t("blogForm.descPlaceholder")}
         className="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
       />
 
@@ -111,7 +113,7 @@ export default function BlogForm({ formData, setFormData, onSubmit, editing }) {
         onClick={onSubmit}
         className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
       >
-        {editing ? "Save Changes" : "Add Post"}
+        {editing ? t("blogForm.saveButton") : t("blogForm.addButton")}
       </button>
     </div>
   );

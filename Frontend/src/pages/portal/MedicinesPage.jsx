@@ -4,8 +4,10 @@ import axiosInstance from "../../lib/axios";
 import toast from "react-hot-toast";
 import MedicineForm from "../../components/medicine/MedicineForm";
 import useAuthStore from "../../store/authStore";
+import { useTranslation } from "react-i18next";
 
 const MedicinesPage = () => {
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const [medicines, setMedicines] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,21 +27,21 @@ const MedicinesPage = () => {
       });
       setMedicines(response.data.data || response.data || []);
     } catch (error) {
-      toast.error("Failed to load medicines");
+      toast.error(t("medicines.toast.loadError"));
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this medicine?")) return;
+    if (!window.confirm(t("medicines.toast.deleteConfirmation"))) return;
 
     try {
       await axiosInstance.delete(`/medicines/${id}`);
-      toast.success("Medicine deleted successfully");
+      toast.success(t("medicines.toast.deleteSuccess"));
       fetchMedicines();
     } catch (error) {
-      toast.error("Failed to delete medicine");
+      toast.error(t("medicines.toast.deleteError"));
     }
   };
 
@@ -55,8 +57,8 @@ const MedicinesPage = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">Medicines</h1>
-          <p className="text-gray-500 mt-1">Manage herbal drug inventory</p>
+          <h1 className="text-3xl font-bold text-gray-800">{t("medicines.title")}</h1>
+          <p className="text-gray-500 mt-1">{t("medicines.subtitle")}</p>
         </div>
         {canManage && (
           <button
@@ -67,7 +69,7 @@ const MedicinesPage = () => {
             className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
           >
             <FiPlus />
-            <span>Add Medicine</span>
+            <span>{t("medicines.addButton")}</span>
           </button>
         )}
       </div>
@@ -78,7 +80,7 @@ const MedicinesPage = () => {
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
-            placeholder="Search by name or code..."
+            placeholder={t("medicines.search.placeholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyUp={(e) => e.key === "Enter" && fetchMedicines()}
@@ -126,15 +128,17 @@ const MedicinesPage = () => {
               <h3 className="text-lg font-bold text-gray-800 mb-1">
                 {medicine.name}
               </h3>
-              <p className="text-sm text-gray-500 mb-4">Code: {medicine.code}</p>
+              <p className="text-sm text-gray-500 mb-4">
+                {t("medicines.card.code")} {medicine.code}
+              </p>
 
               <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex justify-between">
-                  <span>Category:</span>
-                  <span className="font-medium">{medicine.category || "N/A"}</span>
+                  <span>{t("medicines.card.category")}</span>
+                  <span className="font-medium">{medicine.category || t("common.notAvailable")}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>In Stock:</span>
+                  <span>{t("medicines.card.inStock")}</span>
                   <span
                     className={`font-bold ${
                       medicine.availableQuantity <= medicine.minimumStock
@@ -146,8 +150,8 @@ const MedicinesPage = () => {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Strength:</span>
-                  <span>{medicine.strength || "N/A"}</span>
+                  <span>{t("medicines.card.strength")}</span>
+                  <span>{medicine.strength || t("common.notAvailable")}</span>
                 </div>
               </div>
             </div>
@@ -155,7 +159,7 @@ const MedicinesPage = () => {
 
           {medicines.length === 0 && (
             <div className="col-span-full py-12 text-center text-gray-500 bg-white rounded-xl shadow-sm border border-dashed border-gray-300">
-              No medicines found matching your search.
+              {t("medicines.empty")}
             </div>
           )}
         </div>

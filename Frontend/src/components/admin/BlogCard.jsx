@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BlogCard({ blog, onEdit, onDelete }) {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col justify-between">
       <img
@@ -19,13 +22,13 @@ export default function BlogCard({ blog, onEdit, onDelete }) {
           onClick={() => onEdit(blog)}
           className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
         >
-          Edit
+          {t("blogCard.edit")}
         </button>
         <button
           onClick={() => onDelete(blog.id)}
           className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
         >
-          Delete
+          {t("blogCard.delete")}
         </button>
       </div>
     </div>

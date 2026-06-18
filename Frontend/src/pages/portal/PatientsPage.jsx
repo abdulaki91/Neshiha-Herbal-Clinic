@@ -7,8 +7,10 @@ import PatientForm from "../../components/patients/PatientForm";
 import PatientCard from "../../components/patients/PatientCard";
 import toast from "react-hot-toast";
 import useAuthStore from "../../store/authStore";
+import { useTranslation } from "react-i18next";
 
 const PatientsPage = () => {
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const [showForm, setShowForm] = useState(false);
   const [search, setSearch] = useState("");
@@ -32,7 +34,7 @@ const PatientsPage = () => {
   const handlePatientCreated = () => {
     setShowForm(false);
     qc.invalidateQueries({ queryKey: ["patients"] });
-    toast.success("Patient registered successfully!");
+    toast.success(t("patients.toast.registerSuccess"));
   };
 
   const canRegister = ["super_admin", "data_clerk", "doctor"].includes(user?.role);
@@ -41,8 +43,8 @@ const PatientsPage = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">Patients</h1>
-          <p className="text-gray-500 mt-1">Manage patient records</p>
+          <h1 className="text-3xl font-bold text-gray-800">{t("patients.title")}</h1>
+          <p className="text-gray-500 mt-1">{t("patients.subtitle")}</p>
         </div>
         {canRegister && (
           <button
@@ -50,7 +52,7 @@ const PatientsPage = () => {
             className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
           >
             <FiPlus />
-            <span>Register Patient</span>
+            <span>{t("patients.registerButton")}</span>
           </button>
         )}
       </div>
@@ -61,7 +63,7 @@ const PatientsPage = () => {
           <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
-            placeholder="Search patients by name, ID, phone..."
+            placeholder={t("patients.search.placeholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
@@ -81,7 +83,7 @@ const PatientsPage = () => {
               <PatientCard
                 key={patient.id}
                 patient={patient}
-                onUpdate={fetchPatients}
+                onUpdate={() => qc.invalidateQueries({ queryKey: ["patients"] })}
               />
             ))}
           </div>
@@ -94,17 +96,17 @@ const PatientsPage = () => {
                 disabled={!pagination.hasPrev}
                 className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
               >
-                Previous
+                {t("common.previous")}
               </button>
               <span className="px-4 py-2 text-gray-600">
-                Page {page} of {pagination.totalPages}
+                {t("common.pagination.page")} {page} {t("common.pagination.of")} {pagination.totalPages}
               </span>
               <button
                 onClick={() => setPage(page + 1)}
                 disabled={!pagination.hasNext}
                 className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
               >
-                Next
+                {t("common.next")}
               </button>
             </div>
           )}
@@ -112,9 +114,9 @@ const PatientsPage = () => {
       ) : (
         <div className="text-center py-16">
           <FiUser className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-500 text-lg">No patients found</p>
+          <p className="text-gray-500 text-lg">{t("patients.empty.title")}</p>
           <p className="text-gray-400 text-sm mt-2">
-            Register your first patient to get started
+            {t("patients.empty.subtitle")}
           </p>
         </div>
       )}

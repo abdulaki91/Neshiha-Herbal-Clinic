@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { FiX } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 import toast from "react-hot-toast";
 
 const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
+  const { t } = useTranslation();
   const [patients, setPatients] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -41,7 +43,7 @@ const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
       });
       setPatients(response.data.data || response.data || []);
     } catch (error) {
-      console.error("Failed to fetch patients");
+      console.error(t("visitForm.fetchError"));
       setPatients([]);
     }
   };
@@ -51,7 +53,7 @@ const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
       await axiosInstance.post("/visits", data);
       onSuccess();
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to create visit");
+      toast.error(error.response?.data?.message || t("visitForm.createError"));
     }
   };
 
@@ -60,7 +62,7 @@ const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl">
         {/* Header */}
         <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-white flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Create New Visit</h2>
+          <h2 className="text-2xl font-bold">{t("visitForm.title")}</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-white/20 rounded-lg transition"
@@ -74,13 +76,13 @@ const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Patient *
+                {t("visitForm.patientLabel")}
               </label>
               <select
-                {...register("patientId", { required: "Patient is required" })}
+                {...register("patientId", { required: t("visitForm.patientRequired") })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
               >
-                <option value="">Select patient</option>
+                <option value="">{t("visitForm.patientPlaceholder")}</option>
                 {patients.map((patient) => (
                   <option key={patient.id} value={patient.id}>
                     {patient.firstName} {patient.lastName} - {patient.patientId}
@@ -96,19 +98,19 @@ const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Chief Complaint
+                {t("visitForm.chiefComplaintLabel")}
               </label>
               <textarea
                 {...register("chiefComplaint")}
                 rows="4"
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder="Describe the patient's main complaint..."
+                placeholder={t("visitForm.chiefComplaintPlaceholder")}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Visit Date
+                {t("visitForm.visitDateLabel")}
               </label>
               <input
                 type="date"
@@ -120,12 +122,12 @@ const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Arrival Time *
+                {t("visitForm.arrivalTimeLabel")}
               </label>
               <input
                 type="time"
                 {...register("arrivalTime", {
-                  required: "Arrival time is required",
+                  required: t("visitForm.arrivalTimeRequired"),
                 })}
                 defaultValue={new Date().toLocaleTimeString("en-GB", {
                   hour: "2-digit",
@@ -148,14 +150,14 @@ const VisitForm = ({ onClose, onSuccess, defaultPatientId }) => {
               onClick={onClose}
               className="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition font-medium"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
               className="px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? "Creating..." : "Create Visit"}
+              {isSubmitting ? t("visitForm.creating") : t("visitForm.createButton")}
             </button>
           </div>
         </form>

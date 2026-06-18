@@ -3,8 +3,10 @@ import { FiPlus, FiTrash2, FiFileText } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 import useAuthStore from "../../store/authStore";
+import { useTranslation } from "react-i18next";
 
 const InvestigationForm = ({ visitId, patientId, onSave }) => {
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const [investigations, setInvestigations] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -37,7 +39,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
 
   const handleAddInvestigation = async () => {
     if (!formData.investigationType || !formData.testName) {
-      toast.error("Please fill in investigation type and test name");
+      toast.error(t("investigation.fillError"));
       return;
     }
 
@@ -55,7 +57,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
         status: "requested",
       });
 
-      toast.success("Investigation requested successfully");
+      toast.success(t("investigation.requestSuccess"));
       setFormData({
         investigationType: "",
         testName: "",
@@ -67,21 +69,21 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
       fetchInvestigations();
       onSave && onSave();
     } catch (error) {
-      toast.error("Failed to request investigation");
+      toast.error(t("investigation.requestError"));
     }
   };
 
   const handleDeleteInvestigation = async (id) => {
-    if (!confirm("Are you sure you want to cancel this investigation?")) return;
+    if (!confirm(t("investigation.cancelConfirm"))) return;
 
     try {
       await axiosInstance.put(`/investigations/${id}`, {
         status: "cancelled",
       });
-      toast.success("Investigation cancelled");
+      toast.success(t("investigation.cancelSuccess"));
       fetchInvestigations();
     } catch (error) {
-      toast.error("Failed to cancel investigation");
+      toast.error(t("investigation.cancelError"));
     }
   };
 
@@ -105,7 +107,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading investigations...</div>;
+    return <div className="text-center py-8">{t("investigation.loading")}</div>;
   }
 
   return (
@@ -117,7 +119,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
           className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
         >
           <FiPlus />
-          <span>Request Investigation</span>
+          <span>{t("investigation.requestButton")}</span>
         </button>
       )}
 
@@ -126,20 +128,20 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-4">
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-lg font-semibold text-gray-800">
-              Request Investigation
+              {t("investigation.requestButton")}
             </h4>
             <button
               onClick={() => setShowAddForm(false)}
               className="text-gray-500 hover:text-gray-700"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
           </div>
 
           {/* Investigation Type */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Investigation Type *
+              {t("investigation.typeLabel")}
             </label>
             <select
               value={formData.investigationType}
@@ -148,25 +150,25 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             >
-              <option value="">-- Select Type --</option>
-              <option value="Blood Test">Blood Test</option>
-              <option value="Urine Test">Urine Test</option>
-              <option value="Stool Test">Stool Test</option>
-              <option value="X-Ray">X-Ray</option>
-              <option value="Ultrasound">Ultrasound</option>
-              <option value="CT Scan">CT Scan</option>
-              <option value="MRI">MRI</option>
-              <option value="ECG">ECG (Electrocardiogram)</option>
-              <option value="Biopsy">Biopsy</option>
-              <option value="Culture">Culture Test</option>
-              <option value="Other">Other</option>
+              <option value="">{t("investigation.typePlaceholder")}</option>
+              <option value="Blood Test">{t("investigation.type.bloodTest")}</option>
+              <option value="Urine Test">{t("investigation.type.urineTest")}</option>
+              <option value="Stool Test">{t("investigation.type.stoolTest")}</option>
+              <option value="X-Ray">{t("investigation.type.xray")}</option>
+              <option value="Ultrasound">{t("investigation.type.ultrasound")}</option>
+              <option value="CT Scan">{t("investigation.type.ctScan")}</option>
+              <option value="MRI">{t("investigation.type.mri")}</option>
+              <option value="ECG">{t("investigation.type.ecg")}</option>
+              <option value="Biopsy">{t("investigation.type.biopsy")}</option>
+              <option value="Culture">{t("investigation.type.cultureTest")}</option>
+              <option value="Other">{t("investigation.type.other")}</option>
             </select>
           </div>
 
           {/* Test Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Test Name *
+              {t("investigation.testNameLabel")}
             </label>
             <input
               type="text"
@@ -175,14 +177,14 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
                 setFormData({ ...formData, testName: e.target.value })
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              placeholder="e.g., Complete Blood Count, Liver Function Test"
+              placeholder={t("investigation.testNamePlaceholder")}
             />
           </div>
 
           {/* Urgency */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Urgency
+              {t("investigation.urgencyLabel")}
             </label>
             <select
               value={formData.urgency}
@@ -191,16 +193,16 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             >
-              <option value="routine">Routine</option>
-              <option value="urgent">Urgent</option>
-              <option value="stat">STAT (Immediate)</option>
+              <option value="routine">{t("investigation.urgency.routine")}</option>
+              <option value="urgent">{t("investigation.urgency.urgent")}</option>
+              <option value="stat">{t("investigation.urgency.stat")}</option>
             </select>
           </div>
 
           {/* Scheduled Date */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Scheduled Date
+              {t("investigation.scheduledDateLabel")}
             </label>
             <input
               type="date"
@@ -215,7 +217,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
           {/* Instructions */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Special Instructions
+              {t("investigation.instructionsLabel")}
             </label>
             <textarea
               value={formData.instructions}
@@ -224,7 +226,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
               }
               rows={3}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              placeholder="Any special instructions or preparation notes..."
+              placeholder={t("investigation.instructionsPlaceholder")}
             />
           </div>
 
@@ -234,13 +236,13 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
               onClick={() => setShowAddForm(false)}
               className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
             <button
               onClick={handleAddInvestigation}
               className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
             >
-              Request Investigation
+              {t("investigation.requestButton")}
             </button>
           </div>
         </div>
@@ -265,34 +267,34 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
                         investigation.status,
                       )}`}
                     >
-                      {investigation.status.replace("_", " ")}
+                      {t(`investigation.status.${investigation.status === "in_progress" ? "inProgress" : investigation.status}`)}
                     </span>
                     <span
                       className={`px-2 py-1 text-xs rounded-full ${getUrgencyBadge(
                         investigation.urgency,
                       )}`}
                     >
-                      {investigation.urgency}
+                      {t(`investigation.urgency.${investigation.urgency}`)}
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 mb-1">
-                    Type: {investigation.investigationType}
+                    {t("investigation.typePrefix")}{investigation.investigationType}
                   </p>
                   {investigation.instructions && (
                     <p className="text-sm text-gray-600 mb-1">
-                      Instructions: {investigation.instructions}
+                      {t("investigation.instructionsPrefix")}{investigation.instructions}
                     </p>
                   )}
                   <div className="flex items-center space-x-4 text-xs text-gray-500 mt-2">
                     <span>
-                      Requested:{" "}
+                      {t("investigation.requestedPrefix")}
                       {new Date(
                         investigation.requestedDate,
                       ).toLocaleDateString()}
                     </span>
                     {investigation.scheduledDate && (
                       <span>
-                        Scheduled:{" "}
+                        {t("investigation.scheduledPrefix")}
                         {new Date(
                           investigation.scheduledDate,
                         ).toLocaleDateString()}
@@ -315,20 +317,20 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
                 investigation.results && (
                   <div className="mt-3 pt-3 border-t border-gray-200">
                     <p className="text-sm font-medium text-gray-700 mb-1">
-                      Results:
+                      {t("investigation.resultsLabel")}
                     </p>
                     <p className="text-sm text-gray-600">
                       {investigation.results}
                     </p>
                     {investigation.interpretation && (
                       <p className="text-sm text-gray-600 mt-2">
-                        <span className="font-medium">Interpretation:</span>{" "}
+                        <span className="font-medium">{t("investigation.interpretationLabel")}</span>{" "}
                         {investigation.interpretation}
                       </p>
                     )}
                     {investigation.completedDate && (
                       <p className="text-xs text-gray-500 mt-2">
-                        Completed:{" "}
+                        {t("investigation.completedPrefix")}
                         {new Date(
                           investigation.completedDate,
                         ).toLocaleDateString()}
@@ -342,7 +344,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
       ) : (
         <div className="text-center py-12 text-gray-500">
           <FiFileText className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-          <p>No investigations requested yet</p>
+          <p>{t("investigation.emptyList")}</p>
         </div>
       )}
     </div>

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useReactToPrint } from "react-to-print";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   FiDollarSign, FiSearch, FiUser, FiCalendar,
@@ -9,6 +10,7 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 import { getSocket } from "../../lib/socket";
 import { usePendingPayments, usePaymentHistory, useProcessPayment } from "../../hooks/usePayments";
+import PrintableReceipt from "../../components/PrintableReceipt";
 
 const formatETB = (amount) => parseFloat(amount || 0).toFixed(2);
 
@@ -18,6 +20,8 @@ const CashierPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedVisit, setSelectedVisit] = useState(null);
   const [viewPayment, setViewPayment] = useState(null);
+  const [printVisit, setPrintVisit] = useState(null);
+  const printRef = useRef(null);
   const [paymentData, setPaymentData] = useState({
     amount: 0, paymentMethod: "cash", transactionId: "", notes: "",
   });
@@ -63,7 +67,7 @@ const CashierPage = () => {
       { visitId: selectedVisit.id, ...paymentData },
       {
         onSuccess: () => {
-          handlePrintReceipt(selectedVisit);
+          setPrintVisit(selectedVisit);
           setSelectedVisit(null);
           toast.success("Payment received — medicine dispensed to patient");
           qc.invalidateQueries({ queryKey: ["payments"] });
@@ -75,81 +79,22 @@ const CashierPage = () => {
     );
   };
 
-  const handlePrintReceipt = (visit) => {
-    const prescriptions = visit.prescriptions || visit.visit?.prescriptions || [];
-    const patient = visit.patient || visit.visit?.patient || {};
-    const doctor = visit.doctor || visit.visit?.doctor;
-    const total = prescriptions.reduce(
-      (sum, p) => sum + parseFloat(p.totalAmount || p.unitPrice * p.quantity || 0),
-      0,
-    );
-    const printWindow = window.open("", "_blank", "width=380,height=600");
-    if (!printWindow) return;
+  // react-to-print: document title = patient name
+  const printPageLabel = useCallback(() => {
+    const p = printVisit?.patient || printVisit?.visit?.patient || {};
+    return `Receipt_${p.firstName || ""}_${p.lastName || ""}`.replace(/\s+/g, "_");
+  }, [printVisit]);
 
-    const rows = prescriptions
-      .map(
-        (p) => `
-      <tr>
-        <td style="padding:6px 4px;border-bottom:1px dashed #ccc;vertical-align:top">
-          <strong>${p.medicine?.name || "—"}</strong>
-          ${p.medicine?.strength ? ` (${p.medicine.strength})` : ""}
-          <br><span style="font-size:11px;color:#555">
-            Qty: ${p.quantity} &bull; ${p.dosage || "—"} &bull; ${p.frequency || "—"}
-            ${p.route ? ` &bull; ${p.route}` : ""}
-            ${p.duration ? ` &bull; ${p.duration}` : ""}
-            ${p.instructions ? `<br><em>${p.instructions}</em>` : ""}
-          </span>
-        </td>
-        <td style="padding:6px 4px;border-bottom:1px dashed #ccc;text-align:right;white-space:nowrap">
-          ${formatETB(p.totalAmount || p.unitPrice * p.quantity)} ETB
-        </td>
-      </tr>`,
-      )
-      .join("");
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: printPageLabel,
+    onAfterPrint: () => setPrintVisit(null),
+  });
 
-    const html = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Receipt</title>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Courier New', monospace; font-size:12px; padding:16px; max-width:380px; margin:0 auto; }
-    .center { text-align:center; }
-    .bold { font-weight:bold; }
-    .divider { border-top:1px dashed #000; margin:10px 0; }
-    @media print { body { padding:8px; } }
-  </style>
-</head>
-<body>
-  <div class="center">
-    <h2 style="font-size:14px;margin-bottom:2px">Neshiha Herbal Clinic</h2>
-    <p style="font-size:10px;color:#555">Clinic Management System</p>
-    <p style="font-size:10px;margin-top:4px">${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</p>
-  </div>
-  <div class="divider"></div>
-  <p><strong>Patient:</strong> ${patient.firstName || "—"} ${patient.lastName || ""}</p>
-  <p><strong>ID:</strong> ${patient.patientId || "—"}</p>
-  ${visit.visitNumber ? `<p><strong>Visit:</strong> #${visit.visitNumber}</p>` : ""}
-  ${doctor ? `<p><strong>Doctor:</strong> Dr. ${doctor.firstName} ${doctor.lastName}</p>` : ""}
-  <div class="divider"></div>
-  <p class="bold" style="margin-bottom:6px">Prescribed Medicines:</p>
-  <table style="width:100%;border-collapse:collapse">${rows}</table>
-  <div class="divider"></div>
-  <p style="font-size:14px;text-align:right"><strong>TOTAL: ${formatETB(total)} ETB</strong></p>
-  <div class="divider"></div>
-  <div class="center" style="margin-top:12px">
-    <p style="font-size:10px;color:#555">Thank you for choosing</p>
-    <p style="font-size:10px;color:#555">Neshiha Herbal Clinic</p>
-    <p style="font-size:9px;color:#aaa;margin-top:8px">This is a computer-generated receipt</p>
-  </div>
-  <script>window.onload=function(){window.print();window.close();}</script>
-</body>
-</html>`;
-
-    printWindow.document.write(html);
-    printWindow.document.close();
-  };
+  // Auto-trigger print when printVisit is set
+  useEffect(() => {
+    if (printVisit) handlePrint();
+  }, [printVisit, handlePrint]);
 
   if (isLoading && !pendingPayments.length && !recentPayments.length) {
     return (
@@ -356,7 +301,7 @@ const CashierPage = () => {
                         <span>View</span>
                       </button>
                       <button
-                        onClick={() => handlePrintReceipt(payment)}
+                        onClick={() => setPrintVisit(payment)}
                         className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition font-medium flex items-center space-x-2 text-sm"
                       >
                         <FiPrinter />
@@ -517,7 +462,7 @@ const CashierPage = () => {
             </div>
             <div className="p-6 border-t border-gray-200 flex justify-end space-x-3 sticky bottom-0 bg-white">
               <button onClick={() => setViewPayment(null)} className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">Close</button>
-              <button onClick={() => { handlePrintReceipt(viewPayment); setViewPayment(null); }} className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium flex items-center space-x-2">
+              <button onClick={() => { setPrintVisit(viewPayment); setViewPayment(null); }} className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium flex items-center space-x-2">
                 <FiPrinter />
                 <span>Print Receipt</span>
               </button>
@@ -525,6 +470,10 @@ const CashierPage = () => {
           </div>
         </div>
       )}
+      {/* Hidden printable component */}
+      <div style={{ display: "none" }}>
+        <PrintableReceipt ref={printRef} visit={printVisit} />
+      </div>
     </div>
   );
 };

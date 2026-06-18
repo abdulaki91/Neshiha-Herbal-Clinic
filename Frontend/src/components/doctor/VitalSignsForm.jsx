@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { FiSave, FiActivity } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
+import { useTranslation } from "react-i18next";
 
 const VitalSignsForm = ({ visitId, onSave }) => {
+  const { t } = useTranslation();
   const [vitals, setVitals] = useState({
     temperature: "",
     bloodPressureSystolic: "",
@@ -81,20 +83,20 @@ const VitalSignsForm = ({ visitId, onSave }) => {
       };
 
       await axiosInstance.put(`/visits/${visitId}`, vitalData);
-      toast.success("Vital signs saved successfully");
+      toast.success(t("vitalSigns.saveSuccess"));
       onSave && onSave();
     } catch (error) {
-      toast.error("Failed to save vital signs");
+      toast.error(t("vitalSigns.saveError"));
     }
   };
 
   const getBmiCategory = (bmiValue) => {
     if (!bmiValue) return "";
     const bmi = parseFloat(bmiValue);
-    if (bmi < 18.5) return "Underweight";
-    if (bmi < 25) return "Normal";
-    if (bmi < 30) return "Overweight";
-    return "Obese";
+    if (bmi < 18.5) return t("bmi.category.underweight");
+    if (bmi < 25) return t("bmi.category.normal");
+    if (bmi < 30) return t("bmi.category.overweight");
+    return t("bmi.category.obese");
   };
 
   const getBmiColor = (bmiValue) => {
@@ -107,7 +109,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading vital signs...</div>;
+    return <div className="text-center py-8">{t("vitalSigns.loading")}</div>;
   }
 
   return (
@@ -115,14 +117,14 @@ const VitalSignsForm = ({ visitId, onSave }) => {
       <div className="flex items-center justify-between mb-6">
         <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2">
           <FiActivity className="text-emerald-600" />
-          <span>Vital Signs</span>
+          <span>{t("vitalSigns.title")}</span>
         </h4>
         <button
           onClick={handleSaveVitals}
           className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
         >
           <FiSave />
-          <span>Save Vitals</span>
+          <span>{t("vitalSigns.saveButton")}</span>
         </button>
       </div>
 
@@ -130,7 +132,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
         {/* Temperature */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Temperature (°C)
+            {t("vitalSigns.temperatureLabel")}
           </label>
           <input
             type="number"
@@ -140,15 +142,15 @@ const VitalSignsForm = ({ visitId, onSave }) => {
               setVitals({ ...vitals, temperature: e.target.value })
             }
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="e.g., 37.5"
+            placeholder={t("vitalSigns.temperaturePlaceholder")}
           />
-          <p className="mt-1 text-xs text-gray-500">Normal: 36.5 - 37.5°C</p>
+          <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.temperatureNormal")}</p>
         </div>
 
         {/* Blood Pressure */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Blood Pressure (mmHg)
+            {t("vitalSigns.bloodPressureLabel")}
           </label>
           <div className="flex space-x-2">
             <input
@@ -158,7 +160,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
                 setVitals({ ...vitals, bloodPressureSystolic: e.target.value })
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              placeholder="Systolic (120)"
+              placeholder={t("vitalSigns.systolicPlaceholder")}
             />
             <span className="flex items-center text-gray-500">/</span>
             <input
@@ -171,16 +173,16 @@ const VitalSignsForm = ({ visitId, onSave }) => {
                 })
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              placeholder="Diastolic (80)"
+              placeholder={t("vitalSigns.diastolicPlaceholder")}
             />
           </div>
-          <p className="mt-1 text-xs text-gray-500">Normal: 120/80 mmHg</p>
+          <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.bloodPressureNormal")}</p>
         </div>
 
         {/* Heart Rate */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Heart Rate (bpm)
+            {t("vitalSigns.heartRateLabel")}
           </label>
           <input
             type="number"
@@ -189,15 +191,15 @@ const VitalSignsForm = ({ visitId, onSave }) => {
               setVitals({ ...vitals, heartRate: e.target.value })
             }
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="e.g., 72"
+            placeholder={t("vitalSigns.heartRatePlaceholder")}
           />
-          <p className="mt-1 text-xs text-gray-500">Normal: 60 - 100 bpm</p>
+          <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.heartRateNormal")}</p>
         </div>
 
         {/* Respiratory Rate */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Respiratory Rate (per min)
+            {t("vitalSigns.respiratoryRateLabel")}
           </label>
           <input
             type="number"
@@ -206,15 +208,15 @@ const VitalSignsForm = ({ visitId, onSave }) => {
               setVitals({ ...vitals, respiratoryRate: e.target.value })
             }
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="e.g., 16"
+            placeholder={t("vitalSigns.respiratoryRatePlaceholder")}
           />
-          <p className="mt-1 text-xs text-gray-500">Normal: 12 - 20 per min</p>
+          <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.respiratoryRateNormal")}</p>
         </div>
 
         {/* Oxygen Saturation */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Oxygen Saturation (%)
+            {t("vitalSigns.oxygenSaturationLabel")}
           </label>
           <input
             type="number"
@@ -224,15 +226,15 @@ const VitalSignsForm = ({ visitId, onSave }) => {
               setVitals({ ...vitals, oxygenSaturation: e.target.value })
             }
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="e.g., 98"
+            placeholder={t("vitalSigns.oxygenSaturationPlaceholder")}
           />
-          <p className="mt-1 text-xs text-gray-500">Normal: 95 - 100%</p>
+          <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.oxygenSaturationNormal")}</p>
         </div>
 
         {/* Weight */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Weight (kg)
+            {t("vitalSigns.weightLabel")}
           </label>
           <input
             type="number"
@@ -240,14 +242,14 @@ const VitalSignsForm = ({ visitId, onSave }) => {
             value={vitals.weight}
             onChange={(e) => setVitals({ ...vitals, weight: e.target.value })}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="e.g., 70.5"
+            placeholder={t("vitalSigns.weightPlaceholder")}
           />
         </div>
 
         {/* Height */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Height (cm)
+            {t("vitalSigns.heightLabel")}
           </label>
           <input
             type="number"
@@ -255,7 +257,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
             value={vitals.height}
             onChange={(e) => setVitals({ ...vitals, height: e.target.value })}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            placeholder="e.g., 175"
+            placeholder={t("vitalSigns.heightPlaceholder")}
           />
         </div>
 
@@ -263,12 +265,12 @@ const VitalSignsForm = ({ visitId, onSave }) => {
         {bmi && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Body Mass Index (BMI)
+              {t("vitalSigns.bmiLabel")}
             </label>
             <div className="px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg">
               <p className={`text-2xl font-bold ${getBmiColor(bmi)}`}>{bmi}</p>
               <p className="text-sm text-gray-600 mt-1">
-                Category: {getBmiCategory(bmi)}
+                {t("vitalSigns.categoryPrefix")}{getBmiCategory(bmi)}
               </p>
             </div>
           </div>
@@ -278,15 +280,15 @@ const VitalSignsForm = ({ visitId, onSave }) => {
       {/* Reference Card */}
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
         <h5 className="font-semibold text-blue-900 mb-2">
-          Normal Vital Signs Reference
+          {t("vitalSigns.reference.title")}
         </h5>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-blue-800">
-          <div>• Temperature: 36.5 - 37.5°C</div>
-          <div>• Blood Pressure: 120/80 mmHg</div>
-          <div>• Heart Rate: 60 - 100 bpm</div>
-          <div>• Respiratory Rate: 12 - 20/min</div>
-          <div>• Oxygen Saturation: 95 - 100%</div>
-          <div>• BMI: 18.5 - 24.9 (Normal)</div>
+          <div>{t("vitalSigns.reference.temperature")}</div>
+          <div>{t("vitalSigns.reference.bloodPressure")}</div>
+          <div>{t("vitalSigns.reference.heartRate")}</div>
+          <div>{t("vitalSigns.reference.respiratoryRate")}</div>
+          <div>{t("vitalSigns.reference.oxygenSaturation")}</div>
+          <div>{t("vitalSigns.reference.bmi")}</div>
         </div>
       </div>
     </div>

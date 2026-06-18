@@ -5,8 +5,10 @@ import { FiUsers, FiCalendar, FiActivity, FiTrendingUp } from "react-icons/fi";
 import useAuthStore from "../../store/authStore";
 import { getSocket } from "../../lib/socket";
 import { useDashboard } from "../../hooks/useDashboard";
+import { useTranslation } from "react-i18next";
 
 const DashboardPage = () => {
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const { data: stats, isLoading } = useDashboard();
@@ -56,29 +58,29 @@ const DashboardPage = () => {
   if (user?.role === "super_admin" || user?.role === "staff_manager") {
     return (
       <div>
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-6">{t("dashboard.title")}</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatCard
-            title="Total Patients"
+            title={t("dashboard.stats.totalPatients")}
             value={stats?.summary?.totalPatients || 0}
             icon={FiUsers}
             color="emerald"
           />
           <StatCard
-            title="Today's Patients"
+            title={t("dashboard.stats.todayPatients")}
             value={stats?.summary?.todayPatients || 0}
             icon={FiCalendar}
             color="blue"
           />
           <StatCard
-            title="Today's Visits"
+            title={t("dashboard.stats.todayVisits")}
             value={stats?.summary?.todayVisits || 0}
             icon={FiActivity}
             color="purple"
           />
           <StatCard
-            title="Waiting Now"
+            title={t("dashboard.stats.waitingNow")}
             value={stats?.summary?.waitingPatients || 0}
             icon={FiTrendingUp}
             color="orange"
@@ -88,28 +90,28 @@ const DashboardPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              Quick Stats
+              {t("dashboard.quickStats.title")}
             </h3>
             <div className="space-y-3">
               <StatRow
-                label="Total Doctors"
+                label={t("dashboard.stats.totalDoctors")}
                 value={stats?.summary?.totalDoctors || 0}
               />
               <StatRow
-                label="Total Staff"
+                label={t("dashboard.stats.totalStaff")}
                 value={stats?.summary?.totalStaff || 0}
               />
               <StatRow
-                label="Completed Today"
+                label={t("dashboard.stats.completedToday")}
                 value={stats?.summary?.completedVisits || 0}
               />
               <StatRow
-                label="Low Stock Items"
+                label={t("dashboard.stats.lowStockItems")}
                 value={stats?.summary?.lowStockMedicines || 0}
                 color="orange"
               />
               <StatRow
-                label="Expired Medicines"
+                label={t("dashboard.stats.expiredMedicines")}
                 value={stats?.summary?.expiredMedicines || 0}
                 color="red"
               />
@@ -117,24 +119,24 @@ const DashboardPage = () => {
           </div>
 
           <div className="bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl shadow-sm p-6 text-white">
-            <h3 className="text-lg font-semibold mb-4">System Status</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("dashboard.systemStatus.title")}</h3>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span>Database</span>
+                <span>{t("dashboard.systemStatus.database")}</span>
                 <span className="flex items-center">
                   <span className="w-2 h-2 bg-green-300 rounded-full mr-2"></span>
-                  Online
+                  {t("dashboard.systemStatus.online")}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span>Real-time Updates</span>
+                <span>{t("dashboard.systemStatus.realtimeUpdates")}</span>
                 <span className="flex items-center">
                   <span className="w-2 h-2 bg-green-300 rounded-full mr-2"></span>
-                  Connected
+                  {t("dashboard.systemStatus.connected")}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span>Last Backup</span>
+                <span>{t("dashboard.systemStatus.lastBackup")}</span>
                 <span>2 hours ago</span>
               </div>
             </div>
@@ -149,30 +151,30 @@ const DashboardPage = () => {
     return (
       <div>
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          Doctor Dashboard
+          {t("dashboard.doctor.title")}
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatCard
-            title="In Queue"
+            title={t("dashboard.doctor.stats.inQueue")}
             value={stats?.todayQueue || 0}
             icon={FiUsers}
             color="emerald"
           />
           <StatCard
-            title="Completed Today"
+            title={t("dashboard.doctor.stats.completedToday")}
             value={stats?.todayCompleted || 0}
             icon={FiActivity}
             color="blue"
           />
           <StatCard
-            title="Prescriptions"
+            title={t("dashboard.doctor.stats.prescriptions")}
             value={stats?.todayPrescriptions || 0}
             icon={FiCalendar}
             color="purple"
           />
           <StatCard
-            title="Dispensed"
+            title={t("dashboard.doctor.stats.dispensed")}
             value={stats?.todayDispensed || 0}
             icon={FiTrendingUp}
             color="orange"
@@ -181,7 +183,7 @@ const DashboardPage = () => {
 
         <div className="bg-white rounded-xl shadow-sm p-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            Waiting Patients
+            {t("dashboard.doctor.waitingPatients")}
           </h3>
           {stats?.waitingPatients?.length > 0 ? (
             <div className="space-y-3">
@@ -201,7 +203,7 @@ const DashboardPage = () => {
                         {visit.patient?.firstName} {visit.patient?.lastName}
                       </p>
                       <p className="text-sm text-gray-500">
-                        {visit.patient?.age} years • {visit.patient?.gender}
+                        {visit.patient?.age} {t("common.ageUnit.years")} • {visit.patient?.gender}
                       </p>
                     </div>
                   </div>
@@ -211,14 +213,14 @@ const DashboardPage = () => {
                     }
                     className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
                   >
-                    Start Consultation
+                    {t("dashboard.doctor.startConsultation")}
                   </button>
                 </div>
               ))}
             </div>
           ) : (
             <p className="text-gray-500 text-center py-8">
-              No patients waiting
+              {t("dashboard.doctor.empty.noPatients")}
             </p>
           )}
         </div>
@@ -231,24 +233,24 @@ const DashboardPage = () => {
     return (
       <div>
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          Data Clerk Dashboard
+          {t("dashboard.dataClerk.title")}
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <StatCard
-            title="Registered Today"
+            title={t("dashboard.dataClerk.stats.registeredToday")}
             value={stats?.todayRegistrations || 0}
             icon={FiUsers}
             color="emerald"
           />
           <StatCard
-            title="Today's Visits"
+            title={t("dashboard.dataClerk.stats.todayVisits")}
             value={stats?.todayVisits || 0}
             icon={FiCalendar}
             color="blue"
           />
           <StatCard
-            title="Waiting Patients"
+            title={t("dashboard.dataClerk.stats.waitingPatients")}
             value={stats?.waitingPatients || 0}
             icon={FiActivity}
             color="orange"
@@ -257,7 +259,7 @@ const DashboardPage = () => {
 
         <div className="bg-white rounded-xl shadow-sm p-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            Recent Registrations
+            {t("dashboard.dataClerk.recentRegistrations")}
           </h3>
           {stats?.recentPatients?.length > 0 ? (
             <div className="space-y-3">
@@ -271,7 +273,7 @@ const DashboardPage = () => {
                       {patient.firstName} {patient.lastName}
                     </p>
                     <p className="text-sm text-gray-500">
-                      ID: {patient.patientId}
+                      {t("common.patientId")}: {patient.patientId}
                     </p>
                   </div>
                   <span className="text-sm text-gray-500">
@@ -282,7 +284,7 @@ const DashboardPage = () => {
             </div>
           ) : (
             <p className="text-gray-500 text-center py-8">
-              No recent registrations
+              {t("dashboard.dataClerk.empty.noRegistrations")}
             </p>
           )}
         </div>
@@ -295,24 +297,24 @@ const DashboardPage = () => {
     return (
       <div>
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          Cashier Dashboard
+          {t("dashboard.cashier.title")}
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <StatCard
-            title="Pending Payments"
+            title={t("dashboard.cashier.stats.pendingPayments")}
             value={stats?.pendingPayments || 0}
             icon={FiUsers}
             color="orange"
           />
           <StatCard
-            title="Payments Processed Today"
+            title={t("dashboard.cashier.stats.paymentsProcessedToday")}
             value={stats?.todayPaymentsCount || 0}
             icon={FiActivity}
             color="emerald"
           />
           <StatCard
-            title="Today's Revenue (ETB)"
+            title={t("dashboard.cashier.stats.todayRevenue")}
             value={stats?.todayTotalRevenue?.toFixed(2) || "0.00"}
             icon={FiTrendingUp}
             color="blue"
@@ -321,18 +323,18 @@ const DashboardPage = () => {
 
         <div className="bg-white rounded-xl shadow-sm p-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            Recent Payments
+            {t("dashboard.cashier.recentPayments")}
           </h3>
           {stats?.recentPayments?.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
                   <tr className="text-gray-500 text-sm border-b">
-                    <th className="pb-3 font-medium">Payment #</th>
-                    <th className="pb-3 font-medium">Patient</th>
-                    <th className="pb-3 font-medium">Amount</th>
-                    <th className="pb-3 font-medium">Method</th>
-                    <th className="pb-3 font-medium">Date</th>
+                    <th className="pb-3 font-medium">{t("common.paymentNumber")}</th>
+                    <th className="pb-3 font-medium">{t("common.patient")}</th>
+                    <th className="pb-3 font-medium">{t("common.amount")}</th>
+                    <th className="pb-3 font-medium">{t("common.method")}</th>
+                    <th className="pb-3 font-medium">{t("common.date")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
@@ -345,7 +347,7 @@ const DashboardPage = () => {
                         {payment.patient?.firstName} {payment.patient?.lastName}
                       </td>
                       <td className="py-3 font-bold text-emerald-700">
-                        {parseFloat(payment.amount).toFixed(2)} ETB
+                        {parseFloat(payment.amount).toFixed(2)} {t("common.currency.etb")}
                       </td>
                       <td className="py-3 capitalize text-gray-600">
                         {payment.paymentMethod?.replace("_", " ")}
@@ -359,14 +361,14 @@ const DashboardPage = () => {
               </table>
             </div>
           ) : (
-            <p className="text-gray-500 text-center py-8">No recent payments</p>
+            <p className="text-gray-500 text-center py-8">{t("dashboard.cashier.empty.noPayments")}</p>
           )}
         </div>
       </div>
     );
   }
 
-  return <div>Dashboard</div>;
+  return <div>{t("dashboard.fallback.title")}</div>;
 };
 
 const StatCard = ({ title, value, icon: Icon, color }) => {

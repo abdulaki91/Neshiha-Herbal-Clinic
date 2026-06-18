@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Sidebar from "../components/admin/Sidebar";
 import BlogForm from "../components/admin/BlogForm";
 import BlogCard from "../components/admin/BlogCard";
@@ -19,7 +20,8 @@ const initialBlogs = [
 ];
 
 export default function Admin() {
-  const [activeTab, setActiveTab] = useState("Clinic Management");
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState(t("clinicManagement.title"));
   const [blogs, setBlogs] = useState(initialBlogs);
   const [editingBlog, setEditingBlog] = useState(null);
   const [formData, setFormData] = useState({
@@ -33,7 +35,7 @@ export default function Admin() {
     featured: false,
   });
 
-  const menuItems = ["Clinic Management", "Content Management"];
+  const menuItems = [t("clinicManagement.title"), t("sidebar.adminPanel")];
 
   const handleSelectMenu = (item) => {
     setActiveTab(item);
@@ -78,8 +80,8 @@ export default function Admin() {
       />
 
       <main className="flex-1 p-8">
-        {activeTab === "Clinic Management" && <ClinicManagement />}
-        {activeTab === "Content Management" && (
+        {activeTab === t("clinicManagement.title") && <ClinicManagement />}
+        {activeTab === t("sidebar.adminPanel") && (
           <>
             <BlogForm
               formData={formData}

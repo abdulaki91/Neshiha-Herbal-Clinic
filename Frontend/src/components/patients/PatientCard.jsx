@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FiUser, FiPhone, FiCalendar, FiMapPin } from "react-icons/fi";
 
 const PatientCard = ({ patient, onUpdate }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const getInitials = () => {
@@ -18,7 +20,7 @@ const PatientCard = ({ patient, onUpdate }) => {
           <h3 className="text-lg font-semibold text-gray-800">
             {patient.firstName} {patient.middleName} {patient.lastName}
           </h3>
-          <p className="text-sm text-gray-500">ID: {patient.patientId}</p>
+          <p className="text-sm text-gray-500">{t("patientCard.idPrefix")}{patient.patientId}</p>
         </div>
       </div>
 
@@ -26,7 +28,7 @@ const PatientCard = ({ patient, onUpdate }) => {
         <div className="flex items-center text-gray-600">
           <FiUser className="w-4 h-4 mr-2" />
           <span>
-            {patient.age} years • {patient.gender}
+            {patient.age}{t("patientCard.ageGenderSeparator")}{patient.gender}
           </span>
         </div>
         <div className="flex items-center text-gray-600">
@@ -42,7 +44,7 @@ const PatientCard = ({ patient, onUpdate }) => {
         <div className="flex items-center text-gray-600">
           <FiCalendar className="w-4 h-4 mr-2" />
           <span>
-            Registered: {new Date(patient.createdAt).toLocaleDateString()}
+            {t("patientCard.registeredPrefix")}{new Date(patient.createdAt).toLocaleDateString()}
           </span>
         </div>
       </div>
@@ -52,13 +54,13 @@ const PatientCard = ({ patient, onUpdate }) => {
           onClick={() => navigate(`/portal/patients/${patient.id}`)}
           className="flex-1 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition text-sm font-medium"
         >
-          View Details
+          {t("patientCard.viewDetails")}
         </button>
         <button
           onClick={() => navigate(`/portal/visits/new?patientId=${patient.id}`)}
           className="flex-1 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition text-sm font-medium"
         >
-          New Visit
+          {t("patientCard.newVisit")}
         </button>
       </div>
     </div>
