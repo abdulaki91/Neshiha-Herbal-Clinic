@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { FiPlus, FiSearch, FiUser } from "react-icons/fi";
-import axiosInstance from "../../lib/axios";
 import { getSocket } from "../../lib/socket";
+import { usePatients, useCreatePatient } from "../../hooks/usePatients";
 import PatientForm from "../../components/patients/PatientForm";
 import PatientCard from "../../components/patients/PatientCard";
 import toast from "react-hot-toast";
@@ -9,48 +10,28 @@ import useAuthStore from "../../store/authStore";
 
 const PatientsPage = () => {
   const { user } = useAuthStore();
-  const [patients, setPatients] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [pagination, setPagination] = useState(null);
+  const qc = useQueryClient();
 
-  useEffect(() => {
-    fetchPatients();
-  }, [page, search]);
+  const { data, isLoading } = usePatients({ page, pageSize: 10, search });
+  const patients = data?.patients || [];
+  const pagination = data?.pagination;
+  const createPatient = useCreatePatient();
 
-  // Real-time socket listener for new patients
+  // Real-time: invalidate on new patient
   useEffect(() => {
     const socket = getSocket();
     if (!socket) return;
-
-    socket.on("patient:registered", fetchPatients);
-
-    return () => {
-      socket.off("patient:registered", fetchPatients);
-    };
-  }, []);
-
-  const fetchPatients = async () => {
-    try {
-      setLoading(true);
-      const response = await axiosInstance.get("/patients", {
-        params: { page, pageSize: 10, search },
-      });
-      setPatients(response.data.data || response.data || []);
-      setPagination(response.data.pagination || null);
-    } catch (error) {
-      toast.error("Failed to load patients");
-      setPatients([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const invalidate = () => qc.invalidateQueries({ queryKey: ["patients"] });
+    socket.on("patient:registered", invalidate);
+    return () => socket.off("patient:registered", invalidate);
+  }, [qc]);
 
   const handlePatientCreated = () => {
     setShowForm(false);
-    fetchPatients();
+    qc.invalidateQueries({ queryKey: ["patients"] });
     toast.success("Patient registered successfully!");
   };
 
@@ -89,7 +70,7 @@ const PatientsPage = () => {
       </div>
 
       {/* Patient List */}
-      {loading ? (
+      {isLoading ? (
         <div className="flex items-center justify-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
         </div>

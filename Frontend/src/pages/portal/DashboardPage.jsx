@@ -1,39 +1,50 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { FiUsers, FiCalendar, FiActivity, FiTrendingUp } from "react-icons/fi";
 import useAuthStore from "../../store/authStore";
-import axiosInstance from "../../lib/axios";
+import { getSocket } from "../../lib/socket";
+import { useDashboard } from "../../hooks/useDashboard";
 
 const DashboardPage = () => {
   const { user } = useAuthStore();
   const navigate = useNavigate();
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { data: stats, isLoading } = useDashboard();
+  const qc = useQueryClient();
 
+  // Real-time: invalidate dashboard on socket events
   useEffect(() => {
-    fetchDashboard();
-  }, []);
+    const socket = getSocket();
+    if (!socket) return;
 
-  const fetchDashboard = async () => {
-    try {
-      const endpoint = {
-        super_admin: "/dashboard/admin",
-        staff_manager: "/dashboard/admin",
-        doctor: "/dashboard/doctor",
-        data_clerk: "/dashboard/clerk",
-        cashier: "/dashboard/cashier",
-      }[user?.role];
+    const invalidate = () => qc.invalidateQueries({ queryKey: ["dashboard"] });
 
-      const response = await axiosInstance.get(endpoint);
-      setStats(response.data);
-    } catch (error) {
-      console.error("Failed to fetch dashboard:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const attach = () => {
+      socket.on("visit:status-changed", invalidate);
+      socket.on("queue:updated", invalidate);
+      socket.on("patient:registered", invalidate);
+      socket.on("payment:completed", invalidate);
+      socket.on("prescription:created", invalidate);
+    };
 
-  if (loading) {
+    const detach = () => {
+      socket.off("visit:status-changed", invalidate);
+      socket.off("queue:updated", invalidate);
+      socket.off("patient:registered", invalidate);
+      socket.off("payment:completed", invalidate);
+      socket.off("prescription:created", invalidate);
+    };
+
+    if (socket.connected) attach();
+    socket.on("connect", attach);
+
+    return () => {
+      detach();
+      socket.off("connect", attach);
+    };
+  }, [qc]);
+
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>

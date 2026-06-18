@@ -1,23 +1,16 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import {
-  FiUser,
-  FiClock,
-  FiFileText,
-  FiActivity,
-  FiHeart,
-  FiAlertCircle,
-  FiCheckCircle,
-  FiX,
-  FiPlus,
-  FiSave,
-  FiChevronLeft,
-  FiChevronRight,
-  FiUsers,
+  FiUser, FiClock, FiFileText, FiActivity, FiHeart,
+  FiAlertCircle, FiCheckCircle, FiX, FiPlus, FiSave,
+  FiChevronLeft, FiChevronRight, FiUsers,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 import { getSocket } from "../../lib/socket";
+import { useQueue, useUpdateVisit } from "../../hooks/useVisits";
+import { usePrescriptions } from "../../hooks/usePrescriptions";
 import HerbalMedicineForm from "../../components/doctor/HerbalMedicineForm";
 import VitalSignsForm from "../../components/doctor/VitalSignsForm";
 import InvestigationForm from "../../components/doctor/InvestigationForm";
@@ -49,9 +42,7 @@ const addPatientToRecent = (patient) => {
 
 const DoctorQueuePage = () => {
   const [searchParams] = useSearchParams();
-  const [queue, setQueue] = useState([]);
   const [selectedVisit, setSelectedVisit] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("consultation");
   const [showMobileConsultation, setShowMobileConsultation] = useState(false);
 
@@ -68,36 +59,23 @@ const DoctorQueuePage = () => {
     followUpDate: "",
   });
 
-  const fetchQueue = useCallback(async () => {
-    try {
-      const response = await axiosInstance.get("/visits/queue");
-      const visits = response.data.data || response.data || [];
-      setQueue(visits);
-    } catch {
-      toast.error("Failed to fetch queue");
-      setQueue([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const qc = useQueryClient();
+  const { data: queue = [], isLoading } = useQueue();
+  const updateVisit = useUpdateVisit();
+  const { data: prescriptionsData } = usePrescriptions();
 
-  useEffect(() => {
-    fetchQueue();
-  }, [fetchQueue]);
-
-  // Real-time socket listener for queue updates
+  // Real-time: invalidate queue on socket events
   useEffect(() => {
     const socket = getSocket();
     if (!socket) return;
-
-    socket.on("queue:updated", fetchQueue);
-    socket.on("visit:status-changed", fetchQueue);
-
+    const invalidate = () => qc.invalidateQueries({ queryKey: ["queue"] });
+    socket.on("queue:updated", invalidate);
+    socket.on("visit:status-changed", invalidate);
     return () => {
-      socket.off("queue:updated", fetchQueue);
-      socket.off("visit:status-changed", fetchQueue);
+      socket.off("queue:updated", invalidate);
+      socket.off("visit:status-changed", invalidate);
     };
-  }, [fetchQueue]);
+  }, [qc]);
 
   // Auto-start consultation if visitId is in URL
   useEffect(() => {
