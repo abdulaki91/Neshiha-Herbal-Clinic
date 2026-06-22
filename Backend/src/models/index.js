@@ -10,6 +10,7 @@ import AuditLog from "./AuditLog.js";
 import Notification from "./Notification.js";
 import Setting from "./Setting.js";
 import Payment from "./Payment.js";
+import PatientAttachment from "./PatientAttachment.js";
 
 // Define Associations
 
@@ -28,6 +29,7 @@ User.hasMany(MedicineDispense, {
 });
 User.hasMany(Notification, { foreignKey: "userId", as: "notifications" });
 User.hasMany(Payment, { foreignKey: "cashierId", as: "processedPayments" });
+User.hasMany(PatientAttachment, { foreignKey: "uploadedBy", as: "uploadedAttachments" });
 
 // Patient associations
 Patient.belongsTo(User, { foreignKey: "registeredBy", as: "registeredByUser" });
@@ -42,6 +44,7 @@ Patient.hasMany(MedicineDispense, {
   as: "medicineDispenses",
 });
 Patient.hasMany(Payment, { foreignKey: "patientId", as: "payments" });
+Patient.hasMany(PatientAttachment, { foreignKey: "patientId", as: "attachments" });
 
 // Visit associations
 Visit.belongsTo(Patient, { foreignKey: "patientId", as: "patient" });
@@ -54,6 +57,7 @@ Visit.hasMany(MedicineDispense, {
   as: "medicineDispenses",
 });
 Visit.hasMany(Payment, { foreignKey: "visitId", as: "payments" });
+Visit.hasMany(PatientAttachment, { foreignKey: "visitId", as: "attachments" });
 
 // Medicine associations
 Medicine.hasMany(Prescription, {
@@ -118,6 +122,11 @@ Notification.belongsTo(User, { foreignKey: "userId", as: "user" });
 // AuditLog associations
 AuditLog.belongsTo(User, { foreignKey: "userId", as: "user" });
 
+// PatientAttachment associations
+PatientAttachment.belongsTo(User, { foreignKey: "uploadedBy", as: "uploader" });
+PatientAttachment.belongsTo(Patient, { foreignKey: "patientId", as: "patient" });
+PatientAttachment.belongsTo(Visit, { foreignKey: "visitId", as: "visit" });
+
 // Export models and sequelize instance
 export {
   sequelize,
@@ -132,6 +141,7 @@ export {
   Notification,
   Setting,
   Payment,
+  PatientAttachment,
 };
 
 // Sync database (development only)

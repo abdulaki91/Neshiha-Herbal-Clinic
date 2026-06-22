@@ -19,6 +19,7 @@ import ActivePrescriptions from "../../components/doctor/ActivePrescriptions";
 import PendingInvestigations from "../../components/doctor/PendingInvestigations";
 import ConsultationTab from "../../components/doctor/ConsultationTab";
 import PatientHistoryTab from "../../components/doctor/PatientHistoryTab";
+import PatientRecordSidebar from "../../components/doctor/PatientRecordSidebar";
 
 const addPatientToRecent = (patient) => {
   if (!patient) return;
@@ -45,6 +46,7 @@ const DoctorQueuePage = () => {
   const [selectedVisit, setSelectedVisit] = useState(null);
   const [activeTab, setActiveTab] = useState("consultation");
   const [showMobileConsultation, setShowMobileConsultation] = useState(false);
+  const [isRecordSidebarOpen, setIsRecordSidebarOpen] = useState(false);
 
   // Consultation data
   const [consultationData, setConsultationData] = useState({
@@ -233,6 +235,7 @@ const DoctorQueuePage = () => {
           onComplete={handleCompleteConsultation}
           onBack={handleDeselectVisit}
           refreshQueue={refreshQueue}
+          onOpenSidebar={() => setIsRecordSidebarOpen(true)}
         />
       </div>
     );
@@ -394,6 +397,13 @@ const DoctorQueuePage = () => {
             onComplete={handleCompleteConsultation}
             onBack={handleDeselectVisit}
             refreshQueue={refreshQueue}
+            onOpenSidebar={() => setIsRecordSidebarOpen(true)}
+          />
+          <PatientRecordSidebar
+            isOpen={isRecordSidebarOpen}
+            onClose={() => setIsRecordSidebarOpen(false)}
+            patientId={selectedVisit.patient?.id}
+            visitId={selectedVisit.id}
           />
         </div>
       )}
@@ -425,6 +435,7 @@ const ConsultationPanel = ({
   onComplete,
   onBack,
   refreshQueue,
+  onOpenSidebar,
 }) => {
   return (
     <div>
@@ -439,6 +450,13 @@ const ConsultationPanel = ({
           </p>
         </div>
         <div className="flex space-x-2">
+          <button
+            onClick={onOpenSidebar}
+            className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm font-semibold shadow-sm"
+          >
+            <FiFileText className="w-4 h-4" />
+            <span>Patient File Drawer</span>
+          </button>
           <button
             onClick={onSave}
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"

@@ -14,7 +14,7 @@ const Medicine = sequelize.define(
     code: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
+      allowNull: true,
     },
     barcode: {
       type: DataTypes.STRING,

@@ -50,3 +50,37 @@ export const useDeletePatient = () => {
     onSuccess: () => qc.invalidateQueries({ queryKey: ["patients"] }),
   });
 };
+
+export const usePatientAttachments = (patientId) =>
+  useQuery({
+    queryKey: ["patients", patientId, "attachments"],
+    queryFn: () => axiosInstance.get(`/patients/${patientId}/attachments`),
+    select: (res) => res.data || res,
+    enabled: !!patientId,
+  });
+
+export const useUploadPatientAttachment = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, formData }) =>
+      axiosInstance.post(`/patients/${id}/attachments`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      }),
+    onSuccess: (_, { id }) => {
+      qc.invalidateQueries({ queryKey: ["patients", id, "attachments"] });
+      qc.invalidateQueries({ queryKey: ["patients", id, "history"] });
+    },
+  });
+};
+
+export const useDeletePatientAttachment = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, attachmentId }) =>
+      axiosInstance.delete(`/patients/${id}/attachments/${attachmentId}`),
+    onSuccess: (_, { id }) => {
+      qc.invalidateQueries({ queryKey: ["patients", id, "attachments"] });
+      qc.invalidateQueries({ queryKey: ["patients", id, "history"] });
+    },
+  });
+};

@@ -1,5 +1,6 @@
 import express from "express";
 import * as patientController from "../controllers/patientController.js";
+import * as patientAttachmentController from "../controllers/patientAttachmentController.js";
 import * as patientValidator from "../validators/patientValidator.js";
 import { validate } from "../middleware/validator.js";
 import { authenticate, authorize } from "../middleware/auth.js";
@@ -64,6 +65,29 @@ router.post(
   uploadSingle("photo"),
   auditLogger("UPDATE", "Patient"),
   patientController.uploadPhoto,
+);
+
+// Upload patient attachment (laboratory report, photos, etc.)
+router.post(
+  "/:id/attachments",
+  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  uploadSingle("document"),
+  auditLogger("UPDATE", "Patient"),
+  patientAttachmentController.uploadAttachment,
+);
+
+// Get patient attachments
+router.get(
+  "/:id/attachments",
+  patientAttachmentController.getAttachments,
+);
+
+// Delete patient attachment
+router.delete(
+  "/:id/attachments/:attachmentId",
+  authorize(ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  auditLogger("UPDATE", "Patient"),
+  patientAttachmentController.deleteAttachment,
 );
 
 export default router;

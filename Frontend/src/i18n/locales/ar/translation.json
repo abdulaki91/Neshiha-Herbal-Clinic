@@ -11,7 +11,40 @@
     "close": "إغلاق",
     "back": "رجوع",
     "next": "التالي",
-    "previous": "السابق"
+    "previous": "السابق",
+    "view": "View",
+    "print": "Print",
+    "all": "All",
+    "total": "Total",
+    "patient": "Patient",
+    "patientId": "ID",
+    "doctor": "Doctor",
+    "doctorPrefix": "Dr.",
+    "amount": "Amount",
+    "method": "Method",
+    "date": "Date",
+    "dateAndTime": "Date & Time",
+    "cashier": "Cashier",
+    "visitNumber": "Visit #",
+    "paymentNumber": "Payment #",
+    "phone": "Phone",
+    "age": "Age",
+    "notAvailable": "N/A",
+    "instructions": "Instructions",
+    "quantityAbbr": "Qty",
+    "by": "by",
+    "saving": "Saving...",
+    "creating": "Creating...",
+    "currency": {
+      "etb": "ETB"
+    },
+    "pagination": {
+      "page": "Page",
+      "of": "of"
+    },
+    "ageUnit": {
+      "years": "years"
+    }
   },
   "navigation": {
     "home": "الرئيسية",
@@ -41,12 +74,10 @@
     "customFormulations": "تركيبات مخصصة",
     "followUpCare": "الرعاية اللاحقة",
     "lifestyleGuidance": "إرشادات نمط الحياة",
-
     "immuneSupport": "دعم المناعة",
     "detoxPrograms": "برامج إزالة السموم",
     "energyEnhancement": "تعزيز الطاقة",
     "stressManagement": "إدارة التوتر",
-
     "treatment": "العلاج بالأعشاب",
     "herbalMedicine": "الطب العشبي",
     "acupuncture": "الوخز بالإبر",
@@ -60,28 +91,24 @@
     "title": "خدماتنا",
     "subtitle": "علاجات عشبية شاملة لعافيتك",
     "desc": "استشارات عشبية شخصية مع أطبائنا المعتمدين لمعالجة مشاكلك الصحية الخاصة ووضع خطة علاجية مخصصة.",
-
     "therapeuticMassage": "التدليك العلاجي",
     "therapeuticMassageDesc": "جلسات تدليك تقليدية وعلاجات بزيوت عشبية لراحة الجسم والعقل.",
     "swedishMassage": "التدليك السويدي",
     "deepTissue": "تدليك الأنسجة العميقة",
     "herbalOilTherapy": "العلاج بزيوت الأعشاب",
     "stressRelief": "تخفيف التوتر",
-
     "personalizedHealthPlans": "خطط صحية شخصية",
     "personalizedHealthPlansDesc": "خطط مخصصة تشمل التغذية، التمارين، المكملات العشبية والمتابعة.",
     "nutritionGuidance": "إرشادات التغذية",
     "exercisePlans": "خطط التمارين",
     "herbalSupplements": "مكملات عشبية",
     "progressTracking": "متابعة التقدم",
-
     "herbalEducation": "التثقيف العشبي",
     "herbalEducationDesc": "ورش عمل واستشارات حول كيفية استخدام العلاجات الطبيعية في الحياة اليومية.",
     "workshops": "ورش عمل",
     "herbIdentification": "تعريف بالأعشاب",
     "homeRemedies": "علاجات منزلية",
     "safetyGuidelines": "إرشادات السلامة",
-
     "whatsIncluded": "المميزات المتضمنة",
     "ctaTitle": "ابدأ رحلتك الصحية",
     "ctaDesc": "تواصل مع خبراء الأعشاب لدينا واكتشف كيف يمكن للشفاء الطبيعي أن يساعدك."
@@ -101,7 +128,10 @@
     "naturalIngredients": "مكونات طبيعية",
     "naturalIngredientsDesc": "نستخدم فقط أعلى جودة من المكونات الطبيعية ذات المصدر الأخلاقي في جميع علاجاتنا.",
     "holisticApproach": "نهج شامل",
-    "holisticApproachDesc": "نعالج الشخص كاملاً، معالجة الأسباب الجذرية بدلاً من الأعراض فقط لضمان الصحة الدائمة."
+    "holisticApproachDesc": "نعالج الشخص كاملاً، معالجة الأسباب الجذرية بدلاً من الأعراض فقط لضمان الصحة الدائمة.",
+    "metaTitle": "About Us - Nesiha Herbal Clinic",
+    "metaDescription": "Learn about Nesiha Herbal Clinic, where traditional herbal wisdom meets modern science. Discover our certified practitioners, natural ingredients, and holistic approach.",
+    "metaKeywords": "herbal clinic, Nesiha herbal, mana qorichaa aadaa, natural remedies, holistic healing, alternative medicine, Oromia herbal clinic, Ethiopia herbal treatment"
   },
   "testimonials": {
     "title": "ماذا يقول عملاؤنا",
@@ -109,7 +139,6 @@
     "featured": "شهادات فيديو مميزة",
     "more": "قصص عملاء إضافية",
     "videoAvailable": "شهادة فيديو متاحة",
-
     "list": [
       {
         "name": "إيما س.",
@@ -161,12 +190,986 @@
   "footer": {
     "copyright": "© 2024 عيادة نسيحة للأعشاب. جميع الحقوق محفوظة.",
     "privacy": "سياسة الخصوصية",
-    "terms": "شروط الخدمة"
+    "terms": "شروط الخدمة",
+    "quickLinks": "Quick Links"
   },
   "blog": {
     "title": "مدونة الصحة والعافية",
     "subtitle": "رؤى ونصائح للحياة الطبيعية",
     "readMore": "اقرأ المزيد",
-    "publishedOn": "نشر في"
+    "publishedOn": "نشر في",
+    "badge": "Our Blog",
+    "heading": "Wellness Insights",
+    "desc": "Discover expert insights, natural health tips, and the latest research in herbal medicine to support your journey to optimal wellness.",
+    "featuredBadge": "Featured",
+    "readFullArticle": "Read Full Article",
+    "filter": {
+      "all": "All"
+    },
+    "post": [
+      {
+        "title": "5 Essential Tips for a Healthier Lifestyle",
+        "desc": "Discover simple yet powerful daily practices that can transform your health and well-being naturally. From morning routines to evening habits, learn how small changes create lasting results.",
+        "category": "Wellness Tips",
+        "readTime": "5 min read",
+        "date": "March 15, 2024",
+        "author": "Dr. Sarah Johnson"
+      },
+      {
+        "title": "The Healing Power of Herbal Medicine",
+        "desc": "Explore the ancient wisdom of herbal medicine and discover how natural remedies can enhance your health. Learn about the science behind traditional healing practices and modern applications.",
+        "category": "Herbal Medicine",
+        "readTime": "7 min read",
+        "date": "March 12, 2024",
+        "author": "Dr. Ahmed Hassan"
+      },
+      {
+        "title": "Natural Detox: Cleanse Your Body Naturally",
+        "desc": "Learn about natural detoxification methods that support your body's natural cleansing processes. Discover herbs, foods, and practices that promote optimal health and vitality.",
+        "category": "Detox & Cleansing",
+        "readTime": "6 min read",
+        "date": "March 10, 2024",
+        "author": "Dr. Maria Rodriguez"
+      },
+      {
+        "title": "Stress Management Through Traditional Healing",
+        "desc": "Explore ancient stress management techniques and how they can help you find balance in today's fast-paced world. From meditation to herbal remedies, discover natural stress relief.",
+        "category": "Mental Health",
+        "readTime": "8 min read",
+        "date": "March 8, 2024",
+        "author": "Dr. James Chen"
+      },
+      {
+        "title": "Seasonal Wellness: Spring Health Guide",
+        "desc": "Embrace the energy of spring with our comprehensive guide to seasonal wellness. Learn how to align your health practices with nature's rhythms for optimal vitality.",
+        "category": "Seasonal Health",
+        "readTime": "4 min read",
+        "date": "March 5, 2024",
+        "author": "Dr. Elena Petrov"
+      },
+      {
+        "title": "The Science Behind Natural Immunity",
+        "desc": "Understand how natural remedies and lifestyle choices can strengthen your immune system. Discover evidence-based approaches to building robust health naturally.",
+        "category": "Immunity",
+        "readTime": "9 min read",
+        "date": "March 3, 2024",
+        "author": "Dr. Lisa Thompson"
+      }
+    ],
+    "newsletter": {
+      "heading": "Stay Updated",
+      "subtitle": "Get the latest wellness tips, herbal medicine insights, and health updates delivered to your inbox.",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe"
+    }
+  },
+  "sidebar": {
+    "brandName": "Neshiha Clinic",
+    "dashboard": "Dashboard",
+    "staff": "Staff",
+    "patients": "Patients",
+    "visits": "Visits",
+    "medicines": "Medicines",
+    "cashier": "Cashier",
+    "laboratory": "Laboratory",
+    "reports": "Reports",
+    "settings": "Settings",
+    "queue": "Queue",
+    "logout": "Logout",
+    "adminPanel": "Admin Panel",
+    "badgeOverflow": "99+"
+  },
+  "topbar": {
+    "greeting": "Welcome, {{firstName}}!",
+    "notifications": "Notifications",
+    "markAllRead": "Mark all read",
+    "noNotifications": "No notifications yet",
+    "badgeOverflow": "99+",
+    "lang": {
+      "english": "English",
+      "oromo": "Oromo",
+      "amharic": "Amharic",
+      "arabic": "Arabic",
+      "nativeEnglish": "English",
+      "nativeOromo": "Afaan Oromoo",
+      "nativeAmharic": "አማርኛ",
+      "nativeArabic": "العربية"
+    },
+    "notification": {
+      "visitUpdated": "Visit Updated",
+      "visitStatus": "Status: {{status}}",
+      "newPatient": "New Patient",
+      "patientRegistered": "{{firstName}} {{lastName}} registered",
+      "paymentReceived": "Payment Received",
+      "paymentAmount": "{{amount}} ETB paid",
+      "prescriptionAdded": "Prescription Added",
+      "newPrescription": "New prescription created"
+    },
+    "time": {
+      "justNow": "just now",
+      "minutesAgo": "{{m}}m ago",
+      "hoursAgo": "{{h}}h ago"
+    }
+  },
+  "toast": {
+    "newPatientInQueue": "New patient in queue",
+    "patientRegistered": "New patient registered: {{firstName}} {{lastName}}",
+    "newVisitCreated": "New visit created",
+    "visitStatus": "Visit status: {{status}}",
+    "prescriptionAdded": "New prescription added for patient",
+    "medicineDispensed": "Medicine dispensed to patient",
+    "paymentReceived": "Payment received: {{amount}} ETB"
+  },
+  "login": {
+    "brandName": "Neshiha Herbal Clinic",
+    "brandSubtitle": "Clinic Management System",
+    "heading": "Sign In",
+    "label": {
+      "email": "Email Address",
+      "password": "Password"
+    },
+    "placeholder": {
+      "email": "your.email@clinic.com",
+      "password": "••••••••"
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "passwordRequired": "Password is required"
+    },
+    "button": {
+      "submit": "Sign In",
+      "loading": "Signing in..."
+    },
+    "demo": {
+      "heading": "Demo Accounts:",
+      "admin": "admin@neshihaclinic.com | Admin@123",
+      "doctor": "doctor@neshihaclinic.com | Doctor@123",
+      "clerk": "clerk@neshihaclinic.com | Clerk@123",
+      "cashier": "cashier@neshihaclinic.com | Cashier@123"
+    },
+    "toast": {
+      "welcome": "Welcome back, {{firstName}}!",
+      "failed": "Login failed"
+    }
+  },
+  "signin": {
+    "heading": "Admin Sign In",
+    "error": {
+      "fillAllFields": "Please fill in all fields."
+    },
+    "label": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "placeholder": {
+      "email": "you@example.com",
+      "password": "Enter your password"
+    },
+    "button": {
+      "submit": "Sign In"
+    },
+    "forgotPassword": "Forgot your password?",
+    "resetLink": "Reset it"
+  },
+  "error": {
+    "404": {
+      "code": "404",
+      "message": "Page Not Found"
+    }
+  },
+  "home": {
+    "title": "Nesihah Herbal Clinic | Mana Qorichaa Aadaa Nasiiha",
+    "metaDescription": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha): Your trusted source for traditional herbal medicine, natural remedies, and holistic healing in Ethiopia.",
+    "metaKeywords": "Nesihah Herbal Clinic, Mana Qorichaa Aadaa Nasiiha, herbal medicine, natural remedies, traditional healing, Ethiopia",
+    "ogTitle": "Nesihah Herbal Clinic",
+    "ogDescription": "Trusted herbal health solutions and traditional healing in Ethiopia.",
+    "twitterTitle": "Nesihah Herbal Clinic",
+    "twitterDescription": "Trusted herbal health solutions and traditional healing in Ethiopia.",
+    "schema": {
+      "name": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha)",
+      "streetAddress": "AshewaMeda",
+      "addressLocality": "Shegar",
+      "addressRegion": "Oromia",
+      "postalCode": "0000",
+      "addressCountry": "Ethiopia",
+      "telephone": "+251912166549",
+      "url": "https://www.nesihaherbalclinic.com/"
+    }
+  },
+  "receipt": {
+    "clinicName": "Neshiha Herbal Clinic",
+    "clinicSubtitle": "Clinic Management System",
+    "label": {
+      "patient": "Patient:",
+      "id": "ID:",
+      "visit": "Visit:",
+      "doctor": "Doctor:"
+    },
+    "doctorNameFormat": "Dr. {{firstName}} {{lastName}}",
+    "sectionPrescribedMedicines": "Prescribed Medicines:",
+    "medicine": {
+      "qty": "Qty: {{quantity}}"
+    },
+    "placeholder": "—",
+    "totalLabel": "TOTAL:",
+    "currencyFormat": "{{amount}} ETB",
+    "footer": {
+      "thankYou": "Thank you for choosing",
+      "clinicName": "Neshiha Herbal Clinic",
+      "disclaimer": "This is a computer-generated receipt"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "fallback": {
+      "title": "Dashboard"
+    },
+    "stats": {
+      "totalPatients": "Total Patients",
+      "todayPatients": "Today's Patients",
+      "todayVisits": "Today's Visits",
+      "waitingNow": "Waiting Now",
+      "totalDoctors": "Total Doctors",
+      "totalStaff": "Total Staff",
+      "completedToday": "Completed Today",
+      "lowStockItems": "Low Stock Items",
+      "expiredMedicines": "Expired Medicines"
+    },
+    "quickStats": {
+      "title": "Quick Stats"
+    },
+    "systemStatus": {
+      "title": "System Status",
+      "database": "Database",
+      "online": "Online",
+      "realtimeUpdates": "Real-time Updates",
+      "connected": "Connected",
+      "lastBackup": "Last Backup"
+    },
+    "doctor": {
+      "title": "Doctor Dashboard",
+      "stats": {
+        "inQueue": "In Queue",
+        "completedToday": "Completed Today",
+        "prescriptions": "Prescriptions",
+        "dispensed": "Dispensed"
+      },
+      "waitingPatients": "Waiting Patients",
+      "startConsultation": "Start Consultation",
+      "empty": {
+        "noPatients": "No patients waiting"
+      }
+    },
+    "dataClerk": {
+      "title": "Data Clerk Dashboard",
+      "stats": {
+        "registeredToday": "Registered Today",
+        "todayVisits": "Today's Visits",
+        "waitingPatients": "Waiting Patients"
+      },
+      "recentRegistrations": "Recent Registrations",
+      "empty": {
+        "noRegistrations": "No recent registrations"
+      }
+    },
+    "cashier": {
+      "title": "Cashier Dashboard",
+      "stats": {
+        "pendingPayments": "Pending Payments",
+        "paymentsProcessedToday": "Payments Processed Today",
+        "todayRevenue": "Today's Revenue (ETB)"
+      },
+      "recentPayments": "Recent Payments",
+      "empty": {
+        "noPayments": "No recent payments"
+      }
+    }
+  },
+  "cashier": {
+    "title": "Cashier Dashboard",
+    "subtitle": "Receive payments, dispense medicine & print receipts",
+    "tabs": {
+      "pending": "Pending",
+      "recent": "Recent Payments"
+    },
+    "search": {
+      "placeholder": "Search by patient name or ID..."
+    },
+    "pending": {
+      "actionButton": "Receive & Dispense",
+      "empty": "No pending payments"
+    },
+    "recent": {
+      "empty": "No recent payments"
+    },
+    "modal": {
+      "payment": {
+        "title": "Receive Payment",
+        "confirm": "Confirm Payment & Dispense",
+        "totalDue": "Total Amount Due",
+        "medicinesToDispense": "Medicines to dispense:",
+        "paymentMethodLabel": "Payment Method",
+        "transactionIdLabel": "Transaction ID / Reference (Optional)",
+        "transactionIdPlaceholder": "e.g., TXN123456",
+        "notesLabel": "Notes"
+      },
+      "detail": {
+        "title": "Payment Details",
+        "printReceipt": "Print Receipt",
+        "prescribedMedicines": "Prescribed Medicines",
+        "transactionId": "Transaction ID"
+      }
+    },
+    "paymentMethods": {
+      "cash": "Cash",
+      "bankTransfer": "Bank Transfer",
+      "mobileMoney": "Mobile Money (Telebirr/CBE Birr)",
+      "other": "Other"
+    },
+    "toast": {
+      "paymentSuccess": "Payment received — medicine dispensed to patient",
+      "paymentError": "Failed to process payment"
+    }
+  },
+  "cashierReports": {
+    "title": "Cashier Reports",
+    "subtitle": "Paid prescription revenue",
+    "periods": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "periodLabels": {
+      "today": "Today",
+      "thisWeek": "This Week",
+      "thisMonth": "This Month"
+    },
+    "cards": {
+      "totalRevenue": "Total Revenue",
+      "prescriptionsPaid": "Prescriptions Paid",
+      "period": "Period"
+    },
+    "byPaymentMethod": "By Payment Method",
+    "paymentTransactions": "Payment Transactions",
+    "empty": {
+      "payments": "No payments found for this period",
+      "report": "No report data available"
+    }
+  },
+  "patients": {
+    "title": "Patients",
+    "subtitle": "Manage patient records",
+    "registerButton": "Register Patient",
+    "search": {
+      "placeholder": "Search patients by name, ID, phone..."
+    },
+    "empty": {
+      "title": "No patients found",
+      "subtitle": "Register your first patient to get started"
+    },
+    "toast": {
+      "registerSuccess": "Patient registered successfully!"
+    }
+  },
+  "visits": {
+    "title": "Visits",
+    "subtitle": "Manage patient visits",
+    "newVisitButton": "New Visit",
+    "status": {
+      "waiting": "Waiting",
+      "inConsultation": "In Consultation",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "empty": "No visits found",
+    "toast": {
+      "loadError": "Failed to load visits",
+      "createSuccess": "Visit created successfully!"
+    }
+  },
+  "doctorQueue": {
+    "title": "Patient Queue",
+    "backToQueue": "Back to Queue",
+    "refreshQueue": "Refresh Queue",
+    "actions": {
+      "start": "Start",
+      "continue": "Continue",
+      "consulting": "Consulting"
+    },
+    "status": {
+      "withAnotherDoctor": "With another doctor",
+      "active": "Active",
+      "inProgress": "In Progress"
+    },
+    "empty": {
+      "title": "No patients waiting",
+      "subtitle": "New patients will appear here"
+    },
+    "rightPanel": {
+      "selectPatient": "Select a Patient",
+      "selectPatientHint": "Click \"Start\" on a patient from the queue to begin consultation"
+    },
+    "tabs": {
+      "consultation": "Consultation",
+      "vitalSigns": "Vital Signs",
+      "investigation": "Investigation",
+      "herbalMedicine": "Herbal Medicine",
+      "history": "History"
+    },
+    "consultation": {
+      "title": "Consultation",
+      "patientInfo": "Patient Information",
+      "diagnosisTitle": "Diagnosis",
+      "noDiagnosis": "No diagnosis added yet",
+      "ageGender": "Age / Gender",
+      "bloodGroup": "Blood Group",
+      "allergies": "Allergies:",
+      "chronic": "Chronic:",
+      "saveProgress": "Save Progress",
+      "completeConsultation": "Complete Consultation"
+    },
+    "queue": {
+      "chiefComplaintPrefix": "CC:"
+    },
+    "queueStats": {
+      "patients": "patients",
+      "inConsultation": "in consultation"
+    },
+    "toast": {
+      "consultationStarted": "Consultation started — patient stays in queue until saved",
+      "startError": "Failed to start consultation",
+      "saveSuccess": "Consultation details saved",
+      "saveError": "Failed to save consultation",
+      "sentToCashier": "Consultation sent to Cashier for payment",
+      "completeSuccess": "Consultation completed successfully",
+      "completeError": "Failed to complete consultation"
+    }
+  },
+  "medicines": {
+    "title": "Medicines",
+    "subtitle": "Manage herbal drug inventory",
+    "addButton": "Add Medicine",
+    "search": {
+      "placeholder": "Search by name or code..."
+    },
+    "card": {
+      "code": "Code:",
+      "category": "Category:",
+      "inStock": "In Stock:",
+      "strength": "Strength:"
+    },
+    "empty": "No medicines found matching your search.",
+    "toast": {
+      "loadError": "Failed to load medicines",
+      "deleteConfirmation": "Are you sure you want to delete this medicine?",
+      "deleteSuccess": "Medicine deleted successfully",
+      "deleteError": "Failed to delete medicine"
+    }
+  },
+  "pharmacy": {
+    "title": "Pharmacy",
+    "subtitle": "Manage medicine prescriptions and dispensing",
+    "actions": {
+      "dispense": "Dispense"
+    },
+    "filters": {
+      "paid": "Paid",
+      "dispensed": "Dispensed",
+      "completed": "Completed",
+      "pending": "Pending"
+    },
+    "search": {
+      "placeholder": "Search by patient name, ID, or medicine..."
+    },
+    "empty": {
+      "search": "No prescriptions found matching your search",
+      "status": "No {{status}} prescriptions"
+    },
+    "prescription": {
+      "medicineFallback": "Medicine",
+      "dosage": "Dosage",
+      "frequency": "Frequency",
+      "duration": "Duration",
+      "quantity": "Quantity",
+      "instructions": "Instructions:",
+      "prescribed": "Prescribed:"
+    },
+    "status": {
+      "dispensed": "Dispensed"
+    },
+    "dispenseModal": {
+      "title": "Dispense Medicine",
+      "confirm": "Confirm Dispensing",
+      "prescriptionDetails": "Prescription Details",
+      "prescribedQuantity": "Prescribed Quantity",
+      "quantityToDispense": "Quantity to Dispense *",
+      "batchNumber": "Batch Number *",
+      "batchNumberPlaceholder": "e.g., BATCH-2026-001",
+      "expiryDate": "Expiry Date *",
+      "notes": "Notes (Optional)",
+      "notesPlaceholder": "Any additional notes..."
+    },
+    "toast": {
+      "loadError": "Failed to load prescriptions",
+      "invalidQuantity": "Please enter a valid quantity",
+      "missingBatch": "Please enter batch number",
+      "missingExpiry": "Please enter expiry date",
+      "dispenseSuccess": "Medicine dispensed successfully",
+      "dispenseError": "Failed to dispense medicine"
+    }
+  },
+  "laboratory": {
+    "title": "Laboratory",
+    "subtitle": "Manage investigation requests and results",
+    "actions": {
+      "startProcessing": "Start Processing",
+      "enterResults": "Enter Results"
+    },
+    "status": {
+      "requested": "Requested",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "urgency": {
+      "routine": "Routine",
+      "urgent": "Urgent",
+      "stat": "STAT"
+    },
+    "search": {
+      "placeholder": "Search by patient name, ID, or test..."
+    },
+    "empty": {
+      "search": "No investigations found matching your search",
+      "status": "No {{status}} investigations"
+    },
+    "detail": {
+      "instructions": "Instructions:",
+      "results": "Results:",
+      "interpretation": "Interpretation:"
+    },
+    "info": {
+      "requested": "Requested:",
+      "scheduled": "Scheduled:",
+      "completed": "Completed:",
+      "performedBy": "Performed by:"
+    },
+    "modal": {
+      "title": "Enter Investigation Results",
+      "submitResults": "Submit Results",
+      "investigationDetails": "Investigation Details",
+      "type": "Type",
+      "testName": "Test Name",
+      "urgency": "Urgency",
+      "requestedDate": "Requested Date",
+      "instructions": "Instructions:",
+      "results": "Investigation Results *",
+      "resultsPlaceholder": "Enter detailed test results, measurements, observations...",
+      "interpretation": "Clinical Interpretation",
+      "interpretationPlaceholder": "Doctor's interpretation of results (optional)...",
+      "performedBy": "Performed By *",
+      "performedByPlaceholder": "Lab technician or radiologist name",
+      "additionalNotes": "Additional Notes",
+      "additionalNotesPlaceholder": "Any additional notes or comments..."
+    },
+    "toast": {
+      "loadError": "Failed to load investigations",
+      "statusUpdated": "Investigation marked as {{status}}",
+      "statusUpdateError": "Failed to update status",
+      "missingResults": "Please enter investigation results",
+      "missingPerformedBy": "Please enter who performed the investigation",
+      "submitSuccess": "Investigation results submitted successfully",
+      "submitError": "Failed to submit results"
+    }
+  },
+  "patientDetail": {
+    "backToPatients": "Back to Patients",
+    "newVisit": "New Visit",
+    "notFound": "Patient not found",
+    "detail": {
+      "email": "Email",
+      "address": "Address",
+      "occupation": "Occupation",
+      "maritalStatus": "Marital Status"
+    },
+    "registered": "Reg:",
+    "alerts": {
+      "allergies": "Allergies:",
+      "chronic": "Chronic:"
+    },
+    "visitHistory": {
+      "title": "Visit History",
+      "complaint": "Complaint:",
+      "treatment": "Treatment:",
+      "empty": "No previous visits"
+    },
+    "toast": {
+      "loadError": "Failed to load patient details"
+    }
+  },
+  "patientForm": {
+    "updateSuccess": "Patient updated successfully",
+    "registerSuccess": "Patient registered successfully",
+    "saveError": "Failed to save patient",
+    "editTitle": "Edit Patient",
+    "registerTitle": "Register New Patient",
+    "personalInfoTitle": "Personal Information",
+    "firstNameLabel": "First Name *",
+    "firstNameRequired": "First name is required",
+    "firstNamePlaceholder": "First name",
+    "middleNameLabel": "Middle Name",
+    "middleNamePlaceholder": "Middle name",
+    "lastNameLabel": "Last Name *",
+    "lastNameRequired": "Last name is required",
+    "lastNamePlaceholder": "Last name",
+    "genderLabel": "Gender *",
+    "genderRequired": "Gender is required",
+    "genderPlaceholder": "Select gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderOther": "Other",
+    "dobLabel": "Date of Birth *",
+    "dobRequired": "Date of birth is required",
+    "phoneLabel": "Phone Number *",
+    "phoneRequired": "Phone number is required",
+    "phonePlaceholder": "+251911234567",
+    "addressTitle": "Address",
+    "cityLabel": "City",
+    "cityPlaceholder": "City",
+    "subCityLabel": "Sub City",
+    "subCityPlaceholder": "Sub city",
+    "woredaLabel": "Woreda",
+    "woredaPlaceholder": "Woreda",
+    "bloodGroupLabel": "Blood Group",
+    "bloodGroupPlaceholder": "Select blood group",
+    "emergencyContactTitle": "Emergency Contact",
+    "emergencyContactNameLabel": "Emergency Contact Name",
+    "emergencyContactNamePlaceholder": "Full name",
+    "emergencyContactPhoneLabel": "Emergency Contact Phone",
+    "emergencyContactPhonePlaceholder": "+251911234567",
+    "saving": "Saving...",
+    "updateButton": "Update Patient",
+    "registerButton": "Register Patient"
+  },
+  "patientCard": {
+    "idPrefix": "ID: ",
+    "ageGenderSeparator": " years • ",
+    "registeredPrefix": "Registered: ",
+    "viewDetails": "View Details",
+    "newVisit": "New Visit"
+  },
+  "vitalSigns": {
+    "title": "Vital Signs",
+    "loading": "Loading vital signs...",
+    "saveButton": "Save Vitals",
+    "saveSuccess": "Vital signs saved successfully",
+    "saveError": "Failed to save vital signs",
+    "temperatureLabel": "Temperature (°C)",
+    "temperaturePlaceholder": "e.g., 37.5",
+    "temperatureNormal": "Normal: 36.5 - 37.5°C",
+    "bloodPressureLabel": "Blood Pressure (mmHg)",
+    "systolicPlaceholder": "Systolic (120)",
+    "diastolicPlaceholder": "Diastolic (80)",
+    "bloodPressureNormal": "Normal: 120/80 mmHg",
+    "heartRateLabel": "Heart Rate (bpm)",
+    "heartRatePlaceholder": "e.g., 72",
+    "heartRateNormal": "Normal: 60 - 100 bpm",
+    "respiratoryRateLabel": "Respiratory Rate (per min)",
+    "respiratoryRatePlaceholder": "e.g., 16",
+    "respiratoryRateNormal": "Normal: 12 - 20 per min",
+    "oxygenSaturationLabel": "Oxygen Saturation (%)",
+    "oxygenSaturationPlaceholder": "e.g., 98",
+    "oxygenSaturationNormal": "Normal: 95 - 100%",
+    "weightLabel": "Weight (kg)",
+    "weightPlaceholder": "e.g., 70.5",
+    "heightLabel": "Height (cm)",
+    "heightPlaceholder": "e.g., 175",
+    "bmiLabel": "Body Mass Index (BMI)",
+    "categoryPrefix": "Category: ",
+    "reference": {
+      "title": "Normal Vital Signs Reference",
+      "temperature": "• Temperature: 36.5 - 37.5°C",
+      "bloodPressure": "• Blood Pressure: 120/80 mmHg",
+      "heartRate": "• Heart Rate: 60 - 100 bpm",
+      "respiratoryRate": "• Respiratory Rate: 12 - 20/min",
+      "oxygenSaturation": "• Oxygen Saturation: 95 - 100%",
+      "bmi": "• BMI: 18.5 - 24.9 (Normal)"
+    }
+  },
+  "bmi": {
+    "category": {
+      "underweight": "Underweight",
+      "normal": "Normal",
+      "overweight": "Overweight",
+      "obese": "Obese"
+    }
+  },
+  "consultation": {
+    "chiefComplaintLabel": "Chief Complaint *",
+    "chiefComplaintPlaceholder": "Main reason for visit...",
+    "symptomsLabel": "Symptoms",
+    "addSymptomPlaceholder": "Add symptom...",
+    "historyOfPresentIllnessLabel": "History of Present Illness",
+    "historyOfPresentIllnessPlaceholder": "Detailed history of the current condition...",
+    "physicalExaminationLabel": "Physical Examination",
+    "physicalExaminationPlaceholder": "Physical examination findings...",
+    "diagnosisLabel": "Diagnosis",
+    "addDiagnosisPlaceholder": "Add diagnosis...",
+    "treatmentPlanLabel": "Treatment Plan",
+    "treatmentPlanPlaceholder": "Treatment plan and recommendations...",
+    "doctorNotesLabel": "Doctor's Notes",
+    "doctorNotesPlaceholder": "Additional notes...",
+    "followUpDateLabel": "Follow-up Date"
+  },
+  "herbalMedicine": {
+    "loading": "Loading medicines...",
+    "addButton": "Add Herbal Medicine",
+    "prescribeTitle": "Prescribe Herbal Medicine",
+    "selectLabel": "Select Herbal Medicine *",
+    "selectPlaceholder": "-- Select Medicine --",
+    "unitPriceLabel": "Unit Price (ETB) *",
+    "unitPricePlaceholder": "Price per unit",
+    "quantityLabel": "Quantity *",
+    "quantityPlaceholder": "Number of units",
+    "totalLabel": "Total Amount",
+    "totalPrefix": "Total: ",
+    "instructionsLabel": "Instructions (Optional)",
+    "instructionsPlaceholder": "e.g., Take with food, avoid alcohol...",
+    "saveButton": "Save Prescription",
+    "listTitle": "Prescribed Medicines",
+    "emptyList": "No medicines prescribed yet",
+    "fetchError": "Failed to fetch medicines",
+    "selectError": "Please select a herbal medicine",
+    "quantityError": "Please enter a valid quantity",
+    "prescribeSuccess": "Medicine prescribed successfully",
+    "addError": "Failed to add medicine",
+    "cancelConfirm": "Cancel this prescription?",
+    "cancelSuccess": "Prescription cancelled",
+    "cancelError": "Failed to cancel prescription"
+  },
+  "prescription": {
+    "status": {
+      "pending": "pending",
+      "paid": "paid",
+      "dispensed": "dispensed",
+      "completed": "completed",
+      "stopped": "stopped",
+      "expired": "expired"
+    },
+    "dosage": {
+      "asPrescribed": "As prescribed"
+    },
+    "frequency": {
+      "asDirected": "As directed"
+    },
+    "route": {
+      "oral": "oral"
+    },
+    "medicineFallback": "Medicine"
+  },
+  "investigation": {
+    "loading": "Loading investigations...",
+    "requestButton": "Request Investigation",
+    "fillError": "Please fill in investigation type and test name",
+    "requestSuccess": "Investigation requested successfully",
+    "requestError": "Failed to request investigation",
+    "cancelConfirm": "Are you sure you want to cancel this investigation?",
+    "cancelSuccess": "Investigation cancelled",
+    "cancelError": "Failed to cancel investigation",
+    "typeLabel": "Investigation Type *",
+    "typePlaceholder": "-- Select Type --",
+    "testNameLabel": "Test Name *",
+    "testNamePlaceholder": "e.g., Complete Blood Count, Liver Function Test",
+    "urgencyLabel": "Urgency",
+    "scheduledDateLabel": "Scheduled Date",
+    "instructionsLabel": "Special Instructions",
+    "instructionsPlaceholder": "Any special instructions or preparation notes...",
+    "typePrefix": "Type: ",
+    "instructionsPrefix": "Instructions: ",
+    "requestedPrefix": "Requested: ",
+    "scheduledPrefix": "Scheduled: ",
+    "resultsLabel": "Results:",
+    "interpretationLabel": "Interpretation:",
+    "completedPrefix": "Completed: ",
+    "emptyList": "No investigations requested yet",
+    "status": {
+      "requested": "Requested",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "urgency": {
+      "routine": "Routine",
+      "urgent": "Urgent",
+      "stat": "STAT (Immediate)"
+    },
+    "type": {
+      "bloodTest": "Blood Test",
+      "urineTest": "Urine Test",
+      "stoolTest": "Stool Test",
+      "xray": "X-Ray",
+      "ultrasound": "Ultrasound",
+      "ctScan": "CT Scan",
+      "mri": "MRI",
+      "ecg": "ECG (Electrocardiogram)",
+      "biopsy": "Biopsy",
+      "cultureTest": "Culture Test",
+      "other": "Other"
+    }
+  },
+  "patientHistory": {
+    "loading": "Loading history...",
+    "fetchError": "Failed to fetch patient history",
+    "empty": "No previous visits found",
+    "visitNumberPrefix": "Visit #",
+    "diagnosisLabel": "Diagnosis:",
+    "treatmentLabel": "Treatment:"
+  },
+  "activePrescriptions": {
+    "title": "Recent Prescriptions (Last 90 days)",
+    "empty": "No active prescriptions",
+    "prescribedPrefix": "Prescribed: ",
+    "daysLeft": "days left",
+    "endsToday": "Ends today",
+    "expired": "Expired",
+    "durationLabel": "Duration:",
+    "instructionsLabel": "Instructions:",
+    "reasonLabel": "Reason:",
+    "endingSoonAlert": "Medication ending soon - consider refill if needed",
+    "endedAlert": "Medication period has ended"
+  },
+  "pendingInvestigations": {
+    "pendingTitle": "Pending Investigations",
+    "completedTitle": "Recent Results Available",
+    "empty": "No recent investigations",
+    "requestedPrefix": "Requested: ",
+    "scheduledPrefix": "Scheduled: ",
+    "instructionsLabel": "Instructions:",
+    "statAlert": "STAT - Immediate attention required",
+    "resultsReady": "Results Ready",
+    "completedPrefix": "Completed: ",
+    "resultsLabel": "Results:",
+    "interpretationLabel": "Interpretation:",
+    "viewResultFile": "View Result File",
+    "performedByPrefix": "Performed by: "
+  },
+  "followUp": {
+    "firstVisit": "First Visit - No previous medical history",
+    "scheduledTitle": "✓ Scheduled Follow-up Visit",
+    "returnTitle": "Return Visit",
+    "daysSince": "days since last visit",
+    "lastVisitLabel": "Last Visit:",
+    "scheduledForLabel": "Follow-up was scheduled for:",
+    "previousDiagnosisLabel": "Previous Diagnosis:",
+    "previousTreatmentLabel": "Previous Treatment:",
+    "previousNotesLabel": "Previous Notes:",
+    "viewHistory": "View Full History"
+  },
+  "medicineForm": {
+    "updateSuccess": "Medicine updated successfully",
+    "addSuccess": "Medicine added successfully",
+    "saveError": "Failed to save medicine",
+    "editTitle": "Edit Herbal Drug",
+    "addTitle": "Add Herbal Drug",
+    "herbalModeHint": "Only drug name is required",
+    "standardModeHint": "Standard mode with all fields",
+    "modeToggleLabel": "Herbal Drug Mode",
+    "nameLabel": "Drug Name *",
+    "nameRequired": "Drug name is required",
+    "namePlaceholder": "e.g. Garlic Extract, Black Seed Oil...",
+    "autoCodeHint": "A medicine code will be auto-generated when saved",
+    "codeLabel": "Medicine Code",
+    "codePlaceholder": "Leave empty to auto-generate",
+    "codeAutoHint": "Auto-generated if left empty",
+    "genericNameLabel": "Generic Name",
+    "genericNamePlaceholder": "e.g. Allium sativum",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "e.g. Herbal Supplement",
+    "strengthLabel": "Strength",
+    "strengthPlaceholder": "e.g. 500mg",
+    "dosageFormLabel": "Dosage Form",
+    "dosageFormPlaceholder": "Select Form",
+    "manufacturerLabel": "Manufacturer",
+    "supplierLabel": "Supplier",
+    "batchNumberLabel": "Batch Number",
+    "storageLocationLabel": "Storage Location",
+    "availableQuantityLabel": "Available Quantity",
+    "minimumStockLabel": "Minimum Stock",
+    "purchasePriceLabel": "Purchase Price",
+    "sellingPriceLabel": "Selling Price",
+    "expiryDateLabel": "Expiry Date",
+    "requiresPrescriptionLabel": "Requires Prescription",
+    "optionalDetails": "Optional Details",
+    "optionalDetailsHint": "(category, strength, stock, price, notes...)",
+    "instructionsLabel": "Instructions",
+    "instructionsPlaceholder": "How to prepare or use this herbal medicine...",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Additional notes...",
+    "instructionsPlaceholderAlt": "How to prepare or use this medicine...",
+    "sideEffectsLabel": "Side Effects",
+    "contraindicationsLabel": "Contraindications",
+    "saving": "Saving...",
+    "updateButton": "Update Drug",
+    "addButton": "Add Drug",
+    "dosageForm": {
+      "tablet": "Tablet",
+      "capsule": "Capsule",
+      "syrup": "Syrup",
+      "powder": "Powder",
+      "extract": "Extract",
+      "tea": "Tea",
+      "oil": "Oil",
+      "cream": "Cream",
+      "tincture": "Tincture"
+    }
+  },
+  "visitForm": {
+    "fetchError": "Failed to fetch patients",
+    "createError": "Failed to create visit",
+    "title": "Create New Visit",
+    "patientLabel": "Patient *",
+    "patientRequired": "Patient is required",
+    "patientPlaceholder": "Select patient",
+    "chiefComplaintLabel": "Chief Complaint",
+    "chiefComplaintPlaceholder": "Describe the patient's main complaint...",
+    "visitDateLabel": "Visit Date",
+    "arrivalTimeLabel": "Arrival Time *",
+    "arrivalTimeRequired": "Arrival time is required",
+    "creating": "Creating...",
+    "createButton": "Create Visit"
+  },
+  "clinicManagement": {
+    "title": "Clinic Management",
+    "doctors": "Doctors",
+    "doctorsDesc": "Manage doctors here...",
+    "patients": "Patients",
+    "patientsDesc": "Manage patients here...",
+    "appointments": "Appointments",
+    "appointmentsDesc": "Manage appointments..."
+  },
+  "blogForm": {
+    "editTitle": "Edit Post",
+    "addTitle": "Add New Post",
+    "titlePlaceholder": "Title",
+    "mediaTypeLabel": "Media Type:",
+    "mediaTypeImage": "Image",
+    "mediaTypeVideo": "Video",
+    "previewAlt": "Preview",
+    "authorPlaceholder": "Author",
+    "descPlaceholder": "Description",
+    "saveButton": "Save Changes",
+    "addButton": "Add Post"
+  },
+  "blogCard": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "roles": {
+    "super_admin": "Super Admin",
+    "admin": "Admin",
+    "doctor": "Doctor",
+    "data_clerk": "Data Clerk",
+    "cashier": "Cashier",
+    "staff_manager": "Staff Manager"
   }
 }

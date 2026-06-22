@@ -3,12 +3,18 @@ import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import { apiLimiter } from "./middleware/rateLimiter.js";
 import logger from "./config/logger.js";
 
 // Load environment variables
 dotenv.config();
+
+// Define dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Import routes
 import authRoutes from "./routes/authRoutes.js";
@@ -28,8 +34,15 @@ import paymentRoutes from "./routes/paymentRoutes.js";
 // Create Express app
 const app = express();
 
+// Serve static upload files
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+
 // Security middleware
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  }),
+);
 
 // CORS configuration
 app.use(
