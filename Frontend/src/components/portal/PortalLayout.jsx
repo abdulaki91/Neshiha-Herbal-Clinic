@@ -101,7 +101,7 @@ const PortalLayout = () => {
   }, [user]);
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gradient-to-br from-slate-50 via-emerald-50/40 to-teal-50/30">
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div className="flex-1 flex flex-col lg:ml-64">

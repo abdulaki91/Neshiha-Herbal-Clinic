@@ -3,6 +3,13 @@ import { ROLES, USER_STATUS, ERROR_MESSAGES } from "../config/constants.js";
 import { Op } from "sequelize";
 import { getPagination } from "../utils/helpers.js";
 
+// errorHandler reads err.statusCode, otherwise everything surfaces as a 500
+const httpError = (message, statusCode) => {
+  const error = new Error(message);
+  error.statusCode = statusCode;
+  return error;
+};
+
 /**
  * Only a super admin may create, modify or promote to the super_admin role.
  * Without this, a staff manager — who is authorized on the staff endpoints —
@@ -10,7 +17,10 @@ import { getPagination } from "../utils/helpers.js";
  */
 const assertMayManageRole = (actor, targetRole) => {
   if (targetRole === ROLES.SUPER_ADMIN && actor?.role !== ROLES.SUPER_ADMIN) {
-    throw new Error("Only a super admin can assign the super admin role");
+    throw httpError(
+      "Only a super admin can manage super admin accounts",
+      403,
+    );
   }
 };
 
@@ -23,7 +33,7 @@ export const createStaff = async (data, actor) => {
   // Check if email already exists
   const existingUser = await User.findOne({ where: { email: data.email } });
   if (existingUser) {
-    throw new Error("Email already exists");
+    throw httpError("Email already exists", 409);
   }
 
   // Create user
@@ -100,7 +110,7 @@ export const getStaffById = async (id) => {
   });
 
   if (!staff) {
-    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
   }
 
   return staff;
@@ -113,7 +123,7 @@ export const updateStaff = async (id, data, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
-    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
   }
 
   // A non-super-admin may neither promote to nor edit a super admin account
@@ -130,7 +140,7 @@ export const updateStaff = async (id, data, actor) => {
     });
 
     if (existingUser) {
-      throw new Error("Email already exists");
+      throw httpError("Email already exists", 409);
     }
   }
 
@@ -156,13 +166,13 @@ export const deleteStaff = async (id, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
-    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
   }
 
   assertMayManageRole(actor, staff.role);
 
   if (actor?.id && staff.id === actor.id) {
-    throw new Error("You cannot delete your own account");
+    throw httpError("You cannot delete your own account", 400);
   }
 
   await staff.update({ status: USER_STATUS.INACTIVE, refreshToken: null });
@@ -177,7 +187,7 @@ export const activateStaff = async (id, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
-    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
   }
 
   assertMayManageRole(actor, staff.role);
@@ -199,13 +209,13 @@ export const deactivateStaff = async (id, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
-    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
   }
 
   assertMayManageRole(actor, staff.role);
 
   if (actor?.id && staff.id === actor.id) {
-    throw new Error("You cannot deactivate your own account");
+    throw httpError("You cannot deactivate your own account", 400);
   }
 
   // Drop the refresh token so existing sessions cannot be renewed
@@ -221,7 +231,7 @@ export const resetStaffPassword = async (id, password, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
-    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
   }
 
   // A staff manager must not be able to seize a super admin account

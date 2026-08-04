@@ -111,7 +111,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       )}
 
       <aside
-        className={`fixed left-0 top-0 h-full bg-white shadow-xl z-30 w-64 transform transition-transform duration-300 lg:translate-x-0 flex flex-col ${
+        className={`fixed left-0 top-0 h-full bg-white shadow-xl border-r border-gray-100 z-30 w-64 transform transition-transform duration-300 lg:translate-x-0 flex flex-col ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -140,10 +140,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                   to={link.to}
                   end={link.end}
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 px-4 py-2.5 rounded-lg transition relative ${
+                    `flex items-center space-x-3 px-4 py-2.5 rounded-lg transition-all duration-200 relative ${
                       isActive
-                        ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20"
+                        : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-700"
                     }`
                   }
                   onClick={closeIfMobile}

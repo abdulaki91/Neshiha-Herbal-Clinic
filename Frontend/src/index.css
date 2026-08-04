@@ -1,1 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap");
 @import "tailwindcss";
+
+/* Falls back per-glyph to the system stack for scripts Jakarta Sans doesn't
+   cover (Ethiopic, Arabic), so am/ar text still renders correctly. */
+@theme {
+  --font-sans:
+    "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #a7f3d0;
+  color: #064e3b;
+}
+
+/* Slim, brand-tinted scrollbar for the app shell (portal panes, dropdowns) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a7d9c9 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #a7d9c9;
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #6ee7b7;
+}
