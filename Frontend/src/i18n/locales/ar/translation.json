@@ -1165,12 +1165,12 @@
     "delete": "Delete"
   },
   "roles": {
-    "super_admin": "Super Admin",
-    "admin": "Admin",
-    "doctor": "Doctor",
-    "data_clerk": "Data Clerk",
-    "cashier": "Cashier",
-    "staff_manager": "Staff Manager"
+    "super_admin": "المسؤول الأعلى",
+    "admin": "مسؤول",
+    "doctor": "طبيب",
+    "data_clerk": "كاتب بيانات",
+    "cashier": "أمين الصندوق",
+    "staff_manager": "مدير الموظفين"
   },
   "followUpIndicator": {
     "firstVisit": "الزيارة الأولى - لا يوجد تاريخ طبي سابق",
@@ -1228,6 +1228,149 @@
       "routine": "روتيني",
       "urgent": "عاجل",
       "stat": "عاجل جداً"
+    }
+  },
+
+  "staff": {
+    "title": "إدارة الموظفين",
+    "subtitle": "إنشاء حسابات الموظفين وتعديلها وإدارتها",
+    "addButton": "إضافة موظف",
+    "searchPlaceholder": "ابحث بالاسم أو البريد الإلكتروني أو الهاتف...",
+    "empty": "لم يتم العثور على موظفين",
+    "loadError": "تعذر تحميل الموظفين",
+    "you": "أنت",
+    "activate": "تفعيل",
+    "deactivate": "إلغاء التفعيل",
+    "deleteConfirm": "حذف {{name}}؟ سيتم إلغاء تفعيل حسابه.",
+    "stats": {
+      "total": "إجمالي الموظفين",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "doctors": "الأطباء"
+    },
+    "filter": {
+      "allRoles": "جميع الأدوار",
+      "allStatuses": "جميع الحالات"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "suspended": "موقوف"
+    },
+    "table": {
+      "name": "الاسم",
+      "contact": "معلومات الاتصال",
+      "role": "الدور",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    },
+    "resetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "mismatch": "كلمتا المرور غير متطابقتين",
+      "warning": "سيؤدي هذا إلى تسجيل خروج الموظف من جميع الجلسات. شارك كلمة المرور الجديدة معه بأمان.",
+      "submit": "إعادة التعيين",
+      "success": "تمت إعادة تعيين كلمة المرور بنجاح",
+      "error": "تعذرت إعادة تعيين كلمة المرور"
+    },
+    "toast": {
+      "deleteSuccess": "تم حذف الموظف بنجاح",
+      "deleteError": "تعذر حذف الموظف",
+      "activateSuccess": "تم تفعيل الموظف",
+      "activateError": "تعذر تفعيل الموظف",
+      "deactivateSuccess": "تم إلغاء تفعيل الموظف",
+      "deactivateError": "تعذر إلغاء تفعيل الموظف"
+    }
+  },
+
+  "staffForm": {
+    "addTitle": "إضافة موظف جديد",
+    "editTitle": "تعديل بيانات الموظف",
+    "subtitle": "تفاصيل الحساب ودور الوصول",
+    "firstNameLabel": "الاسم الأول",
+    "firstNameRequired": "الاسم الأول مطلوب",
+    "lastNameLabel": "اسم العائلة",
+    "lastNameRequired": "اسم العائلة مطلوب",
+    "emailLabel": "البريد الإلكتروني",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
+    "phoneLabel": "الهاتف",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "phonePlaceholder": "+251...",
+    "passwordLabel": "كلمة المرور",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "passwordTooShort": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+    "passwordWeak": "يجب أن تحتوي كلمة المرور على حرف كبير وحرف صغير ورقم",
+    "passwordHint": "8 أحرف على الأقل، مع حرف كبير وحرف صغير ورقم",
+    "roleLabel": "الدور",
+    "statusLabel": "الحالة",
+    "departmentLabel": "القسم",
+    "specializationLabel": "التخصص",
+    "specializationPlaceholder": "مثال: طب الأعشاب",
+    "licenseNumberLabel": "رقم الترخيص",
+    "addressLabel": "العنوان",
+    "createButton": "إنشاء موظف",
+    "updateButton": "حفظ التغييرات",
+    "createSuccess": "تم إنشاء الموظف بنجاح",
+    "updateSuccess": "تم تحديث بيانات الموظف بنجاح",
+    "saveError": "تعذر حفظ بيانات الموظف"
+  },
+
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "إعدادات العيادة والتفضيلات",
+    "readOnlyNotice": "يمكنك عرض هذه الإعدادات، لكن المسؤول الأعلى وحده يمكنه تغييرها.",
+    "saveButton": "حفظ الإعدادات",
+    "saveSuccess": "تم حفظ الإعدادات بنجاح",
+    "saveError": "تعذر حفظ الإعدادات",
+    "loadError": "تعذر تحميل الإعدادات",
+    "clinic": {
+      "title": "معلومات العيادة",
+      "description": "تظهر في الإيصالات والبطاقات والمستندات المطبوعة",
+      "name": "اسم العيادة",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
+      "address": "العنوان",
+      "currency": "العملة"
+    },
+    "schedule": {
+      "title": "ساعات العمل",
+      "description": "أوقات فتح العيادة للزيارات",
+      "opensAt": "وقت الفتح",
+      "closesAt": "وقت الإغلاق",
+      "timezone": "المنطقة الزمنية",
+      "appointmentDuration": "مدة الموعد",
+      "minutesHint": "بالدقائق",
+      "workingDays": "أيام العمل"
+    },
+    "weekdays": {
+      "monday": "الاثنين",
+      "tuesday": "الثلاثاء",
+      "wednesday": "الأربعاء",
+      "thursday": "الخميس",
+      "friday": "الجمعة",
+      "saturday": "السبت",
+      "sunday": "الأحد"
+    },
+    "operations": {
+      "title": "العمليات",
+      "description": "تنبيهات المخزون والتنسيقات والإشعارات",
+      "lowStockThreshold": "حد المخزون المنخفض",
+      "lowStockHint": "التنبيه عند انخفاض الدواء إلى هذه الكمية",
+      "dateFormat": "تنسيق التاريخ",
+      "timeFormat": "تنسيق الوقت",
+      "hour24": "24 ساعة",
+      "hour12": "12 ساعة",
+      "emailNotifications": "تفعيل إشعارات البريد الإلكتروني",
+      "smsNotifications": "تفعيل إشعارات الرسائل النصية"
+    },
+    "legal": {
+      "title": "قانوني",
+      "description": "نصوص الشروط والخصوصية المعروضة للمرضى",
+      "terms": "الشروط والأحكام",
+      "privacy": "سياسة الخصوصية"
     }
   }
 }

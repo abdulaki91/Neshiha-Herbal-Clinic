@@ -35,7 +35,7 @@ export const getStaffById = asyncHandler(async (req, res) => {
  * @access  Private (Super Admin, Staff Manager)
  */
 export const createStaff = asyncHandler(async (req, res) => {
-  const staff = await staffService.createStaff(req.body, req.user.id);
+  const staff = await staffService.createStaff(req.body, req.user);
 
   return ApiResponse.created(res, staff, "Staff created successfully");
 });
@@ -49,7 +49,7 @@ export const updateStaff = asyncHandler(async (req, res) => {
   const staff = await staffService.updateStaff(
     req.params.id,
     req.body,
-    req.user.id,
+    req.user,
   );
 
   return ApiResponse.success(res, staff, "Staff updated successfully");
@@ -61,7 +61,7 @@ export const updateStaff = asyncHandler(async (req, res) => {
  * @access  Private (Super Admin)
  */
 export const deleteStaff = asyncHandler(async (req, res) => {
-  const result = await staffService.deleteStaff(req.params.id, req.user.id);
+  const result = await staffService.deleteStaff(req.params.id, req.user);
 
   return ApiResponse.success(res, null, result.message);
 });
@@ -75,7 +75,7 @@ export const resetStaffPassword = asyncHandler(async (req, res) => {
   const result = await staffService.resetStaffPassword(
     req.params.id,
     req.body.password,
-    req.user.id,
+    req.user,
   );
 
   return ApiResponse.success(res, null, result.message);
@@ -87,7 +87,7 @@ export const resetStaffPassword = asyncHandler(async (req, res) => {
  * @access  Private (Super Admin, Staff Manager)
  */
 export const activateStaff = asyncHandler(async (req, res) => {
-  const staff = await staffService.activateStaff(req.params.id);
+  const staff = await staffService.activateStaff(req.params.id, req.user);
 
   return ApiResponse.success(res, staff, "Staff activated successfully");
 });
@@ -98,7 +98,7 @@ export const activateStaff = asyncHandler(async (req, res) => {
  * @access  Private (Super Admin, Staff Manager)
  */
 export const deactivateStaff = asyncHandler(async (req, res) => {
-  const staff = await staffService.deactivateStaff(req.params.id, req.user.id);
+  const staff = await staffService.deactivateStaff(req.params.id, req.user);
 
   return ApiResponse.success(res, staff, "Staff deactivated successfully");
 });

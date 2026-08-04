@@ -11,12 +11,15 @@ export const getSettings = async () => {
 };
 
 export const updateSettings = async (data, updatedBy) => {
+  // Never let a client rewrite the row identity or audit columns
+  const { id, createdAt, updatedAt, ...payload } = data;
+
   let settings = await Setting.findOne();
 
   if (!settings) {
-    settings = await Setting.create({ ...data, updatedBy });
+    settings = await Setting.create({ ...payload, updatedBy });
   } else {
-    await settings.update({ ...data, updatedBy });
+    await settings.update({ ...payload, updatedBy });
   }
 
   return settings;

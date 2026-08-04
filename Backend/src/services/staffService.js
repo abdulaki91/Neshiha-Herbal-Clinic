@@ -4,9 +4,22 @@ import { Op } from "sequelize";
 import { getPagination } from "../utils/helpers.js";
 
 /**
+ * Only a super admin may create, modify or promote to the super_admin role.
+ * Without this, a staff manager — who is authorized on the staff endpoints —
+ * could promote themselves by posting role: "super_admin".
+ */
+const assertMayManageRole = (actor, targetRole) => {
+  if (targetRole === ROLES.SUPER_ADMIN && actor?.role !== ROLES.SUPER_ADMIN) {
+    throw new Error("Only a super admin can assign the super admin role");
+  }
+};
+
+/**
  * Create new staff member
  */
-export const createStaff = async (data, createdBy) => {
+export const createStaff = async (data, actor) => {
+  assertMayManageRole(actor, data.role);
+
   // Check if email already exists
   const existingUser = await User.findOne({ where: { email: data.email } });
   if (existingUser) {
@@ -16,7 +29,7 @@ export const createStaff = async (data, createdBy) => {
   // Create user
   const staff = await User.create({
     ...data,
-    createdBy,
+    createdBy: actor?.id,
   });
 
   return staff.toJSON();
@@ -96,12 +109,16 @@ export const getStaffById = async (id) => {
 /**
  * Update staff
  */
-export const updateStaff = async (id, data, updatedBy) => {
+export const updateStaff = async (id, data, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
+
+  // A non-super-admin may neither promote to nor edit a super admin account
+  if (data.role) assertMayManageRole(actor, data.role);
+  assertMayManageRole(actor, staff.role);
 
   // Don't allow email change if it exists for another user
   if (data.email && data.email !== staff.email) {
@@ -126,7 +143,7 @@ export const updateStaff = async (id, data, updatedBy) => {
 
   await staff.update({
     ...data,
-    updatedBy,
+    updatedBy: actor?.id,
   });
 
   return staff.toJSON();
@@ -135,14 +152,16 @@ export const updateStaff = async (id, data, updatedBy) => {
 /**
  * Delete staff (soft delete - set to inactive)
  */
-export const deleteStaff = async (id, actorId) => {
+export const deleteStaff = async (id, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
-  if (actorId && staff.id === actorId) {
+  assertMayManageRole(actor, staff.role);
+
+  if (actor?.id && staff.id === actor.id) {
     throw new Error("You cannot delete your own account");
   }
 
@@ -154,12 +173,14 @@ export const deleteStaff = async (id, actorId) => {
 /**
  * Activate staff
  */
-export const activateStaff = async (id) => {
+export const activateStaff = async (id, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
+
+  assertMayManageRole(actor, staff.role);
 
   // Clear the lockout so a reactivated account can sign in immediately
   await staff.update({
@@ -174,14 +195,16 @@ export const activateStaff = async (id) => {
 /**
  * Deactivate staff
  */
-export const deactivateStaff = async (id, actorId) => {
+export const deactivateStaff = async (id, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
-  if (actorId && staff.id === actorId) {
+  assertMayManageRole(actor, staff.role);
+
+  if (actor?.id && staff.id === actor.id) {
     throw new Error("You cannot deactivate your own account");
   }
 
@@ -194,17 +217,20 @@ export const deactivateStaff = async (id, actorId) => {
 /**
  * Reset a staff member's password (admin initiated)
  */
-export const resetStaffPassword = async (id, password, updatedBy) => {
+export const resetStaffPassword = async (id, password, actor) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
+  // A staff manager must not be able to seize a super admin account
+  assertMayManageRole(actor, staff.role);
+
   // Password is hashed by the User model's beforeUpdate hook
   await staff.update({
     password,
-    updatedBy,
+    updatedBy: actor?.id,
     // Clear any pending self-service reset and unlock the account
     resetPasswordToken: null,
     resetPasswordExpire: null,

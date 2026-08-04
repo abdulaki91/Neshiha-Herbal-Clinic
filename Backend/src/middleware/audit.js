@@ -1,6 +1,33 @@
 import { AuditLog } from "../models/index.js";
 import logger from "../config/logger.js";
 
+// Never persist credentials or tokens into the audit trail
+const SENSITIVE_FIELDS = [
+  "password",
+  "newPassword",
+  "currentPassword",
+  "confirmPassword",
+  "token",
+  "accessToken",
+  "refreshToken",
+  "resetPasswordToken",
+];
+
+/**
+ * Return a copy of a payload with sensitive fields masked
+ */
+export const redact = (payload) => {
+  if (!payload || typeof payload !== "object") return payload;
+
+  const safe = Array.isArray(payload) ? [...payload] : { ...payload };
+
+  for (const field of SENSITIVE_FIELDS) {
+    if (field in safe) safe[field] = "[REDACTED]";
+  }
+
+  return safe;
+};
+
 /**
  * Create audit log entry
  */
@@ -31,7 +58,9 @@ export const auditLogger = (action, resource) => {
           resourceId: req.params.id || data?.data?.id,
           description: `${action} ${resource}`,
           newValues:
-            action === "CREATE" || action === "UPDATE" ? req.body : undefined,
+            action === "CREATE" || action === "UPDATE"
+              ? redact(req.body)
+              : undefined,
           ipAddress: req.ip || req.connection.remoteAddress,
           userAgent: req.headers["user-agent"],
         });
@@ -73,8 +102,8 @@ export const auditUpdate = (resource) => {
           resource,
           resourceId: req.params.id,
           description: `Updated ${resource}`,
-          oldValues: req.originalData,
-          newValues: req.body,
+          oldValues: redact(req.originalData),
+          newValues: redact(req.body),
           ipAddress: req.ip || req.connection.remoteAddress,
           userAgent: req.headers["user-agent"],
         });

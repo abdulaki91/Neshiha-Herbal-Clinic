@@ -22,6 +22,8 @@ import LaboratoryPage from "./pages/portal/LaboratoryPage";
 import PharmacyPage from "./pages/portal/PharmacyPage";
 import CashierPage from "./pages/portal/CashierPage";
 import CashierReportsPage from "./pages/portal/CashierReportsPage";
+import StaffPage from "./pages/portal/StaffPage";
+import SettingsPage from "./pages/portal/SettingsPage";
 
 // Store
 import useAuthStore from "./store/authStore";
@@ -35,6 +37,13 @@ import {
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuthStore();
   return isAuthenticated ? children : <Navigate to="/signin" replace />;
+};
+
+// Restricts a route to specific roles; mirrors the backend `authorize` middleware
+// so users never land on a page whose API calls would only return 403s.
+const RoleRoute = ({ roles, children }) => {
+  const { user } = useAuthStore();
+  return roles.includes(user?.role) ? children : <Navigate to="/portal" replace />;
 };
 
 // 404 Page Component
@@ -137,6 +146,22 @@ export default function App() {
           <Route path="pharmacy" element={<PharmacyPage />} />
           <Route path="cashier" element={<CashierPage />} />
           <Route path="reports" element={<CashierReportsPage />} />
+          <Route
+            path="staff"
+            element={
+              <RoleRoute roles={["super_admin", "staff_manager"]}>
+                <StaffPage />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="settings"
+            element={
+              <RoleRoute roles={["super_admin"]}>
+                <SettingsPage />
+              </RoleRoute>
+            }
+          />
         </Route>
 
         {/* 404 fallback */}

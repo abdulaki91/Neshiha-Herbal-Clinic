@@ -1165,12 +1165,12 @@
     "delete": "Delete"
   },
   "roles": {
-    "super_admin": "Super Admin",
-    "admin": "Admin",
-    "doctor": "Doctor",
-    "data_clerk": "Data Clerk",
-    "cashier": "Cashier",
-    "staff_manager": "Staff Manager"
+    "super_admin": "ዋና አስተዳዳሪ",
+    "admin": "አስተዳዳሪ",
+    "doctor": "ዶክተር",
+    "data_clerk": "የመረጃ ሰራተኛ",
+    "cashier": "ገንዘብ ተቀባይ",
+    "staff_manager": "የሰራተኛ አስተዳዳሪ"
   },
   "followUpIndicator": {
     "firstVisit": "የመጀመሪያ ጉብኝት - ቀዳሚ የሕክምና ታሪክ የለም",
@@ -1228,6 +1228,149 @@
       "routine": "መደበኛ",
       "urgent": "አስቸኳይ",
       "stat": "በጣም አስቸኳይ"
+    }
+  },
+
+  "staff": {
+    "title": "የሰራተኞች አስተዳደር",
+    "subtitle": "የሰራተኞች መለያዎችን ይፍጠሩ፣ ያስተካክሉ እና ያስተዳድሩ",
+    "addButton": "ሰራተኛ ጨምር",
+    "searchPlaceholder": "በስም፣ በኢሜይል ወይም በስልክ ይፈልጉ...",
+    "empty": "ሰራተኛ አልተገኘም",
+    "loadError": "ሰራተኞችን መጫን አልተቻለም",
+    "you": "እርስዎ",
+    "activate": "አግብር",
+    "deactivate": "አቦዝን",
+    "deleteConfirm": "{{name}}ን ይሰረዙ? መለያቸው ይቦዝናል።",
+    "stats": {
+      "total": "ጠቅላላ ሰራተኞች",
+      "active": "ንቁ",
+      "inactive": "ያልነቃ",
+      "doctors": "ዶክተሮች"
+    },
+    "filter": {
+      "allRoles": "ሁሉም ሚናዎች",
+      "allStatuses": "ሁሉም ሁኔታዎች"
+    },
+    "status": {
+      "active": "ንቁ",
+      "inactive": "ያልነቃ",
+      "suspended": "የታገደ"
+    },
+    "table": {
+      "name": "ስም",
+      "contact": "አድራሻ",
+      "role": "ሚና",
+      "status": "ሁኔታ",
+      "actions": "ተግባራት"
+    },
+    "resetPassword": {
+      "title": "የይለፍ ቃል ዳግም አስጀምር",
+      "newPassword": "አዲስ የይለፍ ቃል",
+      "confirmPassword": "የይለፍ ቃል ያረጋግጡ",
+      "mismatch": "የይለፍ ቃላቱ አይመሳሰሉም",
+      "warning": "ይህ ሰራተኛውን ከሁሉም ክፍለ ጊዜዎች ያስወጣል። አዲሱን የይለፍ ቃል በአስተማማኝ መንገድ ያሳውቁ።",
+      "submit": "ዳግም አስጀምር",
+      "success": "የይለፍ ቃል ዳግም ተጀምሯል",
+      "error": "የይለፍ ቃል ዳግም ማስጀመር አልተቻለም"
+    },
+    "toast": {
+      "deleteSuccess": "ሰራተኛው ተሰርዟል",
+      "deleteError": "ሰራተኛውን መሰረዝ አልተቻለም",
+      "activateSuccess": "ሰራተኛው ነቅቷል",
+      "activateError": "ሰራተኛውን ማንቃት አልተቻለም",
+      "deactivateSuccess": "ሰራተኛው ቦዝኗል",
+      "deactivateError": "ሰራተኛውን ማቦዘን አልተቻለም"
+    }
+  },
+
+  "staffForm": {
+    "addTitle": "አዲስ ሰራተኛ ጨምር",
+    "editTitle": "ሰራተኛ አስተካክል",
+    "subtitle": "የመለያ ዝርዝሮች እና የመዳረሻ ሚና",
+    "firstNameLabel": "የመጀመሪያ ስም",
+    "firstNameRequired": "የመጀመሪያ ስም ያስፈልጋል",
+    "lastNameLabel": "የአባት ስም",
+    "lastNameRequired": "የአባት ስም ያስፈልጋል",
+    "emailLabel": "ኢሜይል",
+    "emailRequired": "ኢሜይል ያስፈልጋል",
+    "emailInvalid": "ትክክለኛ ኢሜይል ያስገቡ",
+    "phoneLabel": "ስልክ",
+    "phoneRequired": "የስልክ ቁጥር ያስፈልጋል",
+    "phonePlaceholder": "+251...",
+    "passwordLabel": "የይለፍ ቃል",
+    "passwordRequired": "የይለፍ ቃል ያስፈልጋል",
+    "passwordTooShort": "የይለፍ ቃል ቢያንስ 8 ቁምፊ መሆን አለበት",
+    "passwordWeak": "የይለፍ ቃል አቢይ ሆሄ፣ ንዑስ ሆሄ እና ቁጥር መያዝ አለበት",
+    "passwordHint": "ቢያንስ 8 ቁምፊ፣ ከአቢይ ሆሄ፣ ንዑስ ሆሄ እና ቁጥር ጋር",
+    "roleLabel": "ሚና",
+    "statusLabel": "ሁኔታ",
+    "departmentLabel": "ክፍል",
+    "specializationLabel": "ስፔሻላይዜሽን",
+    "specializationPlaceholder": "ለምሳሌ የዕፅዋት ሕክምና",
+    "licenseNumberLabel": "የፈቃድ ቁጥር",
+    "addressLabel": "አድራሻ",
+    "createButton": "ሰራተኛ ፍጠር",
+    "updateButton": "ለውጦችን አስቀምጥ",
+    "createSuccess": "ሰራተኛው ተፈጥሯል",
+    "updateSuccess": "ሰራተኛው ተስተካክሏል",
+    "saveError": "ሰራተኛውን ማስቀመጥ አልተቻለም"
+  },
+
+  "settings": {
+    "title": "ቅንብሮች",
+    "subtitle": "የክሊኒኩ አወቃቀር እና ምርጫዎች",
+    "readOnlyNotice": "እነዚህን ቅንብሮች ማየት ይችላሉ፣ ነገር ግን ሱፐር አድሚን ብቻ ሊለውጣቸው ይችላል።",
+    "saveButton": "ቅንብሮችን አስቀምጥ",
+    "saveSuccess": "ቅንብሮች ተቀምጠዋል",
+    "saveError": "ቅንብሮችን ማስቀመጥ አልተቻለም",
+    "loadError": "ቅንብሮችን መጫን አልተቻለም",
+    "clinic": {
+      "title": "የክሊኒክ መረጃ",
+      "description": "በደረሰኞች፣ በካርዶች እና በሚታተሙ ሰነዶች ላይ ይታያል",
+      "name": "የክሊኒክ ስም",
+      "phone": "ስልክ",
+      "email": "ኢሜይል",
+      "emailInvalid": "ትክክለኛ ኢሜይል ያስገቡ",
+      "address": "አድራሻ",
+      "currency": "ገንዘብ"
+    },
+    "schedule": {
+      "title": "የስራ ሰዓታት",
+      "description": "ክሊኒኩ ለጉብኝት ክፍት የሚሆንበት ጊዜ",
+      "opensAt": "የሚከፈትበት",
+      "closesAt": "የሚዘጋበት",
+      "timezone": "የሰዓት ክልል",
+      "appointmentDuration": "የቀጠሮ ቆይታ",
+      "minutesHint": "በደቂቃ",
+      "workingDays": "የስራ ቀናት"
+    },
+    "weekdays": {
+      "monday": "ሰኞ",
+      "tuesday": "ማክሰኞ",
+      "wednesday": "ረቡዕ",
+      "thursday": "ሐሙስ",
+      "friday": "ዓርብ",
+      "saturday": "ቅዳሜ",
+      "sunday": "እሁድ"
+    },
+    "operations": {
+      "title": "ክንውኖች",
+      "description": "የክምችት ማንቂያዎች፣ ቅርጸቶች እና ማሳወቂያዎች",
+      "lowStockThreshold": "የዝቅተኛ ክምችት ገደብ",
+      "lowStockHint": "መድሃኒት ወደዚህ መጠን ሲወርድ አሳውቅ",
+      "dateFormat": "የቀን ቅርጸት",
+      "timeFormat": "የሰዓት ቅርጸት",
+      "hour24": "24 ሰዓት",
+      "hour12": "12 ሰዓት",
+      "emailNotifications": "የኢሜይል ማሳወቂያዎችን አንቃ",
+      "smsNotifications": "የSMS ማሳወቂያዎችን አንቃ"
+    },
+    "legal": {
+      "title": "ሕጋዊ",
+      "description": "ለታካሚዎች የሚታዩ የውል እና የግላዊነት ጽሑፎች",
+      "terms": "ውሎች እና ሁኔታዎች",
+      "privacy": "የግላዊነት ፖሊሲ"
     }
   }
 }

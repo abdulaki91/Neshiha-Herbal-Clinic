@@ -1171,5 +1171,148 @@
     "data_clerk": "Kalarkii Daataa",
     "cashier": "Kaashiyara",
     "staff_manager": "Bulchiisaa Hojjettootaa"
+  },
+
+  "staff": {
+    "title": "Bulchiinsa Hojjettootaa",
+    "subtitle": "Herrega hojjettootaa uumi, gulaali fi bulchi",
+    "addButton": "Hojjetaa Dabali",
+    "searchPlaceholder": "Maqaa, imeelii yookaan bilbilaan barbaadi...",
+    "empty": "Hojjetaan hin argamne",
+    "loadError": "Hojjettoota fe'uun hin danda'amne",
+    "you": "ati",
+    "activate": "Hojiirra Oolchi",
+    "deactivate": "Hojiirraa Dhaabi",
+    "deleteConfirm": "{{name}} haquu barbaaddaa? Herregni isaanii ni dhaabbata.",
+    "stats": {
+      "total": "Hojjettoota Waliigalaa",
+      "active": "Kan Hojjetan",
+      "inactive": "Kan Hin Hojjenne",
+      "doctors": "Doktaroota"
+    },
+    "filter": {
+      "allRoles": "Gahee Hunda",
+      "allStatuses": "Haala Hunda"
+    },
+    "status": {
+      "active": "Kan Hojjetu",
+      "inactive": "Kan Hin Hojjenne",
+      "suspended": "Kan Ugguramee"
+    },
+    "table": {
+      "name": "Maqaa",
+      "contact": "Quunnamtii",
+      "role": "Gahee",
+      "status": "Haala",
+      "actions": "Gochaalee"
+    },
+    "resetPassword": {
+      "title": "Jecha Darbii Haaromsi",
+      "newPassword": "Jecha darbii haaraa",
+      "confirmPassword": "Jecha darbii mirkaneessi",
+      "mismatch": "Jechi darbii wal hin simu",
+      "warning": "Kun hojjetaa kana seensa hunda irraa ni baasa. Jecha darbii haaraa nageenyaan itti himi.",
+      "submit": "Haaromsi",
+      "success": "Jechi darbii haaromfameera",
+      "error": "Jecha darbii haaromsuun hin danda'amne"
+    },
+    "toast": {
+      "deleteSuccess": "Hojjetaan haqameera",
+      "deleteError": "Hojjetaa haquun hin danda'amne",
+      "activateSuccess": "Hojjetaan hojiirra oolfameera",
+      "activateError": "Hojjetaa hojiirra oolchuun hin danda'amne",
+      "deactivateSuccess": "Hojjetaan hojiirraa dhaabameera",
+      "deactivateError": "Hojjetaa dhaabuun hin danda'amne"
+    }
+  },
+
+  "staffForm": {
+    "addTitle": "Hojjetaa Haaraa Dabali",
+    "editTitle": "Hojjetaa Gulaali",
+    "subtitle": "Odeeffannoo herregaa fi gahee seensaa",
+    "firstNameLabel": "Maqaa",
+    "firstNameRequired": "Maqaan barbaachisaa dha",
+    "lastNameLabel": "Maqaa Abbaa",
+    "lastNameRequired": "Maqaan abbaa barbaachisaa dha",
+    "emailLabel": "Imeelii",
+    "emailRequired": "Imeeliin barbaachisaa dha",
+    "emailInvalid": "Imeelii sirrii galchi",
+    "phoneLabel": "Bilbila",
+    "phoneRequired": "Lakkoofsi bilbilaa barbaachisaa dha",
+    "phonePlaceholder": "+251...",
+    "passwordLabel": "Jecha Darbii",
+    "passwordRequired": "Jechi darbii barbaachisaa dha",
+    "passwordTooShort": "Jechi darbii yoo xiqqaate arfii 8 ta'uu qaba",
+    "passwordWeak": "Jechi darbii qubee guddaa, qubee xiqqaa fi lakkoofsa qabaachuu qaba",
+    "passwordHint": "Yoo xiqqaate arfii 8, qubee guddaa, qubee xiqqaa fi lakkoofsa waliin",
+    "roleLabel": "Gahee",
+    "statusLabel": "Haala",
+    "departmentLabel": "Damee",
+    "specializationLabel": "Ogummaa",
+    "specializationPlaceholder": "fkn. Qoricha Aadaa",
+    "licenseNumberLabel": "Lakkoofsa Hayyamaa",
+    "addressLabel": "Teessoo",
+    "createButton": "Hojjetaa Uumi",
+    "updateButton": "Jijjiirama Olkaa'i",
+    "createSuccess": "Hojjetaan uumameera",
+    "updateSuccess": "Hojjetaan haaromfameera",
+    "saveError": "Hojjetaa olkaa'uun hin danda'amne"
+  },
+
+  "settings": {
+    "title": "Sajoo",
+    "subtitle": "Qindaa'ina fi filannoo kliinikaa",
+    "readOnlyNotice": "Sajoo kana ilaaluu dandeessa, garuu bulchiisaan olaanaa qofa jijjiiruu danda'a.",
+    "saveButton": "Sajoo Olkaa'i",
+    "saveSuccess": "Sajoon olkaa'ameera",
+    "saveError": "Sajoo olkaa'uun hin danda'amne",
+    "loadError": "Sajoo fe'uun hin danda'amne",
+    "clinic": {
+      "title": "Odeeffannoo Kliinikaa",
+      "description": "Nagahee, kaardii fi barruu maxxanfamu irratti mul'ata",
+      "name": "Maqaa Kliinikaa",
+      "phone": "Bilbila",
+      "email": "Imeelii",
+      "emailInvalid": "Imeelii sirrii galchi",
+      "address": "Teessoo",
+      "currency": "Sharafa"
+    },
+    "schedule": {
+      "title": "Sa'aatii Hojii",
+      "description": "Yeroo kliinikni daawwannaaf banaa ta'u",
+      "opensAt": "Yeroo banamu",
+      "closesAt": "Yeroo cufamu",
+      "timezone": "Naannoo Sa'aatii",
+      "appointmentDuration": "Turtii Beellamaa",
+      "minutesHint": "Daqiiqaadhaan",
+      "workingDays": "Guyyoota Hojii"
+    },
+    "weekdays": {
+      "monday": "Wiixata",
+      "tuesday": "Kibxata",
+      "wednesday": "Roobii",
+      "thursday": "Kamisa",
+      "friday": "Jimaata",
+      "saturday": "Sanbata",
+      "sunday": "Dilbata"
+    },
+    "operations": {
+      "title": "Hojiiwwan",
+      "description": "Akeekkachiisa kuusaa, bifa fi beeksisa",
+      "lowStockThreshold": "Daangaa Kuusaa Xiqqaa",
+      "lowStockHint": "Yeroo qorichi baay'ina kanaan gadi bu'u akeekkachiisi",
+      "dateFormat": "Bifa Guyyaa",
+      "timeFormat": "Bifa Sa'aatii",
+      "hour24": "Sa'aatii 24",
+      "hour12": "Sa'aatii 12",
+      "emailNotifications": "Beeksisa imeelii banaa godhi",
+      "smsNotifications": "Beeksisa SMS banaa godhi"
+    },
+    "legal": {
+      "title": "Seera",
+      "description": "Barruu haalaa fi iccitii dhukkubsattootaaf mul'atu",
+      "terms": "Haalawwan Tajaajilaa",
+      "privacy": "Imaammata Iccitii"
+    }
   }
 }

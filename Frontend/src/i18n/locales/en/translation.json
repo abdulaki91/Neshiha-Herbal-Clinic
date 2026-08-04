@@ -1140,5 +1140,148 @@
     "data_clerk": "Data Clerk",
     "cashier": "Cashier",
     "staff_manager": "Staff Manager"
+  },
+
+  "staff": {
+    "title": "Staff Management",
+    "subtitle": "Create, edit and manage staff accounts",
+    "addButton": "Add Staff",
+    "searchPlaceholder": "Search by name, email or phone...",
+    "empty": "No staff members found",
+    "loadError": "Failed to load staff",
+    "you": "you",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "deleteConfirm": "Delete {{name}}? Their account will be deactivated.",
+    "stats": {
+      "total": "Total Staff",
+      "active": "Active",
+      "inactive": "Inactive",
+      "doctors": "Doctors"
+    },
+    "filter": {
+      "allRoles": "All roles",
+      "allStatuses": "All statuses"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "suspended": "Suspended"
+    },
+    "table": {
+      "name": "Name",
+      "contact": "Contact",
+      "role": "Role",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "mismatch": "Passwords do not match",
+      "warning": "This signs the staff member out of all sessions. Share the new password with them securely.",
+      "submit": "Reset Password",
+      "success": "Password reset successfully",
+      "error": "Failed to reset password"
+    },
+    "toast": {
+      "deleteSuccess": "Staff deleted successfully",
+      "deleteError": "Failed to delete staff",
+      "activateSuccess": "Staff activated",
+      "activateError": "Failed to activate staff",
+      "deactivateSuccess": "Staff deactivated",
+      "deactivateError": "Failed to deactivate staff"
+    }
+  },
+
+  "staffForm": {
+    "addTitle": "Add Staff Member",
+    "editTitle": "Edit Staff Member",
+    "subtitle": "Account details and access role",
+    "firstNameLabel": "First Name",
+    "firstNameRequired": "First name is required",
+    "lastNameLabel": "Last Name",
+    "lastNameRequired": "Last name is required",
+    "emailLabel": "Email",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Enter a valid email address",
+    "phoneLabel": "Phone",
+    "phoneRequired": "Phone number is required",
+    "phonePlaceholder": "+251...",
+    "passwordLabel": "Password",
+    "passwordRequired": "Password is required",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordWeak": "Password must include an uppercase letter, a lowercase letter and a number",
+    "passwordHint": "At least 8 characters, with an uppercase letter, a lowercase letter and a number",
+    "roleLabel": "Role",
+    "statusLabel": "Status",
+    "departmentLabel": "Department",
+    "specializationLabel": "Specialization",
+    "specializationPlaceholder": "e.g. Herbal Medicine",
+    "licenseNumberLabel": "License Number",
+    "addressLabel": "Address",
+    "createButton": "Create Staff",
+    "updateButton": "Save Changes",
+    "createSuccess": "Staff created successfully",
+    "updateSuccess": "Staff updated successfully",
+    "saveError": "Failed to save staff member"
+  },
+
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Clinic configuration and preferences",
+    "readOnlyNotice": "You can view these settings, but only a super admin can change them.",
+    "saveButton": "Save Settings",
+    "saveSuccess": "Settings saved successfully",
+    "saveError": "Failed to save settings",
+    "loadError": "Failed to load settings",
+    "clinic": {
+      "title": "Clinic Information",
+      "description": "Shown on receipts, cards and printed documents",
+      "name": "Clinic Name",
+      "phone": "Phone",
+      "email": "Email",
+      "emailInvalid": "Enter a valid email address",
+      "address": "Address",
+      "currency": "Currency"
+    },
+    "schedule": {
+      "title": "Working Hours",
+      "description": "When the clinic is open for visits",
+      "opensAt": "Opens at",
+      "closesAt": "Closes at",
+      "timezone": "Timezone",
+      "appointmentDuration": "Appointment Duration",
+      "minutesHint": "In minutes",
+      "workingDays": "Working Days"
+    },
+    "weekdays": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "operations": {
+      "title": "Operations",
+      "description": "Inventory alerts, formats and notifications",
+      "lowStockThreshold": "Low Stock Threshold",
+      "lowStockHint": "Alert when a medicine falls to this quantity",
+      "dateFormat": "Date Format",
+      "timeFormat": "Time Format",
+      "hour24": "24-hour",
+      "hour12": "12-hour",
+      "emailNotifications": "Enable email notifications",
+      "smsNotifications": "Enable SMS notifications"
+    },
+    "legal": {
+      "title": "Legal",
+      "description": "Terms and privacy text shown to patients",
+      "terms": "Terms and Conditions",
+      "privacy": "Privacy Policy"
+    }
   }
 }

@@ -7,9 +7,10 @@ const router = express.Router();
 
 router.use(authenticate);
 
+// Staff managers land here too — the payload is operational counts only
 router.get(
   "/admin",
-  authorize(ROLES.SUPER_ADMIN),
+  authorize(ROLES.SUPER_ADMIN, ROLES.STAFF_MANAGER),
   dashboardController.getAdminDashboard,
 );
 router.get(
