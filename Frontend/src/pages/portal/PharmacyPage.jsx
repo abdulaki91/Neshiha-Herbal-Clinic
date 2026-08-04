@@ -174,14 +174,14 @@ const PharmacyPage = () => {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Pharmacy</h1>
+        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Pharmacy</h1>
         <p className="text-gray-600 mt-1">
           Manage medicine prescriptions and dispensing
         </p>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 mb-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           {/* Search */}
           <div className="relative flex-1 max-w-md">
@@ -216,7 +216,7 @@ const PharmacyPage = () => {
 
       {/* Prescriptions List */}
       {filteredPrescriptions.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+        <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-12 text-center">
           <FiPackage className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <p className="text-gray-500 text-lg">
             {searchTerm
@@ -229,7 +229,7 @@ const PharmacyPage = () => {
           {filteredPrescriptions.map((prescription) => (
             <div
               key={prescription.id}
-              className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition"
+              className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1 space-y-3">
@@ -337,7 +337,7 @@ const PharmacyPage = () => {
                 {(prescription.status === "paid" || prescription.status === "pending") && (
                   <button
                     onClick={() => handleDispenseClick(prescription)}
-                    className="ml-6 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium flex items-center space-x-2"
+                    className="ml-6 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium flex items-center space-x-2"
                   >
                     <FiCheck className="w-5 h-5" />
                     <span>Dispense</span>
@@ -496,7 +496,7 @@ const PharmacyPage = () => {
               </button>
               <button
                 onClick={handleDispense}
-                className="px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium"
+                className="px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium"
               >
                 Confirm Dispensing
               </button>

@@ -583,7 +583,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                   return (
                     <div
                       key={visit.id}
-                      className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition text-xs space-y-2.5"
+                      className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 text-xs space-y-2.5"
                     >
                       <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                         <div>

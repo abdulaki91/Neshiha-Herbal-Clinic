@@ -51,6 +51,28 @@ export const useUpdateVisit = () => {
   });
 };
 
+export const useAppointments = (params = {}) =>
+  useQuery({
+    queryKey: ["appointments", params],
+    queryFn: () => axiosInstance.get("/visits/appointments", { params }),
+    select: (res) => ({
+      appointments: res.data || [],
+      pagination: res.pagination,
+    }),
+  });
+
+export const useCheckInAppointment = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id) => axiosInstance.patch(`/visits/${id}/check-in`),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["appointments"] });
+      qc.invalidateQueries({ queryKey: ["visits"] });
+      qc.invalidateQueries({ queryKey: ["queue"] });
+    },
+  });
+};
+
 export const useAssignDoctor = () => {
   const qc = useQueryClient();
   return useMutation({
@@ -59,6 +81,19 @@ export const useAssignDoctor = () => {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["visits"] });
       qc.invalidateQueries({ queryKey: ["queue"] });
+    },
+  });
+};
+
+export const useUpdateVisitStatus = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, status }) =>
+      axiosInstance.patch(`/visits/${id}/status`, { status }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["visits"] });
+      qc.invalidateQueries({ queryKey: ["queue"] });
+      qc.invalidateQueries({ queryKey: ["appointments"] });
     },
   });
 };

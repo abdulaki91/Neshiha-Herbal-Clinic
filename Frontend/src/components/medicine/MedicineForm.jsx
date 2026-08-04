@@ -523,7 +523,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition disabled:opacity-50 shadow-md"
+              className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 shadow-md"
             >
               <FiSave />
               <span>{loading ? t("medicineForm.saving") : isEdit ? t("medicineForm.updateButton") : t("medicineForm.addButton")}</span>

@@ -24,6 +24,7 @@ import CashierPage from "./pages/portal/CashierPage";
 import CashierReportsPage from "./pages/portal/CashierReportsPage";
 import StaffPage from "./pages/portal/StaffPage";
 import SettingsPage from "./pages/portal/SettingsPage";
+import AppointmentsPage from "./pages/portal/AppointmentsPage";
 
 // Store
 import useAuthStore from "./store/authStore";
@@ -140,6 +141,7 @@ export default function App() {
           <Route path="patients/:id" element={<PatientDetailPage />} />
           <Route path="visits" element={<VisitsPage />} />
           <Route path="visits/new" element={<VisitsPage />} />
+          <Route path="appointments" element={<AppointmentsPage />} />
           <Route path="queue" element={<DoctorQueuePage />} />
           <Route path="medicines" element={<MedicinesPage />} />
           <Route path="laboratory" element={<LaboratoryPage />} />

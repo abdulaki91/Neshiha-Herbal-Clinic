@@ -22,7 +22,7 @@ const toTimeInput = (value) => (value ? value.slice(0, 5) : "");
 const Section = ({ icon, title, description, children }) => {
   const Icon = icon;
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 border border-gray-100 p-6">
       <div className="flex items-center space-x-3 mb-5">
         <div className="p-2.5 bg-emerald-50 rounded-lg">
           <Icon className="w-5 h-5 text-emerald-600" />
@@ -118,7 +118,7 @@ const SettingsPage = () => {
 
   if (isError) {
     return (
-      <div className="py-12 text-center text-red-500 bg-white rounded-xl shadow-sm">
+      <div className="py-12 text-center text-red-500 bg-white rounded-2xl shadow-sm shadow-slate-200/60">
         {t("settings.loadError")}
       </div>
     );
@@ -127,7 +127,7 @@ const SettingsPage = () => {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">
+        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
           {t("settings.title")}
         </h1>
         <p className="text-gray-500 mt-1">{t("settings.subtitle")}</p>
@@ -357,7 +357,7 @@ const SettingsPage = () => {
             <button
               type="submit"
               disabled={updateSettings.isPending || !isDirty}
-              className="flex items-center space-x-2 px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition disabled:opacity-50 shadow-lg"
+              className="flex items-center space-x-2 px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 shadow-lg"
             >
               <FiSave />
               <span>

@@ -16,6 +16,7 @@ export const USER_STATUS = {
 
 // Visit Status
 export const VISIT_STATUS = {
+  SCHEDULED: "scheduled",
   WAITING: "waiting",
   IN_CONSULTATION: "in_consultation",
   PENDING_PAYMENT: "pending_payment",

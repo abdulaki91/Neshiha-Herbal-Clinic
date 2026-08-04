@@ -43,13 +43,13 @@ const PatientsPage = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">{t("patients.title")}</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">{t("patients.title")}</h1>
           <p className="text-gray-500 mt-1">{t("patients.subtitle")}</p>
         </div>
         {canRegister && (
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
           >
             <FiPlus />
             <span>{t("patients.registerButton")}</span>

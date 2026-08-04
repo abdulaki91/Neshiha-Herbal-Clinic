@@ -51,6 +51,25 @@ export const getDoctorQueue = asyncHandler(async (req, res) => {
   return ApiResponse.success(res, queue, "Doctor queue retrieved successfully");
 });
 
+export const getAppointments = asyncHandler(async (req, res) => {
+  const result = await visitService.getAppointments(req.query);
+  return ApiResponse.paginated(
+    res,
+    result.appointments,
+    result.pagination,
+    "Appointments retrieved successfully",
+  );
+});
+
+export const checkInAppointment = asyncHandler(async (req, res) => {
+  const visit = await visitService.checkInAppointment(
+    req.params.id,
+    req.user.id,
+  );
+  emitVisitStatusChanged(visit);
+  return ApiResponse.success(res, visit, "Patient checked in successfully");
+});
+
 export const assignDoctor = asyncHandler(async (req, res) => {
   const { doctorId } = req.body;
   const visit = await visitService.assignDoctor(

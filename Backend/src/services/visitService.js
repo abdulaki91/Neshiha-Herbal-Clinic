@@ -3,6 +3,13 @@ import { Op } from "sequelize";
 import { getPagination, calculateBMI } from "../utils/helpers.js";
 import { ERROR_MESSAGES, VISIT_STATUS } from "../config/constants.js";
 
+// errorHandler reads err.statusCode; without it, every thrown error is a 500
+const httpError = (message, statusCode) => {
+  const error = new Error(message);
+  error.statusCode = statusCode;
+  return error;
+};
+
 /**
  * Create new visit
  */
@@ -251,6 +258,125 @@ export const updateVisitStatus = async (id, status, updatedBy) => {
   }
 
   await visit.update(updates);
+
+  return visit;
+};
+
+/**
+ * Get upcoming scheduled appointments (not yet checked in).
+ * These are deliberately excluded from getDoctorQueue, which only ever
+ * looks at today's WAITING/IN_CONSULTATION visits — an appointment stays
+ * invisible to the doctor queue until front desk checks the patient in.
+ */
+export const getAppointments = async (query) => {
+  const {
+    page = 1,
+    pageSize = 20,
+    startDate,
+    endDate,
+    doctorId,
+    search,
+  } = query;
+
+  const { limit, offset } = getPagination(page, pageSize);
+
+  const where = { status: VISIT_STATUS.SCHEDULED };
+  if (doctorId) where.doctorId = doctorId;
+
+  const today = new Date().toISOString().split("T")[0];
+  if (startDate && endDate) {
+    where.visitDate = { [Op.between]: [startDate, endDate] };
+  } else if (startDate) {
+    where.visitDate = { [Op.gte]: startDate };
+  } else if (endDate) {
+    where.visitDate = { [Op.lte]: endDate };
+  } else {
+    // Default to today-and-forward so past no-shows don't clutter the list
+    where.visitDate = { [Op.gte]: today };
+  }
+
+  const patientWhere = {};
+  if (search) {
+    patientWhere[Op.or] = [
+      { firstName: { [Op.iLike]: `%${search}%` } },
+      { lastName: { [Op.iLike]: `%${search}%` } },
+      { patientId: { [Op.iLike]: `%${search}%` } },
+      { phone: { [Op.iLike]: `%${search}%` } },
+    ];
+  }
+
+  const { count, rows } = await Visit.findAndCountAll({
+    where,
+    limit,
+    offset,
+    order: [
+      ["visitDate", "ASC"],
+      ["scheduledTime", "ASC"],
+    ],
+    include: [
+      {
+        model: Patient,
+        as: "patient",
+        where: Object.keys(patientWhere).length > 0 ? patientWhere : undefined,
+        attributes: [
+          "id",
+          "patientId",
+          "firstName",
+          "lastName",
+          "phone",
+          "age",
+          "gender",
+        ],
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["id", "firstName", "lastName", "specialization"],
+      },
+    ],
+  });
+
+  return {
+    appointments: rows,
+    pagination: {
+      page: parseInt(page),
+      pageSize: limit,
+      totalItems: count,
+    },
+  };
+};
+
+/**
+ * Check a scheduled appointment in, moving it onto today's doctor queue.
+ * Only valid on the appointment's own date — checking in early would put a
+ * visit dated for next week onto today's queue, which would be confusing
+ * for the doctor and wrong for same-day reporting.
+ */
+export const checkInAppointment = async (id, updatedBy) => {
+  const visit = await Visit.findByPk(id);
+
+  if (!visit) {
+    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
+  }
+
+  if (visit.status !== VISIT_STATUS.SCHEDULED) {
+    throw httpError("This visit is not a pending appointment", 400);
+  }
+
+  const today = new Date().toISOString().split("T")[0];
+  if (visit.visitDate !== today) {
+    throw httpError(
+      "This appointment is not scheduled for today and cannot be checked in yet",
+      400,
+    );
+  }
+
+  const now = new Date();
+  await visit.update({
+    status: VISIT_STATUS.WAITING,
+    arrivalTime: `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`,
+    updatedBy,
+  });
 
   return visit;
 };

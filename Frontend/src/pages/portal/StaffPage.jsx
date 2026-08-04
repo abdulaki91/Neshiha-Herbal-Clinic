@@ -135,7 +135,7 @@ const ResetPasswordModal = ({ member, onClose }) => {
             <button
               type="submit"
               disabled={resetPassword.isPending || !strongEnough || !matches}
-              className="px-5 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition disabled:opacity-50"
+              className="px-5 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50"
             >
               {resetPassword.isPending
                 ? t("common.saving")
@@ -246,7 +246,7 @@ const StaffPage = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">
+          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
             {t("staff.title")}
           </h1>
           <p className="text-gray-500 mt-1">{t("staff.subtitle")}</p>
@@ -256,7 +256,7 @@ const StaffPage = () => {
             setSelected(null);
             setShowForm(true);
           }}
-          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
+          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
         >
           <FiPlus />
           <span>{t("staff.addButton")}</span>
@@ -270,7 +270,7 @@ const StaffPage = () => {
           return (
             <div
               key={card.label}
-              className="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center space-x-4"
+              className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 border border-gray-100 flex items-center space-x-4"
             >
               <div className={`p-3 rounded-lg ${card.color}`}>
                 <Icon className="w-5 h-5" />
@@ -287,7 +287,7 @@ const StaffPage = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm p-4 mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="relative md:col-span-2">
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
@@ -338,11 +338,11 @@ const StaffPage = () => {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
         </div>
       ) : isError ? (
-        <div className="py-12 text-center text-red-500 bg-white rounded-xl shadow-sm">
+        <div className="py-12 text-center text-red-500 bg-white rounded-2xl shadow-sm shadow-slate-200/60">
           {t("staff.loadError")}
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">

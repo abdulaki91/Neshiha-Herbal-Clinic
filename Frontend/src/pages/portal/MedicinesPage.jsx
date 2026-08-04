@@ -57,7 +57,7 @@ const MedicinesPage = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">{t("medicines.title")}</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">{t("medicines.title")}</h1>
           <p className="text-gray-500 mt-1">{t("medicines.subtitle")}</p>
         </div>
         {canManage && (
@@ -66,7 +66,7 @@ const MedicinesPage = () => {
               setSelectedMedicine(null);
               setShowForm(true);
             }}
-            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
           >
             <FiPlus />
             <span>{t("medicines.addButton")}</span>
@@ -75,7 +75,7 @@ const MedicinesPage = () => {
       </div>
 
       {/* Search */}
-      <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 mb-6">
         <div className="relative">
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
@@ -98,7 +98,7 @@ const MedicinesPage = () => {
           {medicines.map((medicine) => (
             <div
               key={medicine.id}
-              className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition border border-gray-100"
+              className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 border border-gray-100"
             >
               <div className="flex justify-between items-start mb-4">
                 <div className="p-3 bg-emerald-50 rounded-lg">
@@ -158,7 +158,7 @@ const MedicinesPage = () => {
           ))}
 
           {medicines.length === 0 && (
-            <div className="col-span-full py-12 text-center text-gray-500 bg-white rounded-xl shadow-sm border border-dashed border-gray-300">
+            <div className="col-span-full py-12 text-center text-gray-500 bg-white rounded-2xl shadow-sm shadow-slate-200/60 border border-dashed border-gray-300">
               {t("medicines.empty")}
             </div>
           )}

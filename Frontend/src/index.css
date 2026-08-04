@@ -46,3 +46,40 @@ body {
 *::-webkit-scrollbar-thumb:hover {
   background: #6ee7b7;
 }
+
+/* Shared entrance/ambient motion, reusable across any page via className */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ambient-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-3%, 4%) scale(1.05);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-ambient-drift {
+  animation: ambient-drift 12s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-ambient-drift {
+    animation: none;
+  }
+}

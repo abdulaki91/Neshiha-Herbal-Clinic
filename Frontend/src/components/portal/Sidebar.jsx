@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   FiHome, FiUsers, FiCalendar, FiFileText, FiSettings,
-  FiLogOut, FiDollarSign, FiActivity, FiPackage, FiExternalLink,
+  FiLogOut, FiDollarSign, FiActivity, FiPackage, FiExternalLink, FiClock,
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../store/authStore";
@@ -58,6 +58,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       { name: t("sidebar.staff"), to: "/portal/staff", icon: FiUsers },
       { name: t("sidebar.patients"), to: "/portal/patients", icon: FiUsers },
       { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
+      { name: t("sidebar.appointments"), to: "/portal/appointments", icon: FiClock },
       { name: t("sidebar.medicines"), to: "/portal/medicines", icon: FiPackage },
       { name: t("sidebar.cashier"), to: "/portal/cashier", icon: FiDollarSign },
       { name: t("sidebar.laboratory"), to: "/portal/laboratory", icon: FiActivity },
@@ -72,6 +73,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
       { name: t("sidebar.patients"), to: "/portal/patients", icon: FiUsers },
       { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
+      { name: t("sidebar.appointments"), to: "/portal/appointments", icon: FiClock },
       { name: t("sidebar.medicines"), to: "/portal/medicines", icon: FiPackage },
     ],
     doctor: [
@@ -79,6 +81,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       { name: t("sidebar.queue"), to: "/portal/queue", icon: FiCalendar, showBadge: true },
       { name: t("sidebar.patients"), to: "/portal/patients", icon: FiExternalLink },
       { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
+      { name: t("sidebar.appointments"), to: "/portal/appointments", icon: FiClock },
       { name: t("sidebar.medicines"), to: "/portal/medicines", icon: FiPackage },
     ],
     cashier: [

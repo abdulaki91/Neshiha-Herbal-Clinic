@@ -1,7 +1,8 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { useReactToPrint } from "react-to-print";
 import {
   FiUser,
   FiClock,
@@ -16,12 +17,14 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiUsers,
+  FiPrinter,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 import { getSocket } from "../../lib/socket";
 import { useQueue, useUpdateVisit } from "../../hooks/useVisits";
 import { usePrescriptions } from "../../hooks/usePrescriptions";
+import useAuthStore from "../../store/authStore";
 import HerbalMedicineForm from "../../components/doctor/HerbalMedicineForm";
 import FollowUpIndicator from "../../components/doctor/FollowUpIndicator";
 import ActivePrescriptions from "../../components/doctor/ActivePrescriptions";
@@ -29,6 +32,7 @@ import PendingInvestigations from "../../components/doctor/PendingInvestigations
 import ConsultationTab from "../../components/doctor/ConsultationTab";
 import PatientHistoryTab from "../../components/doctor/PatientHistoryTab";
 import PatientRecordSidebar from "../../components/doctor/PatientRecordSidebar";
+import PrintablePrescriptionSlip from "../../components/doctor/PrintablePrescriptionSlip";
 
 const addPatientToRecent = (patient) => {
   if (!patient) return;
@@ -72,10 +76,47 @@ const DoctorQueuePage = () => {
   });
 
   const qc = useQueryClient();
+  const { user } = useAuthStore();
   const { data: queue = [], isLoading } = useQueue();
   const updateVisit = useUpdateVisit();
   const { data: prescriptionsData } = usePrescriptions();
   const refreshQueue = () => qc.invalidateQueries({ queryKey: ["queue"] });
+
+  // Printable herbal prescription slip
+  const [printPayload, setPrintPayload] = useState(null);
+  const [printLoading, setPrintLoading] = useState(false);
+  const printRef = useRef(null);
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: printPayload?.patient
+      ? `${printPayload.patient.firstName}-${printPayload.patient.lastName}-Rx`
+      : "Prescription",
+    onAfterPrint: () => setPrintPayload(null),
+  });
+
+  useEffect(() => {
+    if (printPayload) handlePrint();
+  }, [printPayload, handlePrint]);
+
+  const handlePrintPrescription = async (visit) => {
+    if (!visit) return;
+    setPrintLoading(true);
+    try {
+      const response = await axiosInstance.get("/prescriptions", {
+        params: { visitId: visit.id, pageSize: 100 },
+      });
+      const prescriptions = response.data?.data || response.data || [];
+      if (prescriptions.length === 0) {
+        toast.error(t("doctorQueue.consultation.printNoPrescriptions"));
+        return;
+      }
+      setPrintPayload({ visit, patient: visit.patient, doctor: user, prescriptions });
+    } catch {
+      toast.error(t("doctorQueue.consultation.printError"));
+    } finally {
+      setPrintLoading(false);
+    }
+  };
 
   // Real-time: invalidate queue on socket events
   useEffect(() => {
@@ -248,7 +289,18 @@ const DoctorQueuePage = () => {
           onBack={handleDeselectVisit}
           refreshQueue={refreshQueue}
           onOpenSidebar={() => setIsRecordSidebarOpen(true)}
+          onPrintPrescription={handlePrintPrescription}
+          printLoading={printLoading}
         />
+        <div style={{ display: "none" }}>
+          <PrintablePrescriptionSlip
+            ref={printRef}
+            visit={printPayload?.visit}
+            patient={printPayload?.patient}
+            doctor={printPayload?.doctor}
+            prescriptions={printPayload?.prescriptions || []}
+          />
+        </div>
       </div>
     );
   }
@@ -264,7 +316,7 @@ const DoctorQueuePage = () => {
       >
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">
+            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               {t("doctorQueue.title")}
             </h1>
             <p className="text-gray-500 text-sm mt-1">
@@ -285,7 +337,7 @@ const DoctorQueuePage = () => {
         </div>
 
         {queue.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+          <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-12 text-center">
             <FiCheckCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <p className="text-gray-500 text-lg">
               {t("doctorQueue.empty.title")}
@@ -305,7 +357,7 @@ const DoctorQueuePage = () => {
               return (
                 <div
                   key={visit.id}
-                  className={`bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition cursor-pointer border-2 ${
+                  className={`bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer border-2 ${
                     isSelected
                       ? "border-emerald-500 bg-emerald-50"
                       : "border-transparent"
@@ -416,6 +468,8 @@ const DoctorQueuePage = () => {
             onBack={handleDeselectVisit}
             refreshQueue={refreshQueue}
             onOpenSidebar={() => setIsRecordSidebarOpen(true)}
+            onPrintPrescription={handlePrintPrescription}
+            printLoading={printLoading}
           />
           <PatientRecordSidebar
             isOpen={isRecordSidebarOpen}
@@ -440,6 +494,16 @@ const DoctorQueuePage = () => {
           </div>
         </div>
       )}
+
+      <div style={{ display: "none" }}>
+        <PrintablePrescriptionSlip
+          ref={printRef}
+          visit={printPayload?.visit}
+          patient={printPayload?.patient}
+          doctor={printPayload?.doctor}
+          prescriptions={printPayload?.prescriptions || []}
+        />
+      </div>
     </div>
   );
 };
@@ -456,6 +520,8 @@ const ConsultationPanel = ({
   onBack,
   refreshQueue,
   onOpenSidebar,
+  onPrintPrescription,
+  printLoading,
 }) => {
   const { t } = useTranslation();
 
@@ -481,6 +547,14 @@ const ConsultationPanel = ({
             <span>Patient File Drawer</span>
           </button>
           <button
+            onClick={() => onPrintPrescription?.(selectedVisit)}
+            disabled={printLoading}
+            className="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm disabled:opacity-50"
+          >
+            <FiPrinter />
+            <span>{t("doctorQueue.consultation.printPrescription")}</span>
+          </button>
+          <button
             onClick={onSave}
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
           >
@@ -497,7 +571,7 @@ const ConsultationPanel = ({
       </div>
 
       {/* Patient Info Card */}
-      <div className="bg-white rounded-xl shadow-sm p-4 mb-4">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 mb-4">
         <h3 className="text-sm font-semibold text-gray-800 mb-3">
           {t("doctorQueue.consultation.patientInfo")}
         </h3>
@@ -579,7 +653,7 @@ const ConsultationPanel = ({
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-xl shadow-sm mb-4">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 mb-4">
         <div className="border-b border-gray-200 overflow-x-auto">
           <nav className="flex space-x-1 px-4 min-w-max">
             {[
@@ -626,7 +700,7 @@ const ConsultationPanel = ({
       </div>
 
       {/* Diagnosis summary + Complete button */}
-      <div className="bg-white rounded-xl shadow-sm p-4 border-t-2 border-emerald-100">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 border-t-2 border-emerald-100">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           {/* Diagnosis summary */}
           <div className="flex-1 min-w-0">
@@ -654,7 +728,7 @@ const ConsultationPanel = ({
           {/* Complete button */}
           <button
             onClick={onComplete}
-            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium shadow-md text-center"
+            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium shadow-md text-center"
           >
             {t("doctorQueue.consultation.completeConsultation")}
           </button>

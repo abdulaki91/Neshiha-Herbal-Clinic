@@ -107,7 +107,7 @@ const CashierPage = () => {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Cashier Dashboard</h1>
+        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Cashier Dashboard</h1>
         <p className="text-gray-600 mt-1">Receive payments, dispense medicine &amp; print receipts</p>
       </div>
 
@@ -136,7 +136,7 @@ const CashierPage = () => {
       {/* ===== PENDING TAB ===== */}
       {activeTab === "pending" && (
         <>
-          <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+          <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 mb-6">
             <div className="relative flex-1 max-w-md">
               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
@@ -151,14 +151,14 @@ const CashierPage = () => {
           </div>
 
           {pendingPayments.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+            <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-12 text-center">
               <FiDollarSign className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500 text-lg">No pending payments</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-4">
               {pendingPayments.map((visit) => (
-                <div key={visit.id} className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+                <div key={visit.id} className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-3 mb-4">
@@ -241,14 +241,14 @@ const CashierPage = () => {
       {activeTab === "recent" && (
         <>
           {recentPayments.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+            <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-12 text-center">
               <FiHistory className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500 text-lg">No recent payments</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-4">
               {recentPayments.map((payment) => (
-                <div key={payment.id} className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+                <div key={payment.id} className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-3 mb-4">

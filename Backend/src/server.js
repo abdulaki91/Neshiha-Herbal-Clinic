@@ -58,6 +58,17 @@ const startServer = async () => {
     } catch {
       // Columns may already exist, ignore
     }
+    try {
+      // Appointment scheduling: new column + enum value for pre-booked visits
+      await sequelize.query(
+        `ALTER TABLE visits ADD COLUMN IF NOT EXISTS scheduled_time TIME`
+      );
+      await sequelize.query(
+        `ALTER TYPE enum_visits_status ADD VALUE IF NOT EXISTS 'scheduled'`
+      );
+    } catch {
+      // Column/enum value may already exist, ignore
+    }
 
     // Initialize Socket.io
     initializeSocket(httpServer);

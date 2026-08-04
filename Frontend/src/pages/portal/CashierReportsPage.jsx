@@ -82,7 +82,7 @@ const CashierReportsPage = () => {
         <>
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
                   <FiDollarSign className="w-6 h-6 text-emerald-600" />
@@ -96,7 +96,7 @@ const CashierReportsPage = () => {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                   <FiPackage className="w-6 h-6 text-blue-600" />
@@ -110,7 +110,7 @@ const CashierReportsPage = () => {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                   <FiTrendingUp className="w-6 h-6 text-purple-600" />
@@ -128,7 +128,7 @@ const CashierReportsPage = () => {
 
           {/* Payment Method Breakdown */}
           {report.summary?.byPaymentMethod && Object.keys(report.summary.byPaymentMethod).length > 0 && (
-            <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6 mb-8">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
                 By Payment Method
               </h3>
@@ -146,7 +146,7 @@ const CashierReportsPage = () => {
           )}
 
           {/* Payments Table */}
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 overflow-hidden">
             <div className="p-6 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-800">
                 Payment Transactions ({report.payments?.length || 0})
@@ -217,7 +217,7 @@ const CashierReportsPage = () => {
 
       {/* Empty state (no report + not loading) */}
       {!isLoading && !report && (
-        <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+        <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-12 text-center">
           <FiDollarSign className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <p className="text-gray-500 text-lg">No report data available</p>
         </div>

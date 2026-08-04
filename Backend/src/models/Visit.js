@@ -35,6 +35,11 @@ const Visit = sequelize.define(
       type: DataTypes.DATEONLY,
       allowNull: false,
       defaultValue: DataTypes.NOW,
+      comment: "For a scheduled appointment, this is the appointment date",
+    },
+    scheduledTime: {
+      type: DataTypes.TIME,
+      comment: "Planned appointment time; set only when status is scheduled",
     },
     arrivalTime: {
       type: DataTypes.TIME,

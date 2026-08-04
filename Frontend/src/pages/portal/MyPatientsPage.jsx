@@ -102,7 +102,7 @@ const MyPatientsPage = () => {
           {patients.map((patient) => (
             <div
               key={patient.id}
-              className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition"
+              className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4">

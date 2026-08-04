@@ -9,7 +9,7 @@ export default function ClinicManagement() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+      <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight dark:text-gray-100">
         {t("clinicManagement.title")}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

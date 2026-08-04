@@ -19,6 +19,16 @@ router.get(
 );
 
 router.get("/queue", authorize(ROLES.DOCTOR), visitController.getDoctorQueue);
+
+// Upcoming scheduled appointments (must be before /:id route)
+router.get(
+  "/appointments",
+  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  visitValidator.appointmentQueryValidator,
+  validate,
+  visitController.getAppointments,
+);
+
 router.get("/", visitController.getAllVisits);
 router.get("/:id", visitController.getVisitById);
 router.post(
@@ -43,6 +53,12 @@ router.patch(
   validate,
   auditLogger("UPDATE", "Visit"),
   visitController.updateVisitStatus,
+);
+router.patch(
+  "/:id/check-in",
+  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN),
+  auditLogger("UPDATE", "Visit"),
+  visitController.checkInAppointment,
 );
 router.patch(
   "/:id/assign-doctor",

@@ -11,7 +11,7 @@ const PatientCard = ({ patient, onUpdate }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6">
+    <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-6">
       <div className="flex items-start space-x-4 mb-4">
         <div className="w-16 h-16 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
           {getInitials()}

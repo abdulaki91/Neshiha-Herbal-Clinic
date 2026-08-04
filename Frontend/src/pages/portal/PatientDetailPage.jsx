@@ -89,7 +89,7 @@ const PatientDetailPage = () => {
       </button>
 
       {/* Patient Info Card */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6">
         <div className="flex items-start space-x-4 mb-6">
           <div className="w-20 h-20 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
             {patient.firstName?.[0]}
@@ -202,7 +202,7 @@ const PatientDetailPage = () => {
       </div>
 
       {/* Visit History */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6">
         <h2 className="text-lg font-bold text-gray-800 mb-4">
           Visit History
         </h2>

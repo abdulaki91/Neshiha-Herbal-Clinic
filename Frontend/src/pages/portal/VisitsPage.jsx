@@ -38,6 +38,7 @@ const VisitsPage = () => {
 
   const getStatusColor = (status) => {
     const colors = {
+      scheduled: "bg-purple-100 text-purple-800",
       waiting: "bg-yellow-100 text-yellow-800",
       in_consultation: "bg-blue-100 text-blue-800",
       completed: "bg-green-100 text-green-800",
@@ -48,6 +49,7 @@ const VisitsPage = () => {
 
   const getStatusLabel = (status) => {
     const labels = {
+      scheduled: t("visits.status.scheduled"),
       waiting: t("visits.status.waiting"),
       in_consultation: t("visits.status.inConsultation"),
       completed: t("visits.status.completed"),
@@ -60,12 +62,12 @@ const VisitsPage = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">{t("visits.title")}</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">{t("visits.title")}</h1>
           <p className="text-gray-500 mt-1">{t("visits.subtitle")}</p>
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition shadow-lg"
+          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
         >
           <FiPlus />
           <span>{t("visits.newVisitButton")}</span>
@@ -99,7 +101,7 @@ const VisitsPage = () => {
           {visits.map((visit) => (
             <div
               key={visit.id}
-              className="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6"
+              className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-6"
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4">
@@ -153,7 +155,6 @@ const VisitsPage = () => {
           onSuccess={() => {
             setShowForm(false);
             fetchVisits();
-            toast.success(t("visits.toast.createSuccess"));
           }}
         />
       )}
