@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FiCalendar, FiClock, FiFileText } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 
@@ -6,6 +7,7 @@ import axiosInstance from "../../lib/axios";
  * Component to show if current visit is a follow-up and display previous visit summary
  */
 const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
+  const { t } = useTranslation();
   const [followUpInfo, setFollowUpInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -71,7 +73,7 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
         <div className="flex items-center space-x-2">
           <FiFileText className="w-5 h-5 text-blue-600" />
           <p className="text-sm font-medium text-blue-800">
-            First Visit - No previous medical history
+            {t("followUpIndicator.firstVisit")}
           </p>
         </div>
       </div>
@@ -101,8 +103,8 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
             }`}
           >
             {isScheduledFollowUp
-              ? "✓ Scheduled Follow-up Visit"
-              : "Return Visit"}
+              ? t("followUpIndicator.scheduledFollowUp")
+              : t("followUpIndicator.returnVisit")}
           </h4>
         </div>
         <span
@@ -114,7 +116,7 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
                 : "bg-orange-100 text-orange-800"
           }`}
         >
-          {daysSinceLastVisit} days since last visit
+          {t("followUpIndicator.daysSinceLast", { days: daysSinceLastVisit })}
         </span>
       </div>
 
@@ -126,7 +128,7 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
       >
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="font-medium">Last Visit:</p>
+            <p className="font-medium">{t("followUpIndicator.lastVisit")}</p>
             <p>
               {new Date(lastVisit.visitDate).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -137,7 +139,9 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
           </div>
           {lastVisit.followUpDate && (
             <div>
-              <p className="font-medium">Follow-up was scheduled for:</p>
+              <p className="font-medium">
+                {t("followUpIndicator.followUpScheduled")}
+              </p>
               <p>
                 {new Date(lastVisit.followUpDate).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -151,7 +155,9 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
 
         {lastVisit.diagnosis && (
           <div className="pt-2 border-t border-current border-opacity-20">
-            <p className="font-medium">Previous Diagnosis:</p>
+            <p className="font-medium">
+              {t("followUpIndicator.previousDiagnosis")}
+            </p>
             <p className="mt-1">
               {Array.isArray(lastVisit.diagnosis)
                 ? lastVisit.diagnosis.join(", ")
@@ -162,14 +168,18 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
 
         {lastVisit.treatmentPlan && (
           <div>
-            <p className="font-medium">Previous Treatment:</p>
+            <p className="font-medium">
+              {t("followUpIndicator.previousTreatment")}
+            </p>
             <p className="mt-1">{lastVisit.treatmentPlan}</p>
           </div>
         )}
 
         {lastVisit.doctorNotes && (
           <div>
-            <p className="font-medium">Previous Notes:</p>
+            <p className="font-medium">
+              {t("followUpIndicator.previousNotes")}
+            </p>
             <p className="mt-1 italic">"{lastVisit.doctorNotes}"</p>
           </div>
         )}
@@ -189,7 +199,7 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
               : "bg-blue-100 text-blue-700 hover:bg-blue-200"
           } transition`}
         >
-          View Full History
+          {t("followUpIndicator.viewFullHistory")}
         </button>
       </div>
     </div>

@@ -28,7 +28,11 @@ router.get(
 );
 
 // Get staff by ID
-router.get("/:id", staffController.getStaffById);
+router.get(
+  "/:id",
+  authorize(ROLES.SUPER_ADMIN, ROLES.STAFF_MANAGER),
+  staffController.getStaffById,
+);
 
 // Create new staff
 router.post(
@@ -72,6 +76,16 @@ router.patch(
   authorize(ROLES.SUPER_ADMIN, ROLES.STAFF_MANAGER),
   auditLogger("UPDATE", "User"),
   staffController.deactivateStaff,
+);
+
+// Reset a staff member's password
+router.post(
+  "/:id/reset-password",
+  authorize(ROLES.SUPER_ADMIN, ROLES.STAFF_MANAGER),
+  staffValidator.resetStaffPasswordValidator,
+  validate,
+  auditLogger("UPDATE", "User"),
+  staffController.resetStaffPassword,
 );
 
 export default router;

@@ -5,10 +5,18 @@ import { validate } from "../middleware/validator.js";
 import { authenticate, authorize } from "../middleware/auth.js";
 import { auditLogger, auditUpdate } from "../middleware/audit.js";
 import { ROLES } from "../config/constants.js";
+import { uploadSingle, uploadMultiple } from "../middleware/upload.js";
 
 const router = express.Router();
 
 router.use(authenticate);
+
+// Get completed consultations (must be before /:id route)
+router.get(
+  "/completed",
+  authorize(ROLES.DOCTOR),
+  visitController.getCompletedConsultations,
+);
 
 router.get("/queue", authorize(ROLES.DOCTOR), visitController.getDoctorQueue);
 router.get("/", visitController.getAllVisits);
@@ -50,5 +58,26 @@ router.post(
   auditLogger("UPDATE", "Visit"),
   visitController.recordVitalSigns,
 );
+
+// Upload single attachment during consultation
+router.post(
+  "/:id/attachments",
+  authorize(ROLES.DOCTOR, ROLES.DATA_CLERK),
+  uploadSingle("document"),
+  auditLogger("CREATE", "PatientAttachment"),
+  visitController.uploadVisitAttachment,
+);
+
+// Upload multiple attachments during consultation
+router.post(
+  "/:id/attachments/multiple",
+  authorize(ROLES.DOCTOR, ROLES.DATA_CLERK),
+  uploadMultiple("documents", 10),
+  auditLogger("CREATE", "PatientAttachment"),
+  visitController.uploadMultipleVisitAttachments,
+);
+
+// Get all attachments for a visit
+router.get("/:id/attachments", visitController.getVisitAttachments);
 
 export default router;

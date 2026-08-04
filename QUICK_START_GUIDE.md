@@ -1,469 +1,478 @@
-# Quick Start Guide - Neshiha Herbal Clinic
+# Quick Start Guide - Visit Attachments Feature
 
-## 🚀 System is Ready!
+## 🚀 5-Minute Setup
 
-Both Backend and Frontend are running. Test data has been created.
+### Prerequisites
 
----
+- Backend server running
+- Frontend server running
+- Doctor account credentials
 
-## 📍 Access URLs
-
-- **Frontend:** http://localhost:5174
-- **Backend API:** http://localhost:5000/api/v1
-- **Backend Server:** http://localhost:5000
-
----
-
-## 🔐 Test Accounts
-
-### 1. Super Admin
-
-- **Email:** `admin@neshihaclinic.com`
-- **Password:** `Admin@123`
-- **Can:** Manage everything (staff, patients, visits, reports, settings)
-
-### 2. Staff Manager
-
-- **Email:** `manager@neshihaclinic.com`
-- **Password:** `Manager@123`
-- **Can:** Manage staff accounts only
-
-### 3. Doctor
-
-- **Email:** `doctor@neshihaclinic.com`
-- **Password:** `Doctor@123`
-- **Can:** View queue, start consultations, prescribe medicines, dispense medicines
-
-### 4. Data Clerk
-
-- **Email:** `clerk@neshihaclinic.com`
-- **Password:** `Clerk@123`
-- **Can:** Register patients, create visits, send patients to doctor
-
-### 5. Cashier
-
-- **Email:** `cashier@neshihaclinic.com`
-- **Password:** `Cashier@123`
-- **Can:** View pending payments, process payments, view payment history
-
----
-
-## 📋 Test Data Available
-
-### Patients (5 Created):
-
-1. **Abebe Tesfaye** - 44M, Has Hypertension, Allergic to Penicillin & Peanuts
-2. **Tigist Hailu** - 32F, No conditions
-3. **Mulugeta Bekele** - 49M, Has Diabetes & High Cholesterol
-4. **Hanna Gebre** - 26F, Allergic to Dust & Pollen
-5. **Dawit Abate** - 36M, No conditions
-
-### Waiting Visits (3 Created):
-
-1. **Abebe** - "Headache and fever for 3 days" - Arrived 09:30
-2. **Tigist** - "Stomach pain and nausea" - Arrived 10:15
-3. **Mulugeta** - "High blood sugar levels, follow-up visit" - Arrived 11:00
-
-### Medicines (3 Available):
-
-1. **Paracetamol** - 500mg Tablets (Stock: 1000)
-2. **Amoxicillin** - 250mg Capsules (Stock: 500)
-3. **Ibuprofen** - 400mg Tablets (Stock: 800)
-
----
-
-## 🎯 Complete Workflow Test
-
-### Step 1: Login as Data Clerk
-
-```
-URL: http://localhost:5174
-Email: clerk@neshihaclinic.com
-Password: Clerk@123
-```
-
-**What You'll See:**
-
-- Dashboard showing today's registrations
-- Menu: Dashboard, Patients, Visits
-
-### Step 2: View Patients (Data Clerk)
-
-1. Click **"Patients"** in sidebar
-2. You'll see 5 registered patients
-3. Click **"Register Patient"** to add more (optional)
-
-### Step 3: Create a New Visit (Data Clerk)
-
-1. Click **"Visits"** in sidebar
-2. Click **"New Visit"** button (top right)
-3. Select a patient from dropdown (e.g., "Hanna Gebre")
-4. Enter Chief Complaint: "Severe headache since yesterday"
-5. Visit Date: (Today's date - auto-filled)
-6. Arrival Time: (Current time - auto-filled)
-7. Click **"Create Visit"**
-8. Success! Visit created with status "Waiting"
-
-### Step 4: Logout and Login as Doctor
-
-1. Click Logout (bottom of sidebar)
-2. Login with doctor credentials:
-   ```
-   Email: doctor@neshihaclinic.com
-   Password: Doctor@123
-   ```
-
-**What You'll See:**
-
-- Dashboard with queue statistics
-- Menu: Dashboard, Queue, Patients, Visits
-
-### Step 5: View Queue (Doctor)
-
-1. Click **"Queue"** in sidebar
-2. You'll see 4 waiting patients in numbered cards:
-   - Queue #1: Abebe
-   - Queue #2: Tigist
-   - Queue #3: Mulugeta
-   - Queue #4: Hanna (just created)
-3. Each card shows:
-   - Patient name, age, gender
-   - Patient ID
-   - Arrival time
-   - Chief complaint
-
-### Step 6: Start Consultation (Doctor)
-
-1. Click **"Start Consultation"** on Abebe's card
-2. System opens full consultation interface
-3. **Patient Info Card shows:**
-   - Patient ID, Age, Gender, Blood Group, Phone
-   - 🚨 RED ALERT BOX: "Allergies: Penicillin, Peanuts"
-   - 🚨 RED ALERT BOX: "Chronic Diseases: Hypertension"
-
-### Step 7: Record Vital Signs (Doctor)
-
-1. Click **"Vital Signs"** tab
-2. Fill in:
-   - Temperature: `37.2` (°C)
-   - Blood Pressure: `140` / `90` (mmHg)
-   - Heart Rate: `78` (bpm)
-   - Respiratory Rate: `16` (per min)
-   - Oxygen Saturation: `98` (%)
-   - Weight: `75.5` (kg)
-   - Height: `175` (cm)
-3. BMI auto-calculates: **24.65** (Normal)
-4. Click **"Save Vitals"**
-5. Success notification
-
-### Step 8: Request Investigation (Doctor) - Optional
-
-1. Click **"Investigation"** tab
-2. Click **"Request Investigation"**
-3. Select Investigation Type: "Blood Test"
-4. Test Name: "Complete Blood Count"
-5. Urgency: "Routine"
-6. Click **"Request Investigation"**
-7. Investigation card appears with status "Requested"
-
-### Step 9: Prescribe Herbal Medicine (Doctor)
-
-1. Click **"Herbal Medicine"** tab
-2. Click **"Add Herbal Medicine"** button
-3. **Fill Prescription Form:**
-   - Select Medicine: "Paracetamol - 500mg (Available: 1000 Tablets)"
-   - Dosage Amount: `500`
-   - Unit: `mg`
-   - Frequency: `Three times daily`
-   - Route: `Oral (by mouth)`
-   - Duration: `7` Days
-   - Quantity: `21` (7 days × 3 times)
-   - Reason: `Pain relief and fever reduction`
-   - Instructions: `Take with food. Drink plenty of water.`
-   - ✅ **"Dispense Now"** is checked
-4. Click **"Prescribe & Dispense"**
-5. Green card appears showing:
-   - Medicine dispensed
-   - Date and time of dispensing
-   - All details
-   - "Dispensed" badge
-
-### Step 10: Fill Consultation Details (Doctor)
-
-1. Click **"Consultation"** tab
-2. **Chief Complaint:** `Headache and fever for 3 days` (already filled)
-3. **Symptoms:** Type `headache` → Click + button
-   - Add more: `fever`, `body ache`, `weakness`
-4. **History:** `Patient reports headache started 3 days ago with high fever`
-5. **Physical Examination:** `Alert and oriented. Mild dehydration noted.`
-6. **Diagnosis:** Type `Viral Fever` → Click + button
-   - Add: `Dehydration`
-7. **Treatment Plan:** `Rest, hydration, antipyretics for 7 days`
-8. **Doctor's Notes:** `Patient advised to return if fever persists beyond 3 days`
-9. **Follow-up Date:** Select date 1 week from today
-10. Click **"Save Progress"** (saves without completing)
-
-### Step 11: Complete Consultation (Doctor)
-
-1. Review all tabs to ensure everything is filled
-2. Go back to **"Consultation"** tab
-3. Click **"Complete Consultation"** button (bottom)
-4. Success! Returns to queue page
-5. **Abebe is removed from queue**
-6. Only 3 patients remain in queue
-
-### Step 12: View Completed Visit (Doctor)
-
-1. Click **"Visits"** in sidebar
-2. Click **"completed"** filter button
-3. See Abebe's completed visit with green badge
-4. Click on visit card to see summary
-
-### Step 13: Check Medicine Stock (Admin)
-
-1. Logout from doctor
-2. Login as admin:
-   ```
-   Email: admin@neshihaclinic.com
-   Password: Admin@123
-   ```
-3. _(Medicine management UI not implemented yet)_
-4. **Backend has automatically reduced stock:**
-   - Paracetamol: 1000 → 979 (21 tablets dispensed)
-
----
-
-## ✅ Complete Feature Checklist
-
-### Data Clerk Features:
-
-- ✅ Register new patients
-- ✅ View all patients
-- ✅ Search patients
-- ✅ Create new visits
-- ✅ View all visits
-- ✅ Filter visits by status
-- ✅ Dashboard with today's stats
-
-### Doctor Features:
-
-- ✅ View patient queue (waiting patients)
-- ✅ Start consultation
-- ✅ View patient allergies & chronic diseases (alert)
-- ✅ Record vital signs with auto BMI calculation
-- ✅ Request investigations
-- ✅ Prescribe herbal medicines
-- ✅ Dispense medicines immediately
-- ✅ Fill consultation details (symptoms, diagnosis, treatment)
-- ✅ Complete consultation
-- ✅ View patient history (previous visits)
-- ✅ Save progress during consultation
-- ✅ Dashboard with queue statistics
-
-### System Features:
-
-- ✅ Real-time updates (Socket.io)
-- ✅ Automatic stock reduction
-- ✅ Permanent medicine history
-- ✅ Visit round tracking
-- ✅ Role-based access control
-- ✅ Responsive design
-- ✅ Toast notifications
-- ✅ Form validation
-- ✅ Error handling
-
----
-
-## 🔄 What Happens Behind the Scenes
-
-### When Doctor Dispenses Medicine:
-
-1. ✅ Prescription record created in database
-2. ✅ Dispense record created with timestamp
-3. ✅ Medicine stock automatically reduced
-4. ✅ Added to patient's permanent medicine history
-5. ✅ Doctor's name recorded as dispenser
-6. ✅ Visit updated with medicine information
-7. ✅ Real-time notification sent (if others watching)
-
-### When Consultation Completes:
-
-1. ✅ Visit status changes to "completed"
-2. ✅ Consultation end time recorded
-3. ✅ All data saved to database
-4. ✅ Patient removed from queue
-5. ✅ Doctor dashboard updated
-6. ✅ Visit count incremented for patient
-7. ✅ Audit log created
-
----
-
-## 🐛 Troubleshooting
-
-### Frontend Not Loading?
+### Step 1: Verify Backend is Ready (30 seconds)
 
 ```bash
-cd Frontend
-npm install
-npm run dev
-```
-
-Access at: http://localhost:5174
-
-### Backend Not Running?
-
-```bash
+# Navigate to backend
 cd Backend
-npm install
-npm run dev
+
+# Check if server is running
+# If not, start it:
+npm start
 ```
 
-Should show: "Server running on http://localhost:5000"
+✅ **Success indicator**: Server running on `http://localhost:5000`
 
-### No Patients in Queue?
+### Step 2: Test API Endpoints (1 minute)
 
 ```bash
-cd Backend
-npm run test-data
+# Get your auth token (login first via API or frontend)
+# Replace {TOKEN} with your actual JWT token
+# Replace {VISIT_ID} with an actual visit ID
+
+# Test 1: Get visit attachments (should return empty array or existing attachments)
+curl -X GET \
+  "http://localhost:5000/api/v1/visits/{VISIT_ID}/attachments" \
+  -H "Authorization: Bearer {TOKEN}"
+
+# Expected: {"success": true, "data": [], ...}
 ```
 
-This creates 5 patients and 3 waiting visits
+If you get a successful response, the backend is ready! ✅
 
-### Can't Login?
+### Step 3: Add Component to Frontend (2 minutes)
 
-Make sure backend is running. Check:
+Find your doctor queue or consultation component. Common locations:
 
-- URL is http://localhost:5174 (note port 5174, not 5173)
-- Backend is on http://localhost:5000
-- Use exact credentials from above
+- `Frontend/src/pages/portal/DoctorPortal.jsx`
+- `Frontend/src/pages/DoctorDashboard.jsx`
+- `Frontend/src/components/doctor/Consultation.jsx`
 
-### Database Connection Error?
+Add this import at the top:
 
-Check Backend/.env file:
+```jsx
+import VisitAttachmentUpload from "../components/visits/VisitAttachmentUpload";
+```
 
-- DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD are correct
-- PostgreSQL is running
+Add the component where you want it to appear:
 
----
+```jsx
+<VisitAttachmentUpload
+  visitId={currentVisit.id}
+  patientId={currentVisit.patient.id}
+/>
+```
 
-## 📱 UI Navigation Guide
+### Step 4: Test in Browser (1.5 minutes)
 
-### Sidebar Menu Items (Role-Based):
+1. Open frontend: `http://localhost:5173` (or your port)
+2. Login as doctor
+3. Navigate to queue/consultation page
+4. You should see the "📋 Medical Documents & Images" section
+5. Try uploading a file (image or PDF)
+6. Verify it appears in the list below
 
-**Data Clerk:**
-
-- 🏠 Dashboard
-- 👥 Patients
-- 📅 Visits
-
-**Doctor:**
-
-- 🏠 Dashboard
-- 📋 Queue ← **Main feature**
-- 👥 Patients (view only)
-- 📅 Visits (view only)
-
-**Super Admin:**
-
-- 🏠 Dashboard
-- 👥 Staff
-- 👥 Patients
-- 📅 Visits
-- 📊 Reports
-- ⚙️ Settings
+**Success!** 🎉 You're done!
 
 ---
 
-## 🎨 UI Color Coding
+## 🔍 Detailed Testing Checklist
 
-- **Green Card** = Dispensed Medicine ✅
-- **Yellow Card** = Pending Prescription ⏳
-- **Red Alert Box** = Allergies/Chronic Diseases ⚠️
-- **Blue Card** = Information
-- **Emerald Gradient** = Primary Actions
+### Backend Testing
+
+#### ✅ Test 1: Upload Single File
+
+```bash
+# Create a test file
+echo "Test medical document" > test.txt
+
+# Upload it
+curl -X POST \
+  "http://localhost:5000/api/v1/visits/{VISIT_ID}/attachments" \
+  -H "Authorization: Bearer {TOKEN}" \
+  -F "document=@test.txt"
+
+# Expected response:
+# {
+#   "success": true,
+#   "message": "Attachment uploaded successfully",
+#   "data": {
+#     "id": "uuid",
+#     "fileName": "test.txt",
+#     ...
+#   }
+# }
+```
+
+#### ✅ Test 2: Upload Multiple Files
+
+```bash
+# Upload multiple files
+curl -X POST \
+  "http://localhost:5000/api/v1/visits/{VISIT_ID}/attachments/multiple" \
+  -H "Authorization: Bearer {TOKEN}" \
+  -F "documents=@file1.jpg" \
+  -F "documents=@file2.pdf"
+
+# Expected: Array of uploaded files
+```
+
+#### ✅ Test 3: Get Visit Attachments
+
+```bash
+curl -X GET \
+  "http://localhost:5000/api/v1/visits/{VISIT_ID}/attachments" \
+  -H "Authorization: Bearer {TOKEN}"
+
+# Expected: Array of attachments for the visit
+```
+
+#### ✅ Test 4: Error Handling - No File
+
+```bash
+curl -X POST \
+  "http://localhost:5000/api/v1/visits/{VISIT_ID}/attachments" \
+  -H "Authorization: Bearer {TOKEN}"
+
+# Expected: {"success": false, "message": "Please upload a file"}
+```
+
+#### ✅ Test 5: Error Handling - Invalid File Type
+
+```bash
+# Try uploading an .exe file (not allowed)
+curl -X POST \
+  "http://localhost:5000/api/v1/visits/{VISIT_ID}/attachments" \
+  -H "Authorization: Bearer {TOKEN}" \
+  -F "document=@malicious.exe"
+
+# Expected: Error about file type not allowed
+```
+
+### Frontend Testing
+
+#### ✅ Test 1: Component Renders
+
+- [ ] Component appears on consultation page
+- [ ] Upload section is visible
+- [ ] Attachments list is visible
+- [ ] No console errors
+
+#### ✅ Test 2: File Selection
+
+- [ ] Click "Select File" works
+- [ ] Selected file appears in list
+- [ ] File size is shown
+- [ ] Upload button becomes enabled
+
+#### ✅ Test 3: Upload Single File
+
+- [ ] Click "Upload" button
+- [ ] See loading spinner
+- [ ] Get success message
+- [ ] File appears in attachments list
+- [ ] Upload form resets
+
+#### ✅ Test 4: Upload Multiple Files
+
+- [ ] Switch to "Multiple Files" mode
+- [ ] Select multiple files
+- [ ] All files show in preview
+- [ ] Click "Upload"
+- [ ] All files upload successfully
+- [ ] All appear in attachments list
+
+#### ✅ Test 5: Drag and Drop
+
+- [ ] Drag a file over drop zone
+- [ ] Drop zone changes color
+- [ ] Drop file
+- [ ] File appears as selected
+- [ ] Can upload successfully
+
+#### ✅ Test 6: View Attachment
+
+- [ ] Click on attachment file name
+- [ ] File opens in new tab/downloads
+- [ ] Correct file is shown
+
+#### ✅ Test 7: Delete Attachment
+
+- [ ] Click delete button (🗑️)
+- [ ] Confirmation dialog appears
+- [ ] Confirm deletion
+- [ ] File removed from list
+- [ ] Database record deleted
+
+#### ✅ Test 8: Error Handling
+
+- [ ] Try uploading file > 5MB
+- [ ] See appropriate error message
+- [ ] Try uploading unsupported file type
+- [ ] See appropriate error message
 
 ---
 
-## 📊 Dashboard Metrics
+## 🎯 Quick Integration Examples
 
-### Doctor Dashboard Shows:
+### Example 1: Simplest Integration
 
-- **In Queue:** Number of waiting patients
-- **Completed Today:** Consultations finished today
-- **Prescriptions:** Medicines prescribed today
-- **Dispensed:** Medicines dispensed today
-- **Waiting Patients List:** With "Start Consultation" buttons
+```jsx
+// In your consultation page
+import VisitAttachmentUpload from "../components/visits/VisitAttachmentUpload";
 
-### Data Clerk Dashboard Shows:
+function Consultation({ visitId, patientId }) {
+  return (
+    <div>
+      <h2>Consultation</h2>
+      {/* Your existing forms */}
 
-- **Registered Today:** New patients today
-- **Today's Visits:** All visits created today
-- **Waiting Patients:** Patients in queue
-- **Recent Registrations:** Last patients registered
+      {/* Add this: */}
+      <VisitAttachmentUpload visitId={visitId} patientId={patientId} />
+    </div>
+  );
+}
+```
+
+### Example 2: With Conditional Rendering
+
+```jsx
+function Consultation({ visit }) {
+  if (!visit) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <h2>Consultation for {visit.patient.firstName}</h2>
+
+      {visit.status === "in_consultation" && (
+        <VisitAttachmentUpload
+          visitId={visit.id}
+          patientId={visit.patient.id}
+        />
+      )}
+    </div>
+  );
+}
+```
+
+### Example 3: With Tabs
+
+```jsx
+import { Tabs, Tab } from "your-ui-library";
+
+function Consultation({ visit }) {
+  return (
+    <Tabs>
+      <Tab label="Vitals">{/* Vitals form */}</Tab>
+
+      <Tab label="Diagnosis">{/* Diagnosis form */}</Tab>
+
+      <Tab label="Attachments">
+        <VisitAttachmentUpload
+          visitId={visit.id}
+          patientId={visit.patient.id}
+        />
+      </Tab>
+
+      <Tab label="Prescription">{/* Prescription form */}</Tab>
+    </Tabs>
+  );
+}
+```
 
 ---
 
-## 💡 Tips for Best Experience
+## 🐛 Common Issues & Solutions
 
-1. **Start with Data Clerk:** Register patients and create visits first
-2. **Then Login as Doctor:** Process the waiting patients
-3. **Pay Attention to Alerts:** Red boxes show important patient info
-4. **Dispense Immediately:** Check "Dispense Now" by default
-5. **Save Progress:** Use "Save Progress" for long consultations
-6. **Complete Diagnosis:** Can't complete without at least one diagnosis
-7. **Check Patient History:** Review previous visits before prescribing
-8. **Use Appropriate Units:** Grams for powders, ml for liquids
-9. **Add Clear Instructions:** Help patients understand how to use medicine
-10. **Follow-up Dates:** Set for chronic conditions
+### Issue 1: "Component not found" error
+
+**Problem:** Cannot find VisitAttachmentUpload component
+
+**Solution:**
+
+```bash
+# Check if file exists
+ls Frontend/src/components/visits/VisitAttachmentUpload.jsx
+
+# If not found, file may be in wrong location
+# Adjust import path accordingly
+```
+
+### Issue 2: API returns 401 Unauthorized
+
+**Problem:** Not authenticated
+
+**Solution:**
+
+- Ensure you're logged in
+- Check JWT token is valid and not expired
+- Check Authorization header is being sent
+
+### Issue 3: "File type not allowed"
+
+**Problem:** Trying to upload unsupported file type
+
+**Solution:**
+
+```env
+# Add to Backend/.env
+ALLOWED_FILE_TYPES=image/jpeg,image/png,application/pdf,your/mime-type
+```
+
+### Issue 4: Files not uploading (no error)
+
+**Problem:** Silent failure
+
+**Solution:**
+
+1. Check browser console for errors
+2. Check network tab for failed requests
+3. Check backend logs: `Backend/logs/combined.log`
+4. Verify `uploads/` directory exists and is writable
+
+### Issue 5: CORS error
+
+**Problem:** CORS policy blocking requests
+
+**Solution:**
+
+```javascript
+// Backend/src/app.js
+// Ensure CORS is configured
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Your frontend URL
+    credentials: true,
+  }),
+);
+```
+
+### Issue 6: "Visit not found" error
+
+**Problem:** Invalid visit ID
+
+**Solution:**
+
+- Verify visit ID is correct UUID format
+- Check visit exists in database
+- Ensure you're passing the correct prop
 
 ---
 
-## 🎓 Training Sequence
+## 📊 Verification Checklist
 
-**Day 1 - Data Clerk:**
+After integration, verify these work:
 
-1. Register 5 test patients
-2. Create 10 test visits
-3. Practice search and filtering
+### Backend ✅
 
-**Day 2 - Doctor:**
+- [ ] Server starts without errors
+- [ ] Upload endpoints respond (test with curl)
+- [ ] Files are saved to `Backend/uploads/`
+- [ ] Database records are created
+- [ ] Audit logs are written
 
-1. Process all waiting patients
-2. Record vital signs for each
-3. Prescribe and dispense medicines
-4. Complete consultations
+### Frontend ✅
 
-**Day 3 - Full Workflow:**
+- [ ] Component renders without errors
+- [ ] Upload button works
+- [ ] Files appear in list after upload
+- [ ] Can view/download uploaded files
+- [ ] Can delete uploaded files
+- [ ] Loading states show correctly
+- [ ] Error messages display properly
 
-1. Data clerk creates new visit
-2. Doctor immediately sees in queue
-3. Complete consultation end-to-end
-4. Verify medicine stock reduced
-5. Check patient history updated
+### Integration ✅
 
----
-
-## 📞 System Status
-
-**Backend:** ✅ Running on port 5000
-**Frontend:** ✅ Running on port 5174
-**Database:** ✅ PostgreSQL connected
-**Socket.io:** ✅ Real-time enabled
-**Test Data:** ✅ Created (5 patients, 3 visits, 3 medicines)
+- [ ] Upload from frontend saves to backend
+- [ ] Get attachments retrieves uploaded files
+- [ ] Files are linked to correct visit
+- [ ] Files are linked to correct patient
+- [ ] Multiple uploads work
+- [ ] Drag-and-drop works
 
 ---
 
-## 🎉 You're Ready!
+## 🎓 Tutorial: First Upload
 
-Open http://localhost:5174 and start testing!
+1. **Start both servers**
 
-**Recommended Test Flow:**
+   ```bash
+   # Terminal 1
+   cd Backend
+   npm start
 
-1. Login as Data Clerk → Create a new visit
-2. Login as Doctor → Go to Queue
-3. Click "Start Consultation" on first patient
-4. Complete all tabs (Vital Signs, Medicine, Consultation)
-5. Click "Complete Consultation"
-6. See patient removed from queue!
+   # Terminal 2
+   cd Frontend
+   npm run dev
+   ```
 
-**Have fun! 🌿💊**
+2. **Login as doctor**
+   - Go to `http://localhost:5173`
+   - Login with doctor credentials
+
+3. **Navigate to queue**
+   - Click on "Queue" or "Consultation"
+   - Select a patient from today's queue
+
+4. **Find attachments section**
+   - Scroll down to "📋 Medical Documents & Images"
+   - Should see upload area
+
+5. **Upload your first file**
+   - Click "Click to select" or drag a file
+   - Choose an image or PDF
+   - Click "Upload" button
+   - Wait for success message
+
+6. **Verify**
+   - File should appear in list below
+   - Click file name to view/download
+   - Check `Backend/uploads/documents/` for physical file
+
+**Congratulations!** 🎉 Your first medical document is uploaded!
+
+---
+
+## 📝 Notes
+
+- **File Size Limit**: Default 5MB, configurable in `.env`
+- **Supported Types**: Images (JPEG, PNG, GIF, WebP, BMP), Documents (PDF, Word, Excel, TXT, CSV)
+- **Max Multiple Upload**: 10 files at once
+- **Storage**: Files stored in `Backend/uploads/`
+- **Database**: Records in `patient_attachments` table
+- **Security**: JWT required, role-based access (Doctor/Data Clerk only)
+
+---
+
+## 🔗 Next Steps
+
+1. **Customize styling**: Edit `VisitAttachmentUpload.css`
+2. **Add features**: File preview modal, image thumbnails, etc.
+3. **Integrate with workflow**: Add to your consultation process
+4. **Train users**: Show doctors how to use the feature
+
+---
+
+## 📞 Need Help?
+
+- **API Documentation**: `Backend/VISIT_ATTACHMENTS_API.md`
+- **Integration Guide**: `Frontend/VISIT_ATTACHMENTS_INTEGRATION.md`
+- **System Flow**: `ATTACHMENT_FLOW_DIAGRAM.md`
+- **Backend Logs**: `Backend/logs/combined.log`
+- **Browser Console**: Press F12 to see frontend errors
+
+---
+
+## ✨ Success Criteria
+
+Your implementation is successful when:
+
+✅ Component renders without errors  
+✅ Can upload single file  
+✅ Can upload multiple files  
+✅ Uploaded files appear in list  
+✅ Can view/download files  
+✅ Can delete files  
+✅ Files are saved to disk  
+✅ Database records are created  
+✅ Proper error messages shown
+
+**You're all set!** 🚀

@@ -135,14 +135,18 @@ export const updateStaff = async (id, data, updatedBy) => {
 /**
  * Delete staff (soft delete - set to inactive)
  */
-export const deleteStaff = async (id) => {
+export const deleteStaff = async (id, actorId) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
-  await staff.update({ status: USER_STATUS.INACTIVE });
+  if (actorId && staff.id === actorId) {
+    throw new Error("You cannot delete your own account");
+  }
+
+  await staff.update({ status: USER_STATUS.INACTIVE, refreshToken: null });
 
   return { message: "Staff deleted successfully" };
 };
@@ -157,7 +161,12 @@ export const activateStaff = async (id) => {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
-  await staff.update({ status: USER_STATUS.ACTIVE });
+  // Clear the lockout so a reactivated account can sign in immediately
+  await staff.update({
+    status: USER_STATUS.ACTIVE,
+    loginAttempts: 0,
+    lockUntil: null,
+  });
 
   return staff.toJSON();
 };
@@ -165,16 +174,46 @@ export const activateStaff = async (id) => {
 /**
  * Deactivate staff
  */
-export const deactivateStaff = async (id) => {
+export const deactivateStaff = async (id, actorId) => {
   const staff = await User.findByPk(id);
 
   if (!staff) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND);
   }
 
-  await staff.update({ status: USER_STATUS.INACTIVE });
+  if (actorId && staff.id === actorId) {
+    throw new Error("You cannot deactivate your own account");
+  }
+
+  // Drop the refresh token so existing sessions cannot be renewed
+  await staff.update({ status: USER_STATUS.INACTIVE, refreshToken: null });
 
   return staff.toJSON();
+};
+
+/**
+ * Reset a staff member's password (admin initiated)
+ */
+export const resetStaffPassword = async (id, password, updatedBy) => {
+  const staff = await User.findByPk(id);
+
+  if (!staff) {
+    throw new Error(ERROR_MESSAGES.NOT_FOUND);
+  }
+
+  // Password is hashed by the User model's beforeUpdate hook
+  await staff.update({
+    password,
+    updatedBy,
+    // Clear any pending self-service reset and unlock the account
+    resetPasswordToken: null,
+    resetPasswordExpire: null,
+    refreshToken: null,
+    loginAttempts: 0,
+    lockUntil: null,
+  });
+
+  return { message: "Password reset successfully" };
 };
 
 /**
@@ -188,9 +227,13 @@ export const getStaffStats = async () => {
   const inactiveStaff = await User.count({
     where: { status: USER_STATUS.INACTIVE },
   });
+  const suspendedStaff = await User.count({
+    where: { status: USER_STATUS.SUSPENDED },
+  });
 
   const doctors = await User.count({ where: { role: ROLES.DOCTOR } });
   const dataClerks = await User.count({ where: { role: ROLES.DATA_CLERK } });
+  const cashiers = await User.count({ where: { role: ROLES.CASHIER } });
   const staffManagers = await User.count({
     where: { role: ROLES.STAFF_MANAGER },
   });
@@ -200,9 +243,11 @@ export const getStaffStats = async () => {
     total: totalStaff,
     active: activeStaff,
     inactive: inactiveStaff,
+    suspended: suspendedStaff,
     byRole: {
       doctors,
       dataClerks,
+      cashiers,
       staffManagers,
       superAdmins,
     },

@@ -262,7 +262,10 @@ export const getDoctorQueue = async (doctorId) => {
   const queue = await Visit.findAll({
     where: {
       [Op.or]: [
-        { doctorId, status: [VISIT_STATUS.WAITING, VISIT_STATUS.IN_CONSULTATION] },
+        {
+          doctorId,
+          status: [VISIT_STATUS.WAITING, VISIT_STATUS.IN_CONSULTATION],
+        },
         { doctorId: null, status: VISIT_STATUS.WAITING },
       ],
       visitDate: new Date().toISOString().split("T")[0],
@@ -361,4 +364,140 @@ export const recordVitalSigns = async (id, vitalData, updatedBy) => {
   });
 
   return visit;
+};
+
+/**
+ * Get completed consultations for doctor (with full patient history)
+ */
+export const getCompletedConsultations = async (doctorId, query = {}) => {
+  const { page = 1, pageSize = 20, search, startDate, endDate } = query;
+
+  const { limit, offset } = getPagination(page, pageSize);
+
+  const where = {
+    doctorId,
+    status: VISIT_STATUS.COMPLETED,
+  };
+
+  // Filter by date range
+  if (startDate && endDate) {
+    where.visitDate = {
+      [Op.between]: [startDate, endDate],
+    };
+  } else if (startDate) {
+    where.visitDate = {
+      [Op.gte]: startDate,
+    };
+  } else if (endDate) {
+    where.visitDate = {
+      [Op.lte]: endDate,
+    };
+  }
+
+  // Build patient search condition
+  const patientWhere = {};
+  if (search) {
+    patientWhere[Op.or] = [
+      { firstName: { [Op.iLike]: `%${search}%` } },
+      { middleName: { [Op.iLike]: `%${search}%` } },
+      { lastName: { [Op.iLike]: `%${search}%` } },
+      { patientId: { [Op.iLike]: `%${search}%` } },
+      { cardNumber: { [Op.iLike]: `%${search}%` } },
+      { phone: { [Op.iLike]: `%${search}%` } },
+    ];
+  }
+
+  const { count, rows } = await Visit.findAndCountAll({
+    where,
+    limit,
+    offset,
+    order: [
+      ["visitDate", "DESC"],
+      ["consultationEndTime", "DESC"],
+    ],
+    include: [
+      {
+        model: Patient,
+        as: "patient",
+        where: Object.keys(patientWhere).length > 0 ? patientWhere : undefined,
+        attributes: [
+          "id",
+          "patientId",
+          "firstName",
+          "middleName",
+          "lastName",
+          "age",
+          "gender",
+          "phone",
+          "bloodGroup",
+          "knownAllergies",
+          "chronicDiseases",
+          "photo",
+        ],
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["id", "firstName", "lastName", "specialization"],
+      },
+    ],
+  });
+
+  // Parse JSON fields in patient data
+  const visitsWithParsedData = rows.map((visit) => {
+    const visitData = visit.toJSON();
+    if (visitData.patient) {
+      if (visitData.patient.knownAllergies) {
+        try {
+          visitData.patient.knownAllergies = JSON.parse(
+            visitData.patient.knownAllergies,
+          );
+        } catch (e) {
+          visitData.patient.knownAllergies = [];
+        }
+      } else {
+        visitData.patient.knownAllergies = [];
+      }
+
+      if (visitData.patient.chronicDiseases) {
+        try {
+          visitData.patient.chronicDiseases = JSON.parse(
+            visitData.patient.chronicDiseases,
+          );
+        } catch (e) {
+          visitData.patient.chronicDiseases = [];
+        }
+      } else {
+        visitData.patient.chronicDiseases = [];
+      }
+    }
+
+    // Parse visit diagnosis and symptoms
+    if (visitData.diagnosis) {
+      try {
+        visitData.diagnosis = JSON.parse(visitData.diagnosis);
+      } catch (e) {
+        // Keep as string if not JSON
+      }
+    }
+
+    if (visitData.symptoms) {
+      try {
+        visitData.symptoms = JSON.parse(visitData.symptoms);
+      } catch (e) {
+        // Keep as string if not JSON
+      }
+    }
+
+    return visitData;
+  });
+
+  return {
+    consultations: visitsWithParsedData,
+    pagination: {
+      page: parseInt(page),
+      pageSize: limit,
+      totalItems: count,
+    },
+  };
 };

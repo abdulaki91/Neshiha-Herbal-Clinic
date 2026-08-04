@@ -10,14 +10,24 @@ const uploadDir = path.join(__dirname, "../../uploads");
 /**
  * Add attachment to a patient record
  */
-export const createAttachment = async ({ patientId, visitId, file, userId }) => {
+export const createAttachment = async ({
+  patientId,
+  visitId,
+  file,
+  userId,
+}) => {
   const patient = await Patient.findByPk(patientId);
   if (!patient) {
     throw new Error("Patient not found");
   }
 
   // Convert absolute path to relative web-friendly path (e.g. uploads/documents/filename.ext)
-  const relativePath = file.path.replace(/\\/g, "/").split("/uploads/").pop().split("uploads/").pop();
+  const relativePath = file.path
+    .replace(/\\/g, "/")
+    .split("/uploads/")
+    .pop()
+    .split("uploads/")
+    .pop();
   const cleanPath = `uploads/${relativePath}`;
 
   const attachment = await PatientAttachment.create({
@@ -50,6 +60,18 @@ export const getAttachmentsByPatientId = async (patientId) => {
 };
 
 /**
+ * Get all attachments for a specific visit
+ */
+export const getAttachmentsByVisitId = async (visitId) => {
+  const attachments = await PatientAttachment.findAll({
+    where: { visitId },
+    order: [["createdAt", "DESC"]],
+  });
+
+  return attachments;
+};
+
+/**
  * Delete an attachment entry and its physical file
  */
 export const deleteAttachment = async (attachmentId) => {
@@ -68,7 +90,10 @@ export const deleteAttachment = async (attachmentId) => {
       fs.unlinkSync(absolutePath);
     }
   } catch (error) {
-    console.error(`Failed to delete physical file at ${absolutePath}:`, error.message);
+    console.error(
+      `Failed to delete physical file at ${absolutePath}:`,
+      error.message,
+    );
   }
 
   // Delete from database

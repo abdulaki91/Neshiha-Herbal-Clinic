@@ -12,38 +12,38 @@
     "back": "رجوع",
     "next": "التالي",
     "previous": "السابق",
-    "view": "View",
-    "print": "Print",
-    "all": "All",
-    "total": "Total",
-    "patient": "Patient",
-    "patientId": "ID",
-    "doctor": "Doctor",
-    "doctorPrefix": "Dr.",
-    "amount": "Amount",
-    "method": "Method",
-    "date": "Date",
-    "dateAndTime": "Date & Time",
-    "cashier": "Cashier",
-    "visitNumber": "Visit #",
-    "paymentNumber": "Payment #",
-    "phone": "Phone",
-    "age": "Age",
-    "notAvailable": "N/A",
-    "instructions": "Instructions",
-    "quantityAbbr": "Qty",
-    "by": "by",
-    "saving": "Saving...",
-    "creating": "Creating...",
+    "view": "عرض",
+    "print": "طباعة",
+    "all": "الكل",
+    "total": "الإجمالي",
+    "patient": "مريض",
+    "patientId": "الرقم",
+    "doctor": "طبيب",
+    "doctorPrefix": "د.",
+    "amount": "المبلغ",
+    "method": "الطريقة",
+    "date": "التاريخ",
+    "dateAndTime": "التاريخ والوقت",
+    "cashier": "أمين الصندوق",
+    "visitNumber": "الزيارة #",
+    "paymentNumber": "الدفع #",
+    "phone": "هاتف",
+    "age": "العمر",
+    "notAvailable": "غير متاح",
+    "instructions": "التعليمات",
+    "quantityAbbr": "الكمية",
+    "by": "بواسطة",
+    "saving": "جاري الحفظ...",
+    "creating": "جاري الإنشاء...",
     "currency": {
-      "etb": "ETB"
+      "etb": "بر إثيوبي"
     },
     "pagination": {
-      "page": "Page",
-      "of": "of"
+      "page": "صفحة",
+      "of": "من"
     },
     "ageUnit": {
-      "years": "years"
+      "years": "سنة"
     }
   },
   "navigation": {
@@ -264,92 +264,92 @@
     }
   },
   "sidebar": {
-    "brandName": "Neshiha Clinic",
-    "dashboard": "Dashboard",
-    "staff": "Staff",
-    "patients": "Patients",
-    "visits": "Visits",
-    "medicines": "Medicines",
-    "cashier": "Cashier",
-    "laboratory": "Laboratory",
-    "reports": "Reports",
-    "settings": "Settings",
-    "queue": "Queue",
-    "logout": "Logout",
-    "adminPanel": "Admin Panel",
-    "badgeOverflow": "99+"
+    "brandName": "عيادة نسيحة",
+    "dashboard": "لوحة التحكم",
+    "staff": "الموظفون",
+    "patients": "المرضى",
+    "visits": "الزيارات",
+    "medicines": "الأدوية",
+    "cashier": "أمين الصندوق",
+    "laboratory": "المختبر",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "queue": "قائمة الانتظار",
+    "logout": "تسجيل الخروج",
+    "adminPanel": "لوحة الإدارة",
+    "badgeOverflow": "+99"
   },
   "topbar": {
-    "greeting": "Welcome, {{firstName}}!",
-    "notifications": "Notifications",
-    "markAllRead": "Mark all read",
-    "noNotifications": "No notifications yet",
-    "badgeOverflow": "99+",
+    "greeting": "مرحباً, {{firstName}}!",
+    "notifications": "الإشعارات",
+    "markAllRead": "وضع علامة مقروء على الكل",
+    "noNotifications": "لا توجد إشعارات بعد",
+    "badgeOverflow": "+99",
     "lang": {
-      "english": "English",
-      "oromo": "Oromo",
-      "amharic": "Amharic",
-      "arabic": "Arabic",
+      "english": "الإنجليزية",
+      "oromo": "الأورومية",
+      "amharic": "الأمهرية",
+      "arabic": "العربية",
       "nativeEnglish": "English",
       "nativeOromo": "Afaan Oromoo",
       "nativeAmharic": "አማርኛ",
       "nativeArabic": "العربية"
     },
     "notification": {
-      "visitUpdated": "Visit Updated",
-      "visitStatus": "Status: {{status}}",
-      "newPatient": "New Patient",
-      "patientRegistered": "{{firstName}} {{lastName}} registered",
-      "paymentReceived": "Payment Received",
-      "paymentAmount": "{{amount}} ETB paid",
-      "prescriptionAdded": "Prescription Added",
-      "newPrescription": "New prescription created"
+      "visitUpdated": "تم تحديث الزيارة",
+      "visitStatus": "الحالة: {{status}}",
+      "newPatient": "مريض جديد",
+      "patientRegistered": "{{firstName}} {{lastName}} تم التسجيل",
+      "paymentReceived": "تم استلام الدفع",
+      "paymentAmount": "{{amount}} بر إثيوبي تم الدفع",
+      "prescriptionAdded": "تمت إضافة وصفة طبية",
+      "newPrescription": "تم إنشاء وصفة طبية جديدة"
     },
     "time": {
-      "justNow": "just now",
-      "minutesAgo": "{{m}}m ago",
-      "hoursAgo": "{{h}}h ago"
+      "justNow": "الآن",
+      "minutesAgo": "منذ {{m}} دقيقة",
+      "hoursAgo": "منذ {{h}} ساعة"
     }
   },
   "toast": {
-    "newPatientInQueue": "New patient in queue",
-    "patientRegistered": "New patient registered: {{firstName}} {{lastName}}",
-    "newVisitCreated": "New visit created",
-    "visitStatus": "Visit status: {{status}}",
-    "prescriptionAdded": "New prescription added for patient",
-    "medicineDispensed": "Medicine dispensed to patient",
-    "paymentReceived": "Payment received: {{amount}} ETB"
+    "newPatientInQueue": "مريض جديد في قائمة الانتظار",
+    "patientRegistered": "تم تسجيل مريض جديد: {{firstName}} {{lastName}}",
+    "newVisitCreated": "تم إنشاء زيارة جديدة",
+    "visitStatus": "حالة الزيارة: {{status}}",
+    "prescriptionAdded": "تمت إضافة وصفة طبية جديدة للمريض",
+    "medicineDispensed": "تم صرف الدواء للمريض",
+    "paymentReceived": "تم استلام الدفع: {{amount}} بر إثيوبي"
   },
   "login": {
-    "brandName": "Neshiha Herbal Clinic",
-    "brandSubtitle": "Clinic Management System",
-    "heading": "Sign In",
+    "brandName": "عيادة نسيحة للأعشاب",
+    "brandSubtitle": "نظام إدارة العيادة",
+    "heading": "تسجيل الدخول",
     "label": {
-      "email": "Email Address",
-      "password": "Password"
+      "email": "عنوان البريد الإلكتروني",
+      "password": "كلمة المرور"
     },
     "placeholder": {
       "email": "your.email@clinic.com",
       "password": "••••••••"
     },
     "validation": {
-      "emailRequired": "Email is required",
-      "passwordRequired": "Password is required"
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "passwordRequired": "كلمة المرور مطلوبة"
     },
     "button": {
-      "submit": "Sign In",
-      "loading": "Signing in..."
+      "submit": "تسجيل الدخول",
+      "loading": "جاري تسجيل الدخول..."
     },
     "demo": {
-      "heading": "Demo Accounts:",
+      "heading": "حسابات تجريبية:",
       "admin": "admin@neshihaclinic.com | Admin@123",
       "doctor": "doctor@neshihaclinic.com | Doctor@123",
       "clerk": "clerk@neshihaclinic.com | Clerk@123",
       "cashier": "cashier@neshihaclinic.com | Cashier@123"
     },
     "toast": {
-      "welcome": "Welcome back, {{firstName}}!",
-      "failed": "Login failed"
+      "welcome": "مرحباً بعودتك, {{firstName}}!",
+      "failed": "فشل تسجيل الدخول"
     }
   },
   "signin": {
@@ -420,391 +420,391 @@
     }
   },
   "dashboard": {
-    "title": "Dashboard",
+    "title": "لوحة التحكم",
     "fallback": {
-      "title": "Dashboard"
+      "title": "لوحة التحكم"
     },
     "stats": {
-      "totalPatients": "Total Patients",
-      "todayPatients": "Today's Patients",
-      "todayVisits": "Today's Visits",
-      "waitingNow": "Waiting Now",
-      "totalDoctors": "Total Doctors",
-      "totalStaff": "Total Staff",
-      "completedToday": "Completed Today",
-      "lowStockItems": "Low Stock Items",
-      "expiredMedicines": "Expired Medicines"
+      "totalPatients": "إجمالي المرضى",
+      "todayPatients": "مرضى اليوم",
+      "todayVisits": "زيارات اليوم",
+      "waitingNow": "في الانتظار الآن",
+      "totalDoctors": "إجمالي الأطباء",
+      "totalStاff": "إجمالي الموظفين",
+      "completedToday": "مكتمل اليوم",
+      "lowStockItems": "عناصر منخفضة المخزون",
+      "expiredMedicines": "أدوية منتهية الصلاحية"
     },
     "quickStats": {
-      "title": "Quick Stats"
+      "title": "إحصائيات سريعة"
     },
     "systemStatus": {
-      "title": "System Status",
-      "database": "Database",
-      "online": "Online",
-      "realtimeUpdates": "Real-time Updates",
-      "connected": "Connected",
-      "lastBackup": "Last Backup"
+      "title": "حالة النظام",
+      "database": "قاعدة البيانات",
+      "online": "متصل",
+      "realtimeUpdates": "تحديثات فورية",
+      "connected": "متصل",
+      "lastBackup": "آخر نسخة احتياطية"
     },
     "doctor": {
-      "title": "Doctor Dashboard",
+      "title": "لوحة تحكم الطبيب",
       "stats": {
-        "inQueue": "In Queue",
-        "completedToday": "Completed Today",
-        "prescriptions": "Prescriptions",
-        "dispensed": "Dispensed"
+        "inQueue": "في قائمة الانتظار",
+        "completedToday": "مكتمل اليوم",
+        "prescriptions": "وصفات طبية",
+        "dispensed": "تم الصرف"
       },
-      "waitingPatients": "Waiting Patients",
-      "startConsultation": "Start Consultation",
+      "waitingPatients": "المرضى في الانتظار",
+      "startConsultation": "بدء الاستشارة",
       "empty": {
-        "noPatients": "No patients waiting"
+        "noPatients": "لا يوجد مرضى في الانتظار"
       }
     },
     "dataClerk": {
-      "title": "Data Clerk Dashboard",
+      "title": "لوحة تحكم موظف البيانات",
       "stats": {
-        "registeredToday": "Registered Today",
-        "todayVisits": "Today's Visits",
-        "waitingPatients": "Waiting Patients"
+        "registeredToday": "مسجل اليوم",
+        "todayVisits": "زيارات اليوم",
+        "waitingPatients": "المرضى في الانتظار"
       },
-      "recentRegistrations": "Recent Registrations",
+      "recentRegistrations": "التسجيلات الأخيرة",
       "empty": {
-        "noRegistrations": "No recent registrations"
+        "noRegistrations": "لا توجد تسجيلات حديثة"
       }
     },
     "cashier": {
-      "title": "Cashier Dashboard",
+      "title": "لوحة تحكم أمين الصندوق",
       "stats": {
-        "pendingPayments": "Pending Payments",
-        "paymentsProcessedToday": "Payments Processed Today",
-        "todayRevenue": "Today's Revenue (ETB)"
+        "pendingPayments": "مدفوعات معلقة",
+        "paymentsProcessedToday": "مدفوعات معالجة اليوم",
+        "todayRevenue": "إيرادات اليوم (بر إثيوبي)"
       },
-      "recentPayments": "Recent Payments",
+      "recentPayments": "المدفوعات الأخيرة",
       "empty": {
-        "noPayments": "No recent payments"
+        "noPayments": "لا توجد مدفوعات حديثة"
       }
     }
   },
   "cashier": {
-    "title": "Cashier Dashboard",
-    "subtitle": "Receive payments, dispense medicine & print receipts",
+    "title": "لوحة تحكم أمين الصندوق",
+    "subtitle": "استلام المدفوعات وصرف الأدوية وطباعة الإيصالات",
     "tabs": {
-      "pending": "Pending",
-      "recent": "Recent Payments"
+      "pending": "معلق",
+      "recent": "المدفوعات الأخيرة"
     },
     "search": {
-      "placeholder": "Search by patient name or ID..."
+      "placeholder": "بحث باسم المريض أو الرقم..."
     },
     "pending": {
-      "actionButton": "Receive & Dispense",
-      "empty": "No pending payments"
+      "actionButton": "استلام وصرف",
+      "empty": "لا توجد مدفوعات معلقة"
     },
     "recent": {
-      "empty": "No recent payments"
+      "empty": "لا توجد مدفوعات حديثة"
     },
     "modal": {
       "payment": {
-        "title": "Receive Payment",
-        "confirm": "Confirm Payment & Dispense",
-        "totalDue": "Total Amount Due",
-        "medicinesToDispense": "Medicines to dispense:",
-        "paymentMethodLabel": "Payment Method",
-        "transactionIdLabel": "Transaction ID / Reference (Optional)",
-        "transactionIdPlaceholder": "e.g., TXN123456",
-        "notesLabel": "Notes"
+        "title": "استلام الدفع",
+        "confirm": "تأكيد الدفع والصرف",
+        "totalDue": "المبلغ الإجمالي المستحق",
+        "medicinesToDispense": "الأدوية المراد صرفها:",
+        "paymentMethodLabel": "طريقة الدفع",
+        "transactionIdLabel": "رقم المعاملة / المرجع (اختياري)",
+        "transactionIdPlaceholder": "مثال: TXN123456",
+        "notesLabel": "ملاحظات"
       },
       "detail": {
-        "title": "Payment Details",
-        "printReceipt": "Print Receipt",
-        "prescribedMedicines": "Prescribed Medicines",
-        "transactionId": "Transaction ID"
+        "title": "تفاصيل الدفع",
+        "printReceipt": "طباعة إيصال",
+        "prescribedMedicines": "الأدوية الموصوفة",
+        "transactionId": "رقم المعاملة"
       }
     },
     "paymentMethods": {
-      "cash": "Cash",
-      "bankTransfer": "Bank Transfer",
-      "mobileMoney": "Mobile Money (Telebirr/CBE Birr)",
-      "other": "Other"
+      "cash": "نقداً",
+      "bankTransfer": "تحويل بنكي",
+      "mobileMoney": "النقود المتنقلة (Telebirr/CBE Birr)",
+      "other": "أخرى"
     },
     "toast": {
-      "paymentSuccess": "Payment received — medicine dispensed to patient",
-      "paymentError": "Failed to process payment"
+      "paymentSuccess": "تم استلام الدفع — تم صرف الدواء للمريض",
+      "paymentError": "فشل معالجة الدفع"
     }
   },
   "cashierReports": {
-    "title": "Cashier Reports",
-    "subtitle": "Paid prescription revenue",
+    "title": "تقارير أمين الصندوق",
+    "subtitle": "إيرادات الوصفات المدفوعة",
     "periods": {
-      "daily": "Daily",
-      "weekly": "Weekly",
-      "monthly": "Monthly"
+      "daily": "يومي",
+      "weekly": "أسبوعي",
+      "monthly": "شهري"
     },
     "periodLabels": {
-      "today": "Today",
-      "thisWeek": "This Week",
-      "thisMonth": "This Month"
+      "today": "اليوم",
+      "thisWeek": "هذا الأسبوع",
+      "thisMonth": "هذا الشهر"
     },
     "cards": {
-      "totalRevenue": "Total Revenue",
-      "prescriptionsPaid": "Prescriptions Paid",
-      "period": "Period"
+      "totalRevenue": "الإيرادات الإجمالية",
+      "prescriptionsPaid": "الوصفات المدفوعة",
+      "period": "الفترة"
     },
-    "byPaymentMethod": "By Payment Method",
-    "paymentTransactions": "Payment Transactions",
+    "byPaymentMethod": "حسب طريقة الدفع",
+    "paymentTransactions": "معاملات الدفع",
     "empty": {
-      "payments": "No payments found for this period",
-      "report": "No report data available"
+      "payments": "لم يتم العثور على مدفوعات لهذه الفترة",
+      "report": "لا تتوفر بيانات تقرير"
     }
   },
   "patients": {
-    "title": "Patients",
-    "subtitle": "Manage patient records",
-    "registerButton": "Register Patient",
+    "title": "المرضى",
+    "subtitle": "إدارة سجلات المرضى",
+    "registerButton": "تسجيل مريض",
     "search": {
-      "placeholder": "Search patients by name, ID, phone..."
+      "placeholder": "بحث عن المرضى بالاسم أو الرقم أو الهاتف..."
     },
     "empty": {
-      "title": "No patients found",
-      "subtitle": "Register your first patient to get started"
+      "title": "لم يتم العثور على مرضى",
+      "subtitle": "سجل أول مريض للبدء"
     },
     "toast": {
-      "registerSuccess": "Patient registered successfully!"
+      "registerSuccess": "تم تسجيل المريض بنجاح!"
     }
   },
   "visits": {
-    "title": "Visits",
-    "subtitle": "Manage patient visits",
-    "newVisitButton": "New Visit",
+    "title": "الزيارات",
+    "subtitle": "إدارة زيارات المرضى",
+    "newVisitButton": "زيارة جديدة",
     "status": {
-      "waiting": "Waiting",
-      "inConsultation": "In Consultation",
-      "completed": "Completed",
-      "cancelled": "Cancelled"
+      "waiting": "في الانتظار",
+      "inConsultation": "في الاستشارة",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
     },
-    "empty": "No visits found",
+    "empty": "لم يتم العثور على زيارات",
     "toast": {
-      "loadError": "Failed to load visits",
-      "createSuccess": "Visit created successfully!"
+      "loadError": "فشل تحميل الزيارات",
+      "createSuccess": "تم إنشاء الزيارة بنجاح!"
     }
   },
   "doctorQueue": {
-    "title": "Patient Queue",
-    "backToQueue": "Back to Queue",
-    "refreshQueue": "Refresh Queue",
+    "title": "قائمة انتظار المرضى",
+    "backToQueue": "العودة إلى القائمة",
+    "refreshQueue": "تحديث القائمة",
     "actions": {
-      "start": "Start",
-      "continue": "Continue",
-      "consulting": "Consulting"
+      "start": "بدء",
+      "continue": "متابعة",
+      "consulting": "في الاستشارة"
     },
     "status": {
-      "withAnotherDoctor": "With another doctor",
-      "active": "Active",
-      "inProgress": "In Progress"
+      "withAnotherDoctor": "مع طبيب آخر",
+      "active": "نشط",
+      "inProgress": "قيد التنفيذ"
     },
     "empty": {
-      "title": "No patients waiting",
-      "subtitle": "New patients will appear here"
+      "title": "لا يوجد مرضى في الانتظار",
+      "subtitle": "سيظهر المرضى الجدد هنا"
     },
     "rightPanel": {
-      "selectPatient": "Select a Patient",
-      "selectPatientHint": "Click \"Start\" on a patient from the queue to begin consultation"
+      "selectPatient": "اختر مريضاً",
+      "selectPatientHint": "انقر على \"بدء\" على مريض من القائمة لبدء الاستشارة"
     },
     "tabs": {
-      "consultation": "Consultation",
-      "vitalSigns": "Vital Signs",
-      "investigation": "Investigation",
-      "herbalMedicine": "Herbal Medicine",
-      "history": "History"
+      "consultation": "الاستشارة",
+      "vitalSigns": "العلامات الحيوية",
+      "investigation": "الفحوصات",
+      "herbalMedicine": "الطب العشبي",
+      "history": "التاريخ"
     },
     "consultation": {
-      "title": "Consultation",
-      "patientInfo": "Patient Information",
-      "diagnosisTitle": "Diagnosis",
-      "noDiagnosis": "No diagnosis added yet",
-      "ageGender": "Age / Gender",
-      "bloodGroup": "Blood Group",
-      "allergies": "Allergies:",
-      "chronic": "Chronic:",
-      "saveProgress": "Save Progress",
-      "completeConsultation": "Complete Consultation"
+      "title": "الاستشارة",
+      "patientInfo": "معلومات المريض",
+      "diagnosisTitle": "التشخيص",
+      "noDiagnosis": "لم تتم إضافة تشخيص بعد",
+      "ageGender": "العمر / الجنس",
+      "bloodGroup": "فصيلة الدم",
+      "allergies": "الحساسية:",
+      "chronic": "الأمراض المزمنة:",
+      "saveProgress": "حفظ التقدم",
+      "completeConsultation": "إكمال الاستشارة"
     },
     "queue": {
-      "chiefComplaintPrefix": "CC:"
+      "chiefComplaintPrefix": "الشكوى الرئيسية:"
     },
     "queueStats": {
-      "patients": "patients",
-      "inConsultation": "in consultation"
+      "patients": "مرضى",
+      "inConsultation": "في الاستشارة"
     },
     "toast": {
-      "consultationStarted": "Consultation started — patient stays in queue until saved",
-      "startError": "Failed to start consultation",
-      "saveSuccess": "Consultation details saved",
-      "saveError": "Failed to save consultation",
-      "sentToCashier": "Consultation sent to Cashier for payment",
-      "completeSuccess": "Consultation completed successfully",
-      "completeError": "Failed to complete consultation"
+      "consultationStarted": "بدأت الاستشارة — يبقى المريض في القائمة حتى يتم الحفظ",
+      "startError": "فشل بدء الاستشارة",
+      "saveSuccess": "تم حفظ تفاصيل الاستشارة",
+      "saveError": "فشل حفظ الاستشارة",
+      "sentToCashier": "تم إرسال الاستشارة إلى أمين الصندوق للدفع",
+      "completeSuccess": "تم إكمال الاستشارة بنجاح",
+      "completeError": "فشل إكمال الاستشارة"
     }
   },
   "medicines": {
-    "title": "Medicines",
-    "subtitle": "Manage herbal drug inventory",
-    "addButton": "Add Medicine",
+    "title": "الأدوية",
+    "subtitle": "إدارة مخزون الأدوية العشبية",
+    "addButton": "إضافة دواء",
     "search": {
-      "placeholder": "Search by name or code..."
+      "placeholder": "بحث بالاسم أو الرمز..."
     },
     "card": {
-      "code": "Code:",
-      "category": "Category:",
-      "inStock": "In Stock:",
-      "strength": "Strength:"
+      "code": "الرمز:",
+      "category": "الفئة:",
+      "inStock": "في المخزون:",
+      "strength": "القوة:"
     },
-    "empty": "No medicines found matching your search.",
+    "empty": "لم يتم العثور على أدوية مطابقة لبحثك.",
     "toast": {
-      "loadError": "Failed to load medicines",
-      "deleteConfirmation": "Are you sure you want to delete this medicine?",
-      "deleteSuccess": "Medicine deleted successfully",
-      "deleteError": "Failed to delete medicine"
+      "loadError": "فشل تحميل الأدوية",
+      "deleteConfirmation": "هل أنت متأكد من حذف هذا الدواء؟",
+      "deleteSuccess": "تم حذف الدواء بنجاح",
+      "deleteError": "فشل حذف الدواء"
     }
   },
   "pharmacy": {
-    "title": "Pharmacy",
-    "subtitle": "Manage medicine prescriptions and dispensing",
+    "title": "الصيدلية",
+    "subtitle": "إدارة الوصفات الطبية وصرف الأدوية",
     "actions": {
-      "dispense": "Dispense"
+      "dispense": "صرف"
     },
     "filters": {
-      "paid": "Paid",
-      "dispensed": "Dispensed",
-      "completed": "Completed",
-      "pending": "Pending"
+      "paid": "مدفوع",
+      "dispensed": "تم الصرف",
+      "completed": "مكتمل",
+      "pending": "معلق"
     },
     "search": {
-      "placeholder": "Search by patient name, ID, or medicine..."
+      "placeholder": "بحث باسم المريض أو الرقم أو الدواء..."
     },
     "empty": {
-      "search": "No prescriptions found matching your search",
-      "status": "No {{status}} prescriptions"
+      "search": "لم يتم العثور على وصفات مطابقة لبحثك",
+      "status": "لا توجد وصفات {{status}}"
     },
     "prescription": {
-      "medicineFallback": "Medicine",
-      "dosage": "Dosage",
-      "frequency": "Frequency",
-      "duration": "Duration",
-      "quantity": "Quantity",
-      "instructions": "Instructions:",
-      "prescribed": "Prescribed:"
+      "medicineFallback": "دواء",
+      "dosage": "الجرعة",
+      "frequency": "التكرار",
+      "duration": "المدة",
+      "quantity": "الكمية",
+      "instructions": "التعليمات:",
+      "prescribed": "موصوف:"
     },
     "status": {
-      "dispensed": "Dispensed"
+      "dispensed": "تم الصرف"
     },
     "dispenseModal": {
-      "title": "Dispense Medicine",
-      "confirm": "Confirm Dispensing",
-      "prescriptionDetails": "Prescription Details",
-      "prescribedQuantity": "Prescribed Quantity",
-      "quantityToDispense": "Quantity to Dispense *",
-      "batchNumber": "Batch Number *",
-      "batchNumberPlaceholder": "e.g., BATCH-2026-001",
-      "expiryDate": "Expiry Date *",
-      "notes": "Notes (Optional)",
-      "notesPlaceholder": "Any additional notes..."
+      "title": "صرف الدواء",
+      "confirm": "تأكيد الصرف",
+      "prescriptionDetails": "تفاصيل الوصفة",
+      "prescribedQuantity": "الكمية الموصوفة",
+      "quantityToDispense": "الكمية المراد صرفها *",
+      "batchNumber": "رقم الدفعة *",
+      "batchNumberPlaceholder": "مثال: BATCH-2026-001",
+      "expiryDate": "تاريخ انتهاء الصلاحية *",
+      "notes": "ملاحظات (اختياري)",
+      "notesPlaceholder": "أي ملاحظات إضافية..."
     },
     "toast": {
-      "loadError": "Failed to load prescriptions",
-      "invalidQuantity": "Please enter a valid quantity",
-      "missingBatch": "Please enter batch number",
-      "missingExpiry": "Please enter expiry date",
-      "dispenseSuccess": "Medicine dispensed successfully",
-      "dispenseError": "Failed to dispense medicine"
+      "loadError": "فشل تحميل الوصفات",
+      "invalidQuantity": "الرجاء إدخال كمية صحيحة",
+      "missingBatch": "الرجاء إدخال رقم الدفعة",
+      "missingExpiry": "الرجاء إدخال تاريخ انتهاء الصلاحية",
+      "dispenseSuccess": "تم صرف الدواء بنجاح",
+      "dispenseError": "فشل صرف الدواء"
     }
   },
   "laboratory": {
-    "title": "Laboratory",
-    "subtitle": "Manage investigation requests and results",
+    "title": "المختبر",
+    "subtitle": "إدارة طلبات ونتائج الفحوصات",
     "actions": {
-      "startProcessing": "Start Processing",
-      "enterResults": "Enter Results"
+      "startProcessing": "بدء المعالجة",
+      "enterResults": "إدخال النتائج"
     },
     "status": {
-      "requested": "Requested",
-      "inProgress": "In Progress",
-      "completed": "Completed",
-      "cancelled": "Cancelled"
+      "requested": "مطلوب",
+      "inProgress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
     },
     "urgency": {
-      "routine": "Routine",
-      "urgent": "Urgent",
-      "stat": "STAT"
+      "routine": "روتيني",
+      "urgent": "عاجل",
+      "stat": "عاجل جداً"
     },
     "search": {
-      "placeholder": "Search by patient name, ID, or test..."
+      "placeholder": "بحث باسم المريض أو الرقم أو الفحص..."
     },
     "empty": {
-      "search": "No investigations found matching your search",
-      "status": "No {{status}} investigations"
+      "search": "لم يتم العثور على فحوصات مطابقة لبحثك",
+      "status": "لا توجد فحوصات {{status}}"
     },
     "detail": {
-      "instructions": "Instructions:",
-      "results": "Results:",
-      "interpretation": "Interpretation:"
+      "instructions": "التعليمات:",
+      "results": "النتائج:",
+      "interpretation": "التفسير:"
     },
     "info": {
-      "requested": "Requested:",
-      "scheduled": "Scheduled:",
-      "completed": "Completed:",
-      "performedBy": "Performed by:"
+      "requested": "مطلوب:",
+      "scheduled": "مجدول:",
+      "completed": "مكتمل:",
+      "performedBy": "تم إجراؤه بواسطة:"
     },
     "modal": {
-      "title": "Enter Investigation Results",
-      "submitResults": "Submit Results",
-      "investigationDetails": "Investigation Details",
-      "type": "Type",
-      "testName": "Test Name",
-      "urgency": "Urgency",
-      "requestedDate": "Requested Date",
-      "instructions": "Instructions:",
-      "results": "Investigation Results *",
-      "resultsPlaceholder": "Enter detailed test results, measurements, observations...",
-      "interpretation": "Clinical Interpretation",
-      "interpretationPlaceholder": "Doctor's interpretation of results (optional)...",
-      "performedBy": "Performed By *",
-      "performedByPlaceholder": "Lab technician or radiologist name",
-      "additionalNotes": "Additional Notes",
-      "additionalNotesPlaceholder": "Any additional notes or comments..."
+      "title": "إدخال نتائج الفحص",
+      "submitResults": "إرسال النتائج",
+      "investigationDetails": "تفاصيل الفحص",
+      "type": "النوع",
+      "testName": "اسم الفحص",
+      "urgency": "الأولوية",
+      "requestedDate": "تاريخ الطلب",
+      "instructions": "التعليمات:",
+      "results": "نتائج الفحص *",
+      "resultsPlaceholder": "أدخل نتائج الفحص التفصيلية، القياسات، الملاحظات...",
+      "interpretation": "التفسير السريري",
+      "interpretationPlaceholder": "تفسير الطبيب للنتائج (اختياري)...",
+      "performedBy": "تم إجراؤه بواسطة *",
+      "performedByPlaceholder": "اسم فني المختبر أو أخصائي الأشعة",
+      "additionalNotes": "ملاحظات إضافية",
+      "additionalNotesPlaceholder": "أي ملاحظات أو تعليقات إضافية..."
     },
     "toast": {
-      "loadError": "Failed to load investigations",
-      "statusUpdated": "Investigation marked as {{status}}",
-      "statusUpdateError": "Failed to update status",
-      "missingResults": "Please enter investigation results",
-      "missingPerformedBy": "Please enter who performed the investigation",
-      "submitSuccess": "Investigation results submitted successfully",
-      "submitError": "Failed to submit results"
+      "loadError": "فشل تحميل الفحوصات",
+      "statusUpdated": "تم وضع علامة على الفحص كـ {{status}}",
+      "statusUpdateError": "فشل تحديث الحالة",
+      "missingResults": "الرجاء إدخال نتائج الفحص",
+      "missingPerformedBy": "الرجاء إدخال من قام بإجراء الفحص",
+      "submitSuccess": "تم إرسال نتائج الفحص بنجاح",
+      "submitError": "فشل إرسال النتائج"
     }
   },
   "patientDetail": {
-    "backToPatients": "Back to Patients",
-    "newVisit": "New Visit",
-    "notFound": "Patient not found",
+    "backToPatients": "العودة إلى المرضى",
+    "newVisit": "زيارة جديدة",
+    "notFound": "المريض غير موجود",
     "detail": {
-      "email": "Email",
-      "address": "Address",
-      "occupation": "Occupation",
-      "maritalStatus": "Marital Status"
+      "email": "البريد الإلكتروني",
+      "address": "العنوان",
+      "occupation": "المهنة",
+      "maritalStatus": "الحالة الاجتماعية"
     },
-    "registered": "Reg:",
+    "registered": "مسجل:",
     "alerts": {
-      "allergies": "Allergies:",
-      "chronic": "Chronic:"
+      "allergies": "الحساسية:",
+      "chronic": "الأمراض المزمنة:"
     },
     "visitHistory": {
-      "title": "Visit History",
-      "complaint": "Complaint:",
-      "treatment": "Treatment:",
-      "empty": "No previous visits"
+      "title": "سجل الزيارات",
+      "complaint": "الشكوى:",
+      "treatment": "العلاج:",
+      "empty": "لا توجد زيارات سابقة"
     },
     "toast": {
-      "loadError": "Failed to load patient details"
+      "loadError": "فشل تحميل تفاصيل المريض"
     }
   },
   "patientForm": {
@@ -1171,5 +1171,63 @@
     "data_clerk": "Data Clerk",
     "cashier": "Cashier",
     "staff_manager": "Staff Manager"
+  },
+  "followUpIndicator": {
+    "firstVisit": "الزيارة الأولى - لا يوجد تاريخ طبي سابق",
+    "scheduledFollowUp": "✓ زيارة متابعة مجدولة",
+    "returnVisit": "زيارة عودة",
+    "daysSinceLast": "{{days}} يوم منذ آخر زيارة",
+    "lastVisit": "آخر زيارة:",
+    "followUpScheduled": "تم جدولة المتابعة لـ:",
+    "previousDiagnosis": "التشخيص السابق:",
+    "previousTreatment": "العلاج السابق:",
+    "previousNotes": "ملاحظات سابقة:",
+    "viewFullHistory": "عرض السجل الكامل"
+  },
+  "prescriptions": {
+    "noActive": "لا توجد وصفات نشطة",
+    "recentTitle": "الوصفات الأخيرة (آخر 90 يوماً)",
+    "medicine": "دواء",
+    "prescribed": "موصوف:",
+    "daysLeft": "{{days}} يوم متبقي",
+    "endsToday": "ينتهي اليوم",
+    "expired": "منتهي الصلاحية",
+    "duration": "المدة:",
+    "instructions": "التعليمات:",
+    "reason": "السبب:",
+    "endingSoon": "الدواء ينتهي قريباً - فكر في التجديد إذا لزم الأمر",
+    "periodEnded": "انتهت فترة الدواء",
+    "status": {
+      "pending": "معلق",
+      "dispensed": "تم الصرف",
+      "completed": "مكتمل",
+      "stopped": "متوقف"
+    }
+  },
+  "investigations": {
+    "noRecent": "لا توجد فحوصات حديثة",
+    "pendingTitle": "الفحوصات المعلقة",
+    "recentResults": "النتائج الأخيرة متاحة",
+    "requested": "مطلوب:",
+    "scheduled": "مجدول:",
+    "completed": "مكتمل:",
+    "instructions": "التعليمات:",
+    "statAlert": "عاجل جداً - يتطلب اهتماماً فورياً",
+    "resultsReady": "النتائج جاهزة",
+    "results": "النتائج:",
+    "interpretation": "التفسير:",
+    "viewFile": "عرض ملف النتيجة",
+    "performedBy": "تم إجراؤه بواسطة:",
+    "status": {
+      "requested": "مطلوب",
+      "in_progress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
+    },
+    "urgency": {
+      "routine": "روتيني",
+      "urgent": "عاجل",
+      "stat": "عاجل جداً"
+    }
   }
 }

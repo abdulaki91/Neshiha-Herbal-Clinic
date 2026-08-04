@@ -12,38 +12,38 @@
     "back": "ወደ ኋላ",
     "next": "ቀጣይ",
     "previous": "ያለፈው",
-    "view": "View",
-    "print": "Print",
-    "all": "All",
-    "total": "Total",
-    "patient": "Patient",
-    "patientId": "ID",
-    "doctor": "Doctor",
-    "doctorPrefix": "Dr.",
-    "amount": "Amount",
-    "method": "Method",
-    "date": "Date",
-    "dateAndTime": "Date & Time",
-    "cashier": "Cashier",
-    "visitNumber": "Visit #",
-    "paymentNumber": "Payment #",
-    "phone": "Phone",
-    "age": "Age",
-    "notAvailable": "N/A",
-    "instructions": "Instructions",
-    "quantityAbbr": "Qty",
-    "by": "by",
-    "saving": "Saving...",
-    "creating": "Creating...",
+    "view": "እይታ",
+    "print": "አትም",
+    "all": "ሁሉም",
+    "total": "ጠቅላላ",
+    "patient": "ታካሚ",
+    "patientId": "መለያ",
+    "doctor": "ሐኪም",
+    "doctorPrefix": "ዶ/ር",
+    "amount": "መጠን",
+    "method": "ዘዴ",
+    "date": "ቀን",
+    "dateAndTime": "ቀን እና ሰዓት",
+    "cashier": "ገንዘብ ተቀባይ",
+    "visitNumber": "ጉብኝት #",
+    "paymentNumber": "ክፍያ #",
+    "phone": "ስልክ",
+    "age": "ዕድሜ",
+    "notAvailable": "የለም",
+    "instructions": "መመሪያዎች",
+    "quantityAbbr": "ብዛት",
+    "by": "በ",
+    "saving": "በማስቀመጥ ላይ...",
+    "creating": "በመፍጠር ላይ...",
     "currency": {
-      "etb": "ETB"
+      "etb": "ብር"
     },
     "pagination": {
-      "page": "Page",
-      "of": "of"
+      "page": "ገጽ",
+      "of": "ከ"
     },
     "ageUnit": {
-      "years": "years"
+      "years": "ዓመታት"
     }
   },
   "navigation": {
@@ -264,92 +264,92 @@
     }
   },
   "sidebar": {
-    "brandName": "Neshiha Clinic",
-    "dashboard": "Dashboard",
-    "staff": "Staff",
-    "patients": "Patients",
-    "visits": "Visits",
-    "medicines": "Medicines",
-    "cashier": "Cashier",
-    "laboratory": "Laboratory",
-    "reports": "Reports",
-    "settings": "Settings",
-    "queue": "Queue",
-    "logout": "Logout",
-    "adminPanel": "Admin Panel",
+    "brandName": "ነስሃ ክሊኒክ",
+    "dashboard": "ዋና ገጽ",
+    "staff": "ሰራተኞች",
+    "patients": "ታካሚዎች",
+    "visits": "ጉብኝቶች",
+    "medicines": "መድሃኒቶች",
+    "cashier": "ገንዘብ ተቀባይ",
+    "laboratory": "ላቦራቶሪ",
+    "reports": "ሪፖርቶች",
+    "settings": "ቅንብሮች",
+    "queue": "ወረፋ",
+    "logout": "ውጣ",
+    "adminPanel": "የአስተዳዳሪ ገጽ",
     "badgeOverflow": "99+"
   },
   "topbar": {
-    "greeting": "Welcome, {{firstName}}!",
-    "notifications": "Notifications",
-    "markAllRead": "Mark all read",
-    "noNotifications": "No notifications yet",
+    "greeting": "እንኳን ደህና መጡ, {{firstName}}!",
+    "notifications": "ማሳሰቢያዎች",
+    "markAllRead": "ሁሉንም እንደተነበበ ምልክት ያድርጉ",
+    "noNotifications": "ገና ማሳሰቢያ የለም",
     "badgeOverflow": "99+",
     "lang": {
-      "english": "English",
-      "oromo": "Oromo",
-      "amharic": "Amharic",
-      "arabic": "Arabic",
+      "english": "እንግሊዝኛ",
+      "oromo": "ኦሮምኛ",
+      "amharic": "አማርኛ",
+      "arabic": "ዓረብኛ",
       "nativeEnglish": "English",
       "nativeOromo": "Afaan Oromoo",
       "nativeAmharic": "አማርኛ",
       "nativeArabic": "العربية"
     },
     "notification": {
-      "visitUpdated": "Visit Updated",
-      "visitStatus": "Status: {{status}}",
-      "newPatient": "New Patient",
-      "patientRegistered": "{{firstName}} {{lastName}} registered",
-      "paymentReceived": "Payment Received",
-      "paymentAmount": "{{amount}} ETB paid",
-      "prescriptionAdded": "Prescription Added",
-      "newPrescription": "New prescription created"
+      "visitUpdated": "ጉብኝት ተዘምኗል",
+      "visitStatus": "ሁኔታ: {{status}}",
+      "newPatient": "አዲስ ታካሚ",
+      "patientRegistered": "{{firstName}} {{lastName}} ተመዝግቧል",
+      "paymentReceived": "ክፍያ ተቀብሏል",
+      "paymentAmount": "{{amount}} ብር ተከፍሏል",
+      "prescriptionAdded": "የመድሃኒት ትዕዛዝ ታክሏል",
+      "newPrescription": "አዲስ የመድሃኒት ትዕዛዝ ተፈጥሯል"
     },
     "time": {
-      "justNow": "just now",
-      "minutesAgo": "{{m}}m ago",
-      "hoursAgo": "{{h}}h ago"
+      "justNow": "አሁን",
+      "minutesAgo": "{{m}} ደቂቃ በፊት",
+      "hoursAgo": "{{h}} ሰዓት በፊት"
     }
   },
   "toast": {
-    "newPatientInQueue": "New patient in queue",
-    "patientRegistered": "New patient registered: {{firstName}} {{lastName}}",
-    "newVisitCreated": "New visit created",
-    "visitStatus": "Visit status: {{status}}",
-    "prescriptionAdded": "New prescription added for patient",
-    "medicineDispensed": "Medicine dispensed to patient",
-    "paymentReceived": "Payment received: {{amount}} ETB"
+    "newPatientInQueue": "አዲስ ታካሚ በወረፋ ውስጥ",
+    "patientRegistered": "አዲስ ታካሚ ተመዝግቧል: {{firstName}} {{lastName}}",
+    "newVisitCreated": "አዲስ ጉብኝት ተፈጥሯል",
+    "visitStatus": "የጉብኝት ሁኔታ: {{status}}",
+    "prescriptionAdded": "አዲስ የመድሃኒት ትዕዛዝ ለታካሚ ታክሏል",
+    "medicineDispensed": "መድሃኒት ለታካሚ ተሰጥቷል",
+    "paymentReceived": "ክፍያ ተቀብሏል: {{amount}} ብር"
   },
   "login": {
-    "brandName": "Neshiha Herbal Clinic",
-    "brandSubtitle": "Clinic Management System",
-    "heading": "Sign In",
+    "brandName": "ነስሃ የእፅዋት ሕክምና ክሊኒክ",
+    "brandSubtitle": "የክሊኒክ አስተዳደር ስርዓት",
+    "heading": "ግባ",
     "label": {
-      "email": "Email Address",
-      "password": "Password"
+      "email": "ኢሜይል አድራሻ",
+      "password": "የይለፍ ቃል"
     },
     "placeholder": {
       "email": "your.email@clinic.com",
       "password": "••••••••"
     },
     "validation": {
-      "emailRequired": "Email is required",
-      "passwordRequired": "Password is required"
+      "emailRequired": "ኢሜይል ያስፈልጋል",
+      "passwordRequired": "የይለፍ ቃል ያስፈልጋል"
     },
     "button": {
-      "submit": "Sign In",
-      "loading": "Signing in..."
+      "submit": "ግባ",
+      "loading": "በመግባት ላይ..."
     },
     "demo": {
-      "heading": "Demo Accounts:",
+      "heading": "የማሳያ መለያዎች:",
       "admin": "admin@neshihaclinic.com | Admin@123",
       "doctor": "doctor@neshihaclinic.com | Doctor@123",
       "clerk": "clerk@neshihaclinic.com | Clerk@123",
       "cashier": "cashier@neshihaclinic.com | Cashier@123"
     },
     "toast": {
-      "welcome": "Welcome back, {{firstName}}!",
-      "failed": "Login failed"
+      "welcome": "እንኳን ደህና መለሱ, {{firstName}}!",
+      "failed": "መግባት አልተሳካም"
     }
   },
   "signin": {
@@ -420,391 +420,391 @@
     }
   },
   "dashboard": {
-    "title": "Dashboard",
+    "title": "ዋና ገጽ",
     "fallback": {
-      "title": "Dashboard"
+      "title": "ዋና ገጽ"
     },
     "stats": {
-      "totalPatients": "Total Patients",
-      "todayPatients": "Today's Patients",
-      "todayVisits": "Today's Visits",
-      "waitingNow": "Waiting Now",
-      "totalDoctors": "Total Doctors",
-      "totalStaff": "Total Staff",
-      "completedToday": "Completed Today",
-      "lowStockItems": "Low Stock Items",
-      "expiredMedicines": "Expired Medicines"
+      "totalPatients": "ጠቅላላ ታካሚዎች",
+      "todayPatients": "የዛሬ ታካሚዎች",
+      "todayVisits": "የዛሬ ጉብኝቶች",
+      "waitingNow": "አሁን በመጠባበቅ ላይ",
+      "totalDoctors": "ጠቅላላ ሐኪሞች",
+      "totalStaff": "ጠቅላላ ሰራተኞች",
+      "completedToday": "ዛሬ የተጠናቀቁ",
+      "lowStockItems": "ዝቅተኛ ክምችት ያላቸው",
+      "expiredMedicines": "ጊዜው ያለፈባቸው መድሃኒቶች"
     },
     "quickStats": {
-      "title": "Quick Stats"
+      "title": "ፈጣን ስታቲስቲክስ"
     },
     "systemStatus": {
-      "title": "System Status",
-      "database": "Database",
-      "online": "Online",
-      "realtimeUpdates": "Real-time Updates",
-      "connected": "Connected",
-      "lastBackup": "Last Backup"
+      "title": "የስርዓት ሁኔታ",
+      "database": "ዳታቤዝ",
+      "online": "ኦንላይን",
+      "realtimeUpdates": "የቅጽበታዊ ማሻሻያዎች",
+      "connected": "ተያይዞ",
+      "lastBackup": "የመጨረሻ ምትኬ"
     },
     "doctor": {
-      "title": "Doctor Dashboard",
+      "title": "የሐኪም ዳሽቦርድ",
       "stats": {
-        "inQueue": "In Queue",
-        "completedToday": "Completed Today",
-        "prescriptions": "Prescriptions",
-        "dispensed": "Dispensed"
+        "inQueue": "በወረፋ ውስጥ",
+        "completedToday": "ዛሬ የተጠናቀቁ",
+        "prescriptions": "ትዕዛዞች",
+        "dispensed": "የተሰጡ"
       },
-      "waitingPatients": "Waiting Patients",
-      "startConsultation": "Start Consultation",
+      "waitingPatients": "በመጠባበቅ ላይ ያሉ ታካሚዎች",
+      "startConsultation": "ምክክር ጀምር",
       "empty": {
-        "noPatients": "No patients waiting"
+        "noPatients": "በመጠባበቅ ላይ ያሉ ታካሚዎች የሉም"
       }
     },
     "dataClerk": {
-      "title": "Data Clerk Dashboard",
+      "title": "የመረጃ ፀሐፊ ዳሽቦርድ",
       "stats": {
-        "registeredToday": "Registered Today",
-        "todayVisits": "Today's Visits",
-        "waitingPatients": "Waiting Patients"
+        "registeredToday": "ዛሬ የተመዘገቡ",
+        "todayVisits": "የዛሬ ጉብኝቶች",
+        "waitingPatients": "በመጠባበቅ ላይ ያሉ ታካሚዎች"
       },
-      "recentRegistrations": "Recent Registrations",
+      "recentRegistrations": "የቅርብ ጊዜ ምዝገባዎች",
       "empty": {
-        "noRegistrations": "No recent registrations"
+        "noRegistrations": "የቅርብ ጊዜ ምዝገባዎች የሉም"
       }
     },
     "cashier": {
-      "title": "Cashier Dashboard",
+      "title": "የገንዘብ ተቀባይ ዳሽቦርድ",
       "stats": {
-        "pendingPayments": "Pending Payments",
-        "paymentsProcessedToday": "Payments Processed Today",
-        "todayRevenue": "Today's Revenue (ETB)"
+        "pendingPayments": "በመጠባበቅ ላይ ያሉ ክፍያዎች",
+        "paymentsProcessedToday": "ዛሬ የተሰራባቸው ክፍያዎች",
+        "todayRevenue": "የዛሬ ገቢ (ብር)"
       },
-      "recentPayments": "Recent Payments",
+      "recentPayments": "የቅርብ ጊዜ ክፍያዎች",
       "empty": {
-        "noPayments": "No recent payments"
+        "noPayments": "የቅርብ ጊዜ ክፍያዎች የሉም"
       }
     }
   },
   "cashier": {
-    "title": "Cashier Dashboard",
-    "subtitle": "Receive payments, dispense medicine & print receipts",
+    "title": "የገንዘብ ተቀባይ ዳሽቦርድ",
+    "subtitle": "ክፍያዎችን ተቀበል፣ መድሃኒት አሰጥ እና ደረሰኝ አትም",
     "tabs": {
-      "pending": "Pending",
-      "recent": "Recent Payments"
+      "pending": "በመጠባበቅ ላይ",
+      "recent": "የቅርብ ጊዜ ክፍያዎች"
     },
     "search": {
-      "placeholder": "Search by patient name or ID..."
+      "placeholder": "በታካሚ ስም ወይም መለያ ፈልግ..."
     },
     "pending": {
-      "actionButton": "Receive & Dispense",
-      "empty": "No pending payments"
+      "actionButton": "ተቀበል እና አሰጥ",
+      "empty": "በመጠባበቅ ላይ ያሉ ክፍያዎች የሉም"
     },
     "recent": {
-      "empty": "No recent payments"
+      "empty": "የቅርብ ጊዜ ክፍያዎች የሉም"
     },
     "modal": {
       "payment": {
-        "title": "Receive Payment",
-        "confirm": "Confirm Payment & Dispense",
-        "totalDue": "Total Amount Due",
-        "medicinesToDispense": "Medicines to dispense:",
-        "paymentMethodLabel": "Payment Method",
-        "transactionIdLabel": "Transaction ID / Reference (Optional)",
-        "transactionIdPlaceholder": "e.g., TXN123456",
-        "notesLabel": "Notes"
+        "title": "ክፍያ ተቀበል",
+        "confirm": "ክፍያ አረጋግጥ እና አሰጥ",
+        "totalDue": "ጠቅላላ መክፈል ያለበት መጠን",
+        "medicinesToDispense": "ሊሰጡ የሚገባቸው መድሃኒቶች:",
+        "paymentMethodLabel": "የክፍያ ዘዴ",
+        "transactionIdLabel": "የግብይት መለያ / ማጣቀሻ (አማራጭ)",
+        "transactionIdPlaceholder": "ለምሳሌ፣ TXN123456",
+        "notesLabel": "ማስታወሻዎች"
       },
       "detail": {
-        "title": "Payment Details",
-        "printReceipt": "Print Receipt",
-        "prescribedMedicines": "Prescribed Medicines",
-        "transactionId": "Transaction ID"
+        "title": "የክፍያ ዝርዝሮች",
+        "printReceipt": "ደረሰኝ አትም",
+        "prescribedMedicines": "የታዘዙ መድሃኒቶች",
+        "transactionId": "የግብይት መለያ"
       }
     },
     "paymentMethods": {
-      "cash": "Cash",
-      "bankTransfer": "Bank Transfer",
-      "mobileMoney": "Mobile Money (Telebirr/CBE Birr)",
-      "other": "Other"
+      "cash": "ጥሬ ገንዘብ",
+      "bankTransfer": "የባንክ ማስተላለፍ",
+      "mobileMoney": "የሞባይል ገንዘብ (ቴሌብር/ሲቢኢ ብር)",
+      "other": "ሌላ"
     },
     "toast": {
-      "paymentSuccess": "Payment received — medicine dispensed to patient",
-      "paymentError": "Failed to process payment"
+      "paymentSuccess": "ክፍያ ተቀብሏል — መድሃኒት ለታካሚ ተሰጥቷል",
+      "paymentError": "ክፍያ ማካሄድ አልተሳካም"
     }
   },
   "cashierReports": {
-    "title": "Cashier Reports",
-    "subtitle": "Paid prescription revenue",
+    "title": "የገንዘብ ተቀባይ ሪፖርቶች",
+    "subtitle": "የተከፈለ የመድሃኒት ትዕዛዝ ገቢ",
     "periods": {
-      "daily": "Daily",
-      "weekly": "Weekly",
-      "monthly": "Monthly"
+      "daily": "ዕለታዊ",
+      "weekly": "ሳምንታዊ",
+      "monthly": "ወርሃዊ"
     },
     "periodLabels": {
-      "today": "Today",
-      "thisWeek": "This Week",
-      "thisMonth": "This Month"
+      "today": "ዛሬ",
+      "thisWeek": "በዚህ ሳምንት",
+      "thisMonth": "በዚህ ወር"
     },
     "cards": {
-      "totalRevenue": "Total Revenue",
-      "prescriptionsPaid": "Prescriptions Paid",
-      "period": "Period"
+      "totalRevenue": "ጠቅላላ ገቢ",
+      "prescriptionsPaid": "የተከፈሉ ትዕዛዞች",
+      "period": "ጊዜ"
     },
-    "byPaymentMethod": "By Payment Method",
-    "paymentTransactions": "Payment Transactions",
+    "byPaymentMethod": "በክፍያ ዘዴ",
+    "paymentTransactions": "የክፍያ ግብይቶች",
     "empty": {
-      "payments": "No payments found for this period",
-      "report": "No report data available"
+      "payments": "ለዚህ ጊዜ የተገኙ ክፍያዎች የሉም",
+      "report": "የሪፖርት መረጃ የለም"
     }
   },
   "patients": {
-    "title": "Patients",
-    "subtitle": "Manage patient records",
-    "registerButton": "Register Patient",
+    "title": "ታካሚዎች",
+    "subtitle": "የታካሚ መዝገቦችን ያስተዳድሩ",
+    "registerButton": "ታካሚ መዝግብ",
     "search": {
-      "placeholder": "Search patients by name, ID, phone..."
+      "placeholder": "ታካሚዎችን በስም፣ መለያ፣ ስልክ ይፈልጉ..."
     },
     "empty": {
-      "title": "No patients found",
-      "subtitle": "Register your first patient to get started"
+      "title": "ታካሚዎች አልተገኙም",
+      "subtitle": "ለመጀመር የመጀመሪያ ታካሚዎን ይመዝግቡ"
     },
     "toast": {
-      "registerSuccess": "Patient registered successfully!"
+      "registerSuccess": "ታካሚ በተሳካ ሁኔታ ተመዝግቧል!"
     }
   },
   "visits": {
-    "title": "Visits",
-    "subtitle": "Manage patient visits",
-    "newVisitButton": "New Visit",
+    "title": "ጉብኝቶች",
+    "subtitle": "የታካሚ ጉብኝቶችን ያስተዳድሩ",
+    "newVisitButton": "አዲስ ጉብኝት",
     "status": {
-      "waiting": "Waiting",
-      "inConsultation": "In Consultation",
-      "completed": "Completed",
-      "cancelled": "Cancelled"
+      "waiting": "በመጠባበቅ ላይ",
+      "inConsultation": "በምክክር ውስጥ",
+      "completed": "ተጠናቅቋል",
+      "cancelled": "ተሰርዟል"
     },
-    "empty": "No visits found",
+    "empty": "ጉብኝቶች አልተገኙም",
     "toast": {
-      "loadError": "Failed to load visits",
-      "createSuccess": "Visit created successfully!"
+      "loadError": "ጉብኝቶችን መጫን አልተሳካም",
+      "createSuccess": "ጉብኝት በተሳካ ሁኔታ ተፈጥሯል!"
     }
   },
   "doctorQueue": {
-    "title": "Patient Queue",
-    "backToQueue": "Back to Queue",
-    "refreshQueue": "Refresh Queue",
+    "title": "የታካሚ ወረፋ",
+    "backToQueue": "ወደ ወረፋ ተመለስ",
+    "refreshQueue": "ወረፋውን አድስ",
     "actions": {
-      "start": "Start",
-      "continue": "Continue",
-      "consulting": "Consulting"
+      "start": "ጀምር",
+      "continue": "ቀጥል",
+      "consulting": "በምክክር ላይ"
     },
     "status": {
-      "withAnotherDoctor": "With another doctor",
-      "active": "Active",
-      "inProgress": "In Progress"
+      "withAnotherDoctor": "ከሌላ ሐኪም ጋር",
+      "active": "ንቁ",
+      "inProgress": "በሂደት ላይ"
     },
     "empty": {
-      "title": "No patients waiting",
-      "subtitle": "New patients will appear here"
+      "title": "በመጠባበቅ ላይ ያሉ ታካሚዎች የሉም",
+      "subtitle": "አዲስ ታካሚዎች እዚህ ይታያሉ"
     },
     "rightPanel": {
-      "selectPatient": "Select a Patient",
-      "selectPatientHint": "Click \"Start\" on a patient from the queue to begin consultation"
+      "selectPatient": "ታካሚ ይምረጡ",
+      "selectPatientHint": "ምክክር ለመጀመር ከወረፋው ላይ ባለው ታካሚ ላይ \"ጀምር\" የሚለውን ጠቅ ያድርጉ"
     },
     "tabs": {
-      "consultation": "Consultation",
-      "vitalSigns": "Vital Signs",
-      "investigation": "Investigation",
-      "herbalMedicine": "Herbal Medicine",
-      "history": "History"
+      "consultation": "ምክክር",
+      "vitalSigns": "የህይወት ምልክቶች",
+      "investigation": "ምርመራ",
+      "herbalMedicine": "የእፅዋት መድሃኒት",
+      "history": "ታሪክ"
     },
     "consultation": {
-      "title": "Consultation",
-      "patientInfo": "Patient Information",
-      "diagnosisTitle": "Diagnosis",
-      "noDiagnosis": "No diagnosis added yet",
-      "ageGender": "Age / Gender",
-      "bloodGroup": "Blood Group",
-      "allergies": "Allergies:",
-      "chronic": "Chronic:",
-      "saveProgress": "Save Progress",
-      "completeConsultation": "Complete Consultation"
+      "title": "ምክክር",
+      "patientInfo": "የታካሚ መረጃ",
+      "diagnosisTitle": "ምርመራ",
+      "noDiagnosis": "ገና ምርመራ አልተጨመረም",
+      "ageGender": "ዕድሜ / ጾታ",
+      "bloodGroup": "የደም ዓይነት",
+      "allergies": "አለርጂዎች:",
+      "chronic": "ሥር የሰደደ:",
+      "saveProgress": "ሂደት አስቀምጥ",
+      "completeConsultation": "ምክክር ጨርስ"
     },
     "queue": {
-      "chiefComplaintPrefix": "CC:"
+      "chiefComplaintPrefix": "ዋናው ቅሬታ:"
     },
     "queueStats": {
-      "patients": "patients",
-      "inConsultation": "in consultation"
+      "patients": "ታካሚዎች",
+      "inConsultation": "በምክክር ውስጥ"
     },
     "toast": {
-      "consultationStarted": "Consultation started — patient stays in queue until saved",
-      "startError": "Failed to start consultation",
-      "saveSuccess": "Consultation details saved",
-      "saveError": "Failed to save consultation",
-      "sentToCashier": "Consultation sent to Cashier for payment",
-      "completeSuccess": "Consultation completed successfully",
-      "completeError": "Failed to complete consultation"
+      "consultationStarted": "ምክክር ተጀምሯል — ታካሚው እስከተቀመጠ ድረስ በወረፋ ውስጥ ይቆያል",
+      "startError": "ምክክር መጀመር አልተሳካም",
+      "saveSuccess": "የምክክር ዝርዝሮች ተቀምጠዋል",
+      "saveError": "ምክክር ማስቀመጥ አልተሳካም",
+      "sentToCashier": "ምክክር ለክፍያ ወደ ገንዘብ ተቀባይ ተልኳል",
+      "completeSuccess": "ምክክር በተሳካ ሁኔታ ተጠናቀቀ",
+      "completeError": "ምክክር ማጠናቀቅ አልተሳካም"
     }
   },
   "medicines": {
-    "title": "Medicines",
-    "subtitle": "Manage herbal drug inventory",
-    "addButton": "Add Medicine",
+    "title": "መድሃኒቶች",
+    "subtitle": "የእፅዋት መድሃኒት ክምችት ያስተዳድሩ",
+    "addButton": "መድሃኒት ጨምር",
     "search": {
-      "placeholder": "Search by name or code..."
+      "placeholder": "በስም ወይም ኮድ ይፈልጉ..."
     },
     "card": {
-      "code": "Code:",
-      "category": "Category:",
-      "inStock": "In Stock:",
-      "strength": "Strength:"
+      "code": "ኮድ:",
+      "category": "ምድብ:",
+      "inStock": "በክምችት ውስጥ:",
+      "strength": "ጥንካሬ:"
     },
-    "empty": "No medicines found matching your search.",
+    "empty": "ከፍለጋዎ ጋር የሚመሳሰሉ መድሃኒቶች አልተገኙም።",
     "toast": {
-      "loadError": "Failed to load medicines",
-      "deleteConfirmation": "Are you sure you want to delete this medicine?",
-      "deleteSuccess": "Medicine deleted successfully",
-      "deleteError": "Failed to delete medicine"
+      "loadError": "መድሃኒቶችን መጫን አልተሳካም",
+      "deleteConfirmation": "እርግጠኛ ነዎት ይህን መድሃኒት መሰረዝ ይፈልጋሉ?",
+      "deleteSuccess": "መድሃኒት በተሳካ ሁኔታ ተሰርዟል",
+      "deleteError": "መድሃኒት መሰረዝ አልተሳካም"
     }
   },
   "pharmacy": {
-    "title": "Pharmacy",
-    "subtitle": "Manage medicine prescriptions and dispensing",
+    "title": "ፋርማሲ",
+    "subtitle": "የመድሃኒት ትዕዛዞችን እና አሰጣጠትን ያስተዳድሩ",
     "actions": {
-      "dispense": "Dispense"
+      "dispense": "አሰጥ"
     },
     "filters": {
-      "paid": "Paid",
-      "dispensed": "Dispensed",
-      "completed": "Completed",
-      "pending": "Pending"
+      "paid": "ተከፍሏል",
+      "dispensed": "ተሰጥቷል",
+      "completed": "ተጠናቅቋል",
+      "pending": "በመጠባበቅ ላይ"
     },
     "search": {
-      "placeholder": "Search by patient name, ID, or medicine..."
+      "placeholder": "በታካሚ ስም፣ መለያ ወይም መድሃኒት ይፈልጉ..."
     },
     "empty": {
-      "search": "No prescriptions found matching your search",
-      "status": "No {{status}} prescriptions"
+      "search": "ከፍለጋዎ ጋር የሚመሳሰሉ ትዕዛዞች አልተገኙም",
+      "status": "{{status}} ትዕዛዞች የሉም"
     },
     "prescription": {
-      "medicineFallback": "Medicine",
-      "dosage": "Dosage",
-      "frequency": "Frequency",
-      "duration": "Duration",
-      "quantity": "Quantity",
-      "instructions": "Instructions:",
-      "prescribed": "Prescribed:"
+      "medicineFallback": "መድሃኒት",
+      "dosage": "መጠን",
+      "frequency": "ድግግሞሽ",
+      "duration": "ጊዜ",
+      "quantity": "ብዛት",
+      "instructions": "መመሪያዎች:",
+      "prescribed": "ተታዝዟል:"
     },
     "status": {
-      "dispensed": "Dispensed"
+      "dispensed": "ተሰጥቷል"
     },
     "dispenseModal": {
-      "title": "Dispense Medicine",
-      "confirm": "Confirm Dispensing",
-      "prescriptionDetails": "Prescription Details",
-      "prescribedQuantity": "Prescribed Quantity",
-      "quantityToDispense": "Quantity to Dispense *",
-      "batchNumber": "Batch Number *",
-      "batchNumberPlaceholder": "e.g., BATCH-2026-001",
-      "expiryDate": "Expiry Date *",
-      "notes": "Notes (Optional)",
-      "notesPlaceholder": "Any additional notes..."
+      "title": "መድሃኒት አሰጥ",
+      "confirm": "አሰጣጠትን አረጋግጥ",
+      "prescriptionDetails": "የትዕዛዝ ዝርዝሮች",
+      "prescribedQuantity": "የታዘዘው ብዛት",
+      "quantityToDispense": "ሊሰጥ የሚገባው ብዛት *",
+      "batchNumber": "የሎት ቁጥር *",
+      "batchNumberPlaceholder": "ለምሳሌ፣ BATCH-2026-001",
+      "expiryDate": "የማለፊያ ቀን *",
+      "notes": "ማስታወሻዎች (አማራጭ)",
+      "notesPlaceholder": "ማናቸውም ተጨማሪ ማስታወሻዎች..."
     },
     "toast": {
-      "loadError": "Failed to load prescriptions",
-      "invalidQuantity": "Please enter a valid quantity",
-      "missingBatch": "Please enter batch number",
-      "missingExpiry": "Please enter expiry date",
-      "dispenseSuccess": "Medicine dispensed successfully",
-      "dispenseError": "Failed to dispense medicine"
+      "loadError": "ትዕዛዞችን መጫን አልተሳካም",
+      "invalidQuantity": "እባክዎ ትክክለኛ ብዛት ያስገቡ",
+      "missingBatch": "እባክዎ የሎት ቁጥር ያስገቡ",
+      "missingExpiry": "እባክዎ የማለፊያ ቀን ያስገቡ",
+      "dispenseSuccess": "መድሃኒት በተሳካ ሁኔታ ተሰጥቷል",
+      "dispenseError": "መድሃኒት ማሰጠት አልተሳካም"
     }
   },
   "laboratory": {
-    "title": "Laboratory",
-    "subtitle": "Manage investigation requests and results",
+    "title": "ላቦራቶሪ",
+    "subtitle": "የምርመራ ጥያቄዎችን እና ውጤቶችን ያስተዳድሩ",
     "actions": {
-      "startProcessing": "Start Processing",
-      "enterResults": "Enter Results"
+      "startProcessing": "ሂደት ጀምር",
+      "enterResults": "ውጤቶችን አስገባ"
     },
     "status": {
-      "requested": "Requested",
-      "inProgress": "In Progress",
-      "completed": "Completed",
-      "cancelled": "Cancelled"
+      "requested": "ተጠይቋል",
+      "inProgress": "በሂደት ላይ",
+      "completed": "ተጠናቅቋል",
+      "cancelled": "ተሰርዟል"
     },
     "urgency": {
-      "routine": "Routine",
-      "urgent": "Urgent",
-      "stat": "STAT"
+      "routine": "መደበኛ",
+      "urgent": "አስቸኳይ",
+      "stat": "በጣም አስቸኳይ"
     },
     "search": {
-      "placeholder": "Search by patient name, ID, or test..."
+      "placeholder": "በታካሚ ስም፣ መለያ ወይም ምርመራ ይፈልጉ..."
     },
     "empty": {
-      "search": "No investigations found matching your search",
-      "status": "No {{status}} investigations"
+      "search": "ከፍለጋዎ ጋር የሚመሳሰሉ ምርመራዎች አልተገኙም",
+      "status": "{{status}} ምርመራዎች የሉም"
     },
     "detail": {
-      "instructions": "Instructions:",
-      "results": "Results:",
-      "interpretation": "Interpretation:"
+      "instructions": "መመሪያዎች:",
+      "results": "ውጤቶች:",
+      "interpretation": "ትርጉም:"
     },
     "info": {
-      "requested": "Requested:",
-      "scheduled": "Scheduled:",
-      "completed": "Completed:",
-      "performedBy": "Performed by:"
+      "requested": "ተጠይቋል:",
+      "scheduled": "ተይዟል:",
+      "completed": "ተጠናቅቋል:",
+      "performedBy": "ያከናወነው:"
     },
     "modal": {
-      "title": "Enter Investigation Results",
-      "submitResults": "Submit Results",
-      "investigationDetails": "Investigation Details",
-      "type": "Type",
-      "testName": "Test Name",
-      "urgency": "Urgency",
-      "requestedDate": "Requested Date",
-      "instructions": "Instructions:",
-      "results": "Investigation Results *",
-      "resultsPlaceholder": "Enter detailed test results, measurements, observations...",
-      "interpretation": "Clinical Interpretation",
-      "interpretationPlaceholder": "Doctor's interpretation of results (optional)...",
-      "performedBy": "Performed By *",
-      "performedByPlaceholder": "Lab technician or radiologist name",
-      "additionalNotes": "Additional Notes",
-      "additionalNotesPlaceholder": "Any additional notes or comments..."
+      "title": "የምርመራ ውጤቶችን አስገባ",
+      "submitResults": "ውጤቶችን አስረክብ",
+      "investigationDetails": "የምርመራ ዝርዝሮች",
+      "type": "ዓይነት",
+      "testName": "የምርመራ ስም",
+      "urgency": "አስቸኳይነት",
+      "requestedDate": "የተጠየቀበት ቀን",
+      "instructions": "መመሪያዎች:",
+      "results": "የምርመራ ውጤቶች *",
+      "resultsPlaceholder": "ዝርዝር የምርመራ ውጤቶችን፣ መለኪያዎችን፣ ምልከታዎችን ያስገቡ...",
+      "interpretation": "የክሊኒካዊ ትርጉም",
+      "interpretationPlaceholder": "የሐኪሙ የውጤት ትርጉም (አማራጭ)...",
+      "performedBy": "ያከናወነው *",
+      "performedByPlaceholder": "የላብራቶሪ ቴክኒሺያን ወይም ራዲዮሎጂስት ስም",
+      "additionalNotes": "ተጨማሪ ማስታወሻዎች",
+      "additionalNotesPlaceholder": "ማናቸውም ተጨማሪ ማስታወሻዎች ወይም አስተያየቶች..."
     },
     "toast": {
-      "loadError": "Failed to load investigations",
-      "statusUpdated": "Investigation marked as {{status}}",
-      "statusUpdateError": "Failed to update status",
-      "missingResults": "Please enter investigation results",
-      "missingPerformedBy": "Please enter who performed the investigation",
-      "submitSuccess": "Investigation results submitted successfully",
-      "submitError": "Failed to submit results"
+      "loadError": "ምርመራዎችን መጫን አልተሳካም",
+      "statusUpdated": "ምርመራ እንደ {{status}} ምልክት ተደርጎበታል",
+      "statusUpdateError": "ሁኔታን ማዘመን አልተሳካም",
+      "missingResults": "እባክዎ የምርመራ ውጤቶችን ያስገቡ",
+      "missingPerformedBy": "እባክዎ ምርመራውን ያከናወነው ማን እንደሆነ ያስገቡ",
+      "submitSuccess": "የምርመራ ውጤቶች በተሳካ ሁኔታ ተስረክበዋል",
+      "submitError": "ውጤቶችን ማስረከብ አልተሳካም"
     }
   },
   "patientDetail": {
-    "backToPatients": "Back to Patients",
-    "newVisit": "New Visit",
-    "notFound": "Patient not found",
+    "backToPatients": "ወደ ታካሚዎች ተመለስ",
+    "newVisit": "አዲስ ጉብኝት",
+    "notFound": "ታካሚ አልተገኘም",
     "detail": {
-      "email": "Email",
-      "address": "Address",
-      "occupation": "Occupation",
-      "maritalStatus": "Marital Status"
+      "email": "ኢሜይል",
+      "address": "አድራሻ",
+      "occupation": "ሙያ",
+      "maritalStatus": "የጋብቻ ሁኔታ"
     },
-    "registered": "Reg:",
+    "registered": "ተመዝግቧል:",
     "alerts": {
-      "allergies": "Allergies:",
-      "chronic": "Chronic:"
+      "allergies": "አለርጂዎች:",
+      "chronic": "ሥር የሰደደ:"
     },
     "visitHistory": {
-      "title": "Visit History",
-      "complaint": "Complaint:",
-      "treatment": "Treatment:",
-      "empty": "No previous visits"
+      "title": "የጉብኝት ታሪክ",
+      "complaint": "ቅሬታ:",
+      "treatment": "ህክምና:",
+      "empty": "ቀዳሚ ጉብኝቶች የሉም"
     },
     "toast": {
-      "loadError": "Failed to load patient details"
+      "loadError": "የታካሚ ዝርዝሮችን መጫን አልተሳካም"
     }
   },
   "patientForm": {
@@ -1171,5 +1171,63 @@
     "data_clerk": "Data Clerk",
     "cashier": "Cashier",
     "staff_manager": "Staff Manager"
+  },
+  "followUpIndicator": {
+    "firstVisit": "የመጀመሪያ ጉብኝት - ቀዳሚ የሕክምና ታሪክ የለም",
+    "scheduledFollowUp": "✓ የተያዘ ክትትል ጉብኝት",
+    "returnVisit": "ተመላሽ ጉብኝት",
+    "daysSinceLast": "{{days}} ቀናት ከመጨረሻው ጉብኝት ጀምሮ",
+    "lastVisit": "የመጨረሻው ጉብኝት:",
+    "followUpScheduled": "ክትትል የተያዘለት:",
+    "previousDiagnosis": "ቀዳሚ ምርመራ:",
+    "previousTreatment": "ቀዳሚ ህክምና:",
+    "previousNotes": "ቀዳሚ ማስታወሻዎች:",
+    "viewFullHistory": "ሙሉ ታሪክ ይመልከቱ"
+  },
+  "prescriptions": {
+    "noActive": "ንቁ ትዕዛዞች የሉም",
+    "recentTitle": "የቅርብ ጊዜ ትዕዛዞች (ባለፉት 90 ቀናት)",
+    "medicine": "መድሃኒት",
+    "prescribed": "ተታዝዟል:",
+    "daysLeft": "{{days}} ቀናት ቀርተዋል",
+    "endsToday": "ዛሬ ያበቃል",
+    "expired": "ጊዜው አልፎበታል",
+    "duration": "ጊዜ:",
+    "instructions": "መመሪያዎች:",
+    "reason": "ምክንያት:",
+    "endingSoon": "መድሃኒት በቅርቡ ያበቃል - ማሻሻያ ካስፈለገ ያስቡበት",
+    "periodEnded": "የመድሃኒት ጊዜ አብቅቷል",
+    "status": {
+      "pending": "በመጠባበቅ ላይ",
+      "dispensed": "ተሰጥቷል",
+      "completed": "ተጠናቅቋል",
+      "stopped": "ቆሟል"
+    }
+  },
+  "investigations": {
+    "noRecent": "የቅርብ ጊዜ ምርመራዎች የሉም",
+    "pendingTitle": "በመጠባበቅ ላይ ያሉ ምርመራዎች",
+    "recentResults": "የቅርብ ጊዜ ውጤቶች ተገኝተዋል",
+    "requested": "ተጠይቋል:",
+    "scheduled": "ተይዟል:",
+    "completed": "ተጠናቅቋል:",
+    "instructions": "መመሪያዎች:",
+    "statAlert": "በጣም አስቸኳይ - ወዲያውኑ ትኩረት ያስፈልጋል",
+    "resultsReady": "ውጤቶች ዝግጁ ናቸው",
+    "results": "ውጤቶች:",
+    "interpretation": "ትርጉም:",
+    "viewFile": "የውጤት ፋይል ይመልከቱ",
+    "performedBy": "ያከናወነው:",
+    "status": {
+      "requested": "ተጠይቋል",
+      "in_progress": "በሂደት ላይ",
+      "completed": "ተጠናቅቋል",
+      "cancelled": "ተሰርዟል"
+    },
+    "urgency": {
+      "routine": "መደበኛ",
+      "urgent": "አስቸኳይ",
+      "stat": "በጣም አስቸኳይ"
+    }
   }
 }

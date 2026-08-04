@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
 import Testimonials from "../components/Testimonials";
@@ -16,22 +17,13 @@ export default function Home() {
       <Helmet>
         {/* Title & Meta */}
         <title>{t("home.title")}</title>
-        <meta
-          name="description"
-          content={t("home.metaDescription")}
-        />
-        <meta
-          name="keywords"
-          content={t("home.metaKeywords")}
-        />
+        <meta name="description" content={t("home.metaDescription")} />
+        <meta name="keywords" content={t("home.metaKeywords")} />
         <link rel="canonical" href="https://www.nesihaherbalclinic.com/" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:title" content={t("home.ogTitle")} />
-        <meta
-          property="og:description"
-          content={t("home.ogDescription")}
-        />
+        <meta property="og:description" content={t("home.ogDescription")} />
         <meta property="og:url" content="https://www.nesihaherbalclinic.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/logo.png" />
@@ -64,6 +56,9 @@ export default function Home() {
           }
         `}</script>
       </Helmet>
+
+      {/* Header */}
+      <Header />
 
       {/* Page Content */}
       <div className="space-y-12">

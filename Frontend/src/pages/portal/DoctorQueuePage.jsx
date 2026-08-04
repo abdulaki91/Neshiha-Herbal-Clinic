@@ -1,10 +1,21 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import {
-  FiUser, FiClock, FiFileText, FiActivity, FiHeart,
-  FiAlertCircle, FiCheckCircle, FiX, FiPlus, FiSave,
-  FiChevronLeft, FiChevronRight, FiUsers,
+  FiUser,
+  FiClock,
+  FiFileText,
+  FiActivity,
+  FiHeart,
+  FiAlertCircle,
+  FiCheckCircle,
+  FiX,
+  FiPlus,
+  FiSave,
+  FiChevronLeft,
+  FiChevronRight,
+  FiUsers,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
@@ -12,8 +23,6 @@ import { getSocket } from "../../lib/socket";
 import { useQueue, useUpdateVisit } from "../../hooks/useVisits";
 import { usePrescriptions } from "../../hooks/usePrescriptions";
 import HerbalMedicineForm from "../../components/doctor/HerbalMedicineForm";
-import VitalSignsForm from "../../components/doctor/VitalSignsForm";
-import InvestigationForm from "../../components/doctor/InvestigationForm";
 import FollowUpIndicator from "../../components/doctor/FollowUpIndicator";
 import ActivePrescriptions from "../../components/doctor/ActivePrescriptions";
 import PendingInvestigations from "../../components/doctor/PendingInvestigations";
@@ -42,6 +51,7 @@ const addPatientToRecent = (patient) => {
 };
 
 const DoctorQueuePage = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const [selectedVisit, setSelectedVisit] = useState(null);
   const [activeTab, setActiveTab] = useState("consultation");
@@ -113,7 +123,9 @@ const DoctorQueuePage = () => {
 
       setSelectedVisit(visit);
       setShowMobileConsultation(true);
-      toast.success("Consultation started — patient stays in queue until saved");
+      toast.success(
+        "Consultation started — patient stays in queue until saved",
+      );
       refreshQueue();
     } catch {
       toast.error("Failed to start consultation");
@@ -223,7 +235,7 @@ const DoctorQueuePage = () => {
           className="flex items-center space-x-2 mb-4 px-3 py-2 bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition"
         >
           <FiChevronLeft />
-          <span>Back to Queue</span>
+          <span>{t("doctorQueue.backToQueue")}</span>
         </button>
         <ConsultationPanel
           selectedVisit={selectedVisit}
@@ -252,13 +264,15 @@ const DoctorQueuePage = () => {
       >
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Patient Queue</h1>
+            <h1 className="text-3xl font-bold text-gray-800">
+              {t("doctorQueue.title")}
+            </h1>
             <p className="text-gray-500 text-sm mt-1">
-              {queue.length} patient{queue.length !== 1 ? "s" : ""}{" "}
+              {queue.length} {t("doctorQueue.queueStats.patients")}{" "}
               {queue.filter((v) => v.status === "in_consultation").length > 0
                 ? `· ${
                     queue.filter((v) => v.status === "in_consultation").length
-                  } in consultation`
+                  } ${t("doctorQueue.queueStats.inConsultation")}`
                 : ""}
             </p>
           </div>
@@ -266,16 +280,18 @@ const DoctorQueuePage = () => {
             onClick={refreshQueue}
             className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm"
           >
-            Refresh Queue
+            {t("doctorQueue.refreshQueue")}
           </button>
         </div>
 
         {queue.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm p-12 text-center">
             <FiCheckCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">No patients waiting</p>
+            <p className="text-gray-500 text-lg">
+              {t("doctorQueue.empty.title")}
+            </p>
             <p className="text-gray-400 text-sm mt-1">
-              New patients will appear here
+              {t("doctorQueue.empty.subtitle")}
             </p>
           </div>
         ) : (
@@ -342,7 +358,9 @@ const DoctorQueuePage = () => {
                         </div>
                         {visit.chiefComplaint && (
                           <p className="mt-1 text-xs text-gray-600 truncate">
-                            <span className="font-medium">CC:</span>{" "}
+                            <span className="font-medium">
+                              {t("doctorQueue.queue.chiefComplaintPrefix")}
+                            </span>{" "}
                             {visit.chiefComplaint}
                           </p>
                         )}
@@ -354,10 +372,10 @@ const DoctorQueuePage = () => {
                       {isInConsultation && (
                         <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full whitespace-nowrap">
                           {isConsultingOthers
-                            ? "With another doctor"
+                            ? t("doctorQueue.status.withAnotherDoctor")
                             : isSelected
-                              ? "Active"
-                              : "In Progress"}
+                              ? t("doctorQueue.status.active")
+                              : t("doctorQueue.status.inProgress")}
                         </span>
                       )}
                       <button
@@ -370,10 +388,10 @@ const DoctorQueuePage = () => {
                         }`}
                       >
                         {isSelected
-                          ? "Consulting"
+                          ? t("doctorQueue.actions.consulting")
                           : isInConsultation && !isConsultingOthers
-                            ? "Continue"
-                            : "Start"}
+                            ? t("doctorQueue.actions.continue")
+                            : t("doctorQueue.actions.start")}
                       </button>
                     </div>
                   </div>
@@ -413,9 +431,11 @@ const DoctorQueuePage = () => {
         <div className="hidden lg:flex w-3/5 items-center justify-center border-l border-gray-200 pl-6">
           <div className="text-center text-gray-400">
             <FiUsers className="w-20 h-20 mx-auto mb-4 text-gray-300" />
-            <p className="text-lg font-medium">Select a Patient</p>
+            <p className="text-lg font-medium">
+              {t("doctorQueue.rightPanel.selectPatient")}
+            </p>
             <p className="text-sm mt-1">
-              Click "Start" on a patient from the queue to begin consultation
+              {t("doctorQueue.rightPanel.selectPatientHint")}
             </p>
           </div>
         </div>
@@ -437,16 +457,19 @@ const ConsultationPanel = ({
   refreshQueue,
   onOpenSidebar,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div>
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Consultation</h1>
+          <h1 className="text-2xl font-bold text-gray-800">
+            {t("doctorQueue.consultation.title")}
+          </h1>
           <p className="text-gray-600 text-sm mt-0.5">
-            {selectedVisit.patient?.firstName}{" "}
-            {selectedVisit.patient?.lastName} • Visit #{" "}
-            {selectedVisit.visitNumber}
+            {selectedVisit.patient?.firstName} {selectedVisit.patient?.lastName}{" "}
+            • {t("common.visitNumber")} {selectedVisit.visitNumber}
           </p>
         </div>
         <div className="flex space-x-2">
@@ -462,7 +485,7 @@ const ConsultationPanel = ({
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
           >
             <FiSave />
-            <span>Save Progress</span>
+            <span>{t("doctorQueue.consultation.saveProgress")}</span>
           </button>
           <button
             onClick={onBack}
@@ -476,29 +499,33 @@ const ConsultationPanel = ({
       {/* Patient Info Card */}
       <div className="bg-white rounded-xl shadow-sm p-4 mb-4">
         <h3 className="text-sm font-semibold text-gray-800 mb-3">
-          Patient Information
+          {t("doctorQueue.consultation.patientInfo")}
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
           <div>
-            <p className="text-xs text-gray-500">Patient ID</p>
+            <p className="text-xs text-gray-500">{t("common.patientId")}</p>
             <p className="font-medium text-gray-800">
               {selectedVisit.patient?.patientId}
             </p>
           </div>
           <div>
-            <p className="text-xs text-gray-500">Age / Gender</p>
+            <p className="text-xs text-gray-500">
+              {t("doctorQueue.consultation.ageGender")}
+            </p>
             <p className="font-medium text-gray-800">
               {selectedVisit.patient?.age}y · {selectedVisit.patient?.gender}
             </p>
           </div>
           <div>
-            <p className="text-xs text-gray-500">Blood Group</p>
+            <p className="text-xs text-gray-500">
+              {t("doctorQueue.consultation.bloodGroup")}
+            </p>
             <p className="font-medium text-gray-800">
-              {selectedVisit.patient?.bloodGroup || "N/A"}
+              {selectedVisit.patient?.bloodGroup || t("common.notAvailable")}
             </p>
           </div>
           <div>
-            <p className="text-xs text-gray-500">Phone</p>
+            <p className="text-xs text-gray-500">{t("common.phone")}</p>
             <p className="font-medium text-gray-800">
               {selectedVisit.patient?.phone}
             </p>
@@ -514,7 +541,7 @@ const ConsultationPanel = ({
                 {selectedVisit.patient?.knownAllergies?.length > 0 && (
                   <div className="mb-1">
                     <span className="font-semibold text-red-800">
-                      Allergies:{" "}
+                      {t("doctorQueue.consultation.allergies")}{" "}
                     </span>
                     <span className="text-red-700">
                       {selectedVisit.patient.knownAllergies.join(", ")}
@@ -524,7 +551,7 @@ const ConsultationPanel = ({
                 {selectedVisit.patient?.chronicDiseases?.length > 0 && (
                   <div>
                     <span className="font-semibold text-red-800">
-                      Chronic:{" "}
+                      {t("doctorQueue.consultation.chronic")}{" "}
                     </span>
                     <span className="text-red-700">
                       {selectedVisit.patient.chronicDiseases.join(", ")}
@@ -556,11 +583,12 @@ const ConsultationPanel = ({
         <div className="border-b border-gray-200 overflow-x-auto">
           <nav className="flex space-x-1 px-4 min-w-max">
             {[
-              { key: "consultation", label: "Consultation" },
-              { key: "vitals", label: "Vital Signs" },
-              { key: "investigation", label: "Investigation" },
-              { key: "medicine", label: "Herbal Medicine" },
-              { key: "history", label: "History" },
+              {
+                key: "consultation",
+                label: t("doctorQueue.tabs.consultation"),
+              },
+              { key: "medicine", label: t("doctorQueue.tabs.herbalMedicine") },
+              { key: "history", label: t("doctorQueue.tabs.history") },
             ].map((tab) => (
               <button
                 key={tab.key}
@@ -584,19 +612,6 @@ const ConsultationPanel = ({
               onChange={setConsultationData}
             />
           )}
-          {activeTab === "vitals" && (
-            <VitalSignsForm
-              visitId={selectedVisit.id}
-              onSave={refreshQueue}
-            />
-          )}
-          {activeTab === "investigation" && (
-            <InvestigationForm
-              visitId={selectedVisit.id}
-              patientId={selectedVisit.patient?.id}
-              onSave={refreshQueue}
-            />
-          )}
           {activeTab === "medicine" && (
             <HerbalMedicineForm
               visitId={selectedVisit.id}
@@ -616,7 +631,7 @@ const ConsultationPanel = ({
           {/* Diagnosis summary */}
           <div className="flex-1 min-w-0">
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
-              Diagnosis
+              {t("doctorQueue.consultation.diagnosisTitle")}
             </p>
             {consultationData.diagnosis.length > 0 ? (
               <div className="flex flex-wrap gap-1.5">
@@ -630,7 +645,9 @@ const ConsultationPanel = ({
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-gray-400 italic">No diagnosis added yet</p>
+              <p className="text-sm text-gray-400 italic">
+                {t("doctorQueue.consultation.noDiagnosis")}
+              </p>
             )}
           </div>
 
@@ -639,7 +656,7 @@ const ConsultationPanel = ({
             onClick={onComplete}
             className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition font-medium shadow-md text-center"
           >
-            Complete Consultation
+            {t("doctorQueue.consultation.completeConsultation")}
           </button>
         </div>
       </div>

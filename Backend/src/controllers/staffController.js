@@ -61,7 +61,22 @@ export const updateStaff = asyncHandler(async (req, res) => {
  * @access  Private (Super Admin)
  */
 export const deleteStaff = asyncHandler(async (req, res) => {
-  const result = await staffService.deleteStaff(req.params.id);
+  const result = await staffService.deleteStaff(req.params.id, req.user.id);
+
+  return ApiResponse.success(res, null, result.message);
+});
+
+/**
+ * @route   POST /api/v1/staff/:id/reset-password
+ * @desc    Reset a staff member's password
+ * @access  Private (Super Admin, Staff Manager)
+ */
+export const resetStaffPassword = asyncHandler(async (req, res) => {
+  const result = await staffService.resetStaffPassword(
+    req.params.id,
+    req.body.password,
+    req.user.id,
+  );
 
   return ApiResponse.success(res, null, result.message);
 });
@@ -83,7 +98,7 @@ export const activateStaff = asyncHandler(async (req, res) => {
  * @access  Private (Super Admin, Staff Manager)
  */
 export const deactivateStaff = asyncHandler(async (req, res) => {
-  const staff = await staffService.deactivateStaff(req.params.id);
+  const staff = await staffService.deactivateStaff(req.params.id, req.user.id);
 
   return ApiResponse.success(res, staff, "Staff deactivated successfully");
 });
