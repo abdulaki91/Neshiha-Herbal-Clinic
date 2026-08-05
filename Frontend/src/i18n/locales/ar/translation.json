@@ -1653,6 +1653,8 @@
       "subtitleLabel": "العنوان الفرعي",
       "ctaText": "نص الزر",
       "ctaLink": "رابط الزر",
+      "linkToBookingForm": "ربط بنموذج الحجز",
+      "linkToBookingFormHint": "سيفتح الزر نموذج \"حجز موعد\" بدلاً من الانتقال إلى أي مكان.",
       "startDate": "تاريخ البدء",
       "endDate": "تاريخ الانتهاء",
       "createSuccess": "تمت إضافة اللافتة",

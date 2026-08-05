@@ -35,7 +35,7 @@ export default function Header() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
-      <BannerStrip />
+      <BannerStrip onBookingCta={() => setIsBookingOpen(true)} />
       <header
         className={`transition-all duration-300 ${
           isScrolled

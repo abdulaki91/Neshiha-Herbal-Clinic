@@ -1505,6 +1505,8 @@
       "subtitleLabel": "Subtitle",
       "ctaText": "Button Text",
       "ctaLink": "Button Link",
+      "linkToBookingForm": "Link to booking form",
+      "linkToBookingFormHint": "The button will open the \"Book Appointment\" form instead of navigating anywhere.",
       "startDate": "Start Date",
       "endDate": "End Date",
       "createSuccess": "Banner added",

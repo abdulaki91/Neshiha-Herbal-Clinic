@@ -5,6 +5,7 @@ import { FiX, FiSave, FiImage, FiUploadCloud } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { useCreateBanner, useUpdateBanner } from "../../hooks/useBanners";
 import TranslatableInput from "./TranslatableInput";
+import { BOOKING_CTA_LINK } from "../BannerStrip";
 
 const backendBase = (import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1").replace(
   "/api/v1",
@@ -28,6 +29,7 @@ const BannerForm = ({ item = null, onClose, onSuccess }) => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -53,6 +55,13 @@ const BannerForm = ({ item = null, onClose, onSuccess }) => {
     setValue("imageFile", file);
     setPreview(URL.createObjectURL(file));
   };
+
+  // The booking form is an in-page modal, not a real URL — offer it as a
+  // one-click choice instead of leaving admins to guess a link for it
+  // (this is exactly what went wrong before: a banner's button was typed
+  // in as "/portal", which is the staff login page, not the booking form).
+  const ctaLinkValue = watch("ctaLink");
+  const isBookingLink = ctaLinkValue === BOOKING_CTA_LINK;
 
   const onSubmit = async (data) => {
     const payload = {
@@ -124,10 +133,34 @@ const BannerForm = ({ item = null, onClose, onSuccess }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                {t("contentAdmin.banners.ctaLink")}
-              </label>
-              <input type="text" {...register("ctaLink")} className={inputClass} placeholder="/portal or https://..." />
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-sm font-medium text-gray-700">
+                  {t("contentAdmin.banners.ctaLink")}
+                </label>
+                <label className="flex items-center gap-1.5 text-xs text-emerald-700 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isBookingLink}
+                    onChange={(e) =>
+                      setValue("ctaLink", e.target.checked ? BOOKING_CTA_LINK : "")
+                    }
+                    className="w-3.5 h-3.5 text-emerald-600 rounded"
+                  />
+                  {t("contentAdmin.banners.linkToBookingForm")}
+                </label>
+              </div>
+              <input
+                type="text"
+                {...register("ctaLink")}
+                disabled={isBookingLink}
+                className={`${inputClass} disabled:bg-gray-50 disabled:text-gray-400`}
+                placeholder="https://... or #services"
+              />
+              {isBookingLink && (
+                <p className="mt-1 text-xs text-gray-400">
+                  {t("contentAdmin.banners.linkToBookingFormHint")}
+                </p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">

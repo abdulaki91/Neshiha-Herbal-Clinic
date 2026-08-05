@@ -1653,6 +1653,8 @@
       "subtitleLabel": "ንዑስ ርዕስ",
       "ctaText": "የአዝራር ጽሑፍ",
       "ctaLink": "የአዝራር አገናኝ",
+      "linkToBookingForm": "ከቀጠሮ ቅጽ ጋር አገናኝ",
+      "linkToBookingFormHint": "አዝራሩ ወደየትም ከመሄድ ይልቅ የ«ቀጠሮ ይያዙ» ቅጹን ይከፍታል።",
       "startDate": "የመጀመሪያ ቀን",
       "endDate": "የመጨረሻ ቀን",
       "createSuccess": "ማስታወቂያ ታክሏል",

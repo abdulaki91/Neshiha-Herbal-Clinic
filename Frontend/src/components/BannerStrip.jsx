@@ -3,10 +3,17 @@ import { useTranslation } from "react-i18next";
 import { FiX } from "react-icons/fi";
 import { usePublicBanners } from "../hooks/usePublicContent";
 
+// A banner's "Button Link" is free text an admin types in — there's no
+// real page for "open the booking form" since it's a client-side modal,
+// not a route. This sentinel value lets BannerForm offer it as a one-click
+// option instead of admins guessing/typing a URL that goes nowhere useful
+// (or, worse, to a login-gated portal page).
+export const BOOKING_CTA_LINK = "#book-appointment";
+
 // Fixed, single-line height so the header/hero offset that accounts for
 // this strip (see Header.jsx / Hero.jsx) stays correct regardless of copy
 // length — h-9/h-10 below must match BANNER_HEIGHT_CLASS there.
-export default function BannerStrip() {
+export default function BannerStrip({ onBookingCta }) {
   const { i18n } = useTranslation();
   const locale = i18n.language;
   const { data: banners = [] } = usePublicBanners();
@@ -40,12 +47,22 @@ export default function BannerStrip() {
             </span>
           )}
           {banner.ctaLink && (banner.ctaText?.[locale] || banner.ctaText?.en) && (
-            <a
-              href={banner.ctaLink}
-              className="underline font-medium hover:text-emerald-100 transition flex-shrink-0"
-            >
-              {banner.ctaText?.[locale] || banner.ctaText?.en}
-            </a>
+            banner.ctaLink === BOOKING_CTA_LINK ? (
+              <button
+                type="button"
+                onClick={onBookingCta}
+                className="underline font-medium hover:text-emerald-100 transition flex-shrink-0"
+              >
+                {banner.ctaText?.[locale] || banner.ctaText?.en}
+              </button>
+            ) : (
+              <a
+                href={banner.ctaLink}
+                className="underline font-medium hover:text-emerald-100 transition flex-shrink-0"
+              >
+                {banner.ctaText?.[locale] || banner.ctaText?.en}
+              </a>
+            )
           )}
         </div>
         <button

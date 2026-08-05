@@ -1607,6 +1607,8 @@
       "subtitleLabel": "Mata Duree Xiqqaa",
       "ctaText": "Barruu Qabduu",
       "ctaLink": "Liinkii Qabduu",
+      "linkToBookingForm": "Foormii beellamaatti walqabsiisi",
+      "linkToBookingFormHint": "Qabduun kun iddoo kamitti iyyuu deemuu mannaa foormii \"Beellama Qabadhu\" banuu qabaa.",
       "startDate": "Guyyaa Jalqabaa",
       "endDate": "Guyyaa Xumuraa",
       "createSuccess": "Beeksisni ida'ameera",
