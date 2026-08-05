@@ -103,7 +103,7 @@ const PendingInvestigations = ({ patientId }) => {
     return (
       <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
         <FiFileText className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-        <p className="text-sm text-gray-600">{t("investigations.noRecent")}</p>
+        <p className="text-sm text-gray-600">{t("pendingInvestigations.empty")}</p>
       </div>
     );
   }
@@ -122,7 +122,7 @@ const PendingInvestigations = ({ patientId }) => {
           <div className="px-4 py-3 border-b border-gray-200 bg-yellow-50">
             <h4 className="font-semibold text-gray-800 flex items-center space-x-2">
               <FiClock className="w-5 h-5 text-yellow-600" />
-              <span>{t("investigations.pendingTitle")}</span>
+              <span>{t("pendingInvestigations.pendingTitle")}</span>
               <span className="ml-2 px-2 py-0.5 bg-yellow-200 text-yellow-800 rounded-full text-xs font-medium">
                 {pending.length}
               </span>
@@ -147,7 +147,7 @@ const PendingInvestigations = ({ patientId }) => {
                         {getStatusIcon(investigation.status)}
                         <span className="capitalize">
                           {t(
-                            `investigations.status.${investigation.status.replace("_", "_")}`,
+                            `investigation.status.${investigation.status === "in_progress" ? "inProgress" : investigation.status}`,
                           )}
                         </span>
                       </span>
@@ -155,7 +155,7 @@ const PendingInvestigations = ({ patientId }) => {
                         <span
                           className={`px-2 py-0.5 rounded-full text-xs font-medium uppercase ${getUrgencyBadge(investigation.urgency)}`}
                         >
-                          {t(`investigations.urgency.${investigation.urgency}`)}
+                          {t(`investigation.urgency.${investigation.urgency}`)}
                         </span>
                       )}
                     </div>
@@ -166,7 +166,7 @@ const PendingInvestigations = ({ patientId }) => {
 
                   <div className="text-right text-sm">
                     <p className="text-gray-500">
-                      {t("investigations.requested")}{" "}
+                      {t("pendingInvestigations.requestedPrefix")}{" "}
                       {new Date(investigation.requestedDate).toLocaleDateString(
                         "en-US",
                         {
@@ -177,7 +177,7 @@ const PendingInvestigations = ({ patientId }) => {
                     </p>
                     {investigation.scheduledDate && (
                       <p className="text-blue-600 font-medium">
-                        {t("investigations.scheduled")}{" "}
+                        {t("pendingInvestigations.scheduledPrefix")}{" "}
                         {new Date(
                           investigation.scheduledDate,
                         ).toLocaleDateString("en-US", {
@@ -192,7 +192,7 @@ const PendingInvestigations = ({ patientId }) => {
                 {investigation.instructions && (
                   <div className="text-xs text-gray-600 mt-2 p-2 bg-gray-50 rounded">
                     <span className="font-medium">
-                      {t("investigations.instructions")}
+                      {t("pendingInvestigations.instructionsLabel")}
                     </span>{" "}
                     {investigation.instructions}
                   </div>
@@ -202,7 +202,7 @@ const PendingInvestigations = ({ patientId }) => {
                 {investigation.urgency === "stat" && (
                   <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-800">
                     <FiAlertCircle className="inline w-3 h-3 mr-1" />
-                    {t("investigations.statAlert")}
+                    {t("pendingInvestigations.statAlert")}
                   </div>
                 )}
               </div>
@@ -217,7 +217,7 @@ const PendingInvestigations = ({ patientId }) => {
           <div className="px-4 py-3 border-b border-gray-200 bg-green-50">
             <h4 className="font-semibold text-gray-800 flex items-center space-x-2">
               <FiCheckCircle className="w-5 h-5 text-green-600" />
-              <span>{t("investigations.recentResults")}</span>
+              <span>{t("pendingInvestigations.completedTitle")}</span>
               <span className="ml-2 px-2 py-0.5 bg-green-200 text-green-800 rounded-full text-xs font-medium">
                 {completed.length}
               </span>
@@ -238,7 +238,7 @@ const PendingInvestigations = ({ patientId }) => {
                       </h5>
                       <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                         <FiCheckCircle className="w-3 h-3" />
-                        <span>{t("investigations.resultsReady")}</span>
+                        <span>{t("pendingInvestigations.resultsReady")}</span>
                       </span>
                     </div>
                     <p className="text-sm text-gray-600">
@@ -248,7 +248,7 @@ const PendingInvestigations = ({ patientId }) => {
 
                   <div className="text-right text-sm">
                     <p className="text-gray-500">
-                      {t("investigations.completed")}{" "}
+                      {t("pendingInvestigations.completedPrefix")}{" "}
                       {new Date(investigation.completedDate).toLocaleDateString(
                         "en-US",
                         {
@@ -263,7 +263,7 @@ const PendingInvestigations = ({ patientId }) => {
                 {investigation.results && (
                   <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded">
                     <p className="text-xs font-medium text-green-800 mb-1">
-                      {t("investigations.results")}
+                      {t("pendingInvestigations.resultsLabel")}
                     </p>
                     <p className="text-sm text-gray-700">
                       {investigation.results}
@@ -274,7 +274,7 @@ const PendingInvestigations = ({ patientId }) => {
                 {investigation.interpretation && (
                   <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded">
                     <p className="text-xs font-medium text-blue-800 mb-1">
-                      {t("investigations.interpretation")}
+                      {t("pendingInvestigations.interpretationLabel")}
                     </p>
                     <p className="text-sm text-gray-700">
                       {investigation.interpretation}
@@ -291,14 +291,14 @@ const PendingInvestigations = ({ patientId }) => {
                       className="inline-flex items-center space-x-1 text-xs text-blue-600 hover:text-blue-700 font-medium"
                     >
                       <FiFileText className="w-3 h-3" />
-                      <span>{t("investigations.viewFile")}</span>
+                      <span>{t("pendingInvestigations.viewResultFile")}</span>
                     </a>
                   </div>
                 )}
 
                 {investigation.performedBy && (
                   <div className="mt-2 text-xs text-gray-500">
-                    {t("investigations.performedBy")}{" "}
+                    {t("pendingInvestigations.performedByPrefix")}{" "}
                     {investigation.performedBy}
                   </div>
                 )}

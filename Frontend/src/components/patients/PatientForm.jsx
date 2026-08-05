@@ -16,19 +16,12 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
     defaultValues: patient
       ? {
           firstName: patient.firstName || "",
-          middleName: patient.middleName || "",
           lastName: patient.lastName || "",
           gender: patient.gender || "",
-          dateOfBirth: patient.dateOfBirth
-            ? patient.dateOfBirth.split("T")[0]
-            : "",
+          age: patient.age ?? "",
           phone: patient.phone || "",
           city: patient.city || "",
-          subCity: patient.subCity || "",
           woreda: patient.woreda || "",
-          bloodGroup: patient.bloodGroup || "",
-          emergencyContactName: patient.emergencyContactName || "",
-          emergencyContactPhone: patient.emergencyContactPhone || "",
         }
       : {},
   });
@@ -99,17 +92,6 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t("patientForm.middleNameLabel")}
-              </label>
-              <input
-                {...register("middleName")}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder={t("patientForm.middleNamePlaceholder")}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
                 {t("patientForm.lastNameLabel")}
               </label>
               <input
@@ -146,18 +128,24 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t("patientForm.dobLabel")}
+                {t("patientForm.ageLabel")}
               </label>
               <input
-                type="date"
-                {...register("dateOfBirth", {
-                  required: t("patientForm.dobRequired"),
+                type="number"
+                min="0"
+                max="150"
+                {...register("age", {
+                  required: t("patientForm.ageRequired"),
+                  valueAsNumber: true,
+                  min: { value: 0, message: t("patientForm.ageInvalid") },
+                  max: { value: 150, message: t("patientForm.ageInvalid") },
                 })}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                placeholder={t("patientForm.agePlaceholder")}
               />
-              {errors.dateOfBirth && (
+              {errors.age && (
                 <p className="mt-1 text-sm text-red-600">
-                  {errors.dateOfBirth.message}
+                  {errors.age.message}
                 </p>
               )}
             </div>
@@ -198,72 +186,12 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t("patientForm.subCityLabel")}
-              </label>
-              <input
-                {...register("subCity")}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder={t("patientForm.subCityPlaceholder")}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
                 {t("patientForm.woredaLabel")}
               </label>
               <input
                 {...register("woreda")}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
                 placeholder={t("patientForm.woredaPlaceholder")}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t("patientForm.bloodGroupLabel")}
-              </label>
-              <select
-                {...register("bloodGroup")}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-              >
-                <option value="">{t("patientForm.bloodGroupPlaceholder")}</option>
-                <option value="A+">A+</option>
-                <option value="A-">A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-              </select>
-            </div>
-
-            {/* Emergency Contact */}
-            <div className="col-span-2 mt-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                {t("patientForm.emergencyContactTitle")}
-              </h3>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t("patientForm.emergencyContactNameLabel")}
-              </label>
-              <input
-                {...register("emergencyContactName")}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder={t("patientForm.emergencyContactNamePlaceholder")}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t("patientForm.emergencyContactPhoneLabel")}
-              </label>
-              <input
-                {...register("emergencyContactPhone")}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                placeholder={t("patientForm.emergencyContactPhonePlaceholder")}
               />
             </div>
           </div>

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   FiPlus,
   FiSearch,
@@ -14,6 +15,7 @@ import {
 import toast from "react-hot-toast";
 import useAuthStore from "../../store/authStore";
 import StaffForm from "../../components/staff/StaffForm";
+import { getSocket } from "../../lib/socket";
 import {
   useStaff,
   useStaffStats,
@@ -151,6 +153,17 @@ const ResetPasswordModal = ({ member, onClose }) => {
 const StaffPage = () => {
   const { t } = useTranslation();
   const { user } = useAuthStore();
+  const qc = useQueryClient();
+
+  // Real-time: another admin creating or updating a staff account should
+  // reflect here without a manual reload
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+    const invalidate = () => qc.invalidateQueries({ queryKey: ["staff"] });
+    socket.on("staff:created", invalidate);
+    return () => socket.off("staff:created", invalidate);
+  }, [qc]);
 
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");

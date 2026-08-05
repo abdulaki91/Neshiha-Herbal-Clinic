@@ -16,7 +16,7 @@
     "print": "Maxxansi",
     "all": "Hunda",
     "total": "Ida'ama",
-    "patient": "Maamila",
+    "patient": "Dhukkubsataa",
     "patientId": "LakkID",
     "doctor": "Doktara",
     "doctorPrefix": "Dr.",
@@ -27,7 +27,7 @@
     "cashier": "Kaashiyara",
     "visitNumber": "Daawwata Lakk#",
     "paymentNumber": "Kaffaltii Lakk#",
-    "phone": "Bilbilaa",
+    "phone": "Bilbila",
     "age": "Umurii",
     "notAvailable": "Hin argamu",
     "instructions": "Qajeelfama",
@@ -50,7 +50,7 @@
     "home": "Fuula Duraa",
     "about": "Waa'ee Keenya",
     "services": "Tajaajiloota",
-    "testimonials": "Yaada Maamila",
+    "testimonials": "Yaada Dhukkubstaa",
     "contact": "Nu Qunnami",
     "blog": "Blogii"
   },
@@ -119,7 +119,7 @@
     "description": "Ogummaa biqilaa aadaa fi hubannoo ammayyaa walitti maknee furmaatota fayyaa uumamaa bu'a qabeessa dhiheessina.",
     "extendedDescription": "Kliinikii keenya ogummaa biqilaa durii fi qorannoo ammayyaa walitti makuun karoora yaalaa dhuunfaa uuma. Mallattoolee qofa utuu hin taane nama guutuu yaaluu amanna, fayyaa fi humna dheeraaf eeguuf.",
     "experience": "Waggaa Muuxannoo",
-    "patients": "Mamiloota Gammadan",
+    "patients": "Dhukkubsattoota Gammadan",
     "treatments": "Yaala Milkaa'aa",
     "herbalWisdom": "Ogummaa Biqilaa Aadaa",
     "herbalWisdomDesc": "Dhaloota irraa dhalootaatti darbaa dhufe",
@@ -134,10 +134,10 @@
     "metaKeywords": "kliinika biqilaa, Nesiha biqilaa, mana qorichaa aadaa, yaala uumamaa, fayyummaa guutuu, yaala filannoo, Kliinika biqilaa Oromiyaa, yaala biqilaa Itoophiyaa"
   },
   "testimonials": {
-    "title": "Maamila Keenya Maal Jedhu",
+    "title": "Dhukkubstaa Keenya Maal Jedhu",
     "subtitle": "Seenaa dhugaa namoota dhugaa irraa",
     "featured": "Ragaa Video Filatamaa",
-    "more": "Seenaa Maamila Dabalataa",
+    "more": "Seenaa Dhukkubstaa Dabalataa",
     "videoAvailable": "Ragaa video argamuu danda'a",
     "list": [
       {
@@ -267,7 +267,7 @@
     "brandName": "Kliinika Nesihaa",
     "dashboard": "Dashboordii",
     "staff": "Hojjettoota",
-    "patients": "Mamiloota",
+    "patients": "Dhukkubsattoota",
     "visits": "Daawwattoota",
     "medicines": "Qoricha",
     "cashier": "Kaashiyara",
@@ -299,7 +299,7 @@
     "notification": {
       "visitUpdated": "Daawwata Fooyya'e",
       "visitStatus": "Haala: {{status}}",
-      "newPatient": "Maamila Haaraa",
+      "newPatient": "Dhukkubstaa Haaraa",
       "patientRegistered": "{{firstName}} {{lastName}} galmeessame",
       "paymentReceived": "Kaffaltii Fudhatame",
       "paymentAmount": "{{amount}} ETB kaffalame",
@@ -313,13 +313,14 @@
     }
   },
   "toast": {
-    "newPatientInQueue": "Maamila haaraa tarree keessatti",
-    "patientRegistered": "Maamila haaraa galmeessame: {{firstName}} {{lastName}}",
+    "newPatientInQueue": "Dhukkubstaa haaraa tarree keessatti",
+    "patientRegistered": "Dhukkubstaa haaraa galmeessame: {{firstName}} {{lastName}}",
     "newVisitCreated": "Daawwata haaraa uumame",
     "visitStatus": "Haala daawwataa: {{status}}",
-    "prescriptionAdded": "Ajandaan haaraa maamilaaf dabale",
-    "medicineDispensed": "Qorichi maamilaaf kennam",
-    "paymentReceived": "Kaffaltii fudhatame: {{amount}} ETB"
+    "prescriptionAdded": "Ajandaan haaraa Dhukkubstaaaf dabale",
+    "medicineDispensed": "Qorichi Dhukkubstaaaf kennam",
+    "paymentReceived": "Kaffaltii fudhatame: {{amount}} ETB",
+    "staffCreated": "Hojjetaan haaraan dabalameera"
   },
   "login": {
     "brandName": "Kliinika Biqilaa Nesihaa",
@@ -401,7 +402,7 @@
     "clinicName": "Kliinika Biqilaa Nesihaa",
     "clinicSubtitle": "Sirna Bulchiinsa Kliinika",
     "label": {
-      "patient": "Maamila:",
+      "patient": "Dhukkubstaa:",
       "id": "LakkID:",
       "visit": "Daawwata:",
       "doctor": "Doktara:"
@@ -426,8 +427,8 @@
       "title": "Dashboordii"
     },
     "stats": {
-      "totalPatients": "Mamiloota Waliigalaa",
-      "todayPatients": "Mamiloota Har'aa",
+      "totalPatients": "Dhukkubsattoota Waliigalaa",
+      "todayPatients": "Dhukkubsattoota Har'aa",
       "todayVisits": "Daawwattoota Har'aa",
       "waitingNow": "Amma Eeggataa Jiran",
       "totalDoctors": "Doktaroota Waliigalaa",
@@ -455,10 +456,10 @@
         "prescriptions": "Ajandoota",
         "dispensed": "Kennaman"
       },
-      "waitingPatients": "Mamiloota Eeggataa Jiran",
+      "waitingPatients": "Dhukkubsattoota Eeggataa Jiran",
       "startConsultation": "Gorsa Eegali",
       "empty": {
-        "noPatients": "Mamila eeggataa hin jiru"
+        "noPatients": "Dhukkubstaa eeggataa hin jiru"
       }
     },
     "dataClerk": {
@@ -466,7 +467,7 @@
       "stats": {
         "registeredToday": "Har'a Galmeessaman",
         "todayVisits": "Daawwattoota Har'aa",
-        "waitingPatients": "Mamiloota Eeggataa Jiran"
+        "waitingPatients": "Dhukkubsattoota Eeggataa Jiran"
       },
       "recentRegistrations": "Galmeessa Dhiyoo",
       "empty": {
@@ -494,7 +495,7 @@
       "recent": "Kaffaltii Dhiyoo"
     },
     "search": {
-      "placeholder": "Maqaa ykn LakkID maamilaatiin barbaadi..."
+      "placeholder": "Maqaa ykn LakkID Dhukkubstaaatiin barbaadi..."
     },
     "pending": {
       "actionButton": "Fudhi fi Kenni",
@@ -528,7 +529,7 @@
       "other": "Kan Biroo"
     },
     "toast": {
-      "paymentSuccess": "Kaffaltii fudhatame — qorichi maamilaaf kenname",
+      "paymentSuccess": "Kaffaltii fudhatame — qorichi Dhukkubstaaaf kenname",
       "paymentError": "Kaffaltii hojjechuun milkaa'uu baate"
     }
   },
@@ -558,23 +559,23 @@
     }
   },
   "patients": {
-    "title": "Mamiloota",
-    "subtitle": "Galmee maamilaa bulchi",
-    "registerButton": "Maamila Galmeessi",
+    "title": "Dhukkubsattoota",
+    "subtitle": "Galmee Dhukkubstaaa bulchi",
+    "registerButton": "Dhukkubstaa Galmeessi",
     "search": {
-      "placeholder": "Maqaa, LakkID, bilbilaatiin maamiloota barbaadi..."
+      "placeholder": "Maqaa, LakkID, bilbilaatiin dhukkubsattoota barbaadi..."
     },
     "empty": {
-      "title": "Mamila hin argamne",
-      "subtitle": "Mamila jalqabaa keessan galmeessaa jalqabuuf"
+      "title": "Dhukkubstaa hin argamne",
+      "subtitle": "Dhukkubstaa jalqabaa keessan galmeessaa jalqabuuf"
     },
     "toast": {
-      "registerSuccess": "Maamila milkaa'inaan galmeessame!"
+      "registerSuccess": "Dhukkubstaa milkaa'inaan galmeessame!"
     }
   },
   "visits": {
     "title": "Daawwattoota",
-    "subtitle": "Daawwattoota maamilaa bulchi",
+    "subtitle": "Daawwattoota Dhukkubstaaa bulchi",
     "newVisitButton": "Daawwata Haaraa",
     "status": {
       "waiting": "Eeggataa Jira",
@@ -590,7 +591,7 @@
     }
   },
   "doctorQueue": {
-    "title": "Tarree Eeggataa Maamilaa",
+    "title": "Tarree Eeggataa Dhukkubstaaa",
     "backToQueue": "Gara Tarree Eeggataatti Deebi'i",
     "refreshQueue": "Tarree Eeggataa Haaromsi",
     "actions": {
@@ -604,12 +605,12 @@
       "inProgress": "Adeemsa Keessatti"
     },
     "empty": {
-      "title": "Mamila eeggataa hin jiru",
+      "title": "Dhukkubstaa eeggataa hin jiru",
       "subtitle": "Mamiloonni haaraan asitti mul'atu"
     },
     "rightPanel": {
-      "selectPatient": "Maamila Tokko Fili",
-      "selectPatientHint": "Gorsa eegaluuf maamila tarree keessaa tokko irratti \"Jalqabi\" cuqaasi"
+      "selectPatient": "Dhukkubstaa Tokko Fili",
+      "selectPatientHint": "Gorsa eegaluuf Dhukkubstaa tarree keessaa tokko irratti \"Jalqabi\" cuqaasi"
     },
     "tabs": {
       "consultation": "Gorsa",
@@ -620,7 +621,7 @@
     },
     "consultation": {
       "title": "Gorsa",
-      "patientInfo": "Odeeffannoo Maamilaa",
+      "patientInfo": "Odeeffannoo Dhukkubstaaa",
       "diagnosisTitle": "Dhukkuba Adda Baasuu",
       "noDiagnosis": "Ammas dhukkuba adda baasuun hin jiru",
       "ageGender": "Umurii / Saala",
@@ -631,17 +632,24 @@
       "completeConsultation": "Gorsa Xumuri",
       "printPrescription": "Qorichaa Maxxansi",
       "printNoPrescriptions": "Daawwannaa kanaaf qorichi maxxanfamu hin jiru",
-      "printError": "Qoricha maxxansuuf qopheessuun hin danda'amne"
+      "printError": "Qoricha maxxansuuf qopheessuun hin danda'amne",
+      "patientFileDrawer": "Faayilii Dhukkubsataa",
+      "saveStatus": {
+        "pending": "Jijjiirama hin kuufamne",
+        "saving": "Kuusaa jira...",
+        "saved": "Jijjiiramni hundi kuufameera",
+        "error": "Kuusuun hin danda'amne"
+      }
     },
     "queue": {
       "chiefComplaintPrefix": "KK:"
     },
     "queueStats": {
-      "patients": "mamiloota",
+      "patients": "Dhukkubsattoota",
       "inConsultation": "gorsa keessatti"
     },
     "toast": {
-      "consultationStarted": "Gorsa jalqabe — hamma kuusamutti mamila tarree keessatti hafa",
+      "consultationStarted": "Gorsa jalqabe — hamma kuusamutti Dhukkubstaa tarree keessatti hafa",
       "startError": "Gorsa jalqabuun milkaa'uu baate",
       "saveSuccess": "Ibsi gorsaa kuusame",
       "saveError": "Gorsa kuusuun milkaa'uu baate",
@@ -684,7 +692,7 @@
       "pending": "Eeggataa Jira"
     },
     "search": {
-      "placeholder": "Maqaa maamilaa, LakkID ykn qorichaatiin barbaadi..."
+      "placeholder": "Maqaa Dhukkubstaaa, LakkID ykn qorichaatiin barbaadi..."
     },
     "empty": {
       "search": "Ajandaa barbaacha keessan waliin walsimu hin argamne",
@@ -742,7 +750,7 @@
       "stat": "STAT"
     },
     "search": {
-      "placeholder": "Maqaa maamilaa, LakkID ykn qo'annootiin barbaadi..."
+      "placeholder": "Maqaa Dhukkubstaaa, LakkID ykn qo'annootiin barbaadi..."
     },
     "empty": {
       "search": "Qo'annoo barbaacha keessan waliin walsimu hin argamne",
@@ -788,9 +796,9 @@
     }
   },
   "patientDetail": {
-    "backToPatients": "Gara Mamilootaatti Deebi'i",
+    "backToPatients": "Gara Dhukkubsattootaatti Deebi'i",
     "newVisit": "Daawwata Haaraa",
-    "notFound": "Mamila hin argamne",
+    "notFound": "Dhukkubstaa hin argamne",
     "detail": {
       "email": "Imeeli",
       "address": "Teessoo",
@@ -809,15 +817,15 @@
       "empty": "Daawwata duraa hin jiru"
     },
     "toast": {
-      "loadError": "Ibsa maamilaa fe'uun milkaa'uu baate"
+      "loadError": "Ibsa Dhukkubstaaa fe'uun milkaa'uu baate"
     }
   },
   "patientForm": {
-    "updateSuccess": "Maamila milkaa'inaan fooyya'e",
-    "registerSuccess": "Maamila milkaa'inaan galmeessame",
-    "saveError": "Maamila kuusuun milkaa'uu baate",
-    "editTitle": "Maamila Gulaali",
-    "registerTitle": "Maamila Haaraa Galmeessi",
+    "updateSuccess": "Dhukkubstaa milkaa'inaan fooyya'e",
+    "registerSuccess": "Dhukkubstaa milkaa'inaan galmeessame",
+    "saveError": "Dhukkubstaa kuusuun milkaa'uu baate",
+    "editTitle": "Dhukkubstaa Gulaali",
+    "registerTitle": "Dhukkubstaa Haaraa Galmeessi",
     "personalInfoTitle": "Odeeffannoo Dhuunfaa",
     "firstNameLabel": "Maqaa Duraa *",
     "firstNameRequired": "Maqaan duraa barbaachisa",
@@ -835,6 +843,10 @@
     "genderOther": "Kan Biroo",
     "dobLabel": "Guyyaa Dhalootaa *",
     "dobRequired": "Guyyaan dhalootaa barbaachisa",
+    "ageLabel": "Umurii *",
+    "ageRequired": "Umuriin barbaachisaa dha",
+    "ageInvalid": "Umurii sirrii galchi",
+    "agePlaceholder": "Umurii waggaadhaan",
     "phoneLabel": "Lakkoofsa Bilbilaa *",
     "phoneRequired": "Lakkoofsi bilbilaa barbaachisa",
     "phonePlaceholder": "+251911234567",
@@ -853,8 +865,8 @@
     "emergencyContactPhoneLabel": "Bilbilaa Qunnamtii Hatattamaa",
     "emergencyContactPhonePlaceholder": "+251911234567",
     "saving": "Kuusaa jira...",
-    "updateButton": "Maamila Fooyyeessi",
-    "registerButton": "Maamila Galmeessi"
+    "updateButton": "Dhukkubstaa Fooyyeessi",
+    "registerButton": "Dhukkubstaa Galmeessi"
   },
   "patientCard": {
     "idPrefix": "LakkID: ",
@@ -1014,7 +1026,7 @@
       "stoolTest": "Qo'annoo Bobbaatii",
       "xray": "Raajii",
       "ultrasound": "Altraasaawundii",
-      "ctScan": "CT Scan",
+      "ctScan": "Sikaanii CT",
       "mri": "MRI",
       "ecg": "ECG (Elektirookaardiyoogiraamii)",
       "biopsy": "Baayopsii",
@@ -1022,9 +1034,22 @@
       "other": "Kan Biroo"
     }
   },
+  "followUpIndicator": {
+    "firstVisit": "Daawwannaa jalqabaa - seenaan yaalaa duraa hin jiru",
+    "scheduledFollowUp": "✓ Daawwannaa Hordoffii Sagantaa'e",
+    "returnVisit": "Daawwannaa Deebii",
+    "daysSinceLast": "Guyyaa {{days}} daawwannaa dhumaa irraa",
+    "lastVisit": "Daawwannaa Dhumaa:",
+    "followUpScheduled": "Hordoffiin Sagantaa'e:",
+    "previousDiagnosis": "Dhukkuba Adda Baasuu Duraanii:",
+    "previousTreatment": "Yaala Duraanii:",
+    "previousNotes": "Yaadannoo Duraanii:",
+    "viewFullHistory": "Seenaa Guutuu Ilaali"
+  },
+
   "patientHistory": {
     "loading": "Seenaa fe'aa jira...",
-    "fetchError": "Seenaa maamilaa fe'uun milkaa'uu baate",
+    "fetchError": "Seenaa Dhukkubstaaa fe'uun milkaa'uu baate",
     "empty": "Daawwata duraa hin argamne",
     "visitNumberPrefix": "Daawwata Lakk#",
     "diagnosisLabel": "Dhukkuba Adda Baasuu:",
@@ -1129,12 +1154,12 @@
     }
   },
   "visitForm": {
-    "fetchError": "Mamiloota fe'uun milkaa'uu baate",
+    "fetchError": "Dhukkubsattoota fe'uun milkaa'uu baate",
     "createError": "Daawwata uumuun milkaa'uu baate",
     "title": "Daawwata Haaraa Uumi",
-    "patientLabel": "Maamila *",
-    "patientRequired": "Maamila barbaachisa",
-    "patientPlaceholder": "Maamila fili",
+    "patientLabel": "Dhukkubstaa *",
+    "patientRequired": "Dhukkubstaa barbaachisa",
+    "patientPlaceholder": "Dhukkubstaa fili",
     "chiefComplaintLabel": "Komii Guddaa",
     "chiefComplaintPlaceholder": "Komii guddaa maamichaa ibsi...",
     "visitDateLabel": "Guyyaa Daawwataa",
@@ -1159,8 +1184,8 @@
     "title": "Bulchiinsa Kliinika",
     "doctors": "Doktaroota",
     "doctorsDesc": "Doktaroota as bulchi...",
-    "patients": "Mamiloota",
-    "patientsDesc": "Mamiloota as bulchi...",
+    "patients": "Dhukkubsattoota",
+    "patientsDesc": "Dhukkubsattoota as bulchi...",
     "appointments": "Beellamoota",
     "appointmentsDesc": "Beellamoota bulchi..."
   },
@@ -1356,6 +1381,62 @@
       "checkInError": "Dhukkubsataa seensisuun hin danda'amne",
       "cancelSuccess": "Beellamni haqameera",
       "cancelError": "Beellama haquun hin danda'amne"
+    }
+  },
+
+  "patientRecordSidebar": {
+    "title": "Kutaa Faayilii Dhukkubsataa",
+    "idPrefix": "ID:",
+    "cardPrefix": "Kaardii:",
+    "tabs": {
+      "recordData": "Ragaa Galmee",
+      "attachments": "Faayilota",
+      "visitHistory": "Seenaa Daawwannaa"
+    },
+    "clinicalInfoTitle": "Odeeffannoo Kliinikaa fi Demografii",
+    "viewMode": "Haala Ilaalchaa",
+    "editRecord": "Galmee Gulaali",
+    "firstNameLabel": "Maqaa",
+    "lastNameLabel": "Maqaa Abbaa",
+    "ageLabel": "Umurii",
+    "phoneLabel": "Lakkoofsa Bilbilaa",
+    "emailLabel": "Imeelii",
+    "allergiesLabel": "Allergy (comma'n adda baasi)",
+    "allergiesPlaceholder": "fkn. Penicillin, Peanuts",
+    "chronicLabel": "Dhukkuba Yeroo Dheeraa (comma'n adda baasi)",
+    "chronicPlaceholder": "fkn. Dhiibbaa Dhiigaa, Diabetes",
+    "maritalStatusLabel": "Haala Fuudhaa/Heerumaa",
+    "notApplicable": "Hin jiru",
+    "occupationLabel": "Hojii",
+    "addressLabel": "Ibsa Teessoo",
+    "saveButton": "Galmee Dhukkubsataa Olkaa'i",
+    "fullNameLabel": "Maqaa Guutuu",
+    "genderAgeLabel": "Saala fi Umurii",
+    "yearsOldSuffix": "waggaa",
+    "addressViewLabel": "Teessoo",
+    "allergiesPrefix": "Allergy:",
+    "chronicDiseasesPrefix": "Dhukkuba Yeroo Dheeraa:",
+    "uploadTitle": "Gabaasa Laaboratorii ykn Faayilii Ol Fe'i",
+    "uploadHint": "Faayilii suuraa (JPEG, PNG) ykn PDF hanga 5MB",
+    "uploadedFilesTitle": "Faayiloota Ol Fe'aman",
+    "noFilesUploaded": "Dhukkubsataa kanaaf faayiliin ol fe'ame hin jiru",
+    "uploadedOnPrefix": "Kan ol fe'ame",
+    "viewFileTitle": "Faayilii Ilaali",
+    "deleteFileTitle": "Faayilii Haqi",
+    "visitPrefix": "Daawwata #",
+    "chiefComplaintLabel": "Komii Ijoo",
+    "diagnosisLabel": "Dhukkuba Adda Baasuu",
+    "treatmentPlanLabel": "Karoora Yaalaa",
+    "noHistoryAvailable": "Seenaan daawwannaa duraa hin jiru",
+    "toast": {
+      "updateSuccess": "Galmeen dhukkubsataa haaromfameera",
+      "updateError": "Galmee haaromsuun hin danda'amne",
+      "uploadingFile": "Faayilii ol fe'aa jira...",
+      "fileAttached": "Faayiliin milkaa'inaan maxxanfameera",
+      "uploadFailed": "Faayilii ol fe'uun hin danda'amne",
+      "deleteFileConfirm": "Faayilii kana haquu keessan mirkaneessitanii?",
+      "fileDeleted": "Faayiliin haqameera",
+      "deleteFileFailed": "Faayilii haquun hin danda'amne"
     }
   }
 }

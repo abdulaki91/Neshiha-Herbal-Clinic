@@ -84,8 +84,10 @@ app.get("/health", (req, res) => {
 // API version
 const API_VERSION = process.env.API_VERSION || "v1";
 
-// Apply rate limiting to all API routes
-app.use(`/api/${API_VERSION}`, apiLimiter);
+// Rate limiting disabled for now — was causing 429s during normal use
+// (the doctor consultation view alone fires well over 100 requests per
+// 15-minute window). Re-enable by uncommenting once tuned appropriately.
+// app.use(`/api/${API_VERSION}`, apiLimiter);
 
 // Mount routes
 app.use(`/api/${API_VERSION}/auth`, authRoutes);

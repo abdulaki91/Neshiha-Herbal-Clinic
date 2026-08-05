@@ -211,7 +211,7 @@ const PharmacyPage = () => {
           </div>
 
           {/* Status Filter */}
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-2">
             {["paid", "dispensed", "completed", "pending"].map((status) => (
               <button
                 key={status}

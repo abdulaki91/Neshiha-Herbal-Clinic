@@ -120,6 +120,18 @@ const Visit = sequelize.define(
     followUpDate: {
       type: DataTypes.DATEONLY,
     },
+    // Set on an auto-created scheduled visit to point back at the
+    // consultation whose follow-up date generated it — lets us move or
+    // cancel that one appointment instead of piling up duplicates if the
+    // doctor changes the date later.
+    followUpFromVisitId: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: "visits",
+        key: "id",
+      },
+    },
     doctorNotes: {
       type: DataTypes.TEXT,
     },

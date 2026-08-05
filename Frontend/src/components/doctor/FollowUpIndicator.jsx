@@ -6,7 +6,7 @@ import axiosInstance from "../../lib/axios";
 /**
  * Component to show if current visit is a follow-up and display previous visit summary
  */
-const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
+const FollowUpIndicator = ({ patientId, currentVisitDate, onViewHistory }) => {
   const { t } = useTranslation();
   const [followUpInfo, setFollowUpInfo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -188,11 +188,7 @@ const FollowUpIndicator = ({ patientId, currentVisitDate }) => {
       {/* Action Buttons */}
       <div className="mt-3 pt-3 border-t border-current border-opacity-20 flex space-x-2">
         <button
-          onClick={() => {
-            // Navigate to full history
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            // Trigger history tab click (you'll need to pass this as a prop)
-          }}
+          onClick={onViewHistory}
           className={`text-xs font-medium px-3 py-1 rounded ${
             isScheduledFollowUp
               ? "bg-green-100 text-green-700 hover:bg-green-200"

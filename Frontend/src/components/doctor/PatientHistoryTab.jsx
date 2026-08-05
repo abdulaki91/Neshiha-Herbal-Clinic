@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 
 const PatientHistoryTab = ({ patientId }) => {
+  const { t } = useTranslation();
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -18,24 +20,25 @@ const PatientHistoryTab = ({ patientId }) => {
           status: "completed",
           sortBy: "visitDate",
           sortOrder: "DESC",
+          pageSize: 100,
         },
       });
-      setHistory(response.data.visits || []);
-    } catch (error) {
-      toast.error("Failed to fetch patient history");
+      setHistory(response.data?.data || response.data || []);
+    } catch {
+      toast.error(t("patientHistory.fetchError"));
     } finally {
       setLoading(false);
     }
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading history...</div>;
+    return <div className="text-center py-8">{t("patientHistory.loading")}</div>;
   }
 
   if (history.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500">
-        No previous visits found
+        {t("patientHistory.empty")}
       </div>
     );
   }
@@ -47,7 +50,7 @@ const PatientHistoryTab = ({ patientId }) => {
           <div className="flex items-center justify-between mb-3">
             <div>
               <p className="font-semibold text-gray-800">
-                Visit #{visit.visitNumber}
+                {t("patientHistory.visitNumberPrefix")}{visit.visitNumber}
               </p>
               <p className="text-sm text-gray-500">
                 {new Date(visit.visitDate).toLocaleDateString()} •{" "}
@@ -57,7 +60,9 @@ const PatientHistoryTab = ({ patientId }) => {
           </div>
           {visit.diagnosis && (
             <div className="mb-2">
-              <p className="text-sm font-medium text-gray-700">Diagnosis:</p>
+              <p className="text-sm font-medium text-gray-700">
+                {t("patientHistory.diagnosisLabel")}
+              </p>
               <p className="text-sm text-gray-600">
                 {Array.isArray(visit.diagnosis)
                   ? visit.diagnosis.join(", ")
@@ -67,7 +72,9 @@ const PatientHistoryTab = ({ patientId }) => {
           )}
           {visit.treatmentPlan && (
             <div>
-              <p className="text-sm font-medium text-gray-700">Treatment:</p>
+              <p className="text-sm font-medium text-gray-700">
+                {t("patientHistory.treatmentLabel")}
+              </p>
               <p className="text-sm text-gray-600">{visit.treatmentPlan}</p>
             </div>
           )}

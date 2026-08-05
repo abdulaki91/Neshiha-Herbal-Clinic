@@ -146,7 +146,6 @@ const CompletedConsultationsSidebar = ({ onSelectConsultation }) => {
                       <div className="patient-details">
                         <h4 className="patient-name">
                           {consultation.patient.firstName}{" "}
-                          {consultation.patient.middleName}{" "}
                           {consultation.patient.lastName}
                         </h4>
                         <span className="patient-id">
@@ -224,7 +223,7 @@ const CompletedConsultationsSidebar = ({ onSelectConsultation }) => {
                     <div className="patient-info-grid">
                       <div className="info-item">
                         <strong>Name:</strong> {patientHistory.firstName}{" "}
-                        {patientHistory.middleName} {patientHistory.lastName}
+                        {patientHistory.lastName}
                       </div>
                       <div className="info-item">
                         <strong>Patient ID:</strong> {patientHistory.patientId}
@@ -234,10 +233,6 @@ const CompletedConsultationsSidebar = ({ onSelectConsultation }) => {
                       </div>
                       <div className="info-item">
                         <strong>Gender:</strong> {patientHistory.gender}
-                      </div>
-                      <div className="info-item">
-                        <strong>Blood Group:</strong>{" "}
-                        {patientHistory.bloodGroup || "N/A"}
                       </div>
                       <div className="info-item">
                         <strong>Phone:</strong> {patientHistory.phone}

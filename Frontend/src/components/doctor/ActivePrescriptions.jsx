@@ -7,6 +7,7 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
+import { translateDosage, translateFrequency, translateRoute } from "../../lib/prescriptionLabels";
 
 /**
  * Component to display active/recent prescriptions for a patient
@@ -118,7 +119,7 @@ const ActivePrescriptions = ({ patientId }) => {
     return (
       <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
         <FiPackage className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-        <p className="text-sm text-gray-600">{t("prescriptions.noActive")}</p>
+        <p className="text-sm text-gray-600">{t("activePrescriptions.empty")}</p>
       </div>
     );
   }
@@ -128,7 +129,7 @@ const ActivePrescriptions = ({ patientId }) => {
       <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
         <h4 className="font-semibold text-gray-800 flex items-center space-x-2">
           <FiPackage className="w-5 h-5" />
-          <span>{t("prescriptions.recentTitle")}</span>
+          <span>{t("activePrescriptions.title")}</span>
         </h4>
       </div>
 
@@ -149,26 +150,27 @@ const ActivePrescriptions = ({ patientId }) => {
                   <div className="flex items-center space-x-2 mb-1">
                     <h5 className="font-semibold text-gray-800">
                       {prescription.medicine?.name ||
-                        t("prescriptions.medicine")}
+                        t("prescription.medicineFallback")}
                     </h5>
                     <span
                       className={`inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(prescription.status)}`}
                     >
                       {getStatusIcon(prescription.status)}
                       <span className="capitalize">
-                        {t(`prescriptions.status.${prescription.status}`)}
+                        {t(`prescription.status.${prescription.status}`)}
                       </span>
                     </span>
                   </div>
                   <p className="text-sm text-gray-600">
-                    {prescription.dosage} • {prescription.frequency} •{" "}
-                    {prescription.route}
+                    {translateDosage(t, prescription.dosage)} •{" "}
+                    {translateFrequency(t, prescription.frequency)} •{" "}
+                    {translateRoute(t, prescription.route)}
                   </p>
                 </div>
 
                 <div className="text-right text-sm">
                   <p className="text-gray-500">
-                    {t("prescriptions.prescribed")}{" "}
+                    {t("activePrescriptions.prescribedPrefix")}{" "}
                     {new Date(prescription.prescribedDate).toLocaleDateString(
                       "en-US",
                       {
@@ -188,10 +190,10 @@ const ActivePrescriptions = ({ patientId }) => {
                       }`}
                     >
                       {daysRemaining > 0
-                        ? t("prescriptions.daysLeft", { days: daysRemaining })
+                        ? `${daysRemaining} ${t("activePrescriptions.daysLeft")}`
                         : daysRemaining === 0
-                          ? t("prescriptions.endsToday")
-                          : t("prescriptions.expired")}
+                          ? t("activePrescriptions.endsToday")
+                          : t("activePrescriptions.expired")}
                     </p>
                   )}
                 </div>
@@ -200,7 +202,7 @@ const ActivePrescriptions = ({ patientId }) => {
               {prescription.duration && (
                 <div className="text-xs text-gray-600 mb-1">
                   <span className="font-medium">
-                    {t("prescriptions.duration")}
+                    {t("activePrescriptions.durationLabel")}
                   </span>{" "}
                   {prescription.duration}
                 </div>
@@ -209,7 +211,7 @@ const ActivePrescriptions = ({ patientId }) => {
               {prescription.instructions && (
                 <div className="text-xs text-gray-600 mb-1">
                   <span className="font-medium">
-                    {t("prescriptions.instructions")}
+                    {t("activePrescriptions.instructionsLabel")}
                   </span>{" "}
                   {prescription.instructions}
                 </div>
@@ -218,7 +220,7 @@ const ActivePrescriptions = ({ patientId }) => {
               {prescription.reason && (
                 <div className="text-xs text-gray-600">
                   <span className="font-medium">
-                    {t("prescriptions.reason")}
+                    {t("activePrescriptions.reasonLabel")}
                   </span>{" "}
                   {prescription.reason}
                 </div>
@@ -230,14 +232,14 @@ const ActivePrescriptions = ({ patientId }) => {
                 daysRemaining > 0 && (
                   <div className="mt-2 p-2 bg-orange-50 border border-orange-200 rounded text-xs text-orange-800">
                     <FiAlertCircle className="inline w-3 h-3 mr-1" />
-                    {t("prescriptions.endingSoon")}
+                    {t("activePrescriptions.endingSoonAlert")}
                   </div>
                 )}
 
               {daysRemaining !== null && daysRemaining < 0 && (
                 <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-800">
                   <FiAlertCircle className="inline w-3 h-3 mr-1" />
-                  {t("prescriptions.periodEnded")}
+                  {t("activePrescriptions.endedAlert")}
                 </div>
               )}
             </div>

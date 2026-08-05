@@ -39,20 +39,16 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
   // Local form states for editing demographics
   const [formData, setFormData] = useState({
     firstName: "",
-    middleName: "",
     lastName: "",
     gender: "",
-    dateOfBirth: "",
+    age: "",
     phone: "",
     email: "",
     address: "",
-    bloodGroup: "",
     maritalStatus: "",
     occupation: "",
     knownAllergies: "",
     chronicDiseases: "",
-    emergencyContactName: "",
-    emergencyContactPhone: "",
   });
 
   // Load patient data into edit form
@@ -60,14 +56,12 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
     if (patient) {
       setFormData({
         firstName: patient.firstName || "",
-        middleName: patient.middleName || "",
         lastName: patient.lastName || "",
         gender: patient.gender || "",
-        dateOfBirth: patient.dateOfBirth ? patient.dateOfBirth.split("T")[0] : "",
+        age: patient.age ?? "",
         phone: patient.phone || "",
         email: patient.email || "",
         address: patient.address || "",
-        bloodGroup: patient.bloodGroup || "",
         maritalStatus: patient.maritalStatus || "",
         occupation: patient.occupation || "",
         knownAllergies: Array.isArray(patient.knownAllergies)
@@ -76,8 +70,6 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
         chronicDiseases: Array.isArray(patient.chronicDiseases)
           ? patient.chronicDiseases.join(", ")
           : patient.chronicDiseases || "",
-        emergencyContactName: patient.emergencyContactName || "",
-        emergencyContactPhone: patient.emergencyContactPhone || "",
       });
     }
   }, [patient, isOpen]);
@@ -105,11 +97,13 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
         chronicDiseases: processedDiseases,
       });
 
-      toast.success("Patient record updated successfully");
+      toast.success(t("patientRecordSidebar.toast.updateSuccess"));
       setIsEditing(false);
       refetchPatient();
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to update record");
+      toast.error(
+        err.response?.data?.message || t("patientRecordSidebar.toast.updateError"),
+      );
     }
   };
 
@@ -131,9 +125,9 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
       });
 
       await toast.promise(uploadPromise, {
-        loading: "Uploading file...",
-        success: "File attached successfully",
-        error: "Failed to upload file",
+        loading: t("patientRecordSidebar.toast.uploadingFile"),
+        success: t("patientRecordSidebar.toast.fileAttached"),
+        error: t("patientRecordSidebar.toast.uploadFailed"),
       });
 
       refetchAttachments();
@@ -145,18 +139,18 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
 
   // Handle File Deletion
   const handleDeleteFile = async (attachmentId) => {
-    if (!window.confirm("Are you sure you want to delete this file?")) return;
+    if (!window.confirm(t("patientRecordSidebar.toast.deleteFileConfirm"))) return;
 
     try {
       await deleteAttachment.mutateAsync({
         id: patientId,
         attachmentId,
       });
-      toast.success("File deleted successfully");
+      toast.success(t("patientRecordSidebar.toast.fileDeleted"));
       refetchAttachments();
       refetchHistory();
-    } catch (err) {
-      toast.error("Failed to delete file");
+    } catch {
+      toast.error(t("patientRecordSidebar.toast.deleteFileFailed"));
     }
   };
 
@@ -169,16 +163,17 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
       />
 
       {/* Drawer Container */}
-      <div className="fixed inset-y-0 right-0 z-50 w-[480px] bg-slate-50 shadow-2xl flex flex-col h-full border-l border-slate-200">
+      <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-[480px] max-w-full bg-slate-50 shadow-2xl flex flex-col h-full border-l border-slate-200">
         {/* Header */}
         <div className="bg-gradient-to-r from-emerald-700 to-teal-700 p-5 text-white flex-shrink-0 flex items-center justify-between shadow-md">
           <div>
             <h2 className="text-xl font-bold flex items-center gap-2">
               <FiUser className="w-5 h-5" />
-              <span>Patient File Drawer</span>
+              <span>{t("patientRecordSidebar.title")}</span>
             </h2>
             <p className="text-xs text-emerald-100 mt-1">
-              ID: {patient.patientId} · Card: {patient.cardNumber}
+              {t("patientRecordSidebar.idPrefix")} {patient.patientId} ·{" "}
+              {t("patientRecordSidebar.cardPrefix")} {patient.cardNumber}
             </p>
           </div>
           <button
@@ -192,9 +187,12 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
         {/* Tab Buttons */}
         <div className="bg-white border-b border-slate-200 flex-shrink-0 px-4 py-2 flex space-x-1">
           {[
-            { key: "demographics", label: "Record Data" },
-            { key: "files", label: `Attachments (${attachments.length})` },
-            { key: "history", label: "Visit History" },
+            { key: "demographics", label: t("patientRecordSidebar.tabs.recordData") },
+            {
+              key: "files",
+              label: `${t("patientRecordSidebar.tabs.attachments")} (${attachments.length})`,
+            },
+            { key: "history", label: t("patientRecordSidebar.tabs.visitHistory") },
           ].map((tab) => (
             <button
               key={tab.key}
@@ -217,7 +215,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
             <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
               <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
                 <h3 className="font-bold text-slate-800 text-sm">
-                  Clinical & Demographics Info
+                  {t("patientRecordSidebar.clinicalInfoTitle")}
                 </h3>
                 <button
                   type="button"
@@ -225,16 +223,20 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                   className="flex items-center gap-1 text-xs font-medium text-emerald-600 hover:text-emerald-700 transition"
                 >
                   <FiEdit2 className="w-3.5 h-3.5" />
-                  <span>{isEditing ? "View Mode" : "Edit Record"}</span>
+                  <span>
+                    {isEditing
+                      ? t("patientRecordSidebar.viewMode")
+                      : t("patientRecordSidebar.editRecord")}
+                  </span>
                 </button>
               </div>
 
               {isEditing ? (
                 <form onSubmit={handleSave} className="space-y-4 text-xs">
                   {/* Name section */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     <div>
-                      <label className="block font-medium text-slate-700 mb-1">First Name</label>
+                      <label className="block font-medium text-slate-700 mb-1">{t("patientRecordSidebar.firstNameLabel")}</label>
                       <input
                         type="text"
                         value={formData.firstName}
@@ -244,20 +246,23 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                       />
                     </div>
                     <div>
-                      <label className="block font-medium text-slate-700 mb-1">Middle Name</label>
-                      <input
-                        type="text"
-                        value={formData.middleName}
-                        onChange={(e) => setFormData({ ...formData, middleName: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-medium text-slate-700 mb-1">Last Name</label>
+                      <label className="block font-medium text-slate-700 mb-1">{t("patientRecordSidebar.lastNameLabel")}</label>
                       <input
                         type="text"
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-medium text-slate-700 mb-1">{t("patientRecordSidebar.ageLabel")}</label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="150"
+                        value={formData.age}
+                        onChange={(e) => setFormData({ ...formData, age: e.target.value })}
                         className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
                         required
                       />
@@ -267,7 +272,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                   {/* Phone / Email */}
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block font-medium text-slate-700 mb-1">Phone Number</label>
+                      <label className="block font-medium text-slate-700 mb-1">{t("patientRecordSidebar.phoneLabel")}</label>
                       <input
                         type="text"
                         value={formData.phone}
@@ -277,7 +282,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                       />
                     </div>
                     <div>
-                      <label className="block font-medium text-slate-700 mb-1">Email Address</label>
+                      <label className="block font-medium text-slate-700 mb-1">{t("patientRecordSidebar.emailLabel")}</label>
                       <input
                         type="email"
                         value={formData.email}
@@ -289,57 +294,44 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
 
                   {/* Allergies / Chronic */}
                   <div>
-                    <label className="block font-medium text-red-700 mb-1">Allergies (comma separated)</label>
+                    <label className="block font-medium text-red-700 mb-1">{t("patientRecordSidebar.allergiesLabel")}</label>
                     <input
                       type="text"
                       value={formData.knownAllergies}
                       onChange={(e) => setFormData({ ...formData, knownAllergies: e.target.value })}
-                      placeholder="e.g. Penicillin, Peanuts"
+                      placeholder={t("patientRecordSidebar.allergiesPlaceholder")}
                       className="w-full px-2.5 py-1.5 border border-red-200 rounded focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none bg-red-50/20"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-medium text-red-700 mb-1">Chronic Conditions (comma separated)</label>
+                    <label className="block font-medium text-red-700 mb-1">{t("patientRecordSidebar.chronicLabel")}</label>
                     <input
                       type="text"
                       value={formData.chronicDiseases}
                       onChange={(e) => setFormData({ ...formData, chronicDiseases: e.target.value })}
-                      placeholder="e.g. Hypertension, Diabetes"
+                      placeholder={t("patientRecordSidebar.chronicPlaceholder")}
                       className="w-full px-2.5 py-1.5 border border-red-200 rounded focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none bg-red-50/20"
                     />
                   </div>
 
                   {/* Demographics details */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block font-medium text-slate-700 mb-1">Blood Group</label>
-                      <select
-                        value={formData.bloodGroup}
-                        onChange={(e) => setFormData({ ...formData, bloodGroup: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded outline-none"
-                      >
-                        <option value="">N/A</option>
-                        {["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"].map(g => (
-                          <option key={g} value={g}>{g}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block font-medium text-slate-700 mb-1">Marital Status</label>
+                      <label className="block font-medium text-slate-700 mb-1">{t("patientRecordSidebar.maritalStatusLabel")}</label>
                       <select
                         value={formData.maritalStatus}
                         onChange={(e) => setFormData({ ...formData, maritalStatus: e.target.value })}
                         className="w-full px-2.5 py-1.5 border border-slate-300 rounded outline-none font-medium capitalize"
                       >
-                        <option value="">N/A</option>
+                        <option value="">{t("patientRecordSidebar.notApplicable")}</option>
                         {["single", "married", "divorced", "widowed"].map(s => (
                           <option key={s} value={s}>{s}</option>
                         ))}
                       </select>
                     </div>
                     <div>
-                      <label className="block font-medium text-slate-700 mb-1">Occupation</label>
+                      <label className="block font-medium text-slate-700 mb-1">{t("patientRecordSidebar.occupationLabel")}</label>
                       <input
                         type="text"
                         value={formData.occupation}
@@ -351,7 +343,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
 
                   {/* Address */}
                   <div>
-                    <label className="block font-medium text-slate-700 mb-1">Address Detail</label>
+                    <label className="block font-medium text-slate-700 mb-1">{t("patientRecordSidebar.addressLabel")}</label>
                     <textarea
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
@@ -360,36 +352,13 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                     />
                   </div>
 
-                  {/* Emergency Contact */}
-                  <div className="bg-slate-50 p-2.5 rounded border border-slate-150 grid grid-cols-2 gap-2 mt-2">
-                    <span className="col-span-2 text-xs font-bold text-slate-700">Emergency Contact</span>
-                    <div>
-                      <label className="block font-medium text-slate-700 mb-1">Contact Name</label>
-                      <input
-                        type="text"
-                        value={formData.emergencyContactName}
-                        onChange={(e) => setFormData({ ...formData, emergencyContactName: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-medium text-slate-700 mb-1">Contact Phone</label>
-                      <input
-                        type="text"
-                        value={formData.emergencyContactPhone}
-                        onChange={(e) => setFormData({ ...formData, emergencyContactPhone: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded outline-none"
-                      />
-                    </div>
-                  </div>
-
                   {/* Save button */}
                   <button
                     type="submit"
                     className="w-full mt-4 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded shadow-md hover:from-emerald-700 hover:to-teal-700 transition"
                   >
                     <FiSave className="w-4 h-4" />
-                    <span>Save Patient Record</span>
+                    <span>{t("patientRecordSidebar.saveButton")}</span>
                   </button>
                 </form>
               ) : (
@@ -397,40 +366,36 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                   {/* View Details Grid */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-slate-400 font-medium">Full Name</p>
+                      <p className="text-slate-400 font-medium">{t("patientRecordSidebar.fullNameLabel")}</p>
                       <p className="text-sm font-semibold text-slate-800">
-                        {patient.firstName} {patient.middleName} {patient.lastName}
+                        {patient.firstName} {patient.lastName}
                       </p>
                     </div>
                     <div>
-                      <p className="text-slate-400 font-medium">Gender & Age</p>
+                      <p className="text-slate-400 font-medium">{t("patientRecordSidebar.genderAgeLabel")}</p>
                       <p className="text-sm font-semibold text-slate-800 capitalize">
-                        {patient.gender} · {patient.age} years old
+                        {patient.gender} · {patient.age} {t("patientRecordSidebar.yearsOldSuffix")}
                       </p>
                     </div>
                     <div>
-                      <p className="text-slate-400 font-medium">Phone Number</p>
+                      <p className="text-slate-400 font-medium">{t("patientRecordSidebar.phoneLabel")}</p>
                       <p className="text-sm font-semibold text-slate-800">{patient.phone}</p>
                     </div>
                     <div>
-                      <p className="text-slate-400 font-medium">Email Address</p>
-                      <p className="text-sm font-semibold text-slate-800">{patient.email || "N/A"}</p>
+                      <p className="text-slate-400 font-medium">{t("patientRecordSidebar.emailLabel")}</p>
+                      <p className="text-sm font-semibold text-slate-800">{patient.email || t("patientRecordSidebar.notApplicable")}</p>
                     </div>
                     <div>
-                      <p className="text-slate-400 font-medium">Blood Group</p>
-                      <p className="text-sm font-semibold text-slate-800">{patient.bloodGroup || "N/A"}</p>
+                      <p className="text-slate-400 font-medium">{t("patientRecordSidebar.maritalStatusLabel")}</p>
+                      <p className="text-sm font-semibold text-slate-800 capitalize">{patient.maritalStatus || t("patientRecordSidebar.notApplicable")}</p>
                     </div>
                     <div>
-                      <p className="text-slate-400 font-medium">Marital Status</p>
-                      <p className="text-sm font-semibold text-slate-800 capitalize">{patient.maritalStatus || "N/A"}</p>
+                      <p className="text-slate-400 font-medium">{t("patientRecordSidebar.occupationLabel")}</p>
+                      <p className="text-sm font-semibold text-slate-800">{patient.occupation || t("patientRecordSidebar.notApplicable")}</p>
                     </div>
                     <div>
-                      <p className="text-slate-400 font-medium">Occupation</p>
-                      <p className="text-sm font-semibold text-slate-800">{patient.occupation || "N/A"}</p>
-                    </div>
-                    <div>
-                      <p className="text-slate-400 font-medium">Address</p>
-                      <p className="text-sm font-semibold text-slate-800">{patient.address || "N/A"}</p>
+                      <p className="text-slate-400 font-medium">{t("patientRecordSidebar.addressViewLabel")}</p>
+                      <p className="text-sm font-semibold text-slate-800">{patient.address || t("patientRecordSidebar.notApplicable")}</p>
                     </div>
                   </div>
 
@@ -439,7 +404,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                     <div className="p-3.5 bg-red-50 border border-red-200 rounded-lg space-y-2 mt-4">
                       {patient.knownAllergies?.length > 0 && (
                         <div>
-                          <span className="font-bold text-red-800">Allergies: </span>
+                          <span className="font-bold text-red-800">{t("patientRecordSidebar.allergiesPrefix")} </span>
                           <span className="text-red-700">
                             {Array.isArray(patient.knownAllergies)
                               ? patient.knownAllergies.join(", ")
@@ -449,7 +414,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                       )}
                       {patient.chronicDiseases?.length > 0 && (
                         <div>
-                          <span className="font-bold text-red-800">Chronic Diseases: </span>
+                          <span className="font-bold text-red-800">{t("patientRecordSidebar.chronicDiseasesPrefix")} </span>
                           <span className="text-red-700">
                             {Array.isArray(patient.chronicDiseases)
                               ? patient.chronicDiseases.join(", ")
@@ -459,21 +424,6 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                       )}
                     </div>
                   )}
-
-                  {/* Emergency Contact */}
-                  <div className="bg-slate-50 border border-slate-200 p-3 rounded-lg mt-4">
-                    <p className="font-bold text-slate-700 mb-2">Emergency Contact</p>
-                    <div className="grid grid-cols-2 gap-2 text-slate-600">
-                      <div>
-                        <p className="text-[10px] text-slate-400">Name</p>
-                        <p className="font-semibold">{patient.emergencyContactName || "N/A"}</p>
-                      </div>
-                      <div>
-                        <p className="text-[10px] text-slate-400">Phone</p>
-                        <p className="font-semibold">{patient.emergencyContactPhone || "N/A"}</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               )}
             </div>
@@ -486,10 +436,10 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
               <div className="bg-white rounded-xl border-2 border-dashed border-slate-350 p-6 text-center hover:border-emerald-500 transition duration-150 relative">
                 <FiUploadCloud className="w-10 h-10 text-slate-400 mx-auto mb-2" />
                 <p className="text-xs font-bold text-slate-700 mb-1">
-                  Upload Lab Reports or Files
+                  {t("patientRecordSidebar.uploadTitle")}
                 </p>
                 <p className="text-[10px] text-slate-400 mb-3">
-                  Allows image files (JPEG, PNG) or PDFs up to 5MB
+                  {t("patientRecordSidebar.uploadHint")}
                 </p>
                 <input
                   type="file"
@@ -501,13 +451,13 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
               {/* Attachments List */}
               <div className="bg-white rounded-xl border border-slate-200 overflow-hidden divide-y divide-slate-100 shadow-sm">
                 <div className="bg-slate-50 px-4 py-2 border-b border-slate-150">
-                  <h4 className="text-xs font-bold text-slate-700">Uploaded Files</h4>
+                  <h4 className="text-xs font-bold text-slate-700">{t("patientRecordSidebar.uploadedFilesTitle")}</h4>
                 </div>
 
                 {attachments.length === 0 ? (
                   <div className="p-8 text-center text-slate-400 text-xs">
                     <FiFileText className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                    <span>No files uploaded yet for this patient</span>
+                    <span>{t("patientRecordSidebar.noFilesUploaded")}</span>
                   </div>
                 ) : (
                   attachments.map((file) => {
@@ -535,7 +485,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                             {file.fileName}
                           </p>
                           <p className="text-[10px] text-slate-400 mt-0.5">
-                            Uploaded on {new Date(file.createdAt).toLocaleDateString()}
+                            {t("patientRecordSidebar.uploadedOnPrefix")} {new Date(file.createdAt).toLocaleDateString()}
                           </p>
                         </div>
 
@@ -546,14 +496,14 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-slate-100 rounded transition"
-                            title="View File"
+                            title={t("patientRecordSidebar.viewFileTitle")}
                           >
                             <FiEye className="w-4 h-4" />
                           </a>
                           <button
                             onClick={() => handleDeleteFile(file.id)}
                             className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-slate-100 rounded transition"
-                            title="Delete File"
+                            title={t("patientRecordSidebar.deleteFileTitle")}
                           >
                             <FiTrash2 className="w-4 h-4" />
                           </button>
@@ -587,12 +537,12 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                     >
                       <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                         <div>
-                          <p className="font-bold text-slate-800">Visit #{visit.visitNumber}</p>
+                          <p className="font-bold text-slate-800">{t("patientRecordSidebar.visitPrefix")}{visit.visitNumber}</p>
                           <p className="text-[10px] text-slate-400 mt-0.5 flex items-center gap-1">
                             <FiCalendar className="w-3.5 h-3.5" />
                             <span>{new Date(visit.visitDate).toLocaleDateString()}</span>
                             {visit.doctor && (
-                              <span>Dr. {visit.doctor.firstName} {visit.doctor.lastName}</span>
+                              <span>{t("common.doctorPrefix")} {visit.doctor.firstName} {visit.doctor.lastName}</span>
                             )}
                           </p>
                         </div>
@@ -603,14 +553,17 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                               : "bg-blue-100 text-blue-800"
                           }`}
                         >
-                          {visit.status.replace("_", " ")}
+                          {t(
+                            `visits.status.${visit.status.replace(/_([a-z])/g, (_, c) => c.toUpperCase())}`,
+                            { defaultValue: visit.status.replace("_", " ") },
+                          )}
                         </span>
                       </div>
 
                       {/* Complaint */}
                       {visit.chiefComplaint && (
                         <div>
-                          <p className="text-[10px] text-slate-400 font-semibold uppercase">Chief Complaint</p>
+                          <p className="text-[10px] text-slate-400 font-semibold uppercase">{t("patientRecordSidebar.chiefComplaintLabel")}</p>
                           <p className="text-slate-700 mt-0.5">{visit.chiefComplaint}</p>
                         </div>
                       )}
@@ -618,7 +571,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                       {/* Diagnosis */}
                       {diagnosisList.length > 0 && (
                         <div>
-                          <p className="text-[10px] text-slate-400 font-semibold uppercase">Diagnosis</p>
+                          <p className="text-[10px] text-slate-400 font-semibold uppercase">{t("patientRecordSidebar.diagnosisLabel")}</p>
                           <div className="flex flex-wrap gap-1 mt-1">
                             {diagnosisList.map((d, idx) => (
                               <span
@@ -635,7 +588,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                       {/* Treatment */}
                       {visit.treatmentPlan && (
                         <div>
-                          <p className="text-[10px] text-slate-400 font-semibold uppercase">Treatment Plan</p>
+                          <p className="text-[10px] text-slate-400 font-semibold uppercase">{t("patientRecordSidebar.treatmentPlanLabel")}</p>
                           <p className="text-slate-700 mt-0.5">{visit.treatmentPlan}</p>
                         </div>
                       )}
@@ -645,7 +598,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
               ) : (
                 <div className="bg-white rounded-xl border border-slate-200 p-8 text-center text-slate-400 text-xs">
                   <FiClock className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                  <span>No previous visit history available</span>
+                  <span>{t("patientRecordSidebar.noHistoryAvailable")}</span>
                 </div>
               )}
             </div>

@@ -22,6 +22,7 @@ const DashboardPage = () => {
     const invalidate = () => qc.invalidateQueries({ queryKey: ["dashboard"] });
 
     const attach = () => {
+      socket.on("visit:created", invalidate);
       socket.on("visit:status-changed", invalidate);
       socket.on("queue:updated", invalidate);
       socket.on("patient:registered", invalidate);
@@ -30,6 +31,7 @@ const DashboardPage = () => {
     };
 
     const detach = () => {
+      socket.off("visit:created", invalidate);
       socket.off("visit:status-changed", invalidate);
       socket.off("queue:updated", invalidate);
       socket.off("patient:registered", invalidate);

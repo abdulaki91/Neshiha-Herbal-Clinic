@@ -114,7 +114,7 @@ const MyPatientsPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 text-lg">
-                      {patient.firstName} {patient.middleName && `${patient.middleName} `}{patient.lastName}
+                      {patient.firstName} {patient.lastName}
                     </h3>
                     <p className="text-sm text-gray-500">
                       #{patient.patientId}

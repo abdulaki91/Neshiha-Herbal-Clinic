@@ -13,7 +13,6 @@ import {
   FiCheckCircle,
   FiX,
   FiPlus,
-  FiSave,
   FiChevronLeft,
   FiChevronRight,
   FiUsers,
@@ -32,6 +31,46 @@ import ConsultationTab from "../../components/doctor/ConsultationTab";
 import PatientHistoryTab from "../../components/doctor/PatientHistoryTab";
 import PatientRecordSidebar from "../../components/doctor/PatientRecordSidebar";
 import PrintablePrescriptionSlip from "../../components/doctor/PrintablePrescriptionSlip";
+
+const emptyConsultationData = () => ({
+  chiefComplaint: "",
+  symptoms: [],
+  historyOfPresentIllness: "",
+  pastHistory: "",
+  physicalExamination: "",
+  diagnosis: [],
+  treatmentPlan: "",
+  doctorNotes: "",
+  followUpDate: "",
+});
+
+// Symptoms/diagnosis come back from the API as JSON-encoded strings (or
+// null for a fresh visit) — parse them into the arrays the form works with.
+const parseJsonArray = (value) => {
+  if (Array.isArray(value)) return value;
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
+// Resuming a consultation (or opening one a data clerk already took intake
+// notes on) should show what's already there, not a blank form — otherwise
+// autosave feels like it silently lost everything the doctor typed earlier.
+const hydrateConsultationData = (visit) => ({
+  chiefComplaint: visit?.chiefComplaint || "",
+  symptoms: parseJsonArray(visit?.symptoms),
+  historyOfPresentIllness: visit?.historyOfPresentIllness || "",
+  pastHistory: visit?.pastHistory || "",
+  physicalExamination: visit?.physicalExamination || "",
+  diagnosis: parseJsonArray(visit?.diagnosis),
+  treatmentPlan: visit?.treatmentPlan || "",
+  doctorNotes: visit?.doctorNotes || "",
+  followUpDate: visit?.followUpDate || "",
+});
 
 const addPatientToRecent = (patient) => {
   if (!patient) return;
@@ -60,19 +99,15 @@ const DoctorQueuePage = () => {
   const [activeTab, setActiveTab] = useState("consultation");
   const [showMobileConsultation, setShowMobileConsultation] = useState(false);
   const [isRecordSidebarOpen, setIsRecordSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.innerWidth < 1024,
+  );
 
   // Consultation data
-  const [consultationData, setConsultationData] = useState({
-    chiefComplaint: "",
-    symptoms: [],
-    historyOfPresentIllness: "",
-    pastHistory: "",
-    physicalExamination: "",
-    diagnosis: [],
-    treatmentPlan: "",
-    doctorNotes: "",
-    followUpDate: "",
-  });
+  const [consultationData, setConsultationData] = useState(emptyConsultationData());
+  const [saveStatus, setSaveStatus] = useState("idle"); // idle | saving | saved | error
+  const autosaveTimer = useRef(null);
+  const skipNextAutosave = useRef(false);
 
   const qc = useQueryClient();
   const { user } = useAuthStore();
@@ -94,6 +129,15 @@ const DoctorQueuePage = () => {
   useEffect(() => {
     if (printPayload) handlePrint();
   }, [printPayload, handlePrint]);
+
+  // Keep the mobile/desktop layout in sync with the viewport — a plain
+  // one-off window.innerWidth check wouldn't react to resizing the browser
+  // or rotating a tablet while the page is already open.
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handlePrintPrescription = async (visit) => {
     if (!visit) return;
@@ -139,14 +183,29 @@ const DoctorQueuePage = () => {
     }
   }, [queue, searchParams]);
 
+  const clearAutosaveTimer = () => {
+    if (autosaveTimer.current) {
+      clearTimeout(autosaveTimer.current);
+      autosaveTimer.current = null;
+    }
+  };
+
   const handleStartConsultation = async (visit) => {
     // Save patient to recent list
     if (visit.patient) {
       addPatientToRecent(visit.patient);
     }
 
+    clearAutosaveTimer();
+    // Loading a visit's own already-saved fields into the form is itself a
+    // consultationData change — without this flag it would immediately
+    // "autosave" the visit's own data back onto itself.
+    skipNextAutosave.current = true;
+    setSaveStatus("idle");
+
     if (visit.status === "in_consultation") {
       setSelectedVisit(visit);
+      setConsultationData(hydrateConsultationData(visit));
       setShowMobileConsultation(true);
       return;
     }
@@ -160,36 +219,58 @@ const DoctorQueuePage = () => {
       });
 
       setSelectedVisit(visit);
+      setConsultationData(hydrateConsultationData(visit));
       setShowMobileConsultation(true);
-      toast.success(
-        "Consultation started — patient stays in queue until saved",
-      );
       refreshQueue();
     } catch {
-      toast.error("Failed to start consultation");
+      toast.error(t("doctorQueue.toast.startError"));
     }
   };
 
-  const handleSaveConsultation = async () => {
-    if (!selectedVisit) return;
-
+  // The autosave engine: fires ~1.2s after the doctor stops typing (see the
+  // debounce effect below), and once more immediately before navigating
+  // away so the last few keystrokes are never left unsaved.
+  const saveConsultationProgress = async (visitId, data) => {
+    setSaveStatus("saving");
     try {
-      await axiosInstance.put(`/visits/${selectedVisit.id}`, {
-        ...consultationData,
-        consultationEndTime: new Date().toLocaleTimeString("en-GB", {
-          hour12: false,
-        }),
-      });
-
-      toast.success("Consultation details saved");
+      await axiosInstance.put(`/visits/${visitId}`, data);
+      setSaveStatus("saved");
       refreshQueue();
+      return true;
     } catch {
-      toast.error("Failed to save consultation");
+      setSaveStatus("error");
+      toast.error(t("doctorQueue.toast.saveError"));
+      return false;
     }
   };
+
+  // Debounced autosave — waits for a pause in typing before persisting,
+  // so every keystroke doesn't fire its own request.
+  useEffect(() => {
+    if (!selectedVisit) return;
+    if (skipNextAutosave.current) {
+      skipNextAutosave.current = false;
+      return;
+    }
+
+    setSaveStatus("pending");
+    clearAutosaveTimer();
+    autosaveTimer.current = setTimeout(() => {
+      saveConsultationProgress(selectedVisit.id, consultationData);
+    }, 1200);
+
+    return clearAutosaveTimer;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [consultationData]);
 
   const handleCompleteConsultation = async () => {
     if (!selectedVisit) return;
+
+    clearAutosaveTimer();
+    // Flush any pending edit immediately so nothing typed in the last
+    // second is lost, then finalize with the status change in one save.
+    const saved = await saveConsultationProgress(selectedVisit.id, consultationData);
+    if (!saved) return;
 
     try {
       const prescriptionsResponse = await axiosInstance.get("/prescriptions", {
@@ -204,52 +285,34 @@ const DoctorQueuePage = () => {
         : "completed";
 
       await axiosInstance.put(`/visits/${selectedVisit.id}`, {
-        ...consultationData,
         status: nextStatus,
         consultationEndTime: new Date().toLocaleTimeString("en-GB", {
           hour12: false,
         }),
       });
 
-      if (hasPendingPrescriptions) {
-        toast.success("Consultation sent to Cashier for payment");
-      } else {
-        toast.success("Consultation completed successfully");
-      }
+      toast.success(
+        hasPendingPrescriptions
+          ? t("doctorQueue.toast.sentToCashier")
+          : t("doctorQueue.toast.completeSuccess"),
+      );
 
       setSelectedVisit(null);
       setShowMobileConsultation(false);
-      setConsultationData({
-        chiefComplaint: "",
-        symptoms: [],
-        historyOfPresentIllness: "",
-        pastHistory: "",
-        physicalExamination: "",
-        diagnosis: [],
-        treatmentPlan: "",
-        doctorNotes: "",
-        followUpDate: "",
-      });
+      setSaveStatus("idle");
+      setConsultationData(emptyConsultationData());
       refreshQueue();
     } catch {
-      toast.error("Failed to complete consultation");
+      toast.error(t("doctorQueue.toast.completeError"));
     }
   };
 
   const handleDeselectVisit = () => {
+    clearAutosaveTimer();
     setSelectedVisit(null);
     setShowMobileConsultation(false);
-    setConsultationData({
-      chiefComplaint: "",
-      symptoms: [],
-      historyOfPresentIllness: "",
-      pastHistory: "",
-      physicalExamination: "",
-      diagnosis: [],
-      treatmentPlan: "",
-      doctorNotes: "",
-      followUpDate: "",
-    });
+    setSaveStatus("idle");
+    setConsultationData(emptyConsultationData());
   };
 
   if (isLoading) {
@@ -262,8 +325,6 @@ const DoctorQueuePage = () => {
 
   // ==================== MOBILE VIEW ====================
   // On mobile, show either the queue or the consultation (not both)
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
-
   if (isMobile && showMobileConsultation && selectedVisit) {
     return (
       <div className="h-full">
@@ -281,7 +342,7 @@ const DoctorQueuePage = () => {
           setConsultationData={setConsultationData}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-          onSave={handleSaveConsultation}
+          saveStatus={saveStatus}
           onComplete={handleCompleteConsultation}
           onBack={handleDeselectVisit}
           refreshQueue={refreshQueue}
@@ -460,7 +521,7 @@ const DoctorQueuePage = () => {
             setConsultationData={setConsultationData}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            onSave={handleSaveConsultation}
+            saveStatus={saveStatus}
             onComplete={handleCompleteConsultation}
             onBack={handleDeselectVisit}
             refreshQueue={refreshQueue}
@@ -506,13 +567,51 @@ const DoctorQueuePage = () => {
 };
 
 // ==================== Consultation Panel (shared by mobile + desktop) ====================
+// Replaces the old manual "Save Progress" button — the consultation now
+// saves itself, this just tells the doctor it's happening.
+const SaveStatusIndicator = ({ status }) => {
+  const { t } = useTranslation();
+
+  const config = {
+    pending: {
+      dot: "bg-gray-400 animate-pulse",
+      text: "text-gray-500",
+      label: t("doctorQueue.consultation.saveStatus.pending"),
+    },
+    saving: {
+      dot: "bg-amber-500 animate-pulse",
+      text: "text-amber-600",
+      label: t("doctorQueue.consultation.saveStatus.saving"),
+    },
+    saved: {
+      dot: "bg-emerald-500",
+      text: "text-emerald-600",
+      label: t("doctorQueue.consultation.saveStatus.saved"),
+    },
+    error: {
+      dot: "bg-red-500",
+      text: "text-red-600",
+      label: t("doctorQueue.consultation.saveStatus.error"),
+    },
+  }[status];
+
+  if (!config) return <div className="w-px" />; // idle: reserve no visual space
+
+  return (
+    <div className={`flex items-center gap-1.5 px-3 text-xs font-medium ${config.text}`}>
+      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${config.dot}`} />
+      <span>{config.label}</span>
+    </div>
+  );
+};
+
 const ConsultationPanel = ({
   selectedVisit,
   consultationData,
   setConsultationData,
   activeTab,
   setActiveTab,
-  onSave,
+  saveStatus,
   onComplete,
   onBack,
   refreshQueue,
@@ -521,45 +620,48 @@ const ConsultationPanel = ({
   printLoading,
 }) => {
   const { t } = useTranslation();
+  const tabsRef = useRef(null);
+
+  const handleViewFullHistory = () => {
+    setActiveTab("history");
+    tabsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-800">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+        <div className="min-w-0">
+          <h1 className="text-2xl font-bold text-gray-800 truncate">
             {t("doctorQueue.consultation.title")}
           </h1>
-          <p className="text-gray-600 text-sm mt-0.5">
+          <p className="text-gray-600 text-sm mt-0.5 truncate">
             {selectedVisit.patient?.firstName} {selectedVisit.patient?.lastName}{" "}
             • {t("common.visitNumber")} {selectedVisit.visitNumber}
           </p>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex items-center flex-wrap gap-2">
+          <SaveStatusIndicator status={saveStatus} />
           <button
             onClick={onOpenSidebar}
-            className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm font-semibold shadow-sm"
+            aria-label={t("doctorQueue.consultation.patientFileDrawer")}
+            className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm font-semibold shadow-sm"
           >
-            <FiFileText className="w-4 h-4" />
-            <span>Patient File Drawer</span>
+            <FiFileText className="w-4 h-4 flex-shrink-0" />
+            <span className="hidden sm:inline">{t("doctorQueue.consultation.patientFileDrawer")}</span>
           </button>
           <button
             onClick={() => onPrintPrescription?.(selectedVisit)}
             disabled={printLoading}
-            className="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm disabled:opacity-50"
+            aria-label={t("doctorQueue.consultation.printPrescription")}
+            className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm disabled:opacity-50"
           >
-            <FiPrinter />
-            <span>{t("doctorQueue.consultation.printPrescription")}</span>
-          </button>
-          <button
-            onClick={onSave}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
-          >
-            <FiSave />
-            <span>{t("doctorQueue.consultation.saveProgress")}</span>
+            <FiPrinter className="flex-shrink-0" />
+            <span className="hidden sm:inline">{t("doctorQueue.consultation.printPrescription")}</span>
           </button>
           <button
             onClick={onBack}
+            aria-label={t("common.close")}
             className="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition text-sm"
           >
             <FiX />
@@ -572,7 +674,7 @@ const ConsultationPanel = ({
         <h3 className="text-sm font-semibold text-gray-800 mb-3">
           {t("doctorQueue.consultation.patientInfo")}
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
           <div>
             <p className="text-xs text-gray-500">{t("common.patientId")}</p>
             <p className="font-medium text-gray-800">
@@ -585,14 +687,6 @@ const ConsultationPanel = ({
             </p>
             <p className="font-medium text-gray-800">
               {selectedVisit.patient?.age}y · {selectedVisit.patient?.gender}
-            </p>
-          </div>
-          <div>
-            <p className="text-xs text-gray-500">
-              {t("doctorQueue.consultation.bloodGroup")}
-            </p>
-            <p className="font-medium text-gray-800">
-              {selectedVisit.patient?.bloodGroup || t("common.notAvailable")}
             </p>
           </div>
           <div>
@@ -640,6 +734,7 @@ const ConsultationPanel = ({
         <FollowUpIndicator
           patientId={selectedVisit.patient?.id}
           currentVisitDate={selectedVisit.visitDate}
+          onViewHistory={handleViewFullHistory}
         />
       </div>
 
@@ -650,7 +745,7 @@ const ConsultationPanel = ({
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 mb-4">
+      <div ref={tabsRef} className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 mb-4">
         <div className="border-b border-gray-200 overflow-x-auto">
           <nav className="flex space-x-1 px-4 min-w-max">
             {[

@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
-import { GENDER, BLOOD_GROUP, MARITAL_STATUS } from "../config/constants.js";
+import { GENDER, MARITAL_STATUS } from "../config/constants.js";
 import { generatePatientId, generateCardNumber } from "../utils/helpers.js";
 
 const Patient = sequelize.define(
@@ -29,9 +29,6 @@ const Patient = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    middleName: {
-      type: DataTypes.STRING,
-    },
     lastName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -40,12 +37,13 @@ const Patient = sequelize.define(
       type: DataTypes.ENUM(...Object.values(GENDER)),
       allowNull: false,
     },
-    dateOfBirth: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
     age: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 0,
+        max: 150,
+      },
     },
     phone: {
       type: DataTypes.STRING,
@@ -66,26 +64,11 @@ const Patient = sequelize.define(
     city: {
       type: DataTypes.STRING,
     },
-    subCity: {
-      type: DataTypes.STRING,
-    },
     woreda: {
       type: DataTypes.STRING,
     },
     address: {
       type: DataTypes.TEXT,
-    },
-    emergencyContactName: {
-      type: DataTypes.STRING,
-    },
-    emergencyContactPhone: {
-      type: DataTypes.STRING,
-    },
-    emergencyContactRelation: {
-      type: DataTypes.STRING,
-    },
-    bloodGroup: {
-      type: DataTypes.ENUM(...Object.values(BLOOD_GROUP)),
     },
     weight: {
       type: DataTypes.DECIMAL(5, 2),
@@ -181,7 +164,7 @@ const Patient = sequelize.define(
 
 // Instance methods
 Patient.prototype.getFullName = function () {
-  return `${this.firstName} ${this.middleName ? this.middleName + " " : ""}${this.lastName}`;
+  return `${this.firstName} ${this.lastName}`;
 };
 
 export default Patient;

@@ -43,7 +43,7 @@ const VisitsPage = () => {
 
       const response = await axiosInstance.get("/visits", { params });
       setVisits(response.data.data || response.data || []);
-    } catch (error) {
+    } catch {
       toast.error(t("visits.toast.loadError"));
       setVisits([]);
     } finally {
@@ -90,7 +90,7 @@ const VisitsPage = () => {
       </div>
 
       {/* Filters */}
-      <div className="flex items-center space-x-4 mb-6">
+      <div className="flex flex-wrap items-center gap-2 mb-6">
         {["all", "waiting", "in_consultation", "completed"].map((status) => (
           <button
             key={status}

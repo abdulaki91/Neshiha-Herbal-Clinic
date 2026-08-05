@@ -256,24 +256,27 @@ export const resetStaffPassword = async (id, password, actor) => {
  * Get staff statistics
  */
 export const getStaffStats = async () => {
-  const totalStaff = await User.count();
-  const activeStaff = await User.count({
-    where: { status: USER_STATUS.ACTIVE },
-  });
-  const inactiveStaff = await User.count({
-    where: { status: USER_STATUS.INACTIVE },
-  });
-  const suspendedStaff = await User.count({
-    where: { status: USER_STATUS.SUSPENDED },
-  });
-
-  const doctors = await User.count({ where: { role: ROLES.DOCTOR } });
-  const dataClerks = await User.count({ where: { role: ROLES.DATA_CLERK } });
-  const cashiers = await User.count({ where: { role: ROLES.CASHIER } });
-  const staffManagers = await User.count({
-    where: { role: ROLES.STAFF_MANAGER },
-  });
-  const superAdmins = await User.count({ where: { role: ROLES.SUPER_ADMIN } });
+  const [
+    totalStaff,
+    activeStaff,
+    inactiveStaff,
+    suspendedStaff,
+    doctors,
+    dataClerks,
+    cashiers,
+    staffManagers,
+    superAdmins,
+  ] = await Promise.all([
+    User.count(),
+    User.count({ where: { status: USER_STATUS.ACTIVE } }),
+    User.count({ where: { status: USER_STATUS.INACTIVE } }),
+    User.count({ where: { status: USER_STATUS.SUSPENDED } }),
+    User.count({ where: { role: ROLES.DOCTOR } }),
+    User.count({ where: { role: ROLES.DATA_CLERK } }),
+    User.count({ where: { role: ROLES.CASHIER } }),
+    User.count({ where: { role: ROLES.STAFF_MANAGER } }),
+    User.count({ where: { role: ROLES.SUPER_ADMIN } }),
+  ]);
 
   return {
     total: totalStaff,

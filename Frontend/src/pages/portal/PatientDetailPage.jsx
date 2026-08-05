@@ -8,7 +8,6 @@ import {
   FiArrowLeft,
   FiPlus,
   FiClock,
-  FiHeart,
   FiAlertCircle,
 } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
@@ -97,7 +96,7 @@ const PatientDetailPage = () => {
           </div>
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-gray-800">
-              {patient.firstName} {patient.middleName} {patient.lastName}
+              {patient.firstName} {patient.lastName}
             </h1>
             <p className="text-sm text-gray-500 mt-1">
               Patient ID: {patient.patientId}
@@ -107,12 +106,6 @@ const PatientDetailPage = () => {
                 <FiUser className="w-4 h-4 mr-1.5" />
                 {patient.age}y • {patient.gender}
               </span>
-              {patient.bloodGroup && (
-                <span className="flex items-center">
-                  <FiHeart className="w-4 h-4 mr-1.5 text-red-500" />
-                  {patient.bloodGroup}
-                </span>
-              )}
               <span className="flex items-center">
                 <FiPhone className="w-4 h-4 mr-1.5" />
                 {patient.phone}

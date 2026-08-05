@@ -1,6 +1,6 @@
 import { Patient, User, Visit } from "../models/index.js";
 import { Op } from "sequelize";
-import { getPagination, calculateAge } from "../utils/helpers.js";
+import { getPagination } from "../utils/helpers.js";
 import { ERROR_MESSAGES } from "../config/constants.js";
 
 /**
@@ -15,11 +15,6 @@ export const createPatient = async (data, registeredBy) => {
     if (existing) {
       throw new Error("Patient with this National ID already exists");
     }
-  }
-
-  // Calculate age from date of birth
-  if (data.dateOfBirth) {
-    data.age = calculateAge(data.dateOfBirth);
   }
 
   // Parse JSON fields
@@ -52,7 +47,6 @@ export const getAllPatients = async (query) => {
     pageSize = 10,
     search,
     gender,
-    bloodGroup,
     isActive = true,
     sortBy = "createdAt",
     sortOrder = "DESC",
@@ -68,16 +62,10 @@ export const getAllPatients = async (query) => {
     where.gender = gender;
   }
 
-  // Filter by blood group
-  if (bloodGroup) {
-    where.bloodGroup = bloodGroup;
-  }
-
   // Search by name, patient ID, card number, or phone
   if (search) {
     where[Op.or] = [
       { firstName: { [Op.iLike]: `%${search}%` } },
-      { middleName: { [Op.iLike]: `%${search}%` } },
       { lastName: { [Op.iLike]: `%${search}%` } },
       { patientId: { [Op.iLike]: `%${search}%` } },
       { cardNumber: { [Op.iLike]: `%${search}%` } },
@@ -217,11 +205,6 @@ export const updatePatient = async (id, data, updatedBy) => {
     if (existing) {
       throw new Error("Patient with this National ID already exists");
     }
-  }
-
-  // Recalculate age if date of birth changed
-  if (data.dateOfBirth && data.dateOfBirth !== patient.dateOfBirth) {
-    data.age = calculateAge(data.dateOfBirth);
   }
 
   // Parse JSON fields

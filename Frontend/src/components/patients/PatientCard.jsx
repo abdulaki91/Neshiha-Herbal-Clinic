@@ -18,7 +18,7 @@ const PatientCard = ({ patient, onUpdate }) => {
         </div>
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-gray-800">
-            {patient.firstName} {patient.middleName} {patient.lastName}
+            {patient.firstName} {patient.lastName}
           </h3>
           <p className="text-sm text-gray-500">{t("patientCard.idPrefix")}{patient.patientId}</p>
         </div>

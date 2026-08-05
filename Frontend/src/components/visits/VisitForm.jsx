@@ -40,11 +40,39 @@ const VisitForm = ({
     fetchPatients();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Pre-select a patient passed in from the Patients page. The target
+  // patient might not even be on the first page of the general patient
+  // list, so fetch them directly and splice them into the options.
   useEffect(() => {
-    if (defaultPatientId) {
+    if (!defaultPatientId) return;
+    let cancelled = false;
+
+    axiosInstance
+      .get(`/patients/${defaultPatientId}`)
+      .then((response) => {
+        if (cancelled) return;
+        const patient = response.data?.data || response.data;
+        if (!patient) return;
+        setPatients((prev) =>
+          prev.some((p) => p.id === patient.id) ? prev : [patient, ...prev],
+        );
+      })
+      .catch(() => {});
+
+    return () => {
+      cancelled = true;
+    };
+  }, [defaultPatientId]);
+
+  // Setting a native <select>'s value only takes effect once a matching
+  // <option> exists in the DOM. Gating on `patients` (rather than firing
+  // once on mount) means this retries after every options update until
+  // the target patient's <option> has actually rendered.
+  useEffect(() => {
+    if (defaultPatientId && patients.some((p) => p.id === defaultPatientId)) {
       setValue("patientId", defaultPatientId);
     }
-  }, [defaultPatientId, setValue]);
+  }, [defaultPatientId, patients, setValue]);
 
   // Switching to appointment mode on today's date reads oddly ("appointment
   // for right now"); nudge the date forward so the intent is unambiguous

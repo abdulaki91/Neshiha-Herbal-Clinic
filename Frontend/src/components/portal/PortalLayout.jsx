@@ -14,89 +14,103 @@ const PortalLayout = () => {
 
   useEffect(() => {
     const socket = getSocket();
+    if (!socket) return;
 
-    if (socket) {
-      // Subscribe to role-specific events
+    const handleQueueUpdated = () => {
+      toast.success(t("toast.newPatientInQueue"), { icon: "🔔" });
+    };
+
+    const handlePatientRegistered = (patient) => {
+      if (["super_admin", "data_clerk", "doctor"].includes(user?.role)) {
+        toast.success(
+          t("toast.patientRegistered", { firstName: patient.firstName, lastName: patient.lastName }),
+          { icon: "👤" },
+        );
+      }
+    };
+
+    const handleVisitCreated = () => {
+      if (["super_admin", "doctor"].includes(user?.role)) {
+        toast.success(t("toast.newVisitCreated"), { icon: "📋" });
+      }
+    };
+
+    const handleVisitStatusChanged = (visit) => {
+      toast.info(t("toast.visitStatus", { status: visit.status }), { icon: "🔄" });
+    };
+
+    const handleNotificationNew = (notification) => {
+      toast(notification.message, {
+        icon: notification.priority === "urgent" ? "🚨" : "📬",
+      });
+    };
+
+    const handlePrescriptionCreated = () => {
+      if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+        toast.success(t("toast.prescriptionAdded"), { icon: "💊" });
+      }
+    };
+
+    const handleMedicineDispensed = () => {
+      if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+        toast.success(t("toast.medicineDispensed"), { icon: "✅" });
+      }
+    };
+
+    const handlePaymentCompleted = (payment) => {
+      if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+        toast.success(
+          t("toast.paymentReceived", { amount: payment.amount?.toLocaleString?.() || payment.amount }),
+          { icon: "💰" },
+        );
+      }
+    };
+
+    const handleStaffCreated = () => {
+      if (["super_admin", "staff_manager"].includes(user?.role)) {
+        toast.success(t("toast.staffCreated"), { icon: "🧑‍⚕️" });
+      }
+    };
+
+    // Room membership (like "queue:updates") doesn't survive a reconnect —
+    // it's per-connection server state, not per-user. A plain mount-time
+    // subscribeToQueue() call worked once, then silently stopped delivering
+    // queue events after any drop/reconnect (sleep, wifi switch, tab
+    // backgrounding) for the rest of the session. Re-running this on every
+    // "connect" — not just the first — is what makes it durable.
+    const attach = () => {
       if (user?.role === "doctor") {
         subscribeToQueue();
-
-        socket.on("queue:updated", (visit) => {
-          toast.success(t("toast.newPatientInQueue"), {
-            icon: "🔔",
-          });
-        });
+        socket.on("queue:updated", handleQueueUpdated);
       }
+      socket.on("patient:registered", handlePatientRegistered);
+      socket.on("visit:created", handleVisitCreated);
+      socket.on("visit:status-changed", handleVisitStatusChanged);
+      socket.on("notification:new", handleNotificationNew);
+      socket.on("prescription:created", handlePrescriptionCreated);
+      socket.on("medicine:dispensed", handleMedicineDispensed);
+      socket.on("payment:completed", handlePaymentCompleted);
+      socket.on("staff:created", handleStaffCreated);
+    };
 
-      socket.on("patient:registered", (patient) => {
-        if (["super_admin", "data_clerk", "doctor"].includes(user?.role)) {
-          toast.success(
-            t("toast.patientRegistered", { firstName: patient.firstName, lastName: patient.lastName }),
-            {
-              icon: "👤",
-            },
-          );
-        }
-      });
+    const detach = () => {
+      socket.off("queue:updated", handleQueueUpdated);
+      socket.off("patient:registered", handlePatientRegistered);
+      socket.off("visit:created", handleVisitCreated);
+      socket.off("visit:status-changed", handleVisitStatusChanged);
+      socket.off("notification:new", handleNotificationNew);
+      socket.off("prescription:created", handlePrescriptionCreated);
+      socket.off("medicine:dispensed", handleMedicineDispensed);
+      socket.off("payment:completed", handlePaymentCompleted);
+      socket.off("staff:created", handleStaffCreated);
+    };
 
-      socket.on("visit:created", (visit) => {
-        if (["super_admin", "doctor"].includes(user?.role)) {
-          toast.success(t("toast.newVisitCreated"), {
-            icon: "📋",
-          });
-        }
-      });
-
-      socket.on("visit:status-changed", (visit) => {
-        toast.info(t("toast.visitStatus", { status: visit.status }), {
-          icon: "🔄",
-        });
-      });
-
-      socket.on("notification:new", (notification) => {
-        toast(notification.message, {
-          icon: notification.priority === "urgent" ? "🚨" : "📬",
-        });
-      });
-
-      socket.on("prescription:created", (prescription) => {
-        if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
-          toast.success(t("toast.prescriptionAdded"), {
-            icon: "💊",
-          });
-        }
-      });
-
-      socket.on("medicine:dispensed", (result) => {
-        if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
-          toast.success(t("toast.medicineDispensed"), {
-            icon: "✅",
-          });
-        }
-      });
-
-      socket.on("payment:completed", (payment) => {
-        if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
-          toast.success(
-            t("toast.paymentReceived", { amount: payment.amount?.toLocaleString?.() || payment.amount }),
-            {
-              icon: "💰",
-            },
-          );
-        }
-      });
-    }
+    if (socket.connected) attach();
+    socket.on("connect", attach);
 
     return () => {
-      if (socket) {
-        socket.off("queue:updated");
-        socket.off("patient:registered");
-        socket.off("visit:created");
-        socket.off("visit:status-changed");
-        socket.off("notification:new");
-        socket.off("prescription:created");
-        socket.off("medicine:dispensed");
-        socket.off("payment:completed");
-      }
+      detach();
+      socket.off("connect", attach);
     };
   }, [user]);
 

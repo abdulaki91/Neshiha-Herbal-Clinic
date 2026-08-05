@@ -11,7 +11,7 @@ import { Op } from "sequelize";
 import sequelize from "../config/database.js";
 
 export const getPatientReport = async (query) => {
-  const { startDate, endDate, gender, bloodGroup } = query;
+  const { startDate, endDate, gender } = query;
 
   const where = { isActive: true };
 
@@ -21,7 +21,6 @@ export const getPatientReport = async (query) => {
     };
   }
   if (gender) where.gender = gender;
-  if (bloodGroup) where.bloodGroup = bloodGroup;
 
   const patients = await Patient.findAll({
     where,

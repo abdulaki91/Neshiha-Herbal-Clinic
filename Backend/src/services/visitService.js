@@ -2,6 +2,7 @@ import { Visit, Patient, User } from "../models/index.js";
 import { Op } from "sequelize";
 import { getPagination, calculateBMI } from "../utils/helpers.js";
 import { ERROR_MESSAGES, VISIT_STATUS } from "../config/constants.js";
+import { emitVisitCreated, emitVisitStatusChanged } from "../config/socket.js";
 
 // errorHandler reads err.statusCode; without it, every thrown error is a 500
 const httpError = (message, statusCode) => {
@@ -72,12 +73,10 @@ export const getAllVisits = async (query) => {
           "id",
           "patientId",
           "firstName",
-          "middleName",
           "lastName",
           "age",
           "gender",
           "phone",
-          "bloodGroup",
           "knownAllergies",
           "chronicDiseases",
         ],
@@ -185,6 +184,61 @@ export const getVisitById = async (id) => {
 };
 
 /**
+ * Create, move, or cancel the scheduled appointment tied to a visit's
+ * follow-up date — so setting a follow-up date in the consultation has the
+ * same effect as front desk scheduling it from the Appointments page.
+ *
+ * Idempotent by design: autosave calls this on every save, so re-saving
+ * the same date must not create duplicates, and changing the date should
+ * move the one appointment already linked to this visit rather than
+ * leaving the old one dangling.
+ */
+const syncFollowUpAppointment = async (visit, updatedBy) => {
+  const linked = await Visit.findOne({
+    where: { followUpFromVisitId: visit.id, status: VISIT_STATUS.SCHEDULED },
+  });
+
+  // Follow-up date was cleared — cancel the appointment it created, if any
+  if (!visit.followUpDate) {
+    if (linked) {
+      await linked.update({ status: VISIT_STATUS.CANCELLED, updatedBy });
+      emitVisitStatusChanged(linked);
+    }
+    return;
+  }
+
+  if (linked) {
+    if (linked.visitDate !== visit.followUpDate) {
+      await linked.update({ visitDate: visit.followUpDate, updatedBy });
+      emitVisitStatusChanged(linked);
+    }
+    return;
+  }
+
+  // No appointment from this visit yet — but avoid creating a second one
+  // if front desk (or a previous save) already scheduled this exact date
+  const existingSameDate = await Visit.findOne({
+    where: {
+      patientId: visit.patientId,
+      visitDate: visit.followUpDate,
+      status: VISIT_STATUS.SCHEDULED,
+    },
+  });
+  if (existingSameDate) return;
+
+  const appointment = await Visit.create({
+    patientId: visit.patientId,
+    doctorId: visit.doctorId,
+    visitDate: visit.followUpDate,
+    status: VISIT_STATUS.SCHEDULED,
+    chiefComplaint: "Follow-up visit",
+    followUpFromVisitId: visit.id,
+    createdBy: updatedBy,
+  });
+  emitVisitCreated(appointment);
+};
+
+/**
  * Update visit
  */
 export const updateVisit = async (id, data, updatedBy) => {
@@ -221,10 +275,17 @@ export const updateVisit = async (id, data, updatedBy) => {
     data.diagnosis = JSON.stringify(data.diagnosis);
   }
 
+  const followUpChanged =
+    "followUpDate" in data && data.followUpDate !== visit.followUpDate;
+
   await visit.update({
     ...data,
     updatedBy,
   });
+
+  if (followUpChanged) {
+    await syncFollowUpAppointment(visit, updatedBy);
+  }
 
   return visit;
 };
@@ -525,7 +586,6 @@ export const getCompletedConsultations = async (doctorId, query = {}) => {
   if (search) {
     patientWhere[Op.or] = [
       { firstName: { [Op.iLike]: `%${search}%` } },
-      { middleName: { [Op.iLike]: `%${search}%` } },
       { lastName: { [Op.iLike]: `%${search}%` } },
       { patientId: { [Op.iLike]: `%${search}%` } },
       { cardNumber: { [Op.iLike]: `%${search}%` } },
@@ -550,12 +610,10 @@ export const getCompletedConsultations = async (doctorId, query = {}) => {
           "id",
           "patientId",
           "firstName",
-          "middleName",
           "lastName",
           "age",
           "gender",
           "phone",
-          "bloodGroup",
           "knownAllergies",
           "chronicDiseases",
           "photo",

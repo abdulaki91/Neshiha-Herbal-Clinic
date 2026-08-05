@@ -211,7 +211,7 @@ const LaboratoryPage = () => {
           </div>
 
           {/* Status Filter */}
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-2">
             {["requested", "in_progress", "completed"].map((status) => (
               <button
                 key={status}

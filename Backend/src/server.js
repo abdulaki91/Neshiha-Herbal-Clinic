@@ -69,6 +69,34 @@ const startServer = async () => {
     } catch {
       // Column/enum value may already exist, ignore
     }
+    try {
+      // Patient registration now collects age directly instead of date of
+      // birth — drop the old NOT NULL so new inserts (which no longer send
+      // date_of_birth) succeed, and backfill/enforce age instead
+      await sequelize.query(
+        `ALTER TABLE patients ALTER COLUMN date_of_birth DROP NOT NULL`
+      );
+      await sequelize.query(
+        `UPDATE patients SET age = EXTRACT(YEAR FROM AGE(date_of_birth))::int WHERE age IS NULL AND date_of_birth IS NOT NULL`
+      );
+      await sequelize.query(
+        `UPDATE patients SET age = 0 WHERE age IS NULL`
+      );
+      await sequelize.query(
+        `ALTER TABLE patients ALTER COLUMN age SET NOT NULL`
+      );
+    } catch {
+      // Constraint already relaxed, ignore
+    }
+    try {
+      // Links an auto-scheduled follow-up appointment back to the
+      // consultation that generated it
+      await sequelize.query(
+        `ALTER TABLE visits ADD COLUMN IF NOT EXISTS follow_up_from_visit_id UUID REFERENCES visits(id)`
+      );
+    } catch {
+      // Column may already exist, ignore
+    }
 
     // Initialize Socket.io
     initializeSocket(httpServer);

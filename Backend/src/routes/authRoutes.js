@@ -11,9 +11,11 @@ import {
 const router = express.Router();
 
 // Public routes
+// Rate limiting disabled for now (see app.js) — authLimiter/passwordResetLimiter
+// are still imported so this is a one-line revert once re-enabled.
 router.post(
   "/login",
-  authLimiter,
+  // authLimiter,
   authValidator.loginValidator,
   validate,
   authController.login,
@@ -26,7 +28,7 @@ router.post(
 );
 router.post(
   "/forgot-password",
-  passwordResetLimiter,
+  // passwordResetLimiter,
   authValidator.forgotPasswordValidator,
   validate,
   authController.forgotPassword,
