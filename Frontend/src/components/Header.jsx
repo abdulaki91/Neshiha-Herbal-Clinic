@@ -17,7 +17,9 @@ export default function Header() {
   const links = [
     { key: "services", href: "#services" },
     { key: "testimonials", href: "#testimonials" },
+    { key: "team", href: "#team" },
     { key: "about", href: "#about" },
+    { key: "faq", href: "#faq" },
     { key: "contact", href: "#contact" },
   ];
 

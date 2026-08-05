@@ -45,6 +45,8 @@
     "about": "About",
     "services": "Services",
     "testimonials": "Testimonials",
+    "team": "Team",
+    "faq": "FAQ",
     "contact": "Contact",
     "blog": "Blog"
   },
@@ -152,9 +154,35 @@
     ]
   },
 
+  "successStories": {
+    "title": "Success Stories",
+    "subtitle": "Real outcomes from real patients",
+    "outcomes": "Outcomes"
+  },
+
+  "team": {
+    "title": "Meet Our Team",
+    "subtitle": "Certified practitioners dedicated to your wellness"
+  },
+
+  "partners": {
+    "title": "Trusted By"
+  },
+
+  "faqs": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to common questions"
+  },
+
   "contact": {
     "title": "Get in Touch",
     "subtitle": "Ready to start your healing journey?",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "twitter": "X (Twitter)"
+    },
     "name": "Full Name",
     "email": "Email Address",
     "phone": "Phone Number",

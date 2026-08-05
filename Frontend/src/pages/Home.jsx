@@ -2,12 +2,18 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import Header from "../components/Header";
+import BannerStrip from "../components/BannerStrip";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
 import Testimonials from "../components/Testimonials";
+import SuccessStories from "../components/SuccessStories";
+import Team from "../components/Team";
+import Partners from "../components/Partners";
+import Faqs from "../components/Faqs";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import Blog from "../components/Blog";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -58,6 +64,7 @@ export default function Home() {
       </Helmet>
 
       {/* Header */}
+      <BannerStrip />
       <Header />
 
       {/* Page Content */}
@@ -65,10 +72,16 @@ export default function Home() {
         <Hero />
         <Services />
         <Testimonials />
+        <SuccessStories />
+        <Team />
+        <Partners />
         <About />
+        <Faqs />
         <Contact />
         <Blog />
       </div>
+
+      <Footer />
     </>
   );
 }
