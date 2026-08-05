@@ -20,6 +20,8 @@ i18n
   .init({
     resources,
     fallbackLng: "en",
+    supportedLngs: ["en", "ar", "om", "am"],
+    load: "languageOnly",
     interpolation: { escapeValue: false },
     detection: {
       order: ["localStorage", "navigator", "htmlTag"],

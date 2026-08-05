@@ -111,7 +111,7 @@ export default function Header() {
 
           <div className="mt-auto">
             {/* Language Selector for mobile */}
-            <LanguageSelector />
+            <LanguageSelector variant="mobile" />
           </div>
         </div>
       </div>
