@@ -815,6 +815,7 @@
     "saveError": "Failed to save patient",
     "editTitle": "Edit Patient",
     "registerTitle": "Register New Patient",
+    "fromBookingNotice": "Pre-filled from a website booking request — please verify and complete the remaining fields.",
     "personalInfoTitle": "Personal Information",
     "firstNameLabel": "First Name *",
     "firstNameRequired": "First name is required",

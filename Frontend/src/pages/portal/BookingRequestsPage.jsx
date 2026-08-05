@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useQueryClient } from "@tanstack/react-query";
 import { FiSearch, FiPhone, FiMail, FiCalendar, FiCheck, FiX, FiUserPlus } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +21,6 @@ const STATUS_STYLES = {
 const BookingRequestsPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const qc = useQueryClient();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [page, setPage] = useState(1);
@@ -49,13 +47,23 @@ const BookingRequestsPage = () => {
 
   // The clinic's full patient registration (age, gender, allergies, ...)
   // needs more than this lightweight public form collects, so "convert"
-  // hands off to the existing Patients page rather than auto-creating a
-  // record here — staff complete registration with the booking's details
-  // as reference, then come back and mark it converted.
-  const handleConvert = async (booking) => {
-    await handleSetStatus(booking.id, "converted");
-    qc.invalidateQueries({ queryKey: ["booking-requests"] });
-    navigate("/portal/patients");
+  // hands off to the existing Patients page instead of auto-creating a
+  // record here. The booking's name/phone/email travel along as router
+  // state so the "Add Patient" form opens pre-filled — PatientsPage marks
+  // this request "converted" itself once a patient is actually created
+  // from it, not before.
+  const handleConvert = (booking) => {
+    const [firstName, ...rest] = booking.fullName.trim().split(/\s+/);
+    navigate("/portal/patients", {
+      state: {
+        bookingPrefill: {
+          firstName,
+          lastName: rest.join(" "),
+          phone: booking.phone,
+        },
+        bookingRequestId: booking.id,
+      },
+    });
   };
 
   return (

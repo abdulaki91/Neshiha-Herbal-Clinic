@@ -837,6 +837,7 @@
     "saveError": "Failed to save patient",
     "editTitle": "Edit Patient",
     "registerTitle": "Register New Patient",
+    "fromBookingNotice": "تم التعبئة مسبقًا من طلب حجز عبر الموقع — يرجى التحقق وإكمال الحقول المتبقية.",
     "personalInfoTitle": "Personal Information",
     "firstNameLabel": "First Name *",
     "firstNameRequired": "First name is required",

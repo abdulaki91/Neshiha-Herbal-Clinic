@@ -4,7 +4,7 @@ import { FiX } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 import toast from "react-hot-toast";
 
-const PatientForm = ({ onClose, onSuccess, patient }) => {
+const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
   const { t } = useTranslation();
   const isEditing = !!patient;
 
@@ -23,7 +23,7 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
           city: patient.city || "",
           woreda: patient.woreda || "",
         }
-      : {},
+      : initialValues || {},
   });
 
   const onSubmit = async (data) => {
@@ -64,6 +64,11 @@ const PatientForm = ({ onClose, onSuccess, patient }) => {
           onSubmit={handleSubmit(onSubmit)}
           className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]"
         >
+          {!isEditing && initialValues && (
+            <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-800">
+              {t("patientForm.fromBookingNotice")}
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Personal Information */}
             <div className="col-span-2">

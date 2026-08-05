@@ -837,6 +837,7 @@
     "saveError": "Failed to save patient",
     "editTitle": "Edit Patient",
     "registerTitle": "Register New Patient",
+    "fromBookingNotice": "ከድረ-ገጽ የቀጠሮ ጥያቄ አስቀድሞ ተሞልቷል — እባክዎ ያረጋግጡ እና የቀሩትን መስኮች ይሙሉ።",
     "personalInfoTitle": "Personal Information",
     "firstNameLabel": "First Name *",
     "firstNameRequired": "First name is required",

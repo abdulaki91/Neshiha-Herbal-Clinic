@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { FiPlus, FiSearch, FiUser } from "react-icons/fi";
 import { getSocket } from "../../lib/socket";
 import { usePatients, useCreatePatient } from "../../hooks/usePatients";
+import { useUpdateBookingStatus } from "../../hooks/useBookingRequests";
 import PatientForm from "../../components/patients/PatientForm";
 import PatientCard from "../../components/patients/PatientCard";
 import toast from "react-hot-toast";
@@ -12,10 +14,18 @@ import { useTranslation } from "react-i18next";
 const PatientsPage = () => {
   const { t } = useTranslation();
   const { user } = useAuthStore();
-  const [showForm, setShowForm] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  // Arrived here via "Convert to Visit" on a booking request — open the
+  // form pre-filled instead of the empty default, and remember which
+  // request to mark converted once registration actually succeeds.
+  const bookingPrefill = location.state?.bookingPrefill;
+  const bookingRequestId = location.state?.bookingRequestId;
+  const [showForm, setShowForm] = useState(!!bookingPrefill);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const qc = useQueryClient();
+  const updateBookingStatus = useUpdateBookingStatus();
 
   const { data, isLoading } = usePatients({ page, pageSize: 10, search });
   const patients = data?.patients || [];
@@ -31,10 +41,22 @@ const PatientsPage = () => {
     return () => socket.off("patient:registered", invalidate);
   }, [qc]);
 
-  const handlePatientCreated = () => {
+  const handlePatientCreated = async () => {
     setShowForm(false);
     qc.invalidateQueries({ queryKey: ["patients"] });
     toast.success(t("patients.toast.registerSuccess"));
+
+    if (bookingRequestId) {
+      try {
+        await updateBookingStatus.mutateAsync({ id: bookingRequestId, status: "converted" });
+      } catch {
+        // Patient is already registered either way; losing this status
+        // update isn't worth blocking or re-alerting the user over.
+      }
+      // Clear the handoff state so refreshing/navigating back doesn't
+      // reopen the form or re-fire the status update.
+      navigate(location.pathname, { replace: true, state: {} });
+    }
   };
 
   const canRegister = ["super_admin", "data_clerk", "doctor"].includes(user?.role);
@@ -124,7 +146,11 @@ const PatientsPage = () => {
       {/* Patient Form Modal */}
       {showForm && (
         <PatientForm
-          onClose={() => setShowForm(false)}
+          initialValues={bookingPrefill}
+          onClose={() => {
+            setShowForm(false);
+            if (bookingRequestId) navigate(location.pathname, { replace: true, state: {} });
+          }}
           onSuccess={handlePatientCreated}
         />
       )}
