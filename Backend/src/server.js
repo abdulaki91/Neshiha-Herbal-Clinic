@@ -264,6 +264,30 @@ const startServer = async () => {
       // silently swallowing a genuine schema problem
       console.error("⚠️  CMS table creation issue:", err.message);
     }
+    try {
+      // Public-website "Book Appointment" submissions — reviewed by staff,
+      // not auto-scheduled (see BookingRequest.js for why this isn't just
+      // a Visit).
+      await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS booking_requests (
+          id UUID PRIMARY KEY,
+          full_name VARCHAR(255) NOT NULL,
+          phone VARCHAR(255) NOT NULL,
+          email VARCHAR(255),
+          preferred_date DATE NOT NULL,
+          preferred_time VARCHAR(255),
+          reason TEXT,
+          status VARCHAR(20) NOT NULL DEFAULT 'pending',
+          staff_notes TEXT,
+          reviewed_by UUID REFERENCES users(id),
+          converted_visit_id UUID REFERENCES visits(id),
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+    } catch (err) {
+      console.error("⚠️  booking_requests table creation issue:", err.message);
+    }
 
     // Initialize Socket.io
     initializeSocket(httpServer);

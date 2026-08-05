@@ -38,6 +38,7 @@ import partnerRoutes from "./routes/partnerRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import publicContentRoutes from "./routes/publicContentRoutes.js";
+import bookingRequestRoutes from "./routes/bookingRequestRoutes.js";
 
 // Create Express app
 const app = express();
@@ -119,6 +120,7 @@ app.use(`/api/${API_VERSION}/partners`, partnerRoutes);
 app.use(`/api/${API_VERSION}/banners`, bannerRoutes);
 app.use(`/api/${API_VERSION}/services`, serviceRoutes);
 app.use(`/api/${API_VERSION}/public`, publicContentRoutes);
+app.use(`/api/${API_VERSION}/booking-requests`, bookingRequestRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

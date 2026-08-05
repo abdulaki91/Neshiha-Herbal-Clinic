@@ -18,6 +18,7 @@ import TeamMember from "./TeamMember.js";
 import Partner from "./Partner.js";
 import Banner from "./Banner.js";
 import Service from "./Service.js";
+import BookingRequest from "./BookingRequest.js";
 
 // Define Associations
 
@@ -134,6 +135,10 @@ PatientAttachment.belongsTo(User, { foreignKey: "uploadedBy", as: "uploader" });
 PatientAttachment.belongsTo(Patient, { foreignKey: "patientId", as: "patient" });
 PatientAttachment.belongsTo(Visit, { foreignKey: "visitId", as: "visit" });
 
+// BookingRequest associations
+BookingRequest.belongsTo(User, { foreignKey: "reviewedBy", as: "reviewer" });
+BookingRequest.belongsTo(Visit, { foreignKey: "convertedVisitId", as: "convertedVisit" });
+
 // Export models and sequelize instance
 export {
   sequelize,
@@ -156,6 +161,7 @@ export {
   Partner,
   Banner,
   Service,
+  BookingRequest,
 };
 
 // Sync database (development only)

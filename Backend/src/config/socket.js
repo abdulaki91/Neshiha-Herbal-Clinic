@@ -277,6 +277,15 @@ export const emitPaymentCompleted = (payment) => {
   emitToRole("doctor", "payment:completed", payment);
 };
 
+/**
+ * Emit a new public "Book Appointment" submission — to whoever handles
+ * patient intake, so it doesn't just sit unseen in the portal.
+ */
+export const emitBookingRequestCreated = (booking) => {
+  emitToRole("data_clerk", "booking-request:created", booking);
+  emitToRole("doctor", "booking-request:created", booking);
+};
+
 export default {
   initializeSocket,
   getIO,
@@ -296,4 +305,5 @@ export default {
   emitInvestigationCreated,
   emitInvestigationResultAdded,
   emitPaymentCompleted,
+  emitBookingRequestCreated,
 };
