@@ -30,6 +30,8 @@ import reportRoutes from "./routes/reportRoutes.js";
 import settingRoutes from "./routes/settingRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import testimonialRoutes from "./routes/testimonialRoutes.js";
+import publicContentRoutes from "./routes/publicContentRoutes.js";
 
 // Create Express app
 const app = express();
@@ -103,6 +105,8 @@ app.use(`/api/${API_VERSION}/reports`, reportRoutes);
 app.use(`/api/${API_VERSION}/settings`, settingRoutes);
 app.use(`/api/${API_VERSION}/notifications`, notificationRoutes);
 app.use(`/api/${API_VERSION}/payments`, paymentRoutes);
+app.use(`/api/${API_VERSION}/testimonials`, testimonialRoutes);
+app.use(`/api/${API_VERSION}/public`, publicContentRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

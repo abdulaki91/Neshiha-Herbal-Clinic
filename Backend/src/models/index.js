@@ -11,6 +11,13 @@ import Notification from "./Notification.js";
 import Setting from "./Setting.js";
 import Payment from "./Payment.js";
 import PatientAttachment from "./PatientAttachment.js";
+import Testimonial from "./Testimonial.js";
+import SuccessStory from "./SuccessStory.js";
+import Faq from "./Faq.js";
+import TeamMember from "./TeamMember.js";
+import Partner from "./Partner.js";
+import Banner from "./Banner.js";
+import Service from "./Service.js";
 
 // Define Associations
 
@@ -142,6 +149,13 @@ export {
   Setting,
   Payment,
   PatientAttachment,
+  Testimonial,
+  SuccessStory,
+  Faq,
+  TeamMember,
+  Partner,
+  Banner,
+  Service,
 };
 
 // Sync database (development only)

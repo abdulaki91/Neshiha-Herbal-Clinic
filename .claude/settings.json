@@ -10,7 +10,8 @@
       "Bash(rm -f /tmp/server-boot.log)",
       "Bash(curl -s -o /dev/null -w \"port 5000 status: %{http_code}\\\\n\" http://localhost:5000/health --max-time 3)",
       "Bash(npx eslint *)",
-      "Bash(node _tmp_test_settings.mjs)"
+      "Bash(node _tmp_test_settings.mjs)",
+      "Bash(node _tmp_test_testimonial.mjs)"
     ]
   }
 }
