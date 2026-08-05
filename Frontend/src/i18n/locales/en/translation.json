@@ -1324,6 +1324,32 @@
       "description": "Terms and privacy text shown to patients",
       "terms": "Terms and Conditions",
       "privacy": "Privacy Policy"
+    },
+    "business": {
+      "title": "Business Information",
+      "description": "Shown on the public website's About section",
+      "logo": "Logo",
+      "uploadLogo": "Upload Logo",
+      "logoUploadSuccess": "Logo uploaded successfully",
+      "logoUploadError": "Failed to upload logo",
+      "tagline": "Tagline",
+      "mission": "Mission",
+      "vision": "Vision",
+      "aboutText": "About Text",
+      "yearsExperience": "Years of Experience",
+      "patientsServed": "Patients Served",
+      "treatmentsOffered": "Treatments Offered"
+    },
+    "contact": {
+      "title": "Contact & Social",
+      "description": "Public website contact details and social links",
+      "whatsapp": "WhatsApp Number",
+      "facebook": "Facebook URL",
+      "instagram": "Instagram URL",
+      "tiktok": "TikTok URL",
+      "twitter": "X (Twitter) URL",
+      "googleMaps": "Google Maps Embed URL",
+      "googleMapsHint": "Paste the src URL from Google Maps' \"Embed a map\" share option"
     }
   },
 

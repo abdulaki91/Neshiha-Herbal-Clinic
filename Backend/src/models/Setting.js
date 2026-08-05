@@ -83,6 +83,48 @@ const Setting = sequelize.define(
     privacyPolicy: {
       type: DataTypes.TEXT,
     },
+    // Business Information — public "About" section content, translatable
+    // per-locale as { en, am, om, ar } (en required, others optional).
+    tagline: {
+      type: DataTypes.JSONB,
+    },
+    mission: {
+      type: DataTypes.JSONB,
+    },
+    vision: {
+      type: DataTypes.JSONB,
+    },
+    aboutText: {
+      type: DataTypes.JSONB,
+    },
+    yearsExperience: {
+      type: DataTypes.INTEGER,
+    },
+    patientsServed: {
+      type: DataTypes.INTEGER,
+    },
+    treatmentsOffered: {
+      type: DataTypes.INTEGER,
+    },
+    // Contact Information — public site contact + social details
+    whatsappNumber: {
+      type: DataTypes.STRING,
+    },
+    facebookUrl: {
+      type: DataTypes.STRING,
+    },
+    instagramUrl: {
+      type: DataTypes.STRING,
+    },
+    tiktokUrl: {
+      type: DataTypes.STRING,
+    },
+    twitterUrl: {
+      type: DataTypes.STRING,
+    },
+    googleMapsEmbedUrl: {
+      type: DataTypes.STRING,
+    },
     metadata: {
       type: DataTypes.JSONB,
     },

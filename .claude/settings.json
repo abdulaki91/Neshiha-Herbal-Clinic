@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(timeout 15 node src/server.js)",
+      "Bash(nohup node src/server.js)",
+      "Bash(echo \"PID:$!\")",
+      "Read(//tmp/**)",
+      "Bash(sleep 3 && tail -40 /tmp/server-boot.log)",
+      "Bash(rm -f /tmp/server-boot.log)",
+      "Bash(curl -s -o /dev/null -w \"port 5000 status: %{http_code}\\\\n\" http://localhost:5000/health --max-time 3)",
+      "Bash(npx eslint *)",
+      "Bash(node _tmp_test_settings.mjs)"
+    ]
+  }
+}

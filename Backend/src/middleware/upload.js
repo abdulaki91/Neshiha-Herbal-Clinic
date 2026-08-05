@@ -24,6 +24,12 @@ const storage = multer.diskStorage({
       folder = "investigations";
     } else if (file.fieldname === "document") {
       folder = "documents";
+    } else if (
+      file.fieldname === "logo" ||
+      file.fieldname === "image" ||
+      file.fieldname === "images"
+    ) {
+      folder = "content";
     }
 
     const dest = path.join(uploadDir, folder);
@@ -85,3 +91,22 @@ export const uploadMultiple = (fieldName, maxCount = 5) =>
 
 // Upload multiple fields
 export const uploadFields = (fields) => upload.fields(fields);
+
+// Copies multer's req.file into req.body[bodyField] as the relative path
+// the rest of the app expects (e.g. "uploads/content/name-123.jpg"), so a
+// generic controller can treat image fields like any other body field.
+export const attachImagePath = (bodyField) => (req, res, next) => {
+  if (req.file) {
+    req.body[bodyField] = `uploads/content/${req.file.filename}`;
+  }
+  next();
+};
+
+// Same idea for a multi-file field (e.g. SuccessStory.images) — stores an
+// array of relative paths.
+export const attachImagePaths = (bodyField) => (req, res, next) => {
+  if (req.files && req.files.length > 0) {
+    req.body[bodyField] = req.files.map((f) => `uploads/content/${f.filename}`);
+  }
+  next();
+};

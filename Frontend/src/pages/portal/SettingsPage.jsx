@@ -1,10 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { FiSave, FiHome, FiClock, FiBell, FiFileText } from "react-icons/fi";
+import {
+  FiSave,
+  FiHome,
+  FiClock,
+  FiBell,
+  FiFileText,
+  FiBriefcase,
+  FiShare2,
+  FiUploadCloud,
+} from "react-icons/fi";
 import toast from "react-hot-toast";
 import useAuthStore from "../../store/authStore";
-import { useSettings, useUpdateSettings } from "../../hooks/useSettings";
+import {
+  useSettings,
+  useUpdateSettings,
+  useUploadLogo,
+} from "../../hooks/useSettings";
+import TranslatableInput from "../../components/content-admin/TranslatableInput";
+
+const emptyLocaleValue = () => ({ en: "", am: "", om: "", ar: "" });
 
 const WEEKDAYS = [
   "monday",
@@ -59,6 +75,8 @@ const SettingsPage = () => {
 
   const { data: settings, isLoading, isError } = useSettings();
   const updateSettings = useUpdateSettings();
+  const uploadLogo = useUploadLogo();
+  const logoInputRef = useRef(null);
 
   const {
     register,
@@ -66,6 +84,25 @@ const SettingsPage = () => {
     reset,
     formState: { errors, isDirty },
   } = useForm();
+
+  const handleLogoChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      await uploadLogo.mutateAsync(file);
+      toast.success(t("settings.business.logoUploadSuccess"));
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || t("settings.business.logoUploadError"),
+      );
+    } finally {
+      e.target.value = "";
+    }
+  };
+
+  const logoUrl = settings?.clinicLogo
+    ? `${(import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1").replace("/api/v1", "")}/${settings.clinicLogo}`
+    : null;
 
   // Populate the form once the settings arrive
   useEffect(() => {
@@ -88,6 +125,19 @@ const SettingsPage = () => {
       enableSMSNotifications: !!settings.enableSMSNotifications,
       termsAndConditions: settings.termsAndConditions || "",
       privacyPolicy: settings.privacyPolicy || "",
+      tagline: { ...emptyLocaleValue(), ...settings.tagline },
+      mission: { ...emptyLocaleValue(), ...settings.mission },
+      vision: { ...emptyLocaleValue(), ...settings.vision },
+      aboutText: { ...emptyLocaleValue(), ...settings.aboutText },
+      yearsExperience: settings.yearsExperience ?? "",
+      patientsServed: settings.patientsServed ?? "",
+      treatmentsOffered: settings.treatmentsOffered ?? "",
+      whatsappNumber: settings.whatsappNumber || "",
+      facebookUrl: settings.facebookUrl || "",
+      instagramUrl: settings.instagramUrl || "",
+      tiktokUrl: settings.tiktokUrl || "",
+      twitterUrl: settings.twitterUrl || "",
+      googleMapsEmbedUrl: settings.googleMapsEmbedUrl || "",
     });
   }, [settings, reset]);
 
@@ -98,6 +148,9 @@ const SettingsPage = () => {
       appointmentDuration: Number(data.appointmentDuration),
       // Checkbox groups yield false for "none selected"; normalise to an array
       workingDays: Array.isArray(data.workingDays) ? data.workingDays : [],
+      yearsExperience: data.yearsExperience === "" ? null : Number(data.yearsExperience),
+      patientsServed: data.patientsServed === "" ? null : Number(data.patientsServed),
+      treatmentsOffered: data.treatmentsOffered === "" ? null : Number(data.treatmentsOffered),
     };
 
     try {
@@ -195,6 +248,162 @@ const SettingsPage = () => {
                     {...register("clinicAddress")}
                     rows={2}
                     className={`${inputClass} resize-none`}
+                  />
+                </Field>
+              </div>
+            </div>
+          </Section>
+
+          <Section
+            icon={FiBriefcase}
+            title={t("settings.business.title")}
+            description={t("settings.business.description")}
+          >
+            <div className="space-y-6">
+              <Field label={t("settings.business.logo")}>
+                <div className="flex items-center gap-4">
+                  {logoUrl ? (
+                    <img
+                      src={logoUrl}
+                      alt={t("settings.business.logo")}
+                      className="w-16 h-16 rounded-lg object-cover border border-gray-200"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400">
+                      <FiUploadCloud className="w-6 h-6" />
+                    </div>
+                  )}
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => logoInputRef.current?.click()}
+                      disabled={uploadLogo.isPending}
+                      className="px-4 py-2 text-sm font-medium bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition disabled:opacity-50"
+                    >
+                      {uploadLogo.isPending
+                        ? t("common.saving")
+                        : t("settings.business.uploadLogo")}
+                    </button>
+                    <input
+                      ref={logoInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLogoChange}
+                      className="hidden"
+                    />
+                  </div>
+                </div>
+              </Field>
+
+              <TranslatableInput
+                register={register}
+                name="tagline"
+                label={t("settings.business.tagline")}
+              />
+              <TranslatableInput
+                register={register}
+                name="mission"
+                label={t("settings.business.mission")}
+                multiline
+              />
+              <TranslatableInput
+                register={register}
+                name="vision"
+                label={t("settings.business.vision")}
+                multiline
+              />
+              <TranslatableInput
+                register={register}
+                name="aboutText"
+                label={t("settings.business.aboutText")}
+                multiline
+                rows={4}
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Field label={t("settings.business.yearsExperience")}>
+                  <input
+                    type="number"
+                    min={0}
+                    {...register("yearsExperience")}
+                    className={inputClass}
+                  />
+                </Field>
+                <Field label={t("settings.business.patientsServed")}>
+                  <input
+                    type="number"
+                    min={0}
+                    {...register("patientsServed")}
+                    className={inputClass}
+                  />
+                </Field>
+                <Field label={t("settings.business.treatmentsOffered")}>
+                  <input
+                    type="number"
+                    min={0}
+                    {...register("treatmentsOffered")}
+                    className={inputClass}
+                  />
+                </Field>
+              </div>
+            </div>
+          </Section>
+
+          <Section
+            icon={FiShare2}
+            title={t("settings.contact.title")}
+            description={t("settings.contact.description")}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Field label={t("settings.contact.whatsapp")}>
+                <input
+                  type="tel"
+                  {...register("whatsappNumber")}
+                  className={inputClass}
+                />
+              </Field>
+              <Field label={t("settings.contact.facebook")}>
+                <input
+                  type="url"
+                  placeholder="https://facebook.com/..."
+                  {...register("facebookUrl")}
+                  className={inputClass}
+                />
+              </Field>
+              <Field label={t("settings.contact.instagram")}>
+                <input
+                  type="url"
+                  placeholder="https://instagram.com/..."
+                  {...register("instagramUrl")}
+                  className={inputClass}
+                />
+              </Field>
+              <Field label={t("settings.contact.tiktok")}>
+                <input
+                  type="url"
+                  placeholder="https://tiktok.com/@..."
+                  {...register("tiktokUrl")}
+                  className={inputClass}
+                />
+              </Field>
+              <Field label={t("settings.contact.twitter")}>
+                <input
+                  type="url"
+                  placeholder="https://x.com/..."
+                  {...register("twitterUrl")}
+                  className={inputClass}
+                />
+              </Field>
+              <div className="md:col-span-2">
+                <Field
+                  label={t("settings.contact.googleMaps")}
+                  hint={t("settings.contact.googleMapsHint")}
+                >
+                  <input
+                    type="text"
+                    placeholder="https://www.google.com/maps/embed?..."
+                    {...register("googleMapsEmbedUrl")}
+                    className={inputClass}
                   />
                 </Field>
               </div>

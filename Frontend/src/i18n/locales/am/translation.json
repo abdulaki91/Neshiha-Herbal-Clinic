@@ -1400,6 +1400,32 @@
       "description": "ለታካሚዎች የሚታዩ የውል እና የግላዊነት ጽሑፎች",
       "terms": "ውሎች እና ሁኔታዎች",
       "privacy": "የግላዊነት ፖሊሲ"
+    },
+    "business": {
+      "title": "የድርጅት መረጃ",
+      "description": "በድረ-ገጹ 'ስለ እኛ' ክፍል ውስጥ ይታያል",
+      "logo": "አርማ",
+      "uploadLogo": "አርማ ስቀል",
+      "logoUploadSuccess": "አርማው በተሳካ ሁኔታ ተሰቅሏል",
+      "logoUploadError": "አርማ መስቀል አልተሳካም",
+      "tagline": "አጭር መፈክር",
+      "mission": "ተልእኮ",
+      "vision": "ራዕይ",
+      "aboutText": "ስለ እኛ ጽሑፍ",
+      "yearsExperience": "የልምድ ዓመታት",
+      "patientsServed": "የተስተናገዱ ታካሚዎች",
+      "treatmentsOffered": "የሚሰጡ ሕክምናዎች"
+    },
+    "contact": {
+      "title": "ግንኙነት እና ማህበራዊ ሚዲያ",
+      "description": "የድረ-ገጹ የመገናኛ መረጃ እና የማህበራዊ ሚዲያ አገናኞች",
+      "whatsapp": "የዋትስአፕ ቁጥር",
+      "facebook": "የፌስቡክ URL",
+      "instagram": "የኢንስታግራም URL",
+      "tiktok": "የቲክቶክ URL",
+      "twitter": "የX (ትዊተር) URL",
+      "googleMaps": "የGoogle Maps Embed URL",
+      "googleMapsHint": "ከGoogle Maps \"Embed a map\" አማራጭ የ src URL ለጥፍ"
     }
   },
 

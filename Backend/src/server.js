@@ -97,6 +97,173 @@ const startServer = async () => {
     } catch {
       // Column may already exist, ignore
     }
+    try {
+      // Business Information + Contact Information fields on the settings
+      // singleton, for the public website CMS
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS tagline JSONB`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS mission JSONB`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS vision JSONB`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS about_text JSONB`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS years_experience INTEGER`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS patients_served INTEGER`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS treatments_offered INTEGER`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS whatsapp_number VARCHAR(255)`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS facebook_url VARCHAR(255)`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS instagram_url VARCHAR(255)`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS tiktok_url VARCHAR(255)`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS twitter_url VARCHAR(255)`
+      );
+      await sequelize.query(
+        `ALTER TABLE settings ADD COLUMN IF NOT EXISTS google_maps_embed_url VARCHAR(255)`
+      );
+    } catch {
+      // Columns may already exist, ignore
+    }
+    try {
+      // Website CMS content tables — created here (not via sequelize.sync,
+      // which is never called on boot) so they self-heal into existence on
+      // any environment without a destructive migrate.js run.
+      const localeDefault = `'{"en":""}'::jsonb`;
+      await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS testimonials (
+          id UUID PRIMARY KEY,
+          client_name VARCHAR(255) NOT NULL,
+          client_photo VARCHAR(255),
+          role JSONB DEFAULT ${localeDefault},
+          company VARCHAR(255),
+          rating INTEGER DEFAULT 5,
+          text JSONB DEFAULT ${localeDefault},
+          status VARCHAR(20) NOT NULL DEFAULT 'draft',
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          created_by UUID REFERENCES users(id),
+          updated_by UUID REFERENCES users(id),
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+      await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS success_stories (
+          id UUID PRIMARY KEY,
+          title JSONB DEFAULT ${localeDefault},
+          description JSONB DEFAULT ${localeDefault},
+          images JSONB DEFAULT '[]'::jsonb,
+          project_details JSONB DEFAULT ${localeDefault},
+          outcomes JSONB DEFAULT ${localeDefault},
+          category VARCHAR(255),
+          featured BOOLEAN NOT NULL DEFAULT FALSE,
+          status VARCHAR(20) NOT NULL DEFAULT 'draft',
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          created_by UUID REFERENCES users(id),
+          updated_by UUID REFERENCES users(id),
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+      await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS faqs (
+          id UUID PRIMARY KEY,
+          question JSONB DEFAULT ${localeDefault},
+          answer JSONB DEFAULT ${localeDefault},
+          category VARCHAR(255),
+          status VARCHAR(20) NOT NULL DEFAULT 'draft',
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          created_by UUID REFERENCES users(id),
+          updated_by UUID REFERENCES users(id),
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+      await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS team_members (
+          id UUID PRIMARY KEY,
+          name VARCHAR(255) NOT NULL,
+          photo VARCHAR(255),
+          role JSONB DEFAULT ${localeDefault},
+          bio JSONB DEFAULT ${localeDefault},
+          social_links JSONB DEFAULT '{}'::jsonb,
+          status VARCHAR(20) NOT NULL DEFAULT 'draft',
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          created_by UUID REFERENCES users(id),
+          updated_by UUID REFERENCES users(id),
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+      await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS partners (
+          id UUID PRIMARY KEY,
+          name VARCHAR(255) NOT NULL,
+          logo VARCHAR(255),
+          website_url VARCHAR(255),
+          status VARCHAR(20) NOT NULL DEFAULT 'draft',
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          created_by UUID REFERENCES users(id),
+          updated_by UUID REFERENCES users(id),
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+      await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS banners (
+          id UUID PRIMARY KEY,
+          title JSONB DEFAULT ${localeDefault},
+          subtitle JSONB DEFAULT ${localeDefault},
+          image VARCHAR(255),
+          cta_text JSONB DEFAULT ${localeDefault},
+          cta_link VARCHAR(255),
+          start_date TIMESTAMPTZ,
+          end_date TIMESTAMPTZ,
+          status VARCHAR(20) NOT NULL DEFAULT 'draft',
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          created_by UUID REFERENCES users(id),
+          updated_by UUID REFERENCES users(id),
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+      await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS services (
+          id UUID PRIMARY KEY,
+          icon VARCHAR(50),
+          title JSONB DEFAULT ${localeDefault},
+          description JSONB DEFAULT ${localeDefault},
+          features JSONB DEFAULT '{"en":[]}'::jsonb,
+          status VARCHAR(20) NOT NULL DEFAULT 'draft',
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          created_by UUID REFERENCES users(id),
+          updated_by UUID REFERENCES users(id),
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `);
+    } catch (err) {
+      // Tables may already exist; log unexpected failures instead of
+      // silently swallowing a genuine schema problem
+      console.error("⚠️  CMS table creation issue:", err.message);
+    }
 
     // Initialize Socket.io
     initializeSocket(httpServer);

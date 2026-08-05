@@ -1355,6 +1355,32 @@
       "description": "Barruu haalaa fi iccitii dhukkubsattootaaf mul'atu",
       "terms": "Haalawwan Tajaajilaa",
       "privacy": "Imaammata Iccitii"
+    },
+    "business": {
+      "title": "Odeeffannoo Dhaabbataa",
+      "description": "Kutaa 'Waa'ee Keenya' marsariitii saba-hawaasaa irratti mul'ata",
+      "logo": "Logo",
+      "uploadLogo": "Logo Ol Fe'i",
+      "logoUploadSuccess": "Logon milkaa'inaan ol fe'ameera",
+      "logoUploadError": "Logo ol fe'uun hin danda'amne",
+      "tagline": "Mallattoo Gabaabaa",
+      "mission": "Ergama",
+      "vision": "Mul'ata",
+      "aboutText": "Barruu Waa'ee Keenya",
+      "yearsExperience": "Waggoota Muuxannoo",
+      "patientsServed": "Dhukkubsattoota Tajaajilaman",
+      "treatmentsOffered": "Yaalawwan Kennaman"
+    },
+    "contact": {
+      "title": "Quunnamtii fi Miidiyaa Hawaasaa",
+      "description": "Odeeffannoo quunnamtii fi liinkii miidiyaa hawaasaa marsariitii saba-hawaasaa",
+      "whatsapp": "Lakkoofsa WhatsApp",
+      "facebook": "URL Facebook",
+      "instagram": "URL Instagram",
+      "tiktok": "URL TikTok",
+      "twitter": "URL X (Twitter)",
+      "googleMaps": "URL Dabalataa Google Maps",
+      "googleMapsHint": "Filannoo \"Embed a map\" kan Google Maps irraa URL src maxxansi"
     }
   },
 

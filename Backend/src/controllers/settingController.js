@@ -11,3 +11,19 @@ export const updateSettings = asyncHandler(async (req, res) => {
   const settings = await settingService.updateSettings(req.body, req.user.id);
   return ApiResponse.success(res, settings, "Settings updated successfully");
 });
+
+export const uploadLogo = asyncHandler(async (req, res) => {
+  if (!req.file) return ApiResponse.badRequest(res, "Please upload a file");
+
+  const settings = await settingService.updateSettings(
+    { clinicLogo: `uploads/content/${req.file.filename}` },
+    req.user.id,
+  );
+
+  return ApiResponse.success(res, settings, "Logo uploaded successfully");
+});
+
+export const getPublicSiteInfo = asyncHandler(async (req, res) => {
+  const info = await settingService.getPublicSiteInfo();
+  return ApiResponse.success(res, info, "Site info retrieved successfully");
+});

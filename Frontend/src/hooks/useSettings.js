@@ -16,3 +16,17 @@ export const useUpdateSettings = () => {
     onSuccess: () => qc.invalidateQueries({ queryKey: ["settings"] }),
   });
 };
+
+export const useUploadLogo = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (file) => {
+      const formData = new FormData();
+      formData.append("logo", file);
+      return axiosInstance.post("/settings/logo", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["settings"] }),
+  });
+};

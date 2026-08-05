@@ -24,3 +24,34 @@ export const updateSettings = async (data, updatedBy) => {
 
   return settings;
 };
+
+// Explicit whitelist for the public (unauthenticated) website — operational
+// fields like lowStockThreshold or notification toggles must never leak
+// here, so this only ever returns business/contact info, never the raw row.
+export const getPublicSiteInfo = async () => {
+  const settings = await getSettings();
+
+  return {
+    clinicName: settings.clinicName,
+    clinicLogo: settings.clinicLogo,
+    clinicPhone: settings.clinicPhone,
+    clinicEmail: settings.clinicEmail,
+    clinicAddress: settings.clinicAddress,
+    whatsappNumber: settings.whatsappNumber,
+    facebookUrl: settings.facebookUrl,
+    instagramUrl: settings.instagramUrl,
+    tiktokUrl: settings.tiktokUrl,
+    twitterUrl: settings.twitterUrl,
+    googleMapsEmbedUrl: settings.googleMapsEmbedUrl,
+    workingHoursStart: settings.workingHoursStart,
+    workingHoursEnd: settings.workingHoursEnd,
+    workingDays: settings.workingDays,
+    tagline: settings.tagline,
+    mission: settings.mission,
+    vision: settings.vision,
+    aboutText: settings.aboutText,
+    yearsExperience: settings.yearsExperience,
+    patientsServed: settings.patientsServed,
+    treatmentsOffered: settings.treatmentsOffered,
+  };
+};
