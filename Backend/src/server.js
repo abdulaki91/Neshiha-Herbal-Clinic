@@ -1,3 +1,5 @@
+// Must be the first import — see loadEnv.js for why.
+import "./config/loadEnv.js";
 import http from "http";
 import app from "./app.js";
 import sequelize, { testConnection } from "./config/database.js";

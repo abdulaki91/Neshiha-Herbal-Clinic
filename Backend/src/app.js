@@ -2,15 +2,18 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
-import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import { apiLimiter } from "./middleware/rateLimiter.js";
 import logger from "./config/logger.js";
 
-// Load environment variables
-dotenv.config();
+// Environment variables are loaded by config/loadEnv.js — the first thing
+// server.js imports — or, for anything that imports this file standalone
+// (scripts, tests), by config/database.js's own dotenv call. Not repeated
+// here: this used to run after several of the imports above (logger,
+// rateLimiter) had already read process.env at their own module-load
+// time, so it was too late to matter for them anyway.
 
 // Define dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
