@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import {
   FiHome, FiUsers, FiCalendar, FiFileText, FiSettings,
   FiLogOut, FiDollarSign, FiActivity, FiPackage, FiExternalLink, FiClock,
+  FiImage,
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../store/authStore";
@@ -63,6 +64,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       { name: t("sidebar.cashier"), to: "/portal/cashier", icon: FiDollarSign },
       { name: t("sidebar.laboratory"), to: "/portal/laboratory", icon: FiActivity },
       { name: t("sidebar.reports"), to: "/portal/reports", icon: FiFileText },
+      { name: t("sidebar.content"), to: "/portal/content", icon: FiImage },
       { name: t("sidebar.settings"), to: "/portal/settings", icon: FiSettings },
     ],
     staff_manager: [

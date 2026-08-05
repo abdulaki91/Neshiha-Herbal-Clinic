@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import LanguageSelector from "./LanguageSelector";
 import { useLanguage } from "../i18n/hooks/useLanguage";
+import { usePublicSiteInfo } from "../hooks/usePublicContent";
+
+const backendBase = (import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1").replace(
+  "/api/v1",
+  "",
+);
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useLanguage();
+  const { data: info = {} } = usePublicSiteInfo();
 
   const links = [
     { key: "services", href: "#services" },
@@ -31,8 +38,15 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
         {/* Logo */}
         <div className="flex items-center gap-3 text-gray-800">
+          {info.clinicLogo && (
+            <img
+              src={`${backendBase}/${info.clinicLogo}`}
+              alt={info.clinicName || t("header.title")}
+              className="h-8 lg:h-10 w-auto object-contain"
+            />
+          )}
           <h2 className="text-lg lg:text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
-            {t("header.title")}
+            {info.clinicName || t("header.title")}
           </h2>
         </div>
 

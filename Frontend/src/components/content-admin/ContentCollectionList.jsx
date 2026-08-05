@@ -33,6 +33,10 @@ const ContentCollectionList = ({
   searchable = true,
 }) => {
   const { t } = useTranslation();
+  // Re-bind as a local const: eslint's no-unused-vars (without
+  // eslint-plugin-react) doesn't recognize JSX-tag usage of a destructured
+  // parameter, only of a local binding.
+  const Form = FormComponent;
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [page, setPage] = useState(1);
@@ -238,7 +242,7 @@ const ContentCollectionList = ({
       )}
 
       {showForm && (
-        <FormComponent
+        <Form
           item={selected}
           onClose={() => setShowForm(false)}
           onSuccess={() => setShowForm(false)}

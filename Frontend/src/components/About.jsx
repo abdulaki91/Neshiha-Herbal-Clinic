@@ -1,10 +1,15 @@
-import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "../i18n/hooks/useLanguage";
+import { usePublicSiteInfo } from "../hooks/usePublicContent";
 
 export default function About() {
   const { t, currentLanguage } = useLanguage();
   const isRTL = currentLanguage === "ar";
+  const { data: info = {} } = usePublicSiteInfo();
+  const locale = currentLanguage;
+
+  const aboutText = info.aboutText?.[locale] || info.aboutText?.en;
+  const mission = info.mission?.[locale] || info.mission?.en;
 
   return (
     <>
@@ -49,57 +54,60 @@ export default function About() {
               dir={isRTL ? "rtl" : "ltr"}
               lang={currentLanguage}
             >
-              {t("about.subtitle")}
+              {info.tagline?.[locale] || info.tagline?.en || t("about.subtitle")}
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
             <div className="space-y-6">
-              <p
-                className="text-lg text-gray-700 leading-relaxed"
-                dir={isRTL ? "rtl" : "ltr"}
-                lang={currentLanguage}
-              >
-                {t("about.description")}
-              </p>
-
-              <p
-                className="text-lg text-gray-700 leading-relaxed"
-                dir={isRTL ? "rtl" : "ltr"}
-                lang={currentLanguage}
-              >
-                {t(
-                  "about.extendedDescription",
-                  "Our clinic combines centuries-old herbal wisdom with modern scientific research to create personalized treatment plans. We believe in treating the whole person, not just symptoms, ensuring long-term wellness and vitality."
-                )}
-              </p>
+              {aboutText ? (
+                <p
+                  className="text-lg text-gray-700 leading-relaxed"
+                  dir={isRTL ? "rtl" : "ltr"}
+                  lang={currentLanguage}
+                >
+                  {aboutText}
+                </p>
+              ) : (
+                <p
+                  className="text-lg text-gray-700 leading-relaxed"
+                  dir={isRTL ? "rtl" : "ltr"}
+                  lang={currentLanguage}
+                >
+                  {t("about.description")}
+                </p>
+              )}
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-8 stats-grid">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-emerald-600 mb-2">
-                    6+
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    {t("about.experience")}
-                  </p>
+              {(info.yearsExperience || info.patientsServed || info.treatmentsOffered) && (
+                <div className="grid grid-cols-3 gap-6 pt-8 stats-grid">
+                  {info.yearsExperience != null && (
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-emerald-600 mb-2">
+                        {info.yearsExperience}+
+                      </div>
+                      <p className="text-sm text-gray-600">{t("about.experience")}</p>
+                    </div>
+                  )}
+                  {info.patientsServed != null && (
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-teal-600 mb-2">
+                        {info.patientsServed}+
+                      </div>
+                      <p className="text-sm text-gray-600">{t("about.patients")}</p>
+                    </div>
+                  )}
+                  {info.treatmentsOffered != null && (
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-blue-600 mb-2">
+                        {info.treatmentsOffered}+
+                      </div>
+                      <p className="text-sm text-gray-600">{t("about.treatments")}</p>
+                    </div>
+                  )}
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-teal-600 mb-2">
-                    100+
-                  </div>
-                  <p className="text-sm text-gray-600">{t("about.patients")}</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">
-                    100+
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    {t("about.treatments")}
-                  </p>
-                </div>
-              </div>
+              )}
             </div>
 
             {/* Image/Visual */}
@@ -110,10 +118,7 @@ export default function About() {
                   {t("about.herbalWisdom", "Traditional Herbal Wisdom")}
                 </h3>
                 <p className="text-emerald-100">
-                  {t(
-                    "about.herbalWisdomDesc",
-                    "Passed down through generations"
-                  )}
+                  {mission || t("about.herbalWisdomDesc", "Passed down through generations")}
                 </p>
               </div>
 

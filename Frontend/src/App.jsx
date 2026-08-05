@@ -30,6 +30,7 @@ const CashierReportsPage = lazy(() => import("./pages/portal/CashierReportsPage"
 const StaffPage = lazy(() => import("./pages/portal/StaffPage"));
 const SettingsPage = lazy(() => import("./pages/portal/SettingsPage"));
 const AppointmentsPage = lazy(() => import("./pages/portal/AppointmentsPage"));
+const ContentManagementPage = lazy(() => import("./pages/portal/ContentManagementPage"));
 
 // Store
 import useAuthStore from "./store/authStore";
@@ -186,6 +187,14 @@ export default function App() {
               element={
                 <RoleRoute roles={["super_admin"]}>
                   <SettingsPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="content"
+              element={
+                <RoleRoute roles={["super_admin"]}>
+                  <ContentManagementPage />
                 </RoleRoute>
               }
             />
