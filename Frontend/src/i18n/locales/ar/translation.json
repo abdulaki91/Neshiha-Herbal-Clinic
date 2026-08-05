@@ -52,7 +52,9 @@
     "services": "الخدمات",
     "testimonials": "آراء العملاء",
     "contact": "اتصل بنا",
-    "blog": "المدونة"
+    "blog": "المدونة",
+    "team": "الفريق",
+    "faq": "الأسئلة الشائعة"
   },
   "header": {
     "title": "عيادة نصيحة للأعشاب",
@@ -185,7 +187,13 @@
     "locationDescription": "نحن موجودون في قلب مدينة الصحة، على مقربة من شارع العافية الرئيسي. موقف سيارات مجاني متاح.",
     "needImmediateAssistance": "هل تحتاج مساعدة فورية؟",
     "expertsReady": "خبراؤنا في الطب العشبي مستعدون لمساعدتك اليوم",
-    "scheduleConsultation": "جدولة استشارة"
+    "scheduleConsultation": "جدولة استشارة",
+    "social": {
+      "facebook": "فيسبوك",
+      "instagram": "إنستغرام",
+      "tiktok": "تيك توك",
+      "twitter": "X (تويتر)"
+    }
   },
   "footer": {
     "copyright": "© 2024 عيادة نصيحة للأعشاب. جميع الحقوق محفوظة.",
@@ -278,7 +286,8 @@
     "logout": "تسجيل الخروج",
     "adminPanel": "لوحة الإدارة",
     "badgeOverflow": "+99",
-    "appointments": "المواعيد"
+    "appointments": "المواعيد",
+    "content": "محتوى الموقع"
   },
   "topbar": {
     "greeting": "مرحباً, {{firstName}}!",
@@ -1259,7 +1268,6 @@
       "stat": "عاجل جداً"
     }
   },
-
   "staff": {
     "title": "إدارة الموظفين",
     "subtitle": "إنشاء حسابات الموظفين وتعديلها وإدارتها",
@@ -1312,7 +1320,6 @@
       "deactivateError": "تعذر إلغاء تفعيل الموظف"
     }
   },
-
   "staffForm": {
     "addTitle": "إضافة موظف جديد",
     "editTitle": "تعديل بيانات الموظف",
@@ -1345,7 +1352,6 @@
     "updateSuccess": "تم تحديث بيانات الموظف بنجاح",
     "saveError": "تعذر حفظ بيانات الموظف"
   },
-
   "settings": {
     "title": "الإعدادات",
     "subtitle": "إعدادات العيادة والتفضيلات",
@@ -1428,7 +1434,6 @@
       "googleMapsHint": "الصق رابط src من خيار \"تضمين خريطة\" في خرائط جوجل"
     }
   },
-
   "appointments": {
     "title": "المواعيد",
     "subtitle": "جدولة مواعيد المرضى القادمة وتسجيل وصولهم",
@@ -1454,7 +1459,6 @@
       "cancelError": "تعذر إلغاء الموعد"
     }
   },
-
   "patientRecordSidebar": {
     "title": "درج ملف المريض",
     "idPrefix": "الرقم:",
@@ -1508,6 +1512,163 @@
       "deleteFileConfirm": "هل أنت متأكد من حذف هذا الملف؟",
       "fileDeleted": "تم حذف الملف",
       "deleteFileFailed": "تعذر حذف الملف"
+    }
+  },
+  "successStories": {
+    "title": "قصص النجاح",
+    "subtitle": "نتائج حقيقية من مرضى حقيقيين",
+    "outcomes": "النتائج"
+  },
+  "team": {
+    "title": "تعرف على فريقنا",
+    "subtitle": "ممارسون معتمدون مكرسون لصحتك"
+  },
+  "partners": {
+    "title": "موثوق به من قبل"
+  },
+  "faqs": {
+    "title": "الأسئلة الشائعة",
+    "subtitle": "إجابات على الأسئلة الشائعة"
+  },
+  "contentAdmin": {
+    "title": "محتوى الموقع",
+    "subtitle": "إدارة كل ما يظهر على الموقع العام — دون الحاجة لتغيير الكود",
+    "tabs": {
+      "testimonials": "الشهادات",
+      "successStories": "قصص النجاح",
+      "faqs": "الأسئلة الشائعة",
+      "teamMembers": "الفريق",
+      "partners": "الشركاء",
+      "banners": "اللافتات",
+      "services": "الخدمات"
+    },
+    "common": {
+      "deleteConfirm": "حذف \"{{label}}\"؟ لا يمكن التراجع عن هذا.",
+      "deleteSuccess": "تم الحذف بنجاح",
+      "deleteError": "تعذر الحذف",
+      "statusUpdateSuccess": "تم تحديث الحالة",
+      "statusUpdateError": "تعذر تحديث الحالة",
+      "reorderError": "تعذر إعادة الترتيب",
+      "allStatuses": "جميع الحالات",
+      "published": "منشور",
+      "draft": "مسودة",
+      "loadError": "تعذر التحميل",
+      "empty": "لا يوجد شيء هنا بعد — انقر إضافة لإنشاء الأول",
+      "moveUp": "تحريك لأعلى",
+      "moveDown": "تحريك لأسفل",
+      "uploadPhoto": "رفع صورة",
+      "uploadImage": "رفع صورة",
+      "uploadLogo": "رفع الشعار",
+      "requiredField": "هذا الحقل مطلوب",
+      "status": "الحالة"
+    },
+    "testimonials": {
+      "title": "الشهادات",
+      "subtitle": "شهادات العملاء المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة شهادة",
+      "searchPlaceholder": "ابحث بالعميل أو الشركة...",
+      "addTitle": "إضافة شهادة",
+      "editTitle": "تعديل الشهادة",
+      "clientName": "اسم العميل",
+      "company": "الشركة",
+      "rating": "التقييم",
+      "role": "الدور",
+      "text": "الشهادة",
+      "createSuccess": "تمت إضافة الشهادة",
+      "updateSuccess": "تم تحديث الشهادة",
+      "saveError": "تعذر حفظ الشهادة"
+    },
+    "successStories": {
+      "title": "قصص النجاح",
+      "subtitle": "قصص نجاح ودراسات حالة العملاء",
+      "addButton": "إضافة قصة",
+      "searchPlaceholder": "ابحث بالفئة...",
+      "addTitle": "إضافة قصة نجاح",
+      "editTitle": "تعديل قصة النجاح",
+      "storyTitle": "العنوان",
+      "description": "الوصف",
+      "projectDetails": "تفاصيل المشروع",
+      "outcomes": "النتائج",
+      "category": "الفئة",
+      "featured": "مميز",
+      "images": "الصور",
+      "createSuccess": "تمت إضافة القصة",
+      "updateSuccess": "تم تحديث القصة",
+      "saveError": "تعذر حفظ القصة"
+    },
+    "faqs": {
+      "title": "الأسئلة الشائعة",
+      "subtitle": "الأسئلة المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة سؤال",
+      "searchPlaceholder": "ابحث بالفئة...",
+      "addTitle": "إضافة سؤال",
+      "editTitle": "تعديل السؤال",
+      "question": "السؤال",
+      "answer": "الإجابة",
+      "category": "الفئة",
+      "createSuccess": "تمت إضافة السؤال",
+      "updateSuccess": "تم تحديث السؤال",
+      "saveError": "تعذر حفظ السؤال"
+    },
+    "teamMembers": {
+      "title": "أعضاء الفريق",
+      "subtitle": "ملفات الموظفين المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة عضو",
+      "searchPlaceholder": "ابحث بالاسم...",
+      "addTitle": "إضافة عضو فريق",
+      "editTitle": "تعديل عضو الفريق",
+      "name": "الاسم",
+      "role": "الدور / المسمى الوظيفي",
+      "bio": "نبذة",
+      "linkedin": "رابط LinkedIn",
+      "twitter": "رابط X (تويتر)",
+      "facebook": "رابط فيسبوك",
+      "createSuccess": "تمت إضافة العضو",
+      "updateSuccess": "تم تحديث العضو",
+      "saveError": "تعذر حفظ العضو"
+    },
+    "partners": {
+      "title": "الشركاء",
+      "subtitle": "شعارات الشركاء المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة شريك",
+      "searchPlaceholder": "ابحث بالاسم...",
+      "addTitle": "إضافة شريك",
+      "editTitle": "تعديل الشريك",
+      "name": "الاسم",
+      "websiteUrl": "رابط الموقع",
+      "createSuccess": "تمت إضافة الشريك",
+      "updateSuccess": "تم تحديث الشريك",
+      "saveError": "تعذر حفظ الشريك"
+    },
+    "banners": {
+      "title": "اللافتات",
+      "subtitle": "اللافتات الترويجية المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة لافتة",
+      "addTitle": "إضافة لافتة",
+      "editTitle": "تعديل اللافتة",
+      "bannerTitle": "العنوان",
+      "subtitleLabel": "العنوان الفرعي",
+      "ctaText": "نص الزر",
+      "ctaLink": "رابط الزر",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "createSuccess": "تمت إضافة اللافتة",
+      "updateSuccess": "تم تحديث اللافتة",
+      "saveError": "تعذر حفظ اللافتة"
+    },
+    "services": {
+      "title": "الخدمات",
+      "subtitle": "الخدمات المدرجة على الصفحة الرئيسية",
+      "addButton": "إضافة خدمة",
+      "addTitle": "إضافة خدمة",
+      "editTitle": "تعديل الخدمة",
+      "icon": "الأيقونة (رمز تعبيري)",
+      "serviceTitle": "العنوان",
+      "description": "الوصف",
+      "features": "الميزات (سطر لكل ميزة)",
+      "createSuccess": "تمت إضافة الخدمة",
+      "updateSuccess": "تم تحديث الخدمة",
+      "saveError": "تعذر حفظ الخدمة"
     }
   }
 }

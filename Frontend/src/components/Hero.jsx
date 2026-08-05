@@ -1,15 +1,25 @@
 import React from "react";
 import { useLanguage } from "../i18n/hooks/useLanguage";
+import { usePublicBanners } from "../hooks/usePublicContent";
 
 /** Hero Banner */
 export default function Hero() {
   const { t, currentLanguage } = useLanguage();
-  
+  const { data: banners = [] } = usePublicBanners();
+
   // Check if current language is RTL
   const isRTL = currentLanguage === 'ar';
-  
+
+  // The fixed header stack (Header.jsx) grows by the BannerStrip's height
+  // (h-9/h-10) when a banner is active — this offset must track that so
+  // Hero's content isn't hidden behind it.
+  const topOffsetClass =
+    banners.length > 0
+      ? "mt-[6.25rem] lg:mt-[7.5rem]"
+      : "mt-16 lg:mt-20";
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden mt-16 lg:mt-20 hero-section">
+    <section className={`relative min-h-screen flex items-center justify-center overflow-hidden hero-section ${topOffsetClass}`}>
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"

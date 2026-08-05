@@ -52,7 +52,9 @@
     "services": "Tajaajiloota",
     "testimonials": "Yaada Dhukkubstaa",
     "contact": "Nu Qunnami",
-    "blog": "Blogii"
+    "blog": "Blogii",
+    "team": "Garee",
+    "faq": "Gaaffii Yeroo Baay'ee Gaafataman"
   },
   "header": {
     "title": "Nesiha Kliinika Biqilaa",
@@ -185,7 +187,13 @@
     "locationDescription": "Bakka fayyaa giddugaleessaa keessatti argamna, daandii Fayyaa guddaa bira. Bakki paarkii konkolaataa bilisaa ni jira.",
     "needImmediateAssistance": "Deeggarsa Hatattamaa Barbaaddaa?",
     "expertsReady": "Ogeeyyiin yaala biqilaa keenya har'a isin gargaaruuf qophii dha",
-    "scheduleConsultation": "Yeroo Gorsa Qabadhu"
+    "scheduleConsultation": "Yeroo Gorsa Qabadhu",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "twitter": "X (Twitter)"
+    }
   },
   "footer": {
     "copyright": "© 2024 Kliinika Biqilaa Nesihaa. Mirga hundi eegame.",
@@ -278,7 +286,8 @@
     "logout": "Ba'i",
     "adminPanel": "Paaneel Bulchiinsa",
     "badgeOverflow": "99+",
-    "appointments": "Beellamoota"
+    "appointments": "Beellamoota",
+    "content": "Qabiyyee Marsariitii"
   },
   "topbar": {
     "greeting": "Baga nagaa dhufte, {{firstName}}!",
@@ -1046,7 +1055,6 @@
     "previousNotes": "Yaadannoo Duraanii:",
     "viewFullHistory": "Seenaa Guutuu Ilaali"
   },
-
   "patientHistory": {
     "loading": "Seenaa fe'aa jira...",
     "fetchError": "Seenaa Dhukkubstaaa fe'uun milkaa'uu baate",
@@ -1214,7 +1222,6 @@
     "cashier": "Kaashiyara",
     "staff_manager": "Bulchiisaa Hojjettootaa"
   },
-
   "staff": {
     "title": "Bulchiinsa Hojjettootaa",
     "subtitle": "Herrega hojjettootaa uumi, gulaali fi bulchi",
@@ -1267,7 +1274,6 @@
       "deactivateError": "Hojjetaa dhaabuun hin danda'amne"
     }
   },
-
   "staffForm": {
     "addTitle": "Hojjetaa Haaraa Dabali",
     "editTitle": "Hojjetaa Gulaali",
@@ -1300,7 +1306,6 @@
     "updateSuccess": "Hojjetaan haaromfameera",
     "saveError": "Hojjetaa olkaa'uun hin danda'amne"
   },
-
   "settings": {
     "title": "Sajoo",
     "subtitle": "Qindaa'ina fi filannoo kliinikaa",
@@ -1383,7 +1388,6 @@
       "googleMapsHint": "Filannoo \"Embed a map\" kan Google Maps irraa URL src maxxansi"
     }
   },
-
   "appointments": {
     "title": "Beellamoota",
     "subtitle": "Beellama dhufaa jiran hordofi, dhukkubsattoota seensisi",
@@ -1409,7 +1413,6 @@
       "cancelError": "Beellama haquun hin danda'amne"
     }
   },
-
   "patientRecordSidebar": {
     "title": "Kutaa Faayilii Dhukkubsataa",
     "idPrefix": "ID:",
@@ -1463,6 +1466,163 @@
       "deleteFileConfirm": "Faayilii kana haquu keessan mirkaneessitanii?",
       "fileDeleted": "Faayiliin haqameera",
       "deleteFileFailed": "Faayilii haquun hin danda'amne"
+    }
+  },
+  "successStories": {
+    "title": "Milkaa'ina Dhukkubsattootaa",
+    "subtitle": "Bu'aa dhugaa dhukkubsattoota dhugaa irraa",
+    "outcomes": "Bu'aa"
+  },
+  "team": {
+    "title": "Garee Keenya Beeki",
+    "subtitle": "Ogeeyyii ragaa qaban fayyaa keessaniif of kennan"
+  },
+  "partners": {
+    "title": "Kan Amanamu"
+  },
+  "faqs": {
+    "title": "Gaaffiiwwan Yeroo Baay'ee Gaafataman",
+    "subtitle": "Deebii gaaffii waliigalaa"
+  },
+  "contentAdmin": {
+    "title": "Qabiyyee Marsariitii",
+    "subtitle": "Waan marsariitii saba-hawaasaa irratti mul'atu hunda bulchi — koodii jijjiiruun hin barbaachisu",
+    "tabs": {
+      "testimonials": "Ragaa Dhukkubsattootaa",
+      "successStories": "Milkaa'ina",
+      "faqs": "Gaaffiiwwan",
+      "teamMembers": "Garee",
+      "partners": "Michoota",
+      "banners": "Beeksisa",
+      "services": "Tajaajilawwan"
+    },
+    "common": {
+      "deleteConfirm": "\"{{label}}\" haquu? Kun deebi'uu hin danda'u.",
+      "deleteSuccess": "Milkaa'inaan haqameera",
+      "deleteError": "Haquun hin milkoofne",
+      "statusUpdateSuccess": "Haalli haaromfameera",
+      "statusUpdateError": "Haala haaromsuun hin milkoofne",
+      "reorderError": "Tartiiba jijjiiruun hin milkoofne",
+      "allStatuses": "Haala hunda",
+      "published": "Maxxanfame",
+      "draft": "Draafti",
+      "loadError": "Fe'uun hin milkoofne",
+      "empty": "Ammaan tana homaa hin jiru — jalqabaa uumuuf 'Ida'i' cuqaasi",
+      "moveUp": "Ol guuri",
+      "moveDown": "Gad buusi",
+      "uploadPhoto": "Suura Ol Fe'i",
+      "uploadImage": "Suura Ol Fe'i",
+      "uploadLogo": "Logo Ol Fe'i",
+      "requiredField": "Kutaan kun barbaachisaadha",
+      "status": "Haala"
+    },
+    "testimonials": {
+      "title": "Ragaa Dhukkubsattootaa",
+      "subtitle": "Ragaan dhukkubsattoota fuula duraatti mul'atu",
+      "addButton": "Ragaa Ida'i",
+      "searchPlaceholder": "Maqaa ykn dhaabbata barbaadi...",
+      "addTitle": "Ragaa Ida'i",
+      "editTitle": "Ragaa Gulaali",
+      "clientName": "Maqaa Dhukkubsataa",
+      "company": "Dhaabbata",
+      "rating": "Sadarkaa",
+      "role": "Gahee",
+      "text": "Ragaa",
+      "createSuccess": "Ragaan ida'ameera",
+      "updateSuccess": "Ragaan haaromfameera",
+      "saveError": "Ragaa olkaa'uun hin milkoofne"
+    },
+    "successStories": {
+      "title": "Milkaa'ina Dhukkubsattootaa",
+      "subtitle": "Seenaa milkaa'ina fi qorannoo dhukkubsattootaa",
+      "addButton": "Seenaa Ida'i",
+      "searchPlaceholder": "Gosa barbaadi...",
+      "addTitle": "Seenaa Milkaa'inaa Ida'i",
+      "editTitle": "Seenaa Milkaa'inaa Gulaali",
+      "storyTitle": "Mata Duree",
+      "description": "Ibsa",
+      "projectDetails": "Ibsa Sirna",
+      "outcomes": "Bu'aa",
+      "category": "Gosa",
+      "featured": "Kan Filatame",
+      "images": "Suuraalee",
+      "createSuccess": "Seenaan ida'ameera",
+      "updateSuccess": "Seenaan haaromfameera",
+      "saveError": "Seenaa olkaa'uun hin milkoofne"
+    },
+    "faqs": {
+      "title": "Gaaffiiwwan Yeroo Baay'ee Gaafataman",
+      "subtitle": "Gaaffiiwwan fuula duraatti mul'atan",
+      "addButton": "Gaaffii Ida'i",
+      "searchPlaceholder": "Gosa barbaadi...",
+      "addTitle": "Gaaffii Ida'i",
+      "editTitle": "Gaaffii Gulaali",
+      "question": "Gaaffii",
+      "answer": "Deebii",
+      "category": "Gosa",
+      "createSuccess": "Gaaffiin ida'ameera",
+      "updateSuccess": "Gaaffiin haaromfameera",
+      "saveError": "Gaaffii olkaa'uun hin milkoofne"
+    },
+    "teamMembers": {
+      "title": "Miseensota Garee",
+      "subtitle": "Piroofaayilii hojjettootaa kan fuula duraatti mul'atu",
+      "addButton": "Miseensa Ida'i",
+      "searchPlaceholder": "Maqaa barbaadi...",
+      "addTitle": "Miseensa Garee Ida'i",
+      "editTitle": "Miseensa Garee Gulaali",
+      "name": "Maqaa",
+      "role": "Gahee / Sadarkaa",
+      "bio": "Seenaa Gabaabaa",
+      "linkedin": "URL LinkedIn",
+      "twitter": "URL X (Twitter)",
+      "facebook": "URL Facebook",
+      "createSuccess": "Miseensi ida'ameera",
+      "updateSuccess": "Miseensi haaromfameera",
+      "saveError": "Miseensa olkaa'uun hin milkoofne"
+    },
+    "partners": {
+      "title": "Michoota",
+      "subtitle": "Suuraalee michoota kan fuula duraatti mul'atu",
+      "addButton": "Michuu Ida'i",
+      "searchPlaceholder": "Maqaa barbaadi...",
+      "addTitle": "Michuu Ida'i",
+      "editTitle": "Michuu Gulaali",
+      "name": "Maqaa",
+      "websiteUrl": "URL Marsariitii",
+      "createSuccess": "Michuun ida'ameera",
+      "updateSuccess": "Michuun haaromfameera",
+      "saveError": "Michuu olkaa'uun hin milkoofne"
+    },
+    "banners": {
+      "title": "Beeksisa",
+      "subtitle": "Beeksisa fuula duraatti mul'atu",
+      "addButton": "Beeksisa Ida'i",
+      "addTitle": "Beeksisa Ida'i",
+      "editTitle": "Beeksisa Gulaali",
+      "bannerTitle": "Mata Duree",
+      "subtitleLabel": "Mata Duree Xiqqaa",
+      "ctaText": "Barruu Qabduu",
+      "ctaLink": "Liinkii Qabduu",
+      "startDate": "Guyyaa Jalqabaa",
+      "endDate": "Guyyaa Xumuraa",
+      "createSuccess": "Beeksisni ida'ameera",
+      "updateSuccess": "Beeksisni haaromfameera",
+      "saveError": "Beeksisa olkaa'uun hin milkoofne"
+    },
+    "services": {
+      "title": "Tajaajilawwan",
+      "subtitle": "Tajaajilawwan fuula duraatti tarreeffaman",
+      "addButton": "Tajaajila Ida'i",
+      "addTitle": "Tajaajila Ida'i",
+      "editTitle": "Tajaajila Gulaali",
+      "icon": "Mallattoo (emoji)",
+      "serviceTitle": "Mata Duree",
+      "description": "Ibsa",
+      "features": "Amaloota (tokkoon tokkoon sarara)",
+      "createSuccess": "Tajaajilli ida'ameera",
+      "updateSuccess": "Tajaajilli haaromfameera",
+      "saveError": "Tajaajila olkaa'uun hin milkoofne"
     }
   }
 }

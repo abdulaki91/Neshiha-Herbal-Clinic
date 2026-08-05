@@ -12,8 +12,10 @@ export const createBannerValidator = [
   translatableField(body("subtitle")),
   translatableField(body("ctaText")),
   body("ctaLink").optional().trim(),
-  body("startDate").optional().isISO8601().withMessage("Invalid date"),
-  body("endDate").optional().isISO8601().withMessage("Invalid date"),
+  // { nullable: true }: the form sends null for a cleared date input, and
+  // optional() alone only skips undefined, not null.
+  body("startDate").optional({ nullable: true }).isISO8601().withMessage("Invalid date"),
+  body("endDate").optional({ nullable: true }).isISO8601().withMessage("Invalid date"),
   body("status").optional().isIn(["draft", "published"]).withMessage("Invalid status"),
 ];
 
@@ -22,7 +24,9 @@ export const updateBannerValidator = [
   translatableField(body("subtitle")),
   translatableField(body("ctaText")),
   body("ctaLink").optional().trim(),
-  body("startDate").optional().isISO8601().withMessage("Invalid date"),
-  body("endDate").optional().isISO8601().withMessage("Invalid date"),
+  // { nullable: true }: the form sends null for a cleared date input, and
+  // optional() alone only skips undefined, not null.
+  body("startDate").optional({ nullable: true }).isISO8601().withMessage("Invalid date"),
+  body("endDate").optional({ nullable: true }).isISO8601().withMessage("Invalid date"),
   body("status").optional().isIn(["draft", "published"]).withMessage("Invalid status"),
 ];

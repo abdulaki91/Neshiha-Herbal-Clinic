@@ -157,7 +157,15 @@ const SettingsPage = () => {
       await updateSettings.mutateAsync(payload);
       toast.success(t("settings.saveSuccess"));
     } catch (error) {
-      toast.error(error.response?.data?.message || t("settings.saveError"));
+      // Field-level validation errors live in `errors`, not `message`
+      // (which is just the generic "Validation failed") — surface the
+      // actual reason instead of a dead-end toast.
+      const fieldErrors = error.response?.data?.errors;
+      if (Array.isArray(fieldErrors) && fieldErrors.length > 0) {
+        toast.error(fieldErrors.map((e) => e.message).join(" "));
+      } else {
+        toast.error(error.response?.data?.message || t("settings.saveError"));
+      }
     }
   };
 

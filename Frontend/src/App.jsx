@@ -162,18 +162,99 @@ export default function App() {
               </ProtectedRoute>
             }
           >
+            {/* Dashboard stays open to every role */}
             <Route index element={<DashboardPage />} />
-            <Route path="patients" element={<PatientsPage />} />
-            <Route path="patients/:id" element={<PatientDetailPage />} />
-            <Route path="visits" element={<VisitsPage />} />
-            <Route path="visits/new" element={<VisitsPage />} />
-            <Route path="appointments" element={<AppointmentsPage />} />
-            <Route path="queue" element={<DoctorQueuePage />} />
-            <Route path="medicines" element={<MedicinesPage />} />
-            <Route path="laboratory" element={<LaboratoryPage />} />
-            <Route path="pharmacy" element={<PharmacyPage />} />
-            <Route path="cashier" element={<CashierPage />} />
-            <Route path="reports" element={<CashierReportsPage />} />
+
+            {/* Clinical / patient-operations pages — super admin is an
+                administrative role and is deliberately excluded here. */}
+            <Route
+              path="patients"
+              element={
+                <RoleRoute roles={["data_clerk", "doctor", "cashier"]}>
+                  <PatientsPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="patients/:id"
+              element={
+                <RoleRoute roles={["data_clerk", "doctor", "cashier"]}>
+                  <PatientDetailPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="visits"
+              element={
+                <RoleRoute roles={["data_clerk", "doctor"]}>
+                  <VisitsPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="visits/new"
+              element={
+                <RoleRoute roles={["data_clerk", "doctor"]}>
+                  <VisitsPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="appointments"
+              element={
+                <RoleRoute roles={["data_clerk", "doctor"]}>
+                  <AppointmentsPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="queue"
+              element={
+                <RoleRoute roles={["doctor"]}>
+                  <DoctorQueuePage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="medicines"
+              element={
+                <RoleRoute roles={["data_clerk", "doctor"]}>
+                  <MedicinesPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="laboratory"
+              element={
+                <RoleRoute roles={["doctor", "data_clerk"]}>
+                  <LaboratoryPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="pharmacy"
+              element={
+                <RoleRoute roles={["doctor", "cashier", "data_clerk"]}>
+                  <PharmacyPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="cashier"
+              element={
+                <RoleRoute roles={["cashier"]}>
+                  <CashierPage />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="reports"
+              element={
+                <RoleRoute roles={["cashier"]}>
+                  <CashierReportsPage />
+                </RoleRoute>
+              }
+            />
             <Route
               path="staff"
               element={

@@ -17,7 +17,7 @@ router.get("/", medicineController.getAllMedicines);
 router.get("/:id", medicineController.getMedicineById);
 router.post(
   "/",
-  authorize(ROLES.SUPER_ADMIN, ROLES.DOCTOR, ROLES.DATA_CLERK),
+  authorize(ROLES.DOCTOR, ROLES.DATA_CLERK),
   medicineValidator.createMedicineValidator,
   validate,
   auditLogger("CREATE", "Medicine"),
@@ -25,7 +25,7 @@ router.post(
 );
 router.put(
   "/:id",
-  authorize(ROLES.SUPER_ADMIN, ROLES.DOCTOR, ROLES.DATA_CLERK),
+  authorize(ROLES.DOCTOR, ROLES.DATA_CLERK),
   medicineValidator.updateMedicineValidator,
   validate,
   auditUpdate("Medicine"),
@@ -33,13 +33,13 @@ router.put(
 );
 router.delete(
   "/:id",
-  authorize(ROLES.SUPER_ADMIN, ROLES.DOCTOR, ROLES.DATA_CLERK),
+  authorize(ROLES.DOCTOR, ROLES.DATA_CLERK),
   auditLogger("DELETE", "Medicine"),
   medicineController.deleteMedicine,
 );
 router.patch(
   "/:id/adjust-stock",
-  authorize(ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  authorize(ROLES.DOCTOR),
   auditLogger("UPDATE", "Medicine"),
   medicineController.adjustStock,
 );

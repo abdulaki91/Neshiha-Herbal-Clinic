@@ -30,9 +30,13 @@ export const updateSettingsValidator = [
   translatableField(body("mission")),
   translatableField(body("vision")),
   translatableField(body("aboutText")),
-  body("yearsExperience").optional().isInt({ min: 0 }).withMessage("Invalid value"),
-  body("patientsServed").optional().isInt({ min: 0 }).withMessage("Invalid value"),
-  body("treatmentsOffered").optional().isInt({ min: 0 }).withMessage("Invalid value"),
+  // { nullable: true } matters here: the form sends null (not undefined)
+  // for a blank number field, and express-validator's optional() only
+  // skips undefined by default — without this, clearing the field to
+  // empty fails validation instead of clearing it.
+  body("yearsExperience").optional({ nullable: true }).isInt({ min: 0 }).withMessage("Invalid value"),
+  body("patientsServed").optional({ nullable: true }).isInt({ min: 0 }).withMessage("Invalid value"),
+  body("treatmentsOffered").optional({ nullable: true }).isInt({ min: 0 }).withMessage("Invalid value"),
   // Contact Information
   body("whatsappNumber").optional().trim(),
   urlField(body("facebookUrl")),

@@ -186,7 +186,6 @@ export const isUserOnline = (userId) => {
 export const emitPatientRegistered = (patient) => {
   emitToRole("doctor", "patient:registered", patient);
   emitToRole("data_clerk", "patient:registered", patient);
-  emitToRole("super_admin", "patient:registered", patient);
 };
 
 /**
@@ -194,7 +193,6 @@ export const emitPatientRegistered = (patient) => {
  */
 export const emitVisitCreated = (visit) => {
   emitToRole("doctor", "visit:created", visit);
-  emitToRole("super_admin", "visit:created", visit);
 
   // Emit to queue updates
   if (io) {
@@ -208,7 +206,6 @@ export const emitVisitCreated = (visit) => {
 export const emitVisitStatusChanged = (visit) => {
   emitToRole("doctor", "visit:status-changed", visit);
   emitToRole("data_clerk", "visit:status-changed", visit);
-  emitToRole("super_admin", "visit:status-changed", visit);
 
   if (io) {
     io.to("queue:updates").emit("queue:updated", visit);
@@ -220,7 +217,6 @@ export const emitVisitStatusChanged = (visit) => {
  */
 export const emitPrescriptionCreated = (prescription) => {
   emitToUser(prescription.doctorId, "prescription:created", prescription);
-  emitToRole("super_admin", "prescription:created", prescription);
 };
 
 /**
@@ -228,14 +224,14 @@ export const emitPrescriptionCreated = (prescription) => {
  */
 export const emitMedicineDispensed = (dispense) => {
   emitToRole("doctor", "medicine:dispensed", dispense);
-  emitToRole("super_admin", "medicine:dispensed", dispense);
 };
 
 /**
  * Emit low stock alert
  */
 export const emitLowStockAlert = (medicine) => {
-  emitToRole("super_admin", "medicine:low-stock", medicine);
+  emitToRole("doctor", "medicine:low-stock", medicine);
+  emitToRole("data_clerk", "medicine:low-stock", medicine);
 };
 
 /**
@@ -260,7 +256,6 @@ export const emitStaffCreated = (staff) => {
  */
 export const emitInvestigationCreated = (investigation) => {
   emitToRole("doctor", "investigation:created", investigation);
-  emitToRole("super_admin", "investigation:created", investigation);
 };
 
 /**
@@ -272,7 +267,6 @@ export const emitInvestigationResultAdded = (investigation) => {
     "investigation:result-added",
     investigation,
   );
-  emitToRole("super_admin", "investigation:result-added", investigation);
 };
 
 /**
@@ -281,7 +275,6 @@ export const emitInvestigationResultAdded = (investigation) => {
 export const emitPaymentCompleted = (payment) => {
   emitToRole("cashier", "payment:completed", payment);
   emitToRole("doctor", "payment:completed", payment);
-  emitToRole("super_admin", "payment:completed", payment);
 };
 
 export default {

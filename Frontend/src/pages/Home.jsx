@@ -2,7 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import Header from "../components/Header";
-import BannerStrip from "../components/BannerStrip";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
 import Testimonials from "../components/Testimonials";
@@ -63,8 +62,7 @@ export default function Home() {
         `}</script>
       </Helmet>
 
-      {/* Header */}
-      <BannerStrip />
+      {/* Header (renders its own banner strip above the nav bar) */}
       <Header />
 
       {/* Page Content */}

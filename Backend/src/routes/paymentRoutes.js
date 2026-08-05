@@ -9,25 +9,25 @@ router.use(authenticate);
 
 router.get(
   "/pending",
-  authorize(ROLES.CASHIER, ROLES.SUPER_ADMIN),
+  authorize(ROLES.CASHIER),
   paymentController.getPendingPayments,
 );
 
 router.get(
   "/history",
-  authorize(ROLES.CASHIER, ROLES.SUPER_ADMIN),
+  authorize(ROLES.CASHIER),
   paymentController.getPaymentHistory,
 );
 
 router.get(
   "/:visitId",
-  authorize(ROLES.CASHIER, ROLES.SUPER_ADMIN),
+  authorize(ROLES.CASHIER),
   paymentController.getPaymentDetails,
 );
 
 router.post(
   "/:visitId",
-  authorize(ROLES.CASHIER, ROLES.SUPER_ADMIN),
+  authorize(ROLES.CASHIER),
   paymentController.processPayment,
 );
 

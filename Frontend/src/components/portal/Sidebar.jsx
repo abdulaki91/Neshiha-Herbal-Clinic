@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   FiHome, FiUsers, FiCalendar, FiFileText, FiSettings,
-  FiLogOut, FiDollarSign, FiActivity, FiPackage, FiExternalLink, FiClock,
+  FiLogOut, FiDollarSign, FiPackage, FiExternalLink, FiClock,
   FiImage,
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
@@ -54,16 +54,13 @@ const Sidebar = ({ isOpen, onClose }) => {
   }, [qc]);
 
   const navigation = {
+    // Super admin is an administrative role only — staff accounts, the
+    // public website's content, and system settings. Clinical/patient
+    // operations (patients, visits, appointments, medicines, cashier,
+    // laboratory, reports) belong to the operational staff roles below.
     super_admin: [
       { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
       { name: t("sidebar.staff"), to: "/portal/staff", icon: FiUsers },
-      { name: t("sidebar.patients"), to: "/portal/patients", icon: FiUsers },
-      { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
-      { name: t("sidebar.appointments"), to: "/portal/appointments", icon: FiClock },
-      { name: t("sidebar.medicines"), to: "/portal/medicines", icon: FiPackage },
-      { name: t("sidebar.cashier"), to: "/portal/cashier", icon: FiDollarSign },
-      { name: t("sidebar.laboratory"), to: "/portal/laboratory", icon: FiActivity },
-      { name: t("sidebar.reports"), to: "/portal/reports", icon: FiFileText },
       { name: t("sidebar.content"), to: "/portal/content", icon: FiImage },
       { name: t("sidebar.settings"), to: "/portal/settings", icon: FiSettings },
     ],

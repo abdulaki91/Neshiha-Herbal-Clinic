@@ -11,7 +11,7 @@ router.use(authenticate);
 // Create dispense record (Doctor, Pharmacist roles could be added)
 router.post(
   "/",
-  authorize([ROLES.DOCTOR, ROLES.SUPER_ADMIN]),
+  authorize(ROLES.DOCTOR),
   medicineDispenseController.createDispense,
 );
 

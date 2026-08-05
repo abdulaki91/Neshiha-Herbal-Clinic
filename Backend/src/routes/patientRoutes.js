@@ -33,7 +33,7 @@ router.get("/:id/history", patientController.getPatientHistory);
 // Create new patient
 router.post(
   "/",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  authorize(ROLES.DATA_CLERK, ROLES.DOCTOR),
   patientValidator.createPatientValidator,
   validate,
   auditLogger("CREATE", "Patient"),
@@ -43,7 +43,7 @@ router.post(
 // Update patient
 router.put(
   "/:id",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  authorize(ROLES.DATA_CLERK, ROLES.DOCTOR),
   patientValidator.updatePatientValidator,
   validate,
   auditUpdate("Patient"),
@@ -53,7 +53,7 @@ router.put(
 // Delete patient (super admin and doctor)
 router.delete(
   "/:id",
-  authorize(ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  authorize(ROLES.DOCTOR),
   auditLogger("DELETE", "Patient"),
   patientController.deletePatient,
 );
@@ -61,7 +61,7 @@ router.delete(
 // Upload patient photo
 router.post(
   "/:id/photo",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  authorize(ROLES.DATA_CLERK, ROLES.DOCTOR),
   uploadSingle("photo"),
   auditLogger("UPDATE", "Patient"),
   patientController.uploadPhoto,
@@ -70,7 +70,7 @@ router.post(
 // Upload patient attachment (laboratory report, photos, etc.)
 router.post(
   "/:id/attachments",
-  authorize(ROLES.DATA_CLERK, ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  authorize(ROLES.DATA_CLERK, ROLES.DOCTOR),
   uploadSingle("document"),
   auditLogger("UPDATE", "Patient"),
   patientAttachmentController.uploadAttachment,
@@ -85,7 +85,7 @@ router.get(
 // Delete patient attachment
 router.delete(
   "/:id/attachments/:attachmentId",
-  authorize(ROLES.SUPER_ADMIN, ROLES.DOCTOR),
+  authorize(ROLES.DOCTOR),
   auditLogger("UPDATE", "Patient"),
   patientAttachmentController.deleteAttachment,
 );

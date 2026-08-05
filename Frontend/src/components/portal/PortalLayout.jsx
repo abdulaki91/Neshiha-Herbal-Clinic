@@ -21,7 +21,7 @@ const PortalLayout = () => {
     };
 
     const handlePatientRegistered = (patient) => {
-      if (["super_admin", "data_clerk", "doctor"].includes(user?.role)) {
+      if (["data_clerk", "doctor"].includes(user?.role)) {
         toast.success(
           t("toast.patientRegistered", { firstName: patient.firstName, lastName: patient.lastName }),
           { icon: "👤" },
@@ -30,7 +30,7 @@ const PortalLayout = () => {
     };
 
     const handleVisitCreated = () => {
-      if (["super_admin", "doctor"].includes(user?.role)) {
+      if (["doctor"].includes(user?.role)) {
         toast.success(t("toast.newVisitCreated"), { icon: "📋" });
       }
     };
@@ -46,19 +46,19 @@ const PortalLayout = () => {
     };
 
     const handlePrescriptionCreated = () => {
-      if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+      if (["doctor", "cashier"].includes(user?.role)) {
         toast.success(t("toast.prescriptionAdded"), { icon: "💊" });
       }
     };
 
     const handleMedicineDispensed = () => {
-      if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+      if (["doctor", "cashier"].includes(user?.role)) {
         toast.success(t("toast.medicineDispensed"), { icon: "✅" });
       }
     };
 
     const handlePaymentCompleted = (payment) => {
-      if (["super_admin", "doctor", "cashier"].includes(user?.role)) {
+      if (["doctor", "cashier"].includes(user?.role)) {
         toast.success(
           t("toast.paymentReceived", { amount: payment.amount?.toLocaleString?.() || payment.amount }),
           { icon: "💰" },
