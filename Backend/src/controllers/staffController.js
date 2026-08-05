@@ -1,6 +1,7 @@
 import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import * as staffService from "../services/staffService.js";
+import { emitStaffCreated } from "../config/socket.js";
 
 /**
  * @route   GET /api/v1/staff
@@ -36,6 +37,8 @@ export const getStaffById = asyncHandler(async (req, res) => {
  */
 export const createStaff = asyncHandler(async (req, res) => {
   const staff = await staffService.createStaff(req.body, req.user);
+
+  emitStaffCreated(staff);
 
   return ApiResponse.created(res, staff, "Staff created successfully");
 });

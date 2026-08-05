@@ -1,6 +1,11 @@
 import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import * as investigationService from "../services/investigationService.js";
+import * as notificationService from "../services/notificationService.js";
+import {
+  emitInvestigationCreated,
+  emitInvestigationResultAdded,
+} from "../config/socket.js";
 
 export const getAllInvestigations = asyncHandler(async (req, res) => {
   const result = await investigationService.getAllInvestigations(req.query);
@@ -28,6 +33,7 @@ export const createInvestigation = asyncHandler(async (req, res) => {
     req.body,
     req.user.id,
   );
+  emitInvestigationCreated(investigation);
   return ApiResponse.created(
     res,
     investigation,
@@ -57,6 +63,22 @@ export const addResults = asyncHandler(async (req, res) => {
     resultFile,
     req.user.id,
   );
+
+  emitInvestigationResultAdded(investigation);
+
+  // The requesting doctor is usually away from this screen once results
+  // come back (with the patient, or between consultations) — a persisted
+  // notification is what actually gets their attention, not just a socket
+  // event that's lost if they weren't connected at that instant
+  notificationService.notifyUser(investigation.requestedBy, {
+    type: "investigation_result",
+    title: "Lab result ready",
+    message: `${investigation.testName} results are ready for review`,
+    priority: investigation.urgency === "stat" ? "urgent" : "medium",
+    link: `/portal/patients/${investigation.patientId}`,
+    metadata: { investigationId: investigation.id },
+  });
+
   return ApiResponse.success(
     res,
     investigation,

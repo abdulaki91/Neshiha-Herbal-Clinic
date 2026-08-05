@@ -254,6 +254,16 @@ export const emitStaffCreated = (staff) => {
 };
 
 /**
+ * Emit new investigation/lab test requested. Only doctors can create or
+ * complete investigations in this system (no separate lab-tech role), so
+ * this is for multi-doctor visibility and admin oversight, not a handoff.
+ */
+export const emitInvestigationCreated = (investigation) => {
+  emitToRole("doctor", "investigation:created", investigation);
+  emitToRole("super_admin", "investigation:created", investigation);
+};
+
+/**
  * Emit investigation result added
  */
 export const emitInvestigationResultAdded = (investigation) => {
@@ -290,6 +300,7 @@ export default {
   emitLowStockAlert,
   emitNotificationCreated,
   emitStaffCreated,
+  emitInvestigationCreated,
   emitInvestigationResultAdded,
   emitPaymentCompleted,
 };

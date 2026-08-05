@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -22,8 +22,7 @@ import {
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 import { getSocket } from "../../lib/socket";
-import { useQueue, useUpdateVisit } from "../../hooks/useVisits";
-import { usePrescriptions } from "../../hooks/usePrescriptions";
+import { useQueue } from "../../hooks/useVisits";
 import useAuthStore from "../../store/authStore";
 import HerbalMedicineForm from "../../components/doctor/HerbalMedicineForm";
 import FollowUpIndicator from "../../components/doctor/FollowUpIndicator";
@@ -78,8 +77,6 @@ const DoctorQueuePage = () => {
   const qc = useQueryClient();
   const { user } = useAuthStore();
   const { data: queue = [], isLoading } = useQueue();
-  const updateVisit = useUpdateVisit();
-  const { data: prescriptionsData } = usePrescriptions();
   const refreshQueue = () => qc.invalidateQueries({ queryKey: ["queue"] });
 
   // Printable herbal prescription slip

@@ -278,7 +278,8 @@
     "queue": "Queue",
     "logout": "Logout",
     "adminPanel": "Admin Panel",
-    "badgeOverflow": "99+"
+    "badgeOverflow": "99+",
+    "appointments": "Appointments"
   },
 
   "topbar": {
@@ -545,7 +546,8 @@
       "waiting": "Waiting",
       "inConsultation": "In Consultation",
       "completed": "Completed",
-      "cancelled": "Cancelled"
+      "cancelled": "Cancelled",
+      "scheduled": "Scheduled"
     },
     "empty": "No visits found",
     "toast": {
@@ -593,7 +595,10 @@
       "allergies": "Allergies:",
       "chronic": "Chronic:",
       "saveProgress": "Save Progress",
-      "completeConsultation": "Complete Consultation"
+      "completeConsultation": "Complete Consultation",
+      "printPrescription": "Print Prescription",
+      "printNoPrescriptions": "No prescriptions to print for this visit yet",
+      "printError": "Failed to prepare prescription for printing"
     },
     "queue": { "chiefComplaintPrefix": "CC:" },
     "queueStats": {
@@ -1101,7 +1106,19 @@
     "arrivalTimeLabel": "Arrival Time *",
     "arrivalTimeRequired": "Arrival time is required",
     "creating": "Creating...",
-    "createButton": "Create Visit"
+    "createButton": "Create Visit",
+    "scheduleTitle": "Schedule Appointment",
+    "mode": {
+      "walkIn": "Walk-in Now",
+      "appointment": "Schedule Ahead"
+    },
+    "appointmentDateLabel": "Appointment Date",
+    "scheduledTimeLabel": "Appointment Time",
+    "scheduledTimeRequired": "Appointment time is required",
+    "appointmentHint": "The patient will appear on the doctor's queue only after front desk checks them in on the appointment date.",
+    "scheduleButton": "Schedule Appointment",
+    "scheduleSuccess": "Appointment scheduled successfully",
+    "createSuccess": "Visit created successfully"
   },
 
   "clinicManagement": {
@@ -1282,6 +1299,32 @@
       "description": "Terms and privacy text shown to patients",
       "terms": "Terms and Conditions",
       "privacy": "Privacy Policy"
+    }
+  },
+
+  "appointments": {
+    "title": "Appointments",
+    "subtitle": "Schedule and check in upcoming patient appointments",
+    "newButton": "New Appointment",
+    "searchPlaceholder": "Search by patient name, ID or phone...",
+    "loadError": "Failed to load appointments",
+    "empty": "No upcoming appointments",
+    "emptyHint": "Scheduled appointments will appear here",
+    "checkIn": "Check In",
+    "checkInDisabledHint": "Only available on the appointment's own date",
+    "cancel": "Cancel appointment",
+    "cancelConfirm": "Cancel this appointment?",
+    "dateGroup": {
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "appointment": "appointment",
+      "appointments": "appointments"
+    },
+    "toast": {
+      "checkInSuccess": "{{name}} checked in",
+      "checkInError": "Failed to check in patient",
+      "cancelSuccess": "Appointment cancelled",
+      "cancelError": "Failed to cancel appointment"
     }
   }
 }

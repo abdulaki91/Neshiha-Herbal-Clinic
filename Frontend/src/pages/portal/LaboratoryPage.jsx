@@ -12,6 +12,7 @@ import {
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 import useAuthStore from "../../store/authStore";
+import { getSocket } from "../../lib/socket";
 
 const LaboratoryPage = () => {
   const { user } = useAuthStore();
@@ -35,6 +36,20 @@ const LaboratoryPage = () => {
   useEffect(() => {
     filterInvestigations();
   }, [searchTerm, investigations]);
+
+  // Real-time: a new test request or a result posted from another session
+  // (or another doctor) should show up here without a manual reload
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+    const refresh = () => fetchInvestigations();
+    socket.on("investigation:created", refresh);
+    socket.on("investigation:result-added", refresh);
+    return () => {
+      socket.off("investigation:created", refresh);
+      socket.off("investigation:result-added", refresh);
+    };
+  }, [statusFilter]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchInvestigations = async () => {
     try {

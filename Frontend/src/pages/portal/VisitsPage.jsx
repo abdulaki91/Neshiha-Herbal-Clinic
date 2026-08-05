@@ -5,6 +5,7 @@ import axiosInstance from "../../lib/axios";
 import VisitForm from "../../components/visits/VisitForm";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { getSocket } from "../../lib/socket";
 
 const VisitsPage = () => {
   const { t } = useTranslation();
@@ -18,7 +19,21 @@ const VisitsPage = () => {
 
   useEffect(() => {
     fetchVisits();
-  }, [filter]);
+  }, [filter]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Real-time: a new walk-in, a check-in, or a status change from the
+  // doctor's queue should reflect here without a manual reload
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+    const refresh = () => fetchVisits();
+    socket.on("visit:created", refresh);
+    socket.on("visit:status-changed", refresh);
+    return () => {
+      socket.off("visit:created", refresh);
+      socket.off("visit:status-changed", refresh);
+    };
+  }, [filter]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchVisits = async () => {
     try {

@@ -12,6 +12,7 @@ import {
 import toast from "react-hot-toast";
 import axiosInstance from "../../lib/axios";
 import useAuthStore from "../../store/authStore";
+import { getSocket } from "../../lib/socket";
 
 const PharmacyPage = () => {
   const { user } = useAuthStore();
@@ -35,6 +36,20 @@ const PharmacyPage = () => {
   useEffect(() => {
     filterPrescriptions();
   }, [searchTerm, prescriptions]);
+
+  // Real-time: another pharmacist dispensing, or a doctor prescribing,
+  // should refresh this queue without waiting for a manual reload
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+    const refresh = () => fetchPrescriptions();
+    socket.on("prescription:created", refresh);
+    socket.on("medicine:dispensed", refresh);
+    return () => {
+      socket.off("prescription:created", refresh);
+      socket.off("medicine:dispensed", refresh);
+    };
+  }, [statusFilter]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchPrescriptions = async () => {
     try {

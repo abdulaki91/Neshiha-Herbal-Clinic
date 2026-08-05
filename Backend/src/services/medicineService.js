@@ -3,6 +3,36 @@ import { Op } from "sequelize";
 import { getPagination, isExpired } from "../utils/helpers.js";
 import { ERROR_MESSAGES, MEDICINE_STATUS } from "../config/constants.js";
 import sequelize from "../config/database.js";
+import { emitLowStockAlert } from "../config/socket.js";
+import * as notificationService from "./notificationService.js";
+
+/**
+ * Called after any operation that reduces stock (manual adjustment,
+ * dispensing). Only alerts on the transition INTO low/out-of-stock —
+ * without the previousStatus check, every dispense of an already-low item
+ * would re-notify every admin, which trains people to ignore the alert.
+ */
+export const alertIfLowStock = (medicine, previousStatus) => {
+  const isLowOrOut =
+    medicine.status === MEDICINE_STATUS.LOW_STOCK ||
+    medicine.status === MEDICINE_STATUS.OUT_OF_STOCK;
+
+  if (!isLowOrOut || medicine.status === previousStatus) return;
+
+  emitLowStockAlert(medicine);
+
+  notificationService.notifyRole("super_admin", {
+    type: "low_stock",
+    title:
+      medicine.status === MEDICINE_STATUS.OUT_OF_STOCK
+        ? "Medicine out of stock"
+        : "Medicine running low",
+    message: `${medicine.name} — ${medicine.availableQuantity} unit(s) remaining`,
+    priority: medicine.status === MEDICINE_STATUS.OUT_OF_STOCK ? "urgent" : "high",
+    link: "/portal/medicines",
+    metadata: { medicineId: medicine.id },
+  });
+};
 
 export const createMedicine = async (data, createdBy) => {
   const medicine = await Medicine.create({ ...data, createdBy });
@@ -79,7 +109,9 @@ export const adjustStock = async (id, quantity, type, updatedBy) => {
 
   if (newQuantity < 0) throw new Error("Insufficient stock");
 
+  const previousStatus = medicine.status;
   await medicine.update({ availableQuantity: newQuantity, updatedBy });
+  alertIfLowStock(medicine, previousStatus);
   return medicine;
 };
 

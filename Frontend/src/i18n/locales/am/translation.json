@@ -277,7 +277,8 @@
     "queue": "ወረፋ",
     "logout": "ውጣ",
     "adminPanel": "የአስተዳዳሪ ገጽ",
-    "badgeOverflow": "99+"
+    "badgeOverflow": "99+",
+    "appointments": "ቀጠሮዎች"
   },
   "topbar": {
     "greeting": "እንኳን ደህና መጡ, {{firstName}}!",
@@ -579,7 +580,8 @@
       "waiting": "በመጠባበቅ ላይ",
       "inConsultation": "በምክክር ውስጥ",
       "completed": "ተጠናቅቋል",
-      "cancelled": "ተሰርዟል"
+      "cancelled": "ተሰርዟል",
+      "scheduled": "ተይዟል"
     },
     "empty": "ጉብኝቶች አልተገኙም",
     "toast": {
@@ -626,7 +628,10 @@
       "allergies": "አለርጂዎች:",
       "chronic": "ሥር የሰደደ:",
       "saveProgress": "ሂደት አስቀምጥ",
-      "completeConsultation": "ምክክር ጨርስ"
+      "completeConsultation": "ምክክር ጨርስ",
+      "printPrescription": "የመድሃኒት ማዘዣ አትም",
+      "printNoPrescriptions": "ለዚህ ጉብኝት የሚታተም የመድሃኒት ማዘዣ የለም",
+      "printError": "የመድሃኒት ማዘዣውን ለማተም ማዘጋጀት አልተቻለም"
     },
     "queue": {
       "chiefComplaintPrefix": "ዋናው ቅሬታ:"
@@ -1136,7 +1141,19 @@
     "arrivalTimeLabel": "Arrival Time *",
     "arrivalTimeRequired": "Arrival time is required",
     "creating": "Creating...",
-    "createButton": "Create Visit"
+    "createButton": "Create Visit",
+    "scheduleTitle": "ቀጠሮ ያስይዙ",
+    "mode": {
+      "walkIn": "አሁን ግቡ",
+      "appointment": "አስቀድሞ ያስይዙ"
+    },
+    "appointmentDateLabel": "የቀጠሮ ቀን",
+    "scheduledTimeLabel": "የቀጠሮ ሰዓት",
+    "scheduledTimeRequired": "የቀጠሮ ሰዓት ያስፈልጋል",
+    "appointmentHint": "ታካሚው በቀጠሮው ቀን የመቀበያ ሰራተኛ ካስገባው በኋላ ብቻ በዶክተሩ ወረፋ ላይ ይታያል።",
+    "scheduleButton": "ቀጠሮ ያስይዙ",
+    "scheduleSuccess": "ቀጠሮው በተሳካ ሁኔታ ተይዟል",
+    "createSuccess": "ጉብኝቱ በተሳካ ሁኔታ ተፈጥሯል"
   },
   "clinicManagement": {
     "title": "Clinic Management",
@@ -1371,6 +1388,32 @@
       "description": "ለታካሚዎች የሚታዩ የውል እና የግላዊነት ጽሑፎች",
       "terms": "ውሎች እና ሁኔታዎች",
       "privacy": "የግላዊነት ፖሊሲ"
+    }
+  },
+
+  "appointments": {
+    "title": "ቀጠሮዎች",
+    "subtitle": "መጪ የታካሚ ቀጠሮዎችን ያስይዙ እና ያስገቡ",
+    "newButton": "አዲስ ቀጠሮ",
+    "searchPlaceholder": "በስም፣ በመታወቂያ ወይም በስልክ ይፈልጉ...",
+    "loadError": "ቀጠሮዎችን መጫን አልተቻለም",
+    "empty": "መጪ ቀጠሮ የለም",
+    "emptyHint": "የተያዙ ቀጠሮዎች እዚህ ይታያሉ",
+    "checkIn": "አስገባ",
+    "checkInDisabledHint": "የሚሰራው በቀጠሮው ቀን ብቻ ነው",
+    "cancel": "ቀጠሮ ሰርዝ",
+    "cancelConfirm": "ይህን ቀጠሮ መሰረዝ ይፈልጋሉ?",
+    "dateGroup": {
+      "today": "ዛሬ",
+      "tomorrow": "ነገ",
+      "appointment": "ቀጠሮ",
+      "appointments": "ቀጠሮዎች"
+    },
+    "toast": {
+      "checkInSuccess": "{{name}} ገብቷል",
+      "checkInError": "ታካሚውን ማስገባት አልተቻለም",
+      "cancelSuccess": "ቀጠሮው ተሰርዟል",
+      "cancelError": "ቀጠሮውን መሰረዝ አልተቻለም"
     }
   }
 }

@@ -1,6 +1,7 @@
 import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import * as prescriptionService from "../services/prescriptionService.js";
+import { alertIfLowStock } from "../services/medicineService.js";
 import { emitPrescriptionCreated, emitMedicineDispensed } from "../config/socket.js";
 
 export const getAllPrescriptions = asyncHandler(async (req, res) => {
@@ -45,6 +46,9 @@ export const dispenseMedicine = asyncHandler(async (req, res) => {
     req.user.id,
   );
   emitMedicineDispensed(result);
+  // Fired only after commit, outside the dispense transaction, so a rolled
+  // back dispense can never trigger a false low-stock alert
+  alertIfLowStock(result.medicine, result.previousMedicineStatus);
   return ApiResponse.success(res, result, "Medicine dispensed successfully");
 });
 

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import MedicineForm from "../../components/medicine/MedicineForm";
 import useAuthStore from "../../store/authStore";
 import { useTranslation } from "react-i18next";
+import { getSocket } from "../../lib/socket";
 
 const MedicinesPage = () => {
   const { t } = useTranslation();
@@ -17,7 +18,21 @@ const MedicinesPage = () => {
 
   useEffect(() => {
     fetchMedicines();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Real-time: stock counts change whenever anyone dispenses, and a
+  // medicine crossing into low/out-of-stock should be visible immediately
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+    const refresh = () => fetchMedicines();
+    socket.on("medicine:dispensed", refresh);
+    socket.on("medicine:low-stock", refresh);
+    return () => {
+      socket.off("medicine:dispensed", refresh);
+      socket.off("medicine:low-stock", refresh);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchMedicines = async () => {
     try {

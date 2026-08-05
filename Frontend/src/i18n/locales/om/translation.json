@@ -277,7 +277,8 @@
     "queue": "Tarree Eeggataa",
     "logout": "Ba'i",
     "adminPanel": "Paaneel Bulchiinsa",
-    "badgeOverflow": "99+"
+    "badgeOverflow": "99+",
+    "appointments": "Beellamoota"
   },
   "topbar": {
     "greeting": "Baga nagaa dhufte, {{firstName}}!",
@@ -579,7 +580,8 @@
       "waiting": "Eeggataa Jira",
       "inConsultation": "Gorsa Keessatti",
       "completed": "Xumurame",
-      "cancelled": "Haqufame"
+      "cancelled": "Haqufame",
+      "scheduled": "Sajoofame"
     },
     "empty": "Daawwata hin argamne",
     "toast": {
@@ -626,7 +628,10 @@
       "allergies": "Alarjii:",
       "chronic": "Dhukkuba Dhaabbataa:",
       "saveProgress": "Guddina Kuusi",
-      "completeConsultation": "Gorsa Xumuri"
+      "completeConsultation": "Gorsa Xumuri",
+      "printPrescription": "Qorichaa Maxxansi",
+      "printNoPrescriptions": "Daawwannaa kanaaf qorichi maxxanfamu hin jiru",
+      "printError": "Qoricha maxxansuuf qopheessuun hin danda'amne"
     },
     "queue": {
       "chiefComplaintPrefix": "KK:"
@@ -1136,7 +1141,19 @@
     "arrivalTimeLabel": "Yeroo Ga'umsaa *",
     "arrivalTimeRequired": "Yeroon ga'umsaa barbaachisa",
     "creating": "Uumaa jira...",
-    "createButton": "Daawwata Uumi"
+    "createButton": "Daawwata Uumi",
+    "scheduleTitle": "Beellama Sajooji",
+    "mode": {
+      "walkIn": "Yeroo Ammaa Seeni",
+      "appointment": "Duraan Sajooji"
+    },
+    "appointmentDateLabel": "Guyyaa Beellamaa",
+    "scheduledTimeLabel": "Sa'aatii Beellamaa",
+    "scheduledTimeRequired": "Sa'aatiin beellamaa barbaachisaa dha",
+    "appointmentHint": "Dhukkubsataan guyyaa beellamaa irratti akkuma daawwannaan seensifameen booda tarree doktaraa irratti mul'ata.",
+    "scheduleButton": "Beellama Sajooji",
+    "scheduleSuccess": "Beellamni sajoofameera",
+    "createSuccess": "Daawwannaan uumameera"
   },
   "clinicManagement": {
     "title": "Bulchiinsa Kliinika",
@@ -1313,6 +1330,32 @@
       "description": "Barruu haalaa fi iccitii dhukkubsattootaaf mul'atu",
       "terms": "Haalawwan Tajaajilaa",
       "privacy": "Imaammata Iccitii"
+    }
+  },
+
+  "appointments": {
+    "title": "Beellamoota",
+    "subtitle": "Beellama dhufaa jiran hordofi, dhukkubsattoota seensisi",
+    "newButton": "Beellama Haaraa",
+    "searchPlaceholder": "Maqaa, lakkoofsa ID yookaan bilbilaan barbaadi...",
+    "loadError": "Beellamoota fe'uun hin danda'amne",
+    "empty": "Beellamni dhufaa jiru hin jiru",
+    "emptyHint": "Beellamni qindaa'e as ni mul'ata",
+    "checkIn": "Seensisi",
+    "checkInDisabledHint": "Guyyaa beellamichaa qofa irratti hojjeta",
+    "cancel": "Beellama haqi",
+    "cancelConfirm": "Beellama kana haquu barbaaddaa?",
+    "dateGroup": {
+      "today": "Har'a",
+      "tomorrow": "Boru",
+      "appointment": "beellama",
+      "appointments": "beellamoota"
+    },
+    "toast": {
+      "checkInSuccess": "{{name}} seensifameera",
+      "checkInError": "Dhukkubsataa seensisuun hin danda'amne",
+      "cancelSuccess": "Beellamni haqameera",
+      "cancelError": "Beellama haquun hin danda'amne"
     }
   }
 }

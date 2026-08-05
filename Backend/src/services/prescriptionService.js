@@ -105,10 +105,28 @@ export const dispenseMedicine = async (
     // Default to full prescribed quantity if not specified
     const dispenseQuantity = quantity || prescription.quantity;
 
+    // Lock the row for the duration of the transaction so two concurrent
+    // dispenses can't both read the same availableQuantity and oversell it
     const medicine = await Medicine.findByPk(prescription.medicineId, {
       transaction,
+      lock: transaction.LOCK.UPDATE,
     });
     if (!medicine) throw new Error("Medicine not found");
+
+    if (medicine.availableQuantity < dispenseQuantity) {
+      throw new Error(
+        `Insufficient stock: only ${medicine.availableQuantity} unit(s) of ${medicine.name} available`,
+      );
+    }
+
+    const previousMedicineStatus = medicine.status;
+
+    // Dispensing was never decrementing inventory, so stock counts and the
+    // low-stock/out-of-stock status derived from them drifted from reality
+    await medicine.update(
+      { availableQuantity: medicine.availableQuantity - dispenseQuantity },
+      { transaction },
+    );
 
     // Create dispense record
     const dispense = await MedicineDispense.create(
@@ -142,7 +160,7 @@ export const dispenseMedicine = async (
     );
 
     await transaction.commit();
-    return { prescription, dispense };
+    return { prescription, dispense, medicine, previousMedicineStatus };
   } catch (error) {
     await transaction.rollback();
     throw error;

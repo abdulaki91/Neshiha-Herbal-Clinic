@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   FiPlus,
   FiCalendar,
@@ -10,6 +11,7 @@ import {
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import VisitForm from "../../components/visits/VisitForm";
+import { getSocket } from "../../lib/socket";
 import {
   useAppointments,
   useCheckInAppointment,
@@ -43,9 +45,24 @@ const formatDateHeading = (dateStr, t) => {
 
 const AppointmentsPage = () => {
   const { t } = useTranslation();
+  const qc = useQueryClient();
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
+
+  // Real-time: another front-desk session scheduling, checking in, or
+  // cancelling an appointment should reflect here immediately
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+    const invalidate = () => qc.invalidateQueries({ queryKey: ["appointments"] });
+    socket.on("visit:created", invalidate);
+    socket.on("visit:status-changed", invalidate);
+    return () => {
+      socket.off("visit:created", invalidate);
+      socket.off("visit:status-changed", invalidate);
+    };
+  }, [qc]);
 
   const { data, isLoading, isError } = useAppointments({ search, pageSize: 100 });
 

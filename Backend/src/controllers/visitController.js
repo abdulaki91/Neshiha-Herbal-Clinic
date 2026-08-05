@@ -77,6 +77,7 @@ export const assignDoctor = asyncHandler(async (req, res) => {
     doctorId,
     req.user.id,
   );
+  emitVisitStatusChanged(visit);
   return ApiResponse.success(res, visit, "Doctor assigned successfully");
 });
 
