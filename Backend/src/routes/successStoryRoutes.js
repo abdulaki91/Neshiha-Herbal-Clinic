@@ -4,7 +4,7 @@ import * as successStoryValidator from "../validators/successStoryValidator.js";
 import { validate } from "../middleware/validator.js";
 import { authenticate, authorize } from "../middleware/auth.js";
 import { auditLogger, auditUpdate } from "../middleware/audit.js";
-import { uploadMultiple, attachImagePaths } from "../middleware/upload.js";
+import { uploadMultiple, attachImagePaths, parseJsonFields } from "../middleware/upload.js";
 import { ROLES } from "../config/constants.js";
 
 const router = express.Router();
@@ -25,6 +25,7 @@ router.post(
   "/",
   uploadMultiple("images", 8),
   attachImagePaths("images"),
+  parseJsonFields("title", "description", "projectDetails", "outcomes"),
   successStoryValidator.createSuccessStoryValidator,
   validate,
   auditLogger("CREATE", "SuccessStory"),
@@ -35,6 +36,7 @@ router.put(
   "/:id",
   uploadMultiple("images", 8),
   attachImagePaths("images"),
+  parseJsonFields("title", "description", "projectDetails", "outcomes"),
   successStoryValidator.updateSuccessStoryValidator,
   validate,
   auditUpdate("SuccessStory"),

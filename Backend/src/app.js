@@ -31,6 +31,12 @@ import settingRoutes from "./routes/settingRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
+import successStoryRoutes from "./routes/successStoryRoutes.js";
+import faqRoutes from "./routes/faqRoutes.js";
+import teamMemberRoutes from "./routes/teamMemberRoutes.js";
+import partnerRoutes from "./routes/partnerRoutes.js";
+import bannerRoutes from "./routes/bannerRoutes.js";
+import serviceRoutes from "./routes/serviceRoutes.js";
 import publicContentRoutes from "./routes/publicContentRoutes.js";
 
 // Create Express app
@@ -106,6 +112,12 @@ app.use(`/api/${API_VERSION}/settings`, settingRoutes);
 app.use(`/api/${API_VERSION}/notifications`, notificationRoutes);
 app.use(`/api/${API_VERSION}/payments`, paymentRoutes);
 app.use(`/api/${API_VERSION}/testimonials`, testimonialRoutes);
+app.use(`/api/${API_VERSION}/success-stories`, successStoryRoutes);
+app.use(`/api/${API_VERSION}/faqs`, faqRoutes);
+app.use(`/api/${API_VERSION}/team-members`, teamMemberRoutes);
+app.use(`/api/${API_VERSION}/partners`, partnerRoutes);
+app.use(`/api/${API_VERSION}/banners`, bannerRoutes);
+app.use(`/api/${API_VERSION}/services`, serviceRoutes);
 app.use(`/api/${API_VERSION}/public`, publicContentRoutes);
 
 // 404 handler

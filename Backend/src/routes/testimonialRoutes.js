@@ -4,7 +4,7 @@ import * as testimonialValidator from "../validators/testimonialValidator.js";
 import { validate } from "../middleware/validator.js";
 import { authenticate, authorize } from "../middleware/auth.js";
 import { auditLogger, auditUpdate } from "../middleware/audit.js";
-import { uploadSingle, attachImagePath } from "../middleware/upload.js";
+import { uploadSingle, attachImagePath, parseJsonFields } from "../middleware/upload.js";
 import { ROLES } from "../config/constants.js";
 
 const router = express.Router();
@@ -26,6 +26,7 @@ router.post(
   "/",
   uploadSingle("image"),
   attachImagePath("clientPhoto"),
+  parseJsonFields("role", "text"),
   testimonialValidator.createTestimonialValidator,
   validate,
   auditLogger("CREATE", "Testimonial"),
@@ -36,6 +37,7 @@ router.put(
   "/:id",
   uploadSingle("image"),
   attachImagePath("clientPhoto"),
+  parseJsonFields("role", "text"),
   testimonialValidator.updateTestimonialValidator,
   validate,
   auditUpdate("Testimonial"),

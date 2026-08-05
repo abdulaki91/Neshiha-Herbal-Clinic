@@ -11,7 +11,11 @@
       "Bash(curl -s -o /dev/null -w \"port 5000 status: %{http_code}\\\\n\" http://localhost:5000/health --max-time 3)",
       "Bash(npx eslint *)",
       "Bash(node _tmp_test_settings.mjs)",
-      "Bash(node _tmp_test_testimonial.mjs)"
+      "Bash(node _tmp_test_testimonial.mjs)",
+      "Bash(node _tmp_test_all_cms.mjs)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/public/testimonials)",
+      "Bash(curl -s http://localhost:5000/api/v1/public/site-info)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/testimonials)"
     ]
   }
 }
