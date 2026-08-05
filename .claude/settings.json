@@ -15,7 +15,15 @@
       "Bash(node _tmp_test_all_cms.mjs)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/public/testimonials)",
       "Bash(curl -s http://localhost:5000/api/v1/public/site-info)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/testimonials)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/testimonials)",
+      "Bash(curl -s -o /dev/null -w \"health check: %{http_code}\\\\n\" http://localhost:5000/health --max-time 3)",
+      "Bash(curl -s -o /dev/null -w \"health: %{http_code}\\\\n\" http://localhost:5000/health --max-time 3)",
+      "Bash(tail -50 /tmp/server-verify.log)",
+      "Bash(curl -s -o /dev/null -w \"health: %{http_code}\\\\n\" http://localhost:5000/health --max-time 5)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/public/testimonials --max-time 5)",
+      "Bash(curl -s http://localhost:5000/api/v1/public/site-info --max-time 5)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/testimonials --max-time 5)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/faqs --max-time 5)"
     ]
   }
 }
