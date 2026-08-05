@@ -287,7 +287,8 @@
     "adminPanel": "لوحة الإدارة",
     "badgeOverflow": "+99",
     "appointments": "المواعيد",
-    "content": "محتوى الموقع"
+    "content": "محتوى الموقع",
+    "bookingRequests": "طلبات الحجز"
   },
   "topbar": {
     "greeting": "مرحباً, {{firstName}}!",
@@ -329,7 +330,8 @@
     "prescriptionAdded": "تمت إضافة وصفة طبية جديدة للمريض",
     "medicineDispensed": "تم صرف الدواء للمريض",
     "paymentReceived": "تم استلام الدفع: {{amount}} بر إثيوبي",
-    "staffCreated": "تمت إضافة موظف جديد"
+    "staffCreated": "تمت إضافة موظف جديد",
+    "newBookingRequest": "طلب حجز جديد من {{name}}"
   },
   "login": {
     "brandName": "عيادة نصيحة للأعشاب",
@@ -1670,5 +1672,51 @@
       "updateSuccess": "تم تحديث الخدمة",
       "saveError": "تعذر حفظ الخدمة"
     }
+  },
+  "booking": {
+    "navCta": "احجز موعدًا",
+    "title": "احجز موعدًا",
+    "subtitle": "أخبرنا قليلاً عنك ومتى ترغب في الزيارة — سنتواصل معك للتأكيد.",
+    "fullName": "الاسم الكامل",
+    "phone": "رقم الهاتف",
+    "email": "البريد الإلكتروني (اختياري)",
+    "preferredDate": "التاريخ المفضل",
+    "preferredTime": "الوقت المفضل",
+    "timeAny": "أي وقت",
+    "timeMorning": "صباحًا",
+    "timeAfternoon": "ظهرًا",
+    "timeEvening": "مساءً",
+    "reason": "سبب الزيارة (اختياري)",
+    "requiredField": "هذا الحقل مطلوب",
+    "submit": "طلب موعد",
+    "submitting": "جارٍ الإرسال...",
+    "submitError": "حدث خطأ ما — يرجى المحاولة مرة أخرى.",
+    "successTitle": "تم استلام الطلب!",
+    "successMessage": "شكرًا لك — سيتواصل معك فريقنا قريبًا لتأكيد موعدك."
+  },
+  "bookingRequests": {
+    "title": "طلبات الحجز",
+    "subtitle": "طلبات المواعيد المقدمة من الموقع",
+    "searchPlaceholder": "ابحث بالاسم أو الهاتف أو البريد الإلكتروني...",
+    "allStatuses": "جميع الحالات",
+    "status": {
+      "pending": "قيد الانتظار",
+      "contacted": "تم التواصل",
+      "confirmed": "مؤكد",
+      "declined": "مرفوض",
+      "converted": "تم التحويل إلى زيارة"
+    },
+    "time": {
+      "morning": "صباحًا",
+      "afternoon": "ظهرًا",
+      "evening": "مساءً"
+    },
+    "markContacted": "وضع علامة تم التواصل",
+    "convert": "تحويل إلى زيارة",
+    "decline": "رفض",
+    "statusUpdateSuccess": "تم تحديث الحالة",
+    "statusUpdateError": "تعذر تحديث الحالة",
+    "loadError": "تعذر تحميل طلبات الحجز",
+    "empty": "لا توجد طلبات حجز بعد"
   }
 }

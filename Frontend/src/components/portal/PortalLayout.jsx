@@ -72,6 +72,14 @@ const PortalLayout = () => {
       }
     };
 
+    const handleBookingRequestCreated = (booking) => {
+      if (["data_clerk", "doctor"].includes(user?.role)) {
+        toast.success(t("toast.newBookingRequest", { name: booking.fullName }), {
+          icon: "📅",
+        });
+      }
+    };
+
     // Room membership (like "queue:updates") doesn't survive a reconnect —
     // it's per-connection server state, not per-user. A plain mount-time
     // subscribeToQueue() call worked once, then silently stopped delivering
@@ -91,6 +99,7 @@ const PortalLayout = () => {
       socket.on("medicine:dispensed", handleMedicineDispensed);
       socket.on("payment:completed", handlePaymentCompleted);
       socket.on("staff:created", handleStaffCreated);
+      socket.on("booking-request:created", handleBookingRequestCreated);
     };
 
     const detach = () => {
@@ -103,6 +112,7 @@ const PortalLayout = () => {
       socket.off("medicine:dispensed", handleMedicineDispensed);
       socket.off("payment:completed", handlePaymentCompleted);
       socket.off("staff:created", handleStaffCreated);
+      socket.off("booking-request:created", handleBookingRequestCreated);
     };
 
     if (socket.connected) attach();

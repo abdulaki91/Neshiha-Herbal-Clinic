@@ -287,7 +287,8 @@
     "adminPanel": "Paaneel Bulchiinsa",
     "badgeOverflow": "99+",
     "appointments": "Beellamoota",
-    "content": "Qabiyyee Marsariitii"
+    "content": "Qabiyyee Marsariitii",
+    "bookingRequests": "Gaaffii Beellamaa"
   },
   "topbar": {
     "greeting": "Baga nagaa dhufte, {{firstName}}!",
@@ -329,7 +330,8 @@
     "prescriptionAdded": "Ajandaan haaraa Dhukkubstaaaf dabale",
     "medicineDispensed": "Qorichi Dhukkubstaaaf kennam",
     "paymentReceived": "Kaffaltii fudhatame: {{amount}} ETB",
-    "staffCreated": "Hojjetaan haaraan dabalameera"
+    "staffCreated": "Hojjetaan haaraan dabalameera",
+    "newBookingRequest": "Gaaffiin beellamaa haaraa {{name}} irraa"
   },
   "login": {
     "brandName": "Kliinika Biqilaa Nesihaa",
@@ -1624,5 +1626,51 @@
       "updateSuccess": "Tajaajilli haaromfameera",
       "saveError": "Tajaajila olkaa'uun hin milkoofne"
     }
+  },
+  "booking": {
+    "navCta": "Beellama Qabadhu",
+    "title": "Beellama Qabadhaa",
+    "subtitle": "Waa'ee keessanii fi yeroo daawwachuu barbaaddan xiqqoo nutti himaa — mirkaneessuuf isin quunnamna.",
+    "fullName": "Maqaa Guutuu",
+    "phone": "Lakkoofsa Bilbilaa",
+    "email": "Imeelii (filannoo)",
+    "preferredDate": "Guyyaa Filatamaa",
+    "preferredTime": "Sa'aatii Filatamaa",
+    "timeAny": "Yeroo kamiyyuu",
+    "timeMorning": "Ganama",
+    "timeAfternoon": "Waaree Booda",
+    "timeEvening": "Galgala",
+    "reason": "Sababa Daawwannaa (filannoo)",
+    "requiredField": "Kutaan kun barbaachisaadha",
+    "submit": "Beellama Gaafadhu",
+    "submitting": "Ergaa jira...",
+    "submitError": "Rakkoon uumameera — irra deebi'aa yaalaa.",
+    "successTitle": "Gaaffiin Argameera!",
+    "successMessage": "Galatoomaa — garee keenya beellama keessan mirkaneessuuf yeroo dhihootti isin quunnama."
+  },
+  "bookingRequests": {
+    "title": "Gaaffii Beellamaa",
+    "subtitle": "Gaaffii beellamaa marsariitii irraa ergaman",
+    "searchPlaceholder": "Maqaa, bilbila, ykn imeelii barbaadi...",
+    "allStatuses": "Haala hunda",
+    "status": {
+      "pending": "Eegaa Jira",
+      "contacted": "Quunnamameera",
+      "confirmed": "Mirkanaa'eera",
+      "declined": "Didameera",
+      "converted": "Gara Daawwannaatti Jijjiirameera"
+    },
+    "time": {
+      "morning": "Ganama",
+      "afternoon": "Waaree Booda",
+      "evening": "Galgala"
+    },
+    "markContacted": "Quunnamame Jedhi",
+    "convert": "Gara Daawwannaatti Jijjiiri",
+    "decline": "Didi",
+    "statusUpdateSuccess": "Haalli haaromfameera",
+    "statusUpdateError": "Haala haaromsuun hin milkoofne",
+    "loadError": "Gaaffii beellamaa fe'uun hin milkoofne",
+    "empty": "Ammaan tana gaaffiin beellamaa hin jiru"
   }
 }

@@ -4,13 +4,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import {
   FiHome, FiUsers, FiCalendar, FiFileText, FiSettings,
   FiLogOut, FiDollarSign, FiPackage, FiExternalLink, FiClock,
-  FiImage,
+  FiImage, FiInbox,
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../store/authStore";
 import { getSocket } from "../../lib/socket";
 import { useQueue } from "../../hooks/useVisits";
 import { usePendingPayments } from "../../hooks/usePayments";
+import { usePendingBookingCount } from "../../hooks/useBookingRequests";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuthStore();
@@ -24,10 +25,14 @@ const Sidebar = ({ isOpen, onClose }) => {
     role === "cashier" ? "" : "",
     { enabled: role === "cashier" },
   );
+  const { data: pendingBookings = 0 } = usePendingBookingCount({
+    enabled: ["doctor", "data_clerk"].includes(role),
+  });
 
   const counts = {
     "/portal/queue": role === "doctor" ? queue.length : 0,
     "/portal/cashier": role === "cashier" ? pendingPayments.length : 0,
+    "/portal/booking-requests": ["doctor", "data_clerk"].includes(role) ? pendingBookings : 0,
   };
 
   // Real-time: invalidate on socket events
@@ -38,15 +43,19 @@ const Sidebar = ({ isOpen, onClose }) => {
       qc.invalidateQueries({ queryKey: ["queue"] });
       qc.invalidateQueries({ queryKey: ["payments"] });
     };
+    const invalidateBookings = () =>
+      qc.invalidateQueries({ queryKey: ["booking-requests"] });
     const attach = () => {
       socket.on("queue:updated", invalidate);
       socket.on("visit:status-changed", invalidate);
       socket.on("payment:completed", invalidate);
+      socket.on("booking-request:created", invalidateBookings);
     };
     const detach = () => {
       socket.off("queue:updated", invalidate);
       socket.off("visit:status-changed", invalidate);
       socket.off("payment:completed", invalidate);
+      socket.off("booking-request:created", invalidateBookings);
     };
     if (socket.connected) attach();
     socket.on("connect", attach);
@@ -70,6 +79,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     ],
     data_clerk: [
       { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
+      { name: t("sidebar.bookingRequests"), to: "/portal/booking-requests", icon: FiInbox, showBadge: true },
       { name: t("sidebar.patients"), to: "/portal/patients", icon: FiUsers },
       { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
       { name: t("sidebar.appointments"), to: "/portal/appointments", icon: FiClock },
@@ -78,6 +88,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     doctor: [
       { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
       { name: t("sidebar.queue"), to: "/portal/queue", icon: FiCalendar, showBadge: true },
+      { name: t("sidebar.bookingRequests"), to: "/portal/booking-requests", icon: FiInbox, showBadge: true },
       { name: t("sidebar.patients"), to: "/portal/patients", icon: FiExternalLink },
       { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
       { name: t("sidebar.appointments"), to: "/portal/appointments", icon: FiClock },

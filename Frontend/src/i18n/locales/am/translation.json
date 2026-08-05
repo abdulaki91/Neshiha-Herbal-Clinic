@@ -287,7 +287,8 @@
     "adminPanel": "የአስተዳዳሪ ገጽ",
     "badgeOverflow": "99+",
     "appointments": "ቀጠሮዎች",
-    "content": "የድረ-ገጽ ይዘት"
+    "content": "የድረ-ገጽ ይዘት",
+    "bookingRequests": "የቀጠሮ ጥያቄዎች"
   },
   "topbar": {
     "greeting": "እንኳን ደህና መጡ, {{firstName}}!",
@@ -329,7 +330,8 @@
     "prescriptionAdded": "አዲስ የመድሃኒት ትዕዛዝ ለታካሚ ታክሏል",
     "medicineDispensed": "መድሃኒት ለታካሚ ተሰጥቷል",
     "paymentReceived": "ክፍያ ተቀብሏል: {{amount}} ብር",
-    "staffCreated": "አዲስ ሰራተኛ ታክሏል"
+    "staffCreated": "አዲስ ሰራተኛ ታክሏል",
+    "newBookingRequest": "አዲስ የቀጠሮ ጥያቄ ከ{{name}}"
   },
   "login": {
     "brandName": "ነስሃ የእፅዋት ሕክምና ክሊኒክ",
@@ -1670,5 +1672,51 @@
       "updateSuccess": "አገልግሎት ተስተካክሏል",
       "saveError": "አገልግሎት ማስቀመጥ አልተሳካም"
     }
+  },
+  "booking": {
+    "navCta": "ቀጠሮ ይያዙ",
+    "title": "ቀጠሮ ይያዙ",
+    "subtitle": "ስለ እርስዎ እና መቼ መጎብኘት እንደሚፈልጉ ትንሽ ይንገሩን — ለማረጋገጥ እናገኝዎታለን።",
+    "fullName": "ሙሉ ስም",
+    "phone": "የስልክ ቁጥር",
+    "email": "ኢሜይል (አማራጭ)",
+    "preferredDate": "የተመረጠ ቀን",
+    "preferredTime": "የተመረጠ ሰዓት",
+    "timeAny": "ማንኛውም ሰዓት",
+    "timeMorning": "ጠዋት",
+    "timeAfternoon": "ከሰዓት በኋላ",
+    "timeEvening": "ማታ",
+    "reason": "የጉብኝት ምክንያት (አማራጭ)",
+    "requiredField": "ይህ መስክ ያስፈልጋል",
+    "submit": "ቀጠሮ ይጠይቁ",
+    "submitting": "በመላክ ላይ...",
+    "submitError": "ችግር ተፈጥሯል — እባክዎ እንደገና ይሞክሩ።",
+    "successTitle": "ጥያቄው ደርሷል!",
+    "successMessage": "እናመሰግናለን — ቡድናችን ቀጠሮዎን ለማረጋገጥ በቅርቡ ያገኝዎታል።"
+  },
+  "bookingRequests": {
+    "title": "የቀጠሮ ጥያቄዎች",
+    "subtitle": "ከድረ-ገጹ የተላኩ የቀጠሮ ጥያቄዎች",
+    "searchPlaceholder": "በስም፣ ስልክ፣ ወይም ኢሜይል ይፈልጉ...",
+    "allStatuses": "ሁሉም ሁኔታዎች",
+    "status": {
+      "pending": "በመጠባበቅ ላይ",
+      "contacted": "ተገናኝቷል",
+      "confirmed": "ተረጋግጧል",
+      "declined": "ተቀባይነት አላገኘም",
+      "converted": "ወደ ጉብኝት ተቀይሯል"
+    },
+    "time": {
+      "morning": "ጠዋት",
+      "afternoon": "ከሰዓት በኋላ",
+      "evening": "ማታ"
+    },
+    "markContacted": "እንደተገናኘ ምልክት አድርግ",
+    "convert": "ወደ ጉብኝት ቀይር",
+    "decline": "አትቀበል",
+    "statusUpdateSuccess": "ሁኔታው ተዘምኗል",
+    "statusUpdateError": "ሁኔታ ማዘመን አልተሳካም",
+    "loadError": "የቀጠሮ ጥያቄዎችን መጫን አልተሳካም",
+    "empty": "እስካሁን የቀጠሮ ጥያቄ የለም"
   }
 }

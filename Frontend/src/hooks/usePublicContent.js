@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosInstance from "../lib/axios";
 
 // Public content hooks — no auth required, always refetched fresh
@@ -28,4 +28,10 @@ export const usePublicSiteInfo = () =>
     select: (res) => res.data || {},
     staleTime: 0,
     refetchOnWindowFocus: true,
+  });
+
+// "Book Appointment" submission — no auth, public write.
+export const useSubmitBookingRequest = () =>
+  useMutation({
+    mutationFn: (data) => axiosInstance.post("/booking-requests", data),
   });

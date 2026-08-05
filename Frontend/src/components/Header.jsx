@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { FiCalendar } from "react-icons/fi";
 import LanguageSelector from "./LanguageSelector";
 import BannerStrip from "./BannerStrip";
+import BookingModal from "./BookingModal";
 import { useLanguage } from "../i18n/hooks/useLanguage";
 import { usePublicSiteInfo } from "../hooks/usePublicContent";
 
@@ -12,6 +14,7 @@ const backendBase = (import.meta.env.VITE_API_URL || "http://localhost:5000/api/
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const { t } = useLanguage();
   const { data: info = {} } = usePublicSiteInfo();
 
@@ -69,6 +72,14 @@ export default function Header() {
 
           {/* Language Selector */}
           <LanguageSelector />
+
+          <button
+            onClick={() => setIsBookingOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+          >
+            <FiCalendar className="w-4 h-4" />
+            <span>{t("booking.navCta", "Book Appointment")}</span>
+          </button>
         </nav>
 
         {/* Mobile Hamburger */}
@@ -128,6 +139,17 @@ export default function Header() {
             </a>
           ))}
 
+          <button
+            onClick={() => {
+              setIsMenuOpen(false);
+              setIsBookingOpen(true);
+            }}
+            className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-lg hover:from-emerald-700 hover:to-teal-700 transition"
+          >
+            <FiCalendar className="w-4 h-4" />
+            <span>{t("booking.navCta", "Book Appointment")}</span>
+          </button>
+
           <div className="mt-auto">
             {/* Language Selector for mobile */}
             <LanguageSelector variant="mobile" />
@@ -135,6 +157,8 @@ export default function Header() {
         </div>
       </div>
       </header>
+
+      {isBookingOpen && <BookingModal onClose={() => setIsBookingOpen(false)} />}
     </div>
   );
 }

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { FiCalendar } from "react-icons/fi";
 import { useLanguage } from "../i18n/hooks/useLanguage";
 import { usePublicBanners } from "../hooks/usePublicContent";
+import BookingModal from "./BookingModal";
 
 /** Hero Banner */
 export default function Hero() {
   const { t, currentLanguage } = useLanguage();
   const { data: banners = [] } = usePublicBanners();
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   // Check if current language is RTL
   const isRTL = currentLanguage === 'ar';
@@ -57,7 +60,18 @@ export default function Hero() {
           >
             {t('hero.description', 'At Nesiha Herbal Clinic, we blend traditional remedies with modern practices to provide personalized care that nurtures your body\'s natural healing abilities.')}
           </p>
-          
+
+          {/* Primary CTA */}
+          <div className="mb-10">
+            <button
+              onClick={() => setIsBookingOpen(true)}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-lg font-bold rounded-xl shadow-lg shadow-emerald-900/30 hover:from-emerald-600 hover:to-teal-600 transition-all duration-200 hover:-translate-y-0.5"
+            >
+              <FiCalendar className="w-5 h-5" />
+              <span>{t('booking.navCta', 'Book Appointment')}</span>
+            </button>
+          </div>
+
           {/* Trust Indicators */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto trust-indicators">
             <div className="flex flex-col items-center text-center">
@@ -95,6 +109,8 @@ export default function Hero() {
       <div className="absolute top-20 left-10 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl animate-pulse floating-elements"></div>
       <div className="absolute top-40 right-20 w-16 h-16 bg-teal-500/10 rounded-full blur-xl animate-pulse delay-1000 floating-elements"></div>
       <div className="absolute bottom-40 left-20 w-12 h-12 bg-blue-500/10 rounded-full blur-xl animate-pulse delay-2000 floating-elements"></div>
+
+      {isBookingOpen && <BookingModal onClose={() => setIsBookingOpen(false)} />}
     </section>
   );
 }

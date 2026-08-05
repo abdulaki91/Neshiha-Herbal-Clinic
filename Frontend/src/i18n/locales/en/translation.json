@@ -308,7 +308,8 @@
     "adminPanel": "Admin Panel",
     "badgeOverflow": "99+",
     "appointments": "Appointments",
-    "content": "Website Content"
+    "content": "Website Content",
+    "bookingRequests": "Booking Requests"
   },
 
   "topbar": {
@@ -352,7 +353,8 @@
     "prescriptionAdded": "New prescription added for patient",
     "medicineDispensed": "Medicine dispensed to patient",
     "paymentReceived": "Payment received: {{amount}} ETB",
-    "staffCreated": "New staff member added"
+    "staffCreated": "New staff member added",
+    "newBookingRequest": "New booking request from {{name}}"
   },
 
   "login": {
@@ -1522,6 +1524,54 @@
       "updateSuccess": "Service updated",
       "saveError": "Failed to save service"
     }
+  },
+
+  "booking": {
+    "navCta": "Book Appointment",
+    "title": "Book an Appointment",
+    "subtitle": "Tell us a little about you and when you'd like to visit — we'll reach out to confirm.",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "email": "Email (optional)",
+    "preferredDate": "Preferred Date",
+    "preferredTime": "Preferred Time",
+    "timeAny": "Any time",
+    "timeMorning": "Morning",
+    "timeAfternoon": "Afternoon",
+    "timeEvening": "Evening",
+    "reason": "Reason for Visit (optional)",
+    "requiredField": "This field is required",
+    "submit": "Request Appointment",
+    "submitting": "Submitting...",
+    "submitError": "Something went wrong — please try again.",
+    "successTitle": "Request Received!",
+    "successMessage": "Thank you — our team will contact you shortly to confirm your appointment."
+  },
+
+  "bookingRequests": {
+    "title": "Booking Requests",
+    "subtitle": "Appointment requests submitted from the website",
+    "searchPlaceholder": "Search by name, phone, or email...",
+    "allStatuses": "All statuses",
+    "status": {
+      "pending": "Pending",
+      "contacted": "Contacted",
+      "confirmed": "Confirmed",
+      "declined": "Declined",
+      "converted": "Converted"
+    },
+    "time": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening"
+    },
+    "markContacted": "Mark Contacted",
+    "convert": "Convert to Visit",
+    "decline": "Decline",
+    "statusUpdateSuccess": "Status updated",
+    "statusUpdateError": "Failed to update status",
+    "loadError": "Failed to load booking requests",
+    "empty": "No booking requests yet"
   },
 
   "appointments": {
