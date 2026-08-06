@@ -19,6 +19,10 @@ export const initializeSocket = (httpServer) => {
       methods: ["GET", "POST"],
       credentials: true,
     },
+    // Match the client (lib/socket.js): Phusion Passenger doesn't support
+    // the WebSocket upgrade, so only advertise polling — matches what the
+    // client actually uses and keeps both sides in agreement.
+    transports: ["polling"],
   });
 
   // Authentication middleware for socket connections
@@ -199,11 +203,15 @@ export const emitVisitCreated = (visit) => {
 };
 
 /**
- * Emit visit status changed
+ * Emit visit status changed. Cashier is included because a visit moving to
+ * "pending_payment" (a doctor finishing a consultation with prescriptions
+ * attached) is the cashier's only signal that a new payment is waiting —
+ * see CashierPage.jsx's listener for this exact event.
  */
 export const emitVisitStatusChanged = (visit) => {
   emitToRole("doctor", "visit:status-changed", visit);
   emitToRole("data_clerk", "visit:status-changed", visit);
+  emitToRole("cashier", "visit:status-changed", visit);
 
   if (io) {
     io.to("queue:updates").emit("queue:updated", visit);
@@ -211,10 +219,13 @@ export const emitVisitStatusChanged = (visit) => {
 };
 
 /**
- * Emit prescription created
+ * Emit prescription created. Also reaches cashier: a prescription added to
+ * a visit that's already pending payment changes the amount due, and
+ * CashierPage.jsx listens for this to keep the total in sync.
  */
 export const emitPrescriptionCreated = (prescription) => {
   emitToUser(prescription.doctorId, "prescription:created", prescription);
+  emitToRole("cashier", "prescription:created", prescription);
 };
 
 /**
@@ -284,6 +295,15 @@ export const emitBookingRequestCreated = (booking) => {
   emitToRole("doctor", "booking-request:created", booking);
 };
 
+/**
+ * Emit a registration fee collected at patient intake. Doctor-only, like
+ * every other financial event (see emitPaymentCompleted) — this is what
+ * lets the doctor reports page live-update without a manual refresh.
+ */
+export const emitRegistrationFeeCollected = (registrationPayment) => {
+  emitToRole("doctor", "registration-fee:collected", registrationPayment);
+};
+
 export default {
   initializeSocket,
   getIO,
@@ -304,4 +324,5 @@ export default {
   emitInvestigationResultAdded,
   emitPaymentCompleted,
   emitBookingRequestCreated,
+  emitRegistrationFeeCollected,
 };

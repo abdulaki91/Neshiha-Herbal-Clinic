@@ -1,7 +1,7 @@
 import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import * as patientService from "../services/patientService.js";
-import { emitPatientRegistered } from "../config/socket.js";
+import { emitPatientRegistered, emitRegistrationFeeCollected } from "../config/socket.js";
 
 /**
  * @route   GET /api/v1/patients
@@ -40,6 +40,10 @@ export const getPatientById = asyncHandler(async (req, res) => {
 export const createPatient = asyncHandler(async (req, res) => {
   const patient = await patientService.createPatient(req.body, req.user.id);
   emitPatientRegistered(patient);
+  const registrationPayment = patient.getDataValue("registrationPayment");
+  if (registrationPayment) {
+    emitRegistrationFeeCollected(registrationPayment);
+  }
   return ApiResponse.created(res, patient, "Patient registered successfully");
 });
 

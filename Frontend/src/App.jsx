@@ -26,7 +26,7 @@ const PatientDetailPage = lazy(() => import("./pages/portal/PatientDetailPage"))
 const LaboratoryPage = lazy(() => import("./pages/portal/LaboratoryPage"));
 const PharmacyPage = lazy(() => import("./pages/portal/PharmacyPage"));
 const CashierPage = lazy(() => import("./pages/portal/CashierPage"));
-const CashierReportsPage = lazy(() => import("./pages/portal/CashierReportsPage"));
+const DoctorReportsPage = lazy(() => import("./pages/portal/DoctorReportsPage"));
 const StaffPage = lazy(() => import("./pages/portal/StaffPage"));
 const SettingsPage = lazy(() => import("./pages/portal/SettingsPage"));
 const AppointmentsPage = lazy(() => import("./pages/portal/AppointmentsPage"));
@@ -253,7 +253,7 @@ export default function App() {
               element={
                 // Revenue/financial reports are doctor-only
                 <RoleRoute roles={["doctor"]}>
-                  <CashierReportsPage />
+                  <DoctorReportsPage />
                 </RoleRoute>
               }
             />

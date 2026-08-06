@@ -3,9 +3,9 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../store/authStore";
-import { getSocket } from "../../lib/socket";
 import axiosInstance from "../../lib/axios";
 import { useNotifications } from "../../hooks/useDashboard";
+import { useSocketEvent } from "../../hooks/useSocketEvent";
 
 const Topbar = ({ onMenuClick }) => {
   const { user } = useAuthStore();
@@ -41,57 +41,33 @@ const Topbar = ({ onMenuClick }) => {
     setUnreadCount(allNotifications().filter((n) => !n.isRead).length);
   }, [notifications, localNotifs]);
 
-  // Real-time: invalidate + add local notification on socket
-  useEffect(() => {
-    const socket = getSocket();
-    if (!socket) return;
+  // Real-time: add a local notification (and invalidate the API-backed
+  // list) on each relevant socket event. Each useSocketEvent call owns and
+  // cleans up only its own listener — unlike the old shared attach/detach
+  // pair, unmounting Topbar can never wipe out another component's
+  // listener for the same event (see useSocketEvent.js for why).
+  const addLocalNotification = useCallback((title, message, type = "info") => {
+    setLocalNotifs((prev) =>
+      [{ id: Date.now().toString(), title, message, type, isRead: false, createdAt: new Date().toISOString() }, ...prev].slice(0, 50),
+    );
+  }, []);
 
-    const addLocal = (title, message, type = "info") => {
-      setLocalNotifs((prev) =>
-        [{ id: Date.now().toString(), title, message, type, isRead: false, createdAt: new Date().toISOString() }, ...prev].slice(0, 50),
-      );
-    };
-
-    const handleNotification = (data) =>
-      addLocal(data.title || data.message, data.message || "", data.type);
-
-    const attach = () => {
-      socket.on("notification:new", handleNotification);
-      socket.on("visit:status-changed", (v) =>
-        addLocal(t("topbar.notification.visitUpdated"), t("topbar.notification.visitStatus", { status: v.status?.replace("_", " ") }), "info"),
-      );
-      socket.on("patient:registered", (p) =>
-        addLocal(t("topbar.notification.newPatient"), t("topbar.notification.patientRegistered", { firstName: p.firstName, lastName: p.lastName }), "success"),
-      );
-      socket.on("payment:completed", (p) =>
-        addLocal(t("topbar.notification.paymentReceived"), t("topbar.notification.paymentAmount", { amount: parseFloat(p.amount || 0).toFixed(2) }), "success"),
-      );
-      socket.on("prescription:created", () =>
-        addLocal(t("topbar.notification.prescriptionAdded"), t("topbar.notification.newPrescription"), "info"),
-      );
-    };
-
-    const detach = () => {
-      socket.off("notification:new", handleNotification);
-      socket.off("visit:status-changed");
-      socket.off("patient:registered");
-      socket.off("payment:completed");
-      socket.off("prescription:created");
-    };
-
-    if (socket.connected) attach();
-    socket.on("connect", attach);
-
-    // Also invalidate the API query periodically
-    const invalidate = () => qc.invalidateQueries({ queryKey: ["notifications"] });
-    socket.on("notification:new", invalidate);
-
-    return () => {
-      detach();
-      socket.off("connect", attach);
-      socket.off("notification:new", invalidate);
-    };
-  }, [qc]);
+  useSocketEvent("notification:new", (data) => {
+    addLocalNotification(data.title || data.message, data.message || "", data.type);
+    qc.invalidateQueries({ queryKey: ["notifications"] });
+  });
+  useSocketEvent("visit:status-changed", (v) =>
+    addLocalNotification(t("topbar.notification.visitUpdated"), t("topbar.notification.visitStatus", { status: v.status?.replace("_", " ") }), "info"),
+  );
+  useSocketEvent("patient:registered", (p) =>
+    addLocalNotification(t("topbar.notification.newPatient"), t("topbar.notification.patientRegistered", { firstName: p.firstName, lastName: p.lastName }), "success"),
+  );
+  useSocketEvent("payment:completed", (p) =>
+    addLocalNotification(t("topbar.notification.paymentReceived"), t("topbar.notification.paymentAmount", { amount: parseFloat(p.amount || 0).toFixed(2) }), "success"),
+  );
+  useSocketEvent("prescription:created", () =>
+    addLocalNotification(t("topbar.notification.prescriptionAdded"), t("topbar.notification.newPrescription"), "info"),
+  );
 
   // Close dropdown on outside click
   useEffect(() => {

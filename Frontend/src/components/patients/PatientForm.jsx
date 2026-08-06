@@ -4,6 +4,11 @@ import { FiX } from "react-icons/fi";
 import axiosInstance from "../../lib/axios";
 import toast from "react-hot-toast";
 
+// Display only — the amount actually charged is enforced server-side
+// (REGISTRATION_FEE_AMOUNT in Backend/src/config/constants.js) and never
+// taken from the request body.
+const REGISTRATION_FEE_AMOUNT = 200;
+
 const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
   const { t } = useTranslation();
   const isEditing = !!patient;
@@ -199,6 +204,63 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
                 placeholder={t("patientForm.woredaPlaceholder")}
               />
             </div>
+
+            {/* Registration Fee — required for new patients only; nothing
+                to collect again when editing an existing one. */}
+            {!isEditing && (
+              <>
+                <div className="col-span-2 mt-4">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                    {t("patientForm.registrationFeeTitle")}
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-4">
+                    {t("patientForm.registrationFeeNotice", { amount: REGISTRATION_FEE_AMOUNT })}
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t("patientForm.registrationFeeAmountLabel")}
+                  </label>
+                  <div className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-700 font-semibold">
+                    {REGISTRATION_FEE_AMOUNT} ETB
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t("patientForm.registrationFeeMethodLabel")}
+                  </label>
+                  <select
+                    {...register("registrationFeeMethod", {
+                      required: t("patientForm.registrationFeeMethodRequired"),
+                    })}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                  >
+                    <option value="">{t("patientForm.registrationFeeMethodPlaceholder")}</option>
+                    <option value="cash">{t("patientForm.registrationFeeMethodCash")}</option>
+                    <option value="transfer">{t("patientForm.registrationFeeMethodTransfer")}</option>
+                    <option value="telebirr">{t("patientForm.registrationFeeMethodTelebirr")}</option>
+                  </select>
+                  {errors.registrationFeeMethod && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.registrationFeeMethod.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t("patientForm.registrationFeeTransactionLabel")}
+                  </label>
+                  <input
+                    {...register("registrationFeeTransactionId")}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                    placeholder={t("patientForm.registrationFeeTransactionPlaceholder")}
+                  />
+                </div>
+              </>
+            )}
           </div>
 
           {/* Actions */}

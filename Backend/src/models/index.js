@@ -10,6 +10,7 @@ import AuditLog from "./AuditLog.js";
 import Notification from "./Notification.js";
 import Setting from "./Setting.js";
 import Payment from "./Payment.js";
+import RegistrationPayment from "./RegistrationPayment.js";
 import PatientAttachment from "./PatientAttachment.js";
 import Testimonial from "./Testimonial.js";
 import SuccessStory from "./SuccessStory.js";
@@ -37,6 +38,7 @@ User.hasMany(MedicineDispense, {
 });
 User.hasMany(Notification, { foreignKey: "userId", as: "notifications" });
 User.hasMany(Payment, { foreignKey: "cashierId", as: "processedPayments" });
+User.hasMany(RegistrationPayment, { foreignKey: "receivedBy", as: "collectedRegistrationFees" });
 User.hasMany(PatientAttachment, { foreignKey: "uploadedBy", as: "uploadedAttachments" });
 
 // Patient associations
@@ -52,6 +54,7 @@ Patient.hasMany(MedicineDispense, {
   as: "medicineDispenses",
 });
 Patient.hasMany(Payment, { foreignKey: "patientId", as: "payments" });
+Patient.hasOne(RegistrationPayment, { foreignKey: "patientId", as: "registrationPayment" });
 Patient.hasMany(PatientAttachment, { foreignKey: "patientId", as: "attachments" });
 
 // Visit associations
@@ -124,6 +127,10 @@ Payment.belongsTo(Visit, { foreignKey: "visitId", as: "visit" });
 Payment.belongsTo(Patient, { foreignKey: "patientId", as: "patient" });
 Payment.belongsTo(User, { foreignKey: "cashierId", as: "cashier" });
 
+// RegistrationPayment associations
+RegistrationPayment.belongsTo(Patient, { foreignKey: "patientId", as: "patient" });
+RegistrationPayment.belongsTo(User, { foreignKey: "receivedBy", as: "receivedByUser" });
+
 // Notification associations
 Notification.belongsTo(User, { foreignKey: "userId", as: "user" });
 
@@ -153,6 +160,7 @@ export {
   Notification,
   Setting,
   Payment,
+  RegistrationPayment,
   PatientAttachment,
   Testimonial,
   SuccessStory,

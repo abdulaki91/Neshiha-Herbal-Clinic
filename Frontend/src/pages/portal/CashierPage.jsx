@@ -7,9 +7,8 @@ import {
   FiClock as FiHistory,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
-import axiosInstance from "../../lib/axios";
-import { getSocket } from "../../lib/socket";
 import { usePendingPayments, usePaymentHistory, useProcessPayment } from "../../hooks/usePayments";
+import { useSocketEvent } from "../../hooks/useSocketEvent";
 import PrintableReceipt from "../../components/PrintableReceipt";
 
 const formatETB = (amount) => parseFloat(amount || 0).toFixed(2);
@@ -38,19 +37,10 @@ const CashierPage = () => {
   const isLoading = activeTab === "pending" ? pendingLoading : recentLoading;
 
   // Real-time: invalidate on socket events
-  useEffect(() => {
-    const socket = getSocket();
-    if (!socket) return;
-    const invalidate = () => qc.invalidateQueries({ queryKey: ["payments"] });
-    socket.on("visit:status-changed", invalidate);
-    socket.on("prescription:created", invalidate);
-    socket.on("payment:completed", invalidate);
-    return () => {
-      socket.off("visit:status-changed", invalidate);
-      socket.off("prescription:created", invalidate);
-      socket.off("payment:completed", invalidate);
-    };
-  }, [qc]);
+  const invalidatePayments = () => qc.invalidateQueries({ queryKey: ["payments"] });
+  useSocketEvent("visit:status-changed", invalidatePayments);
+  useSocketEvent("prescription:created", invalidatePayments);
+  useSocketEvent("payment:completed", invalidatePayments);
 
   const handleProcessPaymentClick = (visit) => {
     setSelectedVisit(visit);
@@ -143,7 +133,7 @@ const CashierPage = () => {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && fetchPendingPayments()}
+                onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
                 placeholder="Search by patient name or ID..."
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               />

@@ -51,6 +51,13 @@ export const MARITAL_STATUS = {
   WIDOWED: "widowed",
 };
 
+// Patient Registration Fee — charged once when a new patient is registered
+// (by a data_clerk or doctor, not a cashier — see RegistrationPayment.js).
+// The amount is fixed here, not accepted from the client, so it can't be
+// tampered with in the request body.
+export const REGISTRATION_FEE_AMOUNT = 200;
+export const REGISTRATION_FEE_METHODS = ["cash", "transfer", "telebirr"];
+
 // Medicine Status
 export const MEDICINE_STATUS = {
   AVAILABLE: "available",

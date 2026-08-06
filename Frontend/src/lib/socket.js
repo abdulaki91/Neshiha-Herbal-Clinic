@@ -14,6 +14,13 @@ export const initializeSocket = (token) => {
       token,
     },
     autoConnect: false,
+    // Phusion Passenger (cPanel's "Setup Node.js App") doesn't support the
+    // WebSocket upgrade — every connection attempt would otherwise try
+    // WebSocket first, wait for that to fail/time out, then fall back to
+    // polling, adding real delay to every (re)connect. Skip straight to
+    // polling so it connects immediately instead of stalling on a doomed
+    // upgrade first. Revisit if the backend ever moves off Passenger.
+    transports: ["polling"],
   });
 
   socket.on("connect", () => {

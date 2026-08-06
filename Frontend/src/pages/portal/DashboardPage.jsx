@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { FiUsers, FiCalendar, FiActivity, FiTrendingUp } from "react-icons/fi";
 import useAuthStore from "../../store/authStore";
-import { getSocket } from "../../lib/socket";
 import { useDashboard } from "../../hooks/useDashboard";
 import { useTranslation } from "react-i18next";
+import { useSocketEvent } from "../../hooks/useSocketEvent";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -15,38 +14,13 @@ const DashboardPage = () => {
   const qc = useQueryClient();
 
   // Real-time: invalidate dashboard on socket events
-  useEffect(() => {
-    const socket = getSocket();
-    if (!socket) return;
-
-    const invalidate = () => qc.invalidateQueries({ queryKey: ["dashboard"] });
-
-    const attach = () => {
-      socket.on("visit:created", invalidate);
-      socket.on("visit:status-changed", invalidate);
-      socket.on("queue:updated", invalidate);
-      socket.on("patient:registered", invalidate);
-      socket.on("payment:completed", invalidate);
-      socket.on("prescription:created", invalidate);
-    };
-
-    const detach = () => {
-      socket.off("visit:created", invalidate);
-      socket.off("visit:status-changed", invalidate);
-      socket.off("queue:updated", invalidate);
-      socket.off("patient:registered", invalidate);
-      socket.off("payment:completed", invalidate);
-      socket.off("prescription:created", invalidate);
-    };
-
-    if (socket.connected) attach();
-    socket.on("connect", attach);
-
-    return () => {
-      detach();
-      socket.off("connect", attach);
-    };
-  }, [qc]);
+  const invalidate = () => qc.invalidateQueries({ queryKey: ["dashboard"] });
+  useSocketEvent("visit:created", invalidate);
+  useSocketEvent("visit:status-changed", invalidate);
+  useSocketEvent("queue:updated", invalidate);
+  useSocketEvent("patient:registered", invalidate);
+  useSocketEvent("payment:completed", invalidate);
+  useSocketEvent("prescription:created", invalidate);
 
   if (isLoading) {
     return (

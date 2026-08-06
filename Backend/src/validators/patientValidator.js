@@ -1,4 +1,5 @@
 import { body, query } from "express-validator";
+import { REGISTRATION_FEE_METHODS } from "../config/constants.js";
 
 export const createPatientValidator = [
   body("firstName").trim().notEmpty().withMessage("First name is required"),
@@ -16,6 +17,13 @@ export const createPatientValidator = [
     .optional()
     .isIn(["single", "married", "divorced", "widowed"])
     .withMessage("Invalid marital status"),
+  // Every new patient must pay the registration fee at intake — see
+  // REGISTRATION_FEE_AMOUNT in constants.js (the amount itself is never
+  // accepted from the client, only how it was paid).
+  body("registrationFeeMethod")
+    .isIn(REGISTRATION_FEE_METHODS)
+    .withMessage("Registration fee payment method is required"),
+  body("registrationFeeTransactionId").optional().trim(),
 ];
 
 export const updatePatientValidator = [

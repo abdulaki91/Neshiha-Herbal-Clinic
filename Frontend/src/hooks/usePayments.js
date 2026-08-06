@@ -6,6 +6,12 @@ export const usePendingPayments = (search = "", opts = {}) =>
     queryKey: ["payments", "pending", search],
     queryFn: () => axiosInstance.get("/payments/pending", { params: { search } }),
     select: (res) => res.data?.data?.visits || res.data?.visits || [],
+    // Socket events should keep this fresh, but poll as a safety net —
+    // matches useQueue's pattern — so a missed/dropped event (reconnect
+    // gap, tab backgrounded) never leaves a cashier staring at a stale
+    // pending-payments list with no self-healing.
+    refetchInterval: 15_000,
+    staleTime: 5_000,
     ...opts,
   });
 

@@ -1,10 +1,15 @@
-import { Patient, User, Visit } from "../models/index.js";
+import { Patient, User, Visit, RegistrationPayment, sequelize } from "../models/index.js";
 import { Op } from "sequelize";
 import { getPagination } from "../utils/helpers.js";
-import { ERROR_MESSAGES } from "../config/constants.js";
+import { ERROR_MESSAGES, REGISTRATION_FEE_AMOUNT } from "../config/constants.js";
 
 /**
- * Create new patient
+ * Create new patient. Every new patient is required to pay a one-time
+ * registration fee at intake, so the Patient row and its
+ * RegistrationPayment row are created together in one transaction — either
+ * both exist or neither does, there's no such thing as an unpaid patient
+ * record. The fee amount is fixed server-side (REGISTRATION_FEE_AMOUNT),
+ * never taken from the request body, so it can't be tampered with.
  */
 export const createPatient = async (data, registeredBy) => {
   // Check for duplicate national ID
@@ -30,9 +35,28 @@ export const createPatient = async (data, registeredBy) => {
     data.chronicDiseases = JSON.stringify(data.chronicDiseases);
   }
 
-  const patient = await Patient.create({
-    ...data,
-    registeredBy,
+  const { registrationFeeMethod, registrationFeeTransactionId, ...patientData } = data;
+
+  const patient = await sequelize.transaction(async (transaction) => {
+    const created = await Patient.create(
+      { ...patientData, registeredBy },
+      { transaction },
+    );
+
+    const registrationPayment = await RegistrationPayment.create(
+      {
+        patientId: created.id,
+        amount: REGISTRATION_FEE_AMOUNT,
+        paymentMethod: registrationFeeMethod,
+        transactionId: registrationFeeTransactionId || null,
+        receivedBy: registeredBy,
+        paidAt: new Date(),
+      },
+      { transaction },
+    );
+
+    created.setDataValue("registrationPayment", registrationPayment);
+    return created;
   });
 
   return patient;

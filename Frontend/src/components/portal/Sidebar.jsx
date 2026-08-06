@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   FiHome, FiUsers, FiCalendar, FiFileText, FiSettings,
@@ -8,10 +7,10 @@ import {
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../store/authStore";
-import { getSocket } from "../../lib/socket";
 import { useQueue } from "../../hooks/useVisits";
 import { usePendingPayments } from "../../hooks/usePayments";
 import { usePendingBookingCount } from "../../hooks/useBookingRequests";
+import { useSocketEvent } from "../../hooks/useSocketEvent";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuthStore();
@@ -36,31 +35,16 @@ const Sidebar = ({ isOpen, onClose }) => {
   };
 
   // Real-time: invalidate on socket events
-  useEffect(() => {
-    const socket = getSocket();
-    if (!socket) return;
-    const invalidate = () => {
-      qc.invalidateQueries({ queryKey: ["queue"] });
-      qc.invalidateQueries({ queryKey: ["payments"] });
-    };
-    const invalidateBookings = () =>
-      qc.invalidateQueries({ queryKey: ["booking-requests"] });
-    const attach = () => {
-      socket.on("queue:updated", invalidate);
-      socket.on("visit:status-changed", invalidate);
-      socket.on("payment:completed", invalidate);
-      socket.on("booking-request:created", invalidateBookings);
-    };
-    const detach = () => {
-      socket.off("queue:updated", invalidate);
-      socket.off("visit:status-changed", invalidate);
-      socket.off("payment:completed", invalidate);
-      socket.off("booking-request:created", invalidateBookings);
-    };
-    if (socket.connected) attach();
-    socket.on("connect", attach);
-    return () => { detach(); socket.off("connect", attach); };
-  }, [qc]);
+  const invalidate = () => {
+    qc.invalidateQueries({ queryKey: ["queue"] });
+    qc.invalidateQueries({ queryKey: ["payments"] });
+  };
+  const invalidateBookings = () => qc.invalidateQueries({ queryKey: ["booking-requests"] });
+
+  useSocketEvent("queue:updated", invalidate);
+  useSocketEvent("visit:status-changed", invalidate);
+  useSocketEvent("payment:completed", invalidate);
+  useSocketEvent("booking-request:created", invalidateBookings);
 
   const navigation = {
     // Super admin is an administrative role only — staff accounts, the
