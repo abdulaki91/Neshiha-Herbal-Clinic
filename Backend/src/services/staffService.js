@@ -25,13 +25,29 @@ const assertMayManageRole = (actor, targetRole) => {
 };
 
 /**
+ * Look up an active (non-deleted) staff member or throw 404.
+ * Deleted staff are hidden everywhere except direct DB inspection.
+ */
+const findStaffOrThrow = async (id) => {
+  const staff = await User.findOne({ where: { id, deletedAt: null } });
+
+  if (!staff) {
+    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
+  }
+
+  return staff;
+};
+
+/**
  * Create new staff member
  */
 export const createStaff = async (data, actor) => {
   assertMayManageRole(actor, data.role);
 
-  // Check if email already exists
-  const existingUser = await User.findOne({ where: { email: data.email } });
+  // Check if email already exists (a deleted staff member's email is free to reuse)
+  const existingUser = await User.findOne({
+    where: { email: data.email, deletedAt: null },
+  });
   if (existingUser) {
     throw httpError("Email already exists", 409);
   }
@@ -61,7 +77,8 @@ export const getAllStaff = async (query) => {
 
   const { limit, offset } = getPagination(page, pageSize);
 
-  const where = {};
+  // Deleted staff never appear in listings
+  const where = { deletedAt: null };
 
   // Filter by role
   if (role) {
@@ -105,7 +122,8 @@ export const getAllStaff = async (query) => {
  * Get staff by ID
  */
 export const getStaffById = async (id) => {
-  const staff = await User.findByPk(id, {
+  const staff = await User.findOne({
+    where: { id, deletedAt: null },
     attributes: { exclude: ["password", "refreshToken", "resetPasswordToken"] },
   });
 
@@ -120,22 +138,19 @@ export const getStaffById = async (id) => {
  * Update staff
  */
 export const updateStaff = async (id, data, actor) => {
-  const staff = await User.findByPk(id);
-
-  if (!staff) {
-    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
-  }
+  const staff = await findStaffOrThrow(id);
 
   // A non-super-admin may neither promote to nor edit a super admin account
   if (data.role) assertMayManageRole(actor, data.role);
   assertMayManageRole(actor, staff.role);
 
-  // Don't allow email change if it exists for another user
+  // Don't allow email change if it exists for another (non-deleted) user
   if (data.email && data.email !== staff.email) {
     const existingUser = await User.findOne({
       where: {
         email: data.email,
         id: { [Op.ne]: id },
+        deletedAt: null,
       },
     });
 
@@ -160,14 +175,11 @@ export const updateStaff = async (id, data, actor) => {
 };
 
 /**
- * Delete staff (soft delete - set to inactive)
+ * Delete staff (soft delete - hidden from listings, row kept for FK integrity
+ * with visits/prescriptions/payments/audit logs)
  */
 export const deleteStaff = async (id, actor) => {
-  const staff = await User.findByPk(id);
-
-  if (!staff) {
-    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
-  }
+  const staff = await findStaffOrThrow(id);
 
   assertMayManageRole(actor, staff.role);
 
@@ -175,7 +187,11 @@ export const deleteStaff = async (id, actor) => {
     throw httpError("You cannot delete your own account", 400);
   }
 
-  await staff.update({ status: USER_STATUS.INACTIVE, refreshToken: null });
+  await staff.update({
+    status: USER_STATUS.INACTIVE,
+    refreshToken: null,
+    deletedAt: new Date(),
+  });
 
   return { message: "Staff deleted successfully" };
 };
@@ -184,11 +200,7 @@ export const deleteStaff = async (id, actor) => {
  * Activate staff
  */
 export const activateStaff = async (id, actor) => {
-  const staff = await User.findByPk(id);
-
-  if (!staff) {
-    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
-  }
+  const staff = await findStaffOrThrow(id);
 
   assertMayManageRole(actor, staff.role);
 
@@ -206,11 +218,7 @@ export const activateStaff = async (id, actor) => {
  * Deactivate staff
  */
 export const deactivateStaff = async (id, actor) => {
-  const staff = await User.findByPk(id);
-
-  if (!staff) {
-    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
-  }
+  const staff = await findStaffOrThrow(id);
 
   assertMayManageRole(actor, staff.role);
 
@@ -228,11 +236,7 @@ export const deactivateStaff = async (id, actor) => {
  * Reset a staff member's password (admin initiated)
  */
 export const resetStaffPassword = async (id, password, actor) => {
-  const staff = await User.findByPk(id);
-
-  if (!staff) {
-    throw httpError(ERROR_MESSAGES.NOT_FOUND, 404);
-  }
+  const staff = await findStaffOrThrow(id);
 
   // A staff manager must not be able to seize a super admin account
   assertMayManageRole(actor, staff.role);
@@ -267,15 +271,15 @@ export const getStaffStats = async () => {
     staffManagers,
     superAdmins,
   ] = await Promise.all([
-    User.count(),
-    User.count({ where: { status: USER_STATUS.ACTIVE } }),
-    User.count({ where: { status: USER_STATUS.INACTIVE } }),
-    User.count({ where: { status: USER_STATUS.SUSPENDED } }),
-    User.count({ where: { role: ROLES.DOCTOR } }),
-    User.count({ where: { role: ROLES.DATA_CLERK } }),
-    User.count({ where: { role: ROLES.CASHIER } }),
-    User.count({ where: { role: ROLES.STAFF_MANAGER } }),
-    User.count({ where: { role: ROLES.SUPER_ADMIN } }),
+    User.count({ where: { deletedAt: null } }),
+    User.count({ where: { deletedAt: null, status: USER_STATUS.ACTIVE } }),
+    User.count({ where: { deletedAt: null, status: USER_STATUS.INACTIVE } }),
+    User.count({ where: { deletedAt: null, status: USER_STATUS.SUSPENDED } }),
+    User.count({ where: { deletedAt: null, role: ROLES.DOCTOR } }),
+    User.count({ where: { deletedAt: null, role: ROLES.DATA_CLERK } }),
+    User.count({ where: { deletedAt: null, role: ROLES.CASHIER } }),
+    User.count({ where: { deletedAt: null, role: ROLES.STAFF_MANAGER } }),
+    User.count({ where: { deletedAt: null, role: ROLES.SUPER_ADMIN } }),
   ]);
 
   return {

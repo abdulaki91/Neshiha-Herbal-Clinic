@@ -92,6 +92,12 @@ const User = sequelize.define(
       type: DataTypes.UUID,
       allowNull: true,
     },
+    // Soft-delete marker. Staff rows are FK-referenced by visits, prescriptions,
+    // payments, etc., so we hide deleted staff instead of removing the row.
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     tableName: "users",

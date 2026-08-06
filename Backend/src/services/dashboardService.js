@@ -31,8 +31,8 @@ export const getAdminDashboard = async () => {
   ] = await Promise.all([
     Patient.count({ where: { isActive: true } }),
     Visit.count({ where: { visitDate: todayStr } }),
-    User.count({ where: { role: ROLES.DOCTOR } }),
-    User.count(),
+    User.count({ where: { role: ROLES.DOCTOR, deletedAt: null } }),
+    User.count({ where: { deletedAt: null } }),
     Visit.count({ where: { visitDate: todayStr } }),
     Visit.count({
       where: { visitDate: todayStr, status: VISIT_STATUS.COMPLETED },
