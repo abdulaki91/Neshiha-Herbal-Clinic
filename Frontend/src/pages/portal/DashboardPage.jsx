@@ -329,7 +329,10 @@ const DashboardPage = () => {
           {t("dashboard.cashier.title")}
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {/* Revenue/financial totals are doctor-only — see reportRoutes.js
+            and dashboardService.getCashierDashboard — so this grid is
+            operational counts only, no monetary figures. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <StatCard
             title={t("dashboard.cashier.stats.pendingPayments")}
             value={stats?.pendingPayments || 0}
@@ -343,13 +346,6 @@ const DashboardPage = () => {
             icon={FiActivity}
             color="emerald"
             delay={60}
-          />
-          <StatCard
-            title={t("dashboard.cashier.stats.todayRevenue")}
-            value={stats?.todayTotalRevenue?.toFixed(2) || "0.00"}
-            icon={FiTrendingUp}
-            color="blue"
-            delay={120}
           />
         </div>
 

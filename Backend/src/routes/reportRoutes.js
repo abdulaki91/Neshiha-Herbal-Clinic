@@ -14,6 +14,8 @@ router.get("/medicines", reportController.getMedicineReport);
 router.get("/daily", reportController.getDailyReport);
 router.get("/monthly", reportController.getMonthlyReport);
 router.get("/yearly", reportController.getYearlyReport);
-router.get("/revenue", reportController.getRevenueReport);
+
+// Financial data — doctor only, overriding the router-wide role gate above
+router.get("/revenue", authorize(ROLES.DOCTOR), reportController.getRevenueReport);
 
 export default router;

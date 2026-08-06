@@ -154,16 +154,17 @@ export const getClerkDashboard = async () => {
   };
 };
 
+// Revenue/financial totals are doctor-only (see reportRoutes.js's
+// /reports/revenue) — this dashboard intentionally returns operational
+// counts only, no monetary aggregates, even though a cashier processes
+// the payments themselves.
 export const getCashierDashboard = async () => {
   const today = new Date().toISOString().split("T")[0];
 
-  const [pendingPayments, todayPaymentsCount, todayTotalRevenue, recentPayments] =
+  const [pendingPayments, todayPaymentsCount, recentPayments] =
     await Promise.all([
       Visit.count({ where: { status: VISIT_STATUS.PENDING_PAYMENT } }),
       Payment.count({ where: { paidAt: { [Op.gte]: new Date(today) } } }),
-      Payment.sum("amount", {
-        where: { paidAt: { [Op.gte]: new Date(today) }, status: "paid" },
-      }),
       Payment.findAll({
         order: [["paidAt", "DESC"]],
         limit: 10,
@@ -180,7 +181,6 @@ export const getCashierDashboard = async () => {
   return {
     pendingPayments,
     todayPaymentsCount,
-    todayTotalRevenue: todayTotalRevenue || 0,
     recentPayments,
   };
 };

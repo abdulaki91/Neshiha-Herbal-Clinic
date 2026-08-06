@@ -251,7 +251,8 @@ export default function App() {
             <Route
               path="reports"
               element={
-                <RoleRoute roles={["cashier"]}>
+                // Revenue/financial reports are doctor-only
+                <RoleRoute roles={["doctor"]}>
                   <CashierReportsPage />
                 </RoleRoute>
               }

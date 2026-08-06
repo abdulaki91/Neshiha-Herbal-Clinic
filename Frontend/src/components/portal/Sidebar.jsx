@@ -93,11 +93,12 @@ const Sidebar = ({ isOpen, onClose }) => {
       { name: t("sidebar.visits"), to: "/portal/visits", icon: FiCalendar },
       { name: t("sidebar.appointments"), to: "/portal/appointments", icon: FiClock },
       { name: t("sidebar.medicines"), to: "/portal/medicines", icon: FiPackage },
+      // Revenue/financial reports are doctor-only — see reportRoutes.js
+      { name: t("sidebar.reports"), to: "/portal/reports", icon: FiFileText },
     ],
     cashier: [
       { name: t("sidebar.dashboard"), to: "/portal", icon: FiHome, end: true },
       { name: t("sidebar.cashier"), to: "/portal/cashier", icon: FiDollarSign, showBadge: true },
-      { name: t("sidebar.reports"), to: "/portal/reports", icon: FiFileText },
       { name: t("sidebar.patients"), to: "/portal/patients", icon: FiUsers },
     ],
   };
