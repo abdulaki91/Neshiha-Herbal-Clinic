@@ -91,6 +91,23 @@ app.get("/health", (req, res) => {
   });
 });
 
+// Explicitly disable caching for every API response. The production host
+// (cPanel's LiteSpeed reverse proxy in front of "Setup Node.js App") adds
+// its own default `Cache-Control: public, max-age=2592000` to any proxied
+// response that doesn't set one itself — confirmed via curl against the
+// live backend, even on 401s and DELETE/POST responses. The data coming
+// out of Node was always fresh (nothing in this codebase sets
+// Cache-Control), but browsers honor that header and serve GET responses
+// from their own local cache for up to 30 days, so a write would succeed
+// on the server while every list view kept silently showing stale cached
+// data — this is what looked like "queue not created" / "can't delete
+// medicine" in production. An explicit header here overrides the proxy's
+// default, since the origin's own Cache-Control always wins.
+app.use("/api", (req, res, next) => {
+  res.set("Cache-Control", "no-store");
+  next();
+});
+
 // API version
 const API_VERSION = process.env.API_VERSION || "v1";
 

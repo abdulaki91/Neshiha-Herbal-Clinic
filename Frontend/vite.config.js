@@ -5,13 +5,13 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [react(), tailwindcss()],
-  esbuild: {
-    // Strip console.* calls and debugger statements from the production
-    // build only — dev keeps them since console.log is still useful while
-    // working locally. esbuild is Vite's default minifier, so this needs
-    // no extra dependency.
-    drop: mode === 'production' ? ['console', 'debugger'] : [],
-  },
+  // esbuild: {
+  //   // Strip console.* calls and debugger statements from the production
+  //   // build only — dev keeps them since console.log is still useful while
+  //   // working locally. esbuild is Vite's default minifier, so this needs
+  //   // no extra dependency.
+  //   drop: mode === 'production' ? ['console', 'debugger'] : [],
+  // },
   build: {
     rollupOptions: {
       output: {
@@ -32,11 +32,11 @@ export default defineConfig(({ mode }) => ({
         // "Cannot read properties of undefined (reading 'createContext')".
         // Keeping them together guarantees correct evaluation order.
         manualChunks(id) {
-          if (!id.includes('node_modules')) return undefined
-          if (id.includes('socket.io')) return 'vendor-socket'
-          return 'vendor'
+          if (!id.includes("node_modules")) return undefined;
+          if (id.includes("socket.io")) return "vendor-socket";
+          return "vendor";
         },
       },
     },
   },
-}))
+}));
