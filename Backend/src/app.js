@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import { apiLimiter } from "./middleware/rateLimiter.js";
 import logger from "./config/logger.js";
+import { allowedOrigins } from "./config/corsOrigins.js";
 
 // Environment variables are loaded by config/loadEnv.js — the first thing
 // server.js imports — or, for anything that imports this file standalone
@@ -59,10 +60,7 @@ app.use(
 // CORS configuration
 app.use(
   cors({
-    origin: [
-      process.env.FRONTEND_URL || "http://localhost:5173",
-      "http://localhost:5174",
-    ],
+    origin: allowedOrigins,
     credentials: true,
   }),
 );

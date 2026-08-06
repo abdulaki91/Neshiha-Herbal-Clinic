@@ -35,6 +35,15 @@ const REQUIRED_IN_PRODUCTION = [
 
 if (process.env.NODE_ENV === "production") {
   const missing = REQUIRED_IN_PRODUCTION.filter((key) => !process.env[key]);
+
+  // Neither var missing outright breaks the server — it just silently
+  // falls back to allowing only localhost origins (see config/corsOrigins.js),
+  // which surfaces as a confusing "blocked by CORS policy" error in the
+  // browser instead of anything visible here at boot. Catch it explicitly.
+  if (!process.env.ALLOWED_ORIGINS && !process.env.FRONTEND_URL) {
+    missing.push("ALLOWED_ORIGINS (or FRONTEND_URL)");
+  }
+
   if (missing.length > 0) {
     // eslint-disable-next-line no-console
     console.error(

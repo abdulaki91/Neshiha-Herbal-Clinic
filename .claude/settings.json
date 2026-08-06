@@ -24,7 +24,9 @@
       "Bash(curl -s http://localhost:5000/api/v1/public/site-info --max-time 5)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/testimonials --max-time 5)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5000/api/v1/faqs --max-time 5)",
-      "PowerShell(Get-Process -Id 3792 -ErrorAction SilentlyContinue)"
+      "PowerShell(Get-Process -Id 3792 -ErrorAction SilentlyContinue)",
+      "Bash(curl -s -D - -o /dev/null -H \"Origin: https://nesihaherbalclinic.abdulaki.com\" http://localhost:5000/api/v1/public/testimonials --max-time 5)",
+      "Bash(pkill -f \"node src/server.js\")"
     ]
   }
 }

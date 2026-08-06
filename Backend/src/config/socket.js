@@ -2,6 +2,7 @@ import { Server } from "socket.io";
 import jwt from "jsonwebtoken";
 import { User } from "../models/index.js";
 import logger from "./logger.js";
+import { allowedOrigins } from "./corsOrigins.js";
 
 let io;
 
@@ -14,10 +15,7 @@ const connectedUsers = new Map();
 export const initializeSocket = (httpServer) => {
   io = new Server(httpServer, {
     cors: {
-      origin: [
-        process.env.FRONTEND_URL || "http://localhost:5173",
-        "http://localhost:5174",
-      ],
+      origin: allowedOrigins,
       methods: ["GET", "POST"],
       credentials: true,
     },
