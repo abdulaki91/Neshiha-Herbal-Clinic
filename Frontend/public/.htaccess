@@ -1,0 +1,20 @@
+# SPA fallback for client-side routing (React Router / BrowserRouter).
+#
+# Without this, a direct visit, refresh, or shared link to any route other
+# than "/" (e.g. /signin, /portal/patients) 404s — the browser asks Apache
+# for that exact path, but no such file exists; only index.html + the JS
+# bundle know how to render it, via React Router running in the browser.
+# This rewrites any request that isn't a real file or directory to
+# index.html instead, so the app loads and takes over routing from there.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Already a real file or directory (JS/CSS/images/etc.) — serve as-is
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Anything else is a client-side route — hand it to the SPA
+  RewriteRule ^ index.html [L]
+</IfModule>

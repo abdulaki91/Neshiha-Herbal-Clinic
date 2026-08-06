@@ -20,7 +20,3 @@ const configuredOrigins = (process.env.ALLOWED_ORIGINS || process.env.FRONTEND_U
   .filter(Boolean);
 
 export const allowedOrigins = [...new Set([...configuredOrigins, ...DEV_ORIGINS])];
-
-console.log("[DEBUG corsOrigins] process.env.ALLOWED_ORIGINS =", JSON.stringify(process.env.ALLOWED_ORIGINS));
-console.log("[DEBUG corsOrigins] process.env.FRONTEND_URL =", JSON.stringify(process.env.FRONTEND_URL));
-console.log("[DEBUG corsOrigins] computed allowedOrigins =", allowedOrigins);
