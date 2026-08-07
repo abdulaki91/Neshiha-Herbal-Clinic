@@ -58,10 +58,10 @@ export const getAllMedicines = async (query) => {
 
   if (search) {
     where[Op.or] = [
-      { name: { [Op.iLike]: `%${search}%` } },
-      { genericName: { [Op.iLike]: `%${search}%` } },
-      { medicineId: { [Op.iLike]: `%${search}%` } },
-      { barcode: { [Op.iLike]: `%${search}%` } },
+      { name: { [Op.like]: `%${search}%` } },
+      { genericName: { [Op.like]: `%${search}%` } },
+      { code: { [Op.like]: `%${search}%` } },
+      { barcode: { [Op.like]: `%${search}%` } },
     ];
   }
 

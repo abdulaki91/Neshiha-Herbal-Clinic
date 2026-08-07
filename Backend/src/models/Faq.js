@@ -9,8 +9,8 @@ const Faq = sequelize.define(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    question: { type: DataTypes.JSONB, defaultValue: { en: "" } },
-    answer: { type: DataTypes.JSONB, defaultValue: { en: "" } },
+    question: { type: DataTypes.JSON, defaultValue: { en: "" } },
+    answer: { type: DataTypes.JSON, defaultValue: { en: "" } },
     category: { type: DataTypes.STRING },
     status: {
       type: DataTypes.STRING,

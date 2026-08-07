@@ -1,6 +1,6 @@
 import { body, query } from "express-validator";
 
-// Translatable fields are stored as { en, am, om, ar } JSONB objects.
+// Translatable fields are stored as { en, am, om, ar } JSON objects.
 export const translatableField = (chain) =>
   chain
     .optional()

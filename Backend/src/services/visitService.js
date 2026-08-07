@@ -359,10 +359,10 @@ export const getAppointments = async (query) => {
   const patientWhere = {};
   if (search) {
     patientWhere[Op.or] = [
-      { firstName: { [Op.iLike]: `%${search}%` } },
-      { lastName: { [Op.iLike]: `%${search}%` } },
-      { patientId: { [Op.iLike]: `%${search}%` } },
-      { phone: { [Op.iLike]: `%${search}%` } },
+      { firstName: { [Op.like]: `%${search}%` } },
+      { lastName: { [Op.like]: `%${search}%` } },
+      { patientId: { [Op.like]: `%${search}%` } },
+      { phone: { [Op.like]: `%${search}%` } },
     ];
   }
 
@@ -585,11 +585,11 @@ export const getCompletedConsultations = async (doctorId, query = {}) => {
   const patientWhere = {};
   if (search) {
     patientWhere[Op.or] = [
-      { firstName: { [Op.iLike]: `%${search}%` } },
-      { lastName: { [Op.iLike]: `%${search}%` } },
-      { patientId: { [Op.iLike]: `%${search}%` } },
-      { cardNumber: { [Op.iLike]: `%${search}%` } },
-      { phone: { [Op.iLike]: `%${search}%` } },
+      { firstName: { [Op.like]: `%${search}%` } },
+      { lastName: { [Op.like]: `%${search}%` } },
+      { patientId: { [Op.like]: `%${search}%` } },
+      { cardNumber: { [Op.like]: `%${search}%` } },
+      { phone: { [Op.like]: `%${search}%` } },
     ];
   }
 

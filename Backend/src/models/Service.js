@@ -10,10 +10,10 @@ const Service = sequelize.define(
       primaryKey: true,
     },
     icon: { type: DataTypes.STRING },
-    title: { type: DataTypes.JSONB, defaultValue: { en: "" } },
-    description: { type: DataTypes.JSONB, defaultValue: { en: "" } },
+    title: { type: DataTypes.JSON, defaultValue: { en: "" } },
+    description: { type: DataTypes.JSON, defaultValue: { en: "" } },
     // Array of feature strings, per locale: { en: [...], am: [...] }
-    features: { type: DataTypes.JSONB, defaultValue: { en: [] } },
+    features: { type: DataTypes.JSON, defaultValue: { en: [] } },
     status: {
       type: DataTypes.STRING,
       defaultValue: "draft",

@@ -18,7 +18,7 @@ const Testimonial = sequelize.define(
     },
     // Translatable: { en, am, om, ar }
     role: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
       defaultValue: { en: "" },
     },
     company: {
@@ -30,7 +30,7 @@ const Testimonial = sequelize.define(
       validate: { min: 1, max: 5 },
     },
     text: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
       defaultValue: { en: "" },
     },
     status: {

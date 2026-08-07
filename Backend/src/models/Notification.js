@@ -46,7 +46,7 @@ const Notification = sequelize.define(
       comment: "Link to related resource",
     },
     metadata: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
     },
   },
   {

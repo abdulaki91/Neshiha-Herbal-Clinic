@@ -29,9 +29,9 @@ export const getAll = async (query) => {
   if (status) where.status = status;
   if (search) {
     where[Op.or] = [
-      { fullName: { [Op.iLike]: `%${search}%` } },
-      { phone: { [Op.iLike]: `%${search}%` } },
-      { email: { [Op.iLike]: `%${search}%` } },
+      { fullName: { [Op.like]: `%${search}%` } },
+      { phone: { [Op.like]: `%${search}%` } },
+      { email: { [Op.like]: `%${search}%` } },
     ];
   }
 

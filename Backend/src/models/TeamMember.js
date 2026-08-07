@@ -11,9 +11,9 @@ const TeamMember = sequelize.define(
     },
     name: { type: DataTypes.STRING, allowNull: false },
     photo: { type: DataTypes.STRING },
-    role: { type: DataTypes.JSONB, defaultValue: { en: "" } },
-    bio: { type: DataTypes.JSONB, defaultValue: { en: "" } },
-    socialLinks: { type: DataTypes.JSONB, defaultValue: {} },
+    role: { type: DataTypes.JSON, defaultValue: { en: "" } },
+    bio: { type: DataTypes.JSON, defaultValue: { en: "" } },
+    socialLinks: { type: DataTypes.JSON, defaultValue: {} },
     status: {
       type: DataTypes.STRING,
       defaultValue: "draft",

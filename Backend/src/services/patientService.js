@@ -89,12 +89,12 @@ export const getAllPatients = async (query) => {
   // Search by name, patient ID, card number, or phone
   if (search) {
     where[Op.or] = [
-      { firstName: { [Op.iLike]: `%${search}%` } },
-      { lastName: { [Op.iLike]: `%${search}%` } },
-      { patientId: { [Op.iLike]: `%${search}%` } },
-      { cardNumber: { [Op.iLike]: `%${search}%` } },
-      { phone: { [Op.iLike]: `%${search}%` } },
-      { nationalId: { [Op.iLike]: `%${search}%` } },
+      { firstName: { [Op.like]: `%${search}%` } },
+      { lastName: { [Op.like]: `%${search}%` } },
+      { patientId: { [Op.like]: `%${search}%` } },
+      { cardNumber: { [Op.like]: `%${search}%` } },
+      { phone: { [Op.like]: `%${search}%` } },
+      { nationalId: { [Op.like]: `%${search}%` } },
     ];
   }
 

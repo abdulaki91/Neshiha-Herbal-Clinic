@@ -34,11 +34,11 @@ const AuditLog = sequelize.define(
       type: DataTypes.TEXT,
     },
     oldValues: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
       comment: "Previous values before update",
     },
     newValues: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
       comment: "New values after update",
     },
     ipAddress: {
@@ -48,7 +48,7 @@ const AuditLog = sequelize.define(
       type: DataTypes.TEXT,
     },
     metadata: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
       comment: "Additional metadata",
     },
   },

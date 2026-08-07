@@ -37,7 +37,7 @@ export const createCollectionService = (
 
     if (search && searchableFields.length > 0) {
       where[Op.or] = searchableFields.map((field) => ({
-        [field]: { [Op.iLike]: `%${search}%` },
+        [field]: { [Op.like]: `%${search}%` },
       }));
     }
 

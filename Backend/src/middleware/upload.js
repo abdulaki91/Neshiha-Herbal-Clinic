@@ -111,11 +111,11 @@ export const attachImagePaths = (bodyField) => (req, res, next) => {
   next();
 };
 
-// multipart/form-data always sends every field as a plain string, so JSONB
+// multipart/form-data always sends every field as a plain string, so JSON
 // fields (translatable text, feature lists, social links, ...) arrive as
 // JSON-encoded text rather than objects. Parse the named fields back into
 // real objects/arrays before they reach validation or the DB write. Only
-// needed on routes that accept file uploads alongside JSONB fields — plain
+// needed on routes that accept file uploads alongside JSON fields — plain
 // JSON requests already arrive parsed.
 export const parseJsonFields = (...fields) => (req, res, next) => {
   for (const field of fields) {

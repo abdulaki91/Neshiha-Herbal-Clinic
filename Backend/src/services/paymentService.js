@@ -38,9 +38,9 @@ export const getPendingPayments = async (query) => {
         where: search
           ? {
               [Op.or]: [
-                { firstName: { [Op.iLike]: `%${search}%` } },
-                { lastName: { [Op.iLike]: `%${search}%` } },
-                { patientId: { [Op.iLike]: `%${search}%` } },
+                { firstName: { [Op.like]: `%${search}%` } },
+                { lastName: { [Op.like]: `%${search}%` } },
+                { patientId: { [Op.like]: `%${search}%` } },
               ],
             }
           : undefined,
@@ -195,7 +195,7 @@ export const getPaymentHistory = async (query) => {
   const where = {};
   if (search) {
     where[Op.or] = [
-      { paymentNumber: { [Op.iLike]: `%${search}%` } },
+      { paymentNumber: { [Op.like]: `%${search}%` } },
     ];
   }
 

@@ -113,12 +113,20 @@ export const formatPhoneNumber = (phone) => {
 
 /**
  * Pagination helper
+ *
+ * page/pageSize arrive as strings from Express query params. MySQL's LIMIT/
+ * OFFSET grammar rejects a quoted numeric string ("LIMIT '10'" is a syntax
+ * error), unlike Postgres which tolerated it — so these must be coerced to
+ * real numbers, not just compared/multiplied (which would silently work for
+ * offset via `-`/`*` coercion but leave limit as a string whenever it's
+ * under the 100 cap).
  */
 export const getPagination = (page = 1, pageSize = 10) => {
-  const limit = pageSize > 100 ? 100 : pageSize;
-  const offset = (page - 1) * limit;
+  const pageNum = Math.max(1, parseInt(page, 10) || 1);
+  const pageSizeNum = Math.min(parseInt(pageSize, 10) || 10, 100);
+  const offset = (pageNum - 1) * pageSizeNum;
 
-  return { limit, offset };
+  return { limit: pageSizeNum, offset };
 };
 
 /**

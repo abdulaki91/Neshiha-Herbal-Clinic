@@ -62,7 +62,7 @@ const Setting = sequelize.define(
       defaultValue: "17:00:00",
     },
     workingDays: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
       defaultValue: [
         "monday",
         "tuesday",
@@ -86,16 +86,16 @@ const Setting = sequelize.define(
     // Business Information — public "About" section content, translatable
     // per-locale as { en, am, om, ar } (en required, others optional).
     tagline: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
     },
     mission: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
     },
     vision: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
     },
     aboutText: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
     },
     yearsExperience: {
       type: DataTypes.INTEGER,
@@ -126,7 +126,7 @@ const Setting = sequelize.define(
       type: DataTypes.STRING,
     },
     metadata: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON,
     },
     updatedBy: {
       type: DataTypes.UUID,
