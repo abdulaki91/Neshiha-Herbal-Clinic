@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Release builds need this explicitly to reach the clinic API. -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="nesiha_herbal_mobile_app"
+        android:label="Nesiha Clinic"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
