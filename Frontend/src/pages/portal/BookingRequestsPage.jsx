@@ -13,7 +13,7 @@ const PAGE_SIZE = 10;
 const STATUS_STYLES = {
   pending: "bg-amber-100 text-amber-700",
   contacted: "bg-blue-100 text-blue-700",
-  confirmed: "bg-emerald-100 text-emerald-700",
+  confirmed: "bg-brand-100 text-brand-700",
   declined: "bg-red-100 text-red-700",
   converted: "bg-gray-200 text-gray-700",
 };
@@ -86,7 +86,7 @@ const BookingRequestsPage = () => {
               setPage(1);
             }}
             placeholder={t("bookingRequests.searchPlaceholder")}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
           />
         </div>
         <select
@@ -95,7 +95,7 @@ const BookingRequestsPage = () => {
             setStatusFilter(e.target.value);
             setPage(1);
           }}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-sm"
+          className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none text-sm"
         >
           <option value="">{t("bookingRequests.allStatuses")}</option>
           {["pending", "contacted", "confirmed", "declined", "converted"].map((s) => (
@@ -108,7 +108,7 @@ const BookingRequestsPage = () => {
 
       {isLoading ? (
         <div className="flex items-center justify-center h-48">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-600"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-brand-600"></div>
         </div>
       ) : isError ? (
         <div className="py-10 text-center text-red-500 bg-white rounded-2xl shadow-sm shadow-slate-200/60">
@@ -167,7 +167,7 @@ const BookingRequestsPage = () => {
                     )}
                     <button
                       onClick={() => handleConvert(booking)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition"
                     >
                       <FiUserPlus className="w-3.5 h-3.5" />
                       {t("bookingRequests.convert")}

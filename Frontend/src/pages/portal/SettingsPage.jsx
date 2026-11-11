@@ -40,8 +40,8 @@ const Section = ({ icon, title, description, children }) => {
   return (
     <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 border border-gray-100 p-6">
       <div className="flex items-center space-x-3 mb-5">
-        <div className="p-2.5 bg-emerald-50 rounded-lg">
-          <Icon className="w-5 h-5 text-emerald-600" />
+        <div className="p-2.5 bg-brand-50 rounded-lg">
+          <Icon className="w-5 h-5 text-brand-600" />
         </div>
         <div>
           <h2 className="font-bold text-gray-800">{title}</h2>
@@ -66,7 +66,7 @@ const Field = ({ label, hint, children }) => (
 );
 
 const inputClass =
-  "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition";
+  "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
@@ -172,7 +172,7 @@ const SettingsPage = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
       </div>
     );
   }
@@ -474,7 +474,7 @@ const SettingsPage = () => {
                         type="checkbox"
                         value={day}
                         {...register("workingDays")}
-                        className="w-4 h-4 text-emerald-600 rounded"
+                        className="w-4 h-4 text-brand-600 rounded"
                       />
                       <span className="text-sm text-gray-700">
                         {t(`settings.weekdays.${day}`)}
@@ -524,7 +524,7 @@ const SettingsPage = () => {
                   <input
                     type="checkbox"
                     {...register("enableEmailNotifications")}
-                    className="w-4 h-4 text-emerald-600 rounded"
+                    className="w-4 h-4 text-brand-600 rounded"
                   />
                   <span className="text-sm text-gray-700">
                     {t("settings.operations.emailNotifications")}
@@ -534,7 +534,7 @@ const SettingsPage = () => {
                   <input
                     type="checkbox"
                     {...register("enableSMSNotifications")}
-                    className="w-4 h-4 text-emerald-600 rounded"
+                    className="w-4 h-4 text-brand-600 rounded"
                   />
                   <span className="text-sm text-gray-700">
                     {t("settings.operations.smsNotifications")}
@@ -574,7 +574,7 @@ const SettingsPage = () => {
             <button
               type="submit"
               disabled={updateSettings.isPending || !isDirty}
-              className="flex items-center space-x-2 px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 shadow-lg"
+              className="flex items-center space-x-2 px-8 py-3 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 shadow-lg"
             >
               <FiSave />
               <span>

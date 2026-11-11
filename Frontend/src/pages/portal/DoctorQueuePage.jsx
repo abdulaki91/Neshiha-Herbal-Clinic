@@ -318,7 +318,7 @@ const DoctorQueuePage = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
       </div>
     );
   }
@@ -388,7 +388,7 @@ const DoctorQueuePage = () => {
           </div>
           <button
             onClick={refreshQueue}
-            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm"
+            className="px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition text-sm"
           >
             {t("doctorQueue.refreshQueue")}
           </button>
@@ -417,7 +417,7 @@ const DoctorQueuePage = () => {
                   key={visit.id}
                   className={`bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer border-2 ${
                     isSelected
-                      ? "border-emerald-500 bg-emerald-50"
+                      ? "border-brand-500 bg-brand-50"
                       : "border-transparent"
                   }`}
                   onClick={() => handleStartConsultation(visit)}
@@ -428,7 +428,7 @@ const DoctorQueuePage = () => {
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
                           isSelected
-                            ? "bg-gradient-to-br from-emerald-600 to-teal-600"
+                            ? "bg-gradient-to-br from-brand-600 to-accent-600"
                             : isInConsultation
                               ? "bg-blue-500"
                               : "bg-gray-200"
@@ -449,7 +449,7 @@ const DoctorQueuePage = () => {
                       <div className="flex-1 min-w-0">
                         <h3
                           className={`font-semibold truncate ${
-                            isSelected ? "text-emerald-800" : "text-gray-800"
+                            isSelected ? "text-brand-800" : "text-gray-800"
                           }`}
                         >
                           {visit.patient?.firstName} {visit.patient?.lastName}
@@ -491,10 +491,10 @@ const DoctorQueuePage = () => {
                       <button
                         className={`px-3 py-1.5 rounded-lg text-xs font-medium transition whitespace-nowrap ${
                           isSelected
-                            ? "bg-emerald-600 text-white"
+                            ? "bg-brand-600 text-white"
                             : isInConsultation && !isConsultingOthers
                               ? "bg-blue-600 text-white hover:bg-blue-700"
-                              : "bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
+                              : "bg-brand-100 text-brand-700 hover:bg-brand-200"
                         }`}
                       >
                         {isSelected
@@ -584,8 +584,8 @@ const SaveStatusIndicator = ({ status }) => {
       label: t("doctorQueue.consultation.saveStatus.saving"),
     },
     saved: {
-      dot: "bg-emerald-500",
-      text: "text-emerald-600",
+      dot: "bg-brand-500",
+      text: "text-brand-600",
       label: t("doctorQueue.consultation.saveStatus.saved"),
     },
     error: {
@@ -645,7 +645,7 @@ const ConsultationPanel = ({
           <button
             onClick={onOpenSidebar}
             aria-label={t("doctorQueue.consultation.patientFileDrawer")}
-            className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm font-semibold shadow-sm"
+            className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition text-sm font-semibold shadow-sm"
           >
             <FiFileText className="w-4 h-4 flex-shrink-0" />
             <span className="hidden sm:inline">{t("doctorQueue.consultation.patientFileDrawer")}</span>
@@ -761,7 +761,7 @@ const ConsultationPanel = ({
                 onClick={() => setActiveTab(tab.key)}
                 className={`py-3 px-3 border-b-2 font-medium text-sm transition whitespace-nowrap ${
                   activeTab === tab.key
-                    ? "border-emerald-600 text-emerald-600"
+                    ? "border-brand-600 text-brand-600"
                     : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -792,7 +792,7 @@ const ConsultationPanel = ({
       </div>
 
       {/* Diagnosis summary + Complete button */}
-      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 border-t-2 border-emerald-100">
+      <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-4 border-t-2 border-brand-100">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           {/* Diagnosis summary */}
           <div className="flex-1 min-w-0">
@@ -820,7 +820,7 @@ const ConsultationPanel = ({
           {/* Complete button */}
           <button
             onClick={onComplete}
-            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium shadow-md text-center"
+            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 font-medium shadow-md text-center"
           >
             {t("doctorQueue.consultation.completeConsultation")}
           </button>

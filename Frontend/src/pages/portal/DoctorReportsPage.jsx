@@ -10,8 +10,8 @@ const PERIODS = { DAILY: "daily", WEEKLY: "weekly", MONTHLY: "monthly" };
 // `bg-${color}-100` — so each color variant is spelled out here instead of
 // composed from a prop.
 const CARD_COLORS = {
-  teal: { bg: "bg-teal-100", text: "text-teal-600" },
-  emerald: { bg: "bg-emerald-100", text: "text-emerald-600" },
+  accent: { bg: "bg-accent-100", text: "text-accent-600" },
+  brand: { bg: "bg-brand-100", text: "text-brand-600" },
   blue: { bg: "bg-blue-100", text: "text-blue-600" },
   purple: { bg: "bg-purple-100", text: "text-purple-600" },
 };
@@ -80,7 +80,7 @@ const DoctorReportsPage = () => {
             onClick={() => setPeriod(key)}
             className={`px-4 py-2 rounded-md text-sm font-medium transition ${
               period === key
-                ? "bg-white text-emerald-700 shadow-sm"
+                ? "bg-white text-brand-700 shadow-sm"
                 : "text-gray-600 hover:text-gray-800"
             }`}
           >
@@ -97,7 +97,7 @@ const DoctorReportsPage = () => {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm"
+            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm"
           />
         </div>
       )}
@@ -109,7 +109,7 @@ const DoctorReportsPage = () => {
             type="month"
             value={date.substring(0, 7)}
             onChange={(e) => setDate(e.target.value + "-01")}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm"
+            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm"
           />
         </div>
       )}
@@ -117,7 +117,7 @@ const DoctorReportsPage = () => {
       {/* Loading */}
       {isLoading && (
         <div className="flex items-center justify-center h-40">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-600"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-brand-600"></div>
         </div>
       )}
 
@@ -128,14 +128,14 @@ const DoctorReportsPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <SummaryCard
               icon={FiTrendingUp}
-              color="teal"
+              color="accent"
               label="Grand Total"
               value={`${report.summary?.grandTotal?.toLocaleString()} ETB`}
               sub={`${periodLabel} · ${report.startDate} – ${report.endDate}`}
             />
             <SummaryCard
               icon={FiDollarSign}
-              color="emerald"
+              color="brand"
               label="Consultation Revenue"
               value={`${report.summary?.consultationRevenue?.toLocaleString()} ETB`}
               sub={`${report.summary?.totalPayments ?? 0} payment(s)`}
@@ -177,7 +177,7 @@ const DoctorReportsPage = () => {
                         <td className="px-6 py-3 text-gray-700">{row.day}</td>
                         <td className="px-6 py-3 text-gray-600">{row.consultationRevenue.toLocaleString()} ETB</td>
                         <td className="px-6 py-3 text-gray-600">{row.registrationFeeRevenue.toLocaleString()} ETB</td>
-                        <td className="px-6 py-3 font-semibold text-emerald-700">{row.total.toLocaleString()} ETB</td>
+                        <td className="px-6 py-3 font-semibold text-brand-700">{row.total.toLocaleString()} ETB</td>
                       </tr>
                     ))}
                   </tbody>
@@ -226,7 +226,7 @@ const DoctorReportsPage = () => {
                         </p>
                       </td>
                       <td className="px-6 py-3 text-gray-600">{payment.paymentNumber}</td>
-                      <td className="px-6 py-3 font-semibold text-emerald-700">
+                      <td className="px-6 py-3 font-semibold text-brand-700">
                         {payment.amount?.toLocaleString()} ETB
                       </td>
                       <td className="px-6 py-3">
@@ -295,7 +295,7 @@ const DoctorReportsPage = () => {
                           {fee.patient?.patientId}
                         </p>
                       </td>
-                      <td className="px-6 py-3 font-semibold text-emerald-700">
+                      <td className="px-6 py-3 font-semibold text-brand-700">
                         {fee.amount?.toLocaleString()} ETB
                       </td>
                       <td className="px-6 py-3">

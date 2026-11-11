@@ -13,7 +13,7 @@ const PatientCard = ({ patient, onUpdate }) => {
   return (
     <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-6">
       <div className="flex items-start space-x-4 mb-4">
-        <div className="w-16 h-16 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
+        <div className="w-16 h-16 bg-gradient-to-br from-brand-600 to-accent-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
           {getInitials()}
         </div>
         <div className="flex-1">
@@ -52,7 +52,7 @@ const PatientCard = ({ patient, onUpdate }) => {
       <div className="mt-4 pt-4 border-t border-gray-100 flex items-center space-x-2">
         <button
           onClick={() => navigate(`/portal/patients/${patient.id}`)}
-          className="flex-1 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition text-sm font-medium"
+          className="flex-1 px-4 py-2 bg-brand-50 text-brand-600 rounded-lg hover:bg-brand-100 transition text-sm font-medium"
         >
           {t("patientCard.viewDetails")}
         </button>

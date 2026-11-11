@@ -291,6 +291,10 @@
     "bookingRequests": "طلبات الحجز"
   },
   "topbar": {
+    "theme": {
+      "toDark": "التبديل إلى الوضع الداكن",
+      "toLight": "التبديل إلى الوضع الفاتح"
+    },
     "greeting": "مرحباً, {{firstName}}!",
     "notifications": "الإشعارات",
     "markAllRead": "وضع علامة مقروء على الكل",
@@ -433,6 +437,122 @@
     }
   },
   "dashboard": {
+    "hero": {
+      "insightEyebrow": "رؤية اليوم",
+      "ring": {
+        "visitsCompleted": "الزيارات المكتملة",
+        "queueCleared": "إنجاز الطابور",
+        "visitsSeen": "الزيارات المُعاينة",
+        "paymentsCleared": "المدفوعات المسددة",
+        "noVisits": "لا توجد زيارات اليوم بعد",
+        "noPayments": "لا توجد مدفوعات اليوم بعد"
+      },
+      "marks": {
+        "waiting": "في الانتظار",
+        "completed": "مكتملة",
+        "visits": "الزيارات",
+        "inQueue": "في الطابور",
+        "prescriptions": "الوصفات",
+        "registered": "المسجلون",
+        "pending": "معلقة",
+        "processed": "تمت معالجتها"
+      },
+      "legend": {
+        "completed": "مكتملة",
+        "waiting": "في الانتظار",
+        "inProgress": "قيد التنفيذ",
+        "seen": "تمت المعاينة",
+        "doctors": "الأطباء",
+        "otherStaff": "موظفون آخرون",
+        "inQueue": "في الطابور",
+        "lowStock": "مخزون منخفض",
+        "expired": "منتهية الصلاحية"
+      },
+      "cards": {
+        "todayVisits": "زيارات اليوم",
+        "totalPatients": "إجمالي المرضى",
+        "activeRecords": "سجلات المرضى النشطة",
+        "staff": "الموظفون",
+        "medicineStock": "تنبيهات الأدوية",
+        "inQueue": "في الطابور",
+        "nextPatient": "التالي: {{name}}",
+        "completedToday": "المكتملة اليوم",
+        "prescriptions": "وصفات اليوم",
+        "dispensedOf": "تم صرف {{dispensed}} من {{total}}",
+        "bookingRequests": "طلبات الحجز",
+        "bookingsHint": "طلبات عبر الإنترنت من الموقع",
+        "registeredToday": "المسجلون اليوم",
+        "waitingNow": "في الانتظار الآن",
+        "waitingHint": "مرضى سجّلوا وصولهم وينتظرون",
+        "pendingPayments": "المدفوعات المعلقة",
+        "pendingHint": "زيارات بانتظار الدفع",
+        "processedToday": "تمت معالجتها اليوم",
+        "lastPayment": "آخر دفعة",
+        "noneYet": "لا توجد مدفوعات بعد",
+        "paymentMethods": "طرق الدفع الأخيرة"
+      },
+      "chip": {
+        "live": "مباشر",
+        "offline": "غير متصل",
+        "allGood": "كل شيء على ما يرام",
+        "needsAttention": "يحتاج إلى انتباه",
+        "needsReview": "يحتاج إلى مراجعة",
+        "queueActive": "الطابور نشط"
+      },
+      "timeline": {
+        "empty": "لا يوجد نشاط اليوم بعد",
+        "noArrivals": "لا أحد في الانتظار الآن"
+      },
+      "cta": {
+        "manageStaff": "إدارة الموظفين",
+        "openQueue": "فتح الطابور",
+        "reviewRequests": "مراجعة الطلبات",
+        "viewPatients": "عرض المرضى",
+        "openCashier": "فتح الصندوق"
+      }
+    },
+    "insight": {
+      "allClear": {
+        "headline": "كل شيء يسير بسلاسة — لا توجد مهام معلقة.",
+        "detail": "سيظهر أي نشاط جديد هنا مباشرةً."
+      },
+      "waiting": {
+        "headline": "هناك مرضى ينتظرون المعاينة.",
+        "detail": "في الانتظار الآن: {{count}}. الحفاظ على حركة الطابور يقلل وقت الانتظار."
+      },
+      "expired": {
+        "headline": "انتهت صلاحية بعض الأدوية.",
+        "detail": "منتهية الصلاحية: {{expired}} · مخزون منخفض: {{low}}. أزل المخزون المنتهي قبل أن يصل إلى أي مريض."
+      },
+      "lowStock": {
+        "headline": "بعض الأدوية على وشك النفاد.",
+        "detail": "مخزون منخفض: {{count}}. أعد التخزين قريبًا لتجنب انقطاع العلاج."
+      },
+      "doctorQueue": {
+        "headline": "هناك مرضى في انتظارك.",
+        "detail": "في الطابور: {{count}} · التالي: {{name}}"
+      },
+      "doctorDone": {
+        "headline": "قائمتك خالية — عمل رائع اليوم.",
+        "detail": "الاستشارات المكتملة اليوم: {{count}}"
+      },
+      "doctorIdle": {
+        "headline": "لا يوجد مرضى في قائمتك بعد.",
+        "detail": "ستظهر الزيارات الجديدة هنا مباشرةً."
+      },
+      "bookings": {
+        "headline": "طلبات حجز جديدة عبر الإنترنت تحتاج إلى مراجعة.",
+        "detail": "الطلبات المعلقة: {{count}}"
+      },
+      "cashierPending": {
+        "headline": "هناك زيارات بانتظار الدفع.",
+        "detail": "المدفوعات المعلقة: {{count}}"
+      },
+      "cashierClear": {
+        "headline": "تمت تسوية جميع المدفوعات.",
+        "detail": "ستظهر المدفوعات الجديدة هنا مباشرةً."
+      }
+    },
     "title": "لوحة التحكم",
     "fallback": {
       "title": "لوحة التحكم"
@@ -452,6 +572,7 @@
       "title": "إحصائيات سريعة"
     },
     "systemStatus": {
+      "reconnecting": "جارٍ إعادة الاتصال…",
       "title": "حالة النظام",
       "database": "قاعدة البيانات",
       "online": "متصل",

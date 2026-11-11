@@ -28,13 +28,13 @@ import {
 const ROLE_BADGE = {
   super_admin: "bg-purple-100 text-purple-700",
   staff_manager: "bg-blue-100 text-blue-700",
-  doctor: "bg-emerald-100 text-emerald-700",
+  doctor: "bg-brand-100 text-brand-700",
   data_clerk: "bg-amber-100 text-amber-700",
-  cashier: "bg-teal-100 text-teal-700",
+  cashier: "bg-accent-100 text-accent-700",
 };
 
 const STATUS_BADGE = {
-  active: "bg-emerald-100 text-emerald-700",
+  active: "bg-brand-100 text-brand-700",
   inactive: "bg-gray-100 text-gray-600",
   suspended: "bg-red-100 text-red-700",
 };
@@ -68,7 +68,7 @@ const ResetPasswordModal = ({ member, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div>
@@ -97,7 +97,7 @@ const ResetPasswordModal = ({ member, onClose }) => {
               autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
             />
             <p className="mt-1 text-xs text-gray-400">
               {t("staffForm.passwordHint")}
@@ -113,7 +113,7 @@ const ResetPasswordModal = ({ member, onClose }) => {
               autoComplete="new-password"
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
             />
             {confirm && !matches && (
               <p className="mt-1 text-xs text-red-500">
@@ -137,7 +137,7 @@ const ResetPasswordModal = ({ member, onClose }) => {
             <button
               type="submit"
               disabled={resetPassword.isPending || !strongEnough || !matches}
-              className="px-5 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50"
+              className="px-5 py-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50"
             >
               {resetPassword.isPending
                 ? t("common.saving")
@@ -233,7 +233,7 @@ const StaffPage = () => {
       label: t("staff.stats.total"),
       value: stats?.total,
       icon: FiUsers,
-      color: "text-emerald-600 bg-emerald-50",
+      color: "text-brand-600 bg-brand-50",
     },
     {
       label: t("staff.stats.active"),
@@ -269,7 +269,7 @@ const StaffPage = () => {
             setSelected(null);
             setShowForm(true);
           }}
-          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
+          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
         >
           <FiPlus />
           <span>{t("staff.addButton")}</span>
@@ -310,7 +310,7 @@ const StaffPage = () => {
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyUp={(e) => e.key === "Enter" && applySearch()}
             onBlur={applySearch}
-            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition"
+            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition"
           />
         </div>
 
@@ -320,7 +320,7 @@ const StaffPage = () => {
             setPage(1);
             setRoleFilter(e.target.value);
           }}
-          className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+          className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
         >
           <option value="">{t("staff.filter.allRoles")}</option>
           {Object.keys(ROLE_BADGE).map((role) => (
@@ -336,7 +336,7 @@ const StaffPage = () => {
             setPage(1);
             setStatusFilter(e.target.value);
           }}
-          className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+          className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
         >
           <option value="">{t("staff.filter.allStatuses")}</option>
           <option value="active">{t("staff.status.active")}</option>
@@ -348,7 +348,7 @@ const StaffPage = () => {
       {/* Table */}
       {isLoading ? (
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
         </div>
       ) : isError ? (
         <div className="py-12 text-center text-red-500 bg-white rounded-2xl shadow-sm shadow-slate-200/60">
@@ -384,8 +384,8 @@ const StaffPage = () => {
                     <tr key={member.id} className="hover:bg-gray-50 transition">
                       <td className="px-6 py-4">
                         <div className="flex items-center space-x-3">
-                          <div className="w-9 h-9 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span className="text-emerald-700 text-sm font-bold">
+                          <div className="w-9 h-9 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span className="text-brand-700 text-sm font-bold">
                               {member.firstName?.[0]}
                               {member.lastName?.[0]}
                             </span>
@@ -479,7 +479,7 @@ const StaffPage = () => {
                                 )
                               }
                               title={t("staff.activate")}
-                              className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition"
+                              className="p-2 text-brand-600 hover:bg-brand-50 rounded-lg transition"
                             >
                               <FiUserCheck className="w-4 h-4" />
                             </button>

@@ -81,7 +81,7 @@ const MedicinesPage = () => {
               setSelectedMedicine(null);
               setShowForm(true);
             }}
-            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
           >
             <FiPlus />
             <span>{t("medicines.addButton")}</span>
@@ -99,14 +99,14 @@ const MedicinesPage = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyUp={(e) => e.key === "Enter" && fetchMedicines()}
-            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition"
+            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition"
           />
         </div>
       </div>
 
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -116,8 +116,8 @@ const MedicinesPage = () => {
               className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 border border-gray-100"
             >
               <div className="flex justify-between items-start mb-4">
-                <div className="p-3 bg-emerald-50 rounded-lg">
-                  <FiPackage className="w-6 h-6 text-emerald-600" />
+                <div className="p-3 bg-brand-50 rounded-lg">
+                  <FiPackage className="w-6 h-6 text-brand-600" />
                 </div>
                 {canManage && (
                   <div className="flex space-x-2">
@@ -158,7 +158,7 @@ const MedicinesPage = () => {
                     className={`font-bold ${
                       medicine.availableQuantity <= medicine.minimumStock
                         ? "text-red-600"
-                        : "text-emerald-600"
+                        : "text-brand-600"
                     }`}
                   >
                     {medicine.availableQuantity}

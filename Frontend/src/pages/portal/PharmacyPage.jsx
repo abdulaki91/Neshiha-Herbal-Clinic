@@ -181,7 +181,7 @@ const PharmacyPage = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
       </div>
     );
   }
@@ -206,7 +206,7 @@ const PharmacyPage = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by patient name, ID, or medicine..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
 
@@ -218,7 +218,7 @@ const PharmacyPage = () => {
                 onClick={() => setStatusFilter(status)}
                 className={`px-4 py-2 rounded-lg font-medium transition ${
                   statusFilter === status
-                    ? "bg-emerald-600 text-white"
+                    ? "bg-brand-600 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -267,42 +267,42 @@ const PharmacyPage = () => {
                   </div>
 
                   {/* Medicine Details */}
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                  <div className="bg-brand-50 border border-brand-200 rounded-lg p-4">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="font-semibold text-emerald-900 text-lg mb-2">
+                        <h4 className="font-semibold text-brand-900 text-lg mb-2">
                           {prescription.medicine?.name || "Medicine"}
                         </h4>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                           <div>
-                            <p className="text-emerald-700 font-medium">
+                            <p className="text-brand-700 font-medium">
                               Dosage
                             </p>
-                            <p className="text-emerald-900">
+                            <p className="text-brand-900">
                               {prescription.dosage}
                             </p>
                           </div>
                           <div>
-                            <p className="text-emerald-700 font-medium">
+                            <p className="text-brand-700 font-medium">
                               Frequency
                             </p>
-                            <p className="text-emerald-900">
+                            <p className="text-brand-900">
                               {prescription.frequency}
                             </p>
                           </div>
                           <div>
-                            <p className="text-emerald-700 font-medium">
+                            <p className="text-brand-700 font-medium">
                               Duration
                             </p>
-                            <p className="text-emerald-900">
+                            <p className="text-brand-900">
                               {prescription.duration}
                             </p>
                           </div>
                           <div>
-                            <p className="text-emerald-700 font-medium">
+                            <p className="text-brand-700 font-medium">
                               Quantity
                             </p>
-                            <p className="text-emerald-900 text-lg font-bold">
+                            <p className="text-brand-900 text-lg font-bold">
                               {prescription.quantity}
                             </p>
                           </div>
@@ -352,7 +352,7 @@ const PharmacyPage = () => {
                 {(prescription.status === "paid" || prescription.status === "pending") && (
                   <button
                     onClick={() => handleDispenseClick(prescription)}
-                    className="ml-6 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium flex items-center space-x-2"
+                    className="ml-6 px-6 py-3 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 font-medium flex items-center space-x-2"
                   >
                     <FiCheck className="w-5 h-5" />
                     <span>Dispense</span>
@@ -382,7 +382,7 @@ const PharmacyPage = () => {
 
       {/* Dispensing Modal */}
       {selectedPrescription && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold text-gray-800">
@@ -443,7 +443,7 @@ const PharmacyPage = () => {
                   }
                   min="1"
                   max={selectedPrescription.quantity}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                 />
               </div>
 
@@ -461,7 +461,7 @@ const PharmacyPage = () => {
                     })
                   }
                   placeholder="e.g., BATCH-2026-001"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                 />
               </div>
 
@@ -479,7 +479,7 @@ const PharmacyPage = () => {
                     })
                   }
                   min={new Date().toISOString().split("T")[0]}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                 />
               </div>
 
@@ -497,7 +497,7 @@ const PharmacyPage = () => {
                   }
                   rows={3}
                   placeholder="Any additional notes..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                 />
               </div>
             </div>
@@ -511,7 +511,7 @@ const PharmacyPage = () => {
               </button>
               <button
                 onClick={handleDispense}
-                className="px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium"
+                className="px-6 py-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 font-medium"
               >
                 Confirm Dispensing
               </button>

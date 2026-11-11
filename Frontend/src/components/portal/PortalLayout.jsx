@@ -82,12 +82,15 @@ const PortalLayout = () => {
   });
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-slate-50 via-emerald-50/40 to-teal-50/30">
+    // `portal-theme` scopes the light/dark theme (styles/theme.css) to the
+    // portal; `app-backdrop` is the lavender → rose gradient behind it.
+    <div className="portal-theme app-backdrop flex h-screen">
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex-1 flex flex-col lg:ml-64">
+      {/* 16.75rem = sidebar width (16rem) + its 0.75rem inset */}
+      <div className="flex-1 min-w-0 flex flex-col lg:ml-[16.75rem]">
         <Topbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6">
           <Outlet />
         </main>
       </div>

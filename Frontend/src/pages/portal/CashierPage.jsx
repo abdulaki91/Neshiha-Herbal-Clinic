@@ -89,7 +89,7 @@ const CashierPage = () => {
   if (isLoading && !pendingPayments.length && !recentPayments.length) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
       </div>
     );
   }
@@ -106,7 +106,7 @@ const CashierPage = () => {
         <button
           onClick={() => setActiveTab("pending")}
           className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition ${
-            activeTab === "pending" ? "bg-white text-emerald-700 shadow-sm" : "text-gray-600 hover:text-gray-800"
+            activeTab === "pending" ? "bg-white text-brand-700 shadow-sm" : "text-gray-600 hover:text-gray-800"
           }`}
         >
           <FiDollarSign className="w-4 h-4" />
@@ -115,7 +115,7 @@ const CashierPage = () => {
         <button
           onClick={() => setActiveTab("recent")}
           className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition ${
-            activeTab === "recent" ? "bg-white text-emerald-700 shadow-sm" : "text-gray-600 hover:text-gray-800"
+            activeTab === "recent" ? "bg-white text-brand-700 shadow-sm" : "text-gray-600 hover:text-gray-800"
           }`}
         >
           <FiHistory className="w-4 h-4" />
@@ -135,7 +135,7 @@ const CashierPage = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
                 placeholder="Search by patient name or ID..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
               />
             </div>
           </div>
@@ -152,7 +152,7 @@ const CashierPage = () => {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-3 mb-4">
-                        <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <div className="w-12 h-12 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center flex-shrink-0">
                           <FiUser className="w-6 h-6" />
                         </div>
                         <div>
@@ -191,7 +191,7 @@ const CashierPage = () => {
                             </div>
                           </div>
                         ))}
-                        <div className="flex justify-end pt-2 border-t font-bold text-lg text-emerald-700">
+                        <div className="flex justify-end pt-2 border-t font-bold text-lg text-brand-700">
                           Total:{" "}
                           {visit.prescriptions
                             .reduce((sum, p) => sum + parseFloat(p.totalAmount || p.unitPrice * p.quantity || 0), 0)
@@ -213,7 +213,7 @@ const CashierPage = () => {
                     <div className="flex flex-col space-y-2 flex-shrink-0">
                       <button
                         onClick={() => handleProcessPaymentClick(visit)}
-                        className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium flex items-center space-x-2 text-sm"
+                        className="px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition font-medium flex items-center space-x-2 text-sm"
                       >
                         <FiDollarSign />
                         <span>Receive &amp; Dispense</span>
@@ -258,7 +258,7 @@ const CashierPage = () => {
 
                       {/* Payment summary */}
                       <div className="flex flex-wrap gap-3 text-sm mb-3">
-                        <span className="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-semibold">
+                        <span className="bg-brand-50 text-brand-700 px-3 py-1 rounded-full font-semibold">
                           {formatETB(payment.amount)} ETB
                         </span>
                         <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full capitalize">
@@ -308,7 +308,7 @@ const CashierPage = () => {
 
       {/* Payment Modal */}
       {selectedVisit && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white">
               <h2 className="text-2xl font-bold text-gray-800">Receive Payment</h2>
@@ -317,9 +317,9 @@ const CashierPage = () => {
               </button>
             </div>
             <div className="p-6 space-y-4">
-              <div className="bg-emerald-50 p-4 rounded-lg">
-                <p className="text-sm text-emerald-700 font-medium">Total Amount Due</p>
-                <p className="text-3xl font-bold text-emerald-900">{paymentData.amount.toFixed(2)} ETB</p>
+              <div className="bg-brand-50 p-4 rounded-lg">
+                <p className="text-sm text-brand-700 font-medium">Total Amount Due</p>
+                <p className="text-3xl font-bold text-brand-900">{paymentData.amount.toFixed(2)} ETB</p>
               </div>
               {selectedVisit.prescriptions?.length > 0 && (
                 <div className="bg-blue-50 p-3 rounded-lg text-sm">
@@ -352,7 +352,7 @@ const CashierPage = () => {
                 <select
                   value={paymentData.paymentMethod}
                   onChange={(e) => setPaymentData({ ...paymentData, paymentMethod: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500"
                 >
                   <option value="cash">Cash</option>
                   <option value="transfer">Bank Transfer</option>
@@ -362,16 +362,16 @@ const CashierPage = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Transaction ID / Reference (Optional)</label>
-                <input type="text" value={paymentData.transactionId} onChange={(e) => setPaymentData({ ...paymentData, transactionId: e.target.value })} placeholder="e.g., TXN123456" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                <input type="text" value={paymentData.transactionId} onChange={(e) => setPaymentData({ ...paymentData, transactionId: e.target.value })} placeholder="e.g., TXN123456" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
-                <textarea value={paymentData.notes} onChange={(e) => setPaymentData({ ...paymentData, notes: e.target.value })} rows={2} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                <textarea value={paymentData.notes} onChange={(e) => setPaymentData({ ...paymentData, notes: e.target.value })} rows={2} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500" />
               </div>
             </div>
             <div className="p-6 border-t border-gray-200 flex justify-end space-x-3 sticky bottom-0 bg-white">
               <button onClick={() => setSelectedVisit(null)} className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">Cancel</button>
-              <button onClick={handleProcessPayment} className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium">Confirm Payment &amp; Dispense</button>
+              <button onClick={handleProcessPayment} className="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition font-medium">Confirm Payment &amp; Dispense</button>
             </div>
           </div>
         </div>
@@ -379,7 +379,7 @@ const CashierPage = () => {
 
       {/* View Payment Detail Modal */}
       {viewPayment && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white">
               <h2 className="text-2xl font-bold text-gray-800">Payment Details</h2>
@@ -395,7 +395,7 @@ const CashierPage = () => {
                 </div>
                 <div>
                   <p className="text-gray-500">Amount</p>
-                  <p className="font-semibold text-emerald-700">{formatETB(viewPayment.amount)} ETB</p>
+                  <p className="font-semibold text-brand-700">{formatETB(viewPayment.amount)} ETB</p>
                 </div>
                 <div>
                   <p className="text-gray-500">Method</p>
@@ -437,7 +437,7 @@ const CashierPage = () => {
                       )}
                     </div>
                   ))}
-                  <div className="flex justify-end pt-2 border-t font-bold text-emerald-700 mt-2">
+                  <div className="flex justify-end pt-2 border-t font-bold text-brand-700 mt-2">
                     Total: {formatETB(viewPayment.amount)} ETB
                   </div>
                 </div>
@@ -452,7 +452,7 @@ const CashierPage = () => {
             </div>
             <div className="p-6 border-t border-gray-200 flex justify-end space-x-3 sticky bottom-0 bg-white">
               <button onClick={() => setViewPayment(null)} className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">Close</button>
-              <button onClick={() => { setPrintVisit(viewPayment); setViewPayment(null); }} className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium flex items-center space-x-2">
+              <button onClick={() => { setPrintVisit(viewPayment); setViewPayment(null); }} className="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition font-medium flex items-center space-x-2">
                 <FiPrinter />
                 <span>Print Receipt</span>
               </button>

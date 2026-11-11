@@ -37,7 +37,7 @@ const PartnersTab = () => {
               className="w-10 h-10 rounded-lg object-contain bg-white border border-gray-200 flex-shrink-0 p-1"
             />
           ) : (
-            <div className="w-10 h-10 rounded-lg bg-emerald-100 flex-shrink-0" />
+            <div className="w-10 h-10 rounded-lg bg-brand-100 flex-shrink-0" />
           )}
           <div className="min-w-0">
             <p className="font-semibold text-gray-800 truncate">{item.name}</p>

@@ -130,10 +130,10 @@ const VisitForm = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl">
         {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-white flex items-center justify-between">
+        <div className="bg-gradient-to-r from-brand-600 to-accent-600 p-6 text-white flex items-center justify-between">
           <h2 className="text-2xl font-bold">
             {mode === "appointment"
               ? t("visitForm.scheduleTitle")
@@ -155,7 +155,7 @@ const VisitForm = ({
               onClick={() => setMode("walk_in")}
               className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 mode === "walk_in"
-                  ? "bg-white text-emerald-700 shadow-sm"
+                  ? "bg-white text-brand-700 shadow-sm"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -167,7 +167,7 @@ const VisitForm = ({
               onClick={() => setMode("appointment")}
               className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 mode === "appointment"
-                  ? "bg-white text-emerald-700 shadow-sm"
+                  ? "bg-white text-brand-700 shadow-sm"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -186,7 +186,7 @@ const VisitForm = ({
               </label>
               <select
                 {...register("patientId", { required: t("visitForm.patientRequired") })}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
               >
                 <option value="">{t("visitForm.patientPlaceholder")}</option>
                 {patients.map((patient) => (
@@ -209,7 +209,7 @@ const VisitForm = ({
               <textarea
                 {...register("chiefComplaint")}
                 rows="4"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                 placeholder={t("visitForm.chiefComplaintPlaceholder")}
               />
             </div>
@@ -225,7 +225,7 @@ const VisitForm = ({
                   type="date"
                   min={mode === "appointment" ? todayStr() : undefined}
                   {...register("visitDate", { required: true })}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                 />
               </div>
 
@@ -239,7 +239,7 @@ const VisitForm = ({
                     {...register("scheduledTime", {
                       required: t("visitForm.scheduledTimeRequired"),
                     })}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                   />
                   {errors.scheduledTime && (
                     <p className="mt-1 text-sm text-red-600">
@@ -257,7 +257,7 @@ const VisitForm = ({
                     {...register("arrivalTime", {
                       required: t("visitForm.arrivalTimeRequired"),
                     })}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                   />
                   {errors.arrivalTime && (
                     <p className="mt-1 text-sm text-red-600">
@@ -269,7 +269,7 @@ const VisitForm = ({
             </div>
 
             {mode === "appointment" && (
-              <p className="text-xs text-gray-500 bg-emerald-50 border border-emerald-100 rounded-lg p-3">
+              <p className="text-xs text-gray-500 bg-brand-50 border border-brand-100 rounded-lg p-3">
                 {t("visitForm.appointmentHint")}
               </p>
             )}
@@ -287,7 +287,7 @@ const VisitForm = ({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-accent-600 text-white hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 font-medium disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {isSubmitting
                 ? t("visitForm.creating")

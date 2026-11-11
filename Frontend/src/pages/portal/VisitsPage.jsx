@@ -82,7 +82,7 @@ const VisitsPage = () => {
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
+          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
         >
           <FiPlus />
           <span>{t("visits.newVisitButton")}</span>
@@ -97,7 +97,7 @@ const VisitsPage = () => {
             onClick={() => setFilter(status)}
             className={`px-4 py-2 rounded-lg font-medium transition ${
               filter === status
-                ? "bg-emerald-600 text-white"
+                ? "bg-brand-600 text-white"
                 : "bg-white text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -109,7 +109,7 @@ const VisitsPage = () => {
       {/* Visit List */}
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
         </div>
       ) : visits.length > 0 ? (
         <div className="grid grid-cols-1 gap-4">
@@ -120,8 +120,8 @@ const VisitsPage = () => {
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <span className="text-emerald-600 font-bold">
+                  <div className="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center">
+                    <span className="text-brand-600 font-bold">
                       {visit.patient?.firstName?.[0]}
                       {visit.patient?.lastName?.[0]}
                     </span>

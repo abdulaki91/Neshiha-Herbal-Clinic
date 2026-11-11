@@ -291,6 +291,10 @@
     "bookingRequests": "የቀጠሮ ጥያቄዎች"
   },
   "topbar": {
+    "theme": {
+      "toDark": "ወደ ጨለማ ገጽታ ቀይር",
+      "toLight": "ወደ ብሩህ ገጽታ ቀይር"
+    },
     "greeting": "እንኳን ደህና መጡ, {{firstName}}!",
     "notifications": "ማሳሰቢያዎች",
     "markAllRead": "ሁሉንም እንደተነበበ ምልክት ያድርጉ",
@@ -433,6 +437,122 @@
     }
   },
   "dashboard": {
+    "hero": {
+      "insightEyebrow": "የዛሬ ግንዛቤ",
+      "ring": {
+        "visitsCompleted": "የተጠናቀቁ ጉብኝቶች",
+        "queueCleared": "የተስተናገደ ወረፋ",
+        "visitsSeen": "የታዩ ጉብኝቶች",
+        "paymentsCleared": "የተከፈሉ ክፍያዎች",
+        "noVisits": "ዛሬ እስካሁን ጉብኝት የለም",
+        "noPayments": "ዛሬ እስካሁን ክፍያ የለም"
+      },
+      "marks": {
+        "waiting": "በመጠባበቅ ላይ",
+        "completed": "የተጠናቀቁ",
+        "visits": "ጉብኝቶች",
+        "inQueue": "በወረፋ",
+        "prescriptions": "የመድኃኒት ማዘዣዎች",
+        "registered": "የተመዘገቡ",
+        "pending": "በመጠባበቅ ላይ",
+        "processed": "የተስተናገዱ"
+      },
+      "legend": {
+        "completed": "የተጠናቀቁ",
+        "waiting": "በመጠባበቅ ላይ",
+        "inProgress": "በሂደት ላይ",
+        "seen": "የታዩ",
+        "doctors": "ሐኪሞች",
+        "otherStaff": "ሌሎች ሰራተኞች",
+        "inQueue": "በወረፋ",
+        "lowStock": "ዝቅተኛ ክምችት",
+        "expired": "ጊዜው ያለፈበት"
+      },
+      "cards": {
+        "todayVisits": "የዛሬ ጉብኝቶች",
+        "totalPatients": "ጠቅላላ ታካሚዎች",
+        "activeRecords": "ንቁ የታካሚ መዝገቦች",
+        "staff": "ሰራተኞች",
+        "medicineStock": "የመድኃኒት ማንቂያዎች",
+        "inQueue": "በወረፋ",
+        "nextPatient": "ቀጣይ፦ {{name}}",
+        "completedToday": "ዛሬ የተጠናቀቁ",
+        "prescriptions": "የዛሬ የመድኃኒት ማዘዣዎች",
+        "dispensedOf": "ከ{{total}} ውስጥ {{dispensed}} ተሰጥተዋል",
+        "bookingRequests": "የቀጠሮ ጥያቄዎች",
+        "bookingsHint": "ከድረ-ገጹ የመጡ የመስመር ላይ ጥያቄዎች",
+        "registeredToday": "ዛሬ የተመዘገቡ",
+        "waitingNow": "አሁን በመጠባበቅ ላይ",
+        "waitingHint": "ገብተው በመጠባበቅ ላይ ያሉ ታካሚዎች",
+        "pendingPayments": "ያልተከፈሉ ክፍያዎች",
+        "pendingHint": "ክፍያ የሚጠብቁ ጉብኝቶች",
+        "processedToday": "ዛሬ የተስተናገዱ",
+        "lastPayment": "የመጨረሻ ክፍያ",
+        "noneYet": "እስካሁን ክፍያ የለም",
+        "paymentMethods": "የቅርብ ጊዜ የክፍያ ዘዴዎች"
+      },
+      "chip": {
+        "live": "ቀጥታ",
+        "offline": "ከመስመር ውጭ",
+        "allGood": "ሁሉም ደህና ነው",
+        "needsAttention": "ትኩረት ያስፈልገዋል",
+        "needsReview": "መገምገም ያስፈልገዋል",
+        "queueActive": "ወረፋ ንቁ ነው"
+      },
+      "timeline": {
+        "empty": "ዛሬ እስካሁን እንቅስቃሴ የለም",
+        "noArrivals": "አሁን የሚጠብቅ የለም"
+      },
+      "cta": {
+        "manageStaff": "ሰራተኞችን አስተዳድር",
+        "openQueue": "ወረፋ ክፈት",
+        "reviewRequests": "ጥያቄዎችን ገምግም",
+        "viewPatients": "ታካሚዎችን ይመልከቱ",
+        "openCashier": "ገንዘብ ተቀባይ ክፈት"
+      }
+    },
+    "insight": {
+      "allClear": {
+        "headline": "ሁሉም ነገር በሰላም እየሄደ ነው — ምንም የቀረ ስራ የለም።",
+        "detail": "አዳዲስ እንቅስቃሴዎች እዚህ በቀጥታ ይታያሉ።"
+      },
+      "waiting": {
+        "headline": "ታካሚዎች ለመታየት እየጠበቁ ነው።",
+        "detail": "አሁን በመጠባበቅ ላይ፦ {{count}}። ወረፋውን ማንቀሳቀስ የጥበቃ ጊዜን ያሳጥራል።"
+      },
+      "expired": {
+        "headline": "አንዳንድ መድኃኒቶች ጊዜያቸው አልፏል።",
+        "detail": "ጊዜው ያለፈበት፦ {{expired}} · ዝቅተኛ ክምችት፦ {{low}}። ጊዜው ያለፈበትን ክምችት ታካሚ ጋር ከመድረሱ በፊት ያስወግዱ።"
+      },
+      "lowStock": {
+        "headline": "አንዳንድ መድኃኒቶች እያለቁ ነው።",
+        "detail": "ዝቅተኛ ክምችት፦ {{count}}። የሕክምና ክፍተት እንዳይፈጠር በቅርቡ ይሙሉ።"
+      },
+      "doctorQueue": {
+        "headline": "ታካሚዎች እርስዎን እየጠበቁ ነው።",
+        "detail": "በወረፋ፦ {{count}} · ቀጣይ፦ {{name}}"
+      },
+      "doctorDone": {
+        "headline": "ወረፋዎ ባዶ ነው — ዛሬ ጥሩ ስራ ሰርተዋል።",
+        "detail": "ዛሬ የተጠናቀቁ ምክክሮች፦ {{count}}"
+      },
+      "doctorIdle": {
+        "headline": "እስካሁን በወረፋዎ ውስጥ ታካሚ የለም።",
+        "detail": "አዳዲስ ጉብኝቶች እዚህ በቀጥታ ይታያሉ።"
+      },
+      "bookings": {
+        "headline": "አዲስ የመስመር ላይ የቀጠሮ ጥያቄዎች መገምገም ያስፈልጋቸዋል።",
+        "detail": "በመጠባበቅ ላይ ያሉ ጥያቄዎች፦ {{count}}"
+      },
+      "cashierPending": {
+        "headline": "ጉብኝቶች ክፍያ እየጠበቁ ነው።",
+        "detail": "ያልተከፈሉ ክፍያዎች፦ {{count}}"
+      },
+      "cashierClear": {
+        "headline": "ሁሉም ክፍያዎች ተጠናቀዋል።",
+        "detail": "አዳዲስ ክፍያዎች እዚህ በቀጥታ ይታያሉ።"
+      }
+    },
     "title": "ዋና ገጽ",
     "fallback": {
       "title": "ዋና ገጽ"
@@ -452,6 +572,7 @@
       "title": "ፈጣን ስታቲስቲክስ"
     },
     "systemStatus": {
+      "reconnecting": "እንደገና በመገናኘት ላይ…",
       "title": "የስርዓት ሁኔታ",
       "database": "ዳታቤዝ",
       "online": "ኦንላይን",

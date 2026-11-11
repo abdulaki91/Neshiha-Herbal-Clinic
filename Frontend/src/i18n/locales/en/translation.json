@@ -313,6 +313,10 @@
   },
 
   "topbar": {
+    "theme": {
+      "toDark": "Switch to dark mode",
+      "toLight": "Switch to light mode"
+    },
     "greeting": "Welcome, {{firstName}}!",
     "notifications": "Notifications",
     "markAllRead": "Mark all read",
@@ -447,6 +451,122 @@
   },
 
   "dashboard": {
+    "hero": {
+      "insightEyebrow": "Today's insight",
+      "ring": {
+        "visitsCompleted": "Visits completed",
+        "queueCleared": "Queue cleared",
+        "visitsSeen": "Visits seen",
+        "paymentsCleared": "Payments cleared",
+        "noVisits": "No visits yet today",
+        "noPayments": "No payments yet today"
+      },
+      "marks": {
+        "waiting": "Waiting",
+        "completed": "Completed",
+        "visits": "Visits",
+        "inQueue": "In queue",
+        "prescriptions": "Prescriptions",
+        "registered": "Registered",
+        "pending": "Pending",
+        "processed": "Processed"
+      },
+      "legend": {
+        "completed": "Completed",
+        "waiting": "Waiting",
+        "inProgress": "In progress",
+        "seen": "Seen",
+        "doctors": "Doctors",
+        "otherStaff": "Other staff",
+        "inQueue": "In queue",
+        "lowStock": "Low stock",
+        "expired": "Expired"
+      },
+      "cards": {
+        "todayVisits": "Today's visits",
+        "totalPatients": "Total patients",
+        "activeRecords": "Active patient records",
+        "staff": "Staff",
+        "medicineStock": "Medicine alerts",
+        "inQueue": "In queue",
+        "nextPatient": "Next: {{name}}",
+        "completedToday": "Completed today",
+        "prescriptions": "Prescriptions today",
+        "dispensedOf": "{{dispensed}} of {{total}} dispensed",
+        "bookingRequests": "Booking requests",
+        "bookingsHint": "Online requests from the website",
+        "registeredToday": "Registered today",
+        "waitingNow": "Waiting now",
+        "waitingHint": "Patients checked in and waiting",
+        "pendingPayments": "Pending payments",
+        "pendingHint": "Visits waiting to be paid",
+        "processedToday": "Processed today",
+        "lastPayment": "Last payment",
+        "noneYet": "No payments yet",
+        "paymentMethods": "Recent payment methods"
+      },
+      "chip": {
+        "live": "Live",
+        "offline": "Offline",
+        "allGood": "All good",
+        "needsAttention": "Needs attention",
+        "needsReview": "Needs review",
+        "queueActive": "Queue active"
+      },
+      "timeline": {
+        "empty": "No activity yet today",
+        "noArrivals": "No one waiting right now"
+      },
+      "cta": {
+        "manageStaff": "Manage staff",
+        "openQueue": "Open queue",
+        "reviewRequests": "Review requests",
+        "viewPatients": "View patients",
+        "openCashier": "Open cashier"
+      }
+    },
+    "insight": {
+      "allClear": {
+        "headline": "Everything is running smoothly — all caught up.",
+        "detail": "New activity will appear here in real time."
+      },
+      "waiting": {
+        "headline": "Patients are waiting to be seen.",
+        "detail": "Waiting now: {{count}}. Keeping the queue moving shortens wait times."
+      },
+      "expired": {
+        "headline": "Some medicines have expired.",
+        "detail": "Expired: {{expired}} · Low stock: {{low}}. Remove expired stock before it reaches a patient."
+      },
+      "lowStock": {
+        "headline": "Some medicines are running low.",
+        "detail": "Low stock: {{count}}. Restock soon to avoid gaps in treatment."
+      },
+      "doctorQueue": {
+        "headline": "Patients are waiting for you.",
+        "detail": "In queue: {{count}} · Next up: {{name}}"
+      },
+      "doctorDone": {
+        "headline": "Your queue is clear — nice work today.",
+        "detail": "Consultations completed today: {{count}}"
+      },
+      "doctorIdle": {
+        "headline": "No patients in your queue yet.",
+        "detail": "New visits will appear here in real time."
+      },
+      "bookings": {
+        "headline": "New online booking requests need review.",
+        "detail": "Pending requests: {{count}}"
+      },
+      "cashierPending": {
+        "headline": "Visits are waiting for payment.",
+        "detail": "Pending payments: {{count}}"
+      },
+      "cashierClear": {
+        "headline": "All payments are settled.",
+        "detail": "New payments will appear here in real time."
+      }
+    },
     "title": "Dashboard",
     "fallback": { "title": "Dashboard" },
     "stats": {
@@ -462,6 +582,7 @@
     },
     "quickStats": { "title": "Quick Stats" },
     "systemStatus": {
+      "reconnecting": "Reconnecting…",
       "title": "System Status",
       "database": "Database",
       "online": "Online",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, Suspense, lazy } from "react";
+import React, { useLayoutEffect, Suspense, lazy } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -35,6 +35,8 @@ const BookingRequestsPage = lazy(() => import("./pages/portal/BookingRequestsPag
 
 // Store
 import useAuthStore from "./store/authStore";
+// Imported for its side effect too: applies the saved/OS theme on load.
+import "./store/themeStore";
 import {
   initializeSocket,
   connectSocket,
@@ -58,8 +60,8 @@ const RoleRoute = ({ roles, children }) => {
 // used throughout the app's own data-loading states, so it reads as part
 // of the app rather than a generic loader.
 const RouteLoadingFallback = () => (
-  <div className="flex items-center justify-center h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+  <div className="portal-theme app-backdrop flex items-center justify-center h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
   </div>
 );
 
@@ -77,16 +79,7 @@ const NotFoundPage = () => {
 };
 
 export default function App() {
-  const [theme, setTheme] = useState("light");
   const { isAuthenticated, accessToken } = useAuthStore();
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
 
   // Initialize Socket.io when authenticated. This MUST be a layout effect,
   // not a regular effect: React fires layout effects for the whole tree
@@ -118,14 +111,18 @@ export default function App() {
         position="top-right"
         toastOptions={{
           duration: 4000,
+          // Theme-aware via the CSS variables in styles/theme.css
           style: {
-            background: "#fff",
-            color: "#363636",
+            background: "var(--toast-bg)",
+            color: "var(--toast-fg)",
+            border: "1px solid var(--toast-border)",
+            borderRadius: "16px",
+            boxShadow: "0 18px 40px -18px rgb(40 30 90 / 0.45)",
           },
           success: {
             duration: 3000,
             iconTheme: {
-              primary: "#10b981",
+              primary: "#6260b0",
               secondary: "#fff",
             },
           },
@@ -145,9 +142,7 @@ export default function App() {
           <Route
             path="/"
             element={
-              <div
-                className={`min-h-screen flex flex-col ${theme === "light" ? "bg-white" : "bg-gray-900"}`}
-              >
+              <div className="min-h-screen flex flex-col bg-white">
                 <Home />
               </div>
             }

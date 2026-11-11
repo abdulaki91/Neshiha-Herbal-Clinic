@@ -116,12 +116,12 @@ const VitalSignsForm = ({ visitId, onSave }) => {
     <div className="space-y-6">
       <div className="flex items-center justify-between mb-6">
         <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2">
-          <FiActivity className="text-emerald-600" />
+          <FiActivity className="text-brand-600" />
           <span>{t("vitalSigns.title")}</span>
         </h4>
         <button
           onClick={handleSaveVitals}
-          className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+          className="flex items-center space-x-2 px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition"
         >
           <FiSave />
           <span>{t("vitalSigns.saveButton")}</span>
@@ -141,7 +141,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
             onChange={(e) =>
               setVitals({ ...vitals, temperature: e.target.value })
             }
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             placeholder={t("vitalSigns.temperaturePlaceholder")}
           />
           <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.temperatureNormal")}</p>
@@ -159,7 +159,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
               onChange={(e) =>
                 setVitals({ ...vitals, bloodPressureSystolic: e.target.value })
               }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
               placeholder={t("vitalSigns.systolicPlaceholder")}
             />
             <span className="flex items-center text-gray-500">/</span>
@@ -172,7 +172,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
                   bloodPressureDiastolic: e.target.value,
                 })
               }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
               placeholder={t("vitalSigns.diastolicPlaceholder")}
             />
           </div>
@@ -190,7 +190,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
             onChange={(e) =>
               setVitals({ ...vitals, heartRate: e.target.value })
             }
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             placeholder={t("vitalSigns.heartRatePlaceholder")}
           />
           <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.heartRateNormal")}</p>
@@ -207,7 +207,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
             onChange={(e) =>
               setVitals({ ...vitals, respiratoryRate: e.target.value })
             }
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             placeholder={t("vitalSigns.respiratoryRatePlaceholder")}
           />
           <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.respiratoryRateNormal")}</p>
@@ -225,7 +225,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
             onChange={(e) =>
               setVitals({ ...vitals, oxygenSaturation: e.target.value })
             }
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             placeholder={t("vitalSigns.oxygenSaturationPlaceholder")}
           />
           <p className="mt-1 text-xs text-gray-500">{t("vitalSigns.oxygenSaturationNormal")}</p>
@@ -241,7 +241,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
             step="0.1"
             value={vitals.weight}
             onChange={(e) => setVitals({ ...vitals, weight: e.target.value })}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             placeholder={t("vitalSigns.weightPlaceholder")}
           />
         </div>
@@ -256,7 +256,7 @@ const VitalSignsForm = ({ visitId, onSave }) => {
             step="0.1"
             value={vitals.height}
             onChange={(e) => setVitals({ ...vitals, height: e.target.value })}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             placeholder={t("vitalSigns.heightPlaceholder")}
           />
         </div>

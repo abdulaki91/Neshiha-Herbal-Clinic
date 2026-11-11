@@ -158,20 +158,20 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 z-40 transition-opacity"
+        className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm z-40 transition-opacity"
         onClick={onClose}
       />
 
       {/* Drawer Container */}
       <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-[480px] max-w-full bg-slate-50 shadow-2xl flex flex-col h-full border-l border-slate-200">
         {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-700 to-teal-700 p-5 text-white flex-shrink-0 flex items-center justify-between shadow-md">
+        <div className="bg-gradient-to-r from-brand-700 to-accent-700 p-5 text-white flex-shrink-0 flex items-center justify-between shadow-md">
           <div>
             <h2 className="text-xl font-bold flex items-center gap-2">
               <FiUser className="w-5 h-5" />
               <span>{t("patientRecordSidebar.title")}</span>
             </h2>
-            <p className="text-xs text-emerald-100 mt-1">
+            <p className="text-xs text-brand-100 mt-1">
               {t("patientRecordSidebar.idPrefix")} {patient.patientId} ·{" "}
               {t("patientRecordSidebar.cardPrefix")} {patient.cardNumber}
             </p>
@@ -199,7 +199,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
               onClick={() => setActiveSubTab(tab.key)}
               className={`flex-1 py-2 text-center text-xs font-semibold rounded-lg transition ${
                 activeSubTab === tab.key
-                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                  ? "bg-brand-50 text-brand-700 border border-brand-200"
                   : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
               }`}
             >
@@ -220,7 +220,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                 <button
                   type="button"
                   onClick={() => setIsEditing(!isEditing)}
-                  className="flex items-center gap-1 text-xs font-medium text-emerald-600 hover:text-emerald-700 transition"
+                  className="flex items-center gap-1 text-xs font-medium text-brand-600 hover:text-brand-700 transition"
                 >
                   <FiEdit2 className="w-3.5 h-3.5" />
                   <span>
@@ -241,7 +241,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                         type="text"
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none"
                         required
                       />
                     </div>
@@ -251,7 +251,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                         type="text"
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none"
                         required
                       />
                     </div>
@@ -263,7 +263,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                         max="150"
                         value={formData.age}
                         onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none"
                         required
                       />
                     </div>
@@ -277,7 +277,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                         type="text"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none"
                         required
                       />
                     </div>
@@ -287,7 +287,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none"
                       />
                     </div>
                   </div>
@@ -336,7 +336,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                         type="text"
                         value={formData.occupation}
                         onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
-                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                        className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none"
                       />
                     </div>
                   </div>
@@ -348,14 +348,14 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       rows={2}
-                      className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                      className="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none"
                     />
                   </div>
 
                   {/* Save button */}
                   <button
                     type="submit"
-                    className="w-full mt-4 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded shadow-md hover:from-emerald-700 hover:to-teal-700 transition"
+                    className="w-full mt-4 flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-brand-600 to-accent-600 text-white font-bold rounded shadow-md hover:from-brand-700 hover:to-accent-700 transition"
                   >
                     <FiSave className="w-4 h-4" />
                     <span>{t("patientRecordSidebar.saveButton")}</span>
@@ -433,7 +433,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
           {activeSubTab === "files" && (
             <div className="space-y-4">
               {/* File Upload Box */}
-              <div className="bg-white rounded-xl border-2 border-dashed border-slate-350 p-6 text-center hover:border-emerald-500 transition duration-150 relative">
+              <div className="bg-white rounded-xl border-2 border-dashed border-slate-350 p-6 text-center hover:border-brand-500 transition duration-150 relative">
                 <FiUploadCloud className="w-10 h-10 text-slate-400 mx-auto mb-2" />
                 <p className="text-xs font-bold text-slate-700 mb-1">
                   {t("patientRecordSidebar.uploadTitle")}
@@ -495,7 +495,7 @@ const PatientRecordSidebar = ({ isOpen, onClose, patientId, visitId }) => {
                             href={getFileUrl(file.filePath)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-slate-100 rounded transition"
+                            className="p-1.5 text-slate-500 hover:text-brand-600 hover:bg-slate-100 rounded transition"
                             title={t("patientRecordSidebar.viewFileTitle")}
                           >
                             <FiEye className="w-4 h-4" />

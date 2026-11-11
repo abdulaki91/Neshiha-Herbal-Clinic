@@ -63,7 +63,7 @@ const PatientDetailPage = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
       </div>
     );
   }
@@ -81,7 +81,7 @@ const PatientDetailPage = () => {
       {/* Back Button */}
       <button
         onClick={() => navigate("/portal/patients")}
-        className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600 transition"
+        className="flex items-center space-x-2 text-gray-600 hover:text-brand-600 transition"
       >
         <FiArrowLeft />
         <span>Back to Patients</span>
@@ -90,7 +90,7 @@ const PatientDetailPage = () => {
       {/* Patient Info Card */}
       <div className="bg-white rounded-2xl shadow-sm shadow-slate-200/60 p-6">
         <div className="flex items-start space-x-4 mb-6">
-          <div className="w-20 h-20 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+          <div className="w-20 h-20 bg-gradient-to-br from-brand-600 to-accent-600 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
             {patient.firstName?.[0]}
             {patient.lastName?.[0]}
           </div>
@@ -124,7 +124,7 @@ const PatientDetailPage = () => {
           </div>
           <button
             onClick={() => navigate(`/portal/visits/new?patientId=${patient.id}`)}
-            className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition text-sm flex-shrink-0"
+            className="flex items-center space-x-2 px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition text-sm flex-shrink-0"
           >
             <FiPlus />
             <span>New Visit</span>
