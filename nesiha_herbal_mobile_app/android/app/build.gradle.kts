@@ -6,7 +6,8 @@ plugins {
 
 android {
     namespace = "com.example.nesiha_herbal_mobile_app"
-    compileSdk = flutter.compileSdkVersion
+    // 37, not flutter.compileSdkVersion (36): see the note in ../build.gradle.kts.
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
