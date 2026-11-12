@@ -21,8 +21,12 @@ const PortalLayout = () => {
     if (user?.role === "doctor") subscribeToQueue();
   });
 
-  useSocketEvent("queue:updated", () => {
-    if (user?.role === "doctor") toast.success(t("toast.newPatientInQueue"), { icon: "🔔" });
+  // "queue:updated" also fires when a consultation starts or finishes; only
+  // a visit that is now *waiting* is actually a new patient in the queue.
+  useSocketEvent("queue:updated", (visit) => {
+    if (user?.role === "doctor" && visit?.status === "waiting") {
+      toast.success(t("toast.newPatientInQueue"), { icon: "🔔" });
+    }
   });
 
   useSocketEvent("patient:registered", (patient) => {

@@ -173,6 +173,11 @@
       "toggleTitle": "Alert notifications",
       "toggleSubtitle": "Sound and popup for new clinic events",
       "blocked": "Blocked in phone settings — allow notifications for this app"
+    },
+    "history": {
+      "fullRecord": "Full record",
+      "hide": "Hide details",
+      "payment": "Payment"
     }
   }
 }

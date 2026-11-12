@@ -2,7 +2,13 @@ import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import * as visitService from "../services/visitService.js";
 import * as patientAttachmentService from "../services/patientAttachmentService.js";
-import { emitVisitCreated, emitVisitStatusChanged, emitPatientCheckedIn } from "../config/socket.js";
+import {
+  emitVisitCreated,
+  emitVisitStatusChanged,
+  emitVisitUpdated,
+  emitPatientCheckedIn,
+} from "../config/socket.js";
+import { Visit } from "../models/index.js";
 
 export const getAllVisits = asyncHandler(async (req, res) => {
   const result = await visitService.getAllVisits(req.query);
@@ -26,12 +32,22 @@ export const createVisit = asyncHandler(async (req, res) => {
 });
 
 export const updateVisit = asyncHandler(async (req, res) => {
+  // The consultation screens autosave notes/vitals/diagnosis through this
+  // endpoint every few seconds. Only a real status change may announce
+  // itself as one: emitVisitStatusChanged also fires "queue:updated", which
+  // clients show as "New patient in queue" — previously that popped up on
+  // every autosave while the doctor was typing.
+  const before = await Visit.findByPk(req.params.id, { attributes: ["status"] });
   const visit = await visitService.updateVisit(
     req.params.id,
     req.body,
     req.user.id,
   );
-  emitVisitStatusChanged(visit);
+  if (before && before.status !== visit.status) {
+    emitVisitStatusChanged(visit);
+  } else {
+    emitVisitUpdated(visit);
+  }
   return ApiResponse.success(res, visit, "Visit updated successfully");
 });
 

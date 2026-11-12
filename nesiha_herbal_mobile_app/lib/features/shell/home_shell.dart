@@ -197,7 +197,9 @@ class _HomeShellState extends State<HomeShell> {
     final isCashier = _role == Roles.cashier;
     final isAdmin = _role == Roles.superAdmin || _role == Roles.staffManager;
     final (String, IconData)? t = switch (name) {
-      'queue:updated' when isDoctor =>
+      // Also sent when a consultation starts/finishes — only a visit that is
+      // now waiting is a new patient in the queue.
+      'queue:updated' when isDoctor && asString(data['status']) == VisitStatus.waiting =>
         (tr('toast.newPatientInQueue'), Icons.notifications_active_rounded),
       'visit:created' when isDoctor => (tr('toast.newVisitCreated'), Icons.event_note_rounded),
       'visit:status-changed' when !isAdmin => (

@@ -352,6 +352,16 @@ export const emitRegistrationFeeCollected = (registrationPayment) => {
 };
 
 /**
+ * A visit's details changed but its status did not (consultation autosave,
+ * vitals, diagnosis …). Lets open screens refresh quietly — no toasts, no
+ * "queue:updated", no push.
+ */
+export const emitVisitUpdated = (visit) => {
+  emitToRole("doctor", "visit:updated", visit);
+  emitToRole("data_clerk", "visit:updated", visit);
+};
+
+/**
  * A scheduled appointment was checked in — the patient now waits in the
  * doctor's queue. Same socket events as any status change, plus a push.
  */
@@ -383,4 +393,5 @@ export default {
   emitBookingRequestCreated,
   emitRegistrationFeeCollected,
   emitPatientCheckedIn,
+  emitVisitUpdated,
 };

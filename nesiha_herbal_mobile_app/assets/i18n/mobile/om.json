@@ -173,6 +173,11 @@
       "toggleTitle": "Beeksisa akeekkachiisaa",
       "toggleSubtitle": "Sagalee fi ifannoo taateewwan kilinikaa haaraaf",
       "blocked": "Qindaa'ina bilbilaa keessatti dhorkameera — appii kanaaf beeksisa hayyamaa"
+    },
+    "history": {
+      "fullRecord": "Galmee guutuu",
+      "hide": "Bal'ina dhoksi",
+      "payment": "Kaffaltii"
     }
   }
 }

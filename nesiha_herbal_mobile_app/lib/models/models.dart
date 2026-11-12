@@ -156,6 +156,9 @@ class Visit {
   DateTime? get createdAt => asDate(raw['createdAt']);
   List<Prescription> get prescriptions =>
       asMapList(raw['prescriptions']).map(Prescription.new).toList();
+  List<Investigation> get investigations =>
+      asMapList(raw['investigations']).map(Investigation.new).toList();
+  List<Payment> get payments => asMapList(raw['payments']).map(Payment.new).toList();
 
   // Vital signs (stored on the visit row; see VitalSignsForm.jsx).
   double? get temperature => asDouble(raw['temperature']);

@@ -273,35 +273,79 @@ export const getPatientHistory = async (id) => {
     Prescription,
     MedicineDispense,
     Investigation,
+    Medicine,
+    Payment,
   } = await import("../models/index.js");
+
+  const medicineInfo = {
+    model: Medicine,
+    as: "medicine",
+    attributes: ["id", "name", "code", "strength", "dosageForm", "category"],
+  };
 
   const patient = await PatientModel.findByPk(id, {
     include: [
       {
+        // Each visit carries everything that happened in it, so a doctor
+        // seeing a returning patient gets the full record per visit:
+        // medicines given (with quantities, dosage, price and whether they
+        // were paid/dispensed), tests and their results, and payments.
+        //
+        // Every hasMany list uses `separate: true` (its own small query):
+        // joining them all in one SELECT multiplies rows (visits ×
+        // prescriptions × tests × dispenses …) and blows up for long-time
+        // patients. `separate` also makes each list's own `order` apply.
         model: Visit,
         as: "visits",
+        separate: true,
+        order: [
+          ["visitDate", "DESC"],
+          ["createdAt", "DESC"],
+        ],
         include: [
           {
             model: User,
             as: "doctor",
             attributes: ["id", "firstName", "lastName"],
           },
+          {
+            model: Prescription,
+            as: "prescriptions",
+            separate: true,
+            order: [["prescribedDate", "ASC"]],
+            include: [medicineInfo],
+          },
+          {
+            model: Investigation,
+            as: "investigations",
+            separate: true,
+            order: [["requestedDate", "ASC"]],
+          },
+          {
+            model: Payment,
+            as: "payments",
+            separate: true,
+            attributes: ["id", "visitId", "paymentNumber", "amount", "paymentMethod", "paidAt", "status"],
+          },
         ],
-        order: [["visitDate", "DESC"]],
       },
       {
         model: Prescription,
         as: "prescriptions",
+        separate: true,
         order: [["prescribedDate", "DESC"]],
+        include: [medicineInfo],
       },
       {
         model: MedicineDispense,
         as: "medicineDispenses",
+        separate: true,
         order: [["dispensedDate", "DESC"]],
       },
       {
         model: Investigation,
         as: "investigations",
+        separate: true,
         order: [["requestedDate", "DESC"]],
       },
     ],

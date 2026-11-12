@@ -786,7 +786,7 @@ const ConsultationPanel = ({
             />
           )}
           {activeTab === "history" && (
-            <PatientHistoryTab patientId={selectedVisit.patient?.id} />
+            <PatientHistoryTab patientId={selectedVisit.patient?.id} currentVisitId={selectedVisit.id} />
           )}
         </div>
       </div>

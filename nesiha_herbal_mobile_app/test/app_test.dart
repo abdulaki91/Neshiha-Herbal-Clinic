@@ -119,6 +119,14 @@ void main() {
       await tester.scrollUntilVisible(find.text('cbc-result.pdf'), 300,
           scrollable: find.byType(Scrollable).last);
       expect(find.text('cbc-result.pdf'), findsOneWidget);
+      // Previous visits show the medicines received, and the full record.
+      await tester.scrollUntilVisible(find.text('Black seed oil (250 ml)  ×1'), 300,
+          scrollable: find.byType(Scrollable).last);
+      expect(find.text('Black seed oil (250 ml)  ×1'), findsOneWidget);
+      await tapText(tester, 'Full record');
+      expect(find.text('2 tsp · Twice daily'), findsOneWidget);
+      expect(find.textContaining('Advised less screen time', findRichText: true), findsOneWidget);
+      expect(find.textContaining('LDL 3.1'), findsWidgets);
 
       await back(tester);
       await openTab(tester, 'Patients');
@@ -288,6 +296,19 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(find.text('Results ready: Lipid panel'), findsOneWidget);
+
+    // A consultation starting/finishing also sends queue:updated — that must
+    // not claim a new patient arrived; a waiting visit must.
+    await tester.pump(const Duration(seconds: 4)); // let the previous toast clear
+    socket.debugInject(const SocketEvent('queue:updated', {'status': 'in_consultation'}));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text('New patient in queue'), findsNothing);
+    socket.debugInject(const SocketEvent('queue:updated', {'status': 'waiting'}));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text('New patient in queue'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 4));
 
     socket.debugInject(const SocketEvent('payment:completed', {'amount': '450.00'}));
     await tester.pump();
