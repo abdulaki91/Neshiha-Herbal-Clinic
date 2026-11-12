@@ -22,12 +22,17 @@ class Fmt {
       d == null ? '—' : DateFormat('d MMM, h:mm a').format(d);
   static String longToday() => DateFormat('EEEE, d MMMM').format(DateTime.now());
 
+  // Values sent to the API are always formatted with the 'en' locale. With
+  // the app in Arabic, the default locale writes Arabic-Indic digits
+  // ("١٤:٠٥:٠٩"), which MySQL rejects for DATE/TIME columns — completing a
+  // consultation failed with "Database error occurred" in Arabic only.
+
   /// "2026-11-11" — the API's DATEONLY format.
-  static String apiDate(DateTime d) => DateFormat('yyyy-MM-dd').format(d);
+  static String apiDate(DateTime d) => DateFormat('yyyy-MM-dd', 'en').format(d);
 
   /// "14:05" — what the API takes for TIME columns.
-  static String apiTime(DateTime d) => DateFormat('HH:mm').format(d);
-  static String apiTimeSeconds(DateTime d) => DateFormat('HH:mm:ss').format(d);
+  static String apiTime(DateTime d) => DateFormat('HH:mm', 'en').format(d);
+  static String apiTimeSeconds(DateTime d) => DateFormat('HH:mm:ss', 'en').format(d);
 
   /// TIME column ("14:05:00") → "2:05 PM".
   static String clock(String? hhmmss) {
