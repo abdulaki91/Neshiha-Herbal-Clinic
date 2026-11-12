@@ -20,7 +20,10 @@ Future<void> main() async {
 
   final session = SessionStorage();
   final client = ApiClient(session);
-  final socket = SocketService();
+  final socket = SocketService(
+    tokenProvider: () => client.accessToken,
+    onAuthError: client.refreshAccessToken,
+  );
   final theme = ThemeController();
   final auth = AuthController(session: session, client: client, socket: socket);
 

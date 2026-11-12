@@ -162,6 +162,18 @@ class ApiClient {
     }
   }
 
+  /// The access token currently in use (null when signed out).
+  String? get accessToken => _session.accessToken;
+
+  /// Exchange the refresh token for a new access token, sharing one
+  /// in-flight request with any concurrent HTTP 401 retries. Used by the
+  /// socket when the server rejects its handshake token.
+  Future<String?> refreshAccessToken() {
+    if (_session.refreshToken == null) return Future.value(null);
+    return _refreshing ??=
+        _refreshAccessToken().whenComplete(() => _refreshing = null);
+  }
+
   Future<String?> _refreshAccessToken() async {
     try {
       final res = await Dio(BaseOptions(baseUrl: AppConfig.apiUrl)).post(
