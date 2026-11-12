@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 
 import 'app.dart';
 import 'core/api_client.dart';
+import 'core/notification_service.dart';
+import 'core/push_service.dart';
 import 'core/session_storage.dart';
 import 'core/socket_service.dart';
 import 'data/clinic_api.dart';
@@ -33,6 +35,9 @@ Future<void> main() async {
   // Month/day names for am & ar (intl ships the data; it just needs loading).
   await initializeDateFormatting();
   await I18n.instance.load();
+  await NotificationService.instance.init();
+  await PushService.instance.init();
+  PushService.instance.socketConnected = () => socket.isConnected;
   // Not awaited: the splash shows while the stored session is restored.
   auth.bootstrap();
 
@@ -43,6 +48,7 @@ Future<void> main() async {
       ChangeNotifierProvider.value(value: socket),
       ChangeNotifierProvider.value(value: theme),
       ChangeNotifierProvider.value(value: I18n.instance),
+      ChangeNotifierProvider.value(value: NotificationService.instance),
       ChangeNotifierProvider.value(value: auth),
     ],
     child: const NesihaApp(),

@@ -164,7 +164,15 @@
       "lowStock": "Kuusaa xiqqaa: {{name}}",
       "registrationFee": "Kaffaltiin galmee fudhatame: {{amount}} ETB",
       "investigationRequested": "Qo'annoon haaraa gaafatame: {{test}}",
-      "investigationResult": "Bu'aan qophaa'eera: {{test}}"
+      "investigationResult": "Bu'aan qophaa'eera: {{test}}",
+      "billPending": "Kaffaltii haaraa eeggachaa jira: {{name}}"
+    },
+    "notify": {
+      "channelName": "Akeekkachiisa kilinikaa",
+      "channelDescription": "Dhukkubsattoota haaraa, kaffaltii, bu'aa laaboraatoorii fi taateewwan kilinikaa kallattii",
+      "toggleTitle": "Beeksisa akeekkachiisaa",
+      "toggleSubtitle": "Sagalee fi ifannoo taateewwan kilinikaa haaraaf",
+      "blocked": "Qindaa'ina bilbilaa keessatti dhorkameera — appii kanaaf beeksisa hayyamaa"
     }
   }
 }

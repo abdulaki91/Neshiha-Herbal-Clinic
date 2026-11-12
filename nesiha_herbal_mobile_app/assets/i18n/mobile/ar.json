@@ -164,7 +164,15 @@
       "lowStock": "مخزون منخفض: {{name}}",
       "registrationFee": "تم استلام رسوم التسجيل: {{amount}} بر إثيوبي",
       "investigationRequested": "طلب فحص جديد: {{test}}",
-      "investigationResult": "النتائج جاهزة: {{test}}"
+      "investigationResult": "النتائج جاهزة: {{test}}",
+      "billPending": "فاتورة جديدة بانتظار الدفع: {{name}}"
+    },
+    "notify": {
+      "channelName": "تنبيهات العيادة",
+      "channelDescription": "مرضى جدد ومدفوعات ونتائج مختبر وأحداث العيادة المباشرة الأخرى",
+      "toggleTitle": "إشعارات التنبيه",
+      "toggleSubtitle": "صوت ونافذة منبثقة لأحداث العيادة الجديدة",
+      "blocked": "محظورة في إعدادات الهاتف — اسمح بالإشعارات لهذا التطبيق"
     }
   }
 }

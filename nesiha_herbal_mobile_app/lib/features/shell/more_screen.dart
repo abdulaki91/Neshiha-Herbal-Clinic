@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/api_client.dart';
 import '../../core/config.dart';
+import '../../core/notification_service.dart';
 import '../../core/socket_service.dart';
 import '../../i18n/i18n.dart';
 import '../../i18n/language_picker.dart';
@@ -26,6 +27,7 @@ class MoreScreen extends StatelessWidget {
     final shell = context.watch<ShellController>();
     final theme = context.watch<ThemeController>();
     final live = context.watch<SocketService>().isConnected;
+    final notifications = context.watch<NotificationService>();
     final user = auth.user;
 
     return SafeArea(
@@ -110,6 +112,19 @@ class MoreScreen extends StatelessWidget {
                     builder: (_) => const _ChangePasswordSheet(),
                   ),
                 ),
+                if (notifications.isSupported)
+                  _MenuTile(
+                    icon: Icons.notifications_active_rounded,
+                    title: tr('mobile.notify.toggleTitle'),
+                    subtitle: notifications.enabled && !notifications.permitted
+                        ? tr('mobile.notify.blocked')
+                        : tr('mobile.notify.toggleSubtitle'),
+                    onTap: () => notifications.setEnabled(!notifications.enabled),
+                    trailing: Switch.adaptive(
+                      value: notifications.enabled && notifications.permitted,
+                      onChanged: notifications.setEnabled,
+                    ),
+                  ),
                 _MenuTile(
                   icon: Icons.sensors_rounded,
                   title: tr('dashboard.systemStatus.realtimeUpdates'),

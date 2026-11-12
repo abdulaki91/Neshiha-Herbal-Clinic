@@ -164,7 +164,15 @@
       "lowStock": "Low stock: {{name}}",
       "registrationFee": "Registration fee received: {{amount}} ETB",
       "investigationRequested": "New investigation requested: {{test}}",
-      "investigationResult": "Results ready: {{test}}"
+      "investigationResult": "Results ready: {{test}}",
+      "billPending": "New bill waiting for payment: {{name}}"
+    },
+    "notify": {
+      "channelName": "Clinic alerts",
+      "channelDescription": "New patients, payments, lab results and other live clinic events",
+      "toggleTitle": "Alert notifications",
+      "toggleSubtitle": "Sound and popup for new clinic events",
+      "blocked": "Blocked in phone settings — allow notifications for this app"
     }
   }
 }

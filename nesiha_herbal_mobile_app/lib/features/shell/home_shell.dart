@@ -6,6 +6,9 @@ import 'package:provider/provider.dart';
 
 import '../../core/format.dart';
 import '../../core/json.dart';
+import '../../core/api_client.dart';
+import '../../core/notification_service.dart';
+import '../../core/push_service.dart';
 import '../../core/socket_service.dart';
 import '../../data/clinic_api.dart';
 import '../../i18n/i18n.dart';
@@ -78,10 +81,24 @@ class _HomeShellState extends State<HomeShell> {
     // (same pattern as the web portal's refetchInterval).
     _poll = Timer.periodic(const Duration(seconds: 30), (_) => _refreshCounts());
     _sub = context.read<SocketService>().events.listen(_onSocket);
+
+    // Notifications: open the right screen when one is tapped (including the
+    // one that launched the app), and ask for permission once signed in.
+    final notifications = NotificationService.instance;
+    notifications.tapped.addListener(_onNotificationTap);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _onNotificationTap();
+      if (notifications.enabled && !notifications.permitted) {
+        notifications.requestPermission();
+      }
+      // Firebase push for when the app is closed.
+      PushService.instance.register(context.read<ApiClient>());
+    });
   }
 
   @override
   void dispose() {
+    NotificationService.instance.tapped.removeListener(_onNotificationTap);
     _sub?.cancel();
     _poll?.cancel();
     _shell.dispose();
@@ -123,7 +140,48 @@ class _HomeShellState extends State<HomeShell> {
 
     final data = asMap(e.data) ?? const {};
     final toast = _toastFor(e.name, data);
-    if (toast != null) Toast.info(toast.$1, icon: toast.$2);
+    if (toast != null) _alert(toast.$1, toast.$2, _destinationFor(e.name));
+  }
+
+  /// System notification (sound + popup) when allowed, otherwise the
+  /// in-app toast.
+  Future<void> _alert(String message, IconData icon, String? destination) async {
+    // In the background, a registered phone gets the Firebase push for the
+    // same event — don't alert twice.
+    final background =
+        WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed;
+    if (background && PushService.instance.registered) return;
+    final shown = await NotificationService.instance
+        .show(body: message, payload: destination);
+    if (!shown) Toast.info(message, icon: icon);
+  }
+
+  /// Where tapping an event's notification takes this role (a nav id;
+  /// ShellController.goTo ignores ids the role doesn't have).
+  String? _destinationFor(String event) => switch (event) {
+        'queue:updated' || 'visit:created' => 'queue',
+        'visit:status-changed' => switch (_role) {
+            Roles.doctor => 'queue',
+            Roles.cashier => 'cashier',
+            _ => 'visits',
+          },
+        'patient:registered' => 'patients',
+        'prescription:created' => _role == Roles.cashier ? 'cashier' : 'queue',
+        'medicine:dispensed' => 'pharmacy',
+        'medicine:low-stock' => 'medicines',
+        'payment:completed' => _role == Roles.cashier ? 'cashier' : 'reports',
+        'registration-fee:collected' => 'reports',
+        'investigation:created' || 'investigation:result-added' => 'laboratory',
+        'booking-request:created' => 'bookings',
+        'staff:created' => 'staff',
+        _ => null,
+      };
+
+  void _onNotificationTap() {
+    final id = NotificationService.instance.tapped.value;
+    if (id == null || !mounted) return;
+    NotificationService.instance.tapped.value = null;
+    _shell.goTo(context, id);
   }
 
   // Same events, roles and wording as the web's PortalLayout.jsx toasts.

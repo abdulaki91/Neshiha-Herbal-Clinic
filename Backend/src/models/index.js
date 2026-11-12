@@ -20,6 +20,7 @@ import Partner from "./Partner.js";
 import Banner from "./Banner.js";
 import Service from "./Service.js";
 import BookingRequest from "./BookingRequest.js";
+import DeviceToken from "./DeviceToken.js";
 
 // Define Associations
 
@@ -37,6 +38,8 @@ User.hasMany(MedicineDispense, {
   as: "dispensedMedicines",
 });
 User.hasMany(Notification, { foreignKey: "userId", as: "notifications" });
+User.hasMany(DeviceToken, { foreignKey: "userId", as: "deviceTokens" });
+DeviceToken.belongsTo(User, { foreignKey: "userId", as: "user" });
 User.hasMany(Payment, { foreignKey: "cashierId", as: "processedPayments" });
 User.hasMany(RegistrationPayment, { foreignKey: "receivedBy", as: "collectedRegistrationFees" });
 User.hasMany(PatientAttachment, { foreignKey: "uploadedBy", as: "uploadedAttachments" });
@@ -170,6 +173,7 @@ export {
   Banner,
   Service,
   BookingRequest,
+  DeviceToken,
 };
 
 // Sync database (development only)

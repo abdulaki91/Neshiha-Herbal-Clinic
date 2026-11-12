@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:nesiha_herbal_mobile_app/app.dart';
 import 'package:nesiha_herbal_mobile_app/core/api_client.dart';
+import 'package:nesiha_herbal_mobile_app/core/notification_service.dart';
 import 'package:nesiha_herbal_mobile_app/core/session_storage.dart';
 import 'package:nesiha_herbal_mobile_app/core/socket_service.dart';
 import 'package:nesiha_herbal_mobile_app/data/clinic_api.dart';
@@ -56,6 +57,7 @@ Future<void> pumpApp(
       ChangeNotifierProvider.value(value: socket),
       ChangeNotifierProvider.value(value: theme),
       ChangeNotifierProvider.value(value: I18n.instance),
+      ChangeNotifierProvider.value(value: NotificationService.instance),
       ChangeNotifierProvider.value(value: auth),
     ],
     child: const NesihaApp(),

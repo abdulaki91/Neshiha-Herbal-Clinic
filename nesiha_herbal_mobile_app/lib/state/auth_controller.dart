@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../i18n/i18n.dart';
 import '../core/api_client.dart';
 import '../core/json.dart';
+import '../core/push_service.dart';
 import '../core/session_storage.dart';
 import '../core/socket_service.dart';
 import '../models/models.dart';
@@ -100,6 +101,8 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<void> logout() async {
+    // While still authenticated: stop pushes to this phone for this user.
+    await PushService.instance.unregister();
     try {
       await client.post('/auth/logout');
     } catch (_) {

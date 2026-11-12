@@ -35,7 +35,25 @@ const httpServer = http.createServer(app);
 // MODIFY COLUMN ... ENUM(...)` to extend an enum, not Postgres's `ALTER
 // TYPE`) — the next time a column needs to be added to a database that
 // already has data and can't just be force-synced.
-const applySchemaPatches = async () => {};
+const applySchemaPatches = async () => {
+  // Phones registered for mobile push notifications (models/DeviceToken.js).
+  await sequelize.query(`
+    CREATE TABLE IF NOT EXISTS \`device_tokens\` (
+      \`id\` CHAR(36) BINARY NOT NULL,
+      \`user_id\` CHAR(36) BINARY NOT NULL,
+      \`token\` VARCHAR(512) NOT NULL,
+      \`platform\` VARCHAR(20) NOT NULL DEFAULT 'android',
+      \`language\` VARCHAR(8) NOT NULL DEFAULT 'en',
+      \`created_at\` DATETIME NOT NULL,
+      \`updated_at\` DATETIME NOT NULL,
+      PRIMARY KEY (\`id\`),
+      UNIQUE KEY \`device_tokens_token\` (\`token\`),
+      KEY \`device_tokens_user_id\` (\`user_id\`),
+      CONSTRAINT \`device_tokens_user_fk\` FOREIGN KEY (\`user_id\`)
+        REFERENCES \`users\` (\`id\`) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE=InnoDB
+  `);
+};
 
 // Start server
 const startServer = async () => {

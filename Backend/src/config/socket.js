@@ -1,8 +1,16 @@
 import { Server } from "socket.io";
 import jwt from "jsonwebtoken";
-import { User } from "../models/index.js";
+import { User, Patient } from "../models/index.js";
 import logger from "./logger.js";
 import { allowedOrigins } from "./corsOrigins.js";
+import { pushToRoles, pushToUsers, pushTextToUser } from "../services/pushService.js";
+
+// Firebase pushes reach the mobile app when it is closed or in the
+// background (while it is open, the socket events below already alert it).
+// Only events worth interrupting someone for are pushed; `destination`
+// tells the app which screen to open when the notification is tapped.
+const fullName = (p) => [p?.firstName, p?.lastName].filter(Boolean).join(" ");
+const money = (v) => Number(v || 0).toLocaleString("en-US");
 
 let io;
 
@@ -188,6 +196,9 @@ export const isUserOnline = (userId) => {
 export const emitPatientRegistered = (patient) => {
   emitToRole("doctor", "patient:registered", patient);
   emitToRole("data_clerk", "patient:registered", patient);
+  pushToRoles(["doctor"], "patientRegistered",
+    { firstName: patient?.firstName, lastName: patient?.lastName },
+    { event: "patient:registered", destination: "patients" });
 };
 
 /**
@@ -195,6 +206,12 @@ export const emitPatientRegistered = (patient) => {
  */
 export const emitVisitCreated = (visit) => {
   emitToRole("doctor", "visit:created", visit);
+  // Walk-ins go straight to the queue; scheduled appointments only join it
+  // when checked in (see emitPatientCheckedIn).
+  if (visit?.status === "waiting") {
+    pushToRoles(["doctor"], "newPatientInQueue", {},
+      { event: "queue:updated", destination: "queue" });
+  }
 
   // Emit to queue updates
   if (io) {
@@ -212,6 +229,19 @@ export const emitVisitStatusChanged = (visit) => {
   emitToRole("doctor", "visit:status-changed", visit);
   emitToRole("data_clerk", "visit:status-changed", visit);
   emitToRole("cashier", "visit:status-changed", visit);
+
+  // A finished consultation with unpaid medicine is the cashier's cue.
+  if (visit?.status === "pending_payment") {
+    // updateVisit returns the bare row, so look the patient up when absent.
+    const patient = visit.patient
+      ? Promise.resolve(visit.patient)
+      : Patient.findByPk(visit.patientId, { attributes: ["firstName", "lastName"] });
+    patient
+      .catch(() => null)
+      .then((p) =>
+        pushToRoles(["cashier"], "billPending", { name: fullName(p) },
+          { event: "visit:status-changed", destination: "cashier" }));
+  }
 
   if (io) {
     io.to("queue:updates").emit("queue:updated", visit);
@@ -241,6 +271,8 @@ export const emitMedicineDispensed = (dispense) => {
 export const emitLowStockAlert = (medicine) => {
   emitToRole("doctor", "medicine:low-stock", medicine);
   emitToRole("data_clerk", "medicine:low-stock", medicine);
+  pushToRoles(["doctor", "data_clerk"], "lowStock", { name: medicine?.name },
+    { event: "medicine:low-stock", destination: "medicines" });
 };
 
 /**
@@ -248,6 +280,8 @@ export const emitLowStockAlert = (medicine) => {
  */
 export const emitNotificationCreated = (notification) => {
   emitToUser(notification.userId, "notification:new", notification);
+  pushTextToUser(notification.userId, notification.title, notification.message,
+    { event: "notification:new" });
 };
 
 /**
@@ -256,6 +290,8 @@ export const emitNotificationCreated = (notification) => {
 export const emitStaffCreated = (staff) => {
   emitToRole("super_admin", "staff:created", staff);
   emitToRole("staff_manager", "staff:created", staff);
+  pushToRoles(["super_admin", "staff_manager"], "staffCreated", {},
+    { event: "staff:created", destination: "staff" });
 };
 
 /**
@@ -265,6 +301,8 @@ export const emitStaffCreated = (staff) => {
  */
 export const emitInvestigationCreated = (investigation) => {
   emitToRole("doctor", "investigation:created", investigation);
+  pushToRoles(["doctor"], "investigationRequested", { test: investigation?.testName },
+    { event: "investigation:created", destination: "laboratory" });
 };
 
 /**
@@ -276,6 +314,9 @@ export const emitInvestigationResultAdded = (investigation) => {
     "investigation:result-added",
     investigation,
   );
+  pushToUsers([investigation?.requestedBy], "investigationResult",
+    { test: investigation?.testName },
+    { event: "investigation:result-added", destination: "laboratory" });
 };
 
 /**
@@ -284,6 +325,8 @@ export const emitInvestigationResultAdded = (investigation) => {
 export const emitPaymentCompleted = (payment) => {
   emitToRole("cashier", "payment:completed", payment);
   emitToRole("doctor", "payment:completed", payment);
+  pushToRoles(["doctor"], "paymentReceived", { amount: money(payment?.amount) },
+    { event: "payment:completed", destination: "reports" });
 };
 
 /**
@@ -293,6 +336,8 @@ export const emitPaymentCompleted = (payment) => {
 export const emitBookingRequestCreated = (booking) => {
   emitToRole("data_clerk", "booking-request:created", booking);
   emitToRole("doctor", "booking-request:created", booking);
+  pushToRoles(["data_clerk", "doctor"], "bookingRequest", { name: booking?.fullName },
+    { event: "booking-request:created", destination: "bookings" });
 };
 
 /**
@@ -302,6 +347,18 @@ export const emitBookingRequestCreated = (booking) => {
  */
 export const emitRegistrationFeeCollected = (registrationPayment) => {
   emitToRole("doctor", "registration-fee:collected", registrationPayment);
+  pushToRoles(["doctor"], "registrationFee", { amount: money(registrationPayment?.amount) },
+    { event: "registration-fee:collected", destination: "reports" });
+};
+
+/**
+ * A scheduled appointment was checked in — the patient now waits in the
+ * doctor's queue. Same socket events as any status change, plus a push.
+ */
+export const emitPatientCheckedIn = (visit) => {
+  emitVisitStatusChanged(visit);
+  pushToRoles(["doctor"], "newPatientInQueue", {},
+    { event: "queue:updated", destination: "queue" });
 };
 
 export default {
@@ -325,4 +382,5 @@ export default {
   emitPaymentCompleted,
   emitBookingRequestCreated,
   emitRegistrationFeeCollected,
+  emitPatientCheckedIn,
 };

@@ -164,7 +164,15 @@
       "lowStock": "ዝቅተኛ ክምችት: {{name}}",
       "registrationFee": "የምዝገባ ክፍያ ተቀብሏል: {{amount}} ብር",
       "investigationRequested": "አዲስ ምርመራ ተጠይቋል: {{test}}",
-      "investigationResult": "ውጤት ዝግጁ ነው: {{test}}"
+      "investigationResult": "ውጤት ዝግጁ ነው: {{test}}",
+      "billPending": "ለክፍያ የሚጠብቅ አዲስ ሂሳብ: {{name}}"
+    },
+    "notify": {
+      "channelName": "የክሊኒክ ማንቂያዎች",
+      "channelDescription": "አዳዲስ ታካሚዎች፣ ክፍያዎች፣ የላብራቶሪ ውጤቶችና ሌሎች የክሊኒኩ ቀጥታ ክስተቶች",
+      "toggleTitle": "የማንቂያ ማሳወቂያዎች",
+      "toggleSubtitle": "ለአዳዲስ የክሊኒክ ክስተቶች ድምፅና ብቅ-ባይ መልዕክት",
+      "blocked": "በስልኩ ቅንብሮች ታግዷል — ለዚህ መተግበሪያ ማሳወቂያዎችን ይፍቀዱ"
     }
   }
 }

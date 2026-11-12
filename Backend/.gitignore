@@ -40,3 +40,6 @@ coverage/
 # Database
 *.sqlite
 *.db
+
+# Firebase service-account keys are secrets — never commit them.
+*firebase-adminsdk*.json
