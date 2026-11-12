@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 
+import '../i18n/i18n.dart';
+
 import 'config.dart';
 import 'json.dart';
 import 'session_storage.dart';
@@ -86,21 +88,21 @@ class ApiException implements Exception {
         case DioExceptionType.connectionTimeout:
         case DioExceptionType.sendTimeout:
         case DioExceptionType.receiveTimeout:
-          return ApiException('The server is taking too long to respond.');
+          return ApiException(tr('mobile.errors.timeout'));
         case DioExceptionType.connectionError:
           return ApiException(
-              'Can\'t reach the clinic server. Check your internet connection.');
+              tr('mobile.errors.offline'));
         default:
           break;
       }
       if (res?.statusCode == 403) {
-        return ApiException('You don\'t have permission to do that.',
+        return ApiException(tr('mobile.errors.forbidden'),
             statusCode: 403);
       }
-      return ApiException('Something went wrong. Please try again.',
+      return ApiException(tr('mobile.errors.generic'),
           statusCode: res?.statusCode);
     }
-    return ApiException('Something went wrong. Please try again.');
+    return ApiException(tr('mobile.errors.generic'));
   }
 }
 

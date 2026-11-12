@@ -8,6 +8,7 @@ import '../../core/format.dart';
 import '../../core/json.dart';
 import '../../core/socket_service.dart';
 import '../../data/clinic_api.dart';
+import '../../i18n/i18n.dart';
 import '../../models/models.dart';
 import '../../state/auth_controller.dart';
 import '../../theme/app_theme.dart';
@@ -121,34 +122,82 @@ class _HomeShellState extends State<HomeShell> {
     if (countEvents.contains(e.name)) _refreshCounts();
 
     final data = asMap(e.data) ?? const {};
+    final toast = _toastFor(e.name, data);
+    if (toast != null) Toast.info(toast.$1, icon: toast.$2);
+  }
+
+  // Same events, roles and wording as the web's PortalLayout.jsx toasts.
+  // Some events reach a role through two rooms (e.g. queue:updated and
+  // visit:status-changed for one save), so identical toasts within a
+  // moment are collapsed.
+  String? _lastToast;
+  DateTime _lastToastAt = DateTime(2000);
+
+  (String, IconData)? _toastFor(String name, Map<String, dynamic> data) {
     final isDoctor = _role == Roles.doctor;
     final isClerk = _role == Roles.dataClerk;
     final isCashier = _role == Roles.cashier;
-    switch (e.name) {
-      case 'queue:updated' when isDoctor:
-        Toast.info('New patient in the queue', icon: Icons.notifications_active_rounded);
-      case 'patient:registered' when isDoctor || isClerk:
-        final name = '${asString(data['firstName']) ?? ''} ${asString(data['lastName']) ?? ''}'.trim();
-        if (name.isNotEmpty) {
-          Toast.info('$name was registered', icon: Icons.person_add_alt_1_rounded);
-        }
-      case 'notification:new':
-        final msg = asString(data['message']) ?? asString(data['title']);
-        if (msg != null) Toast.info(msg);
-      case 'prescription:created' when isCashier:
-        Toast.info('New prescription awaiting payment', icon: Icons.medication_rounded);
-      case 'payment:completed' when isDoctor || isCashier:
-        Toast.info('Payment received · ${Fmt.money(asDouble(data['amount']))}',
-            icon: Icons.payments_rounded);
-      case 'booking-request:created' when isDoctor || isClerk:
-        Toast.info('New booking request from ${asString(data['fullName']) ?? 'a visitor'}',
-            icon: Icons.event_available_rounded);
-      case 'staff:created'
-          when _role == Roles.superAdmin || _role == Roles.staffManager:
-        Toast.info('New staff account created', icon: Icons.badge_rounded);
-      default:
-        break;
+    final isAdmin = _role == Roles.superAdmin || _role == Roles.staffManager;
+    final (String, IconData)? t = switch (name) {
+      'queue:updated' when isDoctor =>
+        (tr('toast.newPatientInQueue'), Icons.notifications_active_rounded),
+      'visit:created' when isDoctor => (tr('toast.newVisitCreated'), Icons.event_note_rounded),
+      'visit:status-changed' when !isAdmin => (
+          tr('toast.visitStatus', {'status': VisitStatus.label(asString(data['status']))}),
+          Icons.sync_rounded
+        ),
+      'patient:registered' when isDoctor || isClerk => (
+          tr('toast.patientRegistered', {
+            'firstName': asString(data['firstName']) ?? '',
+            'lastName': asString(data['lastName']) ?? '',
+          }),
+          Icons.person_add_alt_1_rounded
+        ),
+      'notification:new' when (asString(data['message']) ?? asString(data['title'])) != null => (
+          asString(data['message']) ?? asString(data['title'])!,
+          asString(data['priority']) == 'urgent'
+              ? Icons.priority_high_rounded
+              : Icons.mark_email_unread_rounded
+        ),
+      'prescription:created' when isDoctor || isCashier =>
+        (tr('toast.prescriptionAdded'), Icons.medication_rounded),
+      'medicine:dispensed' when isDoctor || isCashier =>
+        (tr('toast.medicineDispensed'), Icons.local_pharmacy_rounded),
+      'medicine:low-stock' when isDoctor || isClerk => (
+          tr('mobile.toast.lowStock', {'name': asString(data['name']) ?? ''}),
+          Icons.inventory_2_rounded
+        ),
+      'payment:completed' when isDoctor || isCashier => (
+          tr('toast.paymentReceived', {'amount': Fmt.count(asDouble(data['amount']))}),
+          Icons.payments_rounded
+        ),
+      'registration-fee:collected' when isDoctor => (
+          tr('mobile.toast.registrationFee', {'amount': Fmt.count(asDouble(data['amount']))}),
+          Icons.how_to_reg_rounded
+        ),
+      'investigation:created' when isDoctor => (
+          tr('mobile.toast.investigationRequested', {'test': asString(data['testName']) ?? ''}),
+          Icons.biotech_rounded
+        ),
+      'investigation:result-added' when isDoctor => (
+          tr('mobile.toast.investigationResult', {'test': asString(data['testName']) ?? ''}),
+          Icons.task_alt_rounded
+        ),
+      'booking-request:created' when isDoctor || isClerk => (
+          tr('toast.newBookingRequest', {'name': asString(data['fullName']) ?? ''}),
+          Icons.event_available_rounded
+        ),
+      'staff:created' when isAdmin => (tr('toast.staffCreated'), Icons.badge_rounded),
+      _ => null,
+    };
+    if (t == null) return null;
+    final now = DateTime.now();
+    if (t.$1 == _lastToast && now.difference(_lastToastAt) < const Duration(seconds: 2)) {
+      return null;
     }
+    _lastToast = t.$1;
+    _lastToastAt = now;
+    return t;
   }
 
   @override

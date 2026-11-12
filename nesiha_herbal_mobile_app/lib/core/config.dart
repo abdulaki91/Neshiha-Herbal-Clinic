@@ -26,4 +26,19 @@ class AppConfig {
   static const registrationFee = 200;
 
   static const currency = 'ETB';
+
+  /// The backend's origin — uploaded files are served from `<origin>/uploads/…`.
+  static String get origin {
+    final u = Uri.parse(apiUrl);
+    return u.replace(path: '', query: null, fragment: null).toString();
+  }
+
+  /// Absolute URL for a stored file path such as `uploads/banners/x.jpg`
+  /// (the web portal builds the same `${backendBase}/${path}`).
+  static String? fileUrl(String? path) {
+    if (path == null || path.isEmpty) return null;
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    final clean = path.replaceAll('\\', '/').replaceFirst(RegExp(r'^/+'), '');
+    return '${origin.replaceFirst(RegExp(r'/+$'), '')}/$clean';
+  }
 }

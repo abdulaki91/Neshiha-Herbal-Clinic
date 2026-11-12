@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:material_ui/material_ui.dart';
 
+import '../i18n/i18n.dart';
 import '../models/models.dart';
 import '../theme/app_theme.dart';
 import 'controls.dart';
@@ -87,12 +88,12 @@ class ErrorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EmptyView(
         icon: Icons.cloud_off_rounded,
-        title: 'Couldn\'t load this',
+        title: tr('common.error'),
         subtitle: message,
         action: OutlinedButton.icon(
           onPressed: onRetry,
           icon: const Icon(Icons.refresh_rounded, size: 18),
-          label: const Text('Try again'),
+          label: Text(tr('mobile.common.tryAgain')),
         ),
       );
 }
@@ -134,13 +135,13 @@ class AlertBanner extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Safety alert',
+                Text(tr('mobile.patient.safetyAlert'),
                     style: TextStyle(
                         color: c, fontWeight: FontWeight.w800, fontSize: 13)),
                 if (patient.allergies.isNotEmpty)
-                  line('Allergies:', patient.allergies),
+                  line(tr('patientDetail.alerts.allergies'), patient.allergies),
                 if (patient.chronicDiseases.isNotEmpty)
-                  line('Chronic:', patient.chronicDiseases),
+                  line(tr('patientDetail.alerts.chronic'), patient.chronicDiseases),
               ],
             ),
           ),
@@ -282,7 +283,7 @@ Future<bool> confirmAction(
   BuildContext context, {
   required String title,
   required String message,
-  String confirmLabel = 'Confirm',
+  String? confirmLabel,
   bool destructive = false,
 }) async {
   final p = context.palette;
@@ -295,7 +296,7 @@ Future<bool> confirmAction(
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx, false),
-          child: Text('Cancel', style: TextStyle(color: p.inkSoft)),
+          child: Text(tr('common.cancel'), style: TextStyle(color: p.inkSoft)),
         ),
         FilledButton(
           onPressed: () => Navigator.pop(ctx, true),
@@ -304,7 +305,7 @@ Future<bool> confirmAction(
             foregroundColor: Colors.white,
             shape: const StadiumBorder(),
           ),
-          child: Text(confirmLabel),
+          child: Text(confirmLabel ?? tr('mobile.common.confirm')),
         ),
       ],
     ),

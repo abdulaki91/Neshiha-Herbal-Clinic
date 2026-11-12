@@ -21,6 +21,8 @@ dependencies:
   cupertino_ui: ^1.1.6
   file_picker: ^13.3.3
   url_launcher: ^6.3.3
+  pdf: ^3.13.1
+  printing: ^5.15.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -28,3 +30,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/i18n/web/
+    - assets/i18n/mobile/

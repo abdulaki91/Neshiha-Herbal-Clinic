@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:material_ui/material_ui.dart';
 
+import '../i18n/i18n.dart';
 import '../theme/app_theme.dart';
 
 /// Primary pill button with the brand → orchid gradient.
@@ -411,12 +412,21 @@ class ChoicePill extends StatelessWidget {
                       size: 16, color: selected ? Colors.white : p.inkSoft),
                   const SizedBox(width: 6),
                 ],
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 13,
-                    color: selected ? Colors.white : p.inkSoft,
+                // Capped width + ellipsis: translated labels can be long
+                // (e.g. "Mobile Money (Telebirr/CBE Birr)"). Not Flexible —
+                // pills also sit in horizontal lists with unbounded width.
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxWidth: MediaQuery.sizeOf(context).width - 120),
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
+                      color: selected ? Colors.white : p.inkSoft,
+                    ),
                   ),
                 ),
               ],
@@ -625,7 +635,7 @@ class FieldLabel extends StatelessWidget {
                   style: context.text.labelLarge?.copyWith(color: p.inkSoft)),
               if (optional)
                 TextSpan(
-                    text: '  optional',
+                    text: '  ${tr('mobile.common.optional')}',
                     style:
                         context.text.labelSmall?.copyWith(color: p.inkMuted)),
             ])),

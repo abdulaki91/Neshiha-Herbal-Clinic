@@ -302,6 +302,151 @@ class FakeApi extends ClinicApi {
           'status': 'inactive',
         }),
       ], null);
+
+  // ------------------------------------------------ added with the web-parity port
+  @override
+  Future<Visit> visit(String id) async => Visit({
+        ...queueJson.firstWhere((v) => v['id'] == id, orElse: () => queueJson.first),
+        'temperature': '37.9',
+        'bloodPressureSystolic': 145,
+        'bloodPressureDiastolic': 92,
+        'heartRate': 78,
+        'weight': '72.5',
+        'height': '170',
+      });
+
+  @override
+  Future<void> saveVitals(String visitId, Map<String, dynamic> vitals) async {}
+
+  @override
+  Future<void> updateVisit(String id, Map<String, dynamic> data) async {}
+
+  static Map<String, dynamic> invJson(String id, String status,
+          {String urgency = 'routine'}) =>
+      {
+        'id': id,
+        'visitId': '11',
+        'patientId': '1',
+        'investigationType': 'Blood Test',
+        'testName': status == 'completed' ? 'Lipid panel' : 'Complete Blood Count',
+        'urgency': urgency,
+        'status': status,
+        'requestedDate':
+            DateTime.now().subtract(const Duration(days: 2)).toIso8601String(),
+        'completedDate': status == 'completed' ? DateTime.now().toIso8601String() : null,
+        'results': status == 'completed' ? 'LDL 3.1 mmol/L, HDL 1.2 mmol/L' : null,
+        'performedBy': status == 'completed' ? 'Lab tech Almaz' : null,
+        'patient': patientsJson[0],
+      };
+
+  @override
+  Future<List<Investigation>> investigations(
+          {String? visitId, String? patientId, String? status, int pageSize = 100}) async =>
+      [invJson('i1', 'requested', urgency: 'stat'), invJson('i2', 'completed')]
+          .where((j) => status == null || j['status'] == status)
+          .map(Investigation.new)
+          .toList();
+
+  @override
+  Future<void> updateInvestigation(String id, Map<String, dynamic> data) async {}
+
+  @override
+  Future<void> requestInvestigation(Map<String, dynamic> data) async {}
+
+  @override
+  Future<List<Visit>> completedVisits({String? patientId, int pageSize = 1}) async => [
+        Visit({
+          ...visitJson('90', patientsJson[0], status: 'completed', date: _inDays(-14)),
+          'followUpDate': _today(),
+        }),
+      ];
+
+  @override
+  Future<List<Attachment>> patientAttachments(String patientId) async => [
+        Attachment({
+          'id': 'a1',
+          'fileName': 'cbc-result.pdf',
+          'filePath': 'uploads/patients/cbc-result.pdf',
+          'fileType': 'application/pdf',
+          'createdAt': DateTime.now().toIso8601String(),
+        }),
+      ];
+
+  @override
+  Future<List<Prescription>> pharmacyPrescriptions({String? status}) async => [
+        Prescription({
+          ...rxJson('p9', 0, status: status ?? 'paid'),
+          'patient': patientsJson[1],
+        }),
+      ];
+
+  @override
+  Future<Map<String, dynamic>> revenueReport(String period, DateTime date) async => {
+        'period': period,
+        'startDate': _inDays(-2),
+        'endDate': _today(),
+        'summary': {
+          'grandTotal': 1630,
+          'consultationRevenue': 1230,
+          'registrationFeeRevenue': 400,
+          'totalPayments': 3,
+          'totalRegistrations': 2,
+          'byPaymentMethod': {'cash': 830, 'mobile_money': 400},
+          'registrationByPaymentMethod': {'cash': 400},
+        },
+        'revenueByDay': [
+          {'day': _inDays(-2), 'consultationRevenue': 500, 'registrationFeeRevenue': 200, 'total': 700},
+          {'day': _inDays(-1), 'consultationRevenue': 330, 'registrationFeeRevenue': 0, 'total': 330},
+          {'day': _today(), 'consultationRevenue': 400, 'registrationFeeRevenue': 200, 'total': 600},
+        ],
+        'payments': [
+          {
+            'id': 'pay1', 'paymentNumber': 'PAY-001', 'amount': 400, //
+            'paymentMethod': 'cash', 'paidAt': DateTime.now().toIso8601String(),
+            'patient': patientsJson[1],
+          },
+        ],
+        'registrationFees': [
+          {
+            'id': 'r1', 'amount': 200, 'paymentMethod': 'cash', //
+            'paidAt': DateTime.now().toIso8601String(), 'patient': patientsJson[4],
+          },
+        ],
+      };
+
+  @override
+  Future<ClinicSettings> settings() async => ClinicSettings({
+        'clinicName': 'Neshiha Herbal Clinic',
+        'clinicPhone': '+251 11 000 0000',
+        'currency': 'ETB',
+        'workingHoursStart': '08:00:00',
+        'workingHoursEnd': '17:30:00',
+        'workingDays': ['monday', 'tuesday', 'wednesday'],
+        'appointmentDuration': 30,
+        'lowStockThreshold': 10,
+        'tagline': {'en': 'Natural healing', 'am': 'ተፈጥሯዊ ፈውስ'},
+      });
+
+  @override
+  Future<List<ContentItem>> contentList(String resource, {String? status}) async => [
+        ContentItem({
+          'id': 'c1',
+          'status': 'published',
+          'sortOrder': 1,
+          'clientName': 'Kidist M.',
+          'rating': 5,
+          'text': {'en': 'Great care'},
+          'question': {'en': 'Do you take walk-ins?'},
+          'title': {'en': 'Herbal consultation'},
+          'name': 'Kidist M.',
+        }),
+      ];
+
+  @override
+  Future<Map<String, dynamic>> staffStats() async => {
+        'total': 6, 'active': 5, 'inactive': 1, 'suspended': 0, //
+        'byRole': {'doctors': 2},
+      };
 }
 
 AppUser fakeUser(String role) => AppUser({

@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/api_client.dart';
 import '../../core/async_state.dart';
 import '../../core/format.dart';
@@ -64,15 +65,15 @@ class _QueueScreenState extends State<QueueScreen>
     final inConsult =
         queue.where((v) => v.status == VisitStatus.inConsultation).length;
     return TabPage(
-      title: 'Patient queue',
+      title: tr('doctorQueue.title'),
       subtitle: data == null
-          ? 'Today\'s waiting patients'
+          ? tr('doctorQueue.empty.subtitle')
           : '${queue.length} ${queue.length == 1 ? 'patient' : 'patients'}'
-              '${inConsult > 0 ? ' · $inConsult in consultation' : ''}',
+              '${inConsult > 0 ? ' · $inConsult ${tr('doctorQueue.queueStats.inConsultation')}' : ''}',
       pushed: widget.pushed,
       trailing: CircleIconButton(
         icon: Icons.refresh_rounded,
-        tooltip: 'Refresh',
+        tooltip: tr('doctorQueue.refreshQueue'),
         onPressed: () => reload(),
       ),
       child: loading && data == null
@@ -84,12 +85,12 @@ class _QueueScreenState extends State<QueueScreen>
                   child: queue.isEmpty
                       ? ListView(
                           padding: TabPage.listPadding(context, widget.pushed),
-                          children: const [
+                          children: [
                             EmptyView(
                               icon: Icons.check_circle_outline_rounded,
-                              title: 'Your queue is clear',
+                              title: tr('doctorQueue.empty.title'),
                               subtitle:
-                                  'New patients appear here automatically as they arrive.',
+                                  tr('doctorQueue.empty.subtitle'),
                             ),
                           ],
                         )
@@ -176,7 +177,7 @@ class _QueueCard extends StatelessWidget {
                       [
                         patient?.ageGender ?? '',
                         if (visit.arrivalTime != null)
-                          'Arrived ${Fmt.clock(visit.arrivalTime)}',
+                          tr('mobile.visit.arrivedAt', {'time': Fmt.clock(visit.arrivalTime)}),
                       ].where((e) => e.isNotEmpty).join(' · '),
                       style: context.text.bodySmall,
                     ),
@@ -203,7 +204,7 @@ class _QueueCard extends StatelessWidget {
           ],
           const SizedBox(height: 14),
           GradientButton(
-            label: active ? 'Resume consultation' : 'Start consultation',
+            label: active ? tr('doctorQueue.actions.continue') : tr('dashboard.doctor.startConsultation'),
             icon: active ? Icons.play_arrow_rounded : Icons.medical_services_rounded,
             height: 46,
             loading: busy,

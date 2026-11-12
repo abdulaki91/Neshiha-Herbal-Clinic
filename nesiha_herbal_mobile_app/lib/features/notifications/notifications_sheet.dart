@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/api_client.dart';
 import '../../core/async_state.dart';
 import '../../core/format.dart';
@@ -60,12 +61,12 @@ class _NotificationsSheetState extends State<_NotificationsSheet>
             child: Row(
               children: [
                 Expanded(
-                    child: Text('Notifications', style: context.text.titleLarge)),
+                    child: Text(tr('topbar.notifications'), style: context.text.titleLarge)),
                 if (list.isNotEmpty)
                   TextButton.icon(
                     onPressed: _clearing ? null : _clear,
                     icon: const Icon(Icons.done_all_rounded, size: 18),
-                    label: const Text('Clear all'),
+                    label: Text(tr('topbar.markAllRead')),
                   ),
               ],
             ),
@@ -76,10 +77,10 @@ class _NotificationsSheetState extends State<_NotificationsSheet>
                 : error != null && data == null
                     ? ErrorView(message: error!, onRetry: reload)
                     : list.isEmpty
-                        ? const EmptyView(
+                        ? EmptyView(
                             icon: Icons.notifications_off_outlined,
-                            title: 'You\'re all caught up',
-                            subtitle: 'New alerts will show up here.',
+                            title: tr('topbar.noNotifications'),
+                            subtitle: tr('mobile.notifications.emptyHint'),
                           )
                         : ListView.separated(
                             padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),

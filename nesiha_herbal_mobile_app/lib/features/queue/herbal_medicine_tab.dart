@@ -7,6 +7,7 @@ import '../../core/async_state.dart';
 import '../../core/format.dart';
 import '../../core/paged_state.dart';
 import '../../data/clinic_api.dart';
+import '../../i18n/i18n.dart';
 import '../../models/models.dart';
 import '../../state/auth_controller.dart';
 import '../../theme/app_theme.dart';
@@ -44,16 +45,16 @@ class _HerbalMedicineTabState extends State<HerbalMedicineTab>
 
   Future<void> _remove(Prescription rx) async {
     final ok = await confirmAction(context,
-        title: 'Remove medicine?',
-        message: '${rx.medicineName} will be removed from this prescription.',
-        confirmLabel: 'Remove',
+        title: tr('mobile.herbal.removeTitle'),
+        message: tr('herbalMedicine.cancelConfirm'),
+        confirmLabel: tr('mobile.herbal.remove'),
         destructive: true);
     if (!ok || !mounted) return;
     final api = context.read<ClinicApi>();
     setState(() => _removing.add(rx.id));
     try {
       await api.stopPrescription(rx.id);
-      Toast.success('Medicine removed');
+      Toast.success(tr('herbalMedicine.cancelSuccess'));
       await reload(silent: true);
     } catch (e) {
       Toast.error(ApiException.from(e).message);
@@ -89,12 +90,12 @@ class _HerbalMedicineTabState extends State<HerbalMedicineTab>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Herbal prescription', style: context.text.titleMedium),
+                      Text(tr('herbalMedicine.listTitle'), style: context.text.titleMedium),
                       const SizedBox(height: 2),
                       Text(
                         list.isEmpty
-                            ? 'Nothing prescribed yet'
-                            : 'To pay: ${Fmt.money(pendingTotal)}',
+                            ? tr('herbalMedicine.emptyList')
+                            : tr('mobile.herbal.toPay', {'amount': Fmt.money(pendingTotal)}),
                         style: context.text.bodySmall,
                       ),
                     ],
@@ -103,7 +104,7 @@ class _HerbalMedicineTabState extends State<HerbalMedicineTab>
                 FilledButton.icon(
                   onPressed: _add,
                   icon: const Icon(Icons.add_rounded, size: 19),
-                  label: const Text('Add'),
+                  label: Text(tr('mobile.common.add')),
                   style: FilledButton.styleFrom(
                     backgroundColor: Brand.b600,
                     foregroundColor: Colors.white,
@@ -115,10 +116,10 @@ class _HerbalMedicineTabState extends State<HerbalMedicineTab>
           ),
           const SizedBox(height: 12),
           if (list.isEmpty)
-            const EmptyView(
+            EmptyView(
               icon: Icons.local_florist_outlined,
-              title: 'No medicines prescribed',
-              subtitle: 'Tap Add to prescribe from the clinic\'s herbal stock.',
+              title: tr('herbalMedicine.emptyList'),
+              subtitle: tr('mobile.herbal.emptyHint'),
             )
           else
             for (final rx in list)
@@ -154,7 +155,7 @@ class _HerbalMedicineTabState extends State<HerbalMedicineTab>
                                     color: p.inkSoft, fontStyle: FontStyle.italic)),
                           ],
                           const SizedBox(height: 8),
-                          StatusPill(Fmt.titleCase(rx.status),
+                          StatusPill(Prescription.statusLabel(rx.status),
                               tone: prescriptionTone(rx.status)),
                         ],
                       ),
@@ -167,7 +168,7 @@ class _HerbalMedicineTabState extends State<HerbalMedicineTab>
                                 color: Theme.of(context).colorScheme.primary)),
                         if (rx.status == 'pending')
                           IconButton(
-                            tooltip: 'Remove',
+                            tooltip: tr('mobile.herbal.remove'),
                             onPressed: _removing.contains(rx.id)
                                 ? null
                                 : () => _remove(rx),
@@ -225,7 +226,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
 
   Future<void> _save() async {
     final m = _medicine!;
-    if (_qty <= 0) return Toast.error('Quantity must be at least 1');
+    if (_qty <= 0) return Toast.error(tr('herbalMedicine.quantityError'));
     final auth = context.read<AuthController>();
     final api = context.read<ClinicApi>();
     setState(() => _saving = true);
@@ -245,7 +246,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
         'instructions': _instructions.text.trim(),
         'prescribedDate': DateTime.now().toUtc().toIso8601String(),
       });
-      Toast.success('${m.name} prescribed');
+      Toast.success(tr('herbalMedicine.prescribeSuccess'));
       if (mounted) Navigator.of(context).pop(true);
     } catch (e) {
       Toast.error(ApiException.from(e).message);
@@ -275,10 +276,10 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Choose medicine', style: context.text.titleLarge),
+              Text(trl('herbalMedicine.selectLabel'), style: context.text.titleLarge),
               const SizedBox(height: 12),
               SearchField(
-                hint: 'Search herbal medicines',
+                hint: tr('medicines.search.placeholder'),
                 onChanged: (v) {
                   _search = v;
                   refresh(showSpinner: true);
@@ -291,9 +292,9 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
           child: buildPaged(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
             spacing: 8,
-            empty: const EmptyView(
+            empty: EmptyView(
               icon: Icons.search_off_rounded,
-              title: 'No medicines found',
+              title: tr('medicines.empty'),
             ),
             itemBuilder: (context, m) {
               final out = m.isOut || m.isExpired;
@@ -316,10 +317,10 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
                                 style: context.text.titleSmall),
                             Text(
                               m.isExpired
-                                  ? 'Expired'
+                                  ? tr('mobile.medicine.expired')
                                   : out
-                                      ? 'Out of stock'
-                                      : '${m.availableQuantity} in stock',
+                                      ? tr('mobile.medicine.outOfStock')
+                                      : tr('mobile.medicine.inStockCount', {'count': m.availableQuantity}),
                               style: context.text.bodySmall?.copyWith(
                                   color: out || m.isLow ? p.danger : null),
                             ),
@@ -350,7 +351,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
           child: ListView(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
             children: [
-              Text('Prescribe', style: context.text.titleLarge),
+              Text(tr('herbalMedicine.prescribeTitle'), style: context.text.titleLarge),
               const SizedBox(height: 14),
               GlassCard(
                 radius: 18,
@@ -367,7 +368,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
                           Text(
                             [
                               if (m.strength != null) m.strength!,
-                              '${m.availableQuantity} in stock',
+                              tr('mobile.medicine.inStockCount', {'count': m.availableQuantity}),
                             ].join(' · '),
                             style: context.text.bodySmall,
                           ),
@@ -376,7 +377,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
                     ),
                     TextButton(
                       onPressed: () => setState(() => _medicine = null),
-                      child: const Text('Change'),
+                      child: Text(tr('mobile.common.change')),
                     ),
                   ],
                 ),
@@ -386,7 +387,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: FieldLabel('Unit price (ETB)',
+                    child: FieldLabel(trl('herbalMedicine.unitPriceLabel'),
                         child: TextField(
                           controller: _price,
                           keyboardType:
@@ -399,7 +400,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
                   ),
                   const SizedBox(width: 12),
                   FieldLabel(
-                    'Quantity',
+                    trl('herbalMedicine.quantityLabel'),
                     child: Container(
                       height: 56,
                       decoration: BoxDecoration(
@@ -431,15 +432,15 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
                   ),
                 ],
               ),
-              FieldLabel('Instructions',
+              FieldLabel(trl('herbalMedicine.instructionsLabel').replaceAll(RegExp(r's*(.*)'), ''),
                   optional: true,
                   child: TextField(
                     controller: _instructions,
                     minLines: 2,
                     maxLines: 4,
                     textCapitalization: TextCapitalization.sentences,
-                    decoration: const InputDecoration(
-                        hintText: 'e.g. Boil in water, drink twice daily after meals'),
+                    decoration: InputDecoration(
+                        hintText: tr('herbalMedicine.instructionsPlaceholder')),
                   )),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -452,7 +453,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
                 ),
                 child: Row(
                   children: [
-                    Expanded(child: Text('Total', style: context.text.titleSmall)),
+                    Expanded(child: Text(tr('herbalMedicine.totalLabel'), style: context.text.titleSmall)),
                     Text(Fmt.money(_total), style: context.text.headlineSmall),
                   ],
                 ),
@@ -464,7 +465,7 @@ class _PrescribeSheetState extends State<_PrescribeSheet>
           top: false,
           minimum: const EdgeInsets.fromLTRB(20, 4, 20, 16),
           child: GradientButton(
-            label: 'Add to prescription',
+            label: tr('herbalMedicine.saveButton'),
             icon: Icons.check_rounded,
             loading: _saving,
             onPressed: _save,

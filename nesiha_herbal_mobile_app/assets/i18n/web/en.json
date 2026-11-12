@@ -1,0 +1,1793 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "view": "View",
+    "print": "Print",
+    "all": "All",
+    "total": "Total",
+    "patient": "Patient",
+    "patientId": "ID",
+    "doctor": "Doctor",
+    "doctorPrefix": "Dr.",
+    "amount": "Amount",
+    "method": "Method",
+    "date": "Date",
+    "dateAndTime": "Date & Time",
+    "cashier": "Cashier",
+    "visitNumber": "Visit #",
+    "paymentNumber": "Payment #",
+    "phone": "Phone",
+    "age": "Age",
+    "notAvailable": "N/A",
+    "instructions": "Instructions",
+    "quantityAbbr": "Qty",
+    "by": "by",
+    "saving": "Saving...",
+    "creating": "Creating...",
+    "currency": { "etb": "ETB" },
+    "pagination": { "page": "Page", "of": "of" },
+    "ageUnit": { "years": "years" }
+  },
+
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "testimonials": "Testimonials",
+    "team": "Team",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+
+  "header": {
+    "title": "Neshiha Herbal Clinic",
+    "tagline": "Natural Healing Solutions",
+    "language": "Language"
+  },
+
+  "hero": {
+    "title": "Natural Healing for a",
+    "subtitle": "Healthier Life",
+    "description": "At Nesiha Herbal Clinic, we blend traditional remedies with modern practices to provide personalized care that nurtures your body's natural healing abilities.",
+    "cta": "Book Appointment",
+    "learnMore": "Learn More",
+    "traditionalRemedies": "Traditional Remedies",
+    "modernPractices": "Modern Practices",
+    "personalizedCare": "Personalized Care"
+  },
+
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive herbal treatments for your wellness",
+    "consultation": "Herbal Consultation",
+    "consultationDesc": "Personalized herbal medicine consultation",
+    "treatment": "Herbal Treatment",
+    "treatmentDesc": "Custom herbal remedies and treatments",
+    "wellness": "Wellness Programs",
+    "wellnessDesc": "Holistic wellness and prevention programs",
+    "desc": "Personalized herbal consultations with our certified herbalists to address your specific health concerns and create tailored treatment plans.",
+    "initialAssessment": "Initial Assessment",
+    "customFormulations": "Custom Formulations",
+    "followUpCare": "Follow-up Care",
+    "lifestyleGuidance": "Lifestyle Guidance",
+    "immuneSupport": "Immune Support",
+    "detoxPrograms": "Detox Programs",
+    "energyEnhancement": "Energy Enhancement",
+    "stressManagement": "Stress Management",
+    "herbalMedicine": "Herbal Medicine",
+    "acupuncture": "Acupuncture",
+    "cuppingTherapy": "Cupping Therapy",
+    "moxibustion": "Moxibustion",
+    "therapeuticMassage": "Therapeutic Massage",
+    "therapeuticMassageDesc": "Traditional massage sessions and herbal oil therapies to relax body and mind.",
+    "swedishMassage": "Swedish Massage",
+    "deepTissue": "Deep Tissue",
+    "herbalOilTherapy": "Herbal Oil Therapy",
+    "stressRelief": "Stress Relief",
+    "personalizedHealthPlans": "Personalized Health Plans",
+    "personalizedHealthPlansDesc": "Custom plans covering nutrition, exercise, herbal supplements and follow-up.",
+    "nutritionGuidance": "Nutrition Guidance",
+    "exercisePlans": "Exercise Plans",
+    "herbalSupplements": "Herbal Supplements",
+    "progressTracking": "Progress Tracking",
+    "herbalEducation": "Herbal Education",
+    "herbalEducationDesc": "Workshops and consultations on using natural remedies in daily life.",
+    "workshops": "Workshops",
+    "herbIdentification": "Herb Identification",
+    "homeRemedies": "Home Remedies",
+    "safetyGuidelines": "Safety Guidelines",
+    "whatsIncluded": "What's Included",
+    "ctaTitle": "Start Your Health Journey",
+    "ctaDesc": "Connect with our herbal experts and discover how natural healing can help you."
+  },
+
+  "about": {
+    "title": "About Neshiha",
+    "subtitle": "Your trusted partner in natural health",
+    "description": "We combine traditional herbal wisdom with modern understanding to provide effective, natural healing solutions.",
+    "extendedDescription": "Our clinic combines centuries-old herbal wisdom with modern scientific research to create personalized treatment plans. We believe in treating the whole person, not just symptoms, ensuring long-term wellness and vitality.",
+    "experience": "Years of Experience",
+    "patients": "Happy Patients",
+    "treatments": "Successful Treatments",
+    "herbalWisdom": "Traditional Herbal Wisdom",
+    "herbalWisdomDesc": "Passed down through generations",
+    "certifiedPractitioners": "Certified Practitioners",
+    "certifiedPractitionersDesc": "Our team consists of certified herbal medicine practitioners with extensive training and experience.",
+    "naturalIngredients": "Natural Ingredients",
+    "naturalIngredientsDesc": "We use only the highest quality, ethically sourced natural ingredients in all our treatments.",
+    "holisticApproach": "Holistic Approach",
+    "holisticApproachDesc": "We treat the whole person, addressing root causes rather than just symptoms for lasting wellness.",
+    "metaTitle": "About Us - Nesiha Herbal Clinic",
+    "metaDescription": "Learn about Nesiha Herbal Clinic, where traditional herbal wisdom meets modern science. Discover our certified practitioners, natural ingredients, and holistic approach.",
+    "metaKeywords": "herbal clinic, Nesiha herbal, mana qorichaa aadaa, natural remedies, holistic healing, alternative medicine, Oromia herbal clinic, Ethiopia herbal treatment"
+  },
+
+  "testimonials": {
+    "title": "What Our Patients Say",
+    "subtitle": "Real stories from real people",
+    "featured": "Featured Video Testimonials",
+    "more": "More Client Stories",
+    "videoAvailable": "Video testimonial available",
+    "list": [
+      {
+        "name": "Emma S.",
+        "role": "Wellness Enthusiast",
+        "text": "Nesiha Herbal Clinic transformed my health completely. The personalized approach and natural remedies made such a difference in my energy levels and overall well-being. I feel like a new person!"
+      },
+      {
+        "name": "Liam L.",
+        "role": "Health Coach",
+        "text": "I was thoroughly impressed by the knowledge and care at Nesiha. The comprehensive wellness program helped me achieve my health goals naturally. The herbal treatments are incredibly effective!"
+      }
+    ]
+  },
+
+  "successStories": {
+    "title": "Success Stories",
+    "subtitle": "Real outcomes from real patients",
+    "outcomes": "Outcomes"
+  },
+
+  "team": {
+    "title": "Meet Our Team",
+    "subtitle": "Certified practitioners dedicated to your wellness"
+  },
+
+  "partners": {
+    "title": "Trusted By"
+  },
+
+  "faqs": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to common questions"
+  },
+
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Ready to start your healing journey?",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "twitter": "X (Twitter)"
+    },
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "message": "Your Message",
+    "sendMessage": "Send Message",
+    "address": "Address",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "hours": "Business Hours",
+    "contactInformation": "Contact Information",
+    "emailAddress": "info@nesihaherbalclinic.com",
+    "phoneNumber": "+251912166549",
+    "mainOffice": "Main Office",
+    "whatsapp": "WhatsApp",
+    "whatsappNumber": "+251912166549",
+    "quickResponse": "Quick Response",
+    "streetAddress": "Bero, AshewaMeda",
+    "cityState": "",
+    "businessHours": "Business Hours",
+    "mondayFriday": "Saturday - Thursday",
+    "weekdayHours": "2:00 AM - 10:00 AM",
+    "saturday": "Saturday",
+    "saturdayHours": "2:00 AM - 10:00 AM",
+    "sunday": "Friday",
+    "closed": "Closed",
+    "ourLocation": "Our Location",
+    "easyToFind": "Easy to find!",
+    "locationDescription": "We're located in the heart of Healthville, just off the main Wellness Avenue. Free parking available.",
+    "needImmediateAssistance": "Need Immediate Assistance?",
+    "expertsReady": "Our herbal medicine experts are ready to help you today",
+    "scheduleConsultation": "Schedule Consultation"
+  },
+
+  "footer": {
+    "copyright": "© 2024 Neshiha Herbal Clinic. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "quickLinks": "Quick Links"
+  },
+
+  "blog": {
+    "title": "Health & Wellness Blog",
+    "subtitle": "Insights and tips for natural living",
+    "readMore": "Read More",
+    "publishedOn": "Published on",
+    "badge": "Our Blog",
+    "heading": "Wellness Insights",
+    "desc": "Discover expert insights, natural health tips, and the latest research in herbal medicine to support your journey to optimal wellness.",
+    "featuredBadge": "Featured",
+    "readFullArticle": "Read Full Article",
+    "filter": { "all": "All" },
+    "post": [
+      {
+        "title": "5 Essential Tips for a Healthier Lifestyle",
+        "desc": "Discover simple yet powerful daily practices that can transform your health and well-being naturally. From morning routines to evening habits, learn how small changes create lasting results.",
+        "category": "Wellness Tips",
+        "readTime": "5 min read",
+        "date": "March 15, 2024",
+        "author": "Dr. Sarah Johnson"
+      },
+      {
+        "title": "The Healing Power of Herbal Medicine",
+        "desc": "Explore the ancient wisdom of herbal medicine and discover how natural remedies can enhance your health. Learn about the science behind traditional healing practices and modern applications.",
+        "category": "Herbal Medicine",
+        "readTime": "7 min read",
+        "date": "March 12, 2024",
+        "author": "Dr. Ahmed Hassan"
+      },
+      {
+        "title": "Natural Detox: Cleanse Your Body Naturally",
+        "desc": "Learn about natural detoxification methods that support your body's natural cleansing processes. Discover herbs, foods, and practices that promote optimal health and vitality.",
+        "category": "Detox & Cleansing",
+        "readTime": "6 min read",
+        "date": "March 10, 2024",
+        "author": "Dr. Maria Rodriguez"
+      },
+      {
+        "title": "Stress Management Through Traditional Healing",
+        "desc": "Explore ancient stress management techniques and how they can help you find balance in today's fast-paced world. From meditation to herbal remedies, discover natural stress relief.",
+        "category": "Mental Health",
+        "readTime": "8 min read",
+        "date": "March 8, 2024",
+        "author": "Dr. James Chen"
+      },
+      {
+        "title": "Seasonal Wellness: Spring Health Guide",
+        "desc": "Embrace the energy of spring with our comprehensive guide to seasonal wellness. Learn how to align your health practices with nature's rhythms for optimal vitality.",
+        "category": "Seasonal Health",
+        "readTime": "4 min read",
+        "date": "March 5, 2024",
+        "author": "Dr. Elena Petrov"
+      },
+      {
+        "title": "The Science Behind Natural Immunity",
+        "desc": "Understand how natural remedies and lifestyle choices can strengthen your immune system. Discover evidence-based approaches to building robust health naturally.",
+        "category": "Immunity",
+        "readTime": "9 min read",
+        "date": "March 3, 2024",
+        "author": "Dr. Lisa Thompson"
+      }
+    ],
+    "newsletter": {
+      "heading": "Stay Updated",
+      "subtitle": "Get the latest wellness tips, herbal medicine insights, and health updates delivered to your inbox.",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe"
+    }
+  },
+
+  "sidebar": {
+    "brandName": "Neshiha Clinic",
+    "dashboard": "Dashboard",
+    "staff": "Staff",
+    "patients": "Patients",
+    "visits": "Visits",
+    "medicines": "Medicines",
+    "cashier": "Cashier",
+    "laboratory": "Laboratory",
+    "reports": "Reports",
+    "settings": "Settings",
+    "queue": "Queue",
+    "logout": "Logout",
+    "adminPanel": "Admin Panel",
+    "badgeOverflow": "99+",
+    "appointments": "Appointments",
+    "content": "Website Content",
+    "bookingRequests": "Booking Requests"
+  },
+
+  "topbar": {
+    "theme": {
+      "toDark": "Switch to dark mode",
+      "toLight": "Switch to light mode"
+    },
+    "greeting": "Welcome, {{firstName}}!",
+    "notifications": "Notifications",
+    "markAllRead": "Mark all read",
+    "noNotifications": "No notifications yet",
+    "badgeOverflow": "99+",
+    "lang": {
+      "english": "English",
+      "oromo": "Oromo",
+      "amharic": "Amharic",
+      "arabic": "Arabic",
+      "nativeEnglish": "English",
+      "nativeOromo": "Afaan Oromoo",
+      "nativeAmharic": "አማርኛ",
+      "nativeArabic": "العربية"
+    },
+    "notification": {
+      "visitUpdated": "Visit Updated",
+      "visitStatus": "Status: {{status}}",
+      "newPatient": "New Patient",
+      "patientRegistered": "{{firstName}} {{lastName}} registered",
+      "paymentReceived": "Payment Received",
+      "paymentAmount": "{{amount}} ETB paid",
+      "prescriptionAdded": "Prescription Added",
+      "newPrescription": "New prescription created"
+    },
+    "time": {
+      "justNow": "just now",
+      "minutesAgo": "{{m}}m ago",
+      "hoursAgo": "{{h}}h ago"
+    }
+  },
+
+  "toast": {
+    "newPatientInQueue": "New patient in queue",
+    "patientRegistered": "New patient registered: {{firstName}} {{lastName}}",
+    "newVisitCreated": "New visit created",
+    "visitStatus": "Visit status: {{status}}",
+    "prescriptionAdded": "New prescription added for patient",
+    "medicineDispensed": "Medicine dispensed to patient",
+    "paymentReceived": "Payment received: {{amount}} ETB",
+    "staffCreated": "New staff member added",
+    "newBookingRequest": "New booking request from {{name}}"
+  },
+
+  "login": {
+    "brandName": "Neshiha Herbal Clinic",
+    "brandSubtitle": "Clinic Management System",
+    "heading": "Sign In",
+    "label": {
+      "email": "Email Address",
+      "password": "Password"
+    },
+    "placeholder": {
+      "email": "your.email@clinic.com",
+      "password": "••••••••"
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "passwordRequired": "Password is required"
+    },
+    "button": {
+      "submit": "Sign In",
+      "loading": "Signing in..."
+    },
+    "demo": {
+      "heading": "Demo Accounts:",
+      "admin": "admin@neshihaclinic.com | Admin@123",
+      "doctor": "doctor@neshihaclinic.com | Doctor@123",
+      "clerk": "clerk@neshihaclinic.com | Clerk@123",
+      "cashier": "cashier@neshihaclinic.com | Cashier@123"
+    },
+    "toast": {
+      "welcome": "Welcome back, {{firstName}}!",
+      "failed": "Login failed"
+    }
+  },
+
+  "signin": {
+    "heading": "Admin Sign In",
+    "error": { "fillAllFields": "Please fill in all fields." },
+    "label": { "email": "Email", "password": "Password" },
+    "placeholder": { "email": "you@example.com", "password": "Enter your password" },
+    "button": { "submit": "Sign In" },
+    "forgotPassword": "Forgot your password?",
+    "resetLink": "Reset it"
+  },
+
+  "error": {
+    "404": { "code": "404", "message": "Page Not Found" }
+  },
+
+  "home": {
+    "title": "Nesihah Herbal Clinic | Mana Qorichaa Aadaa Nasiiha",
+    "metaDescription": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha): Your trusted source for traditional herbal medicine, natural remedies, and holistic healing in Ethiopia.",
+    "metaKeywords": "Nesihah Herbal Clinic, Mana Qorichaa Aadaa Nasiiha, herbal medicine, natural remedies, traditional healing, Ethiopia",
+    "ogTitle": "Nesihah Herbal Clinic",
+    "ogDescription": "Trusted herbal health solutions and traditional healing in Ethiopia.",
+    "twitterTitle": "Nesihah Herbal Clinic",
+    "twitterDescription": "Trusted herbal health solutions and traditional healing in Ethiopia.",
+    "schema": {
+      "name": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha)",
+      "streetAddress": "AshewaMeda",
+      "addressLocality": "Shegar",
+      "addressRegion": "Oromia",
+      "postalCode": "0000",
+      "addressCountry": "Ethiopia",
+      "telephone": "+251912166549",
+      "url": "https://www.nesihaherbalclinic.com/"
+    }
+  },
+
+  "receipt": {
+    "clinicName": "Neshiha Herbal Clinic",
+    "clinicSubtitle": "Clinic Management System",
+    "label": {
+      "patient": "Patient:",
+      "id": "ID:",
+      "visit": "Visit:",
+      "doctor": "Doctor:"
+    },
+    "doctorNameFormat": "Dr. {{firstName}} {{lastName}}",
+    "sectionPrescribedMedicines": "Prescribed Medicines:",
+    "medicine": { "qty": "Qty: {{quantity}}" },
+    "placeholder": "—",
+    "totalLabel": "TOTAL:",
+    "currencyFormat": "{{amount}} ETB",
+    "footer": {
+      "thankYou": "Thank you for choosing",
+      "clinicName": "Neshiha Herbal Clinic",
+      "disclaimer": "This is a computer-generated receipt"
+    }
+  },
+
+  "dashboard": {
+    "hero": {
+      "insightEyebrow": "Today's insight",
+      "ring": {
+        "visitsCompleted": "Visits completed",
+        "queueCleared": "Queue cleared",
+        "visitsSeen": "Visits seen",
+        "paymentsCleared": "Payments cleared",
+        "noVisits": "No visits yet today",
+        "noPayments": "No payments yet today"
+      },
+      "marks": {
+        "waiting": "Waiting",
+        "completed": "Completed",
+        "visits": "Visits",
+        "inQueue": "In queue",
+        "prescriptions": "Prescriptions",
+        "registered": "Registered",
+        "pending": "Pending",
+        "processed": "Processed"
+      },
+      "legend": {
+        "completed": "Completed",
+        "waiting": "Waiting",
+        "inProgress": "In progress",
+        "seen": "Seen",
+        "doctors": "Doctors",
+        "otherStaff": "Other staff",
+        "inQueue": "In queue",
+        "lowStock": "Low stock",
+        "expired": "Expired"
+      },
+      "cards": {
+        "todayVisits": "Today's visits",
+        "totalPatients": "Total patients",
+        "activeRecords": "Active patient records",
+        "staff": "Staff",
+        "medicineStock": "Medicine alerts",
+        "inQueue": "In queue",
+        "nextPatient": "Next: {{name}}",
+        "completedToday": "Completed today",
+        "prescriptions": "Prescriptions today",
+        "dispensedOf": "{{dispensed}} of {{total}} dispensed",
+        "bookingRequests": "Booking requests",
+        "bookingsHint": "Online requests from the website",
+        "registeredToday": "Registered today",
+        "waitingNow": "Waiting now",
+        "waitingHint": "Patients checked in and waiting",
+        "pendingPayments": "Pending payments",
+        "pendingHint": "Visits waiting to be paid",
+        "processedToday": "Processed today",
+        "lastPayment": "Last payment",
+        "noneYet": "No payments yet",
+        "paymentMethods": "Recent payment methods"
+      },
+      "chip": {
+        "live": "Live",
+        "offline": "Offline",
+        "allGood": "All good",
+        "needsAttention": "Needs attention",
+        "needsReview": "Needs review",
+        "queueActive": "Queue active"
+      },
+      "timeline": {
+        "empty": "No activity yet today",
+        "noArrivals": "No one waiting right now"
+      },
+      "cta": {
+        "manageStaff": "Manage staff",
+        "openQueue": "Open queue",
+        "reviewRequests": "Review requests",
+        "viewPatients": "View patients",
+        "openCashier": "Open cashier"
+      }
+    },
+    "insight": {
+      "allClear": {
+        "headline": "Everything is running smoothly — all caught up.",
+        "detail": "New activity will appear here in real time."
+      },
+      "waiting": {
+        "headline": "Patients are waiting to be seen.",
+        "detail": "Waiting now: {{count}}. Keeping the queue moving shortens wait times."
+      },
+      "expired": {
+        "headline": "Some medicines have expired.",
+        "detail": "Expired: {{expired}} · Low stock: {{low}}. Remove expired stock before it reaches a patient."
+      },
+      "lowStock": {
+        "headline": "Some medicines are running low.",
+        "detail": "Low stock: {{count}}. Restock soon to avoid gaps in treatment."
+      },
+      "doctorQueue": {
+        "headline": "Patients are waiting for you.",
+        "detail": "In queue: {{count}} · Next up: {{name}}"
+      },
+      "doctorDone": {
+        "headline": "Your queue is clear — nice work today.",
+        "detail": "Consultations completed today: {{count}}"
+      },
+      "doctorIdle": {
+        "headline": "No patients in your queue yet.",
+        "detail": "New visits will appear here in real time."
+      },
+      "bookings": {
+        "headline": "New online booking requests need review.",
+        "detail": "Pending requests: {{count}}"
+      },
+      "cashierPending": {
+        "headline": "Visits are waiting for payment.",
+        "detail": "Pending payments: {{count}}"
+      },
+      "cashierClear": {
+        "headline": "All payments are settled.",
+        "detail": "New payments will appear here in real time."
+      }
+    },
+    "title": "Dashboard",
+    "fallback": { "title": "Dashboard" },
+    "stats": {
+      "totalPatients": "Total Patients",
+      "todayPatients": "Today's Patients",
+      "todayVisits": "Today's Visits",
+      "waitingNow": "Waiting Now",
+      "totalDoctors": "Total Doctors",
+      "totalStaff": "Total Staff",
+      "completedToday": "Completed Today",
+      "lowStockItems": "Low Stock Items",
+      "expiredMedicines": "Expired Medicines"
+    },
+    "quickStats": { "title": "Quick Stats" },
+    "systemStatus": {
+      "reconnecting": "Reconnecting…",
+      "title": "System Status",
+      "database": "Database",
+      "online": "Online",
+      "realtimeUpdates": "Real-time Updates",
+      "connected": "Connected",
+      "lastBackup": "Last Backup"
+    },
+    "doctor": {
+      "title": "Doctor Dashboard",
+      "stats": {
+        "inQueue": "In Queue",
+        "completedToday": "Completed Today",
+        "prescriptions": "Prescriptions",
+        "dispensed": "Dispensed"
+      },
+      "waitingPatients": "Waiting Patients",
+      "startConsultation": "Start Consultation",
+      "empty": { "noPatients": "No patients waiting" }
+    },
+    "dataClerk": {
+      "title": "Data Clerk Dashboard",
+      "stats": {
+        "registeredToday": "Registered Today",
+        "todayVisits": "Today's Visits",
+        "waitingPatients": "Waiting Patients"
+      },
+      "recentRegistrations": "Recent Registrations",
+      "empty": { "noRegistrations": "No recent registrations" }
+    },
+    "cashier": {
+      "title": "Cashier Dashboard",
+      "stats": {
+        "pendingPayments": "Pending Payments",
+        "paymentsProcessedToday": "Payments Processed Today",
+        "todayRevenue": "Today's Revenue (ETB)"
+      },
+      "recentPayments": "Recent Payments",
+      "empty": { "noPayments": "No recent payments" }
+    }
+  },
+
+  "cashier": {
+    "title": "Cashier Dashboard",
+    "subtitle": "Receive payments, dispense medicine & print receipts",
+    "tabs": { "pending": "Pending", "recent": "Recent Payments" },
+    "search": { "placeholder": "Search by patient name or ID..." },
+    "pending": {
+      "actionButton": "Receive & Dispense",
+      "empty": "No pending payments"
+    },
+    "recent": { "empty": "No recent payments" },
+    "modal": {
+      "payment": {
+        "title": "Receive Payment",
+        "confirm": "Confirm Payment & Dispense",
+        "totalDue": "Total Amount Due",
+        "medicinesToDispense": "Medicines to dispense:",
+        "paymentMethodLabel": "Payment Method",
+        "transactionIdLabel": "Transaction ID / Reference (Optional)",
+        "transactionIdPlaceholder": "e.g., TXN123456",
+        "notesLabel": "Notes"
+      },
+      "detail": {
+        "title": "Payment Details",
+        "printReceipt": "Print Receipt",
+        "prescribedMedicines": "Prescribed Medicines",
+        "transactionId": "Transaction ID"
+      }
+    },
+    "paymentMethods": {
+      "cash": "Cash",
+      "bankTransfer": "Bank Transfer",
+      "mobileMoney": "Mobile Money (Telebirr/CBE Birr)",
+      "other": "Other"
+    },
+    "toast": {
+      "paymentSuccess": "Payment received — medicine dispensed to patient",
+      "paymentError": "Failed to process payment"
+    }
+  },
+
+  "cashierReports": {
+    "title": "Cashier Reports",
+    "subtitle": "Paid prescription revenue",
+    "periods": { "daily": "Daily", "weekly": "Weekly", "monthly": "Monthly" },
+    "periodLabels": { "today": "Today", "thisWeek": "This Week", "thisMonth": "This Month" },
+    "cards": {
+      "totalRevenue": "Total Revenue",
+      "prescriptionsPaid": "Prescriptions Paid",
+      "period": "Period"
+    },
+    "byPaymentMethod": "By Payment Method",
+    "paymentTransactions": "Payment Transactions",
+    "empty": {
+      "payments": "No payments found for this period",
+      "report": "No report data available"
+    }
+  },
+
+  "patients": {
+    "title": "Patients",
+    "subtitle": "Manage patient records",
+    "registerButton": "Register Patient",
+    "search": { "placeholder": "Search patients by name, ID, phone..." },
+    "empty": { "title": "No patients found", "subtitle": "Register your first patient to get started" },
+    "toast": { "registerSuccess": "Patient registered successfully!" }
+  },
+
+  "visits": {
+    "title": "Visits",
+    "subtitle": "Manage patient visits",
+    "newVisitButton": "New Visit",
+    "status": {
+      "waiting": "Waiting",
+      "inConsultation": "In Consultation",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "scheduled": "Scheduled"
+    },
+    "empty": "No visits found",
+    "toast": {
+      "loadError": "Failed to load visits",
+      "createSuccess": "Visit created successfully!"
+    }
+  },
+
+  "doctorQueue": {
+    "title": "Patient Queue",
+    "backToQueue": "Back to Queue",
+    "refreshQueue": "Refresh Queue",
+    "actions": {
+      "start": "Start",
+      "continue": "Continue",
+      "consulting": "Consulting"
+    },
+    "status": {
+      "withAnotherDoctor": "With another doctor",
+      "active": "Active",
+      "inProgress": "In Progress"
+    },
+    "empty": {
+      "title": "No patients waiting",
+      "subtitle": "New patients will appear here"
+    },
+    "rightPanel": {
+      "selectPatient": "Select a Patient",
+      "selectPatientHint": "Click \"Start\" on a patient from the queue to begin consultation"
+    },
+    "tabs": {
+      "consultation": "Consultation",
+      "vitalSigns": "Vital Signs",
+      "investigation": "Investigation",
+      "herbalMedicine": "Herbal Medicine",
+      "history": "History"
+    },
+    "consultation": {
+      "title": "Consultation",
+      "patientInfo": "Patient Information",
+      "diagnosisTitle": "Diagnosis",
+      "noDiagnosis": "No diagnosis added yet",
+      "ageGender": "Age / Gender",
+      "bloodGroup": "Blood Group",
+      "allergies": "Allergies:",
+      "chronic": "Chronic:",
+      "saveProgress": "Save Progress",
+      "completeConsultation": "Complete Consultation",
+      "printPrescription": "Print Prescription",
+      "printNoPrescriptions": "No prescriptions to print for this visit yet",
+      "printError": "Failed to prepare prescription for printing",
+      "patientFileDrawer": "Patient File",
+      "saveStatus": {
+        "pending": "Unsaved changes",
+        "saving": "Saving...",
+        "saved": "All changes saved",
+        "error": "Failed to save"
+      }
+    },
+    "queue": { "chiefComplaintPrefix": "CC:" },
+    "queueStats": {
+      "patients": "patients",
+      "inConsultation": "in consultation"
+    },
+    "toast": {
+      "consultationStarted": "Consultation started — patient stays in queue until saved",
+      "startError": "Failed to start consultation",
+      "saveSuccess": "Consultation details saved",
+      "saveError": "Failed to save consultation",
+      "sentToCashier": "Consultation sent to Cashier for payment",
+      "completeSuccess": "Consultation completed successfully",
+      "completeError": "Failed to complete consultation"
+    }
+  },
+
+  "medicines": {
+    "title": "Medicines",
+    "subtitle": "Manage herbal drug inventory",
+    "addButton": "Add Medicine",
+    "search": { "placeholder": "Search by name or code..." },
+    "card": {
+      "code": "Code:",
+      "category": "Category:",
+      "inStock": "In Stock:",
+      "strength": "Strength:"
+    },
+    "empty": "No medicines found matching your search.",
+    "toast": {
+      "loadError": "Failed to load medicines",
+      "deleteConfirmation": "Are you sure you want to delete this medicine?",
+      "deleteSuccess": "Medicine deleted successfully",
+      "deleteError": "Failed to delete medicine"
+    }
+  },
+
+  "pharmacy": {
+    "title": "Pharmacy",
+    "subtitle": "Manage medicine prescriptions and dispensing",
+    "actions": { "dispense": "Dispense" },
+    "filters": {
+      "paid": "Paid",
+      "dispensed": "Dispensed",
+      "completed": "Completed",
+      "pending": "Pending"
+    },
+    "search": { "placeholder": "Search by patient name, ID, or medicine..." },
+    "empty": {
+      "search": "No prescriptions found matching your search",
+      "status": "No {{status}} prescriptions"
+    },
+    "prescription": {
+      "medicineFallback": "Medicine",
+      "dosage": "Dosage",
+      "frequency": "Frequency",
+      "duration": "Duration",
+      "quantity": "Quantity",
+      "instructions": "Instructions:",
+      "prescribed": "Prescribed:"
+    },
+    "status": { "dispensed": "Dispensed" },
+    "dispenseModal": {
+      "title": "Dispense Medicine",
+      "confirm": "Confirm Dispensing",
+      "prescriptionDetails": "Prescription Details",
+      "prescribedQuantity": "Prescribed Quantity",
+      "quantityToDispense": "Quantity to Dispense *",
+      "batchNumber": "Batch Number *",
+      "batchNumberPlaceholder": "e.g., BATCH-2026-001",
+      "expiryDate": "Expiry Date *",
+      "notes": "Notes (Optional)",
+      "notesPlaceholder": "Any additional notes..."
+    },
+    "toast": {
+      "loadError": "Failed to load prescriptions",
+      "invalidQuantity": "Please enter a valid quantity",
+      "missingBatch": "Please enter batch number",
+      "missingExpiry": "Please enter expiry date",
+      "dispenseSuccess": "Medicine dispensed successfully",
+      "dispenseError": "Failed to dispense medicine"
+    }
+  },
+
+  "laboratory": {
+    "title": "Laboratory",
+    "subtitle": "Manage investigation requests and results",
+    "actions": {
+      "startProcessing": "Start Processing",
+      "enterResults": "Enter Results"
+    },
+    "status": {
+      "requested": "Requested",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "urgency": {
+      "routine": "Routine",
+      "urgent": "Urgent",
+      "stat": "STAT"
+    },
+    "search": { "placeholder": "Search by patient name, ID, or test..." },
+    "empty": {
+      "search": "No investigations found matching your search",
+      "status": "No {{status}} investigations"
+    },
+    "detail": {
+      "instructions": "Instructions:",
+      "results": "Results:",
+      "interpretation": "Interpretation:"
+    },
+    "info": {
+      "requested": "Requested:",
+      "scheduled": "Scheduled:",
+      "completed": "Completed:",
+      "performedBy": "Performed by:"
+    },
+    "modal": {
+      "title": "Enter Investigation Results",
+      "submitResults": "Submit Results",
+      "investigationDetails": "Investigation Details",
+      "type": "Type",
+      "testName": "Test Name",
+      "urgency": "Urgency",
+      "requestedDate": "Requested Date",
+      "instructions": "Instructions:",
+      "results": "Investigation Results *",
+      "resultsPlaceholder": "Enter detailed test results, measurements, observations...",
+      "interpretation": "Clinical Interpretation",
+      "interpretationPlaceholder": "Doctor's interpretation of results (optional)...",
+      "performedBy": "Performed By *",
+      "performedByPlaceholder": "Lab technician or radiologist name",
+      "additionalNotes": "Additional Notes",
+      "additionalNotesPlaceholder": "Any additional notes or comments..."
+    },
+    "toast": {
+      "loadError": "Failed to load investigations",
+      "statusUpdated": "Investigation marked as {{status}}",
+      "statusUpdateError": "Failed to update status",
+      "missingResults": "Please enter investigation results",
+      "missingPerformedBy": "Please enter who performed the investigation",
+      "submitSuccess": "Investigation results submitted successfully",
+      "submitError": "Failed to submit results"
+    }
+  },
+
+  "patientDetail": {
+    "backToPatients": "Back to Patients",
+    "newVisit": "New Visit",
+    "notFound": "Patient not found",
+    "detail": {
+      "email": "Email",
+      "address": "Address",
+      "occupation": "Occupation",
+      "maritalStatus": "Marital Status"
+    },
+    "registered": "Reg:",
+    "alerts": {
+      "allergies": "Allergies:",
+      "chronic": "Chronic:"
+    },
+    "visitHistory": {
+      "title": "Visit History",
+      "complaint": "Complaint:",
+      "treatment": "Treatment:",
+      "empty": "No previous visits"
+    },
+    "toast": { "loadError": "Failed to load patient details" }
+  },
+
+  "patientForm": {
+    "updateSuccess": "Patient updated successfully",
+    "registerSuccess": "Patient registered successfully",
+    "saveError": "Failed to save patient",
+    "editTitle": "Edit Patient",
+    "registerTitle": "Register New Patient",
+    "fromBookingNotice": "Pre-filled from a website booking request — please verify and complete the remaining fields.",
+    "personalInfoTitle": "Personal Information",
+    "firstNameLabel": "First Name *",
+    "firstNameRequired": "First name is required",
+    "firstNamePlaceholder": "First name",
+    "middleNameLabel": "Middle Name",
+    "middleNamePlaceholder": "Middle name",
+    "lastNameLabel": "Last Name *",
+    "lastNameRequired": "Last name is required",
+    "lastNamePlaceholder": "Last name",
+    "genderLabel": "Gender *",
+    "genderRequired": "Gender is required",
+    "genderPlaceholder": "Select gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderOther": "Other",
+    "dobLabel": "Date of Birth *",
+    "dobRequired": "Date of birth is required",
+    "ageLabel": "Age *",
+    "ageRequired": "Age is required",
+    "ageInvalid": "Enter a valid age",
+    "agePlaceholder": "Age in years",
+    "phoneLabel": "Phone Number *",
+    "phoneRequired": "Phone number is required",
+    "phonePlaceholder": "+251911234567",
+    "addressTitle": "Address",
+    "cityLabel": "City",
+    "cityPlaceholder": "City",
+    "subCityLabel": "Sub City",
+    "subCityPlaceholder": "Sub city",
+    "woredaLabel": "Woreda",
+    "woredaPlaceholder": "Woreda",
+    "bloodGroupLabel": "Blood Group",
+    "bloodGroupPlaceholder": "Select blood group",
+    "emergencyContactTitle": "Emergency Contact",
+    "emergencyContactNameLabel": "Emergency Contact Name",
+    "emergencyContactNamePlaceholder": "Full name",
+    "emergencyContactPhoneLabel": "Emergency Contact Phone",
+    "emergencyContactPhonePlaceholder": "+251911234567",
+    "registrationFeeTitle": "Registration Fee",
+    "registrationFeeNotice": "A one-time {{amount}} ETB registration fee is required for every new patient.",
+    "registrationFeeAmountLabel": "Amount",
+    "registrationFeeMethodLabel": "Payment Method *",
+    "registrationFeeMethodRequired": "Payment method is required",
+    "registrationFeeMethodPlaceholder": "Select payment method",
+    "registrationFeeMethodCash": "Cash",
+    "registrationFeeMethodTransfer": "Bank Transfer",
+    "registrationFeeMethodTelebirr": "Telebirr",
+    "registrationFeeTransactionLabel": "Transaction / Reference ID (optional)",
+    "registrationFeeTransactionPlaceholder": "e.g. TXN123456",
+    "saving": "Saving...",
+    "updateButton": "Update Patient",
+    "registerButton": "Register Patient"
+  },
+
+  "patientCard": {
+    "idPrefix": "ID: ",
+    "ageGenderSeparator": " years • ",
+    "registeredPrefix": "Registered: ",
+    "viewDetails": "View Details",
+    "newVisit": "New Visit"
+  },
+
+  "vitalSigns": {
+    "title": "Vital Signs",
+    "loading": "Loading vital signs...",
+    "saveButton": "Save Vitals",
+    "saveSuccess": "Vital signs saved successfully",
+    "saveError": "Failed to save vital signs",
+    "temperatureLabel": "Temperature (°C)",
+    "temperaturePlaceholder": "e.g., 37.5",
+    "temperatureNormal": "Normal: 36.5 - 37.5°C",
+    "bloodPressureLabel": "Blood Pressure (mmHg)",
+    "systolicPlaceholder": "Systolic (120)",
+    "diastolicPlaceholder": "Diastolic (80)",
+    "bloodPressureNormal": "Normal: 120/80 mmHg",
+    "heartRateLabel": "Heart Rate (bpm)",
+    "heartRatePlaceholder": "e.g., 72",
+    "heartRateNormal": "Normal: 60 - 100 bpm",
+    "respiratoryRateLabel": "Respiratory Rate (per min)",
+    "respiratoryRatePlaceholder": "e.g., 16",
+    "respiratoryRateNormal": "Normal: 12 - 20 per min",
+    "oxygenSaturationLabel": "Oxygen Saturation (%)",
+    "oxygenSaturationPlaceholder": "e.g., 98",
+    "oxygenSaturationNormal": "Normal: 95 - 100%",
+    "weightLabel": "Weight (kg)",
+    "weightPlaceholder": "e.g., 70.5",
+    "heightLabel": "Height (cm)",
+    "heightPlaceholder": "e.g., 175",
+    "bmiLabel": "Body Mass Index (BMI)",
+    "categoryPrefix": "Category: ",
+    "reference": {
+      "title": "Normal Vital Signs Reference",
+      "temperature": "• Temperature: 36.5 - 37.5°C",
+      "bloodPressure": "• Blood Pressure: 120/80 mmHg",
+      "heartRate": "• Heart Rate: 60 - 100 bpm",
+      "respiratoryRate": "• Respiratory Rate: 12 - 20/min",
+      "oxygenSaturation": "• Oxygen Saturation: 95 - 100%",
+      "bmi": "• BMI: 18.5 - 24.9 (Normal)"
+    }
+  },
+
+  "bmi": {
+    "category": {
+      "underweight": "Underweight",
+      "normal": "Normal",
+      "overweight": "Overweight",
+      "obese": "Obese"
+    }
+  },
+
+  "consultation": {
+    "chiefComplaintLabel": "Chief Complaint *",
+    "chiefComplaintPlaceholder": "Main reason for visit...",
+    "symptomsLabel": "Symptoms",
+    "addSymptomPlaceholder": "Add symptom...",
+    "historyOfPresentIllnessLabel": "History of Present Illness",
+    "historyOfPresentIllnessPlaceholder": "Detailed history of the current condition...",
+    "physicalExaminationLabel": "Physical Examination",
+    "physicalExaminationPlaceholder": "Physical examination findings...",
+    "diagnosisLabel": "Diagnosis",
+    "addDiagnosisPlaceholder": "Add diagnosis...",
+    "treatmentPlanLabel": "Treatment Plan",
+    "treatmentPlanPlaceholder": "Treatment plan and recommendations...",
+    "doctorNotesLabel": "Doctor's Notes",
+    "doctorNotesPlaceholder": "Additional notes...",
+    "followUpDateLabel": "Follow-up Date"
+  },
+
+  "herbalMedicine": {
+    "loading": "Loading medicines...",
+    "addButton": "Add Herbal Medicine",
+    "prescribeTitle": "Prescribe Herbal Medicine",
+    "selectLabel": "Select Herbal Medicine *",
+    "selectPlaceholder": "-- Select Medicine --",
+    "unitPriceLabel": "Unit Price (ETB) *",
+    "unitPricePlaceholder": "Price per unit",
+    "quantityLabel": "Quantity *",
+    "quantityPlaceholder": "Number of units",
+    "totalLabel": "Total Amount",
+    "totalPrefix": "Total: ",
+    "instructionsLabel": "Instructions (Optional)",
+    "instructionsPlaceholder": "e.g., Take with food, avoid alcohol...",
+    "saveButton": "Save Prescription",
+    "listTitle": "Prescribed Medicines",
+    "emptyList": "No medicines prescribed yet",
+    "fetchError": "Failed to fetch medicines",
+    "selectError": "Please select a herbal medicine",
+    "quantityError": "Please enter a valid quantity",
+    "prescribeSuccess": "Medicine prescribed successfully",
+    "addError": "Failed to add medicine",
+    "cancelConfirm": "Cancel this prescription?",
+    "cancelSuccess": "Prescription cancelled",
+    "cancelError": "Failed to cancel prescription"
+  },
+
+  "prescription": {
+    "status": {
+      "pending": "pending",
+      "paid": "paid",
+      "dispensed": "dispensed",
+      "completed": "completed",
+      "stopped": "stopped",
+      "expired": "expired"
+    },
+    "dosage": { "asPrescribed": "As prescribed" },
+    "frequency": { "asDirected": "As directed" },
+    "route": { "oral": "oral" },
+    "medicineFallback": "Medicine"
+  },
+
+  "investigation": {
+    "loading": "Loading investigations...",
+    "requestButton": "Request Investigation",
+    "fillError": "Please fill in investigation type and test name",
+    "requestSuccess": "Investigation requested successfully",
+    "requestError": "Failed to request investigation",
+    "cancelConfirm": "Are you sure you want to cancel this investigation?",
+    "cancelSuccess": "Investigation cancelled",
+    "cancelError": "Failed to cancel investigation",
+    "typeLabel": "Investigation Type *",
+    "typePlaceholder": "-- Select Type --",
+    "testNameLabel": "Test Name *",
+    "testNamePlaceholder": "e.g., Complete Blood Count, Liver Function Test",
+    "urgencyLabel": "Urgency",
+    "scheduledDateLabel": "Scheduled Date",
+    "instructionsLabel": "Special Instructions",
+    "instructionsPlaceholder": "Any special instructions or preparation notes...",
+    "typePrefix": "Type: ",
+    "instructionsPrefix": "Instructions: ",
+    "requestedPrefix": "Requested: ",
+    "scheduledPrefix": "Scheduled: ",
+    "resultsLabel": "Results:",
+    "interpretationLabel": "Interpretation:",
+    "completedPrefix": "Completed: ",
+    "emptyList": "No investigations requested yet",
+    "status": {
+      "requested": "Requested",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "urgency": {
+      "routine": "Routine",
+      "urgent": "Urgent",
+      "stat": "STAT (Immediate)"
+    },
+    "type": {
+      "bloodTest": "Blood Test",
+      "urineTest": "Urine Test",
+      "stoolTest": "Stool Test",
+      "xray": "X-Ray",
+      "ultrasound": "Ultrasound",
+      "ctScan": "CT Scan",
+      "mri": "MRI",
+      "ecg": "ECG (Electrocardiogram)",
+      "biopsy": "Biopsy",
+      "cultureTest": "Culture Test",
+      "other": "Other"
+    }
+  },
+
+  "followUpIndicator": {
+    "firstVisit": "First visit — no prior medical history",
+    "scheduledFollowUp": "✓ Scheduled Follow-up Visit",
+    "returnVisit": "Return Visit",
+    "daysSinceLast": "{{days}} days since last visit",
+    "lastVisit": "Last Visit:",
+    "followUpScheduled": "Follow-up Scheduled:",
+    "previousDiagnosis": "Previous Diagnosis:",
+    "previousTreatment": "Previous Treatment:",
+    "previousNotes": "Previous Notes:",
+    "viewFullHistory": "View Full History"
+  },
+
+  "patientHistory": {
+    "loading": "Loading history...",
+    "fetchError": "Failed to fetch patient history",
+    "empty": "No previous visits found",
+    "visitNumberPrefix": "Visit #",
+    "diagnosisLabel": "Diagnosis:",
+    "treatmentLabel": "Treatment:"
+  },
+
+  "activePrescriptions": {
+    "title": "Recent Prescriptions (Last 90 days)",
+    "empty": "No active prescriptions",
+    "prescribedPrefix": "Prescribed: ",
+    "daysLeft": "days left",
+    "endsToday": "Ends today",
+    "expired": "Expired",
+    "durationLabel": "Duration:",
+    "instructionsLabel": "Instructions:",
+    "reasonLabel": "Reason:",
+    "endingSoonAlert": "Medication ending soon - consider refill if needed",
+    "endedAlert": "Medication period has ended"
+  },
+
+  "pendingInvestigations": {
+    "pendingTitle": "Pending Investigations",
+    "completedTitle": "Recent Results Available",
+    "empty": "No recent investigations",
+    "requestedPrefix": "Requested: ",
+    "scheduledPrefix": "Scheduled: ",
+    "instructionsLabel": "Instructions:",
+    "statAlert": "STAT - Immediate attention required",
+    "resultsReady": "Results Ready",
+    "completedPrefix": "Completed: ",
+    "resultsLabel": "Results:",
+    "interpretationLabel": "Interpretation:",
+    "viewResultFile": "View Result File",
+    "performedByPrefix": "Performed by: "
+  },
+
+  "followUp": {
+    "firstVisit": "First Visit - No previous medical history",
+    "scheduledTitle": "✓ Scheduled Follow-up Visit",
+    "returnTitle": "Return Visit",
+    "daysSince": "days since last visit",
+    "lastVisitLabel": "Last Visit:",
+    "scheduledForLabel": "Follow-up was scheduled for:",
+    "previousDiagnosisLabel": "Previous Diagnosis:",
+    "previousTreatmentLabel": "Previous Treatment:",
+    "previousNotesLabel": "Previous Notes:",
+    "viewHistory": "View Full History"
+  },
+
+  "medicineForm": {
+    "updateSuccess": "Medicine updated successfully",
+    "addSuccess": "Medicine added successfully",
+    "saveError": "Failed to save medicine",
+    "editTitle": "Edit Herbal Drug",
+    "addTitle": "Add Herbal Drug",
+    "herbalModeHint": "Only drug name is required",
+    "standardModeHint": "Standard mode with all fields",
+    "modeToggleLabel": "Herbal Drug Mode",
+    "nameLabel": "Drug Name *",
+    "nameRequired": "Drug name is required",
+    "namePlaceholder": "e.g. Garlic Extract, Black Seed Oil...",
+    "autoCodeHint": "A medicine code will be auto-generated when saved",
+    "codeLabel": "Medicine Code",
+    "codePlaceholder": "Leave empty to auto-generate",
+    "codeAutoHint": "Auto-generated if left empty",
+    "genericNameLabel": "Generic Name",
+    "genericNamePlaceholder": "e.g. Allium sativum",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "e.g. Herbal Supplement",
+    "strengthLabel": "Strength",
+    "strengthPlaceholder": "e.g. 500mg",
+    "dosageFormLabel": "Dosage Form",
+    "dosageFormPlaceholder": "Select Form",
+    "manufacturerLabel": "Manufacturer",
+    "supplierLabel": "Supplier",
+    "batchNumberLabel": "Batch Number",
+    "storageLocationLabel": "Storage Location",
+    "availableQuantityLabel": "Available Quantity",
+    "minimumStockLabel": "Minimum Stock",
+    "purchasePriceLabel": "Purchase Price",
+    "sellingPriceLabel": "Selling Price",
+    "expiryDateLabel": "Expiry Date",
+    "requiresPrescriptionLabel": "Requires Prescription",
+    "optionalDetails": "Optional Details",
+    "optionalDetailsHint": "(category, strength, stock, price, notes...)",
+    "instructionsLabel": "Instructions",
+    "instructionsPlaceholder": "How to prepare or use this herbal medicine...",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Additional notes...",
+    "instructionsPlaceholderAlt": "How to prepare or use this medicine...",
+    "sideEffectsLabel": "Side Effects",
+    "contraindicationsLabel": "Contraindications",
+    "saving": "Saving...",
+    "updateButton": "Update Drug",
+    "addButton": "Add Drug",
+    "dosageForm": {
+      "tablet": "Tablet",
+      "capsule": "Capsule",
+      "syrup": "Syrup",
+      "powder": "Powder",
+      "extract": "Extract",
+      "tea": "Tea",
+      "oil": "Oil",
+      "cream": "Cream",
+      "tincture": "Tincture"
+    }
+  },
+
+  "visitForm": {
+    "fetchError": "Failed to fetch patients",
+    "createError": "Failed to create visit",
+    "title": "Create New Visit",
+    "patientLabel": "Patient *",
+    "patientRequired": "Patient is required",
+    "patientPlaceholder": "Select patient",
+    "chiefComplaintLabel": "Chief Complaint",
+    "chiefComplaintPlaceholder": "Describe the patient's main complaint...",
+    "visitDateLabel": "Visit Date",
+    "arrivalTimeLabel": "Arrival Time *",
+    "arrivalTimeRequired": "Arrival time is required",
+    "creating": "Creating...",
+    "createButton": "Create Visit",
+    "scheduleTitle": "Schedule Appointment",
+    "mode": {
+      "walkIn": "Walk-in Now",
+      "appointment": "Schedule Ahead"
+    },
+    "appointmentDateLabel": "Appointment Date",
+    "scheduledTimeLabel": "Appointment Time",
+    "scheduledTimeRequired": "Appointment time is required",
+    "appointmentHint": "The patient will appear on the doctor's queue only after front desk checks them in on the appointment date.",
+    "scheduleButton": "Schedule Appointment",
+    "scheduleSuccess": "Appointment scheduled successfully",
+    "createSuccess": "Visit created successfully"
+  },
+
+  "clinicManagement": {
+    "title": "Clinic Management",
+    "doctors": "Doctors",
+    "doctorsDesc": "Manage doctors here...",
+    "patients": "Patients",
+    "patientsDesc": "Manage patients here...",
+    "appointments": "Appointments",
+    "appointmentsDesc": "Manage appointments..."
+  },
+
+  "blogForm": {
+    "editTitle": "Edit Post",
+    "addTitle": "Add New Post",
+    "titlePlaceholder": "Title",
+    "mediaTypeLabel": "Media Type:",
+    "mediaTypeImage": "Image",
+    "mediaTypeVideo": "Video",
+    "previewAlt": "Preview",
+    "authorPlaceholder": "Author",
+    "descPlaceholder": "Description",
+    "saveButton": "Save Changes",
+    "addButton": "Add Post"
+  },
+
+  "blogCard": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+
+  "roles": {
+    "super_admin": "Super Admin",
+    "admin": "Admin",
+    "doctor": "Doctor",
+    "data_clerk": "Data Clerk",
+    "cashier": "Cashier",
+    "staff_manager": "Staff Manager"
+  },
+
+  "staff": {
+    "title": "Staff Management",
+    "subtitle": "Create, edit and manage staff accounts",
+    "addButton": "Add Staff",
+    "searchPlaceholder": "Search by name, email or phone...",
+    "empty": "No staff members found",
+    "loadError": "Failed to load staff",
+    "you": "you",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "deleteConfirm": "Delete {{name}}? Their account will be deactivated.",
+    "stats": {
+      "total": "Total Staff",
+      "active": "Active",
+      "inactive": "Inactive",
+      "doctors": "Doctors"
+    },
+    "filter": {
+      "allRoles": "All roles",
+      "allStatuses": "All statuses"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "suspended": "Suspended"
+    },
+    "table": {
+      "name": "Name",
+      "contact": "Contact",
+      "role": "Role",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "mismatch": "Passwords do not match",
+      "warning": "This signs the staff member out of all sessions. Share the new password with them securely.",
+      "submit": "Reset Password",
+      "success": "Password reset successfully",
+      "error": "Failed to reset password"
+    },
+    "toast": {
+      "deleteSuccess": "Staff deleted successfully",
+      "deleteError": "Failed to delete staff",
+      "activateSuccess": "Staff activated",
+      "activateError": "Failed to activate staff",
+      "deactivateSuccess": "Staff deactivated",
+      "deactivateError": "Failed to deactivate staff"
+    }
+  },
+
+  "staffForm": {
+    "addTitle": "Add Staff Member",
+    "editTitle": "Edit Staff Member",
+    "subtitle": "Account details and access role",
+    "firstNameLabel": "First Name",
+    "firstNameRequired": "First name is required",
+    "lastNameLabel": "Last Name",
+    "lastNameRequired": "Last name is required",
+    "emailLabel": "Email",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Enter a valid email address",
+    "phoneLabel": "Phone",
+    "phoneRequired": "Phone number is required",
+    "phonePlaceholder": "+251...",
+    "passwordLabel": "Password",
+    "passwordRequired": "Password is required",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordWeak": "Password must include an uppercase letter, a lowercase letter and a number",
+    "passwordHint": "At least 8 characters, with an uppercase letter, a lowercase letter and a number",
+    "roleLabel": "Role",
+    "statusLabel": "Status",
+    "departmentLabel": "Department",
+    "specializationLabel": "Specialization",
+    "specializationPlaceholder": "e.g. Herbal Medicine",
+    "licenseNumberLabel": "License Number",
+    "addressLabel": "Address",
+    "createButton": "Create Staff",
+    "updateButton": "Save Changes",
+    "createSuccess": "Staff created successfully",
+    "updateSuccess": "Staff updated successfully",
+    "saveError": "Failed to save staff member"
+  },
+
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Clinic configuration and preferences",
+    "readOnlyNotice": "You can view these settings, but only a super admin can change them.",
+    "saveButton": "Save Settings",
+    "saveSuccess": "Settings saved successfully",
+    "saveError": "Failed to save settings",
+    "loadError": "Failed to load settings",
+    "clinic": {
+      "title": "Clinic Information",
+      "description": "Shown on receipts, cards and printed documents",
+      "name": "Clinic Name",
+      "phone": "Phone",
+      "email": "Email",
+      "emailInvalid": "Enter a valid email address",
+      "address": "Address",
+      "currency": "Currency"
+    },
+    "schedule": {
+      "title": "Working Hours",
+      "description": "When the clinic is open for visits",
+      "opensAt": "Opens at",
+      "closesAt": "Closes at",
+      "timezone": "Timezone",
+      "appointmentDuration": "Appointment Duration",
+      "minutesHint": "In minutes",
+      "workingDays": "Working Days"
+    },
+    "weekdays": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "operations": {
+      "title": "Operations",
+      "description": "Inventory alerts, formats and notifications",
+      "lowStockThreshold": "Low Stock Threshold",
+      "lowStockHint": "Alert when a medicine falls to this quantity",
+      "dateFormat": "Date Format",
+      "timeFormat": "Time Format",
+      "hour24": "24-hour",
+      "hour12": "12-hour",
+      "emailNotifications": "Enable email notifications",
+      "smsNotifications": "Enable SMS notifications"
+    },
+    "legal": {
+      "title": "Legal",
+      "description": "Terms and privacy text shown to patients",
+      "terms": "Terms and Conditions",
+      "privacy": "Privacy Policy"
+    },
+    "business": {
+      "title": "Business Information",
+      "description": "Shown on the public website's About section",
+      "logo": "Logo",
+      "uploadLogo": "Upload Logo",
+      "logoUploadSuccess": "Logo uploaded successfully",
+      "logoUploadError": "Failed to upload logo",
+      "tagline": "Tagline",
+      "mission": "Mission",
+      "vision": "Vision",
+      "aboutText": "About Text",
+      "yearsExperience": "Years of Experience",
+      "patientsServed": "Patients Served",
+      "treatmentsOffered": "Treatments Offered"
+    },
+    "contact": {
+      "title": "Contact & Social",
+      "description": "Public website contact details and social links",
+      "whatsapp": "WhatsApp Number",
+      "facebook": "Facebook URL",
+      "instagram": "Instagram URL",
+      "tiktok": "TikTok URL",
+      "twitter": "X (Twitter) URL",
+      "googleMaps": "Google Maps Embed URL",
+      "googleMapsHint": "Paste the src URL from Google Maps' \"Embed a map\" share option"
+    }
+  },
+
+  "contentAdmin": {
+    "title": "Website Content",
+    "subtitle": "Manage everything shown on the public website — no code changes needed",
+    "tabs": {
+      "testimonials": "Testimonials",
+      "successStories": "Success Stories",
+      "faqs": "FAQs",
+      "teamMembers": "Team",
+      "partners": "Partners",
+      "banners": "Banners",
+      "services": "Services"
+    },
+    "common": {
+      "deleteConfirm": "Delete \"{{label}}\"? This cannot be undone.",
+      "deleteSuccess": "Deleted successfully",
+      "deleteError": "Failed to delete",
+      "statusUpdateSuccess": "Status updated",
+      "statusUpdateError": "Failed to update status",
+      "reorderError": "Failed to reorder",
+      "allStatuses": "All statuses",
+      "published": "Published",
+      "draft": "Draft",
+      "loadError": "Failed to load",
+      "empty": "Nothing here yet — click Add to create the first one",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "uploadPhoto": "Upload Photo",
+      "uploadImage": "Upload Image",
+      "uploadLogo": "Upload Logo",
+      "requiredField": "This field is required",
+      "status": "Status"
+    },
+    "testimonials": {
+      "title": "Testimonials",
+      "subtitle": "Client testimonials shown on the homepage",
+      "addButton": "Add Testimonial",
+      "searchPlaceholder": "Search by client or company...",
+      "addTitle": "Add Testimonial",
+      "editTitle": "Edit Testimonial",
+      "clientName": "Client Name",
+      "company": "Company",
+      "rating": "Rating",
+      "role": "Role",
+      "text": "Testimonial",
+      "createSuccess": "Testimonial added",
+      "updateSuccess": "Testimonial updated",
+      "saveError": "Failed to save testimonial"
+    },
+    "successStories": {
+      "title": "Success Stories",
+      "subtitle": "Client success stories and case studies",
+      "addButton": "Add Story",
+      "searchPlaceholder": "Search by category...",
+      "addTitle": "Add Success Story",
+      "editTitle": "Edit Success Story",
+      "storyTitle": "Title",
+      "description": "Description",
+      "projectDetails": "Project Details",
+      "outcomes": "Outcomes",
+      "category": "Category",
+      "featured": "Featured",
+      "images": "Images",
+      "createSuccess": "Success story added",
+      "updateSuccess": "Success story updated",
+      "saveError": "Failed to save success story"
+    },
+    "faqs": {
+      "title": "FAQs",
+      "subtitle": "Frequently asked questions shown on the homepage",
+      "addButton": "Add FAQ",
+      "searchPlaceholder": "Search by category...",
+      "addTitle": "Add FAQ",
+      "editTitle": "Edit FAQ",
+      "question": "Question",
+      "answer": "Answer",
+      "category": "Category",
+      "createSuccess": "FAQ added",
+      "updateSuccess": "FAQ updated",
+      "saveError": "Failed to save FAQ"
+    },
+    "teamMembers": {
+      "title": "Team Members",
+      "subtitle": "Staff profiles shown on the homepage",
+      "addButton": "Add Team Member",
+      "searchPlaceholder": "Search by name...",
+      "addTitle": "Add Team Member",
+      "editTitle": "Edit Team Member",
+      "name": "Name",
+      "role": "Role / Title",
+      "bio": "Bio",
+      "linkedin": "LinkedIn URL",
+      "twitter": "X (Twitter) URL",
+      "facebook": "Facebook URL",
+      "createSuccess": "Team member added",
+      "updateSuccess": "Team member updated",
+      "saveError": "Failed to save team member"
+    },
+    "partners": {
+      "title": "Partners",
+      "subtitle": "Partner logos shown on the homepage",
+      "addButton": "Add Partner",
+      "searchPlaceholder": "Search by name...",
+      "addTitle": "Add Partner",
+      "editTitle": "Edit Partner",
+      "name": "Name",
+      "websiteUrl": "Website URL",
+      "createSuccess": "Partner added",
+      "updateSuccess": "Partner updated",
+      "saveError": "Failed to save partner"
+    },
+    "banners": {
+      "title": "Banners",
+      "subtitle": "Promotional banners shown on the homepage",
+      "addButton": "Add Banner",
+      "addTitle": "Add Banner",
+      "editTitle": "Edit Banner",
+      "bannerTitle": "Title",
+      "subtitleLabel": "Subtitle",
+      "ctaText": "Button Text",
+      "ctaLink": "Button Link",
+      "linkToBookingForm": "Link to booking form",
+      "linkToBookingFormHint": "The button will open the \"Book Appointment\" form instead of navigating anywhere.",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "createSuccess": "Banner added",
+      "updateSuccess": "Banner updated",
+      "saveError": "Failed to save banner"
+    },
+    "services": {
+      "title": "Services",
+      "subtitle": "Services listed on the homepage",
+      "addButton": "Add Service",
+      "addTitle": "Add Service",
+      "editTitle": "Edit Service",
+      "icon": "Icon (emoji)",
+      "serviceTitle": "Title",
+      "description": "Description",
+      "features": "Features (one per line)",
+      "createSuccess": "Service added",
+      "updateSuccess": "Service updated",
+      "saveError": "Failed to save service"
+    }
+  },
+
+  "booking": {
+    "navCta": "Book Appointment",
+    "title": "Book an Appointment",
+    "subtitle": "Tell us a little about you and when you'd like to visit — we'll reach out to confirm.",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "email": "Email (optional)",
+    "preferredDate": "Preferred Date",
+    "preferredTime": "Preferred Time",
+    "timeAny": "Any time",
+    "timeMorning": "Morning",
+    "timeAfternoon": "Afternoon",
+    "timeEvening": "Evening",
+    "reason": "Reason for Visit (optional)",
+    "requiredField": "This field is required",
+    "submit": "Request Appointment",
+    "submitting": "Submitting...",
+    "submitError": "Something went wrong — please try again.",
+    "successTitle": "Request Received!",
+    "successMessage": "Thank you — our team will contact you shortly to confirm your appointment."
+  },
+
+  "bookingRequests": {
+    "title": "Booking Requests",
+    "subtitle": "Appointment requests submitted from the website",
+    "searchPlaceholder": "Search by name, phone, or email...",
+    "allStatuses": "All statuses",
+    "status": {
+      "pending": "Pending",
+      "contacted": "Contacted",
+      "confirmed": "Confirmed",
+      "declined": "Declined",
+      "converted": "Converted"
+    },
+    "time": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening"
+    },
+    "markContacted": "Mark Contacted",
+    "convert": "Convert to Visit",
+    "decline": "Decline",
+    "statusUpdateSuccess": "Status updated",
+    "statusUpdateError": "Failed to update status",
+    "loadError": "Failed to load booking requests",
+    "empty": "No booking requests yet"
+  },
+
+  "appointments": {
+    "title": "Appointments",
+    "subtitle": "Schedule and check in upcoming patient appointments",
+    "newButton": "New Appointment",
+    "searchPlaceholder": "Search by patient name, ID or phone...",
+    "loadError": "Failed to load appointments",
+    "empty": "No upcoming appointments",
+    "emptyHint": "Scheduled appointments will appear here",
+    "checkIn": "Check In",
+    "checkInDisabledHint": "Only available on the appointment's own date",
+    "cancel": "Cancel appointment",
+    "cancelConfirm": "Cancel this appointment?",
+    "dateGroup": {
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "appointment": "appointment",
+      "appointments": "appointments"
+    },
+    "toast": {
+      "checkInSuccess": "{{name}} checked in",
+      "checkInError": "Failed to check in patient",
+      "cancelSuccess": "Appointment cancelled",
+      "cancelError": "Failed to cancel appointment"
+    }
+  },
+
+  "patientRecordSidebar": {
+    "title": "Patient File Drawer",
+    "idPrefix": "ID:",
+    "cardPrefix": "Card:",
+    "tabs": {
+      "recordData": "Record Data",
+      "attachments": "Attachments",
+      "visitHistory": "Visit History"
+    },
+    "clinicalInfoTitle": "Clinical & Demographics Info",
+    "viewMode": "View Mode",
+    "editRecord": "Edit Record",
+    "firstNameLabel": "First Name",
+    "lastNameLabel": "Last Name",
+    "ageLabel": "Age",
+    "phoneLabel": "Phone Number",
+    "emailLabel": "Email Address",
+    "allergiesLabel": "Allergies (comma separated)",
+    "allergiesPlaceholder": "e.g. Penicillin, Peanuts",
+    "chronicLabel": "Chronic Conditions (comma separated)",
+    "chronicPlaceholder": "e.g. Hypertension, Diabetes",
+    "maritalStatusLabel": "Marital Status",
+    "notApplicable": "N/A",
+    "occupationLabel": "Occupation",
+    "addressLabel": "Address Detail",
+    "saveButton": "Save Patient Record",
+    "fullNameLabel": "Full Name",
+    "genderAgeLabel": "Gender & Age",
+    "yearsOldSuffix": "years old",
+    "addressViewLabel": "Address",
+    "allergiesPrefix": "Allergies:",
+    "chronicDiseasesPrefix": "Chronic Diseases:",
+    "uploadTitle": "Upload Lab Reports or Files",
+    "uploadHint": "Allows image files (JPEG, PNG) or PDFs up to 5MB",
+    "uploadedFilesTitle": "Uploaded Files",
+    "noFilesUploaded": "No files uploaded yet for this patient",
+    "uploadedOnPrefix": "Uploaded on",
+    "viewFileTitle": "View File",
+    "deleteFileTitle": "Delete File",
+    "visitPrefix": "Visit #",
+    "chiefComplaintLabel": "Chief Complaint",
+    "diagnosisLabel": "Diagnosis",
+    "treatmentPlanLabel": "Treatment Plan",
+    "noHistoryAvailable": "No previous visit history available",
+    "toast": {
+      "updateSuccess": "Patient record updated successfully",
+      "updateError": "Failed to update record",
+      "uploadingFile": "Uploading file...",
+      "fileAttached": "File attached successfully",
+      "uploadFailed": "Failed to upload file",
+      "deleteFileConfirm": "Are you sure you want to delete this file?",
+      "fileDeleted": "File deleted successfully",
+      "deleteFileFailed": "Failed to delete file"
+    }
+  }
+}

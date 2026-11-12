@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/api_client.dart';
 import '../../core/config.dart';
 import '../../data/clinic_api.dart';
@@ -59,7 +60,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
     setState(() => _showErrors = true);
     final valid = _form.currentState!.validate();
     if (!valid || _gender == null || (!_editing && _feeMethod == null)) {
-      Toast.error('Please complete the highlighted fields');
+      Toast.error(tr('mobile.validation.fixFields'));
       return;
     }
     setState(() => _saving = true);
@@ -80,7 +81,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
       final saved = _editing
           ? await api.updatePatient(widget.patient!.id, payload)
           : await api.createPatient(payload);
-      Toast.success(_editing ? 'Patient updated' : 'Patient registered');
+      Toast.success(_editing ? tr('patientForm.updateSuccess') : tr('patientForm.registerSuccess'));
       if (mounted) Navigator.of(context).pop(saved);
     } catch (e) {
       Toast.error(ApiException.from(e).message);
@@ -90,14 +91,14 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
   }
 
   String? _required(String? v, String label) =>
-      (v ?? '').trim().isEmpty ? '$label is required' : null;
+      (v ?? '').trim().isEmpty ? label : null;
 
   @override
   Widget build(BuildContext context) {
     final p = context.palette;
     return BackdropScaffold(
       appBar: AppBar(
-        title: Text(_editing ? 'Edit patient' : 'Register patient'),
+        title: Text(_editing ? tr('patientForm.editTitle') : tr('patientForm.registerTitle')),
       ),
       body: Form(
         key: _form,
@@ -117,7 +118,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Pre-filled from a website booking request. Complete the remaining details.',
+                        tr('patientForm.fromBookingNotice'),
                         style: TextStyle(color: p.warning, fontWeight: FontWeight.w600),
                       ),
                     ),
@@ -131,50 +132,50 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SectionTitle('Personal information',
+                  SectionTitle(tr('patientForm.personalInfoTitle'),
                       icon: Icons.person_rounded),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: FieldLabel('First name',
+                        child: FieldLabel(trl('patientForm.firstNameLabel'),
                             child: TextFormField(
                               controller: _first,
                               textCapitalization: TextCapitalization.words,
                               textInputAction: TextInputAction.next,
-                              validator: (v) => _required(v, 'First name'),
+                              validator: (v) => _required(v, tr('patientForm.firstNameRequired')),
                             )),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: FieldLabel('Last name',
+                        child: FieldLabel(trl('patientForm.lastNameLabel'),
                             child: TextFormField(
                               controller: _last,
                               textCapitalization: TextCapitalization.words,
                               textInputAction: TextInputAction.next,
-                              validator: (v) => _required(v, 'Last name'),
+                              validator: (v) => _required(v, tr('patientForm.lastNameRequired')),
                             )),
                       ),
                     ],
                   ),
                   FieldLabel(
-                    'Gender',
+                    trl('patientForm.genderLabel'),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Segmented<String?>(
                           value: _gender,
                           onChanged: (v) => setState(() => _gender = v),
-                          items: const [
-                            ('male', 'Male', Icons.male_rounded),
-                            ('female', 'Female', Icons.female_rounded),
-                            ('other', 'Other', null),
+                          items: [
+                            ('male', tr('patientForm.genderMale'), Icons.male_rounded),
+                            ('female', tr('patientForm.genderFemale'), Icons.female_rounded),
+                            ('other', tr('patientForm.genderOther'), null),
                           ],
                         ),
                         if (_showErrors && _gender == null)
                           Padding(
                             padding: const EdgeInsets.only(left: 12, top: 6),
-                            child: Text('Gender is required',
+                            child: Text(tr('patientForm.genderRequired'),
                                 style: TextStyle(color: p.danger, fontSize: 12)),
                           ),
                       ],
@@ -185,7 +186,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                     children: [
                       SizedBox(
                         width: 110,
-                        child: FieldLabel('Age',
+                        child: FieldLabel(trl('patientForm.ageLabel'),
                             child: TextFormField(
                               controller: _age,
                               keyboardType: TextInputType.number,
@@ -197,22 +198,22 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                               decoration: const InputDecoration(suffixText: 'yrs'),
                               validator: (v) {
                                 final n = int.tryParse(v ?? '');
-                                if (n == null) return 'Required';
-                                if (n < 0 || n > 150) return 'Invalid';
+                                if (n == null) return tr('patientForm.ageRequired');
+                                if (n < 0 || n > 150) return tr('patientForm.ageInvalid');
                                 return null;
                               },
                             )),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: FieldLabel('Phone',
+                        child: FieldLabel(trl('patientForm.phoneLabel'),
                             child: TextFormField(
                               controller: _phone,
                               keyboardType: TextInputType.phone,
                               textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                   prefixIcon: Icon(Icons.phone_rounded)),
-                              validator: (v) => _required(v, 'Phone'),
+                              validator: (v) => _required(v, tr('patientForm.phoneRequired')),
                             )),
                       ),
                     ],
@@ -226,11 +227,11 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SectionTitle('Address', icon: Icons.place_rounded),
+                  SectionTitle(tr('patientForm.addressTitle'), icon: Icons.place_rounded),
                   Row(
                     children: [
                       Expanded(
-                        child: FieldLabel('City',
+                        child: FieldLabel(tr('patientForm.cityLabel'),
                             optional: true,
                             child: TextFormField(
                               controller: _city,
@@ -240,7 +241,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: FieldLabel('Woreda',
+                        child: FieldLabel(tr('patientForm.woredaLabel'),
                             optional: true,
                             child: TextFormField(
                               controller: _woreda,
@@ -259,7 +260,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SectionTitle('Registration fee',
+                    SectionTitle(tr('patientForm.registrationFeeTitle'),
                         icon: Icons.receipt_long_rounded),
                     Container(
                       width: double.infinity,
@@ -275,7 +276,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: Text('One-time fee, collected at registration',
+                            child: Text(tr('mobile.patient.feeHint'),
                                 style: context.text.bodyMedium),
                           ),
                           Text('${AppConfig.registrationFee} ${AppConfig.currency}',
@@ -284,7 +285,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                       ),
                     ),
                     FieldLabel(
-                      'Payment method',
+                      trl('patientForm.registrationFeeMethodLabel'),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -292,10 +293,10 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                             spacing: 8,
                             runSpacing: 8,
                             children: [
-                              for (final (v, l, i) in const [
-                                ('cash', 'Cash', Icons.payments_rounded),
-                                ('transfer', 'Transfer', Icons.account_balance_rounded),
-                                ('telebirr', 'Telebirr', Icons.phone_iphone_rounded),
+                              for (final (v, l, i) in [
+                                ('cash', tr('patientForm.registrationFeeMethodCash'), Icons.payments_rounded),
+                                ('transfer', tr('patientForm.registrationFeeMethodTransfer'), Icons.account_balance_rounded),
+                                ('telebirr', tr('patientForm.registrationFeeMethodTelebirr'), Icons.phone_iphone_rounded),
                               ])
                                 ChoicePill(
                                   label: l,
@@ -308,14 +309,14 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
                           if (_showErrors && _feeMethod == null)
                             Padding(
                               padding: const EdgeInsets.only(left: 12, top: 6),
-                              child: Text('Choose how the fee was paid',
+                              child: Text(tr('patientForm.registrationFeeMethodRequired'),
                                   style: TextStyle(color: p.danger, fontSize: 12)),
                             ),
                         ],
                       ),
                     ),
                     if (_feeMethod != null && _feeMethod != 'cash')
-                      FieldLabel('Transaction ID',
+                      FieldLabel(tr('mobile.common.transactionId'),
                           optional: true,
                           child: TextFormField(controller: _txn)),
                   ],
@@ -328,7 +329,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
       bottomBar: SafeArea(
         minimum: const EdgeInsets.fromLTRB(20, 8, 20, 16),
         child: GradientButton(
-          label: _editing ? 'Save changes' : 'Register patient',
+          label: _editing ? tr('patientForm.updateButton') : tr('patientForm.registerButton'),
           icon: _editing ? Icons.check_rounded : Icons.person_add_alt_1_rounded,
           loading: _saving,
           onPressed: _save,

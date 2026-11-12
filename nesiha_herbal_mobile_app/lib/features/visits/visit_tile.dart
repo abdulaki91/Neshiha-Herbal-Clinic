@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/format.dart';
 import '../../models/models.dart';
 import '../../theme/app_theme.dart';
@@ -32,12 +33,12 @@ class VisitTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(patient?.fullName ?? 'Unknown patient',
+                    Text(patient?.fullName ?? tr('common.patient'),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: context.text.titleMedium?.copyWith(color: p.ink)),
                     const SizedBox(height: 2),
-                    Text('Visit #${visit.visitNumber}',
+                    Text('${tr('common.visitNumber')}${visit.visitNumber}',
                         style: context.text.bodySmall),
                   ],
                 ),
@@ -69,7 +70,7 @@ class VisitTile extends StatelessWidget {
                 Icon(Icons.medical_services_outlined, size: 14, color: p.inkMuted),
                 const SizedBox(width: 5),
                 Flexible(
-                  child: Text('Dr. ${visit.doctor!.fullName}',
+                  child: Text('${tr('common.doctorPrefix')} ${visit.doctor!.fullName}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: context.text.bodySmall),
@@ -109,7 +110,7 @@ class VisitHistoryCard extends StatelessWidget {
                     Text(
                       [
                         '#${visit.visitNumber}',
-                        if (visit.doctor != null) 'Dr. ${visit.doctor!.fullName}',
+                        if (visit.doctor != null) '${tr('common.doctorPrefix')} ${visit.doctor!.fullName}',
                       ].join(' · '),
                       style: context.text.bodySmall,
                     ),
@@ -122,7 +123,7 @@ class VisitHistoryCard extends StatelessWidget {
           ),
           if (visit.chiefComplaint != null) ...[
             const SizedBox(height: 12),
-            _Labelled('Complaint', visit.chiefComplaint!),
+            _Labelled(trl('patientDetail.visitHistory.complaint'), visit.chiefComplaint!),
           ],
           if (visit.diagnosis.isNotEmpty) ...[
             const SizedBox(height: 10),
@@ -137,7 +138,7 @@ class VisitHistoryCard extends StatelessWidget {
           ],
           if (visit.treatmentPlan != null) ...[
             const SizedBox(height: 10),
-            _Labelled('Treatment', visit.treatmentPlan!),
+            _Labelled(trl('patientDetail.visitHistory.treatment'), visit.treatmentPlan!),
           ],
         ],
       ),

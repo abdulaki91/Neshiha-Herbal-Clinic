@@ -1,0 +1,1857 @@
+{
+  "common": {
+    "loading": "በመጫን ላይ...",
+    "error": "ስህተት ተከስቷል",
+    "submit": "አስገባ",
+    "cancel": "ይቅር",
+    "save": "አስቀምጥ",
+    "edit": "አስተካክል",
+    "delete": "አጥፋ",
+    "search": "ፈልግ",
+    "close": "ዝጋ",
+    "back": "ወደ ኋላ",
+    "next": "ቀጣይ",
+    "previous": "ያለፈው",
+    "view": "እይታ",
+    "print": "አትም",
+    "all": "ሁሉም",
+    "total": "ጠቅላላ",
+    "patient": "ታካሚ",
+    "patientId": "መለያ",
+    "doctor": "ሐኪም",
+    "doctorPrefix": "ዶ/ር",
+    "amount": "መጠን",
+    "method": "ዘዴ",
+    "date": "ቀን",
+    "dateAndTime": "ቀን እና ሰዓት",
+    "cashier": "ገንዘብ ተቀባይ",
+    "visitNumber": "ጉብኝት #",
+    "paymentNumber": "ክፍያ #",
+    "phone": "ስልክ",
+    "age": "ዕድሜ",
+    "notAvailable": "የለም",
+    "instructions": "መመሪያዎች",
+    "quantityAbbr": "ብዛት",
+    "by": "በ",
+    "saving": "በማስቀመጥ ላይ...",
+    "creating": "በመፍጠር ላይ...",
+    "currency": {
+      "etb": "ብር"
+    },
+    "pagination": {
+      "page": "ገጽ",
+      "of": "ከ"
+    },
+    "ageUnit": {
+      "years": "ዓመታት"
+    }
+  },
+  "navigation": {
+    "home": "ዋና ገጽ",
+    "about": "ስለ እኛ",
+    "services": "አገልግሎቶች",
+    "testimonials": "የደንበኞች አስተያየት",
+    "contact": "ያግኙን",
+    "blog": "ጦማር",
+    "team": "ቡድን",
+    "faq": "ተደጋጋሚ ጥያቄዎች"
+  },
+  "header": {
+    "title": "ነስሃ እፅዋት ሕክምና ክሊኒክ",
+    "tagline": "የተፈጥሮ ሕክምና መፍትሔዎች",
+    "language": "ቋንቋ"
+  },
+  "hero": {
+    "title": "ለጤናማ ህይወት",
+    "subtitle": "የተፈጥሮ ፈውስ",
+    "description": "በነስሃ እፅዋት ሕክምና ክሊኒክ፣ የተፈጥሮ ፈውስ ችሎታዎን ለማጎልበት ባህላዊ ሕክምናዎችን ከዘመናዊ አሰራሮች ጋር እናዋህዳለን።",
+    "cta": "ቀጠሮ ያስይዙ",
+    "learnMore": "የበለጠ ይወቁ",
+    "traditionalRemedies": "ባህላዊ ሕክምናዎች",
+    "modernPractices": "ዘመናዊ አሰራሮች",
+    "personalizedCare": "ግላዊ እንክብካቤ"
+  },
+  "services": {
+    "initialAssessment": "የመጀመሪያ ግምገማ",
+    "customFormulations": "ብጁ ቀመሮች",
+    "followUpCare": "የክትትል እንክብካቤ",
+    "lifestyleGuidance": "የአኗኗር ዘይቤ መመሪያ",
+    "immuneSupport": "የበሽታ መከላከል ድጋፍ",
+    "detoxPrograms": "የሰውነት ማፅዳት ፕሮግራሞች",
+    "energyEnhancement": "የኃይል ማጎልበቻ",
+    "stressManagement": "የጭንቀት አያያዝ",
+    "treatment": "የእፅዋት ሕክምና",
+    "herbalMedicine": "የእፅዋት መድኃኒት",
+    "acupuncture": "የቁርጥማት መርፌ",
+    "cuppingTherapy": "ኩፒንግ ቴራፒ",
+    "moxibustion": "የሞክሲባስተር ሕክምና",
+    "consultationDesc": "ለጤና ፍላጎቶችዎ ተስማሚ የእፅዋት ሕክምናዎችን ለመምረጥ የሚረዱዎት ግላዊ ምክሮች።",
+    "wellnessDesc": "የበሽታ መከላከልን እና ኃይልን ለማጎልበት እንዲሁም የአዕምሮ እና የአካል ሚዛን ለማምጣት የተቀናጁ ፕሮግራሞች።",
+    "treatmentDesc": "የእፅዋት መድኃኒቶችን እና የተፈጥሮ ፈውስ ዘዴዎችን በመጠቀም ውጤታማ ሕክምናዎች።",
+    "consultation": "የእፅዋት ምክክር",
+    "wellness": "የጤና ፕሮግራም",
+    "title": "አገልግሎቶቻችን",
+    "subtitle": "ለጤንነትዎ የተሟላ የእፅዋት ሕክምና",
+    "desc": "የተወሰኑ የጤና ችግሮችዎን ለመፍታት እና ብጁ የሕክምና እቅድ ለማዘጋጀት ከእኛ እውቅና ካላቸው ባለሙያዎች ጋር ግላዊ የእፅዋት ምክር ያግኙ።",
+    "therapeuticMassage": "የሕክምና ማሳጅ",
+    "therapeuticMassageDesc": "ሰውነትንና አዕምሮን ለማረጋጋት ባህላዊ የማሳጅ ክፍለ ጊዜዎች እና የእፅዋት ዘይት ሕክምናዎች።",
+    "swedishMassage": "ስዊዲሽ ማሳጅ",
+    "deepTissue": "ጥልቅ ቲሹ ማሳጅ",
+    "herbalOilTherapy": "የእፅዋት ዘይት ሕክምና",
+    "stressRelief": "የጭንቀት ማስታገሻ",
+    "personalizedHealthPlans": "ግላዊ የጤና ዕቅዶች",
+    "personalizedHealthPlansDesc": "አመጋገብን፣ የአካል ብቃት እንቅስቃሴን፣ የእፅዋት ማሟያዎችን እና ክትትልን የሚያካትቱ ብጁ ዕቅዶች።",
+    "nutritionGuidance": "የአመጋገብ መመሪያ",
+    "exercisePlans": "የአካል ብቃት እንቅስቃሴ ዕቅዶች",
+    "herbalSupplements": "የእፅዋት ማሟያ",
+    "progressTracking": "የሂደት ክትትል",
+    "herbalEducation": "የእፅዋት ትምህርት",
+    "herbalEducationDesc": "የተፈጥሮ ሕክምናዎችን በዕለት ተዕለት ሕይወት ውስጥ እንዴት መጠቀም እንደሚቻል የሚገልጹ አውደ ጥናቶች እና ምክሮች።",
+    "workshops": "አውደ ጥናቶች",
+    "herbIdentification": "የእፅዋት መለየት",
+    "homeRemedies": "የቤት ውስጥ ሕክምናዎች",
+    "safetyGuidelines": "የደህንነት መመሪያዎች",
+    "whatsIncluded": "የተካተቱ ጥቅሞች",
+    "ctaTitle": "የጤና ጉዞዎን ይጀምሩ",
+    "ctaDesc": "ከእኛ የእፅዋት ባለሙያዎች ጋር በመገናኘት የተፈጥሮ ፈውስ እንዴት ሊረዳዎት እንደሚችል ያግኙ።"
+  },
+  "about": {
+    "title": "ስለ እኛ",
+    "subtitle": "የተፈጥሮ ጤናዎ ታማኝ አጋር",
+    "description": "ውጤታማ እና ተፈጥሯዊ የፈውስ መፍትሄዎችን ለማቅረብ ባህላዊ የእፅዋት ጥበብን ከዘመናዊ ግንዛቤ ጋር እናዋህዳለን።",
+    "extendedDescription": "የእኛ ክሊኒክ ጥንታዊውን የእፅዋት ጥበብ ከዘመናዊ ሳይንሳዊ ምርምር ጋር በማጣመር ግላዊ የሕክምና እቅዶችን ይፈጥራል። ረዘም ላለ ጊዜ ጤና እና ሕያውነትን ለማረጋገጥ ምልክቶችን ብቻ ሳይሆን ሙሉውን ሰው ማከም እንደሚያስፈልግ እናምናለን።",
+    "experience": "የዓመታት ልምድ",
+    "patients": "ደስተኛ ታካሚዎች",
+    "treatments": "የተሳኩ ሕክምናዎች",
+    "herbalWisdom": "ባህላዊ የእፅዋት ጥበብ",
+    "herbalWisdomDesc": "በትውልዶች የተላለፈ",
+    "certifiedPractitioners": "እውቅና ያላቸው ባለሙያዎች",
+    "certifiedPractitionersDesc": "ቡድናችን ሰፊ ስልጠና እና ልምድ ካላቸው እውቅና ካላቸው የእፅዋት ሕክምና ባለሙያዎች የተውጣጣ ነው።",
+    "naturalIngredients": "ተፈጥሯዊ ንጥረ ነገሮች",
+    "naturalIngredientsDesc": "በሁሉም ሕክምናዎቻችን ውስጥ ከፍተኛ ጥራት ያላቸውን እና በሥነ ምግባር የታሰበባቸውን የተፈጥሮ ንጥረ ነገሮች ብቻ እንጠቀማለን።",
+    "holisticApproach": "ሙሉአካል አቀራረብ",
+    "holisticApproachDesc": "ዘላቂ ጤንነትን ለማረጋገጥ ምልክቶችን ብቻ ሳይሆን ዋና መንስኤዎችን በማከም ሙሉውን ሰው እንመለከታለን።",
+    "metaTitle": "About Us - Nesiha Herbal Clinic",
+    "metaDescription": "Learn about Nesiha Herbal Clinic, where traditional herbal wisdom meets modern science. Discover our certified practitioners, natural ingredients, and holistic approach.",
+    "metaKeywords": "herbal clinic, Nesiha herbal, mana qorichaa aadaa, natural remedies, holistic healing, alternative medicine, Oromia herbal clinic, Ethiopia herbal treatment"
+  },
+  "testimonials": {
+    "title": "ደንበኞቻችን ምን ይላሉ",
+    "subtitle": "የተፈጥሮ ፈውስ የውድ ደንበኞቻችንን ህይወት እንዴት እንደለወጠው ይወቁ። እውነተኛ ታሪኮች፣ የጤና ለውጥ እና እውነተኛ ደስታ።",
+    "featured": "ዋና የቪዲዮ ምስክሮች",
+    "more": "ተጨማሪ የደንበኛ ታሪኮች",
+    "videoAvailable": "የቪዲዮ ምስክርነት አለ",
+    "list": [
+      {
+        "name": "ኤማ ስ.",
+        "role": "የጤንነት ፍላጎት ያላት",
+        "text": "ነስሃ የእፅዋት ሕክምና ክሊኒክ ጤንነቴን ሙሉ በሙሉ ለውጦታል። ግላዊ የሆነው አቀራረብ እና ተፈጥሯዊ ሕክምናዎች በኃይሌ እና በአጠቃላይ ምቾቴ ላይ ትልቅ ለውጥ አምጥተዋል። አዲስ ሰው ሆኖ ይሰማኛል!"
+      },
+      {
+        "name": "ሊያም ኤል.",
+        "role": "የጤና አሰልጣኝ",
+        "text": "በነስሃ ያለውን እውቀት እና እንክብካቤ በጣም ተደንቄያለሁ። የተሟላው የጤና ፕሮግራም የጤና ግቦቼን በተፈጥሮ እንድደርስ ረድቶኛል። የእፅዋት ሕክምናዎች በሚያስደንቅ ሁኔታ ውጤታማ ናቸው!"
+      }
+    ]
+  },
+  "contact": {
+    "title": "ያግኙን",
+    "subtitle": "የፈውስ ጉዞዎን ለመጀመር ዝግጁ ነዎት?",
+    "name": "ሙሉ ስም",
+    "email": "ኢሜይል",
+    "phone": "ስልክ ቁጥር",
+    "message": "መልዕክትዎ",
+    "sendMessage": "መልዕክት ይላኩ",
+    "address": "አድራሻ",
+    "phoneLabel": "ስልክ",
+    "emailLabel": "ኢሜይል",
+    "hours": "የሥራ ሰዓት",
+    "contactInformation": "የመገናኛ መረጃ",
+    "emailAddress": "info@nesihaherbalclinic.com",
+    "phoneNumber": "(555) 123-4567",
+    "mainOffice": "ዋና ጽሕፈት ቤት",
+    "whatsapp": "ዋትሳፕ",
+    "whatsappNumber": "(555) 987-6543",
+    "quickResponse": "ፈጣን ምላሽ",
+    "streetAddress": "123 የጤና ጎዳና",
+    "cityState": "የጤና ከተማ፣ ካሊፎርኒያ 90210",
+    "businessHours": "የሥራ ሰዓት",
+    "mondayFriday": "ከሰኞ - አርብ",
+    "weekdayHours": "ከጠዋቱ 9:00 - ከምሽቱ 6:00",
+    "saturday": "ቅዳሜ",
+    "saturdayHours": "ከጠዋቱ 10:00 - ከምሽቱ 4:00",
+    "sunday": "እሁድ",
+    "closed": "ዝግ ነው",
+    "ourLocation": "የእኛ ቦታ",
+    "easyToFind": "ለማግኘት ቀላል ነው!",
+    "locationDescription": "ዋናው የጤና ጎዳና አጠገብ፣ በጤና ከተማ እምብርት ላይ እንገኛለን። ነጻ የመኪና ማቆሚያ ቦታ አለ።",
+    "needImmediateAssistance": "አስቸኳይ እርዳታ ይፈልጋሉ?",
+    "expertsReady": "የእኛ የእፅዋት ሕክምና ባለሙያዎች ዛሬ እርስዎን ለመርዳት ዝግጁ ናቸው።",
+    "scheduleConsultation": "የምክክር ቀጠሮ ያስይዙ",
+    "social": {
+      "facebook": "ፌስቡክ",
+      "instagram": "ኢንስታግራም",
+      "tiktok": "ቲክቶክ",
+      "twitter": "X (ትዊተር)"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 ነስሃ የእፅዋት ሕክምና ክሊኒክ። ሁሉም መብቶች የተጠበቁ ናቸው።",
+    "privacy": "የግላዊነት ፖሊሲ",
+    "terms": "የአገልግሎት ውሎች",
+    "quickLinks": "Quick Links"
+  },
+  "blog": {
+    "title": "የጤና እና የጤንነት ጦማር",
+    "subtitle": "ለተፈጥሮአዊ ህይወት ግንዛቤዎች እና ምክሮች",
+    "readMore": "የበለጠ ያንብቡ",
+    "publishedOn": "የታተመው በ",
+    "badge": "Our Blog",
+    "heading": "Wellness Insights",
+    "desc": "Discover expert insights, natural health tips, and the latest research in herbal medicine to support your journey to optimal wellness.",
+    "featuredBadge": "Featured",
+    "readFullArticle": "Read Full Article",
+    "filter": {
+      "all": "All"
+    },
+    "post": [
+      {
+        "title": "5 Essential Tips for a Healthier Lifestyle",
+        "desc": "Discover simple yet powerful daily practices that can transform your health and well-being naturally. From morning routines to evening habits, learn how small changes create lasting results.",
+        "category": "Wellness Tips",
+        "readTime": "5 min read",
+        "date": "March 15, 2024",
+        "author": "Dr. Sarah Johnson"
+      },
+      {
+        "title": "The Healing Power of Herbal Medicine",
+        "desc": "Explore the ancient wisdom of herbal medicine and discover how natural remedies can enhance your health. Learn about the science behind traditional healing practices and modern applications.",
+        "category": "Herbal Medicine",
+        "readTime": "7 min read",
+        "date": "March 12, 2024",
+        "author": "Dr. Ahmed Hassan"
+      },
+      {
+        "title": "Natural Detox: Cleanse Your Body Naturally",
+        "desc": "Learn about natural detoxification methods that support your body's natural cleansing processes. Discover herbs, foods, and practices that promote optimal health and vitality.",
+        "category": "Detox & Cleansing",
+        "readTime": "6 min read",
+        "date": "March 10, 2024",
+        "author": "Dr. Maria Rodriguez"
+      },
+      {
+        "title": "Stress Management Through Traditional Healing",
+        "desc": "Explore ancient stress management techniques and how they can help you find balance in today's fast-paced world. From meditation to herbal remedies, discover natural stress relief.",
+        "category": "Mental Health",
+        "readTime": "8 min read",
+        "date": "March 8, 2024",
+        "author": "Dr. James Chen"
+      },
+      {
+        "title": "Seasonal Wellness: Spring Health Guide",
+        "desc": "Embrace the energy of spring with our comprehensive guide to seasonal wellness. Learn how to align your health practices with nature's rhythms for optimal vitality.",
+        "category": "Seasonal Health",
+        "readTime": "4 min read",
+        "date": "March 5, 2024",
+        "author": "Dr. Elena Petrov"
+      },
+      {
+        "title": "The Science Behind Natural Immunity",
+        "desc": "Understand how natural remedies and lifestyle choices can strengthen your immune system. Discover evidence-based approaches to building robust health naturally.",
+        "category": "Immunity",
+        "readTime": "9 min read",
+        "date": "March 3, 2024",
+        "author": "Dr. Lisa Thompson"
+      }
+    ],
+    "newsletter": {
+      "heading": "Stay Updated",
+      "subtitle": "Get the latest wellness tips, herbal medicine insights, and health updates delivered to your inbox.",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe"
+    }
+  },
+  "sidebar": {
+    "brandName": "ነስሃ ክሊኒክ",
+    "dashboard": "ዋና ገጽ",
+    "staff": "ሰራተኞች",
+    "patients": "ታካሚዎች",
+    "visits": "ጉብኝቶች",
+    "medicines": "መድሃኒቶች",
+    "cashier": "ገንዘብ ተቀባይ",
+    "laboratory": "ላቦራቶሪ",
+    "reports": "ሪፖርቶች",
+    "settings": "ቅንብሮች",
+    "queue": "ወረፋ",
+    "logout": "ውጣ",
+    "adminPanel": "የአስተዳዳሪ ገጽ",
+    "badgeOverflow": "99+",
+    "appointments": "ቀጠሮዎች",
+    "content": "የድረ-ገጽ ይዘት",
+    "bookingRequests": "የቀጠሮ ጥያቄዎች"
+  },
+  "topbar": {
+    "theme": {
+      "toDark": "ወደ ጨለማ ገጽታ ቀይር",
+      "toLight": "ወደ ብሩህ ገጽታ ቀይር"
+    },
+    "greeting": "እንኳን ደህና መጡ, {{firstName}}!",
+    "notifications": "ማሳሰቢያዎች",
+    "markAllRead": "ሁሉንም እንደተነበበ ምልክት ያድርጉ",
+    "noNotifications": "ገና ማሳሰቢያ የለም",
+    "badgeOverflow": "99+",
+    "lang": {
+      "english": "እንግሊዝኛ",
+      "oromo": "ኦሮምኛ",
+      "amharic": "አማርኛ",
+      "arabic": "ዓረብኛ",
+      "nativeEnglish": "English",
+      "nativeOromo": "Afaan Oromoo",
+      "nativeAmharic": "አማርኛ",
+      "nativeArabic": "العربية"
+    },
+    "notification": {
+      "visitUpdated": "ጉብኝት ተዘምኗል",
+      "visitStatus": "ሁኔታ: {{status}}",
+      "newPatient": "አዲስ ታካሚ",
+      "patientRegistered": "{{firstName}} {{lastName}} ተመዝግቧል",
+      "paymentReceived": "ክፍያ ተቀብሏል",
+      "paymentAmount": "{{amount}} ብር ተከፍሏል",
+      "prescriptionAdded": "የመድሃኒት ትዕዛዝ ታክሏል",
+      "newPrescription": "አዲስ የመድሃኒት ትዕዛዝ ተፈጥሯል"
+    },
+    "time": {
+      "justNow": "አሁን",
+      "minutesAgo": "{{m}} ደቂቃ በፊት",
+      "hoursAgo": "{{h}} ሰዓት በፊት"
+    }
+  },
+  "toast": {
+    "newPatientInQueue": "አዲስ ታካሚ በወረፋ ውስጥ",
+    "patientRegistered": "አዲስ ታካሚ ተመዝግቧል: {{firstName}} {{lastName}}",
+    "newVisitCreated": "አዲስ ጉብኝት ተፈጥሯል",
+    "visitStatus": "የጉብኝት ሁኔታ: {{status}}",
+    "prescriptionAdded": "አዲስ የመድሃኒት ትዕዛዝ ለታካሚ ታክሏል",
+    "medicineDispensed": "መድሃኒት ለታካሚ ተሰጥቷል",
+    "paymentReceived": "ክፍያ ተቀብሏል: {{amount}} ብር",
+    "staffCreated": "አዲስ ሰራተኛ ታክሏል",
+    "newBookingRequest": "አዲስ የቀጠሮ ጥያቄ ከ{{name}}"
+  },
+  "login": {
+    "brandName": "ነስሃ የእፅዋት ሕክምና ክሊኒክ",
+    "brandSubtitle": "የክሊኒክ አስተዳደር ስርዓት",
+    "heading": "ግባ",
+    "label": {
+      "email": "ኢሜይል አድራሻ",
+      "password": "የይለፍ ቃል"
+    },
+    "placeholder": {
+      "email": "your.email@clinic.com",
+      "password": "••••••••"
+    },
+    "validation": {
+      "emailRequired": "ኢሜይል ያስፈልጋል",
+      "passwordRequired": "የይለፍ ቃል ያስፈልጋል"
+    },
+    "button": {
+      "submit": "ግባ",
+      "loading": "በመግባት ላይ..."
+    },
+    "demo": {
+      "heading": "የማሳያ መለያዎች:",
+      "admin": "admin@neshihaclinic.com | Admin@123",
+      "doctor": "doctor@neshihaclinic.com | Doctor@123",
+      "clerk": "clerk@neshihaclinic.com | Clerk@123",
+      "cashier": "cashier@neshihaclinic.com | Cashier@123"
+    },
+    "toast": {
+      "welcome": "እንኳን ደህና መለሱ, {{firstName}}!",
+      "failed": "መግባት አልተሳካም"
+    }
+  },
+  "signin": {
+    "heading": "Admin Sign In",
+    "error": {
+      "fillAllFields": "Please fill in all fields."
+    },
+    "label": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "placeholder": {
+      "email": "you@example.com",
+      "password": "Enter your password"
+    },
+    "button": {
+      "submit": "Sign In"
+    },
+    "forgotPassword": "Forgot your password?",
+    "resetLink": "Reset it"
+  },
+  "error": {
+    "404": {
+      "code": "404",
+      "message": "Page Not Found"
+    }
+  },
+  "home": {
+    "title": "Nesihah Herbal Clinic | Mana Qorichaa Aadaa Nasiiha",
+    "metaDescription": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha): Your trusted source for traditional herbal medicine, natural remedies, and holistic healing in Ethiopia.",
+    "metaKeywords": "Nesihah Herbal Clinic, Mana Qorichaa Aadaa Nasiiha, herbal medicine, natural remedies, traditional healing, Ethiopia",
+    "ogTitle": "Nesihah Herbal Clinic",
+    "ogDescription": "Trusted herbal health solutions and traditional healing in Ethiopia.",
+    "twitterTitle": "Nesihah Herbal Clinic",
+    "twitterDescription": "Trusted herbal health solutions and traditional healing in Ethiopia.",
+    "schema": {
+      "name": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha)",
+      "streetAddress": "AshewaMeda",
+      "addressLocality": "Shegar",
+      "addressRegion": "Oromia",
+      "postalCode": "0000",
+      "addressCountry": "Ethiopia",
+      "telephone": "+251912166549",
+      "url": "https://www.nesihaherbalclinic.com/"
+    }
+  },
+  "receipt": {
+    "clinicName": "ነሺሃ የባህል ሕክምና ክሊኒክ",
+    "clinicSubtitle": "የክሊኒክ አስተዳደር ሥርዓት",
+    "label": {
+      "patient": "ታካሚ:",
+      "id": "ID:",
+      "visit": "ጉብኝት:",
+      "doctor": "ሐኪም:"
+    },
+    "doctorNameFormat": "ዶ/ር {{firstName}} {{lastName}}",
+    "sectionPrescribedMedicines": "የታዘዙ መድሃኒቶች:",
+    "medicine": {
+      "qty": "ብዛት: {{quantity}}"
+    },
+    "placeholder": "—",
+    "totalLabel": "TOTAL:",
+    "currencyFormat": "{{amount}} ብር",
+    "footer": {
+      "thankYou": "ስለመረጡን እናመሰግናለን —",
+      "clinicName": "ነሺሃ የባህል ሕክምና ክሊኒክ",
+      "disclaimer": "ይህ በኮምፒውተር የተዘጋጀ ደረሰኝ ነው"
+    }
+  },
+  "dashboard": {
+    "hero": {
+      "insightEyebrow": "የዛሬ ግንዛቤ",
+      "ring": {
+        "visitsCompleted": "የተጠናቀቁ ጉብኝቶች",
+        "queueCleared": "የተስተናገደ ወረፋ",
+        "visitsSeen": "የታዩ ጉብኝቶች",
+        "paymentsCleared": "የተከፈሉ ክፍያዎች",
+        "noVisits": "ዛሬ እስካሁን ጉብኝት የለም",
+        "noPayments": "ዛሬ እስካሁን ክፍያ የለም"
+      },
+      "marks": {
+        "waiting": "በመጠባበቅ ላይ",
+        "completed": "የተጠናቀቁ",
+        "visits": "ጉብኝቶች",
+        "inQueue": "በወረፋ",
+        "prescriptions": "የመድኃኒት ማዘዣዎች",
+        "registered": "የተመዘገቡ",
+        "pending": "በመጠባበቅ ላይ",
+        "processed": "የተስተናገዱ"
+      },
+      "legend": {
+        "completed": "የተጠናቀቁ",
+        "waiting": "በመጠባበቅ ላይ",
+        "inProgress": "በሂደት ላይ",
+        "seen": "የታዩ",
+        "doctors": "ሐኪሞች",
+        "otherStaff": "ሌሎች ሰራተኞች",
+        "inQueue": "በወረፋ",
+        "lowStock": "ዝቅተኛ ክምችት",
+        "expired": "ጊዜው ያለፈበት"
+      },
+      "cards": {
+        "todayVisits": "የዛሬ ጉብኝቶች",
+        "totalPatients": "ጠቅላላ ታካሚዎች",
+        "activeRecords": "ንቁ የታካሚ መዝገቦች",
+        "staff": "ሰራተኞች",
+        "medicineStock": "የመድኃኒት ማንቂያዎች",
+        "inQueue": "በወረፋ",
+        "nextPatient": "ቀጣይ፦ {{name}}",
+        "completedToday": "ዛሬ የተጠናቀቁ",
+        "prescriptions": "የዛሬ የመድኃኒት ማዘዣዎች",
+        "dispensedOf": "ከ{{total}} ውስጥ {{dispensed}} ተሰጥተዋል",
+        "bookingRequests": "የቀጠሮ ጥያቄዎች",
+        "bookingsHint": "ከድረ-ገጹ የመጡ የመስመር ላይ ጥያቄዎች",
+        "registeredToday": "ዛሬ የተመዘገቡ",
+        "waitingNow": "አሁን በመጠባበቅ ላይ",
+        "waitingHint": "ገብተው በመጠባበቅ ላይ ያሉ ታካሚዎች",
+        "pendingPayments": "ያልተከፈሉ ክፍያዎች",
+        "pendingHint": "ክፍያ የሚጠብቁ ጉብኝቶች",
+        "processedToday": "ዛሬ የተስተናገዱ",
+        "lastPayment": "የመጨረሻ ክፍያ",
+        "noneYet": "እስካሁን ክፍያ የለም",
+        "paymentMethods": "የቅርብ ጊዜ የክፍያ ዘዴዎች"
+      },
+      "chip": {
+        "live": "ቀጥታ",
+        "offline": "ከመስመር ውጭ",
+        "allGood": "ሁሉም ደህና ነው",
+        "needsAttention": "ትኩረት ያስፈልገዋል",
+        "needsReview": "መገምገም ያስፈልገዋል",
+        "queueActive": "ወረፋ ንቁ ነው"
+      },
+      "timeline": {
+        "empty": "ዛሬ እስካሁን እንቅስቃሴ የለም",
+        "noArrivals": "አሁን የሚጠብቅ የለም"
+      },
+      "cta": {
+        "manageStaff": "ሰራተኞችን አስተዳድር",
+        "openQueue": "ወረፋ ክፈት",
+        "reviewRequests": "ጥያቄዎችን ገምግም",
+        "viewPatients": "ታካሚዎችን ይመልከቱ",
+        "openCashier": "ገንዘብ ተቀባይ ክፈት"
+      }
+    },
+    "insight": {
+      "allClear": {
+        "headline": "ሁሉም ነገር በሰላም እየሄደ ነው — ምንም የቀረ ስራ የለም።",
+        "detail": "አዳዲስ እንቅስቃሴዎች እዚህ በቀጥታ ይታያሉ።"
+      },
+      "waiting": {
+        "headline": "ታካሚዎች ለመታየት እየጠበቁ ነው።",
+        "detail": "አሁን በመጠባበቅ ላይ፦ {{count}}። ወረፋውን ማንቀሳቀስ የጥበቃ ጊዜን ያሳጥራል።"
+      },
+      "expired": {
+        "headline": "አንዳንድ መድኃኒቶች ጊዜያቸው አልፏል።",
+        "detail": "ጊዜው ያለፈበት፦ {{expired}} · ዝቅተኛ ክምችት፦ {{low}}። ጊዜው ያለፈበትን ክምችት ታካሚ ጋር ከመድረሱ በፊት ያስወግዱ።"
+      },
+      "lowStock": {
+        "headline": "አንዳንድ መድኃኒቶች እያለቁ ነው።",
+        "detail": "ዝቅተኛ ክምችት፦ {{count}}። የሕክምና ክፍተት እንዳይፈጠር በቅርቡ ይሙሉ።"
+      },
+      "doctorQueue": {
+        "headline": "ታካሚዎች እርስዎን እየጠበቁ ነው።",
+        "detail": "በወረፋ፦ {{count}} · ቀጣይ፦ {{name}}"
+      },
+      "doctorDone": {
+        "headline": "ወረፋዎ ባዶ ነው — ዛሬ ጥሩ ስራ ሰርተዋል።",
+        "detail": "ዛሬ የተጠናቀቁ ምክክሮች፦ {{count}}"
+      },
+      "doctorIdle": {
+        "headline": "እስካሁን በወረፋዎ ውስጥ ታካሚ የለም።",
+        "detail": "አዳዲስ ጉብኝቶች እዚህ በቀጥታ ይታያሉ።"
+      },
+      "bookings": {
+        "headline": "አዲስ የመስመር ላይ የቀጠሮ ጥያቄዎች መገምገም ያስፈልጋቸዋል።",
+        "detail": "በመጠባበቅ ላይ ያሉ ጥያቄዎች፦ {{count}}"
+      },
+      "cashierPending": {
+        "headline": "ጉብኝቶች ክፍያ እየጠበቁ ነው።",
+        "detail": "ያልተከፈሉ ክፍያዎች፦ {{count}}"
+      },
+      "cashierClear": {
+        "headline": "ሁሉም ክፍያዎች ተጠናቀዋል።",
+        "detail": "አዳዲስ ክፍያዎች እዚህ በቀጥታ ይታያሉ።"
+      }
+    },
+    "title": "ዋና ገጽ",
+    "fallback": {
+      "title": "ዋና ገጽ"
+    },
+    "stats": {
+      "totalPatients": "ጠቅላላ ታካሚዎች",
+      "todayPatients": "የዛሬ ታካሚዎች",
+      "todayVisits": "የዛሬ ጉብኝቶች",
+      "waitingNow": "አሁን በመጠባበቅ ላይ",
+      "totalDoctors": "ጠቅላላ ሐኪሞች",
+      "totalStaff": "ጠቅላላ ሰራተኞች",
+      "completedToday": "ዛሬ የተጠናቀቁ",
+      "lowStockItems": "ዝቅተኛ ክምችት ያላቸው",
+      "expiredMedicines": "ጊዜው ያለፈባቸው መድሃኒቶች"
+    },
+    "quickStats": {
+      "title": "ፈጣን ስታቲስቲክስ"
+    },
+    "systemStatus": {
+      "reconnecting": "እንደገና በመገናኘት ላይ…",
+      "title": "የስርዓት ሁኔታ",
+      "database": "ዳታቤዝ",
+      "online": "ኦንላይን",
+      "realtimeUpdates": "የቅጽበታዊ ማሻሻያዎች",
+      "connected": "ተያይዞ",
+      "lastBackup": "የመጨረሻ ምትኬ"
+    },
+    "doctor": {
+      "title": "የሐኪም ዳሽቦርድ",
+      "stats": {
+        "inQueue": "በወረፋ ውስጥ",
+        "completedToday": "ዛሬ የተጠናቀቁ",
+        "prescriptions": "ትዕዛዞች",
+        "dispensed": "የተሰጡ"
+      },
+      "waitingPatients": "በመጠባበቅ ላይ ያሉ ታካሚዎች",
+      "startConsultation": "ምክክር ጀምር",
+      "empty": {
+        "noPatients": "በመጠባበቅ ላይ ያሉ ታካሚዎች የሉም"
+      }
+    },
+    "dataClerk": {
+      "title": "የመረጃ ፀሐፊ ዳሽቦርድ",
+      "stats": {
+        "registeredToday": "ዛሬ የተመዘገቡ",
+        "todayVisits": "የዛሬ ጉብኝቶች",
+        "waitingPatients": "በመጠባበቅ ላይ ያሉ ታካሚዎች"
+      },
+      "recentRegistrations": "የቅርብ ጊዜ ምዝገባዎች",
+      "empty": {
+        "noRegistrations": "የቅርብ ጊዜ ምዝገባዎች የሉም"
+      }
+    },
+    "cashier": {
+      "title": "የገንዘብ ተቀባይ ዳሽቦርድ",
+      "stats": {
+        "pendingPayments": "በመጠባበቅ ላይ ያሉ ክፍያዎች",
+        "paymentsProcessedToday": "ዛሬ የተሰራባቸው ክፍያዎች",
+        "todayRevenue": "የዛሬ ገቢ (ብር)"
+      },
+      "recentPayments": "የቅርብ ጊዜ ክፍያዎች",
+      "empty": {
+        "noPayments": "የቅርብ ጊዜ ክፍያዎች የሉም"
+      }
+    }
+  },
+  "cashier": {
+    "title": "የገንዘብ ተቀባይ ዳሽቦርድ",
+    "subtitle": "ክፍያዎችን ተቀበል፣ መድሃኒት አሰጥ እና ደረሰኝ አትም",
+    "tabs": {
+      "pending": "በመጠባበቅ ላይ",
+      "recent": "የቅርብ ጊዜ ክፍያዎች"
+    },
+    "search": {
+      "placeholder": "በታካሚ ስም ወይም መለያ ፈልግ..."
+    },
+    "pending": {
+      "actionButton": "ተቀበል እና አሰጥ",
+      "empty": "በመጠባበቅ ላይ ያሉ ክፍያዎች የሉም"
+    },
+    "recent": {
+      "empty": "የቅርብ ጊዜ ክፍያዎች የሉም"
+    },
+    "modal": {
+      "payment": {
+        "title": "ክፍያ ተቀበል",
+        "confirm": "ክፍያ አረጋግጥ እና አሰጥ",
+        "totalDue": "ጠቅላላ መክፈል ያለበት መጠን",
+        "medicinesToDispense": "ሊሰጡ የሚገባቸው መድሃኒቶች:",
+        "paymentMethodLabel": "የክፍያ ዘዴ",
+        "transactionIdLabel": "የግብይት መለያ / ማጣቀሻ (አማራጭ)",
+        "transactionIdPlaceholder": "ለምሳሌ፣ TXN123456",
+        "notesLabel": "ማስታወሻዎች"
+      },
+      "detail": {
+        "title": "የክፍያ ዝርዝሮች",
+        "printReceipt": "ደረሰኝ አትም",
+        "prescribedMedicines": "የታዘዙ መድሃኒቶች",
+        "transactionId": "የግብይት መለያ"
+      }
+    },
+    "paymentMethods": {
+      "cash": "ጥሬ ገንዘብ",
+      "bankTransfer": "የባንክ ማስተላለፍ",
+      "mobileMoney": "የሞባይል ገንዘብ (ቴሌብር/ሲቢኢ ብር)",
+      "other": "ሌላ"
+    },
+    "toast": {
+      "paymentSuccess": "ክፍያ ተቀብሏል — መድሃኒት ለታካሚ ተሰጥቷል",
+      "paymentError": "ክፍያ ማካሄድ አልተሳካም"
+    }
+  },
+  "cashierReports": {
+    "title": "የገንዘብ ተቀባይ ሪፖርቶች",
+    "subtitle": "የተከፈለ የመድሃኒት ትዕዛዝ ገቢ",
+    "periods": {
+      "daily": "ዕለታዊ",
+      "weekly": "ሳምንታዊ",
+      "monthly": "ወርሃዊ"
+    },
+    "periodLabels": {
+      "today": "ዛሬ",
+      "thisWeek": "በዚህ ሳምንት",
+      "thisMonth": "በዚህ ወር"
+    },
+    "cards": {
+      "totalRevenue": "ጠቅላላ ገቢ",
+      "prescriptionsPaid": "የተከፈሉ ትዕዛዞች",
+      "period": "ጊዜ"
+    },
+    "byPaymentMethod": "በክፍያ ዘዴ",
+    "paymentTransactions": "የክፍያ ግብይቶች",
+    "empty": {
+      "payments": "ለዚህ ጊዜ የተገኙ ክፍያዎች የሉም",
+      "report": "የሪፖርት መረጃ የለም"
+    }
+  },
+  "patients": {
+    "title": "ታካሚዎች",
+    "subtitle": "የታካሚ መዝገቦችን ያስተዳድሩ",
+    "registerButton": "ታካሚ መዝግብ",
+    "search": {
+      "placeholder": "ታካሚዎችን በስም፣ መለያ፣ ስልክ ይፈልጉ..."
+    },
+    "empty": {
+      "title": "ታካሚዎች አልተገኙም",
+      "subtitle": "ለመጀመር የመጀመሪያ ታካሚዎን ይመዝግቡ"
+    },
+    "toast": {
+      "registerSuccess": "ታካሚ በተሳካ ሁኔታ ተመዝግቧል!"
+    }
+  },
+  "visits": {
+    "title": "ጉብኝቶች",
+    "subtitle": "የታካሚ ጉብኝቶችን ያስተዳድሩ",
+    "newVisitButton": "አዲስ ጉብኝት",
+    "status": {
+      "waiting": "በመጠባበቅ ላይ",
+      "inConsultation": "በምክክር ውስጥ",
+      "completed": "ተጠናቅቋል",
+      "cancelled": "ተሰርዟል",
+      "scheduled": "ተይዟል"
+    },
+    "empty": "ጉብኝቶች አልተገኙም",
+    "toast": {
+      "loadError": "ጉብኝቶችን መጫን አልተሳካም",
+      "createSuccess": "ጉብኝት በተሳካ ሁኔታ ተፈጥሯል!"
+    }
+  },
+  "doctorQueue": {
+    "title": "የታካሚ ወረፋ",
+    "backToQueue": "ወደ ወረፋ ተመለስ",
+    "refreshQueue": "ወረፋውን አድስ",
+    "actions": {
+      "start": "ጀምር",
+      "continue": "ቀጥል",
+      "consulting": "በምክክር ላይ"
+    },
+    "status": {
+      "withAnotherDoctor": "ከሌላ ሐኪም ጋር",
+      "active": "ንቁ",
+      "inProgress": "በሂደት ላይ"
+    },
+    "empty": {
+      "title": "በመጠባበቅ ላይ ያሉ ታካሚዎች የሉም",
+      "subtitle": "አዲስ ታካሚዎች እዚህ ይታያሉ"
+    },
+    "rightPanel": {
+      "selectPatient": "ታካሚ ይምረጡ",
+      "selectPatientHint": "ምክክር ለመጀመር ከወረፋው ላይ ባለው ታካሚ ላይ \"ጀምር\" የሚለውን ጠቅ ያድርጉ"
+    },
+    "tabs": {
+      "consultation": "ምክክር",
+      "vitalSigns": "የህይወት ምልክቶች",
+      "investigation": "ምርመራ",
+      "herbalMedicine": "የእፅዋት መድሃኒት",
+      "history": "ታሪክ"
+    },
+    "consultation": {
+      "title": "ምክክር",
+      "patientInfo": "የታካሚ መረጃ",
+      "diagnosisTitle": "ምርመራ",
+      "noDiagnosis": "ገና ምርመራ አልተጨመረም",
+      "ageGender": "ዕድሜ / ጾታ",
+      "bloodGroup": "የደም ዓይነት",
+      "allergies": "አለርጂዎች:",
+      "chronic": "ሥር የሰደደ:",
+      "saveProgress": "ሂደት አስቀምጥ",
+      "completeConsultation": "ምክክር ጨርስ",
+      "printPrescription": "የመድሃኒት ማዘዣ አትም",
+      "printNoPrescriptions": "ለዚህ ጉብኝት የሚታተም የመድሃኒት ማዘዣ የለም",
+      "printError": "የመድሃኒት ማዘዣውን ለማተም ማዘጋጀት አልተቻለም",
+      "patientFileDrawer": "የታካሚ ፋይል",
+      "saveStatus": {
+        "pending": "ያልተቀመጡ ለውጦች",
+        "saving": "በማስቀመጥ ላይ...",
+        "saved": "ሁሉም ለውጦች ተቀምጠዋል",
+        "error": "ማስቀመጥ አልተሳካም"
+      }
+    },
+    "queue": {
+      "chiefComplaintPrefix": "ዋናው ቅሬታ:"
+    },
+    "queueStats": {
+      "patients": "ታካሚዎች",
+      "inConsultation": "በምክክር ውስጥ"
+    },
+    "toast": {
+      "consultationStarted": "ምክክር ተጀምሯል — ታካሚው እስከተቀመጠ ድረስ በወረፋ ውስጥ ይቆያል",
+      "startError": "ምክክር መጀመር አልተሳካም",
+      "saveSuccess": "የምክክር ዝርዝሮች ተቀምጠዋል",
+      "saveError": "ምክክር ማስቀመጥ አልተሳካም",
+      "sentToCashier": "ምክክር ለክፍያ ወደ ገንዘብ ተቀባይ ተልኳል",
+      "completeSuccess": "ምክክር በተሳካ ሁኔታ ተጠናቀቀ",
+      "completeError": "ምክክር ማጠናቀቅ አልተሳካም"
+    }
+  },
+  "medicines": {
+    "title": "መድሃኒቶች",
+    "subtitle": "የእፅዋት መድሃኒት ክምችት ያስተዳድሩ",
+    "addButton": "መድሃኒት ጨምር",
+    "search": {
+      "placeholder": "በስም ወይም ኮድ ይፈልጉ..."
+    },
+    "card": {
+      "code": "ኮድ:",
+      "category": "ምድብ:",
+      "inStock": "በክምችት ውስጥ:",
+      "strength": "ጥንካሬ:"
+    },
+    "empty": "ከፍለጋዎ ጋር የሚመሳሰሉ መድሃኒቶች አልተገኙም።",
+    "toast": {
+      "loadError": "መድሃኒቶችን መጫን አልተሳካም",
+      "deleteConfirmation": "እርግጠኛ ነዎት ይህን መድሃኒት መሰረዝ ይፈልጋሉ?",
+      "deleteSuccess": "መድሃኒት በተሳካ ሁኔታ ተሰርዟል",
+      "deleteError": "መድሃኒት መሰረዝ አልተሳካም"
+    }
+  },
+  "pharmacy": {
+    "title": "ፋርማሲ",
+    "subtitle": "የመድሃኒት ትዕዛዞችን እና አሰጣጠትን ያስተዳድሩ",
+    "actions": {
+      "dispense": "አሰጥ"
+    },
+    "filters": {
+      "paid": "ተከፍሏል",
+      "dispensed": "ተሰጥቷል",
+      "completed": "ተጠናቅቋል",
+      "pending": "በመጠባበቅ ላይ"
+    },
+    "search": {
+      "placeholder": "በታካሚ ስም፣ መለያ ወይም መድሃኒት ይፈልጉ..."
+    },
+    "empty": {
+      "search": "ከፍለጋዎ ጋር የሚመሳሰሉ ትዕዛዞች አልተገኙም",
+      "status": "{{status}} ትዕዛዞች የሉም"
+    },
+    "prescription": {
+      "medicineFallback": "መድሃኒት",
+      "dosage": "መጠን",
+      "frequency": "ድግግሞሽ",
+      "duration": "ጊዜ",
+      "quantity": "ብዛት",
+      "instructions": "መመሪያዎች:",
+      "prescribed": "ተታዝዟል:"
+    },
+    "status": {
+      "dispensed": "ተሰጥቷል"
+    },
+    "dispenseModal": {
+      "title": "መድሃኒት አሰጥ",
+      "confirm": "አሰጣጠትን አረጋግጥ",
+      "prescriptionDetails": "የትዕዛዝ ዝርዝሮች",
+      "prescribedQuantity": "የታዘዘው ብዛት",
+      "quantityToDispense": "ሊሰጥ የሚገባው ብዛት *",
+      "batchNumber": "የሎት ቁጥር *",
+      "batchNumberPlaceholder": "ለምሳሌ፣ BATCH-2026-001",
+      "expiryDate": "የማለፊያ ቀን *",
+      "notes": "ማስታወሻዎች (አማራጭ)",
+      "notesPlaceholder": "ማናቸውም ተጨማሪ ማስታወሻዎች..."
+    },
+    "toast": {
+      "loadError": "ትዕዛዞችን መጫን አልተሳካም",
+      "invalidQuantity": "እባክዎ ትክክለኛ ብዛት ያስገቡ",
+      "missingBatch": "እባክዎ የሎት ቁጥር ያስገቡ",
+      "missingExpiry": "እባክዎ የማለፊያ ቀን ያስገቡ",
+      "dispenseSuccess": "መድሃኒት በተሳካ ሁኔታ ተሰጥቷል",
+      "dispenseError": "መድሃኒት ማሰጠት አልተሳካም"
+    }
+  },
+  "laboratory": {
+    "title": "ላቦራቶሪ",
+    "subtitle": "የምርመራ ጥያቄዎችን እና ውጤቶችን ያስተዳድሩ",
+    "actions": {
+      "startProcessing": "ሂደት ጀምር",
+      "enterResults": "ውጤቶችን አስገባ"
+    },
+    "status": {
+      "requested": "ተጠይቋል",
+      "inProgress": "በሂደት ላይ",
+      "completed": "ተጠናቅቋል",
+      "cancelled": "ተሰርዟል"
+    },
+    "urgency": {
+      "routine": "መደበኛ",
+      "urgent": "አስቸኳይ",
+      "stat": "በጣም አስቸኳይ"
+    },
+    "search": {
+      "placeholder": "በታካሚ ስም፣ መለያ ወይም ምርመራ ይፈልጉ..."
+    },
+    "empty": {
+      "search": "ከፍለጋዎ ጋር የሚመሳሰሉ ምርመራዎች አልተገኙም",
+      "status": "{{status}} ምርመራዎች የሉም"
+    },
+    "detail": {
+      "instructions": "መመሪያዎች:",
+      "results": "ውጤቶች:",
+      "interpretation": "ትርጉም:"
+    },
+    "info": {
+      "requested": "ተጠይቋል:",
+      "scheduled": "ተይዟል:",
+      "completed": "ተጠናቅቋል:",
+      "performedBy": "ያከናወነው:"
+    },
+    "modal": {
+      "title": "የምርመራ ውጤቶችን አስገባ",
+      "submitResults": "ውጤቶችን አስረክብ",
+      "investigationDetails": "የምርመራ ዝርዝሮች",
+      "type": "ዓይነት",
+      "testName": "የምርመራ ስም",
+      "urgency": "አስቸኳይነት",
+      "requestedDate": "የተጠየቀበት ቀን",
+      "instructions": "መመሪያዎች:",
+      "results": "የምርመራ ውጤቶች *",
+      "resultsPlaceholder": "ዝርዝር የምርመራ ውጤቶችን፣ መለኪያዎችን፣ ምልከታዎችን ያስገቡ...",
+      "interpretation": "የክሊኒካዊ ትርጉም",
+      "interpretationPlaceholder": "የሐኪሙ የውጤት ትርጉም (አማራጭ)...",
+      "performedBy": "ያከናወነው *",
+      "performedByPlaceholder": "የላብራቶሪ ቴክኒሺያን ወይም ራዲዮሎጂስት ስም",
+      "additionalNotes": "ተጨማሪ ማስታወሻዎች",
+      "additionalNotesPlaceholder": "ማናቸውም ተጨማሪ ማስታወሻዎች ወይም አስተያየቶች..."
+    },
+    "toast": {
+      "loadError": "ምርመራዎችን መጫን አልተሳካም",
+      "statusUpdated": "ምርመራ እንደ {{status}} ምልክት ተደርጎበታል",
+      "statusUpdateError": "ሁኔታን ማዘመን አልተሳካም",
+      "missingResults": "እባክዎ የምርመራ ውጤቶችን ያስገቡ",
+      "missingPerformedBy": "እባክዎ ምርመራውን ያከናወነው ማን እንደሆነ ያስገቡ",
+      "submitSuccess": "የምርመራ ውጤቶች በተሳካ ሁኔታ ተስረክበዋል",
+      "submitError": "ውጤቶችን ማስረከብ አልተሳካም"
+    }
+  },
+  "patientDetail": {
+    "backToPatients": "ወደ ታካሚዎች ተመለስ",
+    "newVisit": "አዲስ ጉብኝት",
+    "notFound": "ታካሚ አልተገኘም",
+    "detail": {
+      "email": "ኢሜይል",
+      "address": "አድራሻ",
+      "occupation": "ሙያ",
+      "maritalStatus": "የጋብቻ ሁኔታ"
+    },
+    "registered": "ተመዝግቧል:",
+    "alerts": {
+      "allergies": "አለርጂዎች:",
+      "chronic": "ሥር የሰደደ:"
+    },
+    "visitHistory": {
+      "title": "የጉብኝት ታሪክ",
+      "complaint": "ቅሬታ:",
+      "treatment": "ህክምና:",
+      "empty": "ቀዳሚ ጉብኝቶች የሉም"
+    },
+    "toast": {
+      "loadError": "የታካሚ ዝርዝሮችን መጫን አልተሳካም"
+    }
+  },
+  "patientForm": {
+    "updateSuccess": "የታካሚ መረጃ በተሳካ ሁኔታ ተዘምኗል",
+    "registerSuccess": "ታካሚ በተሳካ ሁኔታ ተመዝግቧል",
+    "saveError": "ታካሚውን ማስቀመጥ አልተቻለም",
+    "editTitle": "ታካሚ አስተካክል",
+    "registerTitle": "አዲስ ታካሚ መዝግብ",
+    "fromBookingNotice": "ከድረ-ገጽ የቀጠሮ ጥያቄ አስቀድሞ ተሞልቷል — እባክዎ ያረጋግጡ እና የቀሩትን መስኮች ይሙሉ።",
+    "personalInfoTitle": "የግል መረጃ",
+    "firstNameLabel": "ስም *",
+    "firstNameRequired": "ስም ያስፈልጋል",
+    "firstNamePlaceholder": "ስም",
+    "middleNameLabel": "የአባት ስም",
+    "middleNamePlaceholder": "የአባት ስም",
+    "lastNameLabel": "የአያት ስም *",
+    "lastNameRequired": "የአያት ስም ያስፈልጋል",
+    "lastNamePlaceholder": "የአያት ስም",
+    "genderLabel": "ጾታ *",
+    "genderRequired": "ጾታ ያስፈልጋል",
+    "genderPlaceholder": "ጾታ ይምረጡ",
+    "genderMale": "ወንድ",
+    "genderFemale": "ሴት",
+    "genderOther": "ሌላ",
+    "dobLabel": "የትውልድ ቀን *",
+    "dobRequired": "የትውልድ ቀን ያስፈልጋል",
+    "ageLabel": "እድሜ *",
+    "ageRequired": "እድሜ ያስፈልጋል",
+    "ageInvalid": "ትክክለኛ እድሜ ያስገቡ",
+    "agePlaceholder": "እድሜ በዓመት",
+    "phoneLabel": "ስልክ ቁጥር *",
+    "phoneRequired": "ስልክ ቁጥር ያስፈልጋል",
+    "phonePlaceholder": "+251911234567",
+    "addressTitle": "አድራሻ",
+    "cityLabel": "ከተማ",
+    "cityPlaceholder": "ከተማ",
+    "subCityLabel": "ክፍለ ከተማ",
+    "subCityPlaceholder": "ክፍለ ከተማ",
+    "woredaLabel": "ወረዳ",
+    "woredaPlaceholder": "ወረዳ",
+    "bloodGroupLabel": "የደም ዓይነት",
+    "bloodGroupPlaceholder": "የደም ዓይነት ይምረጡ",
+    "emergencyContactTitle": "የአደጋ ጊዜ ተጠሪ",
+    "emergencyContactNameLabel": "የአደጋ ጊዜ ተጠሪ ስም",
+    "emergencyContactNamePlaceholder": "ሙሉ ስም",
+    "emergencyContactPhoneLabel": "የአደጋ ጊዜ ተጠሪ ስልክ",
+    "emergencyContactPhonePlaceholder": "+251911234567",
+    "registrationFeeTitle": "የምዝገባ ክፍያ",
+    "registrationFeeNotice": "ለእያንዳንዱ አዲስ ታካሚ የ{{amount}} ብር የምዝገባ ክፍያ አንድ ጊዜ ያስፈልጋል።",
+    "registrationFeeAmountLabel": "መጠን",
+    "registrationFeeMethodLabel": "የክፍያ ዘዴ *",
+    "registrationFeeMethodRequired": "የክፍያ ዘዴ ያስፈልጋል",
+    "registrationFeeMethodPlaceholder": "የክፍያ ዘዴ ይምረጡ",
+    "registrationFeeMethodCash": "ጥሬ ገንዘብ",
+    "registrationFeeMethodTransfer": "የባንክ ዝውውር",
+    "registrationFeeMethodTelebirr": "ቴሌብር",
+    "registrationFeeTransactionLabel": "የግብይት/ማጣቀሻ ቁጥር (አማራጭ)",
+    "registrationFeeTransactionPlaceholder": "ለምሳሌ TXN123456",
+    "saving": "በማስቀመጥ ላይ...",
+    "updateButton": "ታካሚ አዘምን",
+    "registerButton": "ታካሚ መዝግብ"
+  },
+  "patientCard": {
+    "idPrefix": "ID: ",
+    "ageGenderSeparator": " years • ",
+    "registeredPrefix": "Registered: ",
+    "viewDetails": "View Details",
+    "newVisit": "New Visit"
+  },
+  "vitalSigns": {
+    "title": "ወሳኝ ምልክቶች",
+    "loading": "ወሳኝ ምልክቶች በመጫን ላይ...",
+    "saveButton": "ወሳኝ ምልክቶች አስቀምጥ",
+    "saveSuccess": "ወሳኝ ምልክቶች በተሳካ ሁኔታ ተቀምጠዋል",
+    "saveError": "ወሳኝ ምልክቶች ማስቀመጥ አልተሳካም",
+    "temperatureLabel": "የሰውነት ሙቀት (°ሴ)",
+    "temperaturePlaceholder": "ለምሳሌ፣ 37.5",
+    "temperatureNormal": "መደበኛ: 36.5 - 37.5°ሴ",
+    "bloodPressureLabel": "የደም ግፊት (mmHg)",
+    "systolicPlaceholder": "ሲስቶሊክ (120)",
+    "diastolicPlaceholder": "ዲያስቶሊክ (80)",
+    "bloodPressureNormal": "መደበኛ: 120/80 mmHg",
+    "heartRateLabel": "የልብ ምት (bpm)",
+    "heartRatePlaceholder": "ለምሳሌ፣ 72",
+    "heartRateNormal": "መደበኛ: 60 - 100 bpm",
+    "respiratoryRateLabel": "የመተንፈስ ምጣኔ (በደቂቃ)",
+    "respiratoryRatePlaceholder": "ለምሳሌ፣ 16",
+    "respiratoryRateNormal": "መደበኛ: 12 - 20 በደቂቃ",
+    "oxygenSaturationLabel": "የኦክስጅን መጠን (%)",
+    "oxygenSaturationPlaceholder": "ለምሳሌ፣ 98",
+    "oxygenSaturationNormal": "መደበኛ: 95 - 100%",
+    "weightLabel": "ክብደት (ኪ.ግ)",
+    "weightPlaceholder": "ለምሳሌ፣ 70.5",
+    "heightLabel": "ቁመት (ሴ.ሜ)",
+    "heightPlaceholder": "ለምሳሌ፣ 175",
+    "bmiLabel": "የሰውነት ክብደት መጠን (BMI)",
+    "categoryPrefix": "ምድብ: ",
+    "reference": {
+      "title": "መደበኛ የወሳኝ ምልክቶች ማጣቀሻ",
+      "temperature": "• የሰውነት ሙቀት: 36.5 - 37.5°ሴ",
+      "bloodPressure": "• የደም ግፊት: 120/80 mmHg",
+      "heartRate": "• የልብ ምት: 60 - 100 bpm",
+      "respiratoryRate": "• የመተንፈስ ምጣኔ: 12 - 20/ደቂቃ",
+      "oxygenSaturation": "• የኦክስጅን መጠን: 95 - 100%",
+      "bmi": "• BMI: 18.5 - 24.9 (መደበኛ)"
+    }
+  },
+  "bmi": {
+    "category": {
+      "underweight": "ከመደበኛ በታች ክብደት",
+      "normal": "መደበኛ",
+      "overweight": "ከመጠን በላይ ክብደት",
+      "obese": "ውፍረት"
+    }
+  },
+  "consultation": {
+    "chiefComplaintLabel": "ዋና ቅሬታ *",
+    "chiefComplaintPlaceholder": "ለጉብኝቱ ዋና ምክንያት...",
+    "symptomsLabel": "ምልክቶች",
+    "addSymptomPlaceholder": "ምልክት ጨምር...",
+    "historyOfPresentIllnessLabel": "የአሁኑ ሕመም ታሪክ",
+    "historyOfPresentIllnessPlaceholder": "የአሁኑ ሁኔታ ዝርዝር ታሪክ...",
+    "physicalExaminationLabel": "አካላዊ ምርመራ",
+    "physicalExaminationPlaceholder": "የአካላዊ ምርመራ ግኝቶች...",
+    "diagnosisLabel": "ምርመራ ውጤት",
+    "addDiagnosisPlaceholder": "የምርመራ ውጤት ጨምር...",
+    "treatmentPlanLabel": "የሕክምና እቅድ",
+    "treatmentPlanPlaceholder": "የሕክምና እቅድ እና ምክሮች...",
+    "doctorNotesLabel": "የሐኪም ማስታወሻዎች",
+    "doctorNotesPlaceholder": "ተጨማሪ ማስታወሻዎች...",
+    "followUpDateLabel": "የክትትል ቀጠሮ ቀን"
+  },
+  "herbalMedicine": {
+    "loading": "መድሃኒቶች በመጫን ላይ...",
+    "addButton": "የዕፅዋት መድሃኒት ጨምር",
+    "prescribeTitle": "የዕፅዋት መድሃኒት ማዘዣ",
+    "selectLabel": "የዕፅዋት መድሃኒት ይምረጡ *",
+    "selectPlaceholder": "-- መድሃኒት ይምረጡ --",
+    "unitPriceLabel": "የአንድ ዋጋ (ብር) *",
+    "unitPricePlaceholder": "ለአንዱ ክፍል ዋጋ",
+    "quantityLabel": "ብዛት *",
+    "quantityPlaceholder": "የክፍሎች ብዛት",
+    "totalLabel": "ጠቅላላ መጠን",
+    "totalPrefix": "ጠቅላላ: ",
+    "instructionsLabel": "መመሪያዎች (አማራጭ)",
+    "instructionsPlaceholder": "ለምሳሌ፣ ከምግብ ጋር ይውሰዱ፣ አልኮል ያስወግዱ...",
+    "saveButton": "ማዘዣ አስቀምጥ",
+    "listTitle": "የታዘዙ መድሃኒቶች",
+    "emptyList": "እስካሁን የታዘዘ መድሃኒት የለም",
+    "fetchError": "መድሃኒቶችን ማምጣት አልተሳካም",
+    "selectError": "እባክዎ የዕፅዋት መድሃኒት ይምረጡ",
+    "quantityError": "እባክዎ ትክክለኛ ብዛት ያስገቡ",
+    "prescribeSuccess": "መድሃኒት በተሳካ ሁኔታ ታዟል",
+    "addError": "መድሃኒት መጨመር አልተሳካም",
+    "cancelConfirm": "ይህን ማዘዣ መሰረዝ ይፈልጋሉ?",
+    "cancelSuccess": "ማዘዣው ተሰርዟል",
+    "cancelError": "ማዘዣ መሰረዝ አልተሳካም"
+  },
+  "prescription": {
+    "status": {
+      "pending": "በመጠባበቅ ላይ",
+      "paid": "ተከፍሏል",
+      "dispensed": "ተሰጥቷል",
+      "completed": "ተጠናቅቋል",
+      "stopped": "ቆሟል",
+      "expired": "ጊዜው አልፏል"
+    },
+    "dosage": {
+      "asPrescribed": "እንደታዘዘው"
+    },
+    "frequency": {
+      "asDirected": "እንደተመራው"
+    },
+    "route": {
+      "oral": "በአፍ"
+    },
+    "medicineFallback": "መድሃኒት"
+  },
+  "investigation": {
+    "loading": "ምርመራዎች በመጫን ላይ...",
+    "requestButton": "ምርመራ ይጠይቁ",
+    "fillError": "እባክዎ የምርመራ አይነት እና የፍተሻ ስም ያስገቡ",
+    "requestSuccess": "ምርመራ በተሳካ ሁኔታ ተጠይቋል",
+    "requestError": "ምርመራ መጠየቅ አልተሳካም",
+    "cancelConfirm": "ይህን ምርመራ መሰረዝ እርግጠኛ ነዎት?",
+    "cancelSuccess": "ምርመራው ተሰርዟል",
+    "cancelError": "ምርመራ መሰረዝ አልተሳካም",
+    "typeLabel": "የምርመራ አይነት *",
+    "typePlaceholder": "-- አይነት ይምረጡ --",
+    "testNameLabel": "የፍተሻ ስም *",
+    "testNamePlaceholder": "ለምሳሌ፣ የሙሉ ደም ቆጠራ፣ የጉበት ተግባር ፍተሻ",
+    "urgencyLabel": "አስቸኳይነት",
+    "scheduledDateLabel": "የተያዘለት ቀን",
+    "instructionsLabel": "ልዩ መመሪያዎች",
+    "instructionsPlaceholder": "ማንኛውም ልዩ መመሪያዎች ወይም የዝግጅት ማስታወሻዎች...",
+    "typePrefix": "አይነት: ",
+    "instructionsPrefix": "መመሪያዎች: ",
+    "requestedPrefix": "የተጠየቀው: ",
+    "scheduledPrefix": "የተያዘው: ",
+    "resultsLabel": "ውጤቶች:",
+    "interpretationLabel": "ትንታኔ:",
+    "completedPrefix": "የተጠናቀቀው: ",
+    "emptyList": "እስካሁን የተጠየቀ ምርመራ የለም",
+    "status": {
+      "requested": "ተጠይቋል",
+      "inProgress": "በሂደት ላይ",
+      "completed": "ተጠናቅቋል",
+      "cancelled": "ተሰርዟል"
+    },
+    "urgency": {
+      "routine": "መደበኛ",
+      "urgent": "አስቸኳይ",
+      "stat": "አፋጣኝ (ወዲያውኑ)"
+    },
+    "type": {
+      "bloodTest": "የደም ምርመራ",
+      "urineTest": "የሽንት ምርመራ",
+      "stoolTest": "የሰገራ ምርመራ",
+      "xray": "ኤክስ-ሬይ",
+      "ultrasound": "አልትራሳውንድ",
+      "ctScan": "ሲቲ ስካን",
+      "mri": "ኤምአርአይ",
+      "ecg": "ኢሲጂ (ኤሌክትሮካርዲዮግራም)",
+      "biopsy": "ባዮፕሲ",
+      "cultureTest": "የባህል ምርመራ",
+      "other": "ሌላ"
+    }
+  },
+  "patientHistory": {
+    "loading": "ታሪክ በመጫን ላይ...",
+    "fetchError": "የታካሚ ታሪክ ማምጣት አልተሳካም",
+    "empty": "ቀደም ያሉ ጉብኝቶች አልተገኙም",
+    "visitNumberPrefix": "ጉብኝት #",
+    "diagnosisLabel": "ምርመራ ውጤት:",
+    "treatmentLabel": "ሕክምና:"
+  },
+  "activePrescriptions": {
+    "title": "የቅርብ ጊዜ ማዘዣዎች (ያለፉት 90 ቀናት)",
+    "empty": "ንቁ ማዘዣዎች የሉም",
+    "prescribedPrefix": "የታዘዘው: ",
+    "daysLeft": "ቀናት ቀርተዋል",
+    "endsToday": "ዛሬ ያበቃል",
+    "expired": "ጊዜው አልፏል",
+    "durationLabel": "ቆይታ:",
+    "instructionsLabel": "መመሪያዎች:",
+    "reasonLabel": "ምክንያት:",
+    "endingSoonAlert": "መድሃኒቱ በቅርቡ ያበቃል - አስፈላጊ ከሆነ ዳግም መሙላትን ያስቡበት",
+    "endedAlert": "የመድሃኒት ጊዜ አብቅቷል"
+  },
+  "pendingInvestigations": {
+    "pendingTitle": "በመጠባበቅ ላይ ያሉ ምርመራዎች",
+    "completedTitle": "የቅርብ ጊዜ ውጤቶች ተገኝተዋል",
+    "empty": "የቅርብ ጊዜ ምርመራዎች የሉም",
+    "requestedPrefix": "የተጠየቀው: ",
+    "scheduledPrefix": "የተያዘው: ",
+    "instructionsLabel": "መመሪያዎች:",
+    "statAlert": "አፋጣኝ - ወዲያውኑ ትኩረት ያስፈልጋል",
+    "resultsReady": "ውጤቶች ዝግጁ ናቸው",
+    "completedPrefix": "የተጠናቀቀው: ",
+    "resultsLabel": "ውጤቶች:",
+    "interpretationLabel": "ትንታኔ:",
+    "viewResultFile": "የውጤት ፋይል ይመልከቱ",
+    "performedByPrefix": "የተሰራው በ: "
+  },
+  "followUp": {
+    "firstVisit": "First Visit - No previous medical history",
+    "scheduledTitle": "✓ Scheduled Follow-up Visit",
+    "returnTitle": "Return Visit",
+    "daysSince": "days since last visit",
+    "lastVisitLabel": "Last Visit:",
+    "scheduledForLabel": "Follow-up was scheduled for:",
+    "previousDiagnosisLabel": "Previous Diagnosis:",
+    "previousTreatmentLabel": "Previous Treatment:",
+    "previousNotesLabel": "Previous Notes:",
+    "viewHistory": "View Full History"
+  },
+  "medicineForm": {
+    "updateSuccess": "መድሃኒቱ በተሳካ ሁኔታ ተዘምኗል",
+    "addSuccess": "መድሃኒቱ በተሳካ ሁኔታ ተጨምሯል",
+    "saveError": "መድሃኒቱን ማስቀመጥ አልተቻለም",
+    "editTitle": "የባህል መድሃኒት አስተካክል",
+    "addTitle": "የባህል መድሃኒት ጨምር",
+    "herbalModeHint": "የመድሃኒቱ ስም ብቻ ያስፈልጋል",
+    "standardModeHint": "ሁሉንም መስኮች የያዘ መደበኛ ቅጽ",
+    "modeToggleLabel": "የባህል መድሃኒት ቅጽ",
+    "nameLabel": "የመድሃኒት ስም *",
+    "nameRequired": "የመድሃኒት ስም ያስፈልጋል",
+    "namePlaceholder": "ለምሳሌ የነጭ ሽንኩርት ቅይጥ፣ የጥቁር አዝሙድ ዘይት...",
+    "autoCodeHint": "ሲቀመጥ የመድሃኒት ኮድ በራስ-ሰር ይፈጠራል",
+    "codeLabel": "የመድሃኒት ኮድ",
+    "codePlaceholder": "በራስ-ሰር እንዲፈጠር ባዶ ይተዉት",
+    "codeAutoHint": "ባዶ ከሆነ በራስ-ሰር ይፈጠራል",
+    "genericNameLabel": "ሳይንሳዊ ስም",
+    "genericNamePlaceholder": "ለምሳሌ Allium sativum",
+    "categoryLabel": "ምድብ",
+    "categoryPlaceholder": "ለምሳሌ የባህል ማሟያ",
+    "strengthLabel": "ጥንካሬ",
+    "strengthPlaceholder": "e.g. 500mg",
+    "dosageFormLabel": "የመድሃኒት ቅርጽ",
+    "dosageFormPlaceholder": "ቅርጽ ይምረጡ",
+    "manufacturerLabel": "አምራች",
+    "supplierLabel": "አቅራቢ",
+    "batchNumberLabel": "የባች ቁጥር",
+    "storageLocationLabel": "የማከማቻ ቦታ",
+    "availableQuantityLabel": "ያለው ብዛት",
+    "minimumStockLabel": "ዝቅተኛ ክምችት",
+    "purchasePriceLabel": "የግዢ ዋጋ",
+    "sellingPriceLabel": "የሽያጭ ዋጋ",
+    "expiryDateLabel": "የማብቂያ ቀን",
+    "requiresPrescriptionLabel": "ማዘዣ ያስፈልገዋል",
+    "optionalDetails": "ተጨማሪ ዝርዝሮች",
+    "optionalDetailsHint": "(ምድብ፣ ጥንካሬ፣ ክምችት፣ ዋጋ፣ ማስታወሻ...)",
+    "instructionsLabel": "መመሪያ",
+    "instructionsPlaceholder": "ይህን የባህል መድሃኒት እንዴት ማዘጋጀት ወይም መጠቀም እንደሚቻል...",
+    "notesLabel": "ማስታወሻ",
+    "notesPlaceholder": "ተጨማሪ ማስታወሻ...",
+    "instructionsPlaceholderAlt": "ይህን መድሃኒት እንዴት ማዘጋጀት ወይም መጠቀም እንደሚቻል...",
+    "sideEffectsLabel": "የጎንዮሽ ጉዳቶች",
+    "contraindicationsLabel": "የማይመከርባቸው ሁኔታዎች",
+    "saving": "በማስቀመጥ ላይ...",
+    "updateButton": "መድሃኒት አዘምን",
+    "addButton": "መድሃኒት ጨምር",
+    "dosageForm": {
+      "tablet": "ኪኒን",
+      "capsule": "ካፕሱል",
+      "syrup": "ሽሮፕ",
+      "powder": "ዱቄት",
+      "extract": "ቅይጥ",
+      "tea": "Tea",
+      "oil": "Oil",
+      "cream": "ክሬም",
+      "tincture": "ቲንክቸር"
+    }
+  },
+  "visitForm": {
+    "fetchError": "ታካሚዎችን ማምጣት አልተቻለም",
+    "createError": "ጉብኝት መፍጠር አልተቻለም",
+    "title": "አዲስ ጉብኝት ፍጠር",
+    "patientLabel": "ታካሚ *",
+    "patientRequired": "ታካሚ ያስፈልጋል",
+    "patientPlaceholder": "ታካሚ ይምረጡ",
+    "chiefComplaintLabel": "ዋና ቅሬታ",
+    "chiefComplaintPlaceholder": "የታካሚውን ዋና ቅሬታ ይግለጹ...",
+    "visitDateLabel": "የጉብኝት ቀን",
+    "arrivalTimeLabel": "የደረሰበት ሰዓት *",
+    "arrivalTimeRequired": "የደረሰበት ሰዓት ያስፈልጋል",
+    "creating": "በመፍጠር ላይ...",
+    "createButton": "ጉብኝት ፍጠር",
+    "scheduleTitle": "ቀጠሮ ያስይዙ",
+    "mode": {
+      "walkIn": "አሁን ግቡ",
+      "appointment": "አስቀድሞ ያስይዙ"
+    },
+    "appointmentDateLabel": "የቀጠሮ ቀን",
+    "scheduledTimeLabel": "የቀጠሮ ሰዓት",
+    "scheduledTimeRequired": "የቀጠሮ ሰዓት ያስፈልጋል",
+    "appointmentHint": "ታካሚው በቀጠሮው ቀን የመቀበያ ሰራተኛ ካስገባው በኋላ ብቻ በዶክተሩ ወረፋ ላይ ይታያል።",
+    "scheduleButton": "ቀጠሮ ያስይዙ",
+    "scheduleSuccess": "ቀጠሮው በተሳካ ሁኔታ ተይዟል",
+    "createSuccess": "ጉብኝቱ በተሳካ ሁኔታ ተፈጥሯል"
+  },
+  "clinicManagement": {
+    "title": "Clinic Management",
+    "doctors": "Doctors",
+    "doctorsDesc": "Manage doctors here...",
+    "patients": "Patients",
+    "patientsDesc": "Manage patients here...",
+    "appointments": "Appointments",
+    "appointmentsDesc": "Manage appointments..."
+  },
+  "blogForm": {
+    "editTitle": "Edit Post",
+    "addTitle": "Add New Post",
+    "titlePlaceholder": "Title",
+    "mediaTypeLabel": "Media Type:",
+    "mediaTypeImage": "Image",
+    "mediaTypeVideo": "Video",
+    "previewAlt": "Preview",
+    "authorPlaceholder": "Author",
+    "descPlaceholder": "Description",
+    "saveButton": "Save Changes",
+    "addButton": "Add Post"
+  },
+  "blogCard": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "roles": {
+    "super_admin": "ዋና አስተዳዳሪ",
+    "admin": "አስተዳዳሪ",
+    "doctor": "ዶክተር",
+    "data_clerk": "የመረጃ ሰራተኛ",
+    "cashier": "ገንዘብ ተቀባይ",
+    "staff_manager": "የሰራተኛ አስተዳዳሪ"
+  },
+  "followUpIndicator": {
+    "firstVisit": "የመጀመሪያ ጉብኝት - ቀዳሚ የሕክምና ታሪክ የለም",
+    "scheduledFollowUp": "✓ የተያዘ ክትትል ጉብኝት",
+    "returnVisit": "ተመላሽ ጉብኝት",
+    "daysSinceLast": "{{days}} ቀናት ከመጨረሻው ጉብኝት ጀምሮ",
+    "lastVisit": "የመጨረሻው ጉብኝት:",
+    "followUpScheduled": "ክትትል የተያዘለት:",
+    "previousDiagnosis": "ቀዳሚ ምርመራ:",
+    "previousTreatment": "ቀዳሚ ህክምና:",
+    "previousNotes": "ቀዳሚ ማስታወሻዎች:",
+    "viewFullHistory": "ሙሉ ታሪክ ይመልከቱ"
+  },
+  "prescriptions": {
+    "noActive": "ንቁ ትዕዛዞች የሉም",
+    "recentTitle": "የቅርብ ጊዜ ትዕዛዞች (ባለፉት 90 ቀናት)",
+    "medicine": "መድሃኒት",
+    "prescribed": "ተታዝዟል:",
+    "daysLeft": "{{days}} ቀናት ቀርተዋል",
+    "endsToday": "ዛሬ ያበቃል",
+    "expired": "ጊዜው አልፎበታል",
+    "duration": "ጊዜ:",
+    "instructions": "መመሪያዎች:",
+    "reason": "ምክንያት:",
+    "endingSoon": "መድሃኒት በቅርቡ ያበቃል - ማሻሻያ ካስፈለገ ያስቡበት",
+    "periodEnded": "የመድሃኒት ጊዜ አብቅቷል",
+    "status": {
+      "pending": "በመጠባበቅ ላይ",
+      "dispensed": "ተሰጥቷል",
+      "completed": "ተጠናቅቋል",
+      "stopped": "ቆሟል"
+    }
+  },
+  "investigations": {
+    "noRecent": "የቅርብ ጊዜ ምርመራዎች የሉም",
+    "pendingTitle": "በመጠባበቅ ላይ ያሉ ምርመራዎች",
+    "recentResults": "የቅርብ ጊዜ ውጤቶች ተገኝተዋል",
+    "requested": "ተጠይቋል:",
+    "scheduled": "ተይዟል:",
+    "completed": "ተጠናቅቋል:",
+    "instructions": "መመሪያዎች:",
+    "statAlert": "በጣም አስቸኳይ - ወዲያውኑ ትኩረት ያስፈልጋል",
+    "resultsReady": "ውጤቶች ዝግጁ ናቸው",
+    "results": "ውጤቶች:",
+    "interpretation": "ትርጉም:",
+    "viewFile": "የውጤት ፋይል ይመልከቱ",
+    "performedBy": "ያከናወነው:",
+    "status": {
+      "requested": "ተጠይቋል",
+      "in_progress": "በሂደት ላይ",
+      "completed": "ተጠናቅቋል",
+      "cancelled": "ተሰርዟል"
+    },
+    "urgency": {
+      "routine": "መደበኛ",
+      "urgent": "አስቸኳይ",
+      "stat": "በጣም አስቸኳይ"
+    }
+  },
+  "staff": {
+    "title": "የሰራተኞች አስተዳደር",
+    "subtitle": "የሰራተኞች መለያዎችን ይፍጠሩ፣ ያስተካክሉ እና ያስተዳድሩ",
+    "addButton": "ሰራተኛ ጨምር",
+    "searchPlaceholder": "በስም፣ በኢሜይል ወይም በስልክ ይፈልጉ...",
+    "empty": "ሰራተኛ አልተገኘም",
+    "loadError": "ሰራተኞችን መጫን አልተቻለም",
+    "you": "እርስዎ",
+    "activate": "አግብር",
+    "deactivate": "አቦዝን",
+    "deleteConfirm": "{{name}}ን ይሰረዙ? መለያቸው ይቦዝናል።",
+    "stats": {
+      "total": "ጠቅላላ ሰራተኞች",
+      "active": "ንቁ",
+      "inactive": "ያልነቃ",
+      "doctors": "ዶክተሮች"
+    },
+    "filter": {
+      "allRoles": "ሁሉም ሚናዎች",
+      "allStatuses": "ሁሉም ሁኔታዎች"
+    },
+    "status": {
+      "active": "ንቁ",
+      "inactive": "ያልነቃ",
+      "suspended": "የታገደ"
+    },
+    "table": {
+      "name": "ስም",
+      "contact": "አድራሻ",
+      "role": "ሚና",
+      "status": "ሁኔታ",
+      "actions": "ተግባራት"
+    },
+    "resetPassword": {
+      "title": "የይለፍ ቃል ዳግም አስጀምር",
+      "newPassword": "አዲስ የይለፍ ቃል",
+      "confirmPassword": "የይለፍ ቃል ያረጋግጡ",
+      "mismatch": "የይለፍ ቃላቱ አይመሳሰሉም",
+      "warning": "ይህ ሰራተኛውን ከሁሉም ክፍለ ጊዜዎች ያስወጣል። አዲሱን የይለፍ ቃል በአስተማማኝ መንገድ ያሳውቁ።",
+      "submit": "ዳግም አስጀምር",
+      "success": "የይለፍ ቃል ዳግም ተጀምሯል",
+      "error": "የይለፍ ቃል ዳግም ማስጀመር አልተቻለም"
+    },
+    "toast": {
+      "deleteSuccess": "ሰራተኛው ተሰርዟል",
+      "deleteError": "ሰራተኛውን መሰረዝ አልተቻለም",
+      "activateSuccess": "ሰራተኛው ነቅቷል",
+      "activateError": "ሰራተኛውን ማንቃት አልተቻለም",
+      "deactivateSuccess": "ሰራተኛው ቦዝኗል",
+      "deactivateError": "ሰራተኛውን ማቦዘን አልተቻለም"
+    }
+  },
+  "staffForm": {
+    "addTitle": "አዲስ ሰራተኛ ጨምር",
+    "editTitle": "ሰራተኛ አስተካክል",
+    "subtitle": "የመለያ ዝርዝሮች እና የመዳረሻ ሚና",
+    "firstNameLabel": "የመጀመሪያ ስም",
+    "firstNameRequired": "የመጀመሪያ ስም ያስፈልጋል",
+    "lastNameLabel": "የአባት ስም",
+    "lastNameRequired": "የአባት ስም ያስፈልጋል",
+    "emailLabel": "ኢሜይል",
+    "emailRequired": "ኢሜይል ያስፈልጋል",
+    "emailInvalid": "ትክክለኛ ኢሜይል ያስገቡ",
+    "phoneLabel": "ስልክ",
+    "phoneRequired": "የስልክ ቁጥር ያስፈልጋል",
+    "phonePlaceholder": "+251...",
+    "passwordLabel": "የይለፍ ቃል",
+    "passwordRequired": "የይለፍ ቃል ያስፈልጋል",
+    "passwordTooShort": "የይለፍ ቃል ቢያንስ 8 ቁምፊ መሆን አለበት",
+    "passwordWeak": "የይለፍ ቃል አቢይ ሆሄ፣ ንዑስ ሆሄ እና ቁጥር መያዝ አለበት",
+    "passwordHint": "ቢያንስ 8 ቁምፊ፣ ከአቢይ ሆሄ፣ ንዑስ ሆሄ እና ቁጥር ጋር",
+    "roleLabel": "ሚና",
+    "statusLabel": "ሁኔታ",
+    "departmentLabel": "ክፍል",
+    "specializationLabel": "ስፔሻላይዜሽን",
+    "specializationPlaceholder": "ለምሳሌ የዕፅዋት ሕክምና",
+    "licenseNumberLabel": "የፈቃድ ቁጥር",
+    "addressLabel": "አድራሻ",
+    "createButton": "ሰራተኛ ፍጠር",
+    "updateButton": "ለውጦችን አስቀምጥ",
+    "createSuccess": "ሰራተኛው ተፈጥሯል",
+    "updateSuccess": "ሰራተኛው ተስተካክሏል",
+    "saveError": "ሰራተኛውን ማስቀመጥ አልተቻለም"
+  },
+  "settings": {
+    "title": "ቅንብሮች",
+    "subtitle": "የክሊኒኩ አወቃቀር እና ምርጫዎች",
+    "readOnlyNotice": "እነዚህን ቅንብሮች ማየት ይችላሉ፣ ነገር ግን ሱፐር አድሚን ብቻ ሊለውጣቸው ይችላል።",
+    "saveButton": "ቅንብሮችን አስቀምጥ",
+    "saveSuccess": "ቅንብሮች ተቀምጠዋል",
+    "saveError": "ቅንብሮችን ማስቀመጥ አልተቻለም",
+    "loadError": "ቅንብሮችን መጫን አልተቻለም",
+    "clinic": {
+      "title": "የክሊኒክ መረጃ",
+      "description": "በደረሰኞች፣ በካርዶች እና በሚታተሙ ሰነዶች ላይ ይታያል",
+      "name": "የክሊኒክ ስም",
+      "phone": "ስልክ",
+      "email": "ኢሜይል",
+      "emailInvalid": "ትክክለኛ ኢሜይል ያስገቡ",
+      "address": "አድራሻ",
+      "currency": "ገንዘብ"
+    },
+    "schedule": {
+      "title": "የስራ ሰዓታት",
+      "description": "ክሊኒኩ ለጉብኝት ክፍት የሚሆንበት ጊዜ",
+      "opensAt": "የሚከፈትበት",
+      "closesAt": "የሚዘጋበት",
+      "timezone": "የሰዓት ክልል",
+      "appointmentDuration": "የቀጠሮ ቆይታ",
+      "minutesHint": "በደቂቃ",
+      "workingDays": "የስራ ቀናት"
+    },
+    "weekdays": {
+      "monday": "ሰኞ",
+      "tuesday": "ማክሰኞ",
+      "wednesday": "ረቡዕ",
+      "thursday": "ሐሙስ",
+      "friday": "ዓርብ",
+      "saturday": "ቅዳሜ",
+      "sunday": "እሁድ"
+    },
+    "operations": {
+      "title": "ክንውኖች",
+      "description": "የክምችት ማንቂያዎች፣ ቅርጸቶች እና ማሳወቂያዎች",
+      "lowStockThreshold": "የዝቅተኛ ክምችት ገደብ",
+      "lowStockHint": "መድሃኒት ወደዚህ መጠን ሲወርድ አሳውቅ",
+      "dateFormat": "የቀን ቅርጸት",
+      "timeFormat": "የሰዓት ቅርጸት",
+      "hour24": "24 ሰዓት",
+      "hour12": "12 ሰዓት",
+      "emailNotifications": "የኢሜይል ማሳወቂያዎችን አንቃ",
+      "smsNotifications": "የSMS ማሳወቂያዎችን አንቃ"
+    },
+    "legal": {
+      "title": "ሕጋዊ",
+      "description": "ለታካሚዎች የሚታዩ የውል እና የግላዊነት ጽሑፎች",
+      "terms": "ውሎች እና ሁኔታዎች",
+      "privacy": "የግላዊነት ፖሊሲ"
+    },
+    "business": {
+      "title": "የድርጅት መረጃ",
+      "description": "በድረ-ገጹ 'ስለ እኛ' ክፍል ውስጥ ይታያል",
+      "logo": "አርማ",
+      "uploadLogo": "አርማ ስቀል",
+      "logoUploadSuccess": "አርማው በተሳካ ሁኔታ ተሰቅሏል",
+      "logoUploadError": "አርማ መስቀል አልተሳካም",
+      "tagline": "አጭር መፈክር",
+      "mission": "ተልእኮ",
+      "vision": "ራዕይ",
+      "aboutText": "ስለ እኛ ጽሑፍ",
+      "yearsExperience": "የልምድ ዓመታት",
+      "patientsServed": "የተስተናገዱ ታካሚዎች",
+      "treatmentsOffered": "የሚሰጡ ሕክምናዎች"
+    },
+    "contact": {
+      "title": "ግንኙነት እና ማህበራዊ ሚዲያ",
+      "description": "የድረ-ገጹ የመገናኛ መረጃ እና የማህበራዊ ሚዲያ አገናኞች",
+      "whatsapp": "የዋትስአፕ ቁጥር",
+      "facebook": "የፌስቡክ URL",
+      "instagram": "የኢንስታግራም URL",
+      "tiktok": "የቲክቶክ URL",
+      "twitter": "የX (ትዊተር) URL",
+      "googleMaps": "የGoogle Maps Embed URL",
+      "googleMapsHint": "ከGoogle Maps \"Embed a map\" አማራጭ የ src URL ለጥፍ"
+    }
+  },
+  "appointments": {
+    "title": "ቀጠሮዎች",
+    "subtitle": "መጪ የታካሚ ቀጠሮዎችን ያስይዙ እና ያስገቡ",
+    "newButton": "አዲስ ቀጠሮ",
+    "searchPlaceholder": "በስም፣ በመታወቂያ ወይም በስልክ ይፈልጉ...",
+    "loadError": "ቀጠሮዎችን መጫን አልተቻለም",
+    "empty": "መጪ ቀጠሮ የለም",
+    "emptyHint": "የተያዙ ቀጠሮዎች እዚህ ይታያሉ",
+    "checkIn": "አስገባ",
+    "checkInDisabledHint": "የሚሰራው በቀጠሮው ቀን ብቻ ነው",
+    "cancel": "ቀጠሮ ሰርዝ",
+    "cancelConfirm": "ይህን ቀጠሮ መሰረዝ ይፈልጋሉ?",
+    "dateGroup": {
+      "today": "ዛሬ",
+      "tomorrow": "ነገ",
+      "appointment": "ቀጠሮ",
+      "appointments": "ቀጠሮዎች"
+    },
+    "toast": {
+      "checkInSuccess": "{{name}} ገብቷል",
+      "checkInError": "ታካሚውን ማስገባት አልተቻለም",
+      "cancelSuccess": "ቀጠሮው ተሰርዟል",
+      "cancelError": "ቀጠሮውን መሰረዝ አልተቻለም"
+    }
+  },
+  "patientRecordSidebar": {
+    "title": "የታካሚ ፋይል መሳቢያ",
+    "idPrefix": "መታወቂያ:",
+    "cardPrefix": "ካርድ:",
+    "tabs": {
+      "recordData": "የመዝገብ መረጃ",
+      "attachments": "ተያያዥ ፋይሎች",
+      "visitHistory": "የጉብኝት ታሪክ"
+    },
+    "clinicalInfoTitle": "ክሊኒካዊ እና ስነ-ሕዝብ መረጃ",
+    "viewMode": "የመመልከቻ ሁኔታ",
+    "editRecord": "መዝገብ አስተካክል",
+    "firstNameLabel": "የመጀመሪያ ስም",
+    "lastNameLabel": "የአባት ስም",
+    "ageLabel": "እድሜ",
+    "phoneLabel": "የስልክ ቁጥር",
+    "emailLabel": "ኢሜይል",
+    "allergiesLabel": "አለርጂዎች (በኮማ ለይ)",
+    "allergiesPlaceholder": "ለምሳሌ፣ ፔኒሲሊን፣ ኦቾሎኒ",
+    "chronicLabel": "ሥር የሰደዱ በሽታዎች (በኮማ ለይ)",
+    "chronicPlaceholder": "ለምሳሌ፣ የደም ግፊት፣ የስኳር በሽታ",
+    "maritalStatusLabel": "የጋብቻ ሁኔታ",
+    "notApplicable": "አይመለከትም",
+    "occupationLabel": "ሥራ",
+    "addressLabel": "የአድራሻ ዝርዝር",
+    "saveButton": "የታካሚ መዝገብ አስቀምጥ",
+    "fullNameLabel": "ሙሉ ስም",
+    "genderAgeLabel": "ጾታ እና እድሜ",
+    "yearsOldSuffix": "ዓመት",
+    "addressViewLabel": "አድራሻ",
+    "allergiesPrefix": "አለርጂዎች:",
+    "chronicDiseasesPrefix": "ሥር የሰደዱ በሽታዎች:",
+    "uploadTitle": "የላብራቶሪ ሪፖርቶች ወይም ፋይሎች ይስቀሉ",
+    "uploadHint": "የምስል ፋይሎች (JPEG, PNG) ወይም PDF እስከ 5MB ይፈቀዳል",
+    "uploadedFilesTitle": "የተሰቀሉ ፋይሎች",
+    "noFilesUploaded": "እስካሁን ለዚህ ታካሚ የተሰቀለ ፋይል የለም",
+    "uploadedOnPrefix": "የተሰቀለው በ",
+    "viewFileTitle": "ፋይል ይመልከቱ",
+    "deleteFileTitle": "ፋይል ሰርዝ",
+    "visitPrefix": "ጉብኝት #",
+    "chiefComplaintLabel": "ዋና ቅሬታ",
+    "diagnosisLabel": "ምርመራ ውጤት",
+    "treatmentPlanLabel": "የሕክምና እቅድ",
+    "noHistoryAvailable": "ቀደም ያለ የጉብኝት ታሪክ የለም",
+    "toast": {
+      "updateSuccess": "የታካሚ መዝገብ በተሳካ ሁኔታ ተስተካክሏል",
+      "updateError": "መዝገብ ማስተካከል አልተሳካም",
+      "uploadingFile": "ፋይል በመስቀል ላይ...",
+      "fileAttached": "ፋይል በተሳካ ሁኔታ ተያይዟል",
+      "uploadFailed": "ፋይል መስቀል አልተሳካም",
+      "deleteFileConfirm": "ይህን ፋይል መሰረዝ እርግጠኛ ነዎት?",
+      "fileDeleted": "ፋይሉ ተሰርዟል",
+      "deleteFileFailed": "ፋይል መሰረዝ አልተሳካም"
+    }
+  },
+  "successStories": {
+    "title": "የስኬት ታሪኮች",
+    "subtitle": "ከእውነተኛ ታካሚዎች የተገኙ እውነተኛ ውጤቶች",
+    "outcomes": "ውጤቶች"
+  },
+  "team": {
+    "title": "ቡድናችንን ይተዋወቁ",
+    "subtitle": "ለጤናዎ ራሳቸውን የሰጡ የተመሰከረላቸው ባለሙያዎች"
+  },
+  "partners": {
+    "title": "የታመኑ አጋሮች"
+  },
+  "faqs": {
+    "title": "ተደጋጋሚ ጥያቄዎች",
+    "subtitle": "ለተለመዱ ጥያቄዎች መልሶች"
+  },
+  "contentAdmin": {
+    "title": "የድረ-ገጽ ይዘት",
+    "subtitle": "በድረ-ገጹ ላይ የሚታየውን ሁሉ ያስተዳድሩ — የኮድ ለውጥ አያስፈልግም",
+    "tabs": {
+      "testimonials": "ምስክርነቶች",
+      "successStories": "የስኬት ታሪኮች",
+      "faqs": "ተደጋጋሚ ጥያቄዎች",
+      "teamMembers": "ቡድን",
+      "partners": "አጋሮች",
+      "banners": "ማስታወቂያዎች",
+      "services": "አገልግሎቶች"
+    },
+    "common": {
+      "deleteConfirm": "\"{{label}}\" ይሰረዝ? ይህ ወደ ኋላ ሊመለስ አይችልም።",
+      "deleteSuccess": "በተሳካ ሁኔታ ተሰርዟል",
+      "deleteError": "መሰረዝ አልተሳካም",
+      "statusUpdateSuccess": "ሁኔታው ተዘምኗል",
+      "statusUpdateError": "ሁኔታ ማዘመን አልተሳካም",
+      "reorderError": "ቅደም ተከተል መቀየር አልተሳካም",
+      "allStatuses": "ሁሉም ሁኔታዎች",
+      "published": "ታትሟል",
+      "draft": "ረቂቅ",
+      "loadError": "መጫን አልተሳካም",
+      "empty": "እስካሁን ምንም የለም — የመጀመሪያውን ለመፍጠር ጨምር የሚለውን ይጫኑ",
+      "moveUp": "ወደ ላይ አንቀሳቅስ",
+      "moveDown": "ወደ ታች አንቀሳቅስ",
+      "uploadPhoto": "ፎቶ ስቀል",
+      "uploadImage": "ምስል ስቀል",
+      "uploadLogo": "አርማ ስቀል",
+      "requiredField": "ይህ መስክ ያስፈልጋል",
+      "status": "ሁኔታ"
+    },
+    "testimonials": {
+      "title": "ምስክርነቶች",
+      "subtitle": "በመነሻ ገጹ ላይ የሚታዩ የደንበኞች ምስክርነቶች",
+      "addButton": "ምስክርነት ጨምር",
+      "searchPlaceholder": "በደንበኛ ወይም ድርጅት ይፈልጉ...",
+      "addTitle": "ምስክርነት ጨምር",
+      "editTitle": "ምስክርነት አስተካክል",
+      "clientName": "የደንበኛ ስም",
+      "company": "ድርጅት",
+      "rating": "ደረጃ",
+      "role": "ሚና",
+      "text": "ምስክርነት",
+      "createSuccess": "ምስክርነት ታክሏል",
+      "updateSuccess": "ምስክርነት ተስተካክሏል",
+      "saveError": "ምስክርነት ማስቀመጥ አልተሳካም"
+    },
+    "successStories": {
+      "title": "የስኬት ታሪኮች",
+      "subtitle": "የደንበኞች የስኬት ታሪኮች እና ጥናቶች",
+      "addButton": "ታሪክ ጨምር",
+      "searchPlaceholder": "በምድብ ይፈልጉ...",
+      "addTitle": "የስኬት ታሪክ ጨምር",
+      "editTitle": "የስኬት ታሪክ አስተካክል",
+      "storyTitle": "ርዕስ",
+      "description": "መግለጫ",
+      "projectDetails": "የፕሮጀክት ዝርዝሮች",
+      "outcomes": "ውጤቶች",
+      "category": "ምድብ",
+      "featured": "ተለይቶ የቀረበ",
+      "images": "ምስሎች",
+      "createSuccess": "ታሪክ ታክሏል",
+      "updateSuccess": "ታሪክ ተስተካክሏል",
+      "saveError": "ታሪክ ማስቀመጥ አልተሳካም"
+    },
+    "faqs": {
+      "title": "ተደጋጋሚ ጥያቄዎች",
+      "subtitle": "በመነሻ ገጹ ላይ የሚታዩ ጥያቄዎች",
+      "addButton": "ጥያቄ ጨምር",
+      "searchPlaceholder": "በምድብ ይፈልጉ...",
+      "addTitle": "ጥያቄ ጨምር",
+      "editTitle": "ጥያቄ አስተካክል",
+      "question": "ጥያቄ",
+      "answer": "መልስ",
+      "category": "ምድብ",
+      "createSuccess": "ጥያቄ ታክሏል",
+      "updateSuccess": "ጥያቄ ተስተካክሏል",
+      "saveError": "ጥያቄ ማስቀመጥ አልተሳካም"
+    },
+    "teamMembers": {
+      "title": "የቡድን አባላት",
+      "subtitle": "በመነሻ ገጹ ላይ የሚታዩ የሰራተኞች መገለጫዎች",
+      "addButton": "አባል ጨምር",
+      "searchPlaceholder": "በስም ይፈልጉ...",
+      "addTitle": "የቡድን አባል ጨምር",
+      "editTitle": "የቡድን አባል አስተካክል",
+      "name": "ስም",
+      "role": "ሚና / ማዕረግ",
+      "bio": "የሕይወት ታሪክ",
+      "linkedin": "የLinkedIn URL",
+      "twitter": "የX (ትዊተር) URL",
+      "facebook": "የፌስቡክ URL",
+      "createSuccess": "አባል ታክሏል",
+      "updateSuccess": "አባል ተስተካክሏል",
+      "saveError": "አባል ማስቀመጥ አልተሳካም"
+    },
+    "partners": {
+      "title": "አጋሮች",
+      "subtitle": "በመነሻ ገጹ ላይ የሚታዩ የአጋር አርማዎች",
+      "addButton": "አጋር ጨምር",
+      "searchPlaceholder": "በስም ይፈልጉ...",
+      "addTitle": "አጋር ጨምር",
+      "editTitle": "አጋር አስተካክል",
+      "name": "ስም",
+      "websiteUrl": "የድረ-ገጽ URL",
+      "createSuccess": "አጋር ታክሏል",
+      "updateSuccess": "አጋር ተስተካክሏል",
+      "saveError": "አጋር ማስቀመጥ አልተሳካም"
+    },
+    "banners": {
+      "title": "ማስታወቂያዎች",
+      "subtitle": "በመነሻ ገጹ ላይ የሚታዩ ማስታወቂያዎች",
+      "addButton": "ማስታወቂያ ጨምር",
+      "addTitle": "ማስታወቂያ ጨምር",
+      "editTitle": "ማስታወቂያ አስተካክል",
+      "bannerTitle": "ርዕስ",
+      "subtitleLabel": "ንዑስ ርዕስ",
+      "ctaText": "የአዝራር ጽሑፍ",
+      "ctaLink": "የአዝራር አገናኝ",
+      "linkToBookingForm": "ከቀጠሮ ቅጽ ጋር አገናኝ",
+      "linkToBookingFormHint": "አዝራሩ ወደየትም ከመሄድ ይልቅ የ«ቀጠሮ ይያዙ» ቅጹን ይከፍታል።",
+      "startDate": "የመጀመሪያ ቀን",
+      "endDate": "የመጨረሻ ቀን",
+      "createSuccess": "ማስታወቂያ ታክሏል",
+      "updateSuccess": "ማስታወቂያ ተስተካክሏል",
+      "saveError": "ማስታወቂያ ማስቀመጥ አልተሳካም"
+    },
+    "services": {
+      "title": "አገልግሎቶች",
+      "subtitle": "በመነሻ ገጹ ላይ የተዘረዘሩ አገልግሎቶች",
+      "addButton": "አገልግሎት ጨምር",
+      "addTitle": "አገልግሎት ጨምር",
+      "editTitle": "አገልግሎት አስተካክል",
+      "icon": "አዶ (emoji)",
+      "serviceTitle": "ርዕስ",
+      "description": "መግለጫ",
+      "features": "ገጽታዎች (በመስመር)",
+      "createSuccess": "አገልግሎት ታክሏል",
+      "updateSuccess": "አገልግሎት ተስተካክሏል",
+      "saveError": "አገልግሎት ማስቀመጥ አልተሳካም"
+    }
+  },
+  "booking": {
+    "navCta": "ቀጠሮ ይያዙ",
+    "title": "ቀጠሮ ይያዙ",
+    "subtitle": "ስለ እርስዎ እና መቼ መጎብኘት እንደሚፈልጉ ትንሽ ይንገሩን — ለማረጋገጥ እናገኝዎታለን።",
+    "fullName": "ሙሉ ስም",
+    "phone": "የስልክ ቁጥር",
+    "email": "ኢሜይል (አማራጭ)",
+    "preferredDate": "የተመረጠ ቀን",
+    "preferredTime": "የተመረጠ ሰዓት",
+    "timeAny": "ማንኛውም ሰዓት",
+    "timeMorning": "ጠዋት",
+    "timeAfternoon": "ከሰዓት በኋላ",
+    "timeEvening": "ማታ",
+    "reason": "የጉብኝት ምክንያት (አማራጭ)",
+    "requiredField": "ይህ መስክ ያስፈልጋል",
+    "submit": "ቀጠሮ ይጠይቁ",
+    "submitting": "በመላክ ላይ...",
+    "submitError": "ችግር ተፈጥሯል — እባክዎ እንደገና ይሞክሩ።",
+    "successTitle": "ጥያቄው ደርሷል!",
+    "successMessage": "እናመሰግናለን — ቡድናችን ቀጠሮዎን ለማረጋገጥ በቅርቡ ያገኝዎታል።"
+  },
+  "bookingRequests": {
+    "title": "የቀጠሮ ጥያቄዎች",
+    "subtitle": "ከድረ-ገጹ የተላኩ የቀጠሮ ጥያቄዎች",
+    "searchPlaceholder": "በስም፣ ስልክ፣ ወይም ኢሜይል ይፈልጉ...",
+    "allStatuses": "ሁሉም ሁኔታዎች",
+    "status": {
+      "pending": "በመጠባበቅ ላይ",
+      "contacted": "ተገናኝቷል",
+      "confirmed": "ተረጋግጧል",
+      "declined": "ተቀባይነት አላገኘም",
+      "converted": "ወደ ጉብኝት ተቀይሯል"
+    },
+    "time": {
+      "morning": "ጠዋት",
+      "afternoon": "ከሰዓት በኋላ",
+      "evening": "ማታ"
+    },
+    "markContacted": "እንደተገናኘ ምልክት አድርግ",
+    "convert": "ወደ ጉብኝት ቀይር",
+    "decline": "አትቀበል",
+    "statusUpdateSuccess": "ሁኔታው ተዘምኗል",
+    "statusUpdateError": "ሁኔታ ማዘመን አልተሳካም",
+    "loadError": "የቀጠሮ ጥያቄዎችን መጫን አልተሳካም",
+    "empty": "እስካሁን የቀጠሮ ጥያቄ የለም"
+  }
+}

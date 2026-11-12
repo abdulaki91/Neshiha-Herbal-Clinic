@@ -38,8 +38,24 @@ DateTime? asDate(dynamic v) {
   return DateTime.tryParse(s)?.toLocal();
 }
 
-Map<String, dynamic>? asMap(dynamic v) =>
-    v is Map ? Map<String, dynamic>.from(v) : null;
+Map<String, dynamic>? asMap(dynamic v) {
+  if (v is Map) return Map<String, dynamic>.from(v);
+  // MySQL JSON columns sometimes come back double-encoded as strings.
+  if (v is String && v.trimLeft().startsWith('{')) {
+    final d = jsonDecodeSafe(v);
+    if (d is Map) return Map<String, dynamic>.from(d);
+  }
+  return null;
+}
+
+/// `jsonDecode` that returns null instead of throwing.
+dynamic jsonDecodeSafe(String s) {
+  try {
+    return jsonDecode(s);
+  } catch (_) {
+    return null;
+  }
+}
 
 List<Map<String, dynamic>> asMapList(dynamic v) {
   if (v is! List) return const [];

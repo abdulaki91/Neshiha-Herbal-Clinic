@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/paged_state.dart';
 import '../../data/clinic_api.dart';
 import '../../models/models.dart';
@@ -23,14 +24,14 @@ class _VisitsScreenState extends State<VisitsScreen>
     with PagedLoad<VisitsScreen, Visit> {
   String? _status;
 
-  static const _filters = <(String?, String)>[
-    (null, 'All'),
-    (VisitStatus.waiting, 'Waiting'),
-    (VisitStatus.inConsultation, 'In consultation'),
-    (VisitStatus.pendingPayment, 'Pending payment'),
-    (VisitStatus.completed, 'Completed'),
-    (VisitStatus.scheduled, 'Scheduled'),
-    (VisitStatus.cancelled, 'Cancelled'),
+  List<(String?, String)> get _filters => [
+    (null, tr('common.all')),
+    (VisitStatus.waiting, VisitStatus.label(VisitStatus.waiting)),
+    (VisitStatus.inConsultation, VisitStatus.label(VisitStatus.inConsultation)),
+    (VisitStatus.pendingPayment, VisitStatus.label(VisitStatus.pendingPayment)),
+    (VisitStatus.completed, VisitStatus.label(VisitStatus.completed)),
+    (VisitStatus.scheduled, VisitStatus.label(VisitStatus.scheduled)),
+    (VisitStatus.cancelled, VisitStatus.label(VisitStatus.cancelled)),
   ];
 
   @override
@@ -49,11 +50,11 @@ class _VisitsScreenState extends State<VisitsScreen>
   @override
   Widget build(BuildContext context) {
     return TabPage(
-      title: 'Visits',
-      subtitle: 'Walk-ins, consultations and follow-ups',
+      title: tr('visits.title'),
+      subtitle: tr('visits.subtitle'),
       pushed: widget.pushed,
       fab: GradientFab(
-        label: 'New visit',
+        label: tr('visits.newVisitButton'),
         icon: Icons.add_rounded,
         onPressed: _newVisit,
       ),
@@ -70,10 +71,10 @@ class _VisitsScreenState extends State<VisitsScreen>
       ),
       child: buildPaged(
         padding: TabPage.listPadding(context, widget.pushed, hasFab: true),
-        empty: const EmptyView(
+        empty: EmptyView(
           icon: Icons.event_busy_rounded,
-          title: 'No visits found',
-          subtitle: 'Create a visit to send a patient to the doctor.',
+          title: tr('visits.empty'),
+          subtitle: tr('mobile.visits.emptyHint'),
         ),
         itemBuilder: (context, v) => VisitTile(
           visit: v,

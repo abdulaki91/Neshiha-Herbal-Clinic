@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../core/api_client.dart';
 import '../../core/config.dart';
 import '../../core/socket_service.dart';
+import '../../i18n/i18n.dart';
+import '../../i18n/language_picker.dart';
 import '../../models/models.dart';
 import '../../state/auth_controller.dart';
 import '../../state/theme_controller.dart';
@@ -31,7 +33,7 @@ class MoreScreen extends StatelessWidget {
       child: ListView(
         padding: TabPage.listPadding(context, false, top: 10),
         children: [
-          Text('More', style: context.text.headlineSmall),
+          Text(tr('mobile.nav.more'), style: context.text.headlineSmall),
           const SizedBox(height: 16),
           GlassCard(
             padding: const EdgeInsets.all(18),
@@ -60,7 +62,7 @@ class MoreScreen extends StatelessWidget {
           ),
           if (shell.more.isNotEmpty) ...[
             const SizedBox(height: 22),
-            const SectionTitle('Workspace'),
+            SectionTitle(tr('mobile.more.workspace')),
             GlassCard(
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: Column(
@@ -79,25 +81,28 @@ class MoreScreen extends StatelessWidget {
             ),
           ],
           const SizedBox(height: 22),
-          const SectionTitle('Appearance'),
+          SectionTitle(tr('mobile.more.appearance')),
           Segmented<ThemeMode>(
             value: theme.mode,
             onChanged: theme.setMode,
-            items: const [
-              (ThemeMode.system, 'System', Icons.brightness_auto_rounded),
-              (ThemeMode.light, 'Light', Icons.light_mode_rounded),
-              (ThemeMode.dark, 'Dark', Icons.dark_mode_rounded),
+            items: [
+              (ThemeMode.system, tr('mobile.more.themeSystem'), Icons.brightness_auto_rounded),
+              (ThemeMode.light, tr('mobile.more.themeLight'), Icons.light_mode_rounded),
+              (ThemeMode.dark, tr('mobile.more.themeDark'), Icons.dark_mode_rounded),
             ],
           ),
           const SizedBox(height: 22),
-          const SectionTitle('Account'),
+          SectionTitle(tr('mobile.more.language')),
+          const LanguagePicker(),
+          const SizedBox(height: 22),
+          SectionTitle(tr('mobile.more.account')),
           GlassCard(
             padding: const EdgeInsets.symmetric(vertical: 6),
             child: Column(
               children: [
                 _MenuTile(
                   icon: Icons.lock_reset_rounded,
-                  title: 'Change password',
+                  title: tr('mobile.password.title'),
                   onTap: () => showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
@@ -107,8 +112,8 @@ class MoreScreen extends StatelessWidget {
                 ),
                 _MenuTile(
                   icon: Icons.sensors_rounded,
-                  title: 'Real-time updates',
-                  subtitle: live ? 'Connected' : 'Reconnecting…',
+                  title: tr('dashboard.systemStatus.realtimeUpdates'),
+                  subtitle: live ? tr('dashboard.systemStatus.connected') : tr('dashboard.systemStatus.reconnecting'),
                   trailing: Container(
                     width: 9,
                     height: 9,
@@ -120,7 +125,7 @@ class MoreScreen extends StatelessWidget {
                 ),
                 _MenuTile(
                   icon: Icons.dns_rounded,
-                  title: 'Server',
+                  title: tr('mobile.more.server'),
                   subtitle: Uri.parse(AppConfig.apiUrl).host,
                   trailing: const SizedBox.shrink(),
                 ),
@@ -132,14 +137,14 @@ class MoreScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 6),
             child: _MenuTile(
               icon: Icons.logout_rounded,
-              title: 'Sign out',
+              title: tr('sidebar.logout'),
               color: p.danger,
               trailing: const SizedBox.shrink(),
               onTap: () async {
                 final ok = await confirmAction(context,
-                    title: 'Sign out?',
-                    message: 'You\'ll need your email and password to sign back in.',
-                    confirmLabel: 'Sign out',
+                    title: tr('mobile.more.signOutTitle'),
+                    message: tr('mobile.more.signOutMessage'),
+                    confirmLabel: tr('sidebar.logout'),
                     destructive: true);
                 if (ok) auth.logout();
               },
@@ -147,7 +152,7 @@ class MoreScreen extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           Center(
-            child: Text('Nesiha Herbal Clinic · Staff app',
+            child: Text(tr('mobile.more.footer'),
                 style: context.text.bodySmall),
           ),
         ],
@@ -236,7 +241,7 @@ class _ChangePasswordSheetState extends State<_ChangePasswordSheet> {
     setState(() => _saving = true);
     try {
       await auth.changePassword(_current.text, _next.text);
-      Toast.success('Password changed — please sign in again');
+      Toast.success(tr('mobile.password.changed'));
       if (mounted) Navigator.of(context).pop();
       // The server invalidates every session on a password change.
       await auth.logout();
@@ -258,27 +263,27 @@ class _ChangePasswordSheetState extends State<_ChangePasswordSheet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('Change password', style: context.text.titleLarge),
+              Text(tr('mobile.password.title'), style: context.text.titleLarge),
               const SizedBox(height: 4),
-              Text('At least 8 characters, with upper & lower case letters and a number.',
+              Text(tr('staffForm.passwordHint'),
                   style: context.text.bodySmall),
               const SizedBox(height: 18),
               TextFormField(
                 controller: _current,
                 obscureText: true,
-                decoration: const InputDecoration(labelText: 'Current password'),
-                validator: (v) => (v ?? '').isEmpty ? 'Required' : null,
+                decoration: InputDecoration(labelText: tr('mobile.password.current')),
+                validator: (v) => (v ?? '').isEmpty ? tr('mobile.validation.required') : null,
               ),
               const SizedBox(height: 12),
               TextFormField(
                 controller: _next,
                 obscureText: true,
-                decoration: const InputDecoration(labelText: 'New password'),
+                decoration: InputDecoration(labelText: tr('staff.resetPassword.newPassword')),
                 validator: (v) {
                   final s = v ?? '';
-                  if (s.length < 8) return 'At least 8 characters';
+                  if (s.length < 8) return tr('staffForm.passwordTooShort');
                   if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)').hasMatch(s)) {
-                    return 'Needs upper & lower case letters and a number';
+                    return tr('staffForm.passwordWeak');
                   }
                   return null;
                 },
@@ -287,12 +292,12 @@ class _ChangePasswordSheetState extends State<_ChangePasswordSheet> {
               TextFormField(
                 controller: _confirm,
                 obscureText: true,
-                decoration: const InputDecoration(labelText: 'Confirm new password'),
-                validator: (v) => v != _next.text ? 'Passwords don\'t match' : null,
+                decoration: InputDecoration(labelText: tr('staff.resetPassword.confirmPassword')),
+                validator: (v) => v != _next.text ? tr('staff.resetPassword.mismatch') : null,
               ),
               const SizedBox(height: 20),
               GradientButton(
-                label: 'Update password',
+                label: tr('mobile.password.submit'),
                 icon: Icons.check_rounded,
                 loading: _saving,
                 onPressed: _save,

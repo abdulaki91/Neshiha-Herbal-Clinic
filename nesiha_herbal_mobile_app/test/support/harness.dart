@@ -5,6 +5,7 @@ import 'package:nesiha_herbal_mobile_app/core/api_client.dart';
 import 'package:nesiha_herbal_mobile_app/core/session_storage.dart';
 import 'package:nesiha_herbal_mobile_app/core/socket_service.dart';
 import 'package:nesiha_herbal_mobile_app/data/clinic_api.dart';
+import 'package:nesiha_herbal_mobile_app/i18n/i18n.dart';
 import 'package:nesiha_herbal_mobile_app/state/auth_controller.dart';
 import 'package:nesiha_herbal_mobile_app/state/theme_controller.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +25,11 @@ Future<void> pumpApp(
   WidgetTester tester, {
   String? role,
   ThemeMode mode = ThemeMode.light,
+  String lang = 'en',
 }) async {
-  SharedPreferences.setMockInitialValues({});
+  // The real translation files, as shipped (assets/i18n/…).
+  SharedPreferences.setMockInitialValues({'nhc-language': lang});
+  await tester.runAsync(I18n.instance.load);
   final session = SessionStorage();
   final client = ApiClient(session);
   final socket = SocketService();
@@ -51,6 +55,7 @@ Future<void> pumpApp(
       Provider<ClinicApi>.value(value: FakeApi()),
       ChangeNotifierProvider.value(value: socket),
       ChangeNotifierProvider.value(value: theme),
+      ChangeNotifierProvider.value(value: I18n.instance),
       ChangeNotifierProvider.value(value: auth),
     ],
     child: const NesihaApp(),

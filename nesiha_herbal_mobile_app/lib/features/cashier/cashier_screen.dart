@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import '../../core/api_client.dart';
 import '../../core/async_state.dart';
 import '../../core/format.dart';
+import '../../core/print_docs.dart';
 import '../../data/clinic_api.dart';
+import '../../i18n/i18n.dart';
 import '../../models/models.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/cards.dart';
@@ -27,8 +29,8 @@ class _CashierScreenState extends State<CashierScreen> {
   @override
   Widget build(BuildContext context) {
     return TabPage(
-      title: 'Cashier',
-      subtitle: 'Receive payments & dispense medicine',
+      title: tr('sidebar.cashier'),
+      subtitle: tr('cashier.subtitle'),
       pushed: widget.pushed,
       header: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
@@ -38,9 +40,9 @@ class _CashierScreenState extends State<CashierScreen> {
             setState(() => _tab = v);
             if (v == 1) _recentKey.currentState?.reload(silent: true);
           },
-          items: const [
-            (0, 'Pending', Icons.pending_actions_rounded),
-            (1, 'Recent', Icons.history_rounded),
+          items: [
+            (0, tr('cashier.tabs.pending'), Icons.pending_actions_rounded),
+            (1, tr('cashier.tabs.recent'), Icons.history_rounded),
           ],
         ),
       ),
@@ -96,7 +98,7 @@ class _PendingPaymentsState extends State<_PendingPayments>
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
           child: SearchField(
-            hint: 'Search by patient name or ID',
+            hint: tr('cashier.search.placeholder'),
             onChanged: (v) {
               _search = v;
               reload();
@@ -113,12 +115,12 @@ class _PendingPaymentsState extends State<_PendingPayments>
                       child: list.isEmpty
                           ? ListView(
                               padding: TabPage.listPadding(context, widget.pushed),
-                              children: const [
+                              children: [
                                 EmptyView(
                                   icon: Icons.verified_rounded,
-                                  title: 'No pending payments',
+                                  title: tr('cashier.pending.empty'),
                                   subtitle:
-                                      'Completed consultations with prescriptions appear here.',
+                                      tr('mobile.cashier.pendingHint'),
                                 ),
                               ],
                             )
@@ -171,7 +173,7 @@ class _BillCard extends StatelessWidget {
                       [
                         patient?.patientId ?? '',
                         '#${visit.visitNumber}',
-                        if (visit.doctor != null) 'Dr. ${visit.doctor!.fullName}',
+                        if (visit.doctor != null) '${tr('common.doctorPrefix')} ${visit.doctor!.fullName}',
                       ].where((e) => e.isNotEmpty).join(' · '),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -204,7 +206,7 @@ class _BillCard extends StatelessWidget {
                               : '${rx.medicineName} (${rx.medicine!.strength})',
                           style: context.text.titleSmall,
                         ),
-                        Text('Qty ${rx.quantity} × ${Fmt.money(rx.unitPrice)}',
+                        Text('${tr('common.quantityAbbr')} ${rx.quantity} × ${Fmt.money(rx.unitPrice)}',
                             style: context.text.bodySmall),
                         if (rx.instructions != null)
                           Padding(
@@ -221,27 +223,25 @@ class _BillCard extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 8),
+          // Total above a full-width button: translated labels (e.g.
+          // "Receive & Dispense") are too long to share one row.
           Row(
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Total due', style: context.text.bodySmall),
-                    Text(Fmt.money(_billTotal(visit)),
-                        style: context.text.titleLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.primary)),
-                  ],
-                ),
+                child: Text(tr('cashier.modal.payment.totalDue'),
+                    style: context.text.bodySmall),
               ),
-              GradientButton(
-                label: 'Receive',
-                icon: Icons.payments_rounded,
-                expand: false,
-                height: 48,
-                onPressed: onPay,
-              ),
+              Text(Fmt.money(_billTotal(visit)),
+                  style: context.text.titleLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.primary)),
             ],
+          ),
+          const SizedBox(height: 10),
+          GradientButton(
+            label: tr('cashier.pending.actionButton'),
+            icon: Icons.payments_rounded,
+            height: 48,
+            onPressed: onPay,
           ),
         ],
       ),
@@ -281,10 +281,26 @@ class _PaymentSheetState extends State<_PaymentSheet> {
         'transactionId': _txn.text.trim(),
         'notes': _notes.text.trim(),
       });
-      Toast.success('Payment received — medicine dispensed');
-      if (mounted) Navigator.of(context).pop(true);
+      Toast.success(tr('cashier.toast.paymentSuccess'));
+      if (!mounted) return;
+      final navigator = Navigator.of(context);
+      // Same as the web: offer the printable receipt right after payment.
+      final print = await confirmAction(
+        context,
+        title: tr('cashier.modal.detail.printReceipt'),
+        message: tr('mobile.cashier.printPrompt'),
+        confirmLabel: tr('common.print'),
+      );
+      if (print) {
+        try {
+          await PrintDocs.receipt(visit: widget.visit);
+        } catch (_) {
+          Toast.error(tr('mobile.print.failed'));
+        }
+      }
+      if (mounted) navigator.pop(true);
     } catch (e) {
-      Toast.error(ApiException.from(e).message);
+      Toast.error('${tr('cashier.toast.paymentError')}: ${ApiException.from(e).message}');
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -301,7 +317,7 @@ class _PaymentSheetState extends State<_PaymentSheet> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Receive payment', style: context.text.titleLarge),
+            Text(tr('cashier.modal.payment.title'), style: context.text.titleLarge),
             const SizedBox(height: 4),
             Text(widget.visit.patient?.fullName ?? '',
                 style: context.text.bodyMedium?.copyWith(color: p.inkMuted)),
@@ -318,7 +334,7 @@ class _PaymentSheetState extends State<_PaymentSheet> {
               ),
               child: Column(
                 children: [
-                  Text('Amount due',
+                  Text(tr('cashier.modal.payment.totalDue'),
                       style: TextStyle(
                           color: Colors.white.withValues(alpha: 0.85),
                           fontWeight: FontWeight.w600)),
@@ -330,23 +346,23 @@ class _PaymentSheetState extends State<_PaymentSheet> {
                           fontWeight: FontWeight.w300,
                           letterSpacing: -1)),
                   Text(
-                      '${widget.visit.prescriptions.length} ${widget.visit.prescriptions.length == 1 ? 'item' : 'items'}',
+                      tr('mobile.cashier.items', {'count': widget.visit.prescriptions.length}),
                       style: TextStyle(color: Colors.white.withValues(alpha: 0.8))),
                 ],
               ),
             ),
             const SizedBox(height: 18),
             FieldLabel(
-              'Payment method',
+              trl('cashier.modal.payment.paymentMethodLabel'),
               child: Wrap(
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  for (final (v, l, i) in const [
-                    ('cash', 'Cash', Icons.payments_rounded),
-                    ('transfer', 'Bank transfer', Icons.account_balance_rounded),
-                    ('mobile_money', 'Mobile money', Icons.phone_iphone_rounded),
-                    ('other', 'Other', Icons.more_horiz_rounded),
+                  for (final (v, l, i) in [
+                    ('cash', tr('cashier.paymentMethods.cash'), Icons.payments_rounded),
+                    ('transfer', tr('cashier.paymentMethods.bankTransfer'), Icons.account_balance_rounded),
+                    ('mobile_money', tr('cashier.paymentMethods.mobileMoney'), Icons.phone_iphone_rounded),
+                    ('other', tr('cashier.paymentMethods.other'), Icons.more_horiz_rounded),
                   ])
                     ChoicePill(
                       label: l,
@@ -358,19 +374,19 @@ class _PaymentSheetState extends State<_PaymentSheet> {
               ),
             ),
             if (_method != 'cash')
-              FieldLabel('Transaction ID',
+              FieldLabel(trl('cashier.modal.payment.transactionIdLabel').replaceAll(RegExp(r's*(.*)'), ''),
                   optional: true,
                   child: TextField(
                     controller: _txn,
-                    decoration: const InputDecoration(
-                        hintText: 'Reference from Telebirr / CBE Birr / bank'),
+                    decoration: InputDecoration(
+                        hintText: tr('cashier.modal.payment.transactionIdPlaceholder')),
                   )),
-            FieldLabel('Notes',
+            FieldLabel(tr('cashier.modal.payment.notesLabel'),
                 optional: true,
                 child: TextField(controller: _notes, maxLines: 2)),
             const SizedBox(height: 4),
             GradientButton(
-              label: 'Confirm ${Fmt.money(total)}',
+              label: '${tr('cashier.modal.payment.confirm')} · ${Fmt.money(total)}',
               icon: Icons.check_circle_rounded,
               loading: _saving,
               onPressed: _confirm,
@@ -395,6 +411,26 @@ class _RecentPaymentsState extends State<_RecentPayments>
   @override
   List<String> get refreshOn => const ['payment:completed'];
 
+  /// Reprint a past receipt (the web's payment detail → "Print Receipt").
+  Future<void> _printReceipt(Payment pay) async {
+    final visitId = pay.visit?.id ?? pay.raw['visitId']?.toString();
+    final api = context.read<ClinicApi>();
+    try {
+      final visit = visitId == null ? pay.visit : await api.visit(visitId);
+      if (visit == null) return;
+      final rx = visit.prescriptions.isNotEmpty
+          ? visit.prescriptions
+          : await api.prescriptions(visitId: visit.id);
+      await PrintDocs.receipt(
+        visit: Visit({...visit.raw, if (visit.patient == null) 'patient': pay.patient?.raw}),
+        prescriptions: rx.where((p) => p.status != 'stopped').toList(),
+        payment: pay,
+      );
+    } catch (e) {
+      Toast.error('${tr('mobile.print.failed')}: ${ApiException.from(e).message}');
+    }
+  }
+
   @override
   Future<List<Payment>> fetch() => context.read<ClinicApi>().paymentHistory();
 
@@ -414,15 +450,16 @@ class _RecentPaymentsState extends State<_RecentPayments>
         separatorBuilder: (_, _) => const SizedBox(height: 10),
         itemBuilder: (context, i) {
           if (list.isEmpty) {
-            return const EmptyView(
+            return EmptyView(
               icon: Icons.receipt_long_rounded,
-              title: 'No payments yet',
+              title: tr('cashier.recent.empty'),
             );
           }
           final pay = list[i];
           return GlassCard(
             radius: 20,
             padding: const EdgeInsets.all(14),
+            onTap: () => _printReceipt(pay),
             child: Row(
               children: [
                 Container(

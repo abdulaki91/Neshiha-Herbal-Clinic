@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/api_client.dart';
 import '../../core/format.dart';
 import '../../core/paged_state.dart';
@@ -86,7 +87,7 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
   Future<void> _save() async {
     setState(() => _showErrors = true);
     if (_patient == null) {
-      Toast.error('Choose a patient first');
+      Toast.error(tr('visitForm.patientRequired'));
       return;
     }
     setState(() => _saving = true);
@@ -106,8 +107,8 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
     try {
       await context.read<ClinicApi>().createVisit(payload);
       Toast.success(_mode == VisitMode.appointment
-          ? 'Appointment scheduled'
-          : 'Visit created — patient sent to the doctor');
+          ? tr('visitForm.scheduleSuccess')
+          : tr('visitForm.createSuccess'));
       if (mounted) Navigator.of(context).pop(true);
     } catch (e) {
       Toast.error(ApiException.from(e).message);
@@ -121,16 +122,16 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
     final p = context.palette;
     final isAppt = _mode == VisitMode.appointment;
     return BackdropScaffold(
-      appBar: AppBar(title: Text(isAppt ? 'Schedule appointment' : 'New visit')),
+      appBar: AppBar(title: Text(isAppt ? tr('visitForm.scheduleTitle') : tr('visitForm.title'))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 120),
         children: [
           Segmented<VisitMode>(
             value: _mode,
             onChanged: _setMode,
-            items: const [
-              (VisitMode.walkIn, 'Walk-in', Icons.directions_walk_rounded),
-              (VisitMode.appointment, 'Appointment', Icons.event_rounded),
+            items: [
+              (VisitMode.walkIn, tr('visitForm.mode.walkIn'), Icons.directions_walk_rounded),
+              (VisitMode.appointment, tr('visitForm.mode.appointment'), Icons.event_rounded),
             ],
           ),
           const SizedBox(height: 10),
@@ -138,14 +139,14 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: Text(
               isAppt
-                  ? 'The patient is booked for a future date and checked in on arrival.'
-                  : 'The patient goes straight into the doctor\'s queue.',
+                  ? tr('visitForm.appointmentHint')
+                  : tr('mobile.visit.walkInHint'),
               style: context.text.bodySmall,
             ),
           ),
           const SizedBox(height: 18),
           FieldLabel(
-            'Patient',
+            trl('visitForm.patientLabel'),
             child: GlassCard(
               onTap: _pickPatient,
               radius: 18,
@@ -158,7 +159,7 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
                             color: Theme.of(context).colorScheme.primary),
                         const SizedBox(width: 12),
                         Expanded(
-                          child: Text('Choose a patient',
+                          child: Text(tr('visitForm.patientPlaceholder'),
                               style: context.text.titleSmall
                                   ?.copyWith(color: p.inkSoft)),
                         ),
@@ -180,7 +181,7 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
                             ],
                           ),
                         ),
-                        Text('Change',
+                        Text(tr('mobile.common.change'),
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
                                 fontWeight: FontWeight.w700)),
@@ -193,25 +194,25 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
             const SizedBox(height: 16),
           ],
           FieldLabel(
-            'Chief complaint',
+            tr('visitForm.chiefComplaintLabel'),
             optional: true,
             child: TextField(
               controller: _complaint,
               minLines: 2,
               maxLines: 4,
               textCapitalization: TextCapitalization.sentences,
-              decoration: const InputDecoration(
-                  hintText: 'e.g. Headache and fatigue for 3 days'),
+              decoration: InputDecoration(
+                  hintText: tr('visitForm.chiefComplaintPlaceholder')),
             ),
           ),
           Row(
             children: [
               Expanded(
                 child: FieldLabel(
-                  'Date',
+                  isAppt ? tr('visitForm.appointmentDateLabel') : tr('visitForm.visitDateLabel'),
                   child: _PickerBox(
                     icon: Icons.calendar_today_rounded,
-                    label: Fmt.isToday(_date) ? 'Today' : Fmt.date(_date),
+                    label: Fmt.isToday(_date) ? tr('appointments.dateGroup.today') : Fmt.date(_date),
                     onTap: isAppt ? _pickDate : null,
                   ),
                 ),
@@ -219,7 +220,7 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: FieldLabel(
-                  isAppt ? 'Scheduled time' : 'Arrival time',
+                  isAppt ? tr('visitForm.scheduledTimeLabel') : trl('visitForm.arrivalTimeLabel'),
                   child: _PickerBox(
                     icon: Icons.schedule_rounded,
                     label: _time.format(context),
@@ -234,7 +235,7 @@ class _VisitFormScreenState extends State<VisitFormScreen> {
       bottomBar: SafeArea(
         minimum: const EdgeInsets.fromLTRB(20, 8, 20, 16),
         child: GradientButton(
-          label: isAppt ? 'Schedule appointment' : 'Send to doctor',
+          label: isAppt ? tr('visitForm.scheduleButton') : tr('mobile.visit.sendToDoctor'),
           icon: isAppt ? Icons.event_available_rounded : Icons.send_rounded,
           loading: _saving,
           onPressed: _save,
@@ -309,10 +310,10 @@ class _PatientPickerSheetState extends State<PatientPickerSheet>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Choose patient', style: context.text.titleLarge),
+                Text(tr('visitForm.patientPlaceholder'), style: context.text.titleLarge),
                 const SizedBox(height: 12),
                 SearchField(
-                  hint: 'Search by name, phone or ID',
+                  hint: tr('patients.search.placeholder'),
                   onChanged: (v) {
                     _search = v;
                     refresh(showSpinner: true);
@@ -325,10 +326,10 @@ class _PatientPickerSheetState extends State<PatientPickerSheet>
             child: buildPaged(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
               spacing: 8,
-              empty: const EmptyView(
+              empty: EmptyView(
                 icon: Icons.person_search_rounded,
-                title: 'No patients found',
-                subtitle: 'Register the patient first from the Patients tab.',
+                title: tr('patients.empty.title'),
+                subtitle: tr('mobile.visit.registerFirst'),
               ),
               itemBuilder: (context, pt) => PatientTile(
                 patient: pt,

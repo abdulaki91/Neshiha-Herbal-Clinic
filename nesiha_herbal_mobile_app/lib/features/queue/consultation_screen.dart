@@ -5,15 +5,20 @@ import 'package:provider/provider.dart';
 
 import '../../core/api_client.dart';
 import '../../core/format.dart';
+import '../../core/print_docs.dart';
 import '../../data/clinic_api.dart';
+import '../../i18n/i18n.dart';
 import '../../models/models.dart';
+import '../../state/auth_controller.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/backdrop.dart';
 import '../../widgets/cards.dart';
 import '../../widgets/controls.dart';
 import '../../widgets/feedback.dart';
 import 'herbal_medicine_tab.dart';
+import 'investigations_tab.dart';
 import 'patient_history_tab.dart';
+import 'vitals_tab.dart';
 
 enum SaveState { idle, pending, saving, saved, error }
 
@@ -30,7 +35,8 @@ class ConsultationScreen extends StatefulWidget {
 
 class _ConsultationScreenState extends State<ConsultationScreen>
     with SingleTickerProviderStateMixin {
-  late final TabController _tabs = TabController(length: 3, vsync: this);
+  late final TabController _tabs = TabController(length: 5, vsync: this);
+  bool _printing = false;
   late final Visit v = widget.visit;
 
   late final _complaint = TextEditingController(text: v.chiefComplaint);
@@ -112,8 +118,33 @@ class _ConsultationScreenState extends State<ConsultationScreen>
       return true;
     } catch (e) {
       if (mounted) setState(() => _save = SaveState.error);
-      Toast.error('Couldn\'t save: ${ApiException.from(e).message}');
+      Toast.error('${tr('doctorQueue.toast.saveError')}: ${ApiException.from(e).message}');
       return false;
+    }
+  }
+
+  /// Herbal prescription slip for the patient (PrintablePrescriptionSlip.jsx).
+  Future<void> _print() async {
+    final api = context.read<ClinicApi>();
+    final doctor = context.read<AuthController>().user;
+    setState(() => _printing = true);
+    try {
+      final rx = (await api.prescriptions(visitId: v.id))
+          .where((p) => p.status != 'stopped')
+          .toList();
+      if (rx.isEmpty) {
+        Toast.info(tr('doctorQueue.consultation.printNoPrescriptions'));
+        return;
+      }
+      await PrintDocs.prescriptionSlip(
+        visit: Visit({...v.raw, ..._payload}),
+        prescriptions: rx,
+        doctor: v.doctor ?? (doctor == null ? null : PersonRef(doctor.raw)),
+      );
+    } catch (e) {
+      Toast.error(tr('doctorQueue.consultation.printError'));
+    } finally {
+      if (mounted) setState(() => _printing = false);
     }
   }
 
@@ -136,12 +167,14 @@ class _ConsultationScreenState extends State<ConsultationScreen>
       final total = pending.fold<double>(0, (s, p) => s + p.totalAmount);
       final ok = await confirmAction(
         context,
-        title: 'Complete consultation?',
+        title: tr('mobile.consultation.completeTitle'),
         message: pending.isEmpty
-            ? 'The visit will be marked as completed and the patient leaves your queue.'
-            : '${pending.length} prescribed ${pending.length == 1 ? 'medicine' : 'medicines'} '
-                '(${Fmt.money(total)}) will be sent to the cashier for payment.',
-        confirmLabel: pending.isEmpty ? 'Complete' : 'Send to cashier',
+            ? tr('mobile.consultation.completeMessage')
+            : tr('mobile.consultation.sendToCashierMessage',
+                {'count': pending.length, 'amount': Fmt.money(total)}),
+        confirmLabel: pending.isEmpty
+            ? tr('mobile.consultation.complete')
+            : tr('mobile.consultation.sendToCashier'),
       );
       if (!ok) return;
       await api.updateVisit(v.id, {
@@ -151,8 +184,8 @@ class _ConsultationScreenState extends State<ConsultationScreen>
         'consultationEndTime': Fmt.apiTimeSeconds(DateTime.now()),
       });
       Toast.success(pending.isEmpty
-          ? 'Consultation completed'
-          : 'Consultation completed — sent to the cashier');
+          ? tr('doctorQueue.toast.completeSuccess')
+          : tr('doctorQueue.toast.sentToCashier'));
       _leaving = true;
       if (mounted) Navigator.of(context).pop(true);
     } catch (e) {
@@ -181,15 +214,26 @@ class _ConsultationScreenState extends State<ConsultationScreen>
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(patient?.fullName ?? 'Consultation',
+              Text(patient?.fullName ?? tr('doctorQueue.consultation.title'),
                   maxLines: 1, overflow: TextOverflow.ellipsis),
-              Text('Visit #${v.visitNumber}',
+              Text('${tr('common.visitNumber')}${v.visitNumber}',
                   style: context.text.bodySmall?.copyWith(color: p.inkMuted)),
             ],
           ),
           actions: [
             _SaveIndicator(state: _save),
-            const SizedBox(width: 12),
+            _printing
+                ? const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 14),
+                    child: SizedBox.square(
+                        dimension: 20, child: CircularProgressIndicator(strokeWidth: 2.5)),
+                  )
+                : IconButton(
+                    tooltip: tr('doctorQueue.consultation.printPrescription'),
+                    icon: const Icon(Icons.print_rounded),
+                    onPressed: _print,
+                  ),
+            const SizedBox(width: 4),
           ],
         ),
         body: Column(
@@ -215,6 +259,8 @@ class _ConsultationScreenState extends State<ConsultationScreen>
                 ),
                 child: TabBar(
                   controller: _tabs,
+                  isScrollable: true,
+                  tabAlignment: TabAlignment.start,
                   dividerColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
@@ -225,10 +271,12 @@ class _ConsultationScreenState extends State<ConsultationScreen>
                   unselectedLabelColor: p.inkMuted,
                   labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
                   splashBorderRadius: BorderRadius.circular(22),
-                  tabs: const [
-                    Tab(height: 40, text: 'Notes'),
-                    Tab(height: 40, text: 'Medicine'),
-                    Tab(height: 40, text: 'History'),
+                  tabs: [
+                    Tab(height: 40, text: tr('doctorQueue.tabs.consultation')),
+                    Tab(height: 40, text: tr('doctorQueue.tabs.vitalSigns')),
+                    Tab(height: 40, text: tr('doctorQueue.tabs.investigation')),
+                    Tab(height: 40, text: tr('doctorQueue.tabs.herbalMedicine')),
+                    Tab(height: 40, text: tr('doctorQueue.consultation.patientFileDrawer')),
                   ],
                 ),
               ),
@@ -238,9 +286,11 @@ class _ConsultationScreenState extends State<ConsultationScreen>
                 controller: _tabs,
                 children: [
                   _notesTab(context),
+                  VitalsTab(visitId: v.id),
+                  InvestigationsTab(visit: v),
                   HerbalMedicineTab(visit: v),
                   PatientHistoryTab(
-                      patientId: patient?.id ?? '', currentVisitId: v.id),
+                      patientId: patient?.id ?? asPatientId(v) ?? '', currentVisit: v),
                 ],
               ),
             ),
@@ -255,6 +305,10 @@ class _ConsultationScreenState extends State<ConsultationScreen>
     );
   }
 
+  /// Web labels carry a trailing " *" for required fields; mobile marks
+  /// optional fields instead, so strip it.
+  String _label(String key) => tr(key).replaceAll(RegExp(r'\s*\*\s*$'), '');
+
   Widget _notesTab(BuildContext context) {
     final p = context.palette;
     InputDecoration hint(String h) => InputDecoration(hintText: h);
@@ -266,39 +320,39 @@ class _ConsultationScreenState extends State<ConsultationScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FieldLabel('Chief complaint',
+              FieldLabel(_label('consultation.chiefComplaintLabel'),
                   child: TextField(
                     controller: _complaint,
                     minLines: 2,
                     maxLines: 4,
                     textCapitalization: TextCapitalization.sentences,
-                    decoration: hint('Main reason for the visit'),
+                    decoration: hint(tr('consultation.chiefComplaintPlaceholder')),
                   )),
-              FieldLabel('Symptoms',
+              FieldLabel(tr('consultation.symptomsLabel'),
                   child: TagInput(
                     tags: _symptoms,
-                    hint: 'Add a symptom',
+                    hint: tr('consultation.addSymptomPlaceholder'),
                     tone: Tone.info,
                     onChanged: (t) {
                       setState(() => _symptoms = t);
                       _changed();
                     },
                   )),
-              FieldLabel('History of present illness',
+              FieldLabel(tr('consultation.historyOfPresentIllnessLabel'),
                   child: TextField(
                     controller: _hpi,
                     minLines: 3,
                     maxLines: 8,
                     textCapitalization: TextCapitalization.sentences,
-                    decoration: hint('Onset, duration, progression…'),
+                    decoration: hint(tr('consultation.historyOfPresentIllnessPlaceholder')),
                   )),
-              FieldLabel('Physical examination',
+              FieldLabel(tr('consultation.physicalExaminationLabel'),
                   child: TextField(
                     controller: _exam,
                     minLines: 3,
                     maxLines: 8,
                     textCapitalization: TextCapitalization.sentences,
-                    decoration: hint('Findings on examination'),
+                    decoration: hint(tr('consultation.physicalExaminationPlaceholder')),
                   )),
             ],
           ),
@@ -309,34 +363,34 @@ class _ConsultationScreenState extends State<ConsultationScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FieldLabel('Diagnosis',
+              FieldLabel(tr('consultation.diagnosisLabel'),
                   child: TagInput(
                     tags: _diagnosis,
-                    hint: 'Add a diagnosis',
+                    hint: tr('consultation.addDiagnosisPlaceholder'),
                     tone: Tone.danger,
                     onChanged: (t) {
                       setState(() => _diagnosis = t);
                       _changed();
                     },
                   )),
-              FieldLabel('Treatment plan',
+              FieldLabel(tr('consultation.treatmentPlanLabel'),
                   child: TextField(
                     controller: _plan,
                     minLines: 3,
                     maxLines: 8,
                     textCapitalization: TextCapitalization.sentences,
-                    decoration: hint('Herbal therapy, diet, lifestyle advice…'),
+                    decoration: hint(tr('consultation.treatmentPlanPlaceholder')),
                   )),
-              FieldLabel('Doctor notes',
+              FieldLabel(tr('consultation.doctorNotesLabel'),
                   optional: true,
                   child: TextField(
                     controller: _notes,
                     minLines: 2,
                     maxLines: 6,
                     textCapitalization: TextCapitalization.sentences,
-                    decoration: hint('Private notes'),
+                    decoration: hint(tr('consultation.doctorNotesPlaceholder')),
                   )),
-              FieldLabel('Follow-up date',
+              FieldLabel(tr('consultation.followUpDateLabel'),
                   optional: true,
                   child: Material(
                     color: p.isDark ? const Color(0x0FFFFFFF) : const Color(0xD9FFFFFF),
@@ -368,7 +422,9 @@ class _ConsultationScreenState extends State<ConsultationScreen>
                             const SizedBox(width: 10),
                             Expanded(
                               child: Text(
-                                _followUp == null ? 'No follow-up' : Fmt.date(_followUp),
+                                _followUp == null
+                                    ? tr('mobile.consultation.noFollowUp')
+                                    : Fmt.date(_followUp),
                                 style: TextStyle(
                                   color: _followUp == null ? p.inkMuted : p.ink,
                                   fontWeight: FontWeight.w600,
@@ -428,7 +484,7 @@ class _PatientStrip extends StatelessWidget {
             ),
           ),
           if (visit.arrivalTime != null)
-            StatusPill('Arrived ${Fmt.clock(visit.arrivalTime)}',
+            StatusPill(tr('mobile.visit.arrivedAt', {'time': Fmt.clock(visit.arrivalTime)}),
                 tone: Tone.brand, dot: false),
         ],
       ),
@@ -445,10 +501,10 @@ class _SaveIndicator extends StatelessWidget {
     final p = context.palette;
     final (label, color, pulse) = switch (state) {
       SaveState.idle => ('', p.inkMuted, false),
-      SaveState.pending => ('Unsaved', p.inkMuted, true),
-      SaveState.saving => ('Saving…', p.warning, true),
-      SaveState.saved => ('Saved', p.success, false),
-      SaveState.error => ('Not saved', p.danger, false),
+      SaveState.pending => (tr('mobile.consultation.unsaved'), p.inkMuted, true),
+      SaveState.saving => (tr('common.saving'), p.warning, true),
+      SaveState.saved => (tr('mobile.consultation.saved'), p.success, false),
+      SaveState.error => (tr('mobile.consultation.notSaved'), p.danger, false),
     };
     if (label.isEmpty) return const SizedBox.shrink();
     return AnimatedSwitcher(
@@ -514,7 +570,7 @@ class _CompleteBar extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text('DIAGNOSIS',
+                Text(tr('doctorQueue.consultation.diagnosisTitle').toUpperCase(),
                     style: context.text.labelSmall?.copyWith(
                         color: p.inkMuted,
                         letterSpacing: 1,
@@ -522,7 +578,7 @@ class _CompleteBar extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: diagnosis.isEmpty
-                      ? Text('None recorded yet',
+                      ? Text(tr('doctorQueue.consultation.noDiagnosis'),
                           style: context.text.bodySmall
                               ?.copyWith(fontStyle: FontStyle.italic))
                       : SizedBox(
@@ -540,7 +596,7 @@ class _CompleteBar extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             GradientButton(
-              label: 'Complete consultation',
+              label: tr('doctorQueue.consultation.completeConsultation'),
               icon: Icons.task_alt_rounded,
               loading: busy,
               onPressed: onComplete,

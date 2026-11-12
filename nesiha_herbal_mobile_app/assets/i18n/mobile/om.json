@@ -1,0 +1,170 @@
+{
+  "mobile": {
+    "nav": {
+      "home": "Mana",
+      "more": "Dabalata",
+      "bookings": "Beellamoota"
+    },
+    "common": {
+      "add": "Dabali",
+      "ageYears": "Waggaa {{age}}",
+      "change": "Jijjiiri",
+      "confirm": "Mirkaneessi",
+      "optional": "dirqama miti",
+      "selectDate": "Guyyaa filadhu",
+      "transactionId": "Lakkoofsa daldalaa",
+      "tryAgain": "Irra deebi'ii yaali"
+    },
+    "greeting": {
+      "morning": "Akkam bultan",
+      "afternoon": "Akkam ooltan",
+      "evening": "Akkam galgalteessan"
+    },
+    "time": {
+      "daysAgo": "guyyaa {{d}} dura"
+    },
+    "errors": {
+      "timeout": "Sarvarri deebii kennuuf yeroo dheeraa fudhachaa jira.",
+      "offline": "Sarvara kilinikaa argachuun hin danda'amne. Walqunnamtii interneetii keessan ilaalaa.",
+      "forbidden": "Kana gochuuf hayyama hin qabdan.",
+      "generic": "Rakkoon uumameera. Maaloo irra deebi'aa yaalaa.",
+      "unexpected": "Sarvara irraa deebiin hin eegamne dhufe."
+    },
+    "validation": {
+      "required": "Barbaachisaa dha",
+      "number": "Lakkoofsa sirrii galchaa",
+      "fixFields": "Maaloo bakkeewwan agarsiifaman guutaa"
+    },
+    "login": {
+      "welcome": "Baga deebitan",
+      "subtitle": "Gara portaala hojjettootaa seenaa",
+      "sessionExpired": "Yeroon seensa keessanii xumurameera. Maaloo irra deebi'aa seenaa.",
+      "accountsNote": "Herregni kan uumamu bulchaa kilinikaa keessaniin.",
+      "tagline": "Fayyina uumamaa,\nqajeelfama of eeggannoo qabuun.",
+      "taglineSub": "Dhukkubsattoota, gorsaa fi kaffaltii — harka keessan keessatti.",
+      "toggleTheme": "Bifa jijjiiri"
+    },
+    "more": {
+      "workspace": "Bakka hojii",
+      "appearance": "Bifa",
+      "themeSystem": "Sirna",
+      "themeLight": "Ifaa",
+      "themeDark": "Dukkana",
+      "language": "Afaan",
+      "account": "Herrega",
+      "server": "Sarvara",
+      "signOutTitle": "Ba'uu barbaaddu?",
+      "signOutMessage": "Deebitanii seenuuf imeelii fi jecha darbii keessan isin barbaachisa.",
+      "footer": "Kilinika Qorichaa Aadaa Nashiihaa · Appii hojjettootaa"
+    },
+    "password": {
+      "title": "Jecha darbii jijjiiri",
+      "current": "Jecha darbii amma",
+      "submit": "Jecha darbii haaromsi",
+      "changed": "Jechi darbii jijjiirameera — maaloo irra deebi'aa seenaa"
+    },
+    "visitStatus": {
+      "pendingPayment": "Kaffaltii eeggachaa"
+    },
+    "visit": {
+      "arrivedAt": "Ga'e {{time}}",
+      "walkInHint": "Dhukkubsataan kallattiin tarree doktaraa seena.",
+      "sendToDoctor": "Gara doktaraatti ergi",
+      "registerFirst": "Jalqaba dhukkubsataa fuula Dhukkubsattootaa irraa galmeessaa."
+    },
+    "visits": {
+      "emptyHint": "Dhukkubsataa gara doktaraatti erguuf daawwata uumaa."
+    },
+    "patients": {
+      "noMatches": "Maqaa, bilbila ykn lakkoofsa dhukkubsataa biraa yaalaa."
+    },
+    "patient": {
+      "feeHint": "Kaffaltii yeroo tokkoo, yeroo galmee kaffalamu",
+      "safetyAlert": "Akeekkachiisa nageenyaa",
+      "deleteConfirm": "Galmeen {{name}} haqamuu? Kun deebi'uu hin danda'u.",
+      "deleted": "Galmeen dhukkubsataa haqameera"
+    },
+    "appointments": {
+      "unscheduled": "Hin qindoofne"
+    },
+    "bookings": {
+      "declineMessage": "Gaaffiin beellamaa {{name}} akka dideametti galmaa'a.",
+      "emptyHint": "Gaaffiiwwan marsariitii irratti dhiyaatan battaluma kanatti mul'atu.",
+      "received": "Kan fudhatame {{when}}"
+    },
+    "consultation": {
+      "completeTitle": "Gorsa xumurtu?",
+      "completeMessage": "Daawwanni akka xumurametti galmaa'a, dhukkubsataanis tarree keessan keessaa ba'a.",
+      "sendToCashierMessage": "Qorichoonni ajajaman {{count}} ({{amount}}) kaffaltiif gara kaasheeraatti ergamu.",
+      "complete": "Xumuri",
+      "sendToCashier": "Gara kaasheeraatti ergi",
+      "noFollowUp": "Hordoffii hin jiru",
+      "unsaved": "Hin kuufamne",
+      "saved": "Kuufameera",
+      "notSaved": "Hin kuufamne"
+    },
+    "herbal": {
+      "removeTitle": "Qorichi haqamuu?",
+      "remove": "Haqi",
+      "toPay": "Kan kaffalamu: {{amount}}",
+      "emptyHint": "Kuusaa qorichaa aadaa kilinikaa irraa ajajuuf 'Dabali' tuqaa."
+    },
+    "investigation": {
+      "cancelTitle": "Qo'annoon haqamuu?",
+      "cancelAction": "Gaaffii haqi"
+    },
+    "medicine": {
+      "available": "Ni argama",
+      "inStock": "Kuusaa keessa jira",
+      "lowStock": "Kuusaa xiqqaa",
+      "outOfStock": "Kuusaan dhumeera",
+      "expired": "Yeroon isaa darbeera",
+      "inStockCount": "{{count}} kuusaa keessa",
+      "left": "{{count}} hafe",
+      "expires": "Yeroon isaa {{date}} dhuma"
+    },
+    "pharmacy": {
+      "exceedsPrescribed": "Kan ajajame caalaa kennuun hin danda'amu"
+    },
+    "cashier": {
+      "pendingHint": "Gorsawwan xumuraman kan qoricha ajajame qaban asitti mul'atu.",
+      "items": "Meeshaa {{count}}",
+      "printPrompt": "Nagahee kaffaltii kanaa amma maxxansuu barbaaddu?"
+    },
+    "print": {
+      "prescriptionSubtitle": "Ajaja Qorichaa Aadaa",
+      "disclaimer": "Kun sanada kompiitaraan qophaa'edha",
+      "failed": "Sanada maxxansaaf qopheessuun hin danda'amne"
+    },
+    "reports": {
+      "subtitle": "Kaffaltii galmee fi galii gorsaa",
+      "consultation": "Gorsawwan",
+      "registration": "Kaffaltii galmee",
+      "registrationFees": "Kaffaltii galmee",
+      "paymentsCount": "Kaffaltii {{count}}",
+      "registrationsCount": "Galmee {{count}}",
+      "byDay": "Galii guyyaan",
+      "tapBar": "Ida'ama guyyaa sanaa ilaaluuf utubaa tuqaa",
+      "noRegistrations": "Yeroo kana keessatti kaffaltiin galmee hin argamne"
+    },
+    "staff": {
+      "activateMessage": "{{name}} irra deebi'ee seenuu ni danda'a.",
+      "deactivateMessage": "{{name}} kana booda seenuu hin danda'u.",
+      "lastLogin": "Seensa dhumaa {{when}}"
+    },
+    "content": {
+      "publish": "Maxxansi",
+      "unpublish": "Gara wixineetti deebisi",
+      "fallbackHint": "Dirqama miti — yoo duwwaa ta'e marsariitiin Afaan Ingiliffaa agarsiisa"
+    },
+    "notifications": {
+      "emptyHint": "Beeksisni haaraan asitti mul'ata."
+    },
+    "toast": {
+      "lowStock": "Kuusaa xiqqaa: {{name}}",
+      "registrationFee": "Kaffaltiin galmee fudhatame: {{amount}} ETB",
+      "investigationRequested": "Qo'annoon haaraa gaafatame: {{test}}",
+      "investigationResult": "Bu'aan qophaa'eera: {{test}}"
+    }
+  }
+}

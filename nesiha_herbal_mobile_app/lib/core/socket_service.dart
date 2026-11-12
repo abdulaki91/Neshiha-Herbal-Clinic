@@ -93,7 +93,9 @@ class SocketService extends ChangeNotifier with WidgetsBindingObserver {
     _retryTimer?.cancel();
     if (_sid != null) {
       // Best effort: tell the server we're leaving (Engine.IO "close").
-      _post(_session, _sid!, ['1']).catchError((_) {});
+      // (`catchError((_) {})` would itself throw: its handler must return
+      // a Response, so a failed close surfaced as an unhandled error.)
+      unawaited(_post(_session, _sid!, ['1']).then((_) {}, onError: (Object _) {}));
     }
     _teardown();
     if (_observing) {
@@ -108,6 +110,10 @@ class SocketService extends ChangeNotifier with WidgetsBindingObserver {
     final payload = data == null ? [event] : [event, data];
     _send('42${jsonEncode(payload)}');
   }
+
+  /// Test hook: deliver [event] as if it came from the server.
+  @visibleForTesting
+  void debugInject(SocketEvent event) => _events.add(event);
 
   /// Listen for any of [names]; cancel the returned subscription in dispose().
   StreamSubscription<SocketEvent> on(

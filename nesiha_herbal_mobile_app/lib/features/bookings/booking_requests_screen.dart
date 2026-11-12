@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/api_client.dart';
 import '../../core/format.dart';
 import '../../core/paged_state.dart';
@@ -52,11 +53,11 @@ class _BookingRequestsScreenState extends State<BookingRequestsScreen>
 
   Future<void> _decline(BookingRequest b) async {
     final ok = await confirmAction(context,
-        title: 'Decline request?',
-        message: '${b.fullName}\'s booking request will be marked as declined.',
-        confirmLabel: 'Decline',
+        title: tr('bookingRequests.decline'),
+        message: tr('mobile.bookings.declineMessage', {'name': b.fullName}),
+        confirmLabel: tr('bookingRequests.decline'),
         destructive: true);
-    if (ok) _setStatus(b, 'declined', 'Request declined');
+    if (ok) _setStatus(b, 'declined', tr('bookingRequests.statusUpdateSuccess'));
   }
 
   /// Registration needs more than the public form collects, so convert opens
@@ -84,16 +85,16 @@ class _BookingRequestsScreenState extends State<BookingRequestsScreen>
   @override
   Widget build(BuildContext context) {
     return TabPage(
-      title: 'Booking requests',
-      subtitle: 'From the clinic website',
+      title: tr('bookingRequests.title'),
+      subtitle: tr('bookingRequests.subtitle'),
       pushed: widget.pushed,
       header: Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: FilterChips<String?>(
           value: _status,
           items: [
-            (null, 'All'),
-            for (final s in BookingRequest.statuses) (s, Fmt.titleCase(s)),
+            (null, tr('bookingRequests.allStatuses')),
+            for (final s in BookingRequest.statuses) (s, tr('bookingRequests.status.$s')),
           ],
           onChanged: (v) {
             setState(() => _status = v);
@@ -105,13 +106,13 @@ class _BookingRequestsScreenState extends State<BookingRequestsScreen>
         padding: TabPage.listPadding(context, widget.pushed),
         empty: EmptyView(
           icon: Icons.inbox_outlined,
-          title: _status == 'pending' ? 'No new requests' : 'Nothing here',
-          subtitle: 'Requests made on the website appear here instantly.',
+          title: tr('bookingRequests.empty'),
+          subtitle: tr('mobile.bookings.emptyHint'),
         ),
         itemBuilder: (context, b) => _BookingCard(
           booking: b,
           busy: _busy.contains(b.id),
-          onContacted: () => _setStatus(b, 'contacted', 'Marked as contacted'),
+          onContacted: () => _setStatus(b, 'contacted', tr('bookingRequests.statusUpdateSuccess')),
           onConvert: () => _convert(b),
           onDecline: () => _decline(b),
         ),
@@ -151,7 +152,7 @@ class _BookingCard extends StatelessWidget {
               Expanded(
                 child: Text(b.fullName, style: context.text.titleMedium),
               ),
-              StatusPill(Fmt.titleCase(b.status), tone: bookingTone(b.status)),
+              StatusPill(I18n.instance.maybe('bookingRequests.status.${b.status}') ?? Fmt.titleCase(b.status), tone: bookingTone(b.status)),
             ],
           ),
           const SizedBox(height: 10),
@@ -165,7 +166,7 @@ class _BookingCard extends StatelessWidget {
                 Icons.event_rounded,
                 [
                   Fmt.date(b.preferredDate),
-                  if (b.preferredTime != null) Fmt.titleCase(b.preferredTime),
+                  if (b.preferredTime != null) I18n.instance.maybe('bookingRequests.time.${b.preferredTime}') ?? Fmt.titleCase(b.preferredTime),
                 ].join(' · '),
               ),
             ],
@@ -178,7 +179,7 @@ class _BookingCard extends StatelessWidget {
           ],
           if (b.createdAt != null) ...[
             const SizedBox(height: 8),
-            Text('Received ${Fmt.relative(b.createdAt)}', style: context.text.bodySmall),
+            Text(tr('mobile.bookings.received', {'when': Fmt.relative(b.createdAt)}), style: context.text.bodySmall),
           ],
           if (open) ...[
             const SizedBox(height: 14),
@@ -188,7 +189,7 @@ class _BookingCard extends StatelessWidget {
                   child: FilledButton.icon(
                     onPressed: busy ? null : onConvert,
                     icon: const Icon(Icons.person_add_alt_1_rounded, size: 18),
-                    label: const Text('Register'),
+                    label: Text(tr('bookingRequests.convert')),
                     style: FilledButton.styleFrom(
                       backgroundColor: Brand.b600,
                       foregroundColor: Colors.white,
@@ -203,13 +204,13 @@ class _BookingCard extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: busy ? null : onContacted,
                       style: OutlinedButton.styleFrom(minimumSize: const Size(0, 44)),
-                      child: const Text('Contacted'),
+                      child: Text(tr('bookingRequests.markContacted')),
                     ),
                   ),
                 ],
                 const SizedBox(width: 8),
                 IconButton(
-                  tooltip: 'Decline',
+                  tooltip: tr('bookingRequests.decline'),
                   onPressed: busy ? null : onDecline,
                   icon: Icon(Icons.close_rounded, color: p.danger),
                   style: IconButton.styleFrom(

@@ -1,9 +1,11 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/api_client.dart';
 import '../../core/async_state.dart';
 import '../../core/format.dart';
 import '../../data/clinic_api.dart';
+import '../../i18n/i18n.dart';
 import '../../models/models.dart';
 import '../../state/auth_controller.dart';
 import '../../theme/app_theme.dart';
@@ -13,8 +15,12 @@ import '../../widgets/controls.dart';
 import '../../widgets/feedback.dart';
 import '../visits/visit_form_screen.dart';
 import '../visits/visit_tile.dart';
+import 'patient_file.dart';
 import 'patient_form_screen.dart';
 
+/// One patient's record — the mobile PatientDetailPage.jsx plus the
+/// patient-file panels the web shows beside the consultation (recent
+/// prescriptions, test results, attachments).
 class PatientDetailScreen extends StatefulWidget {
   const PatientDetailScreen({super.key, required this.patientId});
   final String patientId;
@@ -32,10 +38,11 @@ class _PatientDetailScreenState extends State<PatientDetailScreen>
   Future<Patient> fetch() =>
       context.read<ClinicApi>().patientHistory(widget.patientId);
 
-  bool get _canEdit {
-    final role = context.read<AuthController>().role;
-    return role == Roles.dataClerk || role == Roles.doctor;
-  }
+  String get _role => context.read<AuthController>().role;
+
+  // Backend: clerks & doctors edit and upload; only doctors delete.
+  bool get _canEdit => _role == Roles.dataClerk || _role == Roles.doctor;
+  bool get _isDoctor => _role == Roles.doctor;
 
   Future<void> _edit(Patient p) async {
     final saved = await Navigator.of(context).push<Patient>(
@@ -49,18 +56,42 @@ class _PatientDetailScreenState extends State<PatientDetailScreen>
     if (ok == true) reload(silent: true);
   }
 
+  Future<void> _delete(Patient p) async {
+    final ok = await confirmAction(
+      context,
+      title: tr('common.delete'),
+      message: tr('mobile.patient.deleteConfirm', {'name': p.fullName}),
+      confirmLabel: tr('common.delete'),
+      destructive: true,
+    );
+    if (!ok || !mounted) return;
+    try {
+      await context.read<ClinicApi>().deletePatient(p.id);
+      Toast.success(tr('mobile.patient.deleted'));
+      if (mounted) Navigator.of(context).pop(true);
+    } catch (e) {
+      Toast.error(ApiException.from(e).message);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final patient = data;
     return BackdropScaffold(
       appBar: AppBar(
-        title: const Text('Patient'),
+        title: Text(tr('common.patient')),
         actions: [
           if (patient != null && _canEdit)
             IconButton(
-              tooltip: 'Edit',
+              tooltip: tr('common.edit'),
               icon: const Icon(Icons.edit_rounded),
               onPressed: () => _edit(patient),
+            ),
+          if (patient != null && _isDoctor)
+            IconButton(
+              tooltip: tr('common.delete'),
+              icon: Icon(Icons.delete_outline_rounded, color: context.palette.danger),
+              onPressed: () => _delete(patient),
             ),
           const SizedBox(width: 8),
         ],
@@ -81,18 +112,31 @@ class _PatientDetailScreenState extends State<PatientDetailScreen>
                       ],
                       const SizedBox(height: 14),
                       _Details(patient: patient),
+                      if (_isDoctor) ...[
+                        const SizedBox(height: 14),
+                        RecentPrescriptionsCard(patientId: patient.id),
+                        const SizedBox(height: 14),
+                        RecentInvestigationsCard(patientId: patient.id),
+                      ],
+                      if (_role != Roles.cashier) ...[
+                        const SizedBox(height: 14),
+                        AttachmentsSection(
+                          patientId: patient.id,
+                          canUpload: _canEdit,
+                          canDelete: _isDoctor,
+                        ),
+                      ],
                       const SizedBox(height: 22),
-                      SectionTitle('Visit history',
+                      SectionTitle(tr('patientDetail.visitHistory.title'),
                           icon: Icons.history_rounded,
                           trailing: Text('${patient.visits.length}',
                               style: context.text.labelLarge
                                   ?.copyWith(color: context.palette.inkMuted))),
                       if (patient.visits.isEmpty)
-                        const GlassCard(
+                        GlassCard(
                           child: EmptyView(
                             icon: Icons.event_busy_rounded,
-                            title: 'No visits yet',
-                            subtitle: 'Visits for this patient will appear here.',
+                            title: tr('patientDetail.visitHistory.empty'),
                           ),
                         )
                       else
@@ -108,7 +152,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen>
           ? SafeArea(
               minimum: const EdgeInsets.fromLTRB(20, 8, 20, 16),
               child: GradientButton(
-                label: 'New visit',
+                label: tr('patientDetail.newVisit'),
                 icon: Icons.add_rounded,
                 onPressed: () => _newVisit(patient),
               ),
@@ -134,7 +178,7 @@ class _Header extends StatelessWidget {
           Text(patient.fullName,
               textAlign: TextAlign.center, style: context.text.headlineSmall),
           const SizedBox(height: 4),
-          Text('Patient ID · ${patient.patientId}',
+          Text('${tr('common.patientId')} · ${patient.patientId}',
               style: context.text.bodyMedium?.copyWith(color: p.inkMuted)),
           const SizedBox(height: 14),
           Wrap(
@@ -145,8 +189,10 @@ class _Header extends StatelessWidget {
               _Chip(Icons.person_outline_rounded, patient.ageGender),
               if (patient.phone != null) _Chip(Icons.phone_rounded, patient.phone!),
               if (patient.city != null) _Chip(Icons.place_outlined, patient.city!),
+              if (patient.bloodGroup != null)
+                _Chip(Icons.bloodtype_outlined, patient.bloodGroup!),
               _Chip(Icons.calendar_today_rounded,
-                  'Since ${Fmt.date(patient.createdAt)}'),
+                  '${trl('patientDetail.registered')} ${Fmt.date(patient.createdAt)}'),
             ],
           ),
         ],
@@ -191,13 +237,16 @@ class _Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rows = <(IconData, String, String)>[
-      if (patient.woreda != null) (Icons.map_outlined, 'Woreda', patient.woreda!),
-      if (patient.address != null) (Icons.home_outlined, 'Address', patient.address!),
-      if (patient.email != null) (Icons.mail_outline_rounded, 'Email', patient.email!),
+      if (patient.woreda != null)
+        (Icons.map_outlined, tr('patientForm.woredaLabel'), patient.woreda!),
+      if (patient.address != null)
+        (Icons.home_outlined, tr('patientDetail.detail.address'), patient.address!),
+      if (patient.email != null)
+        (Icons.mail_outline_rounded, tr('patientDetail.detail.email'), patient.email!),
       if (patient.occupation != null)
-        (Icons.work_outline_rounded, 'Occupation', patient.occupation!),
+        (Icons.work_outline_rounded, tr('patientDetail.detail.occupation'), patient.occupation!),
       if (patient.maritalStatus != null)
-        (Icons.favorite_border_rounded, 'Marital status',
+        (Icons.favorite_border_rounded, tr('patientDetail.detail.maritalStatus'),
             Fmt.titleCase(patient.maritalStatus)),
     ];
     if (rows.isEmpty) return const SizedBox.shrink();

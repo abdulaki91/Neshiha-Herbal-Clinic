@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/paged_state.dart';
 import '../../data/clinic_api.dart';
 import '../../models/models.dart';
@@ -47,12 +48,12 @@ class _PatientsScreenState extends State<PatientsScreen>
   @override
   Widget build(BuildContext context) {
     return TabPage(
-      title: 'Patients',
-      subtitle: 'Search and manage patient records',
+      title: tr('patients.title'),
+      subtitle: tr('patients.subtitle'),
       pushed: widget.pushed,
       fab: _canRegister
           ? GradientFab(
-              label: 'Register',
+              label: tr('patients.registerButton'),
               icon: Icons.person_add_alt_1_rounded,
               onPressed: _register,
             )
@@ -60,7 +61,7 @@ class _PatientsScreenState extends State<PatientsScreen>
       header: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
         child: SearchField(
-          hint: 'Search by name, phone or ID',
+          hint: tr('patients.search.placeholder'),
           onChanged: (v) {
             _search = v;
             refresh(showSpinner: true);
@@ -72,10 +73,10 @@ class _PatientsScreenState extends State<PatientsScreen>
             hasFab: _canRegister),
         empty: EmptyView(
           icon: Icons.person_search_rounded,
-          title: _search.isEmpty ? 'No patients yet' : 'No matches',
+          title: tr('patients.empty.title'),
           subtitle: _search.isEmpty
-              ? 'Registered patients will appear here.'
-              : 'Try a different name, phone or patient ID.',
+              ? tr('patients.empty.subtitle')
+              : tr('mobile.patients.noMatches'),
         ),
         itemBuilder: (context, p) => PatientTile(
           patient: p,

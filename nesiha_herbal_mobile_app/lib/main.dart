@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
@@ -7,6 +8,7 @@ import 'core/api_client.dart';
 import 'core/session_storage.dart';
 import 'core/socket_service.dart';
 import 'data/clinic_api.dart';
+import 'i18n/i18n.dart';
 import 'state/auth_controller.dart';
 import 'state/theme_controller.dart';
 
@@ -28,6 +30,9 @@ Future<void> main() async {
   final auth = AuthController(session: session, client: client, socket: socket);
 
   await theme.load();
+  // Month/day names for am & ar (intl ships the data; it just needs loading).
+  await initializeDateFormatting();
+  await I18n.instance.load();
   // Not awaited: the splash shows while the stored session is restored.
   auth.bootstrap();
 
@@ -37,6 +42,7 @@ Future<void> main() async {
       Provider(create: (_) => ClinicApi(client)),
       ChangeNotifierProvider.value(value: socket),
       ChangeNotifierProvider.value(value: theme),
+      ChangeNotifierProvider.value(value: I18n.instance),
       ChangeNotifierProvider.value(value: auth),
     ],
     child: const NesihaApp(),

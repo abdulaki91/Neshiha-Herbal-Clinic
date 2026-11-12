@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 
+import '../i18n/i18n.dart';
 import 'config.dart';
 
 class Fmt {
@@ -41,12 +42,18 @@ class Fmt {
   static String relative(DateTime? d) {
     if (d == null) return '';
     final diff = DateTime.now().difference(d);
-    if (diff.inSeconds < 60) return 'Just now';
-    if (diff.inMinutes < 60) return '${diff.inMinutes}m ago';
-    if (diff.inHours < 24) return '${diff.inHours}h ago';
-    if (diff.inDays < 7) return '${diff.inDays}d ago';
+    if (diff.inSeconds < 60) return capitalize(tr('topbar.time.justNow'));
+    if (diff.inMinutes < 60) return tr('topbar.time.minutesAgo', {'m': diff.inMinutes});
+    if (diff.inHours < 24) return tr('topbar.time.hoursAgo', {'h': diff.inHours});
+    if (diff.inDays < 7) return tr('mobile.time.daysAgo', {'d': diff.inDays});
     return date(d);
   }
+
+  /// Days between two calendar dates (ignores time of day).
+  static int daysBetween(DateTime a, DateTime b) =>
+      DateTime(b.year, b.month, b.day)
+          .difference(DateTime(a.year, a.month, a.day))
+          .inDays;
 
   static bool isToday(DateTime? d) {
     if (d == null) return false;
@@ -56,9 +63,9 @@ class Fmt {
 
   static String greeting() {
     final h = DateTime.now().hour;
-    if (h < 12) return 'Good morning';
-    if (h < 17) return 'Good afternoon';
-    return 'Good evening';
+    if (h < 12) return tr('mobile.greeting.morning');
+    if (h < 17) return tr('mobile.greeting.afternoon');
+    return tr('mobile.greeting.evening');
   }
 
   static String titleCase(String? s) {
@@ -70,6 +77,10 @@ class Fmt {
         .map((w) => w[0].toUpperCase() + w.substring(1))
         .join(' ');
   }
+
+  /// "pending" → "Pending" (keeps the rest of the string as-is).
+  static String capitalize(String s) =>
+      s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);
 
   static String initials(String? first, String? last) {
     final a = (first ?? '').trim();

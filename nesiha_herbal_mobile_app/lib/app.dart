@@ -1,8 +1,10 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'features/auth/login_screen.dart';
+import 'i18n/i18n.dart';
 import 'features/shell/home_shell.dart';
 import 'state/auth_controller.dart';
 import 'state/theme_controller.dart';
@@ -11,16 +13,63 @@ import 'widgets/backdrop.dart';
 import 'widgets/brand.dart';
 import 'widgets/feedback.dart';
 
-class NesihaApp extends StatelessWidget {
+final _delegates = [
+  for (final d in GlobalMaterialLocalizations.delegates)
+    FallbackLocalizationsDelegate<dynamic>(d),
+];
+
+class NesihaApp extends StatefulWidget {
   const NesihaApp({super.key});
+
+  @override
+  State<NesihaApp> createState() => _NesihaAppState();
+}
+
+class _NesihaAppState extends State<NesihaApp> {
+  String _lang = I18n.instance.code;
+
+  @override
+  void initState() {
+    super.initState();
+    Intl.defaultLocale = I18n.instance.intlLocale;
+    I18n.instance.addListener(_onLanguage);
+  }
+
+  @override
+  void dispose() {
+    I18n.instance.removeListener(_onLanguage);
+    super.dispose();
+  }
+
+  /// Text comes from the global `tr()`, which widgets don't "depend" on, so
+  /// a language switch marks every element dirty — a full in-place rebuild
+  /// that keeps navigation, scroll positions and form state.
+  void _onLanguage() {
+    if (_lang == I18n.instance.code) return;
+    _lang = I18n.instance.code;
+    Intl.defaultLocale = I18n.instance.intlLocale;
+    setState(() {});
+    void mark(Element e) {
+      e.markNeedsBuild();
+      e.visitChildren(mark);
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final root = rootNavigatorKey.currentContext;
+      if (root is Element) mark(root);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final mode = context.watch<ThemeController>().mode;
     return MaterialApp(
-      title: 'Nesiha Clinic',
+      title: tr('sidebar.brandName'),
       debugShowCheckedModeBanner: false,
       navigatorKey: rootNavigatorKey,
+      locale: I18n.instance.locale,
+      supportedLocales: I18n.instance.supportedLocales,
+      localizationsDelegates: _delegates,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: mode,

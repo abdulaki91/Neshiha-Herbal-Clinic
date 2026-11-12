@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../i18n/i18n.dart';
 import '../core/api_client.dart';
 import '../core/json.dart';
 import '../core/session_storage.dart';
@@ -72,7 +73,7 @@ class AuthController extends ChangeNotifier {
     final refresh = asString(data['refreshToken']);
     final user = asMap(data['user']);
     if (access == null || user == null) {
-      throw ApiException('Unexpected response from the server.');
+      throw ApiException(tr('mobile.errors.unexpected'));
     }
     await session.saveTokens(access: access, refresh: refresh);
     await session.saveUser(user);

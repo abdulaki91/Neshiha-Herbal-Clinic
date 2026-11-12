@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
 import '../../core/api_client.dart';
 import '../../core/async_state.dart';
 import '../../core/format.dart';
@@ -55,24 +56,24 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
 
   Future<void> _cancel(Visit v) async {
     final ok = await confirmAction(context,
-        title: 'Cancel appointment?',
+        title: tr('appointments.cancel'),
         message:
-            '${v.patient?.fullName ?? 'This patient'}\'s appointment on ${Fmt.date(v.visitDate)} will be cancelled.',
-        confirmLabel: 'Cancel appointment',
+            tr('appointments.cancelConfirm'),
+        confirmLabel: tr('appointments.cancel'),
         destructive: true);
     if (!ok || !mounted) return;
     final api = context.read<ClinicApi>();
     _run(v, () => api.setVisitStatus(v.id, VisitStatus.cancelled),
-        'Appointment cancelled');
+        tr('appointments.toast.cancelSuccess'));
   }
 
   String _groupLabel(DateTime? d) {
-    if (d == null) return 'Unscheduled';
+    if (d == null) return tr('mobile.appointments.unscheduled');
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final diff = DateTime(d.year, d.month, d.day).difference(today).inDays;
-    if (diff == 0) return 'Today';
-    if (diff == 1) return 'Tomorrow';
+    if (diff == 0) return tr('appointments.dateGroup.today');
+    if (diff == 1) return tr('appointments.dateGroup.tomorrow');
     return Fmt.date(d);
   }
 
@@ -85,15 +86,15 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
     }
 
     return TabPage(
-      title: 'Appointments',
-      subtitle: 'Upcoming scheduled visits',
+      title: tr('appointments.title'),
+      subtitle: tr('appointments.subtitle'),
       pushed: widget.pushed,
       fab: GradientFab(
-          label: 'Schedule', icon: Icons.event_rounded, onPressed: _schedule),
+          label: tr('appointments.newButton'), icon: Icons.event_rounded, onPressed: _schedule),
       header: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
         child: SearchField(
-          hint: 'Search by patient',
+          hint: tr('appointments.searchPlaceholder'),
           onChanged: (v) {
             _search = v;
             reload();
@@ -110,10 +111,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
                     padding: TabPage.listPadding(context, widget.pushed, hasFab: true),
                     children: [
                       if (list.isEmpty)
-                        const EmptyView(
+                        EmptyView(
                           icon: Icons.event_available_rounded,
-                          title: 'No upcoming appointments',
-                          subtitle: 'Scheduled visits will appear here.',
+                          title: tr('appointments.empty'),
+                          subtitle: tr('appointments.emptyHint'),
                         ),
                       for (final entry in groups.entries) ...[
                         SectionTitle(entry.key,
@@ -128,7 +129,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
                                 ? () => _run(
                                     v,
                                     () => context.read<ClinicApi>().checkIn(v.id),
-                                    '${v.patient?.firstName ?? 'Patient'} checked in — sent to the queue')
+                                    tr('appointments.toast.checkInSuccess', {'name': v.patient?.fullName ?? ''}))
                                 : null,
                             onCancel: () => _cancel(v),
                           ),
@@ -219,7 +220,7 @@ class _AppointmentCard extends StatelessWidget {
             children: [
               Expanded(
                 child: onCheckIn == null
-                    ? Text('Check-in opens on the appointment day',
+                    ? Text(tr('appointments.checkInDisabledHint'),
                         style: context.text.bodySmall)
                     : FilledButton.icon(
                         onPressed: busy ? null : onCheckIn,
@@ -229,7 +230,7 @@ class _AppointmentCard extends StatelessWidget {
                                 child: CircularProgressIndicator(
                                     strokeWidth: 2, color: Colors.white))
                             : const Icon(Icons.how_to_reg_rounded, size: 18),
-                        label: const Text('Check in'),
+                        label: Text(tr('appointments.checkIn')),
                         style: FilledButton.styleFrom(
                           backgroundColor: Brand.b600,
                           foregroundColor: Colors.white,
@@ -239,7 +240,7 @@ class _AppointmentCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               IconButton(
-                tooltip: 'Cancel appointment',
+                tooltip: tr('appointments.cancel'),
                 onPressed: busy ? null : onCancel,
                 icon: Icon(Icons.event_busy_rounded, color: p.danger),
                 style: IconButton.styleFrom(

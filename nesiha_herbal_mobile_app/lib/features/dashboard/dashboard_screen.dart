@@ -6,6 +6,7 @@ import '../../core/format.dart';
 import '../../core/json.dart';
 import '../../core/socket_service.dart';
 import '../../data/clinic_api.dart';
+import '../../i18n/i18n.dart';
 import '../../models/models.dart';
 import '../../state/auth_controller.dart';
 import '../../theme/app_theme.dart';
@@ -88,6 +89,10 @@ class _DashboardScreenState extends State<DashboardScreen>
     final live = context.watch<SocketService>().isConnected;
     final shell = context.read<ShellController>();
     void go(String id) => shell.goTo(context, id);
+    String h(String k, [Map<String, Object?>? a]) => tr('dashboard.hero.$k', a);
+    _Insight ins(String k, [Map<String, Object?>? a]) =>
+        _Insight(tr('dashboard.insight.$k.headline', a), tr('dashboard.insight.$k.detail', a));
+    final liveLabel = live ? h('chip.live') : h('chip.offline');
 
     switch (role) {
       case Roles.doctor:
@@ -98,47 +103,47 @@ class _DashboardScreenState extends State<DashboardScreen>
         final waiting = asMapList(s['waitingPatients']).map(Visit.new).toList();
         final next = waiting.isNotEmpty ? waiting.first.patient?.fullName : null;
         final insight = queue > 0
-            ? _Insight('Patients are waiting for you.',
-                'In queue: $queue · Next up: ${next ?? '—'}')
+            ? ins('doctorQueue', {'count': queue, 'name': next ?? '—'})
             : d.pendingBookings > 0
-                ? _Insight('New online booking requests need review.',
-                    'Pending requests: ${d.pendingBookings}')
+                ? ins('bookings', {'count': d.pendingBookings})
                 : done > 0
-                    ? _Insight('Your queue is clear — nice work today.',
-                        'Consultations completed today: $done')
-                    : _Insight('No patients in your queue yet.',
-                        'New visits will appear here in real time.');
+                    ? ins('doctorDone', {'count': done})
+                    : ins('doctorIdle');
         final ctaBookings = queue == 0 && d.pendingBookings > 0;
         return [
           _Hero(
             percent: _pct(done, done + queue),
-            caption: done + queue == 0 ? 'No visits yet' : 'Queue cleared',
-            marks: [('In queue', queue), ('Completed', done), ('Prescribed', rx)],
+            caption: done + queue == 0 ? h('ring.noVisits') : h('ring.queueCleared'),
+            marks: [
+              (h('marks.inQueue'), queue),
+              (h('marks.completed'), done),
+              (h('marks.prescriptions'), rx),
+            ],
             insight: insight,
-            ctaLabel: ctaBookings ? 'Review requests' : 'Open queue',
+            ctaLabel: ctaBookings ? h('cta.reviewRequests') : h('cta.openQueue'),
             onCta: () => go(ctaBookings ? 'bookings' : 'queue'),
           ),
           const SizedBox(height: 16),
           _TileGrid(tiles: [
-            _Tile('In queue', '$queue', Icons.groups_rounded, Tone.warning,
-                footer: next != null ? 'Next: $next' : 'Live',
+            _Tile(h('cards.inQueue'), '$queue', Icons.groups_rounded, Tone.warning,
+                footer: next != null ? h('cards.nextPatient', {'name': next}) : liveLabel,
                 live: live),
-            _Tile('Completed today', '$done', Icons.task_alt_rounded, Tone.success),
-            _Tile('Prescriptions', '$rx', Icons.medication_rounded, Tone.brand,
-                footer: '$dispensed of $rx dispensed',
+            _Tile(h('cards.completedToday'), '$done', Icons.task_alt_rounded, Tone.success),
+            _Tile(h('cards.prescriptions'), '$rx', Icons.medication_rounded, Tone.brand,
+                footer: h('cards.dispensedOf', {'dispensed': dispensed, 'total': rx}),
                 progress: rx == 0 ? null : dispensed / rx),
-            _Tile('Booking requests', '${d.pendingBookings}', Icons.inbox_rounded,
+            _Tile(h('cards.bookingRequests'), '${d.pendingBookings}', Icons.inbox_rounded,
                 d.pendingBookings > 0 ? Tone.danger : Tone.violet,
-                footer: 'From the website', onTap: () => go('bookings')),
+                footer: h('cards.bookingsHint'), onTap: () => go('bookings')),
           ]),
           const SizedBox(height: 22),
-          SectionTitle('Waiting patients',
+          SectionTitle(tr('dashboard.doctor.waitingPatients'),
               trailing: waiting.isEmpty
                   ? null
                   : TextButton(
-                      onPressed: () => go('queue'), child: const Text('See queue'))),
+                      onPressed: () => go('queue'), child: Text(h('cta.openQueue')))),
           if (waiting.isEmpty)
-            const _EmptyPanel('No patients waiting right now.')
+            _EmptyPanel(h('timeline.noArrivals'))
           else
             for (var i = 0; i < waiting.length && i < 5; i++)
               _ListRow(
@@ -147,7 +152,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 subtitle: [
                   waiting[i].patient?.ageGender ?? '',
                   if (waiting[i].arrivalTime != null)
-                    'Arrived ${Fmt.clock(waiting[i].arrivalTime)}',
+                    tr('mobile.visit.arrivedAt', {'time': Fmt.clock(waiting[i].arrivalTime)}),
                 ].where((e) => e.isNotEmpty).join(' · '),
                 onTap: () => go('queue'),
               ),
@@ -160,46 +165,47 @@ class _DashboardScreenState extends State<DashboardScreen>
         final seen = (visits - waiting).clamp(0, 1 << 30);
         final recent = asMapList(s['recentPatients']).map(Patient.new).toList();
         final insight = d.pendingBookings > 0
-            ? _Insight('New online booking requests need review.',
-                'Pending requests: ${d.pendingBookings}')
+            ? ins('bookings', {'count': d.pendingBookings})
             : waiting > 0
-                ? _Insight('Patients are waiting to be seen.',
-                    'Waiting now: $waiting. Keeping the queue moving shortens wait times.')
-                : _Insight('Everything is running smoothly — all caught up.',
-                    'New activity will appear here in real time.');
+                ? ins('waiting', {'count': waiting})
+                : ins('allClear');
         return [
           _Hero(
             percent: _pct(seen, visits),
-            caption: visits == 0 ? 'No visits yet' : 'Visits seen',
-            marks: [('Waiting', waiting), ('Visits', visits), ('Registered', registered)],
+            caption: visits == 0 ? h('ring.noVisits') : h('ring.visitsSeen'),
+            marks: [
+              (h('marks.waiting'), waiting),
+              (h('marks.visits'), visits),
+              (h('marks.registered'), registered),
+            ],
             insight: insight,
-            ctaLabel: d.pendingBookings > 0 ? 'Review requests' : 'View patients',
+            ctaLabel: d.pendingBookings > 0 ? h('cta.reviewRequests') : h('cta.viewPatients'),
             onCta: () => go(d.pendingBookings > 0 ? 'bookings' : 'patients'),
           ),
           const SizedBox(height: 16),
           _TileGrid(tiles: [
-            _Tile('Registered today', '$registered', Icons.person_add_alt_1_rounded,
-                Tone.brand, live: live, footer: 'Live'),
-            _Tile("Today's visits", '$visits', Icons.event_note_rounded, Tone.info,
-                footer: '$seen seen · $waiting waiting',
+            _Tile(h('cards.registeredToday'), '$registered', Icons.person_add_alt_1_rounded,
+                Tone.brand, live: live, footer: liveLabel),
+            _Tile(h('cards.todayVisits'), '$visits', Icons.event_note_rounded, Tone.info,
+                footer: '${h('legend.seen')} $seen · ${h('legend.waiting')} $waiting',
                 progress: visits == 0 ? null : seen / visits),
-            _Tile('Waiting now', '$waiting', Icons.hourglass_top_rounded,
+            _Tile(h('cards.waitingNow'), '$waiting', Icons.hourglass_top_rounded,
                 waiting > 0 ? Tone.warning : Tone.success,
-                footer: 'Checked in & waiting'),
-            _Tile('Booking requests', '${d.pendingBookings}', Icons.inbox_rounded,
+                footer: h('cards.waitingHint')),
+            _Tile(h('cards.bookingRequests'), '${d.pendingBookings}', Icons.inbox_rounded,
                 d.pendingBookings > 0 ? Tone.danger : Tone.violet,
-                footer: 'From the website', onTap: () => go('bookings')),
+                footer: h('cards.bookingsHint'), onTap: () => go('bookings')),
           ]),
           const SizedBox(height: 22),
-          const SectionTitle('Recent registrations'),
+          SectionTitle(tr('dashboard.dataClerk.recentRegistrations')),
           if (recent.isEmpty)
-            const _EmptyPanel('No registrations yet.')
+            _EmptyPanel(tr('dashboard.dataClerk.empty.noRegistrations'))
           else
             for (final pt in recent.take(6))
               _ListRow(
                 leading: InitialsAvatar(pt.initials, size: 42),
                 title: pt.fullName,
-                subtitle: 'ID ${pt.patientId}',
+                subtitle: '${tr('common.patientId')} ${pt.patientId}',
                 trailing: Fmt.time(pt.createdAt),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => PatientDetailScreen(patientId: pt.id))),
@@ -212,37 +218,37 @@ class _DashboardScreenState extends State<DashboardScreen>
         final recent = asMapList(s['recentPayments']).map(Payment.new).toList();
         final last = recent.isNotEmpty ? recent.first : null;
         final insight = pending > 0
-            ? _Insight('Visits are waiting for payment.', 'Pending payments: $pending')
-            : _Insight('All payments are settled.',
-                'New payments will appear here in real time.');
+            ? ins('cashierPending', {'count': pending})
+            : ins('cashierClear');
         return [
           _Hero(
             percent: _pct(processed, processed + pending),
-            caption: processed + pending == 0 ? 'No payments yet' : 'Payments cleared',
-            marks: [('Pending', pending), ('Processed', processed)],
+            caption: processed + pending == 0 ? h('ring.noPayments') : h('ring.paymentsCleared'),
+            marks: [(h('marks.pending'), pending), (h('marks.processed'), processed)],
             insight: insight,
-            ctaLabel: 'Open cashier',
+            ctaLabel: h('cta.openCashier'),
             onCta: () => go('cashier'),
           ),
           const SizedBox(height: 16),
           _TileGrid(tiles: [
-            _Tile('Pending payments', '$pending', Icons.pending_actions_rounded,
+            _Tile(h('cards.pendingPayments'), '$pending', Icons.pending_actions_rounded,
                 pending > 0 ? Tone.warning : Tone.success,
-                footer: 'Waiting to be paid', onTap: () => go('cashier')),
-            _Tile('Processed today', '$processed', Icons.receipt_long_rounded,
-                Tone.brand, live: live, footer: 'Live'),
-            _Tile('Last payment', last == null ? '—' : Fmt.time(last.paidAt),
+                footer: h('cards.pendingHint'), onTap: () => go('cashier')),
+            _Tile(h('cards.processedToday'), '$processed', Icons.receipt_long_rounded,
+                Tone.brand, live: live, footer: liveLabel),
+            _Tile(h('cards.lastPayment'), last == null ? '—' : Fmt.time(last.paidAt),
                 Icons.schedule_rounded, Tone.info,
                 footer: last == null
-                    ? 'No payments yet'
+                    ? h('cards.noneYet')
                     : '${last.patient?.fullName ?? ''} · ${Payment.methodLabel(last.method)}'),
-            _Tile('Recent', '${recent.length}', Icons.payments_rounded, Tone.violet,
-                footer: 'Recent transactions'),
+            _Tile(h('cards.paymentMethods'), '${recent.length}', Icons.payments_rounded,
+                Tone.violet,
+                footer: recent.map((r) => Payment.methodLabel(r.method)).toSet().join(', ')),
           ]),
           const SizedBox(height: 22),
-          const SectionTitle('Recent payments'),
+          SectionTitle(tr('dashboard.cashier.recentPayments')),
           if (recent.isEmpty)
-            const _EmptyPanel('No payments yet today.')
+            _EmptyPanel(tr('dashboard.cashier.empty.noPayments'))
           else
             for (final pay in recent.take(8))
               _ListRow(
@@ -265,43 +271,52 @@ class _DashboardScreenState extends State<DashboardScreen>
         final staff = asInt(sum['totalStaff']) ?? 0;
         final patients = asInt(sum['totalPatients']) ?? 0;
         final insight = expired > 0
-            ? _Insight('Some medicines have expired.',
-                'Expired: $expired · Low stock: $low. Remove expired stock before it reaches a patient.')
+            ? ins('expired', {'expired': expired, 'low': low})
             : low > 0
-                ? _Insight('Some medicines are running low.',
-                    'Low stock: $low. Restock soon to avoid gaps in treatment.')
+                ? ins('lowStock', {'count': low})
                 : waiting > 0
-                    ? _Insight('Patients are waiting to be seen.', 'Waiting now: $waiting.')
-                    : _Insight('Everything is running smoothly — all caught up.',
-                        'New activity will appear here in real time.');
+                    ? ins('waiting', {'count': waiting})
+                    : ins('allClear');
         return [
           _Hero(
             percent: _pct(completed, visits),
-            caption: visits == 0 ? 'No visits yet' : 'Visits completed',
-            marks: [('Waiting', waiting), ('Completed', completed), ('Visits', visits)],
+            caption: visits == 0 ? h('ring.noVisits') : h('ring.visitsCompleted'),
+            marks: [
+              (h('marks.waiting'), waiting),
+              (h('marks.completed'), completed),
+              (h('marks.visits'), visits),
+            ],
             insight: insight,
-            ctaLabel: 'Manage staff',
+            ctaLabel: h('cta.manageStaff'),
             onCta: () => go('staff'),
           ),
           const SizedBox(height: 16),
           _TileGrid(tiles: [
-            _Tile("Today's visits", '$visits', Icons.event_note_rounded, Tone.info,
+            _Tile(h('cards.todayVisits'), '$visits', Icons.event_note_rounded, Tone.info,
                 progress: visits == 0 ? null : completed / visits,
-                footer: '$completed completed'),
-            _Tile('Total patients', Fmt.count(patients), Icons.people_alt_rounded,
-                Tone.brand, live: live, footer: 'Active records'),
-            _Tile('Staff', '$staff', Icons.badge_rounded, Tone.violet,
-                footer: '$doctors doctors', onTap: () => go('staff')),
-            _Tile('Medicine alerts', '${low + expired}', Icons.local_florist_rounded,
+                footer: '${h('legend.completed')} $completed'),
+            _Tile(h('cards.totalPatients'), Fmt.count(patients), Icons.people_alt_rounded,
+                Tone.brand, live: live, footer: h('cards.activeRecords')),
+            _Tile(h('cards.staff'), '$staff', Icons.badge_rounded, Tone.violet,
+                footer: '${h('legend.doctors')} $doctors', onTap: () => go('staff')),
+            _Tile(h('cards.medicineStock'), '${low + expired}', Icons.local_florist_rounded,
                 low + expired == 0 ? Tone.success : Tone.danger,
-                footer: '$low low · $expired expired'),
+                footer: '${h('legend.lowStock')} $low · ${h('legend.expired')} $expired'),
           ]),
           const SizedBox(height: 22),
-          const SectionTitle('System status'),
-          _StatusRow(icon: Icons.storage_rounded, label: 'Database', ok: true,
-              text: 'Online'),
-          _StatusRow(icon: Icons.sensors_rounded, label: 'Real-time updates',
-              ok: live, text: live ? 'Connected' : 'Reconnecting'),
+          SectionTitle(tr('dashboard.systemStatus.title')),
+          _StatusRow(
+              icon: Icons.storage_rounded,
+              label: tr('dashboard.systemStatus.database'),
+              ok: true,
+              text: tr('dashboard.systemStatus.online')),
+          _StatusRow(
+              icon: Icons.sensors_rounded,
+              label: tr('dashboard.systemStatus.realtimeUpdates'),
+              ok: live,
+              text: live
+                  ? tr('dashboard.systemStatus.connected')
+                  : tr('dashboard.systemStatus.reconnecting')),
         ];
     }
   }
@@ -386,7 +401,7 @@ class _BellButtonState extends State<_BellButton>
   Widget build(BuildContext context) {
     return CircleIconButton(
       icon: Icons.notifications_none_rounded,
-      tooltip: 'Notifications',
+      tooltip: tr('topbar.notifications'),
       badge: data ?? 0,
       onPressed: () async {
         await showNotificationsSheet(context);
@@ -496,7 +511,7 @@ class _Hero extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 18),
-                  Text("Today's insight",
+                  Text(tr('dashboard.hero.insightEyebrow'),
                       style: TextStyle(
                           color: Colors.white.withValues(alpha: 0.85),
                           fontSize: 12.5,
@@ -680,7 +695,7 @@ class _LiveDot extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 5),
-        Text(on ? 'Live' : 'Offline',
+        Text(on ? tr('dashboard.hero.chip.live') : tr('dashboard.hero.chip.offline'),
             style: TextStyle(color: c, fontSize: 11, fontWeight: FontWeight.w700)),
       ],
     );

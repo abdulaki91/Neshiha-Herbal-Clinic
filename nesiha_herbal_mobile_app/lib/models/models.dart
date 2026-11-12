@@ -1,5 +1,6 @@
 import '../core/format.dart';
 import '../core/json.dart';
+import '../i18n/i18n.dart';
 
 /// Staff roles, mirroring ROLES in api/src/config/constants.js.
 class Roles {
@@ -10,14 +11,10 @@ class Roles {
   static const doctor = 'doctor';
   static const cashier = 'cashier';
 
-  static String label(String? role) => switch (role) {
-        superAdmin => 'Super Admin',
-        staffManager => 'Staff Manager',
-        dataClerk => 'Data Clerk',
-        doctor => 'Doctor',
-        cashier => 'Cashier',
-        _ => Fmt.titleCase(role),
-      };
+  static const all = [superAdmin, staffManager, doctor, dataClerk, cashier];
+
+  static String label(String? role) =>
+      I18n.instance.maybe('roles.$role') ?? Fmt.titleCase(role);
 }
 
 class AppUser {
@@ -34,9 +31,17 @@ class AppUser {
   String get status => asString(raw['status']) ?? 'active';
   String? get department => asString(raw['department']);
   String? get specialization => asString(raw['specialization']);
+  String? get licenseNumber => asString(raw['licenseNumber']);
+  String? get address => asString(raw['address']);
+  String? get gender => asString(raw['gender']);
+  String? get dateOfBirth => asString(raw['dateOfBirth']);
   DateTime? get lastLogin => asDate(raw['lastLogin']);
+  DateTime? get createdAt => asDate(raw['createdAt']);
   String get initials => Fmt.initials(firstName, lastName);
   bool get isActive => status == 'active';
+
+  static String statusLabel(String? s) =>
+      I18n.instance.maybe('staff.status.$s') ?? Fmt.titleCase(s);
 }
 
 class PersonRef {
@@ -82,10 +87,12 @@ class Patient {
   DateTime? get createdAt => asDate(raw['createdAt']);
   bool get hasAlerts => allergies.isNotEmpty || chronicDiseases.isNotEmpty;
 
+  String? get bloodGroup => asString(raw['bloodGroup']);
+
   String get ageGender {
     final parts = <String>[
-      if (age != null) '$age yrs',
-      if (gender != null) Fmt.titleCase(gender),
+      if (age != null) tr('mobile.common.ageYears', {'age': age}),
+      if (gender != null) genderLabel(gender),
     ];
     return parts.isEmpty ? '—' : parts.join(' · ');
   }
@@ -107,15 +114,20 @@ class VisitStatus {
   static const cancelled = 'cancelled';
 
   static String label(String? s) => switch (s) {
-        scheduled => 'Scheduled',
-        waiting => 'Waiting',
-        inConsultation => 'In consultation',
-        pendingPayment => 'Pending payment',
-        completed => 'Completed',
-        cancelled => 'Cancelled',
+        scheduled => tr('visits.status.scheduled'),
+        waiting => tr('visits.status.waiting'),
+        inConsultation => tr('visits.status.inConsultation'),
+        pendingPayment => tr('mobile.visitStatus.pendingPayment'),
+        completed => tr('visits.status.completed'),
+        cancelled => tr('visits.status.cancelled'),
         _ => Fmt.titleCase(s),
       };
 }
+
+/// "male" → localized label (patientForm.gender.* on the web).
+String genderLabel(String? g) =>
+    I18n.instance.maybe('patientForm.gender.${g?.toLowerCase()}') ??
+    Fmt.titleCase(g);
 
 class Visit {
   Visit(this.raw);
@@ -139,9 +151,31 @@ class Visit {
   String? get followUpDate => asString(raw['followUpDate']);
   Patient? get patient => Patient.maybe(raw['patient']);
   PersonRef? get doctor => PersonRef.maybe(raw['doctor']);
+  String? get doctorId => asString(raw['doctorId']);
+  String? get visitType => asString(raw['visitType']);
   DateTime? get createdAt => asDate(raw['createdAt']);
   List<Prescription> get prescriptions =>
       asMapList(raw['prescriptions']).map(Prescription.new).toList();
+
+  // Vital signs (stored on the visit row; see VitalSignsForm.jsx).
+  double? get temperature => asDouble(raw['temperature']);
+  int? get bloodPressureSystolic => asInt(raw['bloodPressureSystolic']);
+  int? get bloodPressureDiastolic => asInt(raw['bloodPressureDiastolic']);
+  int? get heartRate => asInt(raw['heartRate']);
+  int? get respiratoryRate => asInt(raw['respiratoryRate']);
+  double? get oxygenSaturation => asDouble(raw['oxygenSaturation']);
+  double? get weight => asDouble(raw['weight']);
+  double? get height => asDouble(raw['height']);
+  double? get bmi => asDouble(raw['bmi']);
+  bool get hasVitals => [
+        temperature,
+        bloodPressureSystolic,
+        heartRate,
+        respiratoryRate,
+        oxygenSaturation,
+        weight,
+        height,
+      ].any((v) => v != null);
 
   String get sortKey =>
       '${asString(raw['visitDate']) ?? ''} ${arrivalTime ?? scheduledTime ?? ''}';
@@ -160,9 +194,161 @@ class Prescription {
   String? get instructions => asString(raw['instructions']);
   String? get dosage => asString(raw['dosage']);
   String? get frequency => asString(raw['frequency']);
+  String? get duration => asString(raw['duration']);
+  String? get route => asString(raw['route']);
+  String? get stopReason => asString(raw['stopReason']);
+  String? get visitId => asString(raw['visitId']);
   Medicine? get medicine => Medicine.maybe(raw['medicine']);
+  Patient? get patient => Patient.maybe(raw['patient']);
+  Visit? get visit {
+    final m = asMap(raw['visit']);
+    return m == null ? null : Visit(m);
+  }
+
+  PersonRef? get doctor => PersonRef.maybe(raw['doctor']);
   DateTime? get prescribedDate => asDate(raw['prescribedDate']);
-  String get medicineName => medicine?.name ?? 'Medicine';
+  DateTime? get dispensedDate => asDate(raw['dispensedDate']);
+  String get medicineName => medicine?.name ?? tr('prescription.medicineFallback');
+
+  static String statusLabel(String? s) {
+    final v = I18n.instance.maybe('prescription.status.$s');
+    return v == null ? Fmt.titleCase(s) : Fmt.capitalize(v);
+  }
+}
+
+/// A lab/imaging request on a visit (Backend/src/models/Investigation.js).
+class Investigation {
+  Investigation(this.raw);
+  final Map<String, dynamic> raw;
+
+  static const types = [
+    ('Blood Test', 'bloodTest'),
+    ('Urine Test', 'urineTest'),
+    ('Stool Test', 'stoolTest'),
+    ('X-Ray', 'xray'),
+    ('Ultrasound', 'ultrasound'),
+    ('CT Scan', 'ctScan'),
+    ('MRI', 'mri'),
+    ('ECG', 'ecg'),
+    ('Biopsy', 'biopsy'),
+    ('Culture', 'cultureTest'),
+    ('Other', 'other'),
+  ];
+  static const urgencies = ['routine', 'urgent', 'stat'];
+
+  String get id => asString(raw['id']) ?? '';
+  String? get visitId => asString(raw['visitId']);
+  String? get patientId => asString(raw['patientId']);
+  String get type => asString(raw['investigationType']) ?? '';
+  String get testName => asString(raw['testName']) ?? '';
+  String? get instructions => asString(raw['instructions']);
+  String get urgency => asString(raw['urgency']) ?? 'routine';
+  String get status => asString(raw['status']) ?? 'requested';
+  DateTime? get requestedDate => asDate(raw['requestedDate']) ?? asDate(raw['createdAt']);
+  DateTime? get scheduledDate => asDate(raw['scheduledDate']);
+  DateTime? get completedDate => asDate(raw['completedDate']);
+  String? get results => asString(raw['results']);
+  String? get resultFile => asString(raw['resultFile']);
+  String? get interpretation => asString(raw['interpretation']);
+  String? get notes => asString(raw['notes']);
+  String? get performedBy => asString(raw['performedBy']);
+  Patient? get patient => Patient.maybe(raw['patient']);
+  bool get isPending => status == 'requested' || status == 'in_progress';
+
+  static String typeLabel(String type) {
+    for (final (value, key) in types) {
+      if (value == type) return tr('investigation.type.$key');
+    }
+    return type;
+  }
+
+  static String statusLabel(String s) =>
+      tr('investigation.status.${s == 'in_progress' ? 'inProgress' : s}');
+  static String urgencyLabel(String u) => tr('laboratory.urgency.$u');
+}
+
+/// A document uploaded against a patient or visit.
+class Attachment {
+  Attachment(this.raw);
+  final Map<String, dynamic> raw;
+
+  String get id => asString(raw['id']) ?? '';
+  String get fileName => asString(raw['fileName']) ?? asString(raw['originalName']) ?? '';
+  String? get filePath => asString(raw['filePath']) ?? asString(raw['path']);
+  String? get fileType => asString(raw['fileType']) ?? asString(raw['mimeType']);
+  int? get fileSize => asInt(raw['fileSize']) ?? asInt(raw['size']);
+  String? get description => asString(raw['description']);
+  String? get visitId => asString(raw['visitId']);
+  DateTime? get createdAt => asDate(raw['createdAt']);
+  PersonRef? get uploader => PersonRef.maybe(raw['uploader'] ?? raw['uploadedByUser']);
+  bool get isImage => (fileType ?? '').startsWith('image/') ||
+      RegExp(r'\.(png|jpe?g|gif|webp)$', caseSensitive: false).hasMatch(fileName);
+  bool get isPdf => (fileType ?? '').contains('pdf') ||
+      fileName.toLowerCase().endsWith('.pdf');
+}
+
+/// Text stored once per interface language: `{"en": "...", "am": "..."}`
+/// (website content and some settings). Reads tolerate double-encoded JSON.
+class Localized {
+  Localized(this.values);
+  final Map<String, String> values;
+
+  static Localized from(dynamic v) {
+    if (v is String) {
+      final s = v.trim();
+      if (s.startsWith('{')) {
+        try {
+          return from(jsonDecodeSafe(s));
+        } catch (_) {}
+      }
+      return Localized({'en': v});
+    }
+    final m = asMap(v);
+    if (m == null) return Localized({});
+    return Localized({
+      for (final e in m.entries)
+        if (e.value != null) e.key: e.value.toString(),
+    });
+  }
+
+  /// Current language, else English, else any non-empty value.
+  String get text {
+    final code = I18n.instance.code;
+    final pick = values[code];
+    if (pick != null && pick.trim().isNotEmpty) return pick;
+    final en = values['en'];
+    if (en != null && en.trim().isNotEmpty) return en;
+    return values.values.firstWhere((s) => s.trim().isNotEmpty, orElse: () => '');
+  }
+
+  Map<String, String> toJson() => {
+        for (final l in I18n.languages) l.code: values[l.code] ?? '',
+      };
+}
+
+/// One row of a website-content collection (testimonials, FAQs, …).
+class ContentItem {
+  ContentItem(this.raw);
+  final Map<String, dynamic> raw;
+
+  String get id => asString(raw['id']) ?? '';
+  String get status => asString(raw['status']) ?? 'draft';
+  bool get isPublished => status == 'published';
+  int get sortOrder => asInt(raw['sortOrder']) ?? 0;
+  Localized loc(String field) => Localized.from(raw[field]);
+  String? str(String field) => asString(raw[field]);
+}
+
+/// Clinic-wide settings (Backend/src/models/Setting.js).
+class ClinicSettings {
+  ClinicSettings(this.raw);
+  final Map<String, dynamic> raw;
+
+  String? str(String k) => asString(raw[k]);
+  int? integer(String k) => asInt(raw[k]);
+  bool flag(String k) => asBool(raw[k]);
+  Localized loc(String k) => Localized.from(raw[k]);
+  List<String> get workingDays => asStringList(raw['workingDays']);
 }
 
 class Medicine {
@@ -185,6 +371,18 @@ class Medicine {
   int get minimumStock => asInt(raw['minimumStock']) ?? 0;
   String? get status => asString(raw['status']);
   DateTime? get expiryDate => asDate(raw['expiryDate']);
+  String? get expiryDateRaw => asString(raw['expiryDate']);
+  String? get barcode => asString(raw['barcode']);
+  String? get manufacturer => asString(raw['manufacturer']);
+  String? get supplier => asString(raw['supplier']);
+  String? get batchNumber => asString(raw['batchNumber']);
+  double? get purchasePrice => asDouble(raw['purchasePrice']);
+  String? get storageLocation => asString(raw['storageLocation']);
+  bool get requiresPrescription => asBool(raw['requiresPrescription'], fallback: true);
+  String? get sideEffects => asString(raw['sideEffects']);
+  String? get contraindications => asString(raw['contraindications']);
+  String? get instructions => asString(raw['instructions']);
+  String? get notes => asString(raw['notes']);
 
   bool get isOut => availableQuantity <= 0 || status == 'out_of_stock';
   bool get isLow =>
@@ -204,12 +402,19 @@ class Payment {
   DateTime? get paidAt => asDate(raw['paidAt']) ?? asDate(raw['createdAt']);
   Patient? get patient => Patient.maybe(raw['patient']);
 
+  String? get notes => asString(raw['notes']);
+  Visit? get visit {
+    final m = asMap(raw['visit']);
+    return m == null ? null : Visit(m);
+  }
+
+  PersonRef? get cashier => PersonRef.maybe(raw['cashier'] ?? raw['processedByUser']);
+
   static String methodLabel(String? m) => switch (m) {
-        'cash' => 'Cash',
-        'transfer' => 'Bank transfer',
-        'mobile_money' => 'Mobile money',
-        'telebirr' => 'Telebirr',
-        'other' => 'Other',
+        'cash' => tr('cashier.paymentMethods.cash'),
+        'transfer' || 'bank_transfer' => tr('cashier.paymentMethods.bankTransfer'),
+        'mobile_money' || 'telebirr' => tr('cashier.paymentMethods.mobileMoney'),
+        'other' => tr('cashier.paymentMethods.other'),
         _ => Fmt.titleCase(m),
       };
 }

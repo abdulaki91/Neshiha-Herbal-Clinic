@@ -1,6 +1,8 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import '../../i18n/i18n.dart';
+import '../../i18n/language_picker.dart';
 import '../../core/api_client.dart';
 import '../../state/auth_controller.dart';
 import '../../state/theme_controller.dart';
@@ -50,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final auth = context.read<AuthController>();
     try {
       await auth.login(_email.text, _password.text);
-      Toast.success('Welcome back, ${auth.user?.firstName ?? ''}');
+      Toast.success(tr('login.toast.welcome', {'firstName': auth.user?.firstName ?? ''}));
     } catch (e) {
       if (!mounted) return;
       setState(() => _error = ApiException.from(e).message);
@@ -82,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: brightness == Brightness.dark
                               ? Icons.light_mode_rounded
                               : Icons.dark_mode_rounded,
-                          tooltip: 'Toggle theme',
+                          tooltip: tr('mobile.login.toggleTheme'),
                           onPressed: () =>
                               context.read<ThemeController>().toggle(brightness),
                         ),
@@ -98,10 +100,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Welcome back',
+                              Text(tr('mobile.login.welcome'),
                                   style: context.text.headlineSmall),
                               const SizedBox(height: 4),
-                              Text('Sign in to the staff portal',
+                              Text(tr('mobile.login.subtitle'),
                                   style: context.text.bodyMedium
                                       ?.copyWith(color: p.inkMuted)),
                               const SizedBox(height: 22),
@@ -109,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _Notice(
                                   icon: Icons.lock_clock_rounded,
                                   text:
-                                      'Your session expired. Please sign in again.',
+                                      tr('mobile.login.sessionExpired'),
                                   color: p.warning,
                                 ),
                                 const SizedBox(height: 14),
@@ -127,16 +129,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 keyboardType: TextInputType.emailAddress,
                                 autofillHints: const [AutofillHints.email],
                                 textInputAction: TextInputAction.next,
-                                decoration: const InputDecoration(
-                                  labelText: 'Email address',
+                                decoration: InputDecoration(
+                                  labelText: tr('login.label.email'),
                                   prefixIcon: Icon(Icons.mail_outline_rounded),
                                 ),
                                 validator: (v) {
                                   final s = v?.trim() ?? '';
-                                  if (s.isEmpty) return 'Email is required';
+                                  if (s.isEmpty) return tr('login.validation.emailRequired');
                                   if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
                                       .hasMatch(s)) {
-                                    return 'Enter a valid email';
+                                    return tr('staffForm.emailInvalid');
                                   }
                                   return null;
                                 },
@@ -149,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 textInputAction: TextInputAction.done,
                                 onFieldSubmitted: (_) => _submit(),
                                 decoration: InputDecoration(
-                                  labelText: 'Password',
+                                  labelText: tr('login.label.password'),
                                   prefixIcon:
                                       const Icon(Icons.lock_outline_rounded),
                                   suffixIcon: IconButton(
@@ -161,12 +163,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 validator: (v) => (v ?? '').isEmpty
-                                    ? 'Password is required'
+                                    ? tr('login.validation.passwordRequired')
                                     : null,
                               ),
                               const SizedBox(height: 24),
                               GradientButton(
-                                label: 'Sign in',
+                                label: tr('login.button.submit'),
                                 icon: Icons.arrow_forward_rounded,
                                 loading: _loading,
                                 onPressed: _submit,
@@ -177,10 +179,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        'Accounts are created by your clinic administrator.',
+                        tr('mobile.login.accountsNote'),
                         textAlign: TextAlign.center,
                         style: context.text.bodySmall,
                       ),
+                      const SizedBox(height: 16),
+                      const LanguagePicker(compact: true),
                     ],
                   ),
                 ),
@@ -230,13 +234,13 @@ class _LoginHero extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     children: [
                       BrandMark(size: 46),
                       SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'Nesiha Herbal Clinic',
+                          tr('login.brandName'),
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
@@ -248,8 +252,8 @@ class _LoginHero extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 36),
-                  const Text(
-                    'Natural healing,\nthoughtfully managed.',
+                  Text(
+                    tr('mobile.login.tagline'),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -260,7 +264,7 @@ class _LoginHero extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Patients, consultations & payments — in your pocket.',
+                    tr('mobile.login.taglineSub'),
                     style: TextStyle(
                       color: Colors.white.withValues(alpha: 0.85),
                       fontSize: 13,
