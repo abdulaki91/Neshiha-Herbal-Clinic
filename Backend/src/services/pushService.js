@@ -2,7 +2,7 @@ import fs from "fs";
 import { Op } from "sequelize";
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import { getMessaging } from "firebase-admin/messaging";
-import { DeviceToken, User } from "../models/index.js";
+import { DeviceToken, Notification, User } from "../models/index.js";
 import { translatePush } from "../config/pushMessages.js";
 import logger from "../config/logger.js";
 
@@ -131,36 +131,66 @@ const send = async (devices, key, params, data) => {
 };
 
 /**
- * Push to every active staff member with one of [roles]. Fire-and-forget:
- * never throws, never delays the request that triggered it.
+ * Store the alert in each recipient's notification inbox (the bell in the
+ * web portal and the app), so it has a badge and stays listed after a
+ * refresh. The text is saved in English; `metadata.key/params` let each
+ * client show it in the user's own language. A quiet
+ * "notifications:changed" socket event refreshes open bells — not
+ * "notification:new", which would toast a second time on top of the live
+ * event that already alerted them.
  */
-export const pushToRoles = (roles, key, params = {}, data = {}) => {
-  if (!getClient()) return;
-  DeviceToken.findAll({
-    include: [
-      {
-        model: User,
-        as: "user",
-        attributes: [],
-        where: { role: { [Op.in]: roles }, status: "active", deletedAt: null },
-      },
-    ],
-    attributes: ["token", "language"],
-  })
-    .then((devices) => send(devices, key, params, data))
-    .catch((error) => logger.error("Push lookup failed:", error));
+const saveToInbox = async (userIds, key, params, data) => {
+  const text = translatePush("en", key, params);
+  await Notification.bulkCreate(
+    userIds.map((userId) => ({
+      userId,
+      type: data.event || key,
+      title: text,
+      message: text,
+      priority: data.priority || "medium",
+      link: data.link || null,
+      metadata: { key, params, destination: data.destination || null },
+    })),
+  );
+  const { emitToUser } = await import("../config/socket.js");
+  for (const id of userIds) emitToUser(id, "notifications:changed", {});
 };
 
-/** Push to specific users (e.g. the doctor who requested a lab test). */
+/**
+ * Alert specific users: save to their notification inbox and (if Firebase
+ * is configured) push to their phones. Fire-and-forget: never throws, never
+ * delays the request that triggered it.
+ */
+const alertUsers = async (userIds, key, params, data) => {
+  if (userIds.length === 0) return;
+  try {
+    await saveToInbox(userIds, key, params, data);
+  } catch (error) {
+    logger.error("Saving notifications failed:", error);
+  }
+  if (!getClient()) return;
+  const devices = await DeviceToken.findAll({
+    where: { userId: { [Op.in]: userIds } },
+    attributes: ["token", "language"],
+  });
+  // FCM data must be strings and only carries what the app needs.
+  await send(devices, key, params, { event: data.event, destination: data.destination });
+};
+
+/** Alert every active staff member with one of [roles]. */
+export const pushToRoles = (roles, key, params = {}, data = {}) => {
+  User.findAll({
+    where: { role: { [Op.in]: roles }, status: "active", deletedAt: null },
+    attributes: ["id"],
+  })
+    .then((users) => alertUsers(users.map((u) => u.id), key, params, data))
+    .catch((error) => logger.error("Alert failed:", error));
+};
+
+/** Alert specific users (e.g. the doctor who requested a lab test). */
 export const pushToUsers = (userIds, key, params = {}, data = {}) => {
   const ids = [...new Set(userIds.filter(Boolean))];
-  if (!getClient() || ids.length === 0) return;
-  DeviceToken.findAll({
-    where: { userId: { [Op.in]: ids } },
-    attributes: ["token", "language"],
-  })
-    .then((devices) => send(devices, key, params, data))
-    .catch((error) => logger.error("Push lookup failed:", error));
+  alertUsers(ids, key, params, data).catch((error) => logger.error("Alert failed:", error));
 };
 
 /** Push a free-text notification (already written in one language). */

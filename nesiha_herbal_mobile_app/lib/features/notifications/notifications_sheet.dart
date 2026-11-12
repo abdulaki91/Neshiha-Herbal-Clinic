@@ -5,6 +5,7 @@ import '../../i18n/i18n.dart';
 import '../../core/api_client.dart';
 import '../../core/async_state.dart';
 import '../../core/format.dart';
+import '../../core/notification_service.dart';
 import '../../data/clinic_api.dart';
 import '../../models/models.dart';
 import '../../theme/app_theme.dart';
@@ -30,7 +31,7 @@ class _NotificationsSheetState extends State<_NotificationsSheet>
   bool _clearing = false;
 
   @override
-  List<String> get refreshOn => const ['notification:new'];
+  List<String> get refreshOn => const ['notification:new', 'notifications:changed'];
 
   @override
   Future<List<AppNotification>> fetch() =>
@@ -62,11 +63,15 @@ class _NotificationsSheetState extends State<_NotificationsSheet>
               children: [
                 Expanded(
                     child: Text(tr('topbar.notifications'), style: context.text.titleLarge)),
+                // Flexible: translated labels (e.g. Amharic) can be long.
                 if (list.isNotEmpty)
-                  TextButton.icon(
-                    onPressed: _clearing ? null : _clear,
-                    icon: const Icon(Icons.done_all_rounded, size: 18),
-                    label: Text(tr('topbar.markAllRead')),
+                  Flexible(
+                    child: TextButton.icon(
+                      onPressed: _clearing ? null : _clear,
+                      icon: const Icon(Icons.done_all_rounded, size: 18),
+                      label: Text(tr('topbar.markAllRead'),
+                          maxLines: 2, textAlign: TextAlign.end),
+                    ),
                   ),
               ],
             ),
@@ -94,7 +99,7 @@ class _NotificationsSheetState extends State<_NotificationsSheet>
                                 'warning' || 'high' => p.warning,
                                 _ => Brand.b500,
                               };
-                              return Container(
+                              final card = Container(
                                 padding: const EdgeInsets.all(14),
                                 decoration: BoxDecoration(
                                   color: n.isRead
@@ -117,10 +122,9 @@ class _NotificationsSheetState extends State<_NotificationsSheet>
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(n.title,
+                                          Text(n.text,
                                               style: context.text.titleSmall),
-                                          if (n.message != null &&
-                                              n.message != n.title) ...[
+                                          if (n.hasDetail) ...[
                                             const SizedBox(height: 2),
                                             Text(n.message!,
                                                 style: context.text.bodyMedium),
@@ -133,6 +137,17 @@ class _NotificationsSheetState extends State<_NotificationsSheet>
                                     ),
                                   ],
                                 ),
+                              );
+                              final dest = n.destination;
+                              if (dest == null) return card;
+                              // Tap → close the sheet and open the related
+                              // screen (HomeShell listens to `tapped`).
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                  NotificationService.instance.open(dest);
+                                },
+                                child: card,
                               );
                             },
                           ),

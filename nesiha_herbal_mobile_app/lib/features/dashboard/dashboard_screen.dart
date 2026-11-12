@@ -386,6 +386,7 @@ class _BellButtonState extends State<_BellButton>
   @override
   List<String> get refreshOn => const [
         'notification:new',
+        'notifications:changed',
         'patient:registered',
         'payment:completed',
         'visit:status-changed',

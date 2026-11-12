@@ -178,6 +178,19 @@ class FakeApi extends ClinicApi {
           'isRead': false,
           'createdAt': DateTime.now().toIso8601String(),
         }),
+        // Saved by the backend for an event: shown translated from its key.
+        AppNotification({
+          'id': 'n2',
+          'title': 'Payment received: 450 ETB',
+          'message': 'Payment received: 450 ETB',
+          'isRead': false,
+          'metadata': {
+            'key': 'paymentReceived',
+            'params': {'amount': '450'},
+            'destination': 'reports',
+          },
+          'createdAt': DateTime.now().toIso8601String(),
+        }),
       ];
 
   @override

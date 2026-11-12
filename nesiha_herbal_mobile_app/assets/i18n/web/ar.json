@@ -335,7 +335,12 @@
     "medicineDispensed": "تم صرف الدواء للمريض",
     "paymentReceived": "تم استلام الدفع: {{amount}} بر إثيوبي",
     "staffCreated": "تمت إضافة موظف جديد",
-    "newBookingRequest": "طلب حجز جديد من {{name}}"
+    "newBookingRequest": "طلب حجز جديد من {{name}}",
+    "billPending": "فاتورة جديدة بانتظار الدفع: {{name}}",
+    "registrationFee": "تم استلام رسوم التسجيل: {{amount}} بر إثيوبي",
+    "lowStock": "مخزون منخفض: {{name}}",
+    "investigationRequested": "طلب فحص جديد: {{test}}",
+    "investigationResult": "النتائج جاهزة: {{test}}"
   },
   "login": {
     "brandName": "عيادة نصيحة للأعشاب",

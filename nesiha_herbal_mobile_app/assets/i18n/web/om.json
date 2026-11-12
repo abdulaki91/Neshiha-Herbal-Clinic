@@ -335,7 +335,12 @@
     "medicineDispensed": "Qorichi Dhukkubstaaaf kennam",
     "paymentReceived": "Kaffaltii fudhatame: {{amount}} ETB",
     "staffCreated": "Hojjetaan haaraan dabalameera",
-    "newBookingRequest": "Gaaffiin beellamaa haaraa {{name}} irraa"
+    "newBookingRequest": "Gaaffiin beellamaa haaraa {{name}} irraa",
+    "billPending": "Kaffaltii haaraa eeggachaa jira: {{name}}",
+    "registrationFee": "Kaffaltiin galmee fudhatame: {{amount}} ETB",
+    "lowStock": "Kuusaa xiqqaa: {{name}}",
+    "investigationRequested": "Qo'annoon haaraa gaafatame: {{test}}",
+    "investigationResult": "Bu'aan qophaa'eera: {{test}}"
   },
   "login": {
     "brandName": "Kliinika Biqilaa Nesihaa",

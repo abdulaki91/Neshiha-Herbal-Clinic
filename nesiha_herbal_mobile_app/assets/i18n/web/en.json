@@ -358,7 +358,12 @@
     "medicineDispensed": "Medicine dispensed to patient",
     "paymentReceived": "Payment received: {{amount}} ETB",
     "staffCreated": "New staff member added",
-    "newBookingRequest": "New booking request from {{name}}"
+    "newBookingRequest": "New booking request from {{name}}",
+    "billPending": "New bill waiting for payment: {{name}}",
+    "registrationFee": "Registration fee received: {{amount}} ETB",
+    "lowStock": "Low stock: {{name}}",
+    "investigationRequested": "New investigation requested: {{test}}",
+    "investigationResult": "Results ready: {{test}}"
   },
 
   "login": {

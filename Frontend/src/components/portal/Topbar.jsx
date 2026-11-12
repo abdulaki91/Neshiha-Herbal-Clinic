@@ -8,6 +8,28 @@ import axiosInstance from "../../lib/axios";
 import { useNotifications } from "../../hooks/useDashboard";
 import { useSocketEvent } from "../../hooks/useSocketEvent";
 
+// Backend message key (Backend/src/config/pushMessages.js) → translation key.
+const NOTIFICATION_KEYS = {
+  newPatientInQueue: "toast.newPatientInQueue",
+  billPending: "toast.billPending",
+  paymentReceived: "toast.paymentReceived",
+  registrationFee: "toast.registrationFee",
+  lowStock: "toast.lowStock",
+  investigationRequested: "toast.investigationRequested",
+  investigationResult: "toast.investigationResult",
+  bookingRequest: "toast.newBookingRequest",
+  patientRegistered: "toast.patientRegistered",
+  staffCreated: "toast.staffCreated",
+};
+
+const safeParse = (s) => {
+  try {
+    return JSON.parse(s);
+  } catch {
+    return null;
+  }
+};
+
 const Topbar = ({ onMenuClick }) => {
   const { user } = useAuthStore();
   const theme = useThemeStore((s) => s.theme);
@@ -16,7 +38,6 @@ const Topbar = ({ onMenuClick }) => {
   const qc = useQueryClient();
   const { data: notifications = [] } = useNotifications();
   const [unreadCount, setUnreadCount] = useState(0);
-  const [localNotifs, setLocalNotifs] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showLangDropdown, setShowLangDropdown] = useState(false);
   const dropdownRef = useRef(null);
@@ -29,48 +50,28 @@ const Topbar = ({ onMenuClick }) => {
     { code: "ar", label: t("topbar.lang.arabic"), native: t("topbar.lang.nativeArabic") },
   ];
 
-  // Merge API notifications with local real-time ones
-  const allNotifications = useCallback(() => {
-    const apiIds = new Set(notifications.map((n) => n.id));
-    const merged = [...notifications];
-    for (const n of localNotifs) {
-      if (!apiIds.has(n.id)) merged.unshift(n);
-    }
-    return merged;
-  }, [notifications, localNotifs]);
+  // The bell lists the user's stored notifications (the server saves one for
+  // every important event — see Backend/src/services/pushService.js), so
+  // they survive a refresh and match the mobile app. Previously most events
+  // were only kept in memory here and vanished on reload.
+  const allNotifications = useCallback(() => notifications, [notifications]);
 
-  // Update unread count
   useEffect(() => {
-    setUnreadCount(allNotifications().filter((n) => !n.isRead).length);
-  }, [notifications, localNotifs]);
+    setUnreadCount(notifications.filter((n) => !n.isRead).length);
+  }, [notifications]);
 
-  // Real-time: add a local notification (and invalidate the API-backed
-  // list) on each relevant socket event. Each useSocketEvent call owns and
-  // cleans up only its own listener — unlike the old shared attach/detach
-  // pair, unmounting Topbar can never wipe out another component's
-  // listener for the same event (see useSocketEvent.js for why).
-  const addLocalNotification = useCallback((title, message, type = "info") => {
-    setLocalNotifs((prev) =>
-      [{ id: Date.now().toString(), title, message, type, isRead: false, createdAt: new Date().toISOString() }, ...prev].slice(0, 50),
-    );
-  }, []);
+  const refreshNotifications = () => qc.invalidateQueries({ queryKey: ["notifications"] });
+  useSocketEvent("notification:new", refreshNotifications);
+  // Sent after an event alert is saved to this user's inbox.
+  useSocketEvent("notifications:changed", refreshNotifications);
 
-  useSocketEvent("notification:new", (data) => {
-    addLocalNotification(data.title || data.message, data.message || "", data.type);
-    qc.invalidateQueries({ queryKey: ["notifications"] });
-  });
-  useSocketEvent("visit:status-changed", (v) =>
-    addLocalNotification(t("topbar.notification.visitUpdated"), t("topbar.notification.visitStatus", { status: v.status?.replace("_", " ") }), "info"),
-  );
-  useSocketEvent("patient:registered", (p) =>
-    addLocalNotification(t("topbar.notification.newPatient"), t("topbar.notification.patientRegistered", { firstName: p.firstName, lastName: p.lastName }), "success"),
-  );
-  useSocketEvent("payment:completed", (p) =>
-    addLocalNotification(t("topbar.notification.paymentReceived"), t("topbar.notification.paymentAmount", { amount: parseFloat(p.amount || 0).toFixed(2) }), "success"),
-  );
-  useSocketEvent("prescription:created", () =>
-    addLocalNotification(t("topbar.notification.prescriptionAdded"), t("topbar.notification.newPrescription"), "info"),
-  );
+  // Event alerts store a message key + values; show them in the current
+  // language (falls back to the stored English text).
+  const notificationText = (n) => {
+    const meta = typeof n.metadata === "string" ? safeParse(n.metadata) : n.metadata;
+    const key = meta?.key && NOTIFICATION_KEYS[meta.key];
+    return key ? t(key, { ...(meta.params || {}), defaultValue: n.title }) : n.title;
+  };
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -88,7 +89,6 @@ const Topbar = ({ onMenuClick }) => {
     } catch {
       // silent
     }
-    setLocalNotifs((prev) => prev.map((n) => ({ ...n, isRead: true })));
     qc.invalidateQueries({ queryKey: ["notifications"] });
   };
 
@@ -239,10 +239,10 @@ const Topbar = ({ onMenuClick }) => {
                             className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${getTypeColor(n.type)}`}
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                              {n.title}
+                            <p className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">
+                              {notificationText(n)}
                             </p>
-                            {n.message && (
+                            {n.message && n.message !== n.title && (
                               <p className="text-xs text-gray-500 dark:text-white/55 mt-0.5 line-clamp-2">
                                 {n.message}
                               </p>

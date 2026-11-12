@@ -456,4 +456,36 @@ class AppNotification {
   String? get priority => asString(raw['priority']);
   bool get isRead => asBool(raw['isRead']);
   DateTime? get createdAt => asDate(raw['createdAt']);
+
+  /// Event alerts saved by the backend (pushService.saveToInbox) carry the
+  /// message key + values, so they read in the user's current language.
+  Map<String, dynamic>? get metadata => asMap(raw['metadata']);
+  String? get destination => asString(metadata?['destination']);
+
+  /// Backend message key (Backend/src/config/pushMessages.js) → app key.
+  static const _keys = {
+    'newPatientInQueue': 'toast.newPatientInQueue',
+    'billPending': 'mobile.toast.billPending',
+    'paymentReceived': 'toast.paymentReceived',
+    'registrationFee': 'mobile.toast.registrationFee',
+    'lowStock': 'mobile.toast.lowStock',
+    'investigationRequested': 'mobile.toast.investigationRequested',
+    'investigationResult': 'mobile.toast.investigationResult',
+    'bookingRequest': 'toast.newBookingRequest',
+    'patientRegistered': 'toast.patientRegistered',
+    'staffCreated': 'toast.staffCreated',
+  };
+
+  /// The text to show: translated when the backend stored a known key,
+  /// otherwise the stored title (free-text notifications).
+  String get text {
+    final key = _keys[asString(metadata?['key'])];
+    if (key == null) return title;
+    final params = asMap(metadata?['params']) ?? const <String, dynamic>{};
+    return tr(key, params);
+  }
+
+  /// Whether [message] adds anything beyond [text].
+  bool get hasDetail =>
+      metadata?['key'] == null && message != null && message != title;
 }

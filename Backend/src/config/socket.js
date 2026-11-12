@@ -316,7 +316,11 @@ export const emitInvestigationResultAdded = (investigation) => {
   );
   pushToUsers([investigation?.requestedBy], "investigationResult",
     { test: investigation?.testName },
-    { event: "investigation:result-added", destination: "laboratory" });
+    {
+      event: "investigation:result-added",
+      destination: "laboratory",
+      priority: investigation?.urgency === "stat" ? "urgent" : "medium",
+    });
 };
 
 /**

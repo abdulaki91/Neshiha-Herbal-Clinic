@@ -335,7 +335,12 @@
     "medicineDispensed": "መድሃኒት ለታካሚ ተሰጥቷል",
     "paymentReceived": "ክፍያ ተቀብሏል: {{amount}} ብር",
     "staffCreated": "አዲስ ሰራተኛ ታክሏል",
-    "newBookingRequest": "አዲስ የቀጠሮ ጥያቄ ከ{{name}}"
+    "newBookingRequest": "አዲስ የቀጠሮ ጥያቄ ከ{{name}}",
+    "billPending": "ለክፍያ የሚጠብቅ አዲስ ሂሳብ: {{name}}",
+    "registrationFee": "የምዝገባ ክፍያ ተቀብሏል: {{amount}} ብር",
+    "lowStock": "ዝቅተኛ ክምችት: {{name}}",
+    "investigationRequested": "አዲስ ምርመራ ተጠይቋል: {{test}}",
+    "investigationResult": "ውጤት ዝግጁ ነው: {{test}}"
   },
   "login": {
     "brandName": "ነስሃ የእፅዋት ሕክምና ክሊኒክ",

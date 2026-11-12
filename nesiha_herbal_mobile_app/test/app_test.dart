@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:nesiha_herbal_mobile_app/core/format.dart';
 import 'package:nesiha_herbal_mobile_app/core/socket_service.dart';
 import 'package:nesiha_herbal_mobile_app/i18n/i18n.dart';
 import 'package:nesiha_herbal_mobile_app/models/models.dart';
@@ -259,6 +260,18 @@ void main() {
     });
   }
 
+  // Regression: in Arabic the app sent "١٤:٠٥:٠٩" as consultationEndTime and
+  // MySQL rejected it ("Database error occurred" on Complete consultation).
+  testWidgets('API dates and times use Western digits in Arabic', (tester) async {
+    usePhoneViewport(tester);
+    await pumpApp(tester, role: Roles.doctor, lang: 'ar');
+    final d = DateTime(2026, 11, 12, 14, 5, 9);
+    expect(Fmt.apiDate(d), '2026-11-12');
+    expect(Fmt.apiTime(d), '14:05');
+    expect(Fmt.apiTimeSeconds(d), '14:05:09');
+    await unmount(tester);
+  });
+
   testWidgets('language: Amharic and Arabic, switched live', (tester) async {
     usePhoneViewport(tester);
     await pumpApp(tester, role: Roles.doctor, lang: 'am');
@@ -282,6 +295,22 @@ void main() {
     expect(find.text('Queue'), findsWidgets);
     expect(Directionality.of(tester.element(find.text('More').first)),
         TextDirection.ltr);
+    await unmount(tester);
+  });
+
+  testWidgets('bell: badge and stored notifications, translated', (tester) async {
+    usePhoneViewport(tester);
+    await pumpApp(tester, role: Roles.doctor, lang: 'am');
+    // Two unread notifications → badge "2".
+    expect(find.text('2'), findsWidgets);
+    await tester.tap(find.byIcon(Icons.notifications_none_rounded));
+    await tester.pumpAndSettle();
+    // The event notification is shown from its key, in Amharic.
+    expect(find.text('ክፍያ ተቀብሏል: 450 ብር'), findsOneWidget);
+    // Tapping it closes the sheet and opens Reports.
+    await tester.tap(find.text('ክፍያ ተቀብሏል: 450 ብር'));
+    await tester.pumpAndSettle();
+    expect(find.text(tr('sidebar.reports')), findsWidgets);
     await unmount(tester);
   });
 
