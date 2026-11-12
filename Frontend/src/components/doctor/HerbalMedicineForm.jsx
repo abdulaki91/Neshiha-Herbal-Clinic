@@ -136,7 +136,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
       {!showAddForm && (
         <button
           onClick={() => setShowAddForm(true)}
-          className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+          className="flex items-center space-x-2 px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition"
         >
           <FiPlus />
           <span>{t("herbalMedicine.addButton")}</span>
@@ -165,7 +165,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
             <select
               value={formData.medicineId}
               onChange={(e) => handleMedicineSelect(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500"
             >
               <option value="">{t("herbalMedicine.selectPlaceholder")}</option>
               {medicines.map((medicine) => (
@@ -191,7 +191,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, unitPrice: e.target.value })
                 }
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500"
                 placeholder={t("herbalMedicine.unitPricePlaceholder")}
               />
             </div>
@@ -205,19 +205,19 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, quantity: e.target.value })
                 }
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500"
                 placeholder={t("herbalMedicine.quantityPlaceholder")}
               />
             </div>
           </div>
 
           {/* Total */}
-          <div className="bg-emerald-50 p-4 rounded-lg">
+          <div className="bg-brand-50 p-4 rounded-lg">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-medium text-emerald-700">
+              <span className="text-sm font-medium text-brand-700">
                 {t("herbalMedicine.totalLabel")}
               </span>
-              <span className="text-2xl font-bold text-emerald-900">
+              <span className="text-2xl font-bold text-brand-900">
                 {totalAmount} {t("common.currency.etb")}
               </span>
             </div>
@@ -234,7 +234,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
                 setFormData({ ...formData, instructions: e.target.value })
               }
               rows={2}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500"
               placeholder={t("herbalMedicine.instructionsPlaceholder")}
             />
           </div>
@@ -249,7 +249,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
             </button>
             <button
               onClick={handleAddPrescription}
-              className="flex items-center space-x-2 px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+              className="flex items-center space-x-2 px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition"
             >
               <FiSave />
               <span>{t("herbalMedicine.saveButton")}</span>
@@ -262,7 +262,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
       {prescriptions.length > 0 ? (
         <div className="space-y-3">
           <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2">
-            <FiPackage className="text-emerald-600" />
+            <FiPackage className="text-brand-600" />
             <span>{t("herbalMedicine.listTitle")}</span>
           </h4>
           {prescriptions.map((prescription) => (
@@ -286,7 +286,7 @@ const HerbalMedicineForm = ({ visitId, patientId, onSave }) => {
                       {prescription.quantity} x{" "}
                       {parseFloat(prescription.unitPrice || 0).toFixed(2)} {t("common.currency.etb")}
                     </span>
-                    <span className="font-bold text-emerald-700">
+                    <span className="font-bold text-brand-700">
                       {t("herbalMedicine.totalPrefix")}
                       {parseFloat(prescription.totalAmount || 0).toFixed(2)} {t("common.currency.etb")}
                     </span>

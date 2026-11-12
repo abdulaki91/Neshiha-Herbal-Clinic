@@ -291,6 +291,10 @@
     "bookingRequests": "Gaaffii Beellamaa"
   },
   "topbar": {
+    "theme": {
+      "toDark": "Gara haala dukkanaa'aatti jijjiiri",
+      "toLight": "Gara haala ifaatti jijjiiri"
+    },
     "greeting": "Baga nagaa dhufte, {{firstName}}!",
     "notifications": "Beeffannoo",
     "markAllRead": "Hunda akka dubbifame mallattoo godhi",
@@ -433,6 +437,122 @@
     }
   },
   "dashboard": {
+    "hero": {
+      "insightEyebrow": "Hubannoo har'aa",
+      "ring": {
+        "visitsCompleted": "Daawwannaa xumurame",
+        "queueCleared": "Tarree xumurame",
+        "visitsSeen": "Daawwannaa ilaalame",
+        "paymentsCleared": "Kaffaltii raawwatame",
+        "noVisits": "Har'a hanga ammaatti daawwannaan hin jiru",
+        "noPayments": "Har'a hanga ammaatti kaffaltiin hin jiru"
+      },
+      "marks": {
+        "waiting": "Eegaa jiru",
+        "completed": "Xumurame",
+        "visits": "Daawwannaa",
+        "inQueue": "Tarree keessa",
+        "prescriptions": "Ajaja qorichaa",
+        "registered": "Galmaa'an",
+        "pending": "Eegaa jiru",
+        "processed": "Raawwatame"
+      },
+      "legend": {
+        "completed": "Xumurame",
+        "waiting": "Eegaa jiru",
+        "inProgress": "Adeemsa irra",
+        "seen": "Ilaalame",
+        "doctors": "Doktoroota",
+        "otherStaff": "Hojjettoota biroo",
+        "inQueue": "Tarree keessa",
+        "lowStock": "Kuusaa xiqqaa",
+        "expired": "Yeroon isaa darbe"
+      },
+      "cards": {
+        "todayVisits": "Daawwannaa har'aa",
+        "totalPatients": "Dhukkubsattoota waliigalaa",
+        "activeRecords": "Galmee dhukkubsattootaa hojii irra jiru",
+        "staff": "Hojjettoota",
+        "medicineStock": "Akeekkachiisa qorichaa",
+        "inQueue": "Tarree keessa",
+        "nextPatient": "Itti aanu: {{name}}",
+        "completedToday": "Har'a xumuraman",
+        "prescriptions": "Ajaja qorichaa har'aa",
+        "dispensedOf": "{{total}} keessaa {{dispensed}} kennameera",
+        "bookingRequests": "Gaaffii beellamaa",
+        "bookingsHint": "Gaaffiiwwan marsariitii irraa dhufan",
+        "registeredToday": "Har'a galmaa'an",
+        "waitingNow": "Amma eegaa jiru",
+        "waitingHint": "Dhukkubsattoota galanii eegaa jiran",
+        "pendingPayments": "Kaffaltii hin raawwatamne",
+        "pendingHint": "Daawwannaa kaffaltii eegaa jiran",
+        "processedToday": "Har'a raawwataman",
+        "lastPayment": "Kaffaltii dhumaa",
+        "noneYet": "Hanga ammaatti kaffaltiin hin jiru",
+        "paymentMethods": "Mala kaffaltii dhiyoo"
+      },
+      "chip": {
+        "live": "Kallattiin",
+        "offline": "Toora ala",
+        "allGood": "Hundi gaarii dha",
+        "needsAttention": "Xiyyeeffannaa barbaada",
+        "needsReview": "Ilaalamuu qaba",
+        "queueActive": "Tarreen socho'aa jira"
+      },
+      "timeline": {
+        "empty": "Har'a hanga ammaatti sochiin hin jiru",
+        "noArrivals": "Amma namni eegaa jiru hin jiru"
+      },
+      "cta": {
+        "manageStaff": "Hojjettoota bulchi",
+        "openQueue": "Tarree bani",
+        "reviewRequests": "Gaaffiiwwan ilaali",
+        "viewPatients": "Dhukkubsattoota ilaali",
+        "openCashier": "Kaffaltii bani"
+      }
+    },
+    "insight": {
+      "allClear": {
+        "headline": "Wanti hundi sirriitti deemaa jira — hojiin hafe hin jiru.",
+        "detail": "Sochiin haaraan asitti kallattiin mul'ata."
+      },
+      "waiting": {
+        "headline": "Dhukkubsattoonni ilaalamuuf eegaa jiru.",
+        "detail": "Amma eegaa jiru: {{count}}. Tarree socheessuun yeroo eegumsaa gabaabsa."
+      },
+      "expired": {
+        "headline": "Qorichoonni tokko tokko yeroon isaanii darbeera.",
+        "detail": "Yeroon darbe: {{expired}} · Kuusaa xiqqaa: {{low}}. Qoricha yeroon isaa darbe osoo dhukkubsataa hin ga'in balleessaa."
+      },
+      "lowStock": {
+        "headline": "Qorichoonni tokko tokko xumuramaa jiru.",
+        "detail": "Kuusaa xiqqaa: {{count}}. Yaaliin akka hin addaan cinneef dafaa guutaa."
+      },
+      "doctorQueue": {
+        "headline": "Dhukkubsattoonni isin eegaa jiru.",
+        "detail": "Tarree keessa: {{count}} · Itti aanu: {{name}}"
+      },
+      "doctorDone": {
+        "headline": "Tarreen keessan duwwaa dha — har'a hojii gaarii hojjettaniittu.",
+        "detail": "Mariin har'a xumurame: {{count}}"
+      },
+      "doctorIdle": {
+        "headline": "Hanga ammaatti tarree keessan keessa dhukkubsataan hin jiru.",
+        "detail": "Daawwannaan haaraan asitti kallattiin mul'ata."
+      },
+      "bookings": {
+        "headline": "Gaaffiiwwan beellamaa haaraan ilaalamuu qabu.",
+        "detail": "Gaaffiiwwan eegaa jiran: {{count}}"
+      },
+      "cashierPending": {
+        "headline": "Daawwannaawwan kaffaltii eegaa jiru.",
+        "detail": "Kaffaltii hin raawwatamne: {{count}}"
+      },
+      "cashierClear": {
+        "headline": "Kaffaltiiwwan hundi raawwatameera.",
+        "detail": "Kaffaltiiwwan haaraan asitti kallattiin mul'atu."
+      }
+    },
     "title": "Dashboordii",
     "fallback": {
       "title": "Dashboordii"
@@ -452,6 +572,7 @@
       "title": "Islaayidii Ariifataa"
     },
     "systemStatus": {
+      "reconnecting": "Irra deebiin walqunnamaa jira…",
       "title": "Haala Sirnichaa",
       "database": "Daataa Kuusaa",
       "online": "Toora irraa",

@@ -1,14 +1,17 @@
-import { FiBell, FiMenu, FiX, FiCheck, FiGlobe } from "react-icons/fi";
+import { FiBell, FiMenu, FiCheck, FiGlobe, FiMoon, FiSun } from "react-icons/fi";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../store/authStore";
+import useThemeStore from "../../store/themeStore";
 import axiosInstance from "../../lib/axios";
 import { useNotifications } from "../../hooks/useDashboard";
 import { useSocketEvent } from "../../hooks/useSocketEvent";
 
 const Topbar = ({ onMenuClick }) => {
   const { user } = useAuthStore();
+  const theme = useThemeStore((s) => s.theme);
+  const toggleTheme = useThemeStore((s) => s.toggleTheme);
   const { t, i18n } = useTranslation();
   const qc = useQueryClient();
   const { data: notifications = [] } = useNotifications();
@@ -89,17 +92,18 @@ const Topbar = ({ onMenuClick }) => {
     qc.invalidateQueries({ queryKey: ["notifications"] });
   };
 
+  // Colour of the small status dot beside each notification
   const getTypeColor = (type) => {
     switch (type) {
       case "urgent":
       case "error":
-        return "bg-red-100 text-red-700";
+        return "bg-rose-500";
       case "success":
-        return "bg-emerald-100 text-emerald-700";
+        return "bg-green-500";
       case "warning":
-        return "bg-yellow-100 text-yellow-700";
+        return "bg-amber-500";
       default:
-        return "bg-blue-100 text-blue-700";
+        return "bg-brand-500";
     }
   };
 
@@ -113,22 +117,27 @@ const Topbar = ({ onMenuClick }) => {
     return d.toLocaleDateString();
   };
 
+  const isDark = theme === "dark";
+  const pillButton =
+    "relative w-10 h-10 rounded-full flex items-center justify-center text-gray-600 hover:bg-white/80 hover:text-gray-900 transition dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white";
+
   return (
-    <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200/70 sticky top-0 z-10">
-      <div className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center space-x-4">
+    <header className="relative z-20 px-4 sm:px-6 lg:px-8 pt-4">
+      <div className="flex items-center justify-between gap-4 pb-4 border-b border-white/60 dark:border-white/10">
+        <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={onMenuClick}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition"
+            className="lg:hidden w-10 h-10 rounded-full glass-panel flex items-center justify-center text-gray-700 dark:text-white/80"
+            aria-label="Menu"
           >
-            <FiMenu className="w-6 h-6" />
+            <FiMenu className="w-5 h-5" />
           </button>
-          <div>
-            <h2 className="text-xl font-bold text-gray-800">
+          <div className="min-w-0">
+            <h2 className="text-xl sm:text-2xl font-normal tracking-tight text-gray-900 dark:text-white truncate">
               {t("topbar.greeting", { firstName: user?.firstName })}
             </h2>
-            <p className="text-sm text-gray-500">
-              {new Date().toLocaleDateString("en-US", {
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-white/50 truncate">
+              {new Date().toLocaleDateString(i18n.language || undefined, {
                 weekday: "long",
                 year: "numeric",
                 month: "long",
@@ -138,56 +147,71 @@ const Topbar = ({ onMenuClick }) => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-2">
+        {/* Controls pill — mirrors the bell + avatar capsule in the reference */}
+        <div className="glass-panel flex items-center gap-0.5 p-1 rounded-full shrink-0">
           {/* Language Switcher */}
           <div ref={langRef} className="relative">
             <button
               onClick={() => { setShowLangDropdown(!showLangDropdown); setShowDropdown(false); }}
-              className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition text-sm font-medium text-gray-600"
+              className={`${pillButton} sm:w-auto sm:px-3 gap-1.5 text-sm font-medium`}
+              aria-label="Language"
             >
-              <FiGlobe className="w-5 h-5" />
+              <FiGlobe className="w-[18px] h-[18px]" />
               <span className="hidden sm:inline">{i18n.language?.toUpperCase()}</span>
             </button>
             {showLangDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 py-1">
+              <div className="glass-menu absolute right-0 mt-3 w-52 rounded-2xl z-50 p-1.5 animate-fade-in-up">
                 {LANGUAGES.map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => { i18n.changeLanguage(lang.code); setShowLangDropdown(false); }}
-                    className={`w-full text-left px-4 py-2.5 text-sm hover:bg-gray-50 transition flex items-center justify-between ${
-                      i18n.language === lang.code ? "text-emerald-600 font-semibold" : "text-gray-700"
+                    className={`w-full text-left px-3 py-2.5 text-sm rounded-xl transition flex items-center justify-between ${
+                      i18n.language === lang.code
+                        ? "bg-brand-50 text-brand-700 font-semibold dark:bg-white/10 dark:text-white"
+                        : "text-gray-700 hover:bg-gray-100 dark:text-white/75 dark:hover:bg-white/5"
                     }`}
                   >
                     <span>{lang.native}</span>
-                    <span className="text-xs text-gray-400">{lang.code.toUpperCase()}</span>
+                    <span className="text-xs text-gray-400 dark:text-white/40">{lang.code.toUpperCase()}</span>
                   </button>
                 ))}
               </div>
             )}
           </div>
 
+          {/* Light / dark toggle */}
+          <button
+            onClick={toggleTheme}
+            className={pillButton}
+            title={isDark ? t("topbar.theme.toLight") : t("topbar.theme.toDark")}
+            aria-label={isDark ? t("topbar.theme.toLight") : t("topbar.theme.toDark")}
+          >
+            {isDark ? <FiSun className="w-[18px] h-[18px]" /> : <FiMoon className="w-[18px] h-[18px]" />}
+          </button>
+
           {/* Bell with dropdown */}
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setShowDropdown(!showDropdown)}
-              className="relative p-2 rounded-lg hover:bg-gray-100 transition"
+              className={pillButton}
+              aria-label={t("topbar.notifications")}
             >
-              <FiBell className="w-6 h-6 text-gray-600" />
+              <FiBell className="w-[18px] h-[18px]" />
               {unreadCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[20px] h-5 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full px-1">
+                <span className="absolute top-1 right-1 min-w-[18px] h-[18px] flex items-center justify-center bg-rose-500 text-white text-[10px] font-bold rounded-full px-1 ring-2 ring-white/80 dark:ring-[#211d38]">
                   {unreadCount > 99 ? t("topbar.badgeOverflow") : unreadCount}
                 </span>
               )}
             </button>
 
             {showDropdown && (
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 max-h-96 flex flex-col">
-                <div className="flex items-center justify-between p-4 border-b border-gray-100">
-                  <h3 className="font-semibold text-gray-800 text-sm">{t("topbar.notifications")}</h3>
+              <div className="glass-menu absolute right-0 mt-3 w-80 max-w-[calc(100vw-2rem)] rounded-2xl z-50 max-h-[26rem] flex flex-col overflow-hidden animate-fade-in-up">
+                <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-100 dark:border-white/10">
+                  <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{t("topbar.notifications")}</h3>
                   {unreadCount > 0 && (
                     <button
                       onClick={handleMarkAllRead}
-                      className="text-xs text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1"
+                      className="text-xs text-brand-600 hover:text-brand-700 dark:text-brand-300 dark:hover:text-white font-medium flex items-center gap-1"
                     >
                       <FiCheck className="w-3 h-3" />
                       {t("topbar.markAllRead")}
@@ -195,19 +219,19 @@ const Topbar = ({ onMenuClick }) => {
                   )}
                 </div>
 
-                <div className="overflow-y-auto flex-1">
+                <div className="overflow-y-auto flex-1 p-1.5">
                   {(() => {
                     const list = allNotifications();
                     return list.length === 0 ? (
-                    <div className="p-6 text-center text-sm text-gray-400">
+                    <div className="p-6 text-center text-sm text-gray-400 dark:text-white/40">
                       {t("topbar.noNotifications")}
                     </div>
                   ) : (
                     list.slice(0, 20).map((n) => (
                       <div
                         key={n.id}
-                        className={`px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition cursor-pointer ${
-                          !n.isRead ? "bg-blue-50/50" : ""
+                        className={`px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 transition cursor-pointer ${
+                          !n.isRead ? "bg-brand-50/70 dark:bg-white/[0.04]" : ""
                         }`}
                       >
                         <div className="flex items-start gap-3">
@@ -215,20 +239,20 @@ const Topbar = ({ onMenuClick }) => {
                             className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${getTypeColor(n.type)}`}
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-800 truncate">
+                            <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                               {n.title}
                             </p>
                             {n.message && (
-                              <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">
+                              <p className="text-xs text-gray-500 dark:text-white/55 mt-0.5 line-clamp-2">
                                 {n.message}
                               </p>
                             )}
-                            <p className="text-xs text-gray-400 mt-1">
+                            <p className="text-xs text-gray-400 dark:text-white/35 mt-1">
                               {formatTime(n.createdAt)}
                             </p>
                           </div>
                           {!n.isRead && (
-                            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0 mt-1.5" />
+                            <span className="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0 mt-1.5" />
                           )}
                         </div>
                       </div>
@@ -237,6 +261,15 @@ const Topbar = ({ onMenuClick }) => {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Avatar */}
+          <div
+            className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-400 to-accent-400 flex items-center justify-center text-white text-sm font-semibold ring-2 ring-white/80 dark:ring-white/10 ml-0.5"
+            title={`${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim()}
+          >
+            {user?.firstName?.[0]}
+            {user?.lastName?.[0]}
           </div>
         </div>
       </div>

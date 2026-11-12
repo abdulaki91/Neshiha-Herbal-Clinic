@@ -116,7 +116,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
       {!showAddForm && (
         <button
           onClick={() => setShowAddForm(true)}
-          className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+          className="flex items-center space-x-2 px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition"
         >
           <FiPlus />
           <span>{t("investigation.requestButton")}</span>
@@ -148,7 +148,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
               onChange={(e) =>
                 setFormData({ ...formData, investigationType: e.target.value })
               }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             >
               <option value="">{t("investigation.typePlaceholder")}</option>
               <option value="Blood Test">{t("investigation.type.bloodTest")}</option>
@@ -176,7 +176,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
               onChange={(e) =>
                 setFormData({ ...formData, testName: e.target.value })
               }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
               placeholder={t("investigation.testNamePlaceholder")}
             />
           </div>
@@ -191,7 +191,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
               onChange={(e) =>
                 setFormData({ ...formData, urgency: e.target.value })
               }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             >
               <option value="routine">{t("investigation.urgency.routine")}</option>
               <option value="urgent">{t("investigation.urgency.urgent")}</option>
@@ -210,7 +210,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
               onChange={(e) =>
                 setFormData({ ...formData, scheduledDate: e.target.value })
               }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
 
@@ -225,7 +225,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
                 setFormData({ ...formData, instructions: e.target.value })
               }
               rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
               placeholder={t("investigation.instructionsPlaceholder")}
             />
           </div>
@@ -240,7 +240,7 @@ const InvestigationForm = ({ visitId, patientId, onSave }) => {
             </button>
             <button
               onClick={handleAddInvestigation}
-              className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+              className="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition"
             >
               {t("investigation.requestButton")}
             </button>

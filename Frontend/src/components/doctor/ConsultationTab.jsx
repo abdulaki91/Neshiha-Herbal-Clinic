@@ -54,7 +54,7 @@ const ConsultationTab = ({ data, onChange }) => {
             onChange({ ...data, chiefComplaint: e.target.value })
           }
           rows={2}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           placeholder={t("consultation.chiefComplaintPlaceholder")}
         />
       </div>
@@ -70,12 +70,12 @@ const ConsultationTab = ({ data, onChange }) => {
             value={newSymptom}
             onChange={(e) => setNewSymptom(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleAddSymptom()}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             placeholder={t("consultation.addSymptomPlaceholder")}
           />
           <button
             onClick={handleAddSymptom}
-            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+            className="px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700"
           >
             <FiPlus />
           </button>
@@ -109,7 +109,7 @@ const ConsultationTab = ({ data, onChange }) => {
             onChange({ ...data, historyOfPresentIllness: e.target.value })
           }
           rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           placeholder={t("consultation.historyOfPresentIllnessPlaceholder")}
         />
       </div>
@@ -125,7 +125,7 @@ const ConsultationTab = ({ data, onChange }) => {
             onChange({ ...data, physicalExamination: e.target.value })
           }
           rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           placeholder={t("consultation.physicalExaminationPlaceholder")}
         />
       </div>
@@ -141,12 +141,12 @@ const ConsultationTab = ({ data, onChange }) => {
             value={newDiagnosis}
             onChange={(e) => setNewDiagnosis(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleAddDiagnosis()}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             placeholder={t("consultation.addDiagnosisPlaceholder")}
           />
           <button
             onClick={handleAddDiagnosis}
-            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+            className="px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700"
           >
             <FiPlus />
           </button>
@@ -178,7 +178,7 @@ const ConsultationTab = ({ data, onChange }) => {
           value={data.treatmentPlan}
           onChange={(e) => onChange({ ...data, treatmentPlan: e.target.value })}
           rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           placeholder={t("consultation.treatmentPlanPlaceholder")}
         />
       </div>
@@ -192,7 +192,7 @@ const ConsultationTab = ({ data, onChange }) => {
           value={data.doctorNotes}
           onChange={(e) => onChange({ ...data, doctorNotes: e.target.value })}
           rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           placeholder={t("consultation.doctorNotesPlaceholder")}
         />
       </div>
@@ -206,7 +206,7 @@ const ConsultationTab = ({ data, onChange }) => {
           type="date"
           value={data.followUpDate}
           onChange={(e) => onChange({ ...data, followUpDate: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
         />
       </div>
     </div>

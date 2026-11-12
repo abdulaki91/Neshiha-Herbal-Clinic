@@ -86,7 +86,7 @@ const MyPatientsPage = () => {
             setSearch(e.target.value);
             setPage(1);
           }}
-          className="w-full max-w-md px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none"
+          className="w-full max-w-md px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 outline-none"
         />
       </div>
 
@@ -106,8 +106,8 @@ const MyPatientsPage = () => {
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-emerald-700 font-bold">
+                  <div className="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-brand-700 font-bold">
                       {patient.firstName?.[0]}
                       {patient.lastName?.[0]}
                     </span>

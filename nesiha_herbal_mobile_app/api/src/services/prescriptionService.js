@@ -1,0 +1,182 @@
+import {
+  Prescription,
+  MedicineDispense,
+  Medicine,
+  Patient,
+  Visit,
+  User,
+} from "../models/index.js";
+import { Op } from "sequelize";
+import { getPagination } from "../utils/helpers.js";
+import { ERROR_MESSAGES, PRESCRIPTION_STATUS } from "../config/constants.js";
+import sequelize from "../config/database.js";
+
+export const createPrescription = async (data, doctorId) => {
+  const prescription = await Prescription.create({
+    ...data,
+    doctorId,
+    createdBy: doctorId,
+  });
+
+  return prescription;
+};
+
+export const getAllPrescriptions = async (query) => {
+  const {
+    page = 1,
+    pageSize = 10,
+    patientId,
+    doctorId,
+    visitId,
+    status,
+    sortBy = "prescribedDate",
+    sortOrder = "DESC",
+  } = query;
+
+  const { limit, offset } = getPagination(page, pageSize);
+  const where = {};
+
+  if (patientId) where.patientId = patientId;
+  if (doctorId) where.doctorId = doctorId;
+  if (visitId) where.visitId = visitId;
+  if (status) where.status = status;
+
+  const { count, rows } = await Prescription.findAndCountAll({
+    where,
+    limit,
+    offset,
+    order: [[sortBy, sortOrder]],
+    include: [
+      {
+        model: Patient,
+        as: "patient",
+        attributes: ["id", "patientId", "firstName", "lastName"],
+      },
+      {
+        model: Medicine,
+        as: "medicine",
+        attributes: ["id", "code", "name", "strength"],
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["id", "firstName", "lastName"],
+      },
+    ],
+  });
+
+  return {
+    prescriptions: rows,
+    pagination: { page: parseInt(page), pageSize: limit, totalItems: count },
+  };
+};
+
+export const getPrescriptionById = async (id) => {
+  const prescription = await Prescription.findByPk(id, {
+    include: [
+      { model: Patient, as: "patient" },
+      { model: Medicine, as: "medicine" },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["id", "firstName", "lastName"],
+      },
+      { model: Visit, as: "visit" },
+    ],
+  });
+
+  if (!prescription) throw new Error(ERROR_MESSAGES.NOT_FOUND);
+  return prescription;
+};
+
+export const dispenseMedicine = async (
+  prescriptionId,
+  quantity,
+  dispensedBy,
+) => {
+  const transaction = await sequelize.transaction();
+
+  try {
+    const prescription = await Prescription.findByPk(prescriptionId, {
+      transaction,
+    });
+    if (!prescription) throw new Error("Prescription not found");
+
+    // Default to full prescribed quantity if not specified
+    const dispenseQuantity = quantity || prescription.quantity;
+
+    // Lock the row for the duration of the transaction so two concurrent
+    // dispenses can't both read the same availableQuantity and oversell it
+    const medicine = await Medicine.findByPk(prescription.medicineId, {
+      transaction,
+      lock: transaction.LOCK.UPDATE,
+    });
+    if (!medicine) throw new Error("Medicine not found");
+
+    if (medicine.availableQuantity < dispenseQuantity) {
+      throw new Error(
+        `Insufficient stock: only ${medicine.availableQuantity} unit(s) of ${medicine.name} available`,
+      );
+    }
+
+    const previousMedicineStatus = medicine.status;
+
+    // Dispensing was never decrementing inventory, so stock counts and the
+    // low-stock/out-of-stock status derived from them drifted from reality
+    await medicine.update(
+      { availableQuantity: medicine.availableQuantity - dispenseQuantity },
+      { transaction },
+    );
+
+    // Create dispense record
+    const dispense = await MedicineDispense.create(
+      {
+        prescriptionId: prescription.id,
+        patientId: prescription.patientId,
+        medicineId: prescription.medicineId,
+        visitId: prescription.visitId,
+        dispensedBy,
+        quantity: dispenseQuantity,
+        dosage: prescription.dosage,
+        frequency: prescription.frequency,
+        route: prescription.route,
+        duration: prescription.duration,
+        instructions: prescription.instructions,
+        reason: prescription.reason,
+        batchNumber: medicine.batchNumber,
+        expiryDate: medicine.expiryDate,
+      },
+      { transaction },
+    );
+
+    // Update prescription status
+    await prescription.update(
+      {
+        status: PRESCRIPTION_STATUS.DISPENSED,
+        dispensedDate: new Date(),
+        dispensedBy,
+      },
+      { transaction },
+    );
+
+    await transaction.commit();
+    return { prescription, dispense, medicine, previousMedicineStatus };
+  } catch (error) {
+    await transaction.rollback();
+    throw error;
+  }
+};
+
+export const stopPrescription = async (prescriptionId, reason, doctorId) => {
+  const prescription = await Prescription.findByPk(prescriptionId);
+  if (!prescription) throw new Error(ERROR_MESSAGES.NOT_FOUND);
+
+  await prescription.update({
+    status: PRESCRIPTION_STATUS.STOPPED,
+    stoppedDate: new Date(),
+    stoppedReason: reason,
+    updatedBy: doctorId,
+  });
+
+  return prescription;
+};

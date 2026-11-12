@@ -1,0 +1,178 @@
+{
+  "mobile": {
+    "nav": {
+      "home": "Home",
+      "more": "More",
+      "bookings": "Bookings"
+    },
+    "common": {
+      "add": "Add",
+      "ageYears": "{{age}} yrs",
+      "change": "Change",
+      "confirm": "Confirm",
+      "optional": "optional",
+      "selectDate": "Select a date",
+      "transactionId": "Transaction ID",
+      "tryAgain": "Try again"
+    },
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening"
+    },
+    "time": {
+      "daysAgo": "{{d}}d ago"
+    },
+    "errors": {
+      "timeout": "The server is taking too long to respond.",
+      "offline": "Can't reach the clinic server. Check your internet connection.",
+      "forbidden": "You don't have permission to do that.",
+      "generic": "Something went wrong. Please try again.",
+      "unexpected": "Unexpected response from the server."
+    },
+    "validation": {
+      "required": "Required",
+      "number": "Enter a valid number",
+      "fixFields": "Please complete the highlighted fields"
+    },
+    "login": {
+      "welcome": "Welcome back",
+      "subtitle": "Sign in to the staff portal",
+      "sessionExpired": "Your session expired. Please sign in again.",
+      "accountsNote": "Accounts are created by your clinic administrator.",
+      "tagline": "Natural healing,\nthoughtfully managed.",
+      "taglineSub": "Patients, consultations & payments — in your pocket.",
+      "toggleTheme": "Toggle theme"
+    },
+    "more": {
+      "workspace": "Workspace",
+      "appearance": "Appearance",
+      "themeSystem": "System",
+      "themeLight": "Light",
+      "themeDark": "Dark",
+      "language": "Language",
+      "account": "Account",
+      "server": "Server",
+      "signOutTitle": "Sign out?",
+      "signOutMessage": "You'll need your email and password to sign back in.",
+      "footer": "Nesiha Herbal Clinic · Staff app"
+    },
+    "password": {
+      "title": "Change password",
+      "current": "Current password",
+      "submit": "Update password",
+      "changed": "Password changed — please sign in again"
+    },
+    "visitStatus": {
+      "pendingPayment": "Pending payment"
+    },
+    "visit": {
+      "arrivedAt": "Arrived {{time}}",
+      "walkInHint": "The patient goes straight into the doctor's queue.",
+      "sendToDoctor": "Send to doctor",
+      "registerFirst": "Register the patient first from the Patients tab."
+    },
+    "visits": {
+      "emptyHint": "Create a visit to send a patient to the doctor."
+    },
+    "patients": {
+      "noMatches": "Try a different name, phone or patient ID."
+    },
+    "patient": {
+      "feeHint": "One-time fee, collected at registration",
+      "safetyAlert": "Safety alert",
+      "deleteConfirm": "Delete {{name}}'s record? This cannot be undone.",
+      "deleted": "Patient record deleted"
+    },
+    "appointments": {
+      "unscheduled": "Unscheduled"
+    },
+    "bookings": {
+      "declineMessage": "{{name}}'s booking request will be marked as declined.",
+      "emptyHint": "Requests made on the website appear here instantly.",
+      "received": "Received {{when}}"
+    },
+    "consultation": {
+      "completeTitle": "Complete consultation?",
+      "completeMessage": "The visit will be marked as completed and the patient leaves your queue.",
+      "sendToCashierMessage": "{{count}} prescribed medicine(s) ({{amount}}) will be sent to the cashier for payment.",
+      "complete": "Complete",
+      "sendToCashier": "Send to cashier",
+      "noFollowUp": "No follow-up",
+      "unsaved": "Unsaved",
+      "saved": "Saved",
+      "notSaved": "Not saved"
+    },
+    "herbal": {
+      "removeTitle": "Remove medicine?",
+      "remove": "Remove",
+      "toPay": "To pay: {{amount}}",
+      "emptyHint": "Tap Add to prescribe from the clinic's herbal stock."
+    },
+    "investigation": {
+      "cancelTitle": "Cancel investigation?",
+      "cancelAction": "Cancel request"
+    },
+    "medicine": {
+      "available": "Available",
+      "inStock": "In stock",
+      "lowStock": "Low stock",
+      "outOfStock": "Out of stock",
+      "expired": "Expired",
+      "inStockCount": "{{count}} in stock",
+      "left": "{{count}} left",
+      "expires": "Expires {{date}}"
+    },
+    "pharmacy": {
+      "exceedsPrescribed": "Can't dispense more than was prescribed"
+    },
+    "cashier": {
+      "pendingHint": "Completed consultations with prescriptions appear here.",
+      "items": "{{count}} item(s)",
+      "printPrompt": "Print the receipt for this payment now?"
+    },
+    "print": {
+      "prescriptionSubtitle": "Herbal Prescription",
+      "disclaimer": "This is a computer-generated document",
+      "failed": "Couldn't prepare the document for printing"
+    },
+    "reports": {
+      "subtitle": "Registration fees and consultation revenue",
+      "consultation": "Consultations",
+      "registration": "Registration fees",
+      "registrationFees": "Registration fees",
+      "paymentsCount": "{{count}} payment(s)",
+      "registrationsCount": "{{count}} registration(s)",
+      "byDay": "Revenue by day",
+      "tapBar": "Tap a bar to see that day's totals",
+      "noRegistrations": "No registration fees found for this period"
+    },
+    "staff": {
+      "activateMessage": "{{name}} will be able to sign in again.",
+      "deactivateMessage": "{{name}} will no longer be able to sign in.",
+      "lastLogin": "Last sign-in {{when}}"
+    },
+    "content": {
+      "publish": "Publish",
+      "unpublish": "Move to draft",
+      "fallbackHint": "Optional — the website shows English when this is empty"
+    },
+    "notifications": {
+      "emptyHint": "New alerts will show up here."
+    },
+    "toast": {
+      "lowStock": "Low stock: {{name}}",
+      "registrationFee": "Registration fee received: {{amount}} ETB",
+      "investigationRequested": "New investigation requested: {{test}}",
+      "investigationResult": "Results ready: {{test}}",
+      "billPending": "New bill waiting for payment: {{name}}"
+    },
+    "notify": {
+      "channelName": "Clinic alerts",
+      "channelDescription": "New patients, payments, lab results and other live clinic events",
+      "toggleTitle": "Alert notifications",
+      "toggleSubtitle": "Sound and popup for new clinic events",
+      "blocked": "Blocked in phone settings — allow notifications for this app"
+    }
+  }
+}

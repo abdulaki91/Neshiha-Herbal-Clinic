@@ -1,0 +1,178 @@
+{
+  "mobile": {
+    "nav": {
+      "home": "الرئيسية",
+      "more": "المزيد",
+      "bookings": "الحجوزات"
+    },
+    "common": {
+      "add": "إضافة",
+      "ageYears": "{{age}} سنة",
+      "change": "تغيير",
+      "confirm": "تأكيد",
+      "optional": "اختياري",
+      "selectDate": "اختر تاريخاً",
+      "transactionId": "رقم المعاملة",
+      "tryAgain": "حاول مرة أخرى"
+    },
+    "greeting": {
+      "morning": "صباح الخير",
+      "afternoon": "مساء الخير",
+      "evening": "مساء الخير"
+    },
+    "time": {
+      "daysAgo": "منذ {{d}} يوم"
+    },
+    "errors": {
+      "timeout": "الخادم يستغرق وقتاً طويلاً للاستجابة.",
+      "offline": "تعذّر الوصول إلى خادم العيادة. تحقق من اتصالك بالإنترنت.",
+      "forbidden": "ليست لديك صلاحية للقيام بذلك.",
+      "generic": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      "unexpected": "استجابة غير متوقعة من الخادم."
+    },
+    "validation": {
+      "required": "مطلوب",
+      "number": "أدخل رقماً صحيحاً",
+      "fixFields": "يرجى إكمال الحقول المحددة"
+    },
+    "login": {
+      "welcome": "مرحباً بعودتك",
+      "subtitle": "سجّل الدخول إلى بوابة الموظفين",
+      "sessionExpired": "انتهت جلستك. يرجى تسجيل الدخول مرة أخرى.",
+      "accountsNote": "يتم إنشاء الحسابات من قِبل مسؤول العيادة.",
+      "tagline": "شفاء طبيعي،\nبإدارة مدروسة.",
+      "taglineSub": "المرضى والاستشارات والمدفوعات — في جيبك.",
+      "toggleTheme": "تبديل المظهر"
+    },
+    "more": {
+      "workspace": "مساحة العمل",
+      "appearance": "المظهر",
+      "themeSystem": "النظام",
+      "themeLight": "فاتح",
+      "themeDark": "داكن",
+      "language": "اللغة",
+      "account": "الحساب",
+      "server": "الخادم",
+      "signOutTitle": "تسجيل الخروج؟",
+      "signOutMessage": "ستحتاج إلى بريدك الإلكتروني وكلمة المرور لتسجيل الدخول مجدداً.",
+      "footer": "عيادة نصيحة للأعشاب · تطبيق الموظفين"
+    },
+    "password": {
+      "title": "تغيير كلمة المرور",
+      "current": "كلمة المرور الحالية",
+      "submit": "تحديث كلمة المرور",
+      "changed": "تم تغيير كلمة المرور — يرجى تسجيل الدخول مجدداً"
+    },
+    "visitStatus": {
+      "pendingPayment": "بانتظار الدفع"
+    },
+    "visit": {
+      "arrivedAt": "وصل {{time}}",
+      "walkInHint": "ينتقل المريض مباشرة إلى قائمة انتظار الطبيب.",
+      "sendToDoctor": "إرسال إلى الطبيب",
+      "registerFirst": "سجّل المريض أولاً من تبويب المرضى."
+    },
+    "visits": {
+      "emptyHint": "أنشئ زيارة لإرسال مريض إلى الطبيب."
+    },
+    "patients": {
+      "noMatches": "جرّب اسماً أو رقم هاتف أو رقم مريض آخر."
+    },
+    "patient": {
+      "feeHint": "رسوم تُدفع مرة واحدة عند التسجيل",
+      "safetyAlert": "تنبيه سلامة",
+      "deleteConfirm": "حذف سجل {{name}}؟ لا يمكن التراجع عن ذلك.",
+      "deleted": "تم حذف سجل المريض"
+    },
+    "appointments": {
+      "unscheduled": "غير مجدول"
+    },
+    "bookings": {
+      "declineMessage": "سيتم وضع علامة الرفض على طلب حجز {{name}}.",
+      "emptyHint": "تظهر الطلبات المقدّمة عبر الموقع هنا فوراً.",
+      "received": "استُلم {{when}}"
+    },
+    "consultation": {
+      "completeTitle": "إكمال الاستشارة؟",
+      "completeMessage": "سيتم تسجيل الزيارة كمكتملة وسيغادر المريض قائمة انتظارك.",
+      "sendToCashierMessage": "سيتم إرسال {{count}} دواء موصوف ({{amount}}) إلى أمين الصندوق للدفع.",
+      "complete": "إكمال",
+      "sendToCashier": "إرسال إلى أمين الصندوق",
+      "noFollowUp": "لا متابعة",
+      "unsaved": "غير محفوظ",
+      "saved": "تم الحفظ",
+      "notSaved": "لم يُحفظ"
+    },
+    "herbal": {
+      "removeTitle": "إزالة الدواء؟",
+      "remove": "إزالة",
+      "toPay": "المستحق: {{amount}}",
+      "emptyHint": "اضغط على إضافة للوصف من مخزون العيادة من الأعشاب."
+    },
+    "investigation": {
+      "cancelTitle": "إلغاء الفحص؟",
+      "cancelAction": "إلغاء الطلب"
+    },
+    "medicine": {
+      "available": "متوفر",
+      "inStock": "في المخزون",
+      "lowStock": "مخزون منخفض",
+      "outOfStock": "نفد المخزون",
+      "expired": "منتهي الصلاحية",
+      "inStockCount": "{{count}} في المخزون",
+      "left": "متبقٍ {{count}}",
+      "expires": "ينتهي في {{date}}"
+    },
+    "pharmacy": {
+      "exceedsPrescribed": "لا يمكن صرف أكثر من الكمية الموصوفة"
+    },
+    "cashier": {
+      "pendingHint": "تظهر هنا الاستشارات المكتملة التي تتضمن وصفات.",
+      "items": "{{count}} عنصر",
+      "printPrompt": "هل تريد طباعة إيصال هذه الدفعة الآن؟"
+    },
+    "print": {
+      "prescriptionSubtitle": "وصفة عشبية",
+      "disclaimer": "هذا مستند صادر عن الحاسوب",
+      "failed": "تعذّر تجهيز المستند للطباعة"
+    },
+    "reports": {
+      "subtitle": "رسوم التسجيل وإيرادات الاستشارات",
+      "consultation": "الاستشارات",
+      "registration": "رسوم التسجيل",
+      "registrationFees": "رسوم التسجيل",
+      "paymentsCount": "{{count}} دفعة",
+      "registrationsCount": "{{count}} تسجيل",
+      "byDay": "الإيرادات حسب اليوم",
+      "tapBar": "اضغط على عمود لعرض إجماليات ذلك اليوم",
+      "noRegistrations": "لا توجد رسوم تسجيل في هذه الفترة"
+    },
+    "staff": {
+      "activateMessage": "سيتمكن {{name}} من تسجيل الدخول مجدداً.",
+      "deactivateMessage": "لن يتمكن {{name}} من تسجيل الدخول بعد الآن.",
+      "lastLogin": "آخر تسجيل دخول {{when}}"
+    },
+    "content": {
+      "publish": "نشر",
+      "unpublish": "نقل إلى المسودات",
+      "fallbackHint": "اختياري — يعرض الموقع النص الإنجليزي إذا كان فارغاً"
+    },
+    "notifications": {
+      "emptyHint": "ستظهر التنبيهات الجديدة هنا."
+    },
+    "toast": {
+      "lowStock": "مخزون منخفض: {{name}}",
+      "registrationFee": "تم استلام رسوم التسجيل: {{amount}} بر إثيوبي",
+      "investigationRequested": "طلب فحص جديد: {{test}}",
+      "investigationResult": "النتائج جاهزة: {{test}}",
+      "billPending": "فاتورة جديدة بانتظار الدفع: {{name}}"
+    },
+    "notify": {
+      "channelName": "تنبيهات العيادة",
+      "channelDescription": "مرضى جدد ومدفوعات ونتائج مختبر وأحداث العيادة المباشرة الأخرى",
+      "toggleTitle": "إشعارات التنبيه",
+      "toggleSubtitle": "صوت ونافذة منبثقة لأحداث العيادة الجديدة",
+      "blocked": "محظورة في إعدادات الهاتف — اسمح بالإشعارات لهذا التطبيق"
+    }
+  }
+}

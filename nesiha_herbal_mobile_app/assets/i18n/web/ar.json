@@ -1,0 +1,1857 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "search": "بحث",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "view": "عرض",
+    "print": "طباعة",
+    "all": "الكل",
+    "total": "الإجمالي",
+    "patient": "مريض",
+    "patientId": "الرقم",
+    "doctor": "طبيب",
+    "doctorPrefix": "د.",
+    "amount": "المبلغ",
+    "method": "الطريقة",
+    "date": "التاريخ",
+    "dateAndTime": "التاريخ والوقت",
+    "cashier": "أمين الصندوق",
+    "visitNumber": "الزيارة #",
+    "paymentNumber": "الدفع #",
+    "phone": "هاتف",
+    "age": "العمر",
+    "notAvailable": "غير متاح",
+    "instructions": "التعليمات",
+    "quantityAbbr": "الكمية",
+    "by": "بواسطة",
+    "saving": "جاري الحفظ...",
+    "creating": "جاري الإنشاء...",
+    "currency": {
+      "etb": "بر إثيوبي"
+    },
+    "pagination": {
+      "page": "صفحة",
+      "of": "من"
+    },
+    "ageUnit": {
+      "years": "سنة"
+    }
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "services": "الخدمات",
+    "testimonials": "آراء العملاء",
+    "contact": "اتصل بنا",
+    "blog": "المدونة",
+    "team": "الفريق",
+    "faq": "الأسئلة الشائعة"
+  },
+  "header": {
+    "title": "عيادة نصيحة للأعشاب",
+    "tagline": "حلول الشفاء الطبيعي",
+    "language": "اللغة"
+  },
+  "hero": {
+    "title": "الشفاء الطبيعي من أجل",
+    "subtitle": "حياة أكثر صحة",
+    "description": "في عيادة نصيحة للأعشاب، ندمج العلاجات التقليدية مع الممارسات الحديثة لتقديم رعاية شخصية تعزز قدرات جسمك الطبيعية على الشفاء.",
+    "cta": "احجز موعد",
+    "learnMore": "اعرف المزيد",
+    "traditionalRemedies": "العلاجات التقليدية",
+    "modernPractices": "الممارسات الحديثة",
+    "personalizedCare": "الرعاية الشخصية"
+  },
+  "services": {
+    "initialAssessment": "التقييم الأولي",
+    "customFormulations": "تركيبات مخصصة",
+    "followUpCare": "الرعاية اللاحقة",
+    "lifestyleGuidance": "إرشادات نمط الحياة",
+    "immuneSupport": "دعم المناعة",
+    "detoxPrograms": "برامج إزالة السموم",
+    "energyEnhancement": "تعزيز الطاقة",
+    "stressManagement": "إدارة التوتر",
+    "treatment": "العلاج بالأعشاب",
+    "herbalMedicine": "الطب العشبي",
+    "acupuncture": "الوخز بالإبر",
+    "cuppingTherapy": "العلاج بالحجامة",
+    "moxibustion": "العلاج بالمكوى",
+    "consultationDesc": "استشارات مخصصة تساعدك على اختيار العلاجات العشبية المناسبة لاحتياجاتك الصحية.",
+    "wellnessDesc": "برامج متكاملة لتعزيز المناعة والطاقة وتحقيق التوازن النفسي والجسدي.",
+    "treatmentDesc": "علاجات فعّالة باستخدام الطب العشبي وأساليب الشفاء الطبيعية.",
+    "consultation": "استشارة عشبية",
+    "wellness": "برنامج العافية",
+    "title": "خدماتنا",
+    "subtitle": "علاجات عشبية شاملة لعافيتك",
+    "desc": "استشارات عشبية شخصية مع أطبائنا المعتمدين لمعالجة مشاكلك الصحية الخاصة ووضع خطة علاجية مخصصة.",
+    "therapeuticMassage": "التدليك العلاجي",
+    "therapeuticMassageDesc": "جلسات تدليك تقليدية وعلاجات بزيوت عشبية لراحة الجسم والعقل.",
+    "swedishMassage": "التدليك السويدي",
+    "deepTissue": "تدليك الأنسجة العميقة",
+    "herbalOilTherapy": "العلاج بزيوت الأعشاب",
+    "stressRelief": "تخفيف التوتر",
+    "personalizedHealthPlans": "خطط صحية شخصية",
+    "personalizedHealthPlansDesc": "خطط مخصصة تشمل التغذية، التمارين، المكملات العشبية والمتابعة.",
+    "nutritionGuidance": "إرشادات التغذية",
+    "exercisePlans": "خطط التمارين",
+    "herbalSupplements": "مكملات عشبية",
+    "progressTracking": "متابعة التقدم",
+    "herbalEducation": "التثقيف العشبي",
+    "herbalEducationDesc": "ورش عمل واستشارات حول كيفية استخدام العلاجات الطبيعية في الحياة اليومية.",
+    "workshops": "ورش عمل",
+    "herbIdentification": "تعريف بالأعشاب",
+    "homeRemedies": "علاجات منزلية",
+    "safetyGuidelines": "إرشادات السلامة",
+    "whatsIncluded": "المميزات المتضمنة",
+    "ctaTitle": "ابدأ رحلتك الصحية",
+    "ctaDesc": "تواصل مع خبراء الأعشاب لدينا واكتشف كيف يمكن للشفاء الطبيعي أن يساعدك."
+  },
+  "about": {
+    "title": "من نحن",
+    "subtitle": "شريككم الموثوق في الصحة الطبيعية",
+    "description": "نحن نجمع بين الحكمة العشبية التقليدية والفهم الحديث لتقديم حلول شفاء طبيعية وفعالة.",
+    "extendedDescription": "تجمع عيادتنا بين الحكمة العشبية القديمة والبحث العلمي الحديث لإنشاء خطط علاج شخصية. نؤمن بمعالجة الشخص كاملاً، وليس الأعراض فقط، مما يضمن الصحة والحيوية على المدى الطويل.",
+    "experience": "سنوات الخبرة",
+    "patients": "مرضى سعداء",
+    "treatments": "علاجات ناجحة",
+    "herbalWisdom": "الحكمة العشبية التقليدية",
+    "herbalWisdomDesc": "توارثتها الأجيال",
+    "certifiedPractitioners": "ممارسون معتمدون",
+    "certifiedPractitionersDesc": "يتكون فريقنا من ممارسين معتمدين في الطب العشبي مع تدريب وخبرة واسعة.",
+    "naturalIngredients": "مكونات طبيعية",
+    "naturalIngredientsDesc": "نستخدم فقط أعلى جودة من المكونات الطبيعية ذات المصدر الأخلاقي في جميع علاجاتنا.",
+    "holisticApproach": "نهج شامل",
+    "holisticApproachDesc": "نعالج الشخص كاملاً، معالجة الأسباب الجذرية بدلاً من الأعراض فقط لضمان الصحة الدائمة.",
+    "metaTitle": "About Us - Nesiha Herbal Clinic",
+    "metaDescription": "Learn about Nesiha Herbal Clinic, where traditional herbal wisdom meets modern science. Discover our certified practitioners, natural ingredients, and holistic approach.",
+    "metaKeywords": "herbal clinic, Nesiha herbal, mana qorichaa aadaa, natural remedies, holistic healing, alternative medicine, Oromia herbal clinic, Ethiopia herbal treatment"
+  },
+  "testimonials": {
+    "title": "ماذا يقول عملاؤنا",
+    "subtitle": "اكتشف كيف غيّر الشفاء الطبيعي حياة عملائنا الكرام. قصص حقيقية، نتائج ملموسة، وصحة حقيقية.",
+    "featured": "شهادات فيديو مميزة",
+    "more": "قصص عملاء إضافية",
+    "videoAvailable": "شهادة فيديو متاحة",
+    "list": [
+      {
+        "name": "إيما س.",
+        "role": "مهتمة بالعافية",
+        "text": "عيادة نصيحة للأعشاب غيّرت صحتي بالكامل. النهج الشخصي والعلاجات الطبيعية أحدثت فرقاً كبيراً في مستوى طاقتي وراحتي العامة. أشعر وكأنني شخص جديد!"
+      },
+      {
+        "name": "ليام ل.",
+        "role": "مدرب صحي",
+        "text": "لقد أُعجبت كثيراً بالمعرفة والرعاية في نصيحة. البرنامج الشامل للصحة ساعدني على تحقيق أهدافي الصحية بشكل طبيعي. العلاجات العشبية فعّالة بشكل لا يصدق!"
+      }
+    ]
+  },
+  "contact": {
+    "title": "تواصل معنا",
+    "subtitle": "هل أنت مستعد لبدء رحلة الشفاء؟",
+    "name": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "message": "رسالتك",
+    "sendMessage": "إرسال الرسالة",
+    "address": "العنوان",
+    "phoneLabel": "الهاتف",
+    "emailLabel": "البريد الإلكتروني",
+    "hours": "ساعات العمل",
+    "contactInformation": "معلومات الاتصال",
+    "emailAddress": "info@nesihaherbalclinic.com",
+    "phoneNumber": "(555) 123-4567",
+    "mainOffice": "المكتب الرئيسي",
+    "whatsapp": "واتساب",
+    "whatsappNumber": "(555) 987-6543",
+    "quickResponse": "استجابة سريعة",
+    "streetAddress": "123 شارع العافية",
+    "cityState": "مدينة الصحة، كاليفورنيا 90210",
+    "businessHours": "ساعات العمل",
+    "mondayFriday": "الاثنين - الجمعة",
+    "weekdayHours": "9:00 صباحاً - 6:00 مساءً",
+    "saturday": "السبت",
+    "saturdayHours": "10:00 صباحاً - 4:00 مساءً",
+    "sunday": "الأحد",
+    "closed": "مغلق",
+    "ourLocation": "موقعنا",
+    "easyToFind": "سهل العثور عليه!",
+    "locationDescription": "نحن موجودون في قلب مدينة الصحة، على مقربة من شارع العافية الرئيسي. موقف سيارات مجاني متاح.",
+    "needImmediateAssistance": "هل تحتاج مساعدة فورية؟",
+    "expertsReady": "خبراؤنا في الطب العشبي مستعدون لمساعدتك اليوم",
+    "scheduleConsultation": "جدولة استشارة",
+    "social": {
+      "facebook": "فيسبوك",
+      "instagram": "إنستغرام",
+      "tiktok": "تيك توك",
+      "twitter": "X (تويتر)"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 عيادة نصيحة للأعشاب. جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "quickLinks": "Quick Links"
+  },
+  "blog": {
+    "title": "مدونة الصحة والعافية",
+    "subtitle": "رؤى ونصائح للحياة الطبيعية",
+    "readMore": "اقرأ المزيد",
+    "publishedOn": "نشر في",
+    "badge": "Our Blog",
+    "heading": "Wellness Insights",
+    "desc": "Discover expert insights, natural health tips, and the latest research in herbal medicine to support your journey to optimal wellness.",
+    "featuredBadge": "Featured",
+    "readFullArticle": "Read Full Article",
+    "filter": {
+      "all": "All"
+    },
+    "post": [
+      {
+        "title": "5 Essential Tips for a Healthier Lifestyle",
+        "desc": "Discover simple yet powerful daily practices that can transform your health and well-being naturally. From morning routines to evening habits, learn how small changes create lasting results.",
+        "category": "Wellness Tips",
+        "readTime": "5 min read",
+        "date": "March 15, 2024",
+        "author": "Dr. Sarah Johnson"
+      },
+      {
+        "title": "The Healing Power of Herbal Medicine",
+        "desc": "Explore the ancient wisdom of herbal medicine and discover how natural remedies can enhance your health. Learn about the science behind traditional healing practices and modern applications.",
+        "category": "Herbal Medicine",
+        "readTime": "7 min read",
+        "date": "March 12, 2024",
+        "author": "Dr. Ahmed Hassan"
+      },
+      {
+        "title": "Natural Detox: Cleanse Your Body Naturally",
+        "desc": "Learn about natural detoxification methods that support your body's natural cleansing processes. Discover herbs, foods, and practices that promote optimal health and vitality.",
+        "category": "Detox & Cleansing",
+        "readTime": "6 min read",
+        "date": "March 10, 2024",
+        "author": "Dr. Maria Rodriguez"
+      },
+      {
+        "title": "Stress Management Through Traditional Healing",
+        "desc": "Explore ancient stress management techniques and how they can help you find balance in today's fast-paced world. From meditation to herbal remedies, discover natural stress relief.",
+        "category": "Mental Health",
+        "readTime": "8 min read",
+        "date": "March 8, 2024",
+        "author": "Dr. James Chen"
+      },
+      {
+        "title": "Seasonal Wellness: Spring Health Guide",
+        "desc": "Embrace the energy of spring with our comprehensive guide to seasonal wellness. Learn how to align your health practices with nature's rhythms for optimal vitality.",
+        "category": "Seasonal Health",
+        "readTime": "4 min read",
+        "date": "March 5, 2024",
+        "author": "Dr. Elena Petrov"
+      },
+      {
+        "title": "The Science Behind Natural Immunity",
+        "desc": "Understand how natural remedies and lifestyle choices can strengthen your immune system. Discover evidence-based approaches to building robust health naturally.",
+        "category": "Immunity",
+        "readTime": "9 min read",
+        "date": "March 3, 2024",
+        "author": "Dr. Lisa Thompson"
+      }
+    ],
+    "newsletter": {
+      "heading": "Stay Updated",
+      "subtitle": "Get the latest wellness tips, herbal medicine insights, and health updates delivered to your inbox.",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe"
+    }
+  },
+  "sidebar": {
+    "brandName": "عيادة نصيحة",
+    "dashboard": "لوحة التحكم",
+    "staff": "الموظفون",
+    "patients": "المرضى",
+    "visits": "الزيارات",
+    "medicines": "الأدوية",
+    "cashier": "أمين الصندوق",
+    "laboratory": "المختبر",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "queue": "قائمة الانتظار",
+    "logout": "تسجيل الخروج",
+    "adminPanel": "لوحة الإدارة",
+    "badgeOverflow": "+99",
+    "appointments": "المواعيد",
+    "content": "محتوى الموقع",
+    "bookingRequests": "طلبات الحجز"
+  },
+  "topbar": {
+    "theme": {
+      "toDark": "التبديل إلى الوضع الداكن",
+      "toLight": "التبديل إلى الوضع الفاتح"
+    },
+    "greeting": "مرحباً, {{firstName}}!",
+    "notifications": "الإشعارات",
+    "markAllRead": "وضع علامة مقروء على الكل",
+    "noNotifications": "لا توجد إشعارات بعد",
+    "badgeOverflow": "+99",
+    "lang": {
+      "english": "الإنجليزية",
+      "oromo": "الأورومية",
+      "amharic": "الأمهرية",
+      "arabic": "العربية",
+      "nativeEnglish": "English",
+      "nativeOromo": "Afaan Oromoo",
+      "nativeAmharic": "አማርኛ",
+      "nativeArabic": "العربية"
+    },
+    "notification": {
+      "visitUpdated": "تم تحديث الزيارة",
+      "visitStatus": "الحالة: {{status}}",
+      "newPatient": "مريض جديد",
+      "patientRegistered": "{{firstName}} {{lastName}} تم التسجيل",
+      "paymentReceived": "تم استلام الدفع",
+      "paymentAmount": "{{amount}} بر إثيوبي تم الدفع",
+      "prescriptionAdded": "تمت إضافة وصفة طبية",
+      "newPrescription": "تم إنشاء وصفة طبية جديدة"
+    },
+    "time": {
+      "justNow": "الآن",
+      "minutesAgo": "منذ {{m}} دقيقة",
+      "hoursAgo": "منذ {{h}} ساعة"
+    }
+  },
+  "toast": {
+    "newPatientInQueue": "مريض جديد في قائمة الانتظار",
+    "patientRegistered": "تم تسجيل مريض جديد: {{firstName}} {{lastName}}",
+    "newVisitCreated": "تم إنشاء زيارة جديدة",
+    "visitStatus": "حالة الزيارة: {{status}}",
+    "prescriptionAdded": "تمت إضافة وصفة طبية جديدة للمريض",
+    "medicineDispensed": "تم صرف الدواء للمريض",
+    "paymentReceived": "تم استلام الدفع: {{amount}} بر إثيوبي",
+    "staffCreated": "تمت إضافة موظف جديد",
+    "newBookingRequest": "طلب حجز جديد من {{name}}"
+  },
+  "login": {
+    "brandName": "عيادة نصيحة للأعشاب",
+    "brandSubtitle": "نظام إدارة العيادة",
+    "heading": "تسجيل الدخول",
+    "label": {
+      "email": "عنوان البريد الإلكتروني",
+      "password": "كلمة المرور"
+    },
+    "placeholder": {
+      "email": "your.email@clinic.com",
+      "password": "••••••••"
+    },
+    "validation": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "passwordRequired": "كلمة المرور مطلوبة"
+    },
+    "button": {
+      "submit": "تسجيل الدخول",
+      "loading": "جاري تسجيل الدخول..."
+    },
+    "demo": {
+      "heading": "حسابات تجريبية:",
+      "admin": "admin@neshihaclinic.com | Admin@123",
+      "doctor": "doctor@neshihaclinic.com | Doctor@123",
+      "clerk": "clerk@neshihaclinic.com | Clerk@123",
+      "cashier": "cashier@neshihaclinic.com | Cashier@123"
+    },
+    "toast": {
+      "welcome": "مرحباً بعودتك, {{firstName}}!",
+      "failed": "فشل تسجيل الدخول"
+    }
+  },
+  "signin": {
+    "heading": "Admin Sign In",
+    "error": {
+      "fillAllFields": "Please fill in all fields."
+    },
+    "label": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "placeholder": {
+      "email": "you@example.com",
+      "password": "Enter your password"
+    },
+    "button": {
+      "submit": "Sign In"
+    },
+    "forgotPassword": "Forgot your password?",
+    "resetLink": "Reset it"
+  },
+  "error": {
+    "404": {
+      "code": "404",
+      "message": "Page Not Found"
+    }
+  },
+  "home": {
+    "title": "Nesihah Herbal Clinic | Mana Qorichaa Aadaa Nasiiha",
+    "metaDescription": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha): Your trusted source for traditional herbal medicine, natural remedies, and holistic healing in Ethiopia.",
+    "metaKeywords": "Nesihah Herbal Clinic, Mana Qorichaa Aadaa Nasiiha, herbal medicine, natural remedies, traditional healing, Ethiopia",
+    "ogTitle": "Nesihah Herbal Clinic",
+    "ogDescription": "Trusted herbal health solutions and traditional healing in Ethiopia.",
+    "twitterTitle": "Nesihah Herbal Clinic",
+    "twitterDescription": "Trusted herbal health solutions and traditional healing in Ethiopia.",
+    "schema": {
+      "name": "Nesihah Herbal Clinic (Mana Qorichaa Aadaa Nasiiha)",
+      "streetAddress": "AshewaMeda",
+      "addressLocality": "Shegar",
+      "addressRegion": "Oromia",
+      "postalCode": "0000",
+      "addressCountry": "Ethiopia",
+      "telephone": "+251912166549",
+      "url": "https://www.nesihaherbalclinic.com/"
+    }
+  },
+  "receipt": {
+    "clinicName": "عيادة نصيحة للأعشاب",
+    "clinicSubtitle": "نظام إدارة العيادة",
+    "label": {
+      "patient": "المريض:",
+      "id": "ID:",
+      "visit": "الزيارة:",
+      "doctor": "الطبيب:"
+    },
+    "doctorNameFormat": "د. {{firstName}} {{lastName}}",
+    "sectionPrescribedMedicines": "الأدوية الموصوفة:",
+    "medicine": {
+      "qty": "الكمية: {{quantity}}"
+    },
+    "placeholder": "—",
+    "totalLabel": "TOTAL:",
+    "currencyFormat": "{{amount}} بر إثيوبي",
+    "footer": {
+      "thankYou": "شكراً لاختياركم",
+      "clinicName": "عيادة نصيحة للأعشاب",
+      "disclaimer": "هذا إيصال صادر عن الحاسوب"
+    }
+  },
+  "dashboard": {
+    "hero": {
+      "insightEyebrow": "رؤية اليوم",
+      "ring": {
+        "visitsCompleted": "الزيارات المكتملة",
+        "queueCleared": "إنجاز الطابور",
+        "visitsSeen": "الزيارات المُعاينة",
+        "paymentsCleared": "المدفوعات المسددة",
+        "noVisits": "لا توجد زيارات اليوم بعد",
+        "noPayments": "لا توجد مدفوعات اليوم بعد"
+      },
+      "marks": {
+        "waiting": "في الانتظار",
+        "completed": "مكتملة",
+        "visits": "الزيارات",
+        "inQueue": "في الطابور",
+        "prescriptions": "الوصفات",
+        "registered": "المسجلون",
+        "pending": "معلقة",
+        "processed": "تمت معالجتها"
+      },
+      "legend": {
+        "completed": "مكتملة",
+        "waiting": "في الانتظار",
+        "inProgress": "قيد التنفيذ",
+        "seen": "تمت المعاينة",
+        "doctors": "الأطباء",
+        "otherStaff": "موظفون آخرون",
+        "inQueue": "في الطابور",
+        "lowStock": "مخزون منخفض",
+        "expired": "منتهية الصلاحية"
+      },
+      "cards": {
+        "todayVisits": "زيارات اليوم",
+        "totalPatients": "إجمالي المرضى",
+        "activeRecords": "سجلات المرضى النشطة",
+        "staff": "الموظفون",
+        "medicineStock": "تنبيهات الأدوية",
+        "inQueue": "في الطابور",
+        "nextPatient": "التالي: {{name}}",
+        "completedToday": "المكتملة اليوم",
+        "prescriptions": "وصفات اليوم",
+        "dispensedOf": "تم صرف {{dispensed}} من {{total}}",
+        "bookingRequests": "طلبات الحجز",
+        "bookingsHint": "طلبات عبر الإنترنت من الموقع",
+        "registeredToday": "المسجلون اليوم",
+        "waitingNow": "في الانتظار الآن",
+        "waitingHint": "مرضى سجّلوا وصولهم وينتظرون",
+        "pendingPayments": "المدفوعات المعلقة",
+        "pendingHint": "زيارات بانتظار الدفع",
+        "processedToday": "تمت معالجتها اليوم",
+        "lastPayment": "آخر دفعة",
+        "noneYet": "لا توجد مدفوعات بعد",
+        "paymentMethods": "طرق الدفع الأخيرة"
+      },
+      "chip": {
+        "live": "مباشر",
+        "offline": "غير متصل",
+        "allGood": "كل شيء على ما يرام",
+        "needsAttention": "يحتاج إلى انتباه",
+        "needsReview": "يحتاج إلى مراجعة",
+        "queueActive": "الطابور نشط"
+      },
+      "timeline": {
+        "empty": "لا يوجد نشاط اليوم بعد",
+        "noArrivals": "لا أحد في الانتظار الآن"
+      },
+      "cta": {
+        "manageStaff": "إدارة الموظفين",
+        "openQueue": "فتح الطابور",
+        "reviewRequests": "مراجعة الطلبات",
+        "viewPatients": "عرض المرضى",
+        "openCashier": "فتح الصندوق"
+      }
+    },
+    "insight": {
+      "allClear": {
+        "headline": "كل شيء يسير بسلاسة — لا توجد مهام معلقة.",
+        "detail": "سيظهر أي نشاط جديد هنا مباشرةً."
+      },
+      "waiting": {
+        "headline": "هناك مرضى ينتظرون المعاينة.",
+        "detail": "في الانتظار الآن: {{count}}. الحفاظ على حركة الطابور يقلل وقت الانتظار."
+      },
+      "expired": {
+        "headline": "انتهت صلاحية بعض الأدوية.",
+        "detail": "منتهية الصلاحية: {{expired}} · مخزون منخفض: {{low}}. أزل المخزون المنتهي قبل أن يصل إلى أي مريض."
+      },
+      "lowStock": {
+        "headline": "بعض الأدوية على وشك النفاد.",
+        "detail": "مخزون منخفض: {{count}}. أعد التخزين قريبًا لتجنب انقطاع العلاج."
+      },
+      "doctorQueue": {
+        "headline": "هناك مرضى في انتظارك.",
+        "detail": "في الطابور: {{count}} · التالي: {{name}}"
+      },
+      "doctorDone": {
+        "headline": "قائمتك خالية — عمل رائع اليوم.",
+        "detail": "الاستشارات المكتملة اليوم: {{count}}"
+      },
+      "doctorIdle": {
+        "headline": "لا يوجد مرضى في قائمتك بعد.",
+        "detail": "ستظهر الزيارات الجديدة هنا مباشرةً."
+      },
+      "bookings": {
+        "headline": "طلبات حجز جديدة عبر الإنترنت تحتاج إلى مراجعة.",
+        "detail": "الطلبات المعلقة: {{count}}"
+      },
+      "cashierPending": {
+        "headline": "هناك زيارات بانتظار الدفع.",
+        "detail": "المدفوعات المعلقة: {{count}}"
+      },
+      "cashierClear": {
+        "headline": "تمت تسوية جميع المدفوعات.",
+        "detail": "ستظهر المدفوعات الجديدة هنا مباشرةً."
+      }
+    },
+    "title": "لوحة التحكم",
+    "fallback": {
+      "title": "لوحة التحكم"
+    },
+    "stats": {
+      "totalPatients": "إجمالي المرضى",
+      "todayPatients": "مرضى اليوم",
+      "todayVisits": "زيارات اليوم",
+      "waitingNow": "في الانتظار الآن",
+      "totalDoctors": "إجمالي الأطباء",
+      "totalStاff": "إجمالي الموظفين",
+      "completedToday": "مكتمل اليوم",
+      "lowStockItems": "عناصر منخفضة المخزون",
+      "expiredMedicines": "أدوية منتهية الصلاحية"
+    },
+    "quickStats": {
+      "title": "إحصائيات سريعة"
+    },
+    "systemStatus": {
+      "reconnecting": "جارٍ إعادة الاتصال…",
+      "title": "حالة النظام",
+      "database": "قاعدة البيانات",
+      "online": "متصل",
+      "realtimeUpdates": "تحديثات فورية",
+      "connected": "متصل",
+      "lastBackup": "آخر نسخة احتياطية"
+    },
+    "doctor": {
+      "title": "لوحة تحكم الطبيب",
+      "stats": {
+        "inQueue": "في قائمة الانتظار",
+        "completedToday": "مكتمل اليوم",
+        "prescriptions": "وصفات طبية",
+        "dispensed": "تم الصرف"
+      },
+      "waitingPatients": "المرضى في الانتظار",
+      "startConsultation": "بدء الاستشارة",
+      "empty": {
+        "noPatients": "لا يوجد مرضى في الانتظار"
+      }
+    },
+    "dataClerk": {
+      "title": "لوحة تحكم موظف البيانات",
+      "stats": {
+        "registeredToday": "مسجل اليوم",
+        "todayVisits": "زيارات اليوم",
+        "waitingPatients": "المرضى في الانتظار"
+      },
+      "recentRegistrations": "التسجيلات الأخيرة",
+      "empty": {
+        "noRegistrations": "لا توجد تسجيلات حديثة"
+      }
+    },
+    "cashier": {
+      "title": "لوحة تحكم أمين الصندوق",
+      "stats": {
+        "pendingPayments": "مدفوعات معلقة",
+        "paymentsProcessedToday": "مدفوعات معالجة اليوم",
+        "todayRevenue": "إيرادات اليوم (بر إثيوبي)"
+      },
+      "recentPayments": "المدفوعات الأخيرة",
+      "empty": {
+        "noPayments": "لا توجد مدفوعات حديثة"
+      }
+    }
+  },
+  "cashier": {
+    "title": "لوحة تحكم أمين الصندوق",
+    "subtitle": "استلام المدفوعات وصرف الأدوية وطباعة الإيصالات",
+    "tabs": {
+      "pending": "معلق",
+      "recent": "المدفوعات الأخيرة"
+    },
+    "search": {
+      "placeholder": "بحث باسم المريض أو الرقم..."
+    },
+    "pending": {
+      "actionButton": "استلام وصرف",
+      "empty": "لا توجد مدفوعات معلقة"
+    },
+    "recent": {
+      "empty": "لا توجد مدفوعات حديثة"
+    },
+    "modal": {
+      "payment": {
+        "title": "استلام الدفع",
+        "confirm": "تأكيد الدفع والصرف",
+        "totalDue": "المبلغ الإجمالي المستحق",
+        "medicinesToDispense": "الأدوية المراد صرفها:",
+        "paymentMethodLabel": "طريقة الدفع",
+        "transactionIdLabel": "رقم المعاملة / المرجع (اختياري)",
+        "transactionIdPlaceholder": "مثال: TXN123456",
+        "notesLabel": "ملاحظات"
+      },
+      "detail": {
+        "title": "تفاصيل الدفع",
+        "printReceipt": "طباعة إيصال",
+        "prescribedMedicines": "الأدوية الموصوفة",
+        "transactionId": "رقم المعاملة"
+      }
+    },
+    "paymentMethods": {
+      "cash": "نقداً",
+      "bankTransfer": "تحويل بنكي",
+      "mobileMoney": "النقود المتنقلة (Telebirr/CBE Birr)",
+      "other": "أخرى"
+    },
+    "toast": {
+      "paymentSuccess": "تم استلام الدفع — تم صرف الدواء للمريض",
+      "paymentError": "فشل معالجة الدفع"
+    }
+  },
+  "cashierReports": {
+    "title": "تقارير أمين الصندوق",
+    "subtitle": "إيرادات الوصفات المدفوعة",
+    "periods": {
+      "daily": "يومي",
+      "weekly": "أسبوعي",
+      "monthly": "شهري"
+    },
+    "periodLabels": {
+      "today": "اليوم",
+      "thisWeek": "هذا الأسبوع",
+      "thisMonth": "هذا الشهر"
+    },
+    "cards": {
+      "totalRevenue": "الإيرادات الإجمالية",
+      "prescriptionsPaid": "الوصفات المدفوعة",
+      "period": "الفترة"
+    },
+    "byPaymentMethod": "حسب طريقة الدفع",
+    "paymentTransactions": "معاملات الدفع",
+    "empty": {
+      "payments": "لم يتم العثور على مدفوعات لهذه الفترة",
+      "report": "لا تتوفر بيانات تقرير"
+    }
+  },
+  "patients": {
+    "title": "المرضى",
+    "subtitle": "إدارة سجلات المرضى",
+    "registerButton": "تسجيل مريض",
+    "search": {
+      "placeholder": "بحث عن المرضى بالاسم أو الرقم أو الهاتف..."
+    },
+    "empty": {
+      "title": "لم يتم العثور على مرضى",
+      "subtitle": "سجل أول مريض للبدء"
+    },
+    "toast": {
+      "registerSuccess": "تم تسجيل المريض بنجاح!"
+    }
+  },
+  "visits": {
+    "title": "الزيارات",
+    "subtitle": "إدارة زيارات المرضى",
+    "newVisitButton": "زيارة جديدة",
+    "status": {
+      "waiting": "في الانتظار",
+      "inConsultation": "في الاستشارة",
+      "completed": "مكتمل",
+      "cancelled": "ملغي",
+      "scheduled": "مجدول"
+    },
+    "empty": "لم يتم العثور على زيارات",
+    "toast": {
+      "loadError": "فشل تحميل الزيارات",
+      "createSuccess": "تم إنشاء الزيارة بنجاح!"
+    }
+  },
+  "doctorQueue": {
+    "title": "قائمة انتظار المرضى",
+    "backToQueue": "العودة إلى القائمة",
+    "refreshQueue": "تحديث القائمة",
+    "actions": {
+      "start": "بدء",
+      "continue": "متابعة",
+      "consulting": "في الاستشارة"
+    },
+    "status": {
+      "withAnotherDoctor": "مع طبيب آخر",
+      "active": "نشط",
+      "inProgress": "قيد التنفيذ"
+    },
+    "empty": {
+      "title": "لا يوجد مرضى في الانتظار",
+      "subtitle": "سيظهر المرضى الجدد هنا"
+    },
+    "rightPanel": {
+      "selectPatient": "اختر مريضاً",
+      "selectPatientHint": "انقر على \"بدء\" على مريض من القائمة لبدء الاستشارة"
+    },
+    "tabs": {
+      "consultation": "الاستشارة",
+      "vitalSigns": "العلامات الحيوية",
+      "investigation": "الفحوصات",
+      "herbalMedicine": "الطب العشبي",
+      "history": "التاريخ"
+    },
+    "consultation": {
+      "title": "الاستشارة",
+      "patientInfo": "معلومات المريض",
+      "diagnosisTitle": "التشخيص",
+      "noDiagnosis": "لم تتم إضافة تشخيص بعد",
+      "ageGender": "العمر / الجنس",
+      "bloodGroup": "فصيلة الدم",
+      "allergies": "الحساسية:",
+      "chronic": "الأمراض المزمنة:",
+      "saveProgress": "حفظ التقدم",
+      "completeConsultation": "إكمال الاستشارة",
+      "printPrescription": "طباعة الوصفة",
+      "printNoPrescriptions": "لا توجد وصفة طبية لطباعتها لهذه الزيارة بعد",
+      "printError": "تعذر تجهيز الوصفة للطباعة",
+      "patientFileDrawer": "ملف المريض",
+      "saveStatus": {
+        "pending": "تغييرات غير محفوظة",
+        "saving": "جارٍ الحفظ...",
+        "saved": "تم حفظ جميع التغييرات",
+        "error": "تعذر الحفظ"
+      }
+    },
+    "queue": {
+      "chiefComplaintPrefix": "الشكوى الرئيسية:"
+    },
+    "queueStats": {
+      "patients": "مرضى",
+      "inConsultation": "في الاستشارة"
+    },
+    "toast": {
+      "consultationStarted": "بدأت الاستشارة — يبقى المريض في القائمة حتى يتم الحفظ",
+      "startError": "فشل بدء الاستشارة",
+      "saveSuccess": "تم حفظ تفاصيل الاستشارة",
+      "saveError": "فشل حفظ الاستشارة",
+      "sentToCashier": "تم إرسال الاستشارة إلى أمين الصندوق للدفع",
+      "completeSuccess": "تم إكمال الاستشارة بنجاح",
+      "completeError": "فشل إكمال الاستشارة"
+    }
+  },
+  "medicines": {
+    "title": "الأدوية",
+    "subtitle": "إدارة مخزون الأدوية العشبية",
+    "addButton": "إضافة دواء",
+    "search": {
+      "placeholder": "بحث بالاسم أو الرمز..."
+    },
+    "card": {
+      "code": "الرمز:",
+      "category": "الفئة:",
+      "inStock": "في المخزون:",
+      "strength": "القوة:"
+    },
+    "empty": "لم يتم العثور على أدوية مطابقة لبحثك.",
+    "toast": {
+      "loadError": "فشل تحميل الأدوية",
+      "deleteConfirmation": "هل أنت متأكد من حذف هذا الدواء؟",
+      "deleteSuccess": "تم حذف الدواء بنجاح",
+      "deleteError": "فشل حذف الدواء"
+    }
+  },
+  "pharmacy": {
+    "title": "الصيدلية",
+    "subtitle": "إدارة الوصفات الطبية وصرف الأدوية",
+    "actions": {
+      "dispense": "صرف"
+    },
+    "filters": {
+      "paid": "مدفوع",
+      "dispensed": "تم الصرف",
+      "completed": "مكتمل",
+      "pending": "معلق"
+    },
+    "search": {
+      "placeholder": "بحث باسم المريض أو الرقم أو الدواء..."
+    },
+    "empty": {
+      "search": "لم يتم العثور على وصفات مطابقة لبحثك",
+      "status": "لا توجد وصفات {{status}}"
+    },
+    "prescription": {
+      "medicineFallback": "دواء",
+      "dosage": "الجرعة",
+      "frequency": "التكرار",
+      "duration": "المدة",
+      "quantity": "الكمية",
+      "instructions": "التعليمات:",
+      "prescribed": "موصوف:"
+    },
+    "status": {
+      "dispensed": "تم الصرف"
+    },
+    "dispenseModal": {
+      "title": "صرف الدواء",
+      "confirm": "تأكيد الصرف",
+      "prescriptionDetails": "تفاصيل الوصفة",
+      "prescribedQuantity": "الكمية الموصوفة",
+      "quantityToDispense": "الكمية المراد صرفها *",
+      "batchNumber": "رقم الدفعة *",
+      "batchNumberPlaceholder": "مثال: BATCH-2026-001",
+      "expiryDate": "تاريخ انتهاء الصلاحية *",
+      "notes": "ملاحظات (اختياري)",
+      "notesPlaceholder": "أي ملاحظات إضافية..."
+    },
+    "toast": {
+      "loadError": "فشل تحميل الوصفات",
+      "invalidQuantity": "الرجاء إدخال كمية صحيحة",
+      "missingBatch": "الرجاء إدخال رقم الدفعة",
+      "missingExpiry": "الرجاء إدخال تاريخ انتهاء الصلاحية",
+      "dispenseSuccess": "تم صرف الدواء بنجاح",
+      "dispenseError": "فشل صرف الدواء"
+    }
+  },
+  "laboratory": {
+    "title": "المختبر",
+    "subtitle": "إدارة طلبات ونتائج الفحوصات",
+    "actions": {
+      "startProcessing": "بدء المعالجة",
+      "enterResults": "إدخال النتائج"
+    },
+    "status": {
+      "requested": "مطلوب",
+      "inProgress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
+    },
+    "urgency": {
+      "routine": "روتيني",
+      "urgent": "عاجل",
+      "stat": "عاجل جداً"
+    },
+    "search": {
+      "placeholder": "بحث باسم المريض أو الرقم أو الفحص..."
+    },
+    "empty": {
+      "search": "لم يتم العثور على فحوصات مطابقة لبحثك",
+      "status": "لا توجد فحوصات {{status}}"
+    },
+    "detail": {
+      "instructions": "التعليمات:",
+      "results": "النتائج:",
+      "interpretation": "التفسير:"
+    },
+    "info": {
+      "requested": "مطلوب:",
+      "scheduled": "مجدول:",
+      "completed": "مكتمل:",
+      "performedBy": "تم إجراؤه بواسطة:"
+    },
+    "modal": {
+      "title": "إدخال نتائج الفحص",
+      "submitResults": "إرسال النتائج",
+      "investigationDetails": "تفاصيل الفحص",
+      "type": "النوع",
+      "testName": "اسم الفحص",
+      "urgency": "الأولوية",
+      "requestedDate": "تاريخ الطلب",
+      "instructions": "التعليمات:",
+      "results": "نتائج الفحص *",
+      "resultsPlaceholder": "أدخل نتائج الفحص التفصيلية، القياسات، الملاحظات...",
+      "interpretation": "التفسير السريري",
+      "interpretationPlaceholder": "تفسير الطبيب للنتائج (اختياري)...",
+      "performedBy": "تم إجراؤه بواسطة *",
+      "performedByPlaceholder": "اسم فني المختبر أو أخصائي الأشعة",
+      "additionalNotes": "ملاحظات إضافية",
+      "additionalNotesPlaceholder": "أي ملاحظات أو تعليقات إضافية..."
+    },
+    "toast": {
+      "loadError": "فشل تحميل الفحوصات",
+      "statusUpdated": "تم وضع علامة على الفحص كـ {{status}}",
+      "statusUpdateError": "فشل تحديث الحالة",
+      "missingResults": "الرجاء إدخال نتائج الفحص",
+      "missingPerformedBy": "الرجاء إدخال من قام بإجراء الفحص",
+      "submitSuccess": "تم إرسال نتائج الفحص بنجاح",
+      "submitError": "فشل إرسال النتائج"
+    }
+  },
+  "patientDetail": {
+    "backToPatients": "العودة إلى المرضى",
+    "newVisit": "زيارة جديدة",
+    "notFound": "المريض غير موجود",
+    "detail": {
+      "email": "البريد الإلكتروني",
+      "address": "العنوان",
+      "occupation": "المهنة",
+      "maritalStatus": "الحالة الاجتماعية"
+    },
+    "registered": "مسجل:",
+    "alerts": {
+      "allergies": "الحساسية:",
+      "chronic": "الأمراض المزمنة:"
+    },
+    "visitHistory": {
+      "title": "سجل الزيارات",
+      "complaint": "الشكوى:",
+      "treatment": "العلاج:",
+      "empty": "لا توجد زيارات سابقة"
+    },
+    "toast": {
+      "loadError": "فشل تحميل تفاصيل المريض"
+    }
+  },
+  "patientForm": {
+    "updateSuccess": "تم تحديث بيانات المريض بنجاح",
+    "registerSuccess": "تم تسجيل المريض بنجاح",
+    "saveError": "تعذّر حفظ بيانات المريض",
+    "editTitle": "تعديل المريض",
+    "registerTitle": "تسجيل مريض جديد",
+    "fromBookingNotice": "تم التعبئة مسبقًا من طلب حجز عبر الموقع — يرجى التحقق وإكمال الحقول المتبقية.",
+    "personalInfoTitle": "المعلومات الشخصية",
+    "firstNameLabel": "الاسم الأول *",
+    "firstNameRequired": "الاسم الأول مطلوب",
+    "firstNamePlaceholder": "الاسم الأول",
+    "middleNameLabel": "الاسم الأوسط",
+    "middleNamePlaceholder": "الاسم الأوسط",
+    "lastNameLabel": "اسم العائلة *",
+    "lastNameRequired": "اسم العائلة مطلوب",
+    "lastNamePlaceholder": "اسم العائلة",
+    "genderLabel": "الجنس *",
+    "genderRequired": "الجنس مطلوب",
+    "genderPlaceholder": "اختر الجنس",
+    "genderMale": "ذكر",
+    "genderFemale": "أنثى",
+    "genderOther": "آخر",
+    "dobLabel": "تاريخ الميلاد *",
+    "dobRequired": "تاريخ الميلاد مطلوب",
+    "ageLabel": "العمر *",
+    "ageRequired": "العمر مطلوب",
+    "ageInvalid": "أدخل عمرًا صالحًا",
+    "agePlaceholder": "العمر بالسنوات",
+    "phoneLabel": "رقم الهاتف *",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "phonePlaceholder": "+251911234567",
+    "addressTitle": "العنوان",
+    "cityLabel": "المدينة",
+    "cityPlaceholder": "المدينة",
+    "subCityLabel": "الحي",
+    "subCityPlaceholder": "الحي",
+    "woredaLabel": "الوريدا",
+    "woredaPlaceholder": "الوريدا",
+    "bloodGroupLabel": "فصيلة الدم",
+    "bloodGroupPlaceholder": "اختر فصيلة الدم",
+    "emergencyContactTitle": "جهة اتصال الطوارئ",
+    "emergencyContactNameLabel": "اسم جهة اتصال الطوارئ",
+    "emergencyContactNamePlaceholder": "الاسم الكامل",
+    "emergencyContactPhoneLabel": "هاتف جهة اتصال الطوارئ",
+    "emergencyContactPhonePlaceholder": "+251911234567",
+    "registrationFeeTitle": "رسوم التسجيل",
+    "registrationFeeNotice": "رسوم تسجيل قدرها {{amount}} بير إثيوبي مطلوبة مرة واحدة لكل مريض جديد.",
+    "registrationFeeAmountLabel": "المبلغ",
+    "registrationFeeMethodLabel": "طريقة الدفع *",
+    "registrationFeeMethodRequired": "طريقة الدفع مطلوبة",
+    "registrationFeeMethodPlaceholder": "اختر طريقة الدفع",
+    "registrationFeeMethodCash": "نقدًا",
+    "registrationFeeMethodTransfer": "تحويل بنكي",
+    "registrationFeeMethodTelebirr": "تيلي بير",
+    "registrationFeeTransactionLabel": "رقم العملية / المرجع (اختياري)",
+    "registrationFeeTransactionPlaceholder": "مثال: TXN123456",
+    "saving": "جارٍ الحفظ...",
+    "updateButton": "تحديث المريض",
+    "registerButton": "تسجيل المريض"
+  },
+  "patientCard": {
+    "idPrefix": "ID: ",
+    "ageGenderSeparator": " years • ",
+    "registeredPrefix": "Registered: ",
+    "viewDetails": "View Details",
+    "newVisit": "New Visit"
+  },
+  "vitalSigns": {
+    "title": "العلامات الحيوية",
+    "loading": "جاري تحميل العلامات الحيوية...",
+    "saveButton": "حفظ العلامات الحيوية",
+    "saveSuccess": "تم حفظ العلامات الحيوية بنجاح",
+    "saveError": "تعذر حفظ العلامات الحيوية",
+    "temperatureLabel": "درجة الحرارة (°م)",
+    "temperaturePlaceholder": "مثال: 37.5",
+    "temperatureNormal": "الطبيعي: 36.5 - 37.5°م",
+    "bloodPressureLabel": "ضغط الدم (mmHg)",
+    "systolicPlaceholder": "الانقباضي (120)",
+    "diastolicPlaceholder": "الانبساطي (80)",
+    "bloodPressureNormal": "الطبيعي: 120/80 mmHg",
+    "heartRateLabel": "معدل ضربات القلب (bpm)",
+    "heartRatePlaceholder": "مثال: 72",
+    "heartRateNormal": "الطبيعي: 60 - 100 bpm",
+    "respiratoryRateLabel": "معدل التنفس (في الدقيقة)",
+    "respiratoryRatePlaceholder": "مثال: 16",
+    "respiratoryRateNormal": "الطبيعي: 12 - 20 في الدقيقة",
+    "oxygenSaturationLabel": "تشبع الأكسجين (%)",
+    "oxygenSaturationPlaceholder": "مثال: 98",
+    "oxygenSaturationNormal": "الطبيعي: 95 - 100%",
+    "weightLabel": "الوزن (كجم)",
+    "weightPlaceholder": "مثال: 70.5",
+    "heightLabel": "الطول (سم)",
+    "heightPlaceholder": "مثال: 175",
+    "bmiLabel": "مؤشر كتلة الجسم (BMI)",
+    "categoryPrefix": "الفئة: ",
+    "reference": {
+      "title": "المرجع الطبيعي للعلامات الحيوية",
+      "temperature": "• درجة الحرارة: 36.5 - 37.5°م",
+      "bloodPressure": "• ضغط الدم: 120/80 mmHg",
+      "heartRate": "• معدل ضربات القلب: 60 - 100 bpm",
+      "respiratoryRate": "• معدل التنفس: 12 - 20/دقيقة",
+      "oxygenSaturation": "• تشبع الأكسجين: 95 - 100%",
+      "bmi": "• مؤشر كتلة الجسم: 18.5 - 24.9 (طبيعي)"
+    }
+  },
+  "bmi": {
+    "category": {
+      "underweight": "نقص الوزن",
+      "normal": "طبيعي",
+      "overweight": "زيادة الوزن",
+      "obese": "سمنة"
+    }
+  },
+  "consultation": {
+    "chiefComplaintLabel": "الشكوى الرئيسية *",
+    "chiefComplaintPlaceholder": "السبب الرئيسي للزيارة...",
+    "symptomsLabel": "الأعراض",
+    "addSymptomPlaceholder": "أضف عرضًا...",
+    "historyOfPresentIllnessLabel": "تاريخ المرض الحالي",
+    "historyOfPresentIllnessPlaceholder": "تاريخ مفصل للحالة الحالية...",
+    "physicalExaminationLabel": "الفحص السريري",
+    "physicalExaminationPlaceholder": "نتائج الفحص السريري...",
+    "diagnosisLabel": "التشخيص",
+    "addDiagnosisPlaceholder": "أضف تشخيصًا...",
+    "treatmentPlanLabel": "خطة العلاج",
+    "treatmentPlanPlaceholder": "خطة العلاج والتوصيات...",
+    "doctorNotesLabel": "ملاحظات الطبيب",
+    "doctorNotesPlaceholder": "ملاحظات إضافية...",
+    "followUpDateLabel": "تاريخ المتابعة"
+  },
+  "herbalMedicine": {
+    "loading": "جاري تحميل الأدوية...",
+    "addButton": "إضافة دواء عشبي",
+    "prescribeTitle": "وصف دواء عشبي",
+    "selectLabel": "اختر الدواء العشبي *",
+    "selectPlaceholder": "-- اختر الدواء --",
+    "unitPriceLabel": "سعر الوحدة (بر إثيوبي) *",
+    "unitPricePlaceholder": "السعر لكل وحدة",
+    "quantityLabel": "الكمية *",
+    "quantityPlaceholder": "عدد الوحدات",
+    "totalLabel": "المبلغ الإجمالي",
+    "totalPrefix": "الإجمالي: ",
+    "instructionsLabel": "التعليمات (اختياري)",
+    "instructionsPlaceholder": "مثال: يؤخذ مع الطعام، تجنب الكحول...",
+    "saveButton": "حفظ الوصفة",
+    "listTitle": "الأدوية الموصوفة",
+    "emptyList": "لم يتم وصف أي دواء بعد",
+    "fetchError": "تعذر جلب الأدوية",
+    "selectError": "الرجاء اختيار دواء عشبي",
+    "quantityError": "الرجاء إدخال كمية صحيحة",
+    "prescribeSuccess": "تم وصف الدواء بنجاح",
+    "addError": "تعذرت إضافة الدواء",
+    "cancelConfirm": "إلغاء هذه الوصفة؟",
+    "cancelSuccess": "تم إلغاء الوصفة",
+    "cancelError": "تعذر إلغاء الوصفة"
+  },
+  "prescription": {
+    "status": {
+      "pending": "قيد الانتظار",
+      "paid": "مدفوع",
+      "dispensed": "تم الصرف",
+      "completed": "مكتمل",
+      "stopped": "متوقف",
+      "expired": "منتهي الصلاحية"
+    },
+    "dosage": {
+      "asPrescribed": "حسب الوصفة"
+    },
+    "frequency": {
+      "asDirected": "حسب التوجيه"
+    },
+    "route": {
+      "oral": "عن طريق الفم"
+    },
+    "medicineFallback": "دواء"
+  },
+  "investigation": {
+    "loading": "جاري تحميل الفحوصات...",
+    "requestButton": "طلب فحص",
+    "fillError": "الرجاء ملء نوع الفحص واسم الاختبار",
+    "requestSuccess": "تم طلب الفحص بنجاح",
+    "requestError": "تعذر طلب الفحص",
+    "cancelConfirm": "هل أنت متأكد من إلغاء هذا الفحص؟",
+    "cancelSuccess": "تم إلغاء الفحص",
+    "cancelError": "تعذر إلغاء الفحص",
+    "typeLabel": "نوع الفحص *",
+    "typePlaceholder": "-- اختر النوع --",
+    "testNameLabel": "اسم الاختبار *",
+    "testNamePlaceholder": "مثال: تعداد الدم الكامل، اختبار وظائف الكبد",
+    "urgencyLabel": "الأولوية",
+    "scheduledDateLabel": "التاريخ المحدد",
+    "instructionsLabel": "تعليمات خاصة",
+    "instructionsPlaceholder": "أي تعليمات خاصة أو ملاحظات تحضيرية...",
+    "typePrefix": "النوع: ",
+    "instructionsPrefix": "التعليمات: ",
+    "requestedPrefix": "تاريخ الطلب: ",
+    "scheduledPrefix": "التاريخ المحدد: ",
+    "resultsLabel": "النتائج:",
+    "interpretationLabel": "التفسير:",
+    "completedPrefix": "تاريخ الإنجاز: ",
+    "emptyList": "لم يتم طلب أي فحص بعد",
+    "status": {
+      "requested": "مطلوب",
+      "inProgress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "ملغى"
+    },
+    "urgency": {
+      "routine": "روتيني",
+      "urgent": "عاجل",
+      "stat": "فوري (طارئ)"
+    },
+    "type": {
+      "bloodTest": "فحص الدم",
+      "urineTest": "فحص البول",
+      "stoolTest": "فحص البراز",
+      "xray": "أشعة سينية",
+      "ultrasound": "الموجات فوق الصوتية",
+      "ctScan": "أشعة مقطعية",
+      "mri": "رنين مغناطيسي",
+      "ecg": "تخطيط القلب الكهربائي (ECG)",
+      "biopsy": "خزعة",
+      "cultureTest": "مزرعة",
+      "other": "أخرى"
+    }
+  },
+  "patientHistory": {
+    "loading": "جاري تحميل السجل...",
+    "fetchError": "تعذر جلب سجل المريض",
+    "empty": "لا توجد زيارات سابقة",
+    "visitNumberPrefix": "زيارة #",
+    "diagnosisLabel": "التشخيص:",
+    "treatmentLabel": "العلاج:"
+  },
+  "activePrescriptions": {
+    "title": "الوصفات الأخيرة (آخر 90 يومًا)",
+    "empty": "لا توجد وصفات نشطة",
+    "prescribedPrefix": "تاريخ الوصف: ",
+    "daysLeft": "أيام متبقية",
+    "endsToday": "ينتهي اليوم",
+    "expired": "منتهي",
+    "durationLabel": "المدة:",
+    "instructionsLabel": "التعليمات:",
+    "reasonLabel": "السبب:",
+    "endingSoonAlert": "الدواء على وشك الانتهاء - فكر في إعادة التعبئة إذا لزم الأمر",
+    "endedAlert": "انتهت فترة الدواء"
+  },
+  "pendingInvestigations": {
+    "pendingTitle": "الفحوصات المعلقة",
+    "completedTitle": "نتائج حديثة متاحة",
+    "empty": "لا توجد فحوصات حديثة",
+    "requestedPrefix": "تاريخ الطلب: ",
+    "scheduledPrefix": "التاريخ المحدد: ",
+    "instructionsLabel": "التعليمات:",
+    "statAlert": "فوري - يتطلب اهتمامًا فوريًا",
+    "resultsReady": "النتائج جاهزة",
+    "completedPrefix": "تاريخ الإنجاز: ",
+    "resultsLabel": "النتائج:",
+    "interpretationLabel": "التفسير:",
+    "viewResultFile": "عرض ملف النتيجة",
+    "performedByPrefix": "تم بواسطة: "
+  },
+  "followUp": {
+    "firstVisit": "First Visit - No previous medical history",
+    "scheduledTitle": "✓ Scheduled Follow-up Visit",
+    "returnTitle": "Return Visit",
+    "daysSince": "days since last visit",
+    "lastVisitLabel": "Last Visit:",
+    "scheduledForLabel": "Follow-up was scheduled for:",
+    "previousDiagnosisLabel": "Previous Diagnosis:",
+    "previousTreatmentLabel": "Previous Treatment:",
+    "previousNotesLabel": "Previous Notes:",
+    "viewHistory": "View Full History"
+  },
+  "medicineForm": {
+    "updateSuccess": "تم تحديث الدواء بنجاح",
+    "addSuccess": "تمت إضافة الدواء بنجاح",
+    "saveError": "تعذّر حفظ الدواء",
+    "editTitle": "تعديل دواء عشبي",
+    "addTitle": "إضافة دواء عشبي",
+    "herbalModeHint": "اسم الدواء فقط مطلوب",
+    "standardModeHint": "الوضع القياسي بجميع الحقول",
+    "modeToggleLabel": "وضع الدواء العشبي",
+    "nameLabel": "اسم الدواء *",
+    "nameRequired": "اسم الدواء مطلوب",
+    "namePlaceholder": "مثال: خلاصة الثوم، زيت الحبة السوداء...",
+    "autoCodeHint": "سيتم إنشاء رمز الدواء تلقائياً عند الحفظ",
+    "codeLabel": "رمز الدواء",
+    "codePlaceholder": "اتركه فارغاً للإنشاء التلقائي",
+    "codeAutoHint": "يُنشأ تلقائياً إذا تُرك فارغاً",
+    "genericNameLabel": "الاسم العلمي",
+    "genericNamePlaceholder": "مثال: Allium sativum",
+    "categoryLabel": "الفئة",
+    "categoryPlaceholder": "مثال: مكمل عشبي",
+    "strengthLabel": "التركيز",
+    "strengthPlaceholder": "e.g. 500mg",
+    "dosageFormLabel": "الشكل الدوائي",
+    "dosageFormPlaceholder": "اختر الشكل",
+    "manufacturerLabel": "الشركة المصنّعة",
+    "supplierLabel": "المورّد",
+    "batchNumberLabel": "رقم الدفعة",
+    "storageLocationLabel": "مكان التخزين",
+    "availableQuantityLabel": "الكمية المتوفرة",
+    "minimumStockLabel": "الحد الأدنى للمخزون",
+    "purchasePriceLabel": "سعر الشراء",
+    "sellingPriceLabel": "سعر البيع",
+    "expiryDateLabel": "تاريخ الانتهاء",
+    "requiresPrescriptionLabel": "يتطلب وصفة طبية",
+    "optionalDetails": "تفاصيل اختيارية",
+    "optionalDetailsHint": "(الفئة، التركيز، المخزون، السعر، ملاحظات...)",
+    "instructionsLabel": "التعليمات",
+    "instructionsPlaceholder": "طريقة تحضير أو استخدام هذا الدواء العشبي...",
+    "notesLabel": "ملاحظات",
+    "notesPlaceholder": "ملاحظات إضافية...",
+    "instructionsPlaceholderAlt": "طريقة تحضير أو استخدام هذا الدواء...",
+    "sideEffectsLabel": "الآثار الجانبية",
+    "contraindicationsLabel": "موانع الاستعمال",
+    "saving": "جارٍ الحفظ...",
+    "updateButton": "تحديث الدواء",
+    "addButton": "إضافة الدواء",
+    "dosageForm": {
+      "tablet": "أقراص",
+      "capsule": "كبسولات",
+      "syrup": "شراب",
+      "powder": "مسحوق",
+      "extract": "خلاصة",
+      "tea": "Tea",
+      "oil": "Oil",
+      "cream": "كريم",
+      "tincture": "صبغة"
+    }
+  },
+  "visitForm": {
+    "fetchError": "تعذّر جلب المرضى",
+    "createError": "تعذّر إنشاء الزيارة",
+    "title": "إنشاء زيارة جديدة",
+    "patientLabel": "المريض *",
+    "patientRequired": "المريض مطلوب",
+    "patientPlaceholder": "اختر المريض",
+    "chiefComplaintLabel": "الشكوى الرئيسية",
+    "chiefComplaintPlaceholder": "صف الشكوى الرئيسية للمريض...",
+    "visitDateLabel": "تاريخ الزيارة",
+    "arrivalTimeLabel": "وقت الوصول *",
+    "arrivalTimeRequired": "وقت الوصول مطلوب",
+    "creating": "جارٍ الإنشاء...",
+    "createButton": "إنشاء الزيارة",
+    "scheduleTitle": "جدولة موعد",
+    "mode": {
+      "walkIn": "حضور فوري",
+      "appointment": "جدولة مسبقة"
+    },
+    "appointmentDateLabel": "تاريخ الموعد",
+    "scheduledTimeLabel": "وقت الموعد",
+    "scheduledTimeRequired": "وقت الموعد مطلوب",
+    "appointmentHint": "لن يظهر المريض في قائمة انتظار الطبيب إلا بعد تسجيل وصوله من قبل موظف الاستقبال في يوم الموعد.",
+    "scheduleButton": "جدولة الموعد",
+    "scheduleSuccess": "تمت جدولة الموعد بنجاح",
+    "createSuccess": "تم إنشاء الزيارة بنجاح"
+  },
+  "clinicManagement": {
+    "title": "Clinic Management",
+    "doctors": "Doctors",
+    "doctorsDesc": "Manage doctors here...",
+    "patients": "Patients",
+    "patientsDesc": "Manage patients here...",
+    "appointments": "Appointments",
+    "appointmentsDesc": "Manage appointments..."
+  },
+  "blogForm": {
+    "editTitle": "Edit Post",
+    "addTitle": "Add New Post",
+    "titlePlaceholder": "Title",
+    "mediaTypeLabel": "Media Type:",
+    "mediaTypeImage": "Image",
+    "mediaTypeVideo": "Video",
+    "previewAlt": "Preview",
+    "authorPlaceholder": "Author",
+    "descPlaceholder": "Description",
+    "saveButton": "Save Changes",
+    "addButton": "Add Post"
+  },
+  "blogCard": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "roles": {
+    "super_admin": "المسؤول الأعلى",
+    "admin": "مسؤول",
+    "doctor": "طبيب",
+    "data_clerk": "كاتب بيانات",
+    "cashier": "أمين الصندوق",
+    "staff_manager": "مدير الموظفين"
+  },
+  "followUpIndicator": {
+    "firstVisit": "الزيارة الأولى - لا يوجد تاريخ طبي سابق",
+    "scheduledFollowUp": "✓ زيارة متابعة مجدولة",
+    "returnVisit": "زيارة عودة",
+    "daysSinceLast": "{{days}} يوم منذ آخر زيارة",
+    "lastVisit": "آخر زيارة:",
+    "followUpScheduled": "تم جدولة المتابعة لـ:",
+    "previousDiagnosis": "التشخيص السابق:",
+    "previousTreatment": "العلاج السابق:",
+    "previousNotes": "ملاحظات سابقة:",
+    "viewFullHistory": "عرض السجل الكامل"
+  },
+  "prescriptions": {
+    "noActive": "لا توجد وصفات نشطة",
+    "recentTitle": "الوصفات الأخيرة (آخر 90 يوماً)",
+    "medicine": "دواء",
+    "prescribed": "موصوف:",
+    "daysLeft": "{{days}} يوم متبقي",
+    "endsToday": "ينتهي اليوم",
+    "expired": "منتهي الصلاحية",
+    "duration": "المدة:",
+    "instructions": "التعليمات:",
+    "reason": "السبب:",
+    "endingSoon": "الدواء ينتهي قريباً - فكر في التجديد إذا لزم الأمر",
+    "periodEnded": "انتهت فترة الدواء",
+    "status": {
+      "pending": "معلق",
+      "dispensed": "تم الصرف",
+      "completed": "مكتمل",
+      "stopped": "متوقف"
+    }
+  },
+  "investigations": {
+    "noRecent": "لا توجد فحوصات حديثة",
+    "pendingTitle": "الفحوصات المعلقة",
+    "recentResults": "النتائج الأخيرة متاحة",
+    "requested": "مطلوب:",
+    "scheduled": "مجدول:",
+    "completed": "مكتمل:",
+    "instructions": "التعليمات:",
+    "statAlert": "عاجل جداً - يتطلب اهتماماً فورياً",
+    "resultsReady": "النتائج جاهزة",
+    "results": "النتائج:",
+    "interpretation": "التفسير:",
+    "viewFile": "عرض ملف النتيجة",
+    "performedBy": "تم إجراؤه بواسطة:",
+    "status": {
+      "requested": "مطلوب",
+      "in_progress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
+    },
+    "urgency": {
+      "routine": "روتيني",
+      "urgent": "عاجل",
+      "stat": "عاجل جداً"
+    }
+  },
+  "staff": {
+    "title": "إدارة الموظفين",
+    "subtitle": "إنشاء حسابات الموظفين وتعديلها وإدارتها",
+    "addButton": "إضافة موظف",
+    "searchPlaceholder": "ابحث بالاسم أو البريد الإلكتروني أو الهاتف...",
+    "empty": "لم يتم العثور على موظفين",
+    "loadError": "تعذر تحميل الموظفين",
+    "you": "أنت",
+    "activate": "تفعيل",
+    "deactivate": "إلغاء التفعيل",
+    "deleteConfirm": "حذف {{name}}؟ سيتم إلغاء تفعيل حسابه.",
+    "stats": {
+      "total": "إجمالي الموظفين",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "doctors": "الأطباء"
+    },
+    "filter": {
+      "allRoles": "جميع الأدوار",
+      "allStatuses": "جميع الحالات"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "suspended": "موقوف"
+    },
+    "table": {
+      "name": "الاسم",
+      "contact": "معلومات الاتصال",
+      "role": "الدور",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    },
+    "resetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "mismatch": "كلمتا المرور غير متطابقتين",
+      "warning": "سيؤدي هذا إلى تسجيل خروج الموظف من جميع الجلسات. شارك كلمة المرور الجديدة معه بأمان.",
+      "submit": "إعادة التعيين",
+      "success": "تمت إعادة تعيين كلمة المرور بنجاح",
+      "error": "تعذرت إعادة تعيين كلمة المرور"
+    },
+    "toast": {
+      "deleteSuccess": "تم حذف الموظف بنجاح",
+      "deleteError": "تعذر حذف الموظف",
+      "activateSuccess": "تم تفعيل الموظف",
+      "activateError": "تعذر تفعيل الموظف",
+      "deactivateSuccess": "تم إلغاء تفعيل الموظف",
+      "deactivateError": "تعذر إلغاء تفعيل الموظف"
+    }
+  },
+  "staffForm": {
+    "addTitle": "إضافة موظف جديد",
+    "editTitle": "تعديل بيانات الموظف",
+    "subtitle": "تفاصيل الحساب ودور الوصول",
+    "firstNameLabel": "الاسم الأول",
+    "firstNameRequired": "الاسم الأول مطلوب",
+    "lastNameLabel": "اسم العائلة",
+    "lastNameRequired": "اسم العائلة مطلوب",
+    "emailLabel": "البريد الإلكتروني",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
+    "phoneLabel": "الهاتف",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "phonePlaceholder": "+251...",
+    "passwordLabel": "كلمة المرور",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "passwordTooShort": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+    "passwordWeak": "يجب أن تحتوي كلمة المرور على حرف كبير وحرف صغير ورقم",
+    "passwordHint": "8 أحرف على الأقل، مع حرف كبير وحرف صغير ورقم",
+    "roleLabel": "الدور",
+    "statusLabel": "الحالة",
+    "departmentLabel": "القسم",
+    "specializationLabel": "التخصص",
+    "specializationPlaceholder": "مثال: طب الأعشاب",
+    "licenseNumberLabel": "رقم الترخيص",
+    "addressLabel": "العنوان",
+    "createButton": "إنشاء موظف",
+    "updateButton": "حفظ التغييرات",
+    "createSuccess": "تم إنشاء الموظف بنجاح",
+    "updateSuccess": "تم تحديث بيانات الموظف بنجاح",
+    "saveError": "تعذر حفظ بيانات الموظف"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "إعدادات العيادة والتفضيلات",
+    "readOnlyNotice": "يمكنك عرض هذه الإعدادات، لكن المسؤول الأعلى وحده يمكنه تغييرها.",
+    "saveButton": "حفظ الإعدادات",
+    "saveSuccess": "تم حفظ الإعدادات بنجاح",
+    "saveError": "تعذر حفظ الإعدادات",
+    "loadError": "تعذر تحميل الإعدادات",
+    "clinic": {
+      "title": "معلومات العيادة",
+      "description": "تظهر في الإيصالات والبطاقات والمستندات المطبوعة",
+      "name": "اسم العيادة",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
+      "address": "العنوان",
+      "currency": "العملة"
+    },
+    "schedule": {
+      "title": "ساعات العمل",
+      "description": "أوقات فتح العيادة للزيارات",
+      "opensAt": "وقت الفتح",
+      "closesAt": "وقت الإغلاق",
+      "timezone": "المنطقة الزمنية",
+      "appointmentDuration": "مدة الموعد",
+      "minutesHint": "بالدقائق",
+      "workingDays": "أيام العمل"
+    },
+    "weekdays": {
+      "monday": "الاثنين",
+      "tuesday": "الثلاثاء",
+      "wednesday": "الأربعاء",
+      "thursday": "الخميس",
+      "friday": "الجمعة",
+      "saturday": "السبت",
+      "sunday": "الأحد"
+    },
+    "operations": {
+      "title": "العمليات",
+      "description": "تنبيهات المخزون والتنسيقات والإشعارات",
+      "lowStockThreshold": "حد المخزون المنخفض",
+      "lowStockHint": "التنبيه عند انخفاض الدواء إلى هذه الكمية",
+      "dateFormat": "تنسيق التاريخ",
+      "timeFormat": "تنسيق الوقت",
+      "hour24": "24 ساعة",
+      "hour12": "12 ساعة",
+      "emailNotifications": "تفعيل إشعارات البريد الإلكتروني",
+      "smsNotifications": "تفعيل إشعارات الرسائل النصية"
+    },
+    "legal": {
+      "title": "قانوني",
+      "description": "نصوص الشروط والخصوصية المعروضة للمرضى",
+      "terms": "الشروط والأحكام",
+      "privacy": "سياسة الخصوصية"
+    },
+    "business": {
+      "title": "معلومات الشركة",
+      "description": "تظهر في قسم \"من نحن\" على الموقع العام",
+      "logo": "الشعار",
+      "uploadLogo": "رفع الشعار",
+      "logoUploadSuccess": "تم رفع الشعار بنجاح",
+      "logoUploadError": "تعذر رفع الشعار",
+      "tagline": "الشعار النصي",
+      "mission": "الرسالة",
+      "vision": "الرؤية",
+      "aboutText": "نص من نحن",
+      "yearsExperience": "سنوات الخبرة",
+      "patientsServed": "المرضى الذين تم خدمتهم",
+      "treatmentsOffered": "العلاجات المقدمة"
+    },
+    "contact": {
+      "title": "التواصل والتواصل الاجتماعي",
+      "description": "بيانات التواصل وروابط التواصل الاجتماعي للموقع العام",
+      "whatsapp": "رقم واتساب",
+      "facebook": "رابط فيسبوك",
+      "instagram": "رابط إنستغرام",
+      "tiktok": "رابط تيك توك",
+      "twitter": "رابط X (تويتر)",
+      "googleMaps": "رابط تضمين خرائط جوجل",
+      "googleMapsHint": "الصق رابط src من خيار \"تضمين خريطة\" في خرائط جوجل"
+    }
+  },
+  "appointments": {
+    "title": "المواعيد",
+    "subtitle": "جدولة مواعيد المرضى القادمة وتسجيل وصولهم",
+    "newButton": "موعد جديد",
+    "searchPlaceholder": "ابحث بالاسم أو المعرف أو الهاتف...",
+    "loadError": "تعذر تحميل المواعيد",
+    "empty": "لا توجد مواعيد قادمة",
+    "emptyHint": "ستظهر المواعيد المجدولة هنا",
+    "checkIn": "تسجيل الوصول",
+    "checkInDisabledHint": "متاح فقط في يوم الموعد نفسه",
+    "cancel": "إلغاء الموعد",
+    "cancelConfirm": "هل تريد إلغاء هذا الموعد؟",
+    "dateGroup": {
+      "today": "اليوم",
+      "tomorrow": "غدًا",
+      "appointment": "موعد",
+      "appointments": "مواعيد"
+    },
+    "toast": {
+      "checkInSuccess": "تم تسجيل وصول {{name}}",
+      "checkInError": "تعذر تسجيل وصول المريض",
+      "cancelSuccess": "تم إلغاء الموعد",
+      "cancelError": "تعذر إلغاء الموعد"
+    }
+  },
+  "patientRecordSidebar": {
+    "title": "درج ملف المريض",
+    "idPrefix": "الرقم:",
+    "cardPrefix": "البطاقة:",
+    "tabs": {
+      "recordData": "بيانات السجل",
+      "attachments": "المرفقات",
+      "visitHistory": "سجل الزيارات"
+    },
+    "clinicalInfoTitle": "المعلومات السريرية والديموغرافية",
+    "viewMode": "وضع العرض",
+    "editRecord": "تعديل السجل",
+    "firstNameLabel": "الاسم الأول",
+    "lastNameLabel": "اسم العائلة",
+    "ageLabel": "العمر",
+    "phoneLabel": "رقم الهاتف",
+    "emailLabel": "البريد الإلكتروني",
+    "allergiesLabel": "الحساسية (افصل بفاصلة)",
+    "allergiesPlaceholder": "مثال: البنسلين، الفول السوداني",
+    "chronicLabel": "الأمراض المزمنة (افصل بفاصلة)",
+    "chronicPlaceholder": "مثال: ارتفاع ضغط الدم، السكري",
+    "maritalStatusLabel": "الحالة الاجتماعية",
+    "notApplicable": "غير متاح",
+    "occupationLabel": "المهنة",
+    "addressLabel": "تفاصيل العنوان",
+    "saveButton": "حفظ سجل المريض",
+    "fullNameLabel": "الاسم الكامل",
+    "genderAgeLabel": "الجنس والعمر",
+    "yearsOldSuffix": "سنة",
+    "addressViewLabel": "العنوان",
+    "allergiesPrefix": "الحساسية:",
+    "chronicDiseasesPrefix": "الأمراض المزمنة:",
+    "uploadTitle": "رفع تقارير المختبر أو الملفات",
+    "uploadHint": "يسمح بملفات الصور (JPEG, PNG) أو PDF حتى 5 ميجابايت",
+    "uploadedFilesTitle": "الملفات المرفوعة",
+    "noFilesUploaded": "لم يتم رفع أي ملف بعد لهذا المريض",
+    "uploadedOnPrefix": "تاريخ الرفع",
+    "viewFileTitle": "عرض الملف",
+    "deleteFileTitle": "حذف الملف",
+    "visitPrefix": "زيارة #",
+    "chiefComplaintLabel": "الشكوى الرئيسية",
+    "diagnosisLabel": "التشخيص",
+    "treatmentPlanLabel": "خطة العلاج",
+    "noHistoryAvailable": "لا يوجد سجل زيارات سابقة",
+    "toast": {
+      "updateSuccess": "تم تحديث سجل المريض بنجاح",
+      "updateError": "تعذر تحديث السجل",
+      "uploadingFile": "جاري رفع الملف...",
+      "fileAttached": "تم إرفاق الملف بنجاح",
+      "uploadFailed": "تعذر رفع الملف",
+      "deleteFileConfirm": "هل أنت متأكد من حذف هذا الملف؟",
+      "fileDeleted": "تم حذف الملف",
+      "deleteFileFailed": "تعذر حذف الملف"
+    }
+  },
+  "successStories": {
+    "title": "قصص النجاح",
+    "subtitle": "نتائج حقيقية من مرضى حقيقيين",
+    "outcomes": "النتائج"
+  },
+  "team": {
+    "title": "تعرف على فريقنا",
+    "subtitle": "ممارسون معتمدون مكرسون لصحتك"
+  },
+  "partners": {
+    "title": "موثوق به من قبل"
+  },
+  "faqs": {
+    "title": "الأسئلة الشائعة",
+    "subtitle": "إجابات على الأسئلة الشائعة"
+  },
+  "contentAdmin": {
+    "title": "محتوى الموقع",
+    "subtitle": "إدارة كل ما يظهر على الموقع العام — دون الحاجة لتغيير الكود",
+    "tabs": {
+      "testimonials": "الشهادات",
+      "successStories": "قصص النجاح",
+      "faqs": "الأسئلة الشائعة",
+      "teamMembers": "الفريق",
+      "partners": "الشركاء",
+      "banners": "اللافتات",
+      "services": "الخدمات"
+    },
+    "common": {
+      "deleteConfirm": "حذف \"{{label}}\"؟ لا يمكن التراجع عن هذا.",
+      "deleteSuccess": "تم الحذف بنجاح",
+      "deleteError": "تعذر الحذف",
+      "statusUpdateSuccess": "تم تحديث الحالة",
+      "statusUpdateError": "تعذر تحديث الحالة",
+      "reorderError": "تعذر إعادة الترتيب",
+      "allStatuses": "جميع الحالات",
+      "published": "منشور",
+      "draft": "مسودة",
+      "loadError": "تعذر التحميل",
+      "empty": "لا يوجد شيء هنا بعد — انقر إضافة لإنشاء الأول",
+      "moveUp": "تحريك لأعلى",
+      "moveDown": "تحريك لأسفل",
+      "uploadPhoto": "رفع صورة",
+      "uploadImage": "رفع صورة",
+      "uploadLogo": "رفع الشعار",
+      "requiredField": "هذا الحقل مطلوب",
+      "status": "الحالة"
+    },
+    "testimonials": {
+      "title": "الشهادات",
+      "subtitle": "شهادات العملاء المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة شهادة",
+      "searchPlaceholder": "ابحث بالعميل أو الشركة...",
+      "addTitle": "إضافة شهادة",
+      "editTitle": "تعديل الشهادة",
+      "clientName": "اسم العميل",
+      "company": "الشركة",
+      "rating": "التقييم",
+      "role": "الدور",
+      "text": "الشهادة",
+      "createSuccess": "تمت إضافة الشهادة",
+      "updateSuccess": "تم تحديث الشهادة",
+      "saveError": "تعذر حفظ الشهادة"
+    },
+    "successStories": {
+      "title": "قصص النجاح",
+      "subtitle": "قصص نجاح ودراسات حالة العملاء",
+      "addButton": "إضافة قصة",
+      "searchPlaceholder": "ابحث بالفئة...",
+      "addTitle": "إضافة قصة نجاح",
+      "editTitle": "تعديل قصة النجاح",
+      "storyTitle": "العنوان",
+      "description": "الوصف",
+      "projectDetails": "تفاصيل المشروع",
+      "outcomes": "النتائج",
+      "category": "الفئة",
+      "featured": "مميز",
+      "images": "الصور",
+      "createSuccess": "تمت إضافة القصة",
+      "updateSuccess": "تم تحديث القصة",
+      "saveError": "تعذر حفظ القصة"
+    },
+    "faqs": {
+      "title": "الأسئلة الشائعة",
+      "subtitle": "الأسئلة المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة سؤال",
+      "searchPlaceholder": "ابحث بالفئة...",
+      "addTitle": "إضافة سؤال",
+      "editTitle": "تعديل السؤال",
+      "question": "السؤال",
+      "answer": "الإجابة",
+      "category": "الفئة",
+      "createSuccess": "تمت إضافة السؤال",
+      "updateSuccess": "تم تحديث السؤال",
+      "saveError": "تعذر حفظ السؤال"
+    },
+    "teamMembers": {
+      "title": "أعضاء الفريق",
+      "subtitle": "ملفات الموظفين المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة عضو",
+      "searchPlaceholder": "ابحث بالاسم...",
+      "addTitle": "إضافة عضو فريق",
+      "editTitle": "تعديل عضو الفريق",
+      "name": "الاسم",
+      "role": "الدور / المسمى الوظيفي",
+      "bio": "نبذة",
+      "linkedin": "رابط LinkedIn",
+      "twitter": "رابط X (تويتر)",
+      "facebook": "رابط فيسبوك",
+      "createSuccess": "تمت إضافة العضو",
+      "updateSuccess": "تم تحديث العضو",
+      "saveError": "تعذر حفظ العضو"
+    },
+    "partners": {
+      "title": "الشركاء",
+      "subtitle": "شعارات الشركاء المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة شريك",
+      "searchPlaceholder": "ابحث بالاسم...",
+      "addTitle": "إضافة شريك",
+      "editTitle": "تعديل الشريك",
+      "name": "الاسم",
+      "websiteUrl": "رابط الموقع",
+      "createSuccess": "تمت إضافة الشريك",
+      "updateSuccess": "تم تحديث الشريك",
+      "saveError": "تعذر حفظ الشريك"
+    },
+    "banners": {
+      "title": "اللافتات",
+      "subtitle": "اللافتات الترويجية المعروضة على الصفحة الرئيسية",
+      "addButton": "إضافة لافتة",
+      "addTitle": "إضافة لافتة",
+      "editTitle": "تعديل اللافتة",
+      "bannerTitle": "العنوان",
+      "subtitleLabel": "العنوان الفرعي",
+      "ctaText": "نص الزر",
+      "ctaLink": "رابط الزر",
+      "linkToBookingForm": "ربط بنموذج الحجز",
+      "linkToBookingFormHint": "سيفتح الزر نموذج \"حجز موعد\" بدلاً من الانتقال إلى أي مكان.",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "createSuccess": "تمت إضافة اللافتة",
+      "updateSuccess": "تم تحديث اللافتة",
+      "saveError": "تعذر حفظ اللافتة"
+    },
+    "services": {
+      "title": "الخدمات",
+      "subtitle": "الخدمات المدرجة على الصفحة الرئيسية",
+      "addButton": "إضافة خدمة",
+      "addTitle": "إضافة خدمة",
+      "editTitle": "تعديل الخدمة",
+      "icon": "الأيقونة (رمز تعبيري)",
+      "serviceTitle": "العنوان",
+      "description": "الوصف",
+      "features": "الميزات (سطر لكل ميزة)",
+      "createSuccess": "تمت إضافة الخدمة",
+      "updateSuccess": "تم تحديث الخدمة",
+      "saveError": "تعذر حفظ الخدمة"
+    }
+  },
+  "booking": {
+    "navCta": "احجز موعدًا",
+    "title": "احجز موعدًا",
+    "subtitle": "أخبرنا قليلاً عنك ومتى ترغب في الزيارة — سنتواصل معك للتأكيد.",
+    "fullName": "الاسم الكامل",
+    "phone": "رقم الهاتف",
+    "email": "البريد الإلكتروني (اختياري)",
+    "preferredDate": "التاريخ المفضل",
+    "preferredTime": "الوقت المفضل",
+    "timeAny": "أي وقت",
+    "timeMorning": "صباحًا",
+    "timeAfternoon": "ظهرًا",
+    "timeEvening": "مساءً",
+    "reason": "سبب الزيارة (اختياري)",
+    "requiredField": "هذا الحقل مطلوب",
+    "submit": "طلب موعد",
+    "submitting": "جارٍ الإرسال...",
+    "submitError": "حدث خطأ ما — يرجى المحاولة مرة أخرى.",
+    "successTitle": "تم استلام الطلب!",
+    "successMessage": "شكرًا لك — سيتواصل معك فريقنا قريبًا لتأكيد موعدك."
+  },
+  "bookingRequests": {
+    "title": "طلبات الحجز",
+    "subtitle": "طلبات المواعيد المقدمة من الموقع",
+    "searchPlaceholder": "ابحث بالاسم أو الهاتف أو البريد الإلكتروني...",
+    "allStatuses": "جميع الحالات",
+    "status": {
+      "pending": "قيد الانتظار",
+      "contacted": "تم التواصل",
+      "confirmed": "مؤكد",
+      "declined": "مرفوض",
+      "converted": "تم التحويل إلى زيارة"
+    },
+    "time": {
+      "morning": "صباحًا",
+      "afternoon": "ظهرًا",
+      "evening": "مساءً"
+    },
+    "markContacted": "وضع علامة تم التواصل",
+    "convert": "تحويل إلى زيارة",
+    "decline": "رفض",
+    "statusUpdateSuccess": "تم تحديث الحالة",
+    "statusUpdateError": "تعذر تحديث الحالة",
+    "loadError": "تعذر تحميل طلبات الحجز",
+    "empty": "لا توجد طلبات حجز بعد"
+  }
+}

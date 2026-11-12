@@ -42,7 +42,7 @@ const ContentManagementPage = () => {
                 onClick={() => setActiveTab(tab.key)}
                 className={`py-3 px-3 border-b-2 font-medium text-sm transition whitespace-nowrap ${
                   activeTab === tab.key
-                    ? "border-emerald-600 text-emerald-600"
+                    ? "border-brand-600 text-brand-600"
                     : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
               >

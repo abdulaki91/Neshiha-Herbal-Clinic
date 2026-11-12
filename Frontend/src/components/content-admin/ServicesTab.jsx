@@ -25,7 +25,7 @@ const ServicesTab = () => {
       searchable={false}
       renderItem={(item) => (
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 text-xl">
+          <div className="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center flex-shrink-0 text-xl">
             {item.icon}
           </div>
           <div className="min-w-0">

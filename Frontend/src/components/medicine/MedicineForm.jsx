@@ -67,12 +67,12 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent-600 rounded-lg flex items-center justify-center">
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2L4 12l2 2 1-1v6h10v-6l1 1 2-2L12 2z" /></svg>
             </div>
             <div>
@@ -110,7 +110,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 onChange={(e) => setHerbalMode(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brand-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
             </label>
           </div>
 
@@ -122,7 +122,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
             <input
               type="text"
               {...register("name", { required: t("medicineForm.nameRequired") })}
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-lg ${
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-500 outline-none text-lg ${
                 errors.name ? "border-red-500" : "border-gray-300"
               }`}
               placeholder={t("medicineForm.namePlaceholder")}
@@ -147,7 +147,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
               <input
                 type="text"
                 {...register("code")}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 placeholder={t("medicineForm.codePlaceholder")}
               />
               <p className="mt-1 text-xs text-gray-400">
@@ -166,7 +166,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="text"
                   {...register("genericName")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                   placeholder={t("medicineForm.genericNamePlaceholder")}
                 />
               </div>
@@ -178,7 +178,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="text"
                   {...register("category")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                   placeholder={t("medicineForm.categoryPlaceholder")}
                 />
               </div>
@@ -190,7 +190,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="text"
                   {...register("strength")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                   placeholder={t("medicineForm.strengthPlaceholder")}
                 />
               </div>
@@ -201,7 +201,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 </label>
                 <select
                   {...register("dosageForm")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 >
                   <option value="">{t("medicineForm.dosageFormPlaceholder")}</option>
                   <option value="Tablet">{t("medicineForm.dosageForm.tablet")}</option>
@@ -223,7 +223,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="text"
                   {...register("manufacturer")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -234,7 +234,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="text"
                   {...register("supplier")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -245,7 +245,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="text"
                   {...register("batchNumber")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -256,7 +256,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="text"
                   {...register("storageLocation")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -267,7 +267,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="number"
                   {...register("availableQuantity", { min: 0 })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -278,7 +278,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="number"
                   {...register("minimumStock", { min: 0 })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -290,7 +290,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                   type="number"
                   step="0.01"
                   {...register("purchasePrice")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -302,7 +302,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                   type="number"
                   step="0.01"
                   {...register("sellingPrice")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -313,7 +313,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <input
                   type="date"
                   {...register("expiryDate")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none"
                 />
               </div>
 
@@ -322,7 +322,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                   type="checkbox"
                   {...register("requiresPrescription")}
                   id="requiresPrescription"
-                  className="w-4 h-4 text-emerald-600 rounded"
+                  className="w-4 h-4 text-brand-600 rounded"
                 />
                 <label
                   htmlFor="requiresPrescription"
@@ -340,7 +340,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
               <button
                 type="button"
                 onClick={() => setShowOptional(!showOptional)}
-                className="flex items-center space-x-2 text-sm text-gray-500 hover:text-emerald-600 transition"
+                className="flex items-center space-x-2 text-sm text-gray-500 hover:text-brand-600 transition"
               >
                 {showOptional ? (
                   <FiChevronUp className="w-4 h-4" />
@@ -362,7 +362,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                     <input
                       type="text"
                       {...register("genericName")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 outline-none text-sm"
                     />
                   </div>
 
@@ -373,7 +373,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                     <input
                       type="text"
                       {...register("category")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 outline-none text-sm"
                     />
                   </div>
 
@@ -384,7 +384,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                     <input
                       type="text"
                       {...register("strength")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 outline-none text-sm"
                     />
                   </div>
 
@@ -394,7 +394,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                     </label>
                     <select
                       {...register("dosageForm")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 outline-none text-sm"
                     >
                       <option value="">{t("medicineForm.dosageFormPlaceholder")}</option>
                       <option value="Tablet">{t("medicineForm.dosageForm.tablet")}</option>
@@ -416,7 +416,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                     <input
                       type="number"
                       {...register("availableQuantity", { min: 0 })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 outline-none text-sm"
                     />
                   </div>
 
@@ -428,7 +428,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                       type="number"
                       step="0.01"
                       {...register("sellingPrice")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 outline-none text-sm"
                     />
                   </div>
 
@@ -439,7 +439,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                     <textarea
                       {...register("instructions")}
                       rows={2}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm resize-none"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 outline-none text-sm resize-none"
                       placeholder={t("medicineForm.instructionsPlaceholder")}
                     ></textarea>
                   </div>
@@ -451,7 +451,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                     <textarea
                       {...register("notes")}
                       rows={2}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-emerald-500 outline-none text-sm resize-none"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 outline-none text-sm resize-none"
                       placeholder={t("medicineForm.notesPlaceholder")}
                     ></textarea>
                   </div>
@@ -470,7 +470,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <textarea
                   {...register("instructions")}
                   rows={3}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none resize-none"
                   placeholder={t("medicineForm.instructionsPlaceholderAlt")}
                 ></textarea>
               </div>
@@ -483,7 +483,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                   <textarea
                     {...register("sideEffects")}
                     rows={2}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none resize-none"
                   ></textarea>
                 </div>
                 <div>
@@ -493,7 +493,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                   <textarea
                     {...register("contraindications")}
                     rows={2}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none resize-none"
                   ></textarea>
                 </div>
               </div>
@@ -505,7 +505,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
                 <textarea
                   {...register("notes")}
                   rows={2}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none resize-none"
                 ></textarea>
               </div>
             </>
@@ -523,7 +523,7 @@ const MedicineForm = ({ medicine = null, onClose, onSuccess }) => {
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 shadow-md"
+              className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 shadow-md"
             >
               <FiSave />
               <span>{loading ? t("medicineForm.saving") : isEdit ? t("medicineForm.updateButton") : t("medicineForm.addButton")}</span>

@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight } from "react-icons/fi";
+import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiMoon, FiSun } from "react-icons/fi";
 import toast from "react-hot-toast";
 import axiosInstance from "../lib/axios";
 import useAuthStore from "../store/authStore";
+import useThemeStore from "../store/themeStore";
+import BrandMark from "../components/portal/BrandMark";
 import { initializeSocket, connectSocket } from "../lib/socket";
 
 export default function LoginPage() {
@@ -14,6 +16,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
+  const theme = useThemeStore((s) => s.theme);
+  const toggleTheme = useThemeStore((s) => s.toggleTheme);
 
   const {
     register,
@@ -44,46 +48,34 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-stretch bg-slate-50">
+    <div className="portal-theme app-backdrop relative min-h-screen flex items-stretch">
+      {/* Light / dark toggle — the choice carries into the portal */}
+      <button
+        type="button"
+        onClick={toggleTheme}
+        title={theme === "dark" ? t("topbar.theme.toLight") : t("topbar.theme.toDark")}
+        aria-label={theme === "dark" ? t("topbar.theme.toLight") : t("topbar.theme.toDark")}
+        className="glass-panel absolute top-5 right-5 z-20 w-11 h-11 rounded-full flex items-center justify-center text-gray-700 hover:text-gray-900 transition dark:text-white/75 dark:hover:text-white"
+      >
+        {theme === "dark" ? <FiSun className="w-[18px] h-[18px]" /> : <FiMoon className="w-[18px] h-[18px]" />}
+      </button>
+
       {/* Branding panel — hidden on small screens, the form still works standalone */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-emerald-700 via-emerald-600 to-teal-700">
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden hero-surface m-3 rounded-[32px]">
         <div
           aria-hidden
-          className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-teal-400/20 blur-3xl animate-ambient-drift"
+          className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/15 blur-3xl animate-ambient-drift"
         />
         <div
           aria-hidden
-          className="absolute -bottom-32 -right-16 w-[28rem] h-[28rem] rounded-full bg-emerald-300/20 blur-3xl animate-ambient-drift"
+          className="absolute -bottom-32 -right-16 w-[28rem] h-[28rem] rounded-full bg-rose-200/25 blur-3xl animate-ambient-drift dark:bg-rose-400/10"
           style={{ animationDelay: "-6s" }}
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, white 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
         />
 
         <div className="relative z-10 flex flex-col justify-between p-12 xl:p-16 text-white w-full">
-          <div className="flex items-center space-x-3 animate-fade-in-up">
-            <div className="w-12 h-12 bg-white/15 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center">
-              <svg
-                className="w-7 h-7 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-            </div>
-            <span className="font-bold text-lg tracking-tight">
+          <div className="flex items-center gap-3 animate-fade-in-up">
+            <BrandMark className="w-12 h-12" />
+            <span className="font-semibold text-lg tracking-tight">
               {t("login.brandName")}
             </span>
           </div>
@@ -92,16 +84,16 @@ export default function LoginPage() {
             className="animate-fade-in-up max-w-md"
             style={{ animationDelay: "80ms" }}
           >
-            <h1 className="text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight">
+            <h1 className="text-4xl xl:text-5xl font-normal leading-tight tracking-tight">
               {t("login.brandName")}
             </h1>
-            <p className="mt-4 text-lg text-emerald-50/90">
+            <p className="mt-4 text-lg text-white/85">
               {t("login.brandSubtitle")}
             </p>
           </div>
 
           <p
-            className="text-sm text-emerald-100/70 animate-fade-in-up"
+            className="text-sm text-white/70 animate-fade-in-up"
             style={{ animationDelay: "160ms" }}
           >
             © {new Date().getFullYear()} {t("login.brandName")}
@@ -110,31 +102,17 @@ export default function LoginPage() {
       </div>
 
       {/* Form panel */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-10">
-        <div className="w-full max-w-sm animate-fade-in-up">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-10">
+        <div className="glass-panel w-full max-w-md rounded-[28px] p-7 sm:p-9 animate-fade-in-up">
           {/* Mobile-only brand mark */}
-          <div className="flex lg:hidden items-center space-x-3 mb-10 justify-center">
-            <div className="w-11 h-11 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl flex items-center justify-center shadow-md shadow-emerald-600/20">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-            </div>
-            <span className="font-bold text-gray-800">
+          <div className="flex lg:hidden items-center gap-3 mb-8 justify-center">
+            <BrandMark />
+            <span className="font-semibold text-gray-900">
               {t("login.brandName")}
             </span>
           </div>
 
-          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+          <h2 className="text-2xl font-semibold text-gray-900 tracking-tight">
             {t("login.heading")}
           </h2>
           <p className="mt-1.5 text-sm text-gray-500">
@@ -156,7 +134,7 @@ export default function LoginPage() {
                   className={`w-full pl-10 pr-4 py-3 rounded-xl border bg-white text-sm outline-none transition-all duration-200 focus:ring-4 ${
                     errors.email
                       ? "border-red-300 focus:ring-red-100 focus:border-red-400"
-                      : "border-gray-200 focus:ring-emerald-100 focus:border-emerald-500"
+                      : "border-gray-200 focus:ring-brand-100 focus:border-brand-500"
                   }`}
                   placeholder={t("login.placeholder.email")}
                 />
@@ -182,7 +160,7 @@ export default function LoginPage() {
                   className={`w-full pl-10 pr-11 py-3 rounded-xl border bg-white text-sm outline-none transition-all duration-200 focus:ring-4 ${
                     errors.password
                       ? "border-red-300 focus:ring-red-100 focus:border-red-400"
-                      : "border-gray-200 focus:ring-emerald-100 focus:border-emerald-500"
+                      : "border-gray-200 focus:ring-brand-100 focus:border-brand-500"
                   }`}
                   placeholder={t("login.placeholder.password")}
                 />
@@ -209,7 +187,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full group flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-3 rounded-xl font-semibold hover:from-emerald-700 hover:to-teal-700 focus:ring-4 focus:ring-emerald-200 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-600/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              className="w-full group flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white py-3 rounded-xl font-semibold hover:from-brand-700 hover:to-accent-700 focus:ring-4 focus:ring-brand-200 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-600/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               <span>
                 {loading ? t("login.button.loading") : t("login.button.submit")}

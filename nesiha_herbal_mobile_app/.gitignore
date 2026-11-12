@@ -1,35 +1,60 @@
-# Flutter / Dart
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
 .dart_tool/
-.flutter-plugins
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-build/
+/build/
+/coverage/
 
-# IDE
-.idea/
-*.iml
-.vscode/
+# Symbolication related
+app.*.symbols
 
-# Android
-android/.gradle/
-android/local.properties
-android/gradlew
-android/gradlew.bat
-android/gradle/wrapper/gradle-wrapper.jar
-android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
-android/key.properties
-*.jks
-*.keystore
+# Obfuscation related
+app.*.map.json
 
-# iOS
-ios/Flutter/ephemeral/
-ios/Flutter/Generated.xcconfig
-ios/Flutter/flutter_export_environment.sh
-ios/Runner/GeneratedPluginRegistrant.*
-ios/Pods/
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
 
-# Secrets / env
+# Widget Preview related
+.widget_preview/
+
+# Firebase service-account keys are secrets — never commit them.
+*firebase-adminsdk*.json
+
+# Secrets and machine-specific files (from main's .gitignore).
 .env
 .env.*
 !.env.example
+android/key.properties
+android/local.properties
+*.jks
+*.keystore

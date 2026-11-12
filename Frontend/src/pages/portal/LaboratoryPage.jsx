@@ -181,7 +181,7 @@ const LaboratoryPage = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
       </div>
     );
   }
@@ -206,7 +206,7 @@ const LaboratoryPage = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by patient name, ID, or test..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
 
@@ -218,7 +218,7 @@ const LaboratoryPage = () => {
                 onClick={() => setStatusFilter(status)}
                 className={`px-4 py-2 rounded-lg font-medium transition ${
                   statusFilter === status
-                    ? "bg-emerald-600 text-white"
+                    ? "bg-brand-600 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -386,7 +386,7 @@ const LaboratoryPage = () => {
                       </button>
                       <button
                         onClick={() => handleEnterResultsClick(investigation)}
-                        className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium text-sm"
+                        className="px-4 py-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 font-medium text-sm"
                       >
                         Enter Results
                       </button>
@@ -396,7 +396,7 @@ const LaboratoryPage = () => {
                   {investigation.status === "in_progress" && (
                     <button
                       onClick={() => handleEnterResultsClick(investigation)}
-                      className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium text-sm"
+                      className="px-4 py-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 font-medium text-sm"
                     >
                       Enter Results
                     </button>
@@ -419,7 +419,7 @@ const LaboratoryPage = () => {
 
       {/* Results Entry Modal */}
       {selectedInvestigation && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold text-gray-800">
@@ -490,7 +490,7 @@ const LaboratoryPage = () => {
                   }
                   rows={6}
                   placeholder="Enter detailed test results, measurements, observations..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                 />
               </div>
 
@@ -508,7 +508,7 @@ const LaboratoryPage = () => {
                   }
                   rows={4}
                   placeholder="Doctor's interpretation of results (optional)..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                 />
               </div>
 
@@ -526,7 +526,7 @@ const LaboratoryPage = () => {
                     })
                   }
                   placeholder="Lab technician or radiologist name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                 />
               </div>
 
@@ -541,7 +541,7 @@ const LaboratoryPage = () => {
                   }
                   rows={3}
                   placeholder="Any additional notes or comments..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                 />
               </div>
             </div>
@@ -555,7 +555,7 @@ const LaboratoryPage = () => {
               </button>
               <button
                 onClick={handleSubmitResults}
-                className="px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 font-medium"
+                className="px-6 py-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 font-medium"
               >
                 Submit Results
               </button>

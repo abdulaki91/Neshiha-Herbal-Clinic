@@ -49,10 +49,10 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-white flex items-center justify-between">
+        <div className="bg-gradient-to-r from-brand-600 to-accent-600 p-6 text-white flex items-center justify-between">
           <h2 className="text-2xl font-bold">
             {isEditing ? t("patientForm.editTitle") : t("patientForm.registerTitle")}
           </h2>
@@ -90,7 +90,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
                 {...register("firstName", {
                   required: t("patientForm.firstNameRequired"),
                 })}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                 placeholder={t("patientForm.firstNamePlaceholder")}
               />
               {errors.firstName && (
@@ -106,7 +106,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
               </label>
               <input
                 {...register("lastName", { required: t("patientForm.lastNameRequired") })}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                 placeholder={t("patientForm.lastNamePlaceholder")}
               />
               {errors.lastName && (
@@ -122,7 +122,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
               </label>
               <select
                 {...register("gender", { required: t("patientForm.genderRequired") })}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
               >
                 <option value="">{t("patientForm.genderPlaceholder")}</option>
                 <option value="male">{t("patientForm.genderMale")}</option>
@@ -150,7 +150,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
                   min: { value: 0, message: t("patientForm.ageInvalid") },
                   max: { value: 150, message: t("patientForm.ageInvalid") },
                 })}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                 placeholder={t("patientForm.agePlaceholder")}
               />
               {errors.age && (
@@ -166,7 +166,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
               </label>
               <input
                 {...register("phone", { required: t("patientForm.phoneRequired") })}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                 placeholder={t("patientForm.phonePlaceholder")}
               />
               {errors.phone && (
@@ -189,7 +189,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
               </label>
               <input
                 {...register("city")}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                 placeholder={t("patientForm.cityPlaceholder")}
               />
             </div>
@@ -200,7 +200,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
               </label>
               <input
                 {...register("woreda")}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                 placeholder={t("patientForm.woredaPlaceholder")}
               />
             </div>
@@ -235,7 +235,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
                     {...register("registrationFeeMethod", {
                       required: t("patientForm.registrationFeeMethodRequired"),
                     })}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                   >
                     <option value="">{t("patientForm.registrationFeeMethodPlaceholder")}</option>
                     <option value="cash">{t("patientForm.registrationFeeMethodCash")}</option>
@@ -255,7 +255,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
                   </label>
                   <input
                     {...register("registrationFeeTransactionId")}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"
                     placeholder={t("patientForm.registrationFeeTransactionPlaceholder")}
                   />
                 </div>
@@ -275,7 +275,7 @@ const PatientForm = ({ onClose, onSuccess, patient, initialValues }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 rounded-lg bg-gradient-to-r from-brand-600 to-accent-600 text-white hover:from-brand-700 hover:to-accent-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting
                 ? t("patientForm.saving")

@@ -37,7 +37,7 @@ const BannersTab = () => {
               className="w-14 h-10 rounded object-cover flex-shrink-0"
             />
           ) : (
-            <div className="w-14 h-10 rounded bg-emerald-100 flex-shrink-0" />
+            <div className="w-14 h-10 rounded bg-brand-100 flex-shrink-0" />
           )}
           <div className="min-w-0">
             <p className="font-semibold text-gray-800 truncate">{item.title?.en}</p>

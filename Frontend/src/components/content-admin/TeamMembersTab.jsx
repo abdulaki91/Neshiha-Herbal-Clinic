@@ -37,7 +37,7 @@ const TeamMembersTab = () => {
               className="w-10 h-10 rounded-full object-cover flex-shrink-0"
             />
           ) : (
-            <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 font-bold text-sm">
+            <div className="w-10 h-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center flex-shrink-0 font-bold text-sm">
               {item.name?.[0]?.toUpperCase()}
             </div>
           )}

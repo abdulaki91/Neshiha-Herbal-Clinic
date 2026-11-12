@@ -77,16 +77,16 @@ const StaffForm = ({ staff = null, onClose, onSuccess }) => {
   };
 
   const inputClass = (hasError) =>
-    `w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition ${
+    `w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition ${
       hasError ? "border-red-500" : "border-gray-300"
     }`;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-brand-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent-600 rounded-lg flex items-center justify-center">
               <FiUserPlus className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -288,7 +288,7 @@ const StaffForm = ({ staff = null, onClose, onSuccess }) => {
               <textarea
                 {...register("address")}
                 rows={2}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none resize-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none resize-none"
               />
             </div>
           </div>
@@ -304,7 +304,7 @@ const StaffForm = ({ staff = null, onClose, onSuccess }) => {
             <button
               type="submit"
               disabled={saving}
-              className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 shadow-md"
+              className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 shadow-md"
             >
               <FiSave />
               <span>

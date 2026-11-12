@@ -116,7 +116,7 @@ const AppointmentsPage = () => {
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-emerald-600/20"
+          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-brand-600/20"
         >
           <FiPlus />
           <span>{t("appointments.newButton")}</span>
@@ -133,14 +133,14 @@ const AppointmentsPage = () => {
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyUp={(e) => e.key === "Enter" && setSearch(searchInput.trim())}
             onBlur={() => setSearch(searchInput.trim())}
-            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition"
+            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition"
           />
         </div>
       </div>
 
       {isLoading ? (
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
         </div>
       ) : isError ? (
         <div className="py-12 text-center text-red-500 bg-white rounded-2xl shadow-sm shadow-slate-200/60">
@@ -215,7 +215,7 @@ const AppointmentsPage = () => {
                               ? t("appointments.checkIn")
                               : t("appointments.checkInDisabledHint")
                           }
-                          className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                          className="flex items-center gap-1.5 px-4 py-2 bg-brand-600 text-white rounded-xl text-sm font-medium hover:bg-brand-700 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                         >
                           <FiUserCheck className="w-4 h-4" />
                           {t("appointments.checkIn")}

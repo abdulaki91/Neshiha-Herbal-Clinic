@@ -1,0 +1,178 @@
+{
+  "mobile": {
+    "nav": {
+      "home": "መነሻ",
+      "more": "ተጨማሪ",
+      "bookings": "ቀጠሮዎች"
+    },
+    "common": {
+      "add": "ጨምር",
+      "ageYears": "{{age}} ዓመት",
+      "change": "ቀይር",
+      "confirm": "አረጋግጥ",
+      "optional": "አማራጭ",
+      "selectDate": "ቀን ይምረጡ",
+      "transactionId": "የግብይት መለያ",
+      "tryAgain": "እንደገና ሞክር"
+    },
+    "greeting": {
+      "morning": "እንደምን አደሩ",
+      "afternoon": "እንደምን ዋሉ",
+      "evening": "እንደምን አመሹ"
+    },
+    "time": {
+      "daysAgo": "ከ{{d}} ቀን በፊት"
+    },
+    "errors": {
+      "timeout": "አገልጋዩ ምላሽ ለመስጠት በጣም እየዘገየ ነው።",
+      "offline": "የክሊኒኩን አገልጋይ ማግኘት አልተቻለም። የኢንተርኔት ግንኙነትዎን ያረጋግጡ።",
+      "forbidden": "ይህን ለማድረግ ፈቃድ የለዎትም።",
+      "generic": "የሆነ ችግር ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።",
+      "unexpected": "ከአገልጋዩ ያልተጠበቀ ምላሽ ደርሷል።"
+    },
+    "validation": {
+      "required": "ያስፈልጋል",
+      "number": "ትክክለኛ ቁጥር ያስገቡ",
+      "fixFields": "እባክዎ የተመለከቱትን መስኮች ያሟሉ"
+    },
+    "login": {
+      "welcome": "እንኳን ደህና መጡ",
+      "subtitle": "ወደ ሰራተኞች መግቢያ ይግቡ",
+      "sessionExpired": "ክፍለ ጊዜዎ አብቅቷል። እባክዎ እንደገና ይግቡ።",
+      "accountsNote": "መለያዎች የሚፈጠሩት በክሊኒኩ አስተዳዳሪ ነው።",
+      "tagline": "ተፈጥሯዊ ፈውስ፣\nበጥንቃቄ የሚመራ።",
+      "taglineSub": "ታካሚዎች፣ ምክክሮች እና ክፍያዎች — በእጅዎ።",
+      "toggleTheme": "ገጽታ ቀይር"
+    },
+    "more": {
+      "workspace": "የሥራ ቦታ",
+      "appearance": "ገጽታ",
+      "themeSystem": "ሲስተም",
+      "themeLight": "ብሩህ",
+      "themeDark": "ጨለማ",
+      "language": "ቋንቋ",
+      "account": "መለያ",
+      "server": "አገልጋይ",
+      "signOutTitle": "ይውጡ?",
+      "signOutMessage": "ተመልሰው ለመግባት ኢሜይልዎና የይለፍ ቃልዎ ያስፈልጋሉ።",
+      "footer": "ነሺሃ የባህል ሕክምና ክሊኒክ · የሰራተኞች መተግበሪያ"
+    },
+    "password": {
+      "title": "የይለፍ ቃል ቀይር",
+      "current": "የአሁኑ የይለፍ ቃል",
+      "submit": "የይለፍ ቃል አዘምን",
+      "changed": "የይለፍ ቃል ተቀይሯል — እባክዎ እንደገና ይግቡ"
+    },
+    "visitStatus": {
+      "pendingPayment": "ክፍያ በመጠባበቅ ላይ"
+    },
+    "visit": {
+      "arrivedAt": "{{time}} ደርሷል",
+      "walkInHint": "ታካሚው በቀጥታ ወደ ሐኪሙ ወረፋ ይገባል።",
+      "sendToDoctor": "ወደ ሐኪም ላክ",
+      "registerFirst": "መጀመሪያ ታካሚውን ከታካሚዎች ገጽ ይመዝግቡ።"
+    },
+    "visits": {
+      "emptyHint": "ታካሚን ወደ ሐኪም ለመላክ ጉብኝት ይፍጠሩ።"
+    },
+    "patients": {
+      "noMatches": "ሌላ ስም፣ ስልክ ወይም የታካሚ መለያ ይሞክሩ።"
+    },
+    "patient": {
+      "feeHint": "በምዝገባ ጊዜ የሚከፈል የአንድ ጊዜ ክፍያ",
+      "safetyAlert": "የደህንነት ማስጠንቀቂያ",
+      "deleteConfirm": "የ{{name}} መዝገብ ይጥፋ? ይህ መመለስ አይቻልም።",
+      "deleted": "የታካሚ መዝገብ ጠፍቷል"
+    },
+    "appointments": {
+      "unscheduled": "ቀን ያልተያዘለት"
+    },
+    "bookings": {
+      "declineMessage": "የ{{name}} የቀጠሮ ጥያቄ ውድቅ ተደርጎ ይመዘገባል።",
+      "emptyHint": "በድረ-ገጹ የሚቀርቡ ጥያቄዎች ወዲያውኑ እዚህ ይታያሉ።",
+      "received": "የደረሰው {{when}}"
+    },
+    "consultation": {
+      "completeTitle": "ምክክሩ ይጠናቀቅ?",
+      "completeMessage": "ጉብኝቱ እንደተጠናቀቀ ይመዘገባል፣ ታካሚውም ከወረፋዎ ይወጣል።",
+      "sendToCashierMessage": "{{count}} የታዘዘ መድሃኒት ({{amount}}) ለክፍያ ወደ ገንዘብ ተቀባይ ይላካል።",
+      "complete": "አጠናቅቅ",
+      "sendToCashier": "ወደ ገንዘብ ተቀባይ ላክ",
+      "noFollowUp": "ክትትል የለም",
+      "unsaved": "ያልተቀመጠ",
+      "saved": "ተቀምጧል",
+      "notSaved": "አልተቀመጠም"
+    },
+    "herbal": {
+      "removeTitle": "መድሃኒቱ ይወገድ?",
+      "remove": "አስወግድ",
+      "toPay": "የሚከፈል: {{amount}}",
+      "emptyHint": "ከክሊኒኩ የባህል መድሃኒት ክምችት ለማዘዝ 'ጨምር'ን ይጫኑ።"
+    },
+    "investigation": {
+      "cancelTitle": "ምርመራው ይሰረዝ?",
+      "cancelAction": "ጥያቄውን ሰርዝ"
+    },
+    "medicine": {
+      "available": "የሚገኝ",
+      "inStock": "በክምችት አለ",
+      "lowStock": "ዝቅተኛ ክምችት",
+      "outOfStock": "ክምችት አልቋል",
+      "expired": "ጊዜው ያለፈበት",
+      "inStockCount": "{{count}} በክምችት",
+      "left": "{{count}} ቀርቷል",
+      "expires": "የሚያበቃው {{date}}"
+    },
+    "pharmacy": {
+      "exceedsPrescribed": "ከታዘዘው በላይ መስጠት አይቻልም"
+    },
+    "cashier": {
+      "pendingHint": "መድሃኒት የታዘዘላቸው የተጠናቀቁ ምክክሮች እዚህ ይታያሉ።",
+      "items": "{{count}} ዕቃ(ዎች)",
+      "printPrompt": "የዚህን ክፍያ ደረሰኝ አሁን ማተም ይፈልጋሉ?"
+    },
+    "print": {
+      "prescriptionSubtitle": "የባህል መድሃኒት ማዘዣ",
+      "disclaimer": "ይህ በኮምፒውተር የተዘጋጀ ሰነድ ነው",
+      "failed": "ሰነዱን ለህትመት ማዘጋጀት አልተቻለም"
+    },
+    "reports": {
+      "subtitle": "የምዝገባ ክፍያዎችና የምክክር ገቢ",
+      "consultation": "ምክክሮች",
+      "registration": "የምዝገባ ክፍያዎች",
+      "registrationFees": "የምዝገባ ክፍያዎች",
+      "paymentsCount": "{{count}} ክፍያ(ዎች)",
+      "registrationsCount": "{{count}} ምዝገባ(ዎች)",
+      "byDay": "ዕለታዊ ገቢ",
+      "tapBar": "የዕለቱን ድምር ለማየት አምድ ይጫኑ",
+      "noRegistrations": "በዚህ ጊዜ ውስጥ የምዝገባ ክፍያ አልተገኘም"
+    },
+    "staff": {
+      "activateMessage": "{{name}} እንደገና መግባት ይችላል።",
+      "deactivateMessage": "{{name}} ከዚህ በኋላ መግባት አይችልም።",
+      "lastLogin": "የመጨረሻ መግቢያ {{when}}"
+    },
+    "content": {
+      "publish": "አትም",
+      "unpublish": "ወደ ረቂቅ መልስ",
+      "fallbackHint": "አማራጭ — ባዶ ከሆነ ድረ-ገጹ እንግሊዝኛውን ያሳያል"
+    },
+    "notifications": {
+      "emptyHint": "አዳዲስ ማሳወቂያዎች እዚህ ይታያሉ።"
+    },
+    "toast": {
+      "lowStock": "ዝቅተኛ ክምችት: {{name}}",
+      "registrationFee": "የምዝገባ ክፍያ ተቀብሏል: {{amount}} ብር",
+      "investigationRequested": "አዲስ ምርመራ ተጠይቋል: {{test}}",
+      "investigationResult": "ውጤት ዝግጁ ነው: {{test}}",
+      "billPending": "ለክፍያ የሚጠብቅ አዲስ ሂሳብ: {{name}}"
+    },
+    "notify": {
+      "channelName": "የክሊኒክ ማንቂያዎች",
+      "channelDescription": "አዳዲስ ታካሚዎች፣ ክፍያዎች፣ የላብራቶሪ ውጤቶችና ሌሎች የክሊኒኩ ቀጥታ ክስተቶች",
+      "toggleTitle": "የማንቂያ ማሳወቂያዎች",
+      "toggleSubtitle": "ለአዳዲስ የክሊኒክ ክስተቶች ድምፅና ብቅ-ባይ መልዕክት",
+      "blocked": "በስልኩ ቅንብሮች ታግዷል — ለዚህ መተግበሪያ ማሳወቂያዎችን ይፍቀዱ"
+    }
+  }
+}

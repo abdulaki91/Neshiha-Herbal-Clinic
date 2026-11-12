@@ -107,7 +107,7 @@ const ContentCollectionList = ({
         </div>
         <button
           onClick={openCreate}
-          className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 hover:-translate-y-0.5 shadow-md text-sm font-semibold"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl hover:from-brand-700 hover:to-accent-700 transition-all duration-200 hover:-translate-y-0.5 shadow-md text-sm font-semibold"
         >
           <FiPlus />
           <span>{addButtonLabel}</span>
@@ -126,7 +126,7 @@ const ContentCollectionList = ({
                 setPage(1);
               }}
               placeholder={searchPlaceholder}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
             />
           </div>
         )}
@@ -136,7 +136,7 @@ const ContentCollectionList = ({
             setStatusFilter(e.target.value);
             setPage(1);
           }}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-sm"
+          className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none text-sm"
         >
           <option value="">{t("contentAdmin.common.allStatuses")}</option>
           <option value="published">{t("contentAdmin.common.published")}</option>
@@ -146,7 +146,7 @@ const ContentCollectionList = ({
 
       {isLoading ? (
         <div className="flex items-center justify-center h-48">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-600"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-brand-600"></div>
         </div>
       ) : isError ? (
         <div className="py-10 text-center text-red-500 bg-white rounded-2xl shadow-sm shadow-slate-200/60">
@@ -167,7 +167,7 @@ const ContentCollectionList = ({
                 <button
                   onClick={() => handleReorder(item, "up")}
                   disabled={index === 0}
-                  className="text-gray-400 hover:text-emerald-600 disabled:opacity-25 disabled:cursor-not-allowed transition"
+                  className="text-gray-400 hover:text-brand-600 disabled:opacity-25 disabled:cursor-not-allowed transition"
                   aria-label={t("contentAdmin.common.moveUp")}
                 >
                   <FiChevronUp className="w-4 h-4" />
@@ -175,7 +175,7 @@ const ContentCollectionList = ({
                 <button
                   onClick={() => handleReorder(item, "down")}
                   disabled={index === items.length - 1}
-                  className="text-gray-400 hover:text-emerald-600 disabled:opacity-25 disabled:cursor-not-allowed transition"
+                  className="text-gray-400 hover:text-brand-600 disabled:opacity-25 disabled:cursor-not-allowed transition"
                   aria-label={t("contentAdmin.common.moveDown")}
                 >
                   <FiChevronDown className="w-4 h-4" />
@@ -189,7 +189,7 @@ const ContentCollectionList = ({
                   onClick={() => handleToggleStatus(item)}
                   className={`px-2.5 py-1 rounded-full text-xs font-semibold transition ${
                     item.status === "published"
-                      ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
+                      ? "bg-brand-100 text-brand-700 hover:bg-brand-200"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   }`}
                 >

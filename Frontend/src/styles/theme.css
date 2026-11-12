@@ -1,0 +1,271 @@
+/* ==========================================================================
+   Portal theme: light (lavender wellness look) + dark
+   --------------------------------------------------------------------------
+   The active theme lives in data-theme on <html> (see store/themeStore.js,
+   plus the inline script in index.html that sets it before first paint).
+   Everything theme-dependent is scoped to `.portal-theme` (the portal shell
+   and the sign-in page), so the public website is never affected.
+   ========================================================================== */
+
+:root {
+  --app-bg:
+    radial-gradient(70rem 45rem at -10% 110%, rgb(240 196 214 / 0.75), transparent 60%),
+    radial-gradient(60rem 40rem at 110% -10%, rgb(206 200 240 / 0.9), transparent 60%),
+    linear-gradient(135deg, #e3e3f4 0%, #e9e4f3 50%, #f2e5ee 100%);
+  --app-bg-fallback: #e7e5f4;
+
+  /* Generic cards (`bg-white` in page code): frosted, so the backdrop
+     tints through like the reference's tiles. */
+  --surface: rgb(255 255 255 / 0.74);
+  /* Floating layers (menus, modals, sticky bars) stay opaque so they
+     remain readable over whatever they cover. */
+  --surface-solid: #ffffff;
+
+  --panel-bg: rgb(255 255 255 / 0.5);
+  --panel-border: rgb(255 255 255 / 0.75);
+  --panel-shadow: 0 18px 50px -24px rgb(76 70 140 / 0.35);
+
+  --menu-bg: rgb(255 255 255 / 0.94);
+  --menu-border: rgb(255 255 255 / 0.9);
+  --menu-shadow: 0 24px 60px -20px rgb(60 50 120 / 0.4);
+
+  /* Deep enough that the hero's white text and the wreath stay crisp —
+     a paler gradient washes everything out and reads as blurry. */
+  --hero-bg:
+    radial-gradient(55% 75% at 0% 100%, rgb(192 108 158 / 0.78), transparent 70%),
+    radial-gradient(45% 60% at 100% 0%, rgb(150 124 198 / 0.6), transparent 70%),
+    radial-gradient(40% 50% at 85% 95%, rgb(104 104 194 / 0.55), transparent 70%),
+    linear-gradient(135deg, #5f63ad 0%, #6a69b3 45%, #7f70b3 75%, #9473ab 100%);
+  --hero-border: rgb(255 255 255 / 0.5);
+  --hero-shadow: 0 30px 70px -35px rgb(60 50 140 / 0.6);
+  --hero-card-bg: rgb(255 255 255 / 0.09);
+  --hero-card-border: rgb(255 255 255 / 0.3);
+  --hero-card-highlight: rgb(255 255 255 / 0.3);
+
+  --toast-bg: #ffffff;
+  --toast-fg: #2b2a45;
+  --toast-border: rgb(98 96 176 / 0.14);
+}
+
+:root[data-theme="dark"] {
+  --app-bg:
+    radial-gradient(70rem 45rem at -10% 110%, rgb(160 80 130 / 0.22), transparent 60%),
+    radial-gradient(60rem 40rem at 110% -10%, rgb(98 96 200 / 0.25), transparent 60%),
+    linear-gradient(135deg, #12111f 0%, #161427 50%, #1b1424 100%);
+  --app-bg-fallback: #14121f;
+
+  --surface: rgb(36 32 62 / 0.72);
+  --surface-solid: #211d38;
+
+  --panel-bg: rgb(255 255 255 / 0.045);
+  --panel-border: rgb(255 255 255 / 0.08);
+  --panel-shadow: 0 18px 50px -24px rgb(0 0 0 / 0.7);
+
+  --menu-bg: rgb(33 29 56 / 0.97);
+  --menu-border: rgb(255 255 255 / 0.08);
+  --menu-shadow: 0 24px 60px -20px rgb(0 0 0 / 0.75);
+
+  --hero-bg:
+    radial-gradient(55% 75% at 0% 100%, rgb(170 86 136 / 0.38), transparent 70%),
+    radial-gradient(45% 60% at 100% 0%, rgb(120 100 190 / 0.35), transparent 70%),
+    linear-gradient(135deg, #252447 0%, #2a2549 50%, #33243f 100%);
+  --hero-border: rgb(255 255 255 / 0.08);
+  --hero-shadow: 0 30px 70px -35px rgb(0 0 0 / 0.8);
+  --hero-card-bg: rgb(255 255 255 / 0.05);
+  --hero-card-border: rgb(255 255 255 / 0.09);
+  --hero-card-highlight: rgb(255 255 255 / 0.06);
+
+  --toast-bg: #262141;
+  --toast-fg: #ecebf7;
+  --toast-border: rgb(255 255 255 / 0.08);
+}
+
+.app-backdrop {
+  background: var(--app-bg);
+  background-color: var(--app-bg-fallback);
+}
+
+.portal-theme {
+  color: var(--color-gray-900);
+}
+
+@layer components {
+  .glass-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    box-shadow: var(--panel-shadow);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    backdrop-filter: blur(22px) saturate(140%);
+  }
+
+  .glass-menu {
+    background: var(--menu-bg);
+    border: 1px solid var(--menu-border);
+    box-shadow: var(--menu-shadow);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+
+  .hero-surface {
+    background: var(--hero-bg);
+    border: 1px solid var(--hero-border);
+    box-shadow: var(--hero-shadow);
+  }
+
+  .hero-glass {
+    background: var(--hero-card-bg);
+    border: 1px solid var(--hero-card-border);
+    box-shadow:
+      inset 0 1px 0 var(--hero-card-highlight),
+      0 12px 30px -18px rgb(40 30 90 / 0.45);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Page-code compatibility layer
+   Portal pages are written with plain Tailwind colours (bg-white,
+   text-gray-800, bg-red-50 …). The rules below adapt those classes to the
+   active theme so every page follows light/dark without per-page edits.
+   They're unlayered on purpose so they win over Tailwind's utilities layer.
+   -------------------------------------------------------------------------- */
+
+.portal-theme .bg-white {
+  background-color: var(--surface);
+}
+
+.portal-theme .bg-white:is(.absolute, .fixed, .sticky),
+.portal-theme .fixed .bg-white {
+  background-color: var(--surface-solid);
+}
+
+/* On the dashboard hero, white is literal (pill button, chart marks) in
+   both themes — it sits on its own coloured gradient, not a page surface. */
+.portal-theme .hero-surface .bg-white {
+  background-color: #fff;
+}
+
+:root[data-theme="dark"] .portal-theme {
+  color-scheme: dark;
+
+  /* Neutrals: low steps become translucent white (subtle fills, borders),
+     high steps become light lavender-greys (text). */
+  --color-gray-50: rgb(255 255 255 / 0.035);
+  --color-gray-100: rgb(255 255 255 / 0.065);
+  --color-gray-200: rgb(255 255 255 / 0.1);
+  --color-gray-300: rgb(255 255 255 / 0.17);
+  --color-gray-400: #8d8aa8;
+  --color-gray-500: #a3a0bd;
+  --color-gray-600: #b7b4cf;
+  --color-gray-700: #cac8de;
+  --color-gray-800: #dddcec;
+  --color-gray-900: #efeef8;
+  --color-gray-950: #f8f8fc;
+
+  --color-slate-50: rgb(255 255 255 / 0.035);
+  --color-slate-100: rgb(255 255 255 / 0.065);
+  --color-slate-200: rgb(255 255 255 / 0.1);
+  --color-slate-300: rgb(255 255 255 / 0.17);
+  --color-slate-400: #8d8aa8;
+  --color-slate-500: #a3a0bd;
+  --color-slate-600: #b7b4cf;
+  --color-slate-700: #cac8de;
+  --color-slate-800: #dddcec;
+  --color-slate-900: #efeef8;
+  --color-slate-950: #f8f8fc;
+}
+
+/* Soft grey card shadows read as a glow on dark backgrounds — use black. */
+:root[data-theme="dark"] .portal-theme :is([class*="shadow-slate-"], [class*="shadow-gray-"]) {
+  --tw-shadow-color: rgb(0 0 0 / 0.45);
+}
+
+/* Colour tints (bg-*-50/100/200, border-*-200) turn into translucent
+   tints, and dark tinted text (text-*-600…900) is lifted so it stays
+   legible on dark surfaces. Generated per hue below. */
+
+:root[data-theme="dark"] .portal-theme {
+  --color-red-50: color-mix(in oklab, oklch(63.7% 0.237 25.331) 10%, transparent);
+  --color-red-100: color-mix(in oklab, oklch(63.7% 0.237 25.331) 17%, transparent);
+  --color-red-200: color-mix(in oklab, oklch(63.7% 0.237 25.331) 30%, transparent);
+  --color-orange-50: color-mix(in oklab, oklch(70.5% 0.213 47.604) 10%, transparent);
+  --color-orange-100: color-mix(in oklab, oklch(70.5% 0.213 47.604) 17%, transparent);
+  --color-orange-200: color-mix(in oklab, oklch(70.5% 0.213 47.604) 30%, transparent);
+  --color-amber-50: color-mix(in oklab, oklch(76.9% 0.188 70.08) 10%, transparent);
+  --color-amber-100: color-mix(in oklab, oklch(76.9% 0.188 70.08) 17%, transparent);
+  --color-amber-200: color-mix(in oklab, oklch(76.9% 0.188 70.08) 30%, transparent);
+  --color-yellow-50: color-mix(in oklab, oklch(79.5% 0.184 86.047) 10%, transparent);
+  --color-yellow-100: color-mix(in oklab, oklch(79.5% 0.184 86.047) 17%, transparent);
+  --color-yellow-200: color-mix(in oklab, oklch(79.5% 0.184 86.047) 30%, transparent);
+  --color-lime-50: color-mix(in oklab, oklch(76.8% 0.233 130.85) 10%, transparent);
+  --color-lime-100: color-mix(in oklab, oklch(76.8% 0.233 130.85) 17%, transparent);
+  --color-lime-200: color-mix(in oklab, oklch(76.8% 0.233 130.85) 30%, transparent);
+  --color-green-50: color-mix(in oklab, oklch(72.3% 0.219 149.579) 10%, transparent);
+  --color-green-100: color-mix(in oklab, oklch(72.3% 0.219 149.579) 17%, transparent);
+  --color-green-200: color-mix(in oklab, oklch(72.3% 0.219 149.579) 30%, transparent);
+  --color-cyan-50: color-mix(in oklab, oklch(71.5% 0.143 215.221) 10%, transparent);
+  --color-cyan-100: color-mix(in oklab, oklch(71.5% 0.143 215.221) 17%, transparent);
+  --color-cyan-200: color-mix(in oklab, oklch(71.5% 0.143 215.221) 30%, transparent);
+  --color-sky-50: color-mix(in oklab, oklch(68.5% 0.169 237.323) 10%, transparent);
+  --color-sky-100: color-mix(in oklab, oklch(68.5% 0.169 237.323) 17%, transparent);
+  --color-sky-200: color-mix(in oklab, oklch(68.5% 0.169 237.323) 30%, transparent);
+  --color-blue-50: color-mix(in oklab, oklch(62.3% 0.214 259.815) 10%, transparent);
+  --color-blue-100: color-mix(in oklab, oklch(62.3% 0.214 259.815) 17%, transparent);
+  --color-blue-200: color-mix(in oklab, oklch(62.3% 0.214 259.815) 30%, transparent);
+  --color-indigo-50: color-mix(in oklab, oklch(58.5% 0.233 277.117) 10%, transparent);
+  --color-indigo-100: color-mix(in oklab, oklch(58.5% 0.233 277.117) 17%, transparent);
+  --color-indigo-200: color-mix(in oklab, oklch(58.5% 0.233 277.117) 30%, transparent);
+  --color-violet-50: color-mix(in oklab, oklch(60.6% 0.25 292.717) 10%, transparent);
+  --color-violet-100: color-mix(in oklab, oklch(60.6% 0.25 292.717) 17%, transparent);
+  --color-violet-200: color-mix(in oklab, oklch(60.6% 0.25 292.717) 30%, transparent);
+  --color-purple-50: color-mix(in oklab, oklch(62.7% 0.265 303.9) 10%, transparent);
+  --color-purple-100: color-mix(in oklab, oklch(62.7% 0.265 303.9) 17%, transparent);
+  --color-purple-200: color-mix(in oklab, oklch(62.7% 0.265 303.9) 30%, transparent);
+  --color-pink-50: color-mix(in oklab, oklch(65.6% 0.241 354.308) 10%, transparent);
+  --color-pink-100: color-mix(in oklab, oklch(65.6% 0.241 354.308) 17%, transparent);
+  --color-pink-200: color-mix(in oklab, oklch(65.6% 0.241 354.308) 30%, transparent);
+  --color-rose-50: color-mix(in oklab, oklch(64.5% 0.246 16.439) 10%, transparent);
+  --color-rose-100: color-mix(in oklab, oklch(64.5% 0.246 16.439) 17%, transparent);
+  --color-rose-200: color-mix(in oklab, oklch(64.5% 0.246 16.439) 30%, transparent);
+  --color-brand-50: color-mix(in oklab, #7876c1 10%, transparent);
+  --color-brand-100: color-mix(in oklab, #7876c1 17%, transparent);
+  --color-brand-200: color-mix(in oklab, #7876c1 30%, transparent);
+  --color-accent-50: color-mix(in oklab, #b26a9f 10%, transparent);
+  --color-accent-100: color-mix(in oklab, #b26a9f 17%, transparent);
+  --color-accent-200: color-mix(in oklab, #b26a9f 30%, transparent);
+}
+
+:root[data-theme="dark"] .portal-theme .text-red-600 { color: oklch(70.4% 0.191 22.216); }
+:root[data-theme="dark"] .portal-theme :is(.text-red-700, .text-red-800, .text-red-900) { color: oklch(80.8% 0.114 19.571); }
+:root[data-theme="dark"] .portal-theme .text-orange-600 { color: oklch(75% 0.183 55.934); }
+:root[data-theme="dark"] .portal-theme :is(.text-orange-700, .text-orange-800, .text-orange-900) { color: oklch(83.7% 0.128 66.29); }
+:root[data-theme="dark"] .portal-theme .text-amber-600 { color: oklch(82.8% 0.189 84.429); }
+:root[data-theme="dark"] .portal-theme :is(.text-amber-700, .text-amber-800, .text-amber-900) { color: oklch(87.9% 0.169 91.605); }
+:root[data-theme="dark"] .portal-theme .text-yellow-600 { color: oklch(85.2% 0.199 91.936); }
+:root[data-theme="dark"] .portal-theme :is(.text-yellow-700, .text-yellow-800, .text-yellow-900) { color: oklch(90.5% 0.182 98.111); }
+:root[data-theme="dark"] .portal-theme .text-lime-600 { color: oklch(84.1% 0.238 128.85); }
+:root[data-theme="dark"] .portal-theme :is(.text-lime-700, .text-lime-800, .text-lime-900) { color: oklch(89.7% 0.196 126.665); }
+:root[data-theme="dark"] .portal-theme .text-green-600 { color: oklch(79.2% 0.209 151.711); }
+:root[data-theme="dark"] .portal-theme :is(.text-green-700, .text-green-800, .text-green-900) { color: oklch(87.1% 0.15 154.449); }
+:root[data-theme="dark"] .portal-theme .text-cyan-600 { color: oklch(78.9% 0.154 211.53); }
+:root[data-theme="dark"] .portal-theme :is(.text-cyan-700, .text-cyan-800, .text-cyan-900) { color: oklch(86.5% 0.127 207.078); }
+:root[data-theme="dark"] .portal-theme .text-sky-600 { color: oklch(74.6% 0.16 232.661); }
+:root[data-theme="dark"] .portal-theme :is(.text-sky-700, .text-sky-800, .text-sky-900) { color: oklch(82.8% 0.111 230.318); }
+:root[data-theme="dark"] .portal-theme .text-blue-600 { color: oklch(70.7% 0.165 254.624); }
+:root[data-theme="dark"] .portal-theme :is(.text-blue-700, .text-blue-800, .text-blue-900) { color: oklch(80.9% 0.105 251.813); }
+:root[data-theme="dark"] .portal-theme .text-indigo-600 { color: oklch(67.3% 0.182 276.935); }
+:root[data-theme="dark"] .portal-theme :is(.text-indigo-700, .text-indigo-800, .text-indigo-900) { color: oklch(78.5% 0.115 274.713); }
+:root[data-theme="dark"] .portal-theme .text-violet-600 { color: oklch(70.2% 0.183 293.541); }
+:root[data-theme="dark"] .portal-theme :is(.text-violet-700, .text-violet-800, .text-violet-900) { color: oklch(81.1% 0.111 293.571); }
+:root[data-theme="dark"] .portal-theme .text-purple-600 { color: oklch(71.4% 0.203 305.504); }
+:root[data-theme="dark"] .portal-theme :is(.text-purple-700, .text-purple-800, .text-purple-900) { color: oklch(82.7% 0.119 306.383); }
+:root[data-theme="dark"] .portal-theme .text-pink-600 { color: oklch(71.8% 0.202 349.761); }
+:root[data-theme="dark"] .portal-theme :is(.text-pink-700, .text-pink-800, .text-pink-900) { color: oklch(82.3% 0.12 346.018); }
+:root[data-theme="dark"] .portal-theme .text-rose-600 { color: oklch(71.2% 0.194 13.428); }
+:root[data-theme="dark"] .portal-theme :is(.text-rose-700, .text-rose-800, .text-rose-900) { color: oklch(81% 0.117 11.638); }
+:root[data-theme="dark"] .portal-theme .text-brand-600 { color: #9391d1; }
+:root[data-theme="dark"] .portal-theme :is(.text-brand-700, .text-brand-800, .text-brand-900) { color: #b4b3e2; }
+:root[data-theme="dark"] .portal-theme .text-accent-600 { color: #ca88b9; }
+:root[data-theme="dark"] .portal-theme :is(.text-accent-700, .text-accent-800, .text-accent-900) { color: #dfb0d4; }
+:root[data-theme="dark"] .portal-theme :is(.hover\:text-brand-600, .hover\:text-brand-700):hover { color: #b4b3e2; }

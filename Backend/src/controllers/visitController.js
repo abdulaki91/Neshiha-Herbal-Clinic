@@ -2,7 +2,7 @@ import { ApiResponse } from "../utils/response.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import * as visitService from "../services/visitService.js";
 import * as patientAttachmentService from "../services/patientAttachmentService.js";
-import { emitVisitCreated, emitVisitStatusChanged } from "../config/socket.js";
+import { emitVisitCreated, emitVisitStatusChanged, emitPatientCheckedIn } from "../config/socket.js";
 
 export const getAllVisits = asyncHandler(async (req, res) => {
   const result = await visitService.getAllVisits(req.query);
@@ -66,7 +66,7 @@ export const checkInAppointment = asyncHandler(async (req, res) => {
     req.params.id,
     req.user.id,
   );
-  emitVisitStatusChanged(visit);
+  emitPatientCheckedIn(visit);
   return ApiResponse.success(res, visit, "Patient checked in successfully");
 });
 
